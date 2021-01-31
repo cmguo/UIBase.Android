@@ -1,4 +1,4 @@
-package com.xhb.uibase.demo;
+package com.xhb.uibase.demo.core;
 
 
 import java.lang.reflect.ParameterizedType;
