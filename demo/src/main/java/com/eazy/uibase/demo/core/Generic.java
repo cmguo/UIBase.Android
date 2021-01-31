@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo;
+package com.eazy.uibase.demo.core;
 
 
 import java.lang.reflect.ParameterizedType;

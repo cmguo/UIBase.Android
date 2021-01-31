@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.eazy.uibase.app.ui.main.ComponentsFragment;
-import com.eazy.uibase.demo.Component;
+import com.eazy.uibase.demo.core.FragmentComponent;
+import com.eazy.uibase.demo.test.TestComponent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,11 +16,12 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.components_container, new ComponentsFragment())
                 .commitNow();
+        switchComponent(new TestComponent());
     }
 
-    private void switchController(Component controller) {
+    private void switchComponent(FragmentComponent component) {
         getSupportFragmentManager().beginTransaction()
-                .replace(com.eazy.uibase.app.R.id.control_container, controller)
+                .replace(com.eazy.uibase.app.R.id.component_container, component)
                 .commitNow();
     }
 

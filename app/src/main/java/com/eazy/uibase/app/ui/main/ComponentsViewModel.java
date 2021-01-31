@@ -2,8 +2,8 @@ package com.eazy.uibase.app.ui.main;
 
 import androidx.lifecycle.ViewModel;
 
-import com.eazy.uibase.demo.Component;
-import com.eazy.uibase.demo.DemoController;
+import com.eazy.uibase.demo.core.FragmentComponent;
+import com.eazy.uibase.demo.core.Component;
 
 import java.util.Map;
 import java.util.ServiceLoader;
@@ -14,20 +14,20 @@ public class ComponentsViewModel extends ViewModel {
     private static final String TAG = "ComponentsViewModel";
 
     // TODO: Implement the ViewModel
-    private Map<Integer, Map<Integer, Component>> controllers_ = collectComponents();
+    private Map<Integer, Map<Integer, FragmentComponent>> controllers_ = collectComponents();
 
-    private static Map<Integer, Map<Integer, Component>> collectComponents() {
-        Map<Integer, Map<Integer, Component>> components = new TreeMap<>();
-        for (DemoController controller : ServiceLoader.load(DemoController.class)) {
+    private static Map<Integer, Map<Integer, FragmentComponent>> collectComponents() {
+        Map<Integer, Map<Integer, FragmentComponent>> components = new TreeMap<>();
+        for (Component controller : ServiceLoader.load(Component.class)) {
             int g = controller.group();
             int n = controller.name();
-            Map<Integer, Component> group = components.get(g);
+            Map<Integer, FragmentComponent> group = components.get(g);
             if (group == null) {
                 group = new TreeMap<>();
                 components.put(g, group);
             }
-            if (controller instanceof Component)
-                group.put(n, (Component) controller);
+            if (controller instanceof FragmentComponent)
+                group.put(n, (FragmentComponent) controller);
         }
         return components;
     }
