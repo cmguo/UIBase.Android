@@ -13,9 +13,31 @@ import androidx.fragment.app.Fragment;
 import com.ustc.base.util.reflect.ClassWrapper;
 import com.ustc.base.util.reflect.ObjectWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.ServiceLoader;
+import java.util.TreeMap;
+
 public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
         Model extends ViewModel, Style extends ViewStyle
         > extends Fragment implements Component {
+
+    public static Map<Integer, List<FragmentComponent>> collectComponents() {
+        Map<Integer, List<FragmentComponent>> components = new TreeMap<>();
+        for (Component controller : ServiceLoader.load(Component.class)) {
+            int g = controller.group();
+            int n = controller.title();
+            List<FragmentComponent> group = components.get(g);
+            if (group == null) {
+                group = new ArrayList<>();
+                components.put(g, group);
+            }
+            if (controller instanceof FragmentComponent)
+                group.add((FragmentComponent) controller);
+        }
+        return components;
+    }
 
     private int layoutId_;
     DataBinding binding_;

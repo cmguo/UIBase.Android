@@ -14,14 +14,15 @@
 
     <FrameLayout
         android:id="@+id/components_container"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:visibility="invisible" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <FrameLayout
         android:id="@+id/styles_container"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

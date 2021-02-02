@@ -3,28 +3,28 @@ package com.xhb.uibase.demo.test;
 import android.graphics.Color;
 
 import com.google.auto.service.AutoService;
+import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.Author;
 import com.xhb.uibase.demo.core.Component;
-import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.FragmentComponent;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyle;
-import com.xhb.uibase.demo.databinding.TestBinding;
+import com.xhb.uibase.demo.databinding.Test2Binding;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class TestComponent extends FragmentComponent<TestBinding, TestComponent.Model, TestComponent.Style> {
+public class TestComponent2 extends FragmentComponent<Test2Binding, TestComponent2.Model, TestComponent2.Style> {
 
     public static class Model extends ViewModel {
-        public String text = "Hello world!";
+        public String text = "Hello world2!";
     }
 
     public static class Style extends ViewStyle {
-        public int color = Color.RED;
+        public int color = Color.BLUE;
     }
 
-    public TestComponent() {
-        super(R.layout.test);
+    public TestComponent2() {
+        super(R.layout.test2);
     }
 
     @Override

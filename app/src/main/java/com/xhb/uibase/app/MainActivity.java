@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         switchComponent(new TestComponent());
     }
 
-    private void switchComponent(FragmentComponent component) {
+    public void switchComponent(FragmentComponent component) {
         getSupportFragmentManager().beginTransaction()
                 .replace(com.xhb.uibase.app.R.id.component_container, component)
                 .commitNow();

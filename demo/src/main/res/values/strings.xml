@@ -3,6 +3,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="group_test">测试分组</string>
     <string name="component_test">测试控件</string>
+    <string name="component_test_desc">测试控件, MVVM 数据绑定</string>
 
     <string name="group_buttons">按钮</string>
 </resources>
