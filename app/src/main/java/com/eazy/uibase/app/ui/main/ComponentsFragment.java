@@ -2,17 +2,25 @@ package com.eazy.uibase.app.ui.main;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.eazy.uibase.app.MainActivity;
 import com.eazy.uibase.app.R;
+import com.eazy.uibase.demo.core.FragmentComponent;
+
+import java.util.Observable;
 
 public class ComponentsFragment extends Fragment {
 
@@ -33,7 +41,14 @@ public class ComponentsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ComponentsViewModel.class);
-        // TODO: Use the ViewModel
+        RecyclerView listView = (RecyclerView) getView().findViewById(R.id.componentsList);
+        listView.setLayoutManager(new LinearLayoutManager(getContext()));
+        listView.setAdapter(new ComponentsAdapter(mViewModel.buildTree(getContext()), new ComponentsAdapter.OnItemClickListener<ComponentInfo>() {
+            @Override
+            public void onClick(RecyclerView recyclerView, View view, ComponentInfo data) {
+                ((MainActivity) getActivity()).switchComponent(data.getComponent());
+            }
+        }, null));
     }
 
 }
