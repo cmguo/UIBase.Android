@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="LoadingStyle" format="reference" />
+    <declare-styleable name="LoadingView">
+        <attr name="loading_view_size" format="dimension" />
+        <attr name="android:color" />
+    </declare-styleable>
+
+    <declare-styleable name="LoadingLayout">
+        <attr name="isFirstVisible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MultipleTextViewGroup">
+        <attr name="textWordMargin" format="dimension" />
+        <attr name="textLineMargin" format="dimension" />
+        <attr name="textBackground" format="reference" />
+        <attr name="textPaddingLeft" format="dimension" />
+        <attr name="textPaddingRight" format="dimension" />
+        <attr name="textPaddingTop" format="dimension" />
+        <attr name="textPaddingBottom" format="dimension" />
+        <attr name="overspread" format="boolean" />
+        <attr name="columnNum" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="FloatInputLayout">
+        <attr name="floatLabelTextAppearance" format="reference" />
+        <attr name="hintText" format="string" />
+        <attr name="hintEnabled" format="boolean" />
+        <attr name="textColorHint" format="color" />
+        <attr name="textSizeHint" format="dimension" />
+        <attr name="textHintPadding" format="dimension" />
+        <attr name="counterFlowTextColor" format="color" />
+        <attr name="counter_TextColor" format="color" />
+        <attr name="counterTextSize" format="dimension" />
+        <attr name="counterEnabled" format="boolean" />
+        <attr name="maxCounter" format="integer" />
+        <attr name="errorEnable" format="boolean" />
+        <attr name="floatInputErrorMessage" format="string" />
+        <attr name="floatInputErrorTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="voicePlayingIconAttr">
+        <attr name="pointer_color" format="color" />
+        <attr name="pointer_num" format="integer" />
+        <attr name="pointer_width" format="float" />
+        <attr name="pointer_speed" format="integer" />
+    </declare-styleable>
+</resources>

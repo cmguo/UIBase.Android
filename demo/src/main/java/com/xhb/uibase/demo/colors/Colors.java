@@ -1,11 +1,9 @@
 package com.xhb.uibase.demo.colors;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
-import android.util.TypedValue;
 
-import com.xhb.uibase.demo.R;
+import com.xhb.uibase.R;
 
 import java.lang.reflect.Field;
 import java.util.Map;

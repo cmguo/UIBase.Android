@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/home_card_bg_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_grade"
+        android:layout_width="88dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/bg_blue_small_button_selector"
+        android:gravity="center"
+        android:textColor="@color/item_grid_child_text_color"
+        android:textSize="@dimen/sp_14"
+        tools:text="幼儿园" />
+</LinearLayout>
