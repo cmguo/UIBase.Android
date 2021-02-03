@@ -23,11 +23,17 @@ public class ComponentsViewModel extends ViewModel {
     ListTree buildTree(Context context) {
         ListTree tree = new ListTree();
         for (Map.Entry<Integer, List<FragmentComponent>> e : controllers_.entrySet()) {
-            ListTree.TreeNode group = tree.addNode(null, context.getText(e.getKey()), R.layout.component_group);
+            ListTree.TreeNode group = tree.addNode(null, getText(context, e.getKey()), R.layout.component_group);
             for (FragmentComponent c : e.getValue()) {
                 tree.addNode(group, new ComponentInfo(context, c), R.layout.component_item);
             }
         }
         return tree;
+    }
+
+    protected static CharSequence getText(Context context, int id) {
+        if (id == 0)
+            return "";
+        return context.getText(id);
     }
 }

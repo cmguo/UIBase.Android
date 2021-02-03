@@ -60,8 +60,13 @@ public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
         binding.setLifecycleOwner(this);
         model_ = createModel();
         style_ = createStyle();
-        ObjectWrapper.wrap(binding).invoke("setModel", model_);
-        ObjectWrapper.wrap(binding).invoke("setStyle", style_);
+        ObjectWrapper<DataBinding> wrapper = ObjectWrapper.wrap(binding);
+        if (wrapper.hasMethod("setComponent", getClass()))
+            ObjectWrapper.wrap(binding).invoke("setComponent", this);
+        if (wrapper.hasMethod("setModel", model_.getClass()))
+            ObjectWrapper.wrap(binding).invoke("setModel", model_);
+        if (wrapper.hasMethod("setStyle", style_.getClass()))
+            ObjectWrapper.wrap(binding).invoke("setStyle", style_);
         return binding.getRoot();
     }
 
@@ -98,11 +103,21 @@ public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
 
     protected Model createModel() {
         Class<Model> clzM = getModelType();
-        return ClassWrapper.wrap(clzM).newInstance();
+        ClassWrapper wrapper = ClassWrapper.wrap(clzM);
+        if (wrapper.hasConstructor(getClass())) {
+            return ClassWrapper.wrap(clzM).newInstance(this);
+        } else {
+            return ClassWrapper.wrap(clzM).newInstance();
+        }
     }
 
     protected Style createStyle() {
         Class<Style> clzS = getStyleType();
-        return ClassWrapper.wrap(clzS).newInstance();
+        ClassWrapper wrapper = ClassWrapper.wrap(clzS);
+        if (wrapper.hasConstructor(getClass())) {
+            return ClassWrapper.wrap(clzS).newInstance(this);
+        } else {
+            return ClassWrapper.wrap(clzS).newInstance();
+        }
     }
 }
