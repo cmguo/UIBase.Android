@@ -23,10 +23,6 @@ public class TestComponent2 extends FragmentComponent<Test2Binding, TestComponen
         public int color = Color.BLUE;
     }
 
-    public TestComponent2() {
-        super(R.layout.test2);
-    }
-
     @Override
     public int group() {
         return R.string.group_test;

@@ -44,10 +44,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
             if (template instanceof Integer)
-                adapter.setItemBinding(
-                        new BaseItemBinding(recyclerView.getContext(), (Integer) template));
-            else if (template instanceof ItemBinding)
-                adapter.setItemBinding((ItemBinding) template);
+                adapter.setItemLayout(
+                        new BaseItemLayout(recyclerView.getContext(), (Integer) template));
+            else if (template instanceof ItemLayout)
+                adapter.setItemLayout((ItemLayout) template);
         }
     }
 
@@ -77,7 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         view.setHasFixedSize(hasFixedSize);
     }
 
-    public interface ItemBinding {
+    public interface ItemLayout {
         int getItemViewType(Object item);
 
         ViewDataBinding createBinding(@NonNull ViewGroup parent, int viewType);
@@ -97,24 +97,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return adapter instanceof RecyclerViewAdapter ? (RecyclerViewAdapter) adapter : null;
     }
 
-    public static class BaseItemBinding implements ItemBinding {
+    public static class BaseItemLayout implements ItemLayout {
 
         private LayoutInflater mInflater;
         private int mItemLayout;
         private RecyclerView.Adapter mAdapter;
 
-        public BaseItemBinding() {
+        public BaseItemLayout() {
         }
 
-        public BaseItemBinding(Context context) {
+        public BaseItemLayout(Context context) {
             mInflater = LayoutInflater.from(context);
         }
 
-        public BaseItemBinding(int itemLayout) {
+        public BaseItemLayout(int itemLayout) {
             mItemLayout = itemLayout;
         }
 
-        public BaseItemBinding(Context context, int itemLayout) {
+        public BaseItemLayout(Context context, int itemLayout) {
             this(context);
             mItemLayout = itemLayout;
         }
@@ -145,14 +145,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<Object> mItems = new ArrayList<>();
 
-    private ItemBinding mItemBinding;
+    private ItemLayout mItemBinding;
 
     private OnItemClickListener mOnItemClickListener;
 
-    public void setItemBinding(ItemBinding binding) {
+    public void setItemLayout(ItemLayout binding) {
         mItemBinding = binding;
-        if (binding instanceof BaseItemBinding)
-            ((BaseItemBinding) mItemBinding).mAdapter = this;
+        if (binding instanceof BaseItemLayout)
+            ((BaseItemLayout) mItemBinding).mAdapter = this;
     }
 
     @NonNull
@@ -259,11 +259,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         }
 
-        public void bind(ItemBinding binding, Object item, int position) {
+        public void bind(ItemLayout binding, Object item, int position) {
             mPosition = position;
             mItem = item;
             binding.bindView(mBinding, item, position);
-            mBinding.executePendingBindings();
+            //mBinding.executePendingBindings();
         }
     }
 

@@ -1,11 +1,9 @@
 package com.eazy.uibase.demo.colors;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
-import android.util.TypedValue;
 
-import com.eazy.uibase.demo.R;
+import com.eazy.uibase.R;
 
 import java.lang.reflect.Field;
 import java.util.Map;

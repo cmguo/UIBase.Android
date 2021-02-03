@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(com.eazy.uibase.app.R.layout.activity_main);
         switchComponent(new TestComponent());
+        getSupportFragmentManager().beginTransaction()
+            .replace(R.id.components_container, componetsFragment)
+            .commitNow();
     }
 
     @Override
@@ -41,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void showComponents() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.components_container, componetsFragment)
+                .show(componetsFragment)
                 .setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out)
                 .commitNow();
     }
 
     private void hideComponents() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.components_container, null)
+                .hide(componetsFragment)
                 .setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out)
                 .commitNow();
     }

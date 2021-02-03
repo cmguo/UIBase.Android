@@ -48,10 +48,6 @@ public class ColorsComponent extends FragmentComponent<ColorsBinding, ColorsComp
         }
     };
 
-    public ColorsComponent() {
-        super(R.layout.test);
-    }
-
     @Override
     public int group() {
         return R.string.group_colors;

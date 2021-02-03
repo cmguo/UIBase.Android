@@ -39,14 +39,9 @@ public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
         return components;
     }
 
-    private int layoutId_;
     DataBinding binding_;
     Model model_;
     Style style_;
-
-    protected FragmentComponent(int layoutId) {
-        layoutId_ = layoutId;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/btn_blue_text_disable_color" android:state_enabled="true" android:state_pressed="true"/>
+    <item android:color="@color/vi_assist_color" android:state_enabled="true" />
+    <item android:color="@color/com_button_neighbor_color" />
+</selector>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/bottom_btn_text_nor_color" android:state_pressed="true" />
+    <item android:color="@color/bottom_btn_text_dis_color" android:state_enabled="false" />
+    <item android:color="@color/bottom_btn_text_nor_color" />
+</selector>
