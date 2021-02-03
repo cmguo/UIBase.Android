@@ -1,0 +1,46 @@
+<resources>
+    <!--最新版颜色-->
+    <!--注释说明：深色模式对应色值（务必注释！方便他人查阅和维护）-->
+
+    <color name="bluegrey_00">#FFFFFF</color>       <!--深色对应 #191E26-->
+    <color name="bluegrey_05">#F7F8F9</color>       <!--深色对应 #263240-->
+    <color name="bluegrey_50">#F7F8F9</color>       <!--深色对应 #0B1117-->
+    <color name="bluegrey_100">#F2F3F4</color>      <!--深色对应 #262D38-->
+    <color name="bluegrey_200">#EBECED</color>      <!--深色对应 -->
+    <color name="bluegrey_300">#E4E6E8</color>      <!--深色对应 #2D3440-->
+    <color name="bluegrey_400">#D5D7DB</color>      <!--深色对应 -->
+    <color name="bluegrey_500">#B7BBBF</color>      <!--深色对应 #4D5666-->
+    <color name="bluegrey_600">#9CA0A6</color>      <!--深色对应 -->
+    <color name="bluegrey_700">#81858C</color>      <!--深色对应 #707C8C-->
+    <color name="bluegrey_800">#4E5359</color>      <!--深色对应 #A3AFBF-->
+    <color name="bluegrey_900">#1D2126</color>      <!--深色对应 #E2ECFA-->
+
+    <color name="brand_100">#FFFCD4</color>         <!--深色对应 #524C23-->
+    <color name="brand_500">#FFD630</color>         <!--深色对应 #FFD630-->
+    <color name="brand_600">#F2C121</color>         <!--深色对应 #D9B629-->
+
+    <color name="red_100">#FFEDED</color>           <!--深色对应 #3D2929-->
+    <color name="red_500">#FF6666</color>           <!--深色对应 #DA7171-->
+    <color name="red_600">#EB3B3B</color>           <!--深色对应 #E48484-->
+
+    <color name="orange_100">#FFF0DB</color>        <!--深色对应 #3C3325-->
+    <color name="orange_500">#FFA319</color>        <!--深色对应 #E6A15C-->
+    <color name="orange_600">#FF8C00</color>        <!--深色对应 #F2AF6C-->
+    <color name="orange_600_80">#80FF8C00</color>   <!--深色对应 #A9701A-->
+
+    <color name="green_100">#E8F7F0</color>         <!--深色对应 #203A32-->
+    <color name="green_500">#00CC66</color>         <!--深色对应 #61BA8D-->
+    <color name="green_600">#00B058</color>         <!--深色对应 #71C99D-->
+
+    <color name="blue_100">#EDF4FF</color>          <!--深色对应 #213452-->
+    <color name="blue_200">#CCE0FF</color>          <!--深色对应 #324563-->
+    <color name="blue_500">#4F94FF</color>          <!--深色对应 #6B99DE-->
+    <color name="blue_600">#1970F2</color>          <!--深色对应 #7FA6E2-->
+    <color name="white_10">#FFFFFF</color>
+
+    <color name="purple_500">#8C79F2</color>        <!--深色对应 #8C79F2-->
+
+    <!--以上部分禁止增加色表中未出现的颜色—————————————————————————————————————————————————————————————-->
+    <!--色表链接：https://lanhu.100tal.com/web/#/item/project/board?pid=209b466b-0a47-4887-9647-04960c7dd634-->
+
+</resources>

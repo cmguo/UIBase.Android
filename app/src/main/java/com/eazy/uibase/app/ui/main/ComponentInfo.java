@@ -24,7 +24,7 @@ public class ComponentInfo {
     public ComponentInfo(Context context, FragmentComponent component) {
         this.component = component;
         icon = context.getDrawable(component.icon());
-        title = context.getText(component.title()).toString();
+        title = ComponentsViewModel.getText(context, component.title()).toString();
         Author annotation = component.getClass().getAnnotation(Author.class);
         author =  annotation == null ? "" : annotation.value();
         detail = context.getText(component.description()).toString();
