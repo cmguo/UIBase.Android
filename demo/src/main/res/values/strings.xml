@@ -7,6 +7,8 @@
     <string name="group_colors">颜色分组</string>
     <string name="component_colors">标准色</string>
     <string name="component_colors_desc">标准色</string>
+    <string name="component_colors2">非标准色</string>
+    <string name="component_colors2_desc">非标准色</string>
 
     <string name="group_buttons">按钮</string>
 </resources>

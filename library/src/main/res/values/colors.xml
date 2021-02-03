@@ -5,7 +5,7 @@
 
     <!--品牌色 / Brand Color-->
     <!--晓黑板VI主色/主要按钮/登录输入点击状态  #E6C02C-->
-    <color name="vi_main_color">@color/brand_500</color>
+    <color name="vi_main_color">#FFD630</color>
     <color name="oral_share_main_color">#FFD630</color>
 
     <!--主色点击色  #B39622-->

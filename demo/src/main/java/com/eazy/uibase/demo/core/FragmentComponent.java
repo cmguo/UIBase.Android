@@ -80,15 +80,15 @@ public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
         return style_;
     }
 
-    private Class<DataBinding> getDataBindingType() {
+    protected Class<DataBinding> getDataBindingType() {
         return Generic.getParamType(getClass(), 0);
     }
 
-    private Class<Model> getModelType() {
+    protected Class<Model> getModelType() {
         return Generic.getParamType(getClass(), 1);
     }
 
-    private Class<Style> getStyleType() {
+    protected Class<Style> getStyleType() {
         return Generic.getParamType(getClass(), 2);
     }
 
