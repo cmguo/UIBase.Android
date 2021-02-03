@@ -47,7 +47,6 @@ public class ComponentsFragment extends Fragment {
             @Override
             public void onClick(RecyclerView recyclerView, View view, ComponentInfo data) {
                 ((MainActivity) getActivity()).switchComponent(data.getComponent());
-                ComponentsFragment.this.getView().setVisibility(View.INVISIBLE);
             }
         }, null));
     }

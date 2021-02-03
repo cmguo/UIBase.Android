@@ -27,6 +27,10 @@ public class ColorsComponent extends FragmentComponent<ColorsBinding, ColorsComp
             colors = Colors.stdColors(component.getContext());
         }
 
+        public Model(ColorsComponent2 component) {
+            colors = Colors.nonStdColors(component.getContext());
+        }
+
         public Map<String, Integer> getColors() {
             return colors;
         }
