@@ -76,15 +76,15 @@ public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
     }
 
     protected Class<DataBinding> getDataBindingType() {
-        return Generic.getParamType(getClass(), 0);
+        return Generic.getParamType(getClass(), FragmentComponent.class, 0);
     }
 
     protected Class<Model> getModelType() {
-        return Generic.getParamType(getClass(), 1);
+        return Generic.getParamType(getClass(), FragmentComponent.class, 1);
     }
 
     protected Class<Style> getStyleType() {
-        return Generic.getParamType(getClass(), 2);
+        return Generic.getParamType(getClass(), FragmentComponent.class, 2);
     }
 
     protected DataBinding createDataBinding(@NonNull LayoutInflater inflater) {

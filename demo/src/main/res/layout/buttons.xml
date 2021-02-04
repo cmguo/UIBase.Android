@@ -33,6 +33,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:data="@{model.styles}"
             app:itemLayout="@{style.itemLayout}"
+            app:itemDecoration="@{style.itemDecoration}"
             app:itemClicked="@{component.buttonClicked}">
 
         </androidx.recyclerview.widget.RecyclerView>

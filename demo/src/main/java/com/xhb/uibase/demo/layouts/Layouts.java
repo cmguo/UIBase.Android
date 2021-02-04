@@ -2,9 +2,7 @@ package com.xhb.uibase.demo.layouts;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 
-import com.airbnb.paris.Paris;
 import com.xhb.uibase.demo.R;
 
 import java.lang.reflect.Field;

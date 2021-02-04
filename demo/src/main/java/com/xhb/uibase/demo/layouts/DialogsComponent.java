@@ -3,8 +3,7 @@ package com.xhb.uibase.demo.layouts;
 import android.app.Dialog;
 import android.util.Log;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.databinding.library.baseAdapters.BR;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.auto.service.AutoService;
 import com.xhb.uibase.binding.RecyclerViewAdapter;
@@ -15,6 +14,7 @@ import com.xhb.uibase.demo.core.FragmentComponent;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyle;
 import com.xhb.uibase.demo.databinding.DialogsBinding;
+import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
 
@@ -38,6 +38,7 @@ public class DialogsComponent extends FragmentComponent<DialogsBinding, DialogsC
 
     public static class Style extends ViewStyle {
         public int itemLayout = R.layout.dialog_item;
+        public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
     }
 
     // this should be in view model, but fragment may simplify things
