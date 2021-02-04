@@ -6,10 +6,14 @@ import java.lang.reflect.Type;
 
 public class Generic {
 
-    public static <T> Class<T> getParamType(Class<?> clazz, int index) {
+    public static <T> Class<T> getParamType(Class<?> clazz, Class<?> base, int index) {
         Type superclass = clazz.getGenericSuperclass();
-        if (superclass instanceof Class) {
-            throw new RuntimeException("Missing type parameter.");
+        while (superclass != null) {
+            if (superclass instanceof ParameterizedType && ((ParameterizedType) superclass).getRawType() == base)
+                break;
+        }
+        if (superclass == null) {
+            throw new RuntimeException("Not found base!");
         }
         ParameterizedType parameterized = (ParameterizedType) superclass;
         Type type = parameterized.getActualTypeArguments()[index];

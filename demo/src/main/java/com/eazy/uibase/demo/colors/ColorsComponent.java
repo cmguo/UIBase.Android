@@ -1,7 +1,8 @@
 package com.eazy.uibase.demo.colors;
 
-import android.content.Context;
 import android.util.Log;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.binding.RecyclerViewAdapter;
@@ -12,6 +13,7 @@ import com.eazy.uibase.demo.core.FragmentComponent;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyle;
 import com.eazy.uibase.demo.databinding.ColorsBinding;
+import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
 
@@ -38,6 +40,7 @@ public class ColorsComponent extends FragmentComponent<ColorsBinding, ColorsComp
 
     public static class Style extends ViewStyle {
         public int itemLayout = R.layout.color_item;
+        public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
     }
 
     // this should be in view model, but fragment may simplify things
