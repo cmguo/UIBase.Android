@@ -23,10 +23,10 @@ import java.util.Map;
 /**
  * RecyclerView 的 databinding adapter
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.BindingViewHolder> {
+public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAdapter.BindingViewHolder> {
 
-    @androidx.databinding.BindingAdapter("data")
-    public static <T> void setRecyclerViewData(RecyclerView recyclerView, T data) {
+    @BindingAdapter("data")
+    public static <LT> void setRecyclerViewData(RecyclerView recyclerView, LT data) {
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
             if (data instanceof List) {
@@ -39,50 +39,50 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    @androidx.databinding.BindingAdapter("itemLayout")
-    public static <T> void setRecyclerViewTemplate(RecyclerView recyclerView, T template) {
+    @BindingAdapter("itemLayout")
+    public static <T> void setRecyclerViewItemLayout(RecyclerView recyclerView, T layout) {
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
-            if (template instanceof Integer)
+            if (layout instanceof Integer)
                 adapter.setItemLayout(
-                        new BaseItemLayout(recyclerView.getContext(), (Integer) template));
-            else if (template instanceof ItemLayout)
-                adapter.setItemLayout((ItemLayout) template);
+                        new UnitTypeItemLayout(recyclerView.getContext(), (Integer) layout));
+            else if (layout instanceof ItemLayout)
+                adapter.setItemLayout((ItemLayout) layout);
         }
     }
 
-    @androidx.databinding.BindingAdapter("itemClicked")
-    public static <T> void setOnItemClickListener(RecyclerView recyclerView, OnItemClickListener listener) {
+    @BindingAdapter("itemClicked")
+    public static <T> void setRecyclerViewOnItemClickListener(RecyclerView recyclerView, OnItemClickListener listener) {
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
             adapter.setOnItemClickListener(listener);
         }
     }
 
-    @BindingAdapter(value = {"layoutManager", "adapter"}, requireAll = false)
-    public static void setRecyclerLayoutManager(RecyclerView view, LayoutManagerFactory factory, RecyclerView.Adapter adapter) {
-        if (factory != null)
+    @BindingAdapter(value = {"layoutManager", "layoutManagerFactory"}, requireAll = false)
+    public static void setRecyclerViewLayoutManager(RecyclerView view, RecyclerView.LayoutManager manager, LayoutManagerFactory factory) {
+        if (manager != null)
+            view.setLayoutManager(manager);
+        else if (factory != null)
             view.setLayoutManager(factory.create(view));
-        if (adapter != null)
-            view.setAdapter(adapter);
     }
 
     @BindingAdapter("itemDecoration")
-    public static void setRecyclerItem(RecyclerView view, RecyclerView.ItemDecoration decoration) {
+    public static void setRecyclerViewItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decoration) {
         view.addItemDecoration(decoration);
     }
 
     @BindingAdapter("hasFixedSize")
-    public static void setRecyclerHasFixedSize(RecyclerView view, boolean hasFixedSize) {
+    public static void setRecyclerViewHasFixedSize(RecyclerView view, boolean hasFixedSize) {
         view.setHasFixedSize(hasFixedSize);
     }
 
-    public interface ItemLayout {
-        int getItemViewType(Object item);
+    public interface ItemLayout<T> {
+        int getItemViewType(T item);
 
         ViewDataBinding createBinding(@NonNull ViewGroup parent, int viewType);
 
-        void bindView(ViewDataBinding binding, Object item, int position);
+        void bindView(ViewDataBinding binding, T item, int position);
     }
 
     private static RecyclerViewAdapter getAdapter(RecyclerView recyclerView) {
@@ -97,10 +97,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return adapter instanceof RecyclerViewAdapter ? (RecyclerViewAdapter) adapter : null;
     }
 
-    public static class BaseItemLayout implements ItemLayout {
+    public static class UnitTypeItemLayout<T> extends BaseItemLayout<T> {
+
+        private int mItemLayout;
+
+        public UnitTypeItemLayout(Context context) {
+            super(context);
+        }
+
+        public UnitTypeItemLayout(int itemLayout) {
+            mItemLayout = itemLayout;
+        }
+
+        public UnitTypeItemLayout(Context context, int itemLayout) {
+            super(context);
+            mItemLayout = itemLayout;
+        }
+
+        @Override
+        public int getItemViewType(T item) {
+            return mItemLayout;
+        }
+    }
+
+    public abstract static class BaseItemLayout<T> implements ItemLayout<T> {
 
         private LayoutInflater mInflater;
-        private int mItemLayout;
         private RecyclerView.Adapter mAdapter;
 
         public BaseItemLayout() {
@@ -108,20 +130,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public BaseItemLayout(Context context) {
             mInflater = LayoutInflater.from(context);
-        }
-
-        public BaseItemLayout(int itemLayout) {
-            mItemLayout = itemLayout;
-        }
-
-        public BaseItemLayout(Context context, int itemLayout) {
-            this(context);
-            mItemLayout = itemLayout;
-        }
-
-        @Override
-        public int getItemViewType(Object item) {
-            return mItemLayout;
         }
 
         @Override
@@ -133,8 +141,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @Override
         @CallSuper
-        public void bindView(ViewDataBinding binding, Object item, int position) {
+        public void bindView(ViewDataBinding binding, T item, int position) {
             binding.setVariable(BR.data, item);
+        }
+
+        public void setAdapter(RecyclerView.Adapter adapter) {
+            this.mAdapter = adapter;
         }
 
         protected RecyclerView.Adapter getAdpater() {
@@ -143,7 +155,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
-    private List<Object> mItems = new ArrayList<>();
+    private List<T> mItems = new ArrayList<>();
 
     private ItemLayout mItemBinding;
 
@@ -151,8 +163,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public void setItemLayout(ItemLayout binding) {
         mItemBinding = binding;
-        if (binding instanceof BaseItemLayout)
-            ((BaseItemLayout) mItemBinding).mAdapter = this;
+        if (binding instanceof UnitTypeItemLayout)
+            ((UnitTypeItemLayout) mItemBinding).setAdapter(this);
     }
 
     @NonNull
@@ -164,7 +176,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
-        Object item = mItems.get(position);
+        T item = mItems.get(position);
         holder.bind(mItemBinding, item, position);
     }
 
@@ -178,18 +190,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mItemBinding.getItemViewType(mItems.get(position));
     }
 
-    public List<Object> getData() {
+    public List<T> getData() {
         return mItems;
     }
 
-    public void addAll(List<? extends Object> items) {
+    public void addAll(List<? extends T> items) {
         if (items == null || items.isEmpty()) return;
         int size = mItems.size();
         mItems.addAll(items);
         notifyItemRangeInserted(size, items.size());
     }
 
-    public void add(Object item) {
+    public void add(T item) {
         if (item == null) return;
         int size = mItems.size();
         mItems.add(item);
@@ -201,13 +213,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         notifyItemRemoved(position);
     }
 
-    public void remove(Object item) {
+    public void remove(T item) {
         int position = findPosition(item);
         if (position < 0) return;
         remove(position);
     }
 
-    public void replace(List<? extends Object> items) {
+    public void replace(List<? extends T> items) {
         mItems.clear();
         if (items != null && !items.isEmpty()) {
             mItems.addAll(items);
@@ -215,10 +227,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         notifyDataSetChanged();
     }
 
-    public void replace(Iterable<? extends Object> items) {
+    public void replace(Iterable<? extends T> items) {
         mItems.clear();
         if (items != null) {
-            for (Object i : items)
+            for (T i : items)
                 mItems.add(i);
         }
         notifyDataSetChanged();
@@ -233,16 +245,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mOnItemClickListener = l;
     }
 
-    public int findPosition(Object item) {
+    public int findPosition(T item) {
         return mItems.indexOf(item);
     }
 
-    public static class BindingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class BindingViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ViewDataBinding mBinding;
         private OnItemClickListener mOnItemClickListener;
         private int mPosition;
-        private Object mItem;
+        private T mItem;
 
         public BindingViewHolder(@NonNull ViewDataBinding binding, OnItemClickListener l) {
             super(binding.getRoot());
@@ -259,7 +271,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         }
 
-        public void bind(ItemLayout binding, Object item, int position) {
+        public void bind(ItemLayout binding, T item, int position) {
             mPosition = position;
             mItem = item;
             binding.bindView(mBinding, item, position);
@@ -268,8 +280,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @FunctionalInterface
-    public interface OnItemClickListener {
-        void onItemClick(int position, Object object);
+    public interface OnItemClickListener<T> {
+        void onItemClick(int position, T object);
     }
 
     public static class LayoutManagers {
@@ -310,7 +322,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public static interface LayoutManagerFactory {
+    public interface LayoutManagerFactory {
         RecyclerView.LayoutManager create(RecyclerView view);
     }
 

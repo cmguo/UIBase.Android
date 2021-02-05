@@ -2,6 +2,7 @@ package com.eazy.uibase.demo.buttons;
 
 import android.util.Log;
 
+import androidx.databinding.Bindable;
 import androidx.databinding.ViewDataBinding;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.R;
-import com.eazy.uibase.demo.core.Author;
+import com.eazy.uibase.demo.core.annotation.Author;
 import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.FragmentComponent;
 import com.eazy.uibase.demo.core.ViewModel;
-import com.eazy.uibase.demo.core.ViewStyle;
+import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.ButtonsBinding;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
@@ -37,13 +38,14 @@ public class ButtonsComponent extends FragmentComponent<ButtonsBinding, ButtonsC
         }
     }
 
-    public static class Style extends ViewStyle {
+    public static class Style extends ViewStyles {
         public ButtonItemLayout itemLayout = new ButtonItemLayout(this);
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
+        @Bindable
         public int width = 400;
     }
 
-    public static class ButtonItemLayout extends RecyclerViewAdapter.BaseItemLayout {
+    public static class ButtonItemLayout extends RecyclerViewAdapter.UnitTypeItemLayout<Map.Entry<String, Integer>> {
         private final Style style;
 
         public ButtonItemLayout(Style style) {
@@ -52,7 +54,7 @@ public class ButtonsComponent extends FragmentComponent<ButtonsBinding, ButtonsC
         }
 
         @Override
-        public void bindView(ViewDataBinding binding, Object item, int position) {
+        public void bindView(ViewDataBinding binding, Map.Entry<String, Integer> item, int position) {
             super.bindView(binding, item, position);
             binding.setVariable(BR.style, style);
         }

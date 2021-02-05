@@ -10,5 +10,5 @@ public interface Component {
     // return string res id
     int description();
 
-    ViewStyle style();
+    ViewStyles styles();
 }

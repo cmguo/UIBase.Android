@@ -2,7 +2,7 @@ package com.eazy.uibase.demo.colors;
 
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.demo.R;
-import com.eazy.uibase.demo.core.Author;
+import com.eazy.uibase.demo.core.annotation.Author;
 import com.eazy.uibase.demo.core.Component;
 
 @AutoService(Component.class)

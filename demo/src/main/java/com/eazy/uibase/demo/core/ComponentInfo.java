@@ -1,14 +1,13 @@
-package com.eazy.uibase.app.ui.main;
+package com.eazy.uibase.demo.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
-import com.eazy.uibase.demo.core.Author;
-import com.eazy.uibase.demo.core.FragmentComponent;
+import com.eazy.uibase.demo.core.annotation.Author;
 
 //保存子行信息的类
 public class ComponentInfo {
+
     private FragmentComponent component;
     //头像,用于设置给ImageView。
     private Drawable icon;
@@ -24,7 +23,7 @@ public class ComponentInfo {
     public ComponentInfo(Context context, FragmentComponent component) {
         this.component = component;
         icon = context.getDrawable(component.icon());
-        title = ComponentsViewModel.getText(context, component.title()).toString();
+        title = getText(context, component.title()).toString();
         Author annotation = component.getClass().getAnnotation(Author.class);
         author =  annotation == null ? "" : annotation.value();
         detail = context.getText(component.description()).toString();
@@ -64,4 +63,11 @@ public class ComponentInfo {
     public void setStars(int stars) {
         this.stars = stars;
     }
+
+    public static CharSequence getText(Context context, int id) {
+        if (id == 0)
+            return "";
+        return context.getText(id);
+    }
+
 }

@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.R;
-import com.eazy.uibase.demo.core.Author;
+import com.eazy.uibase.demo.core.annotation.Author;
 import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.FragmentComponent;
 import com.eazy.uibase.demo.core.ViewModel;
-import com.eazy.uibase.demo.core.ViewStyle;
+import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.DialogsBinding;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
@@ -36,7 +36,7 @@ public class DialogsComponent extends FragmentComponent<DialogsBinding, DialogsC
         }
     }
 
-    public static class Style extends ViewStyle {
+    public static class Style extends ViewStyles {
         public int itemLayout = R.layout.dialog_item;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
     }
