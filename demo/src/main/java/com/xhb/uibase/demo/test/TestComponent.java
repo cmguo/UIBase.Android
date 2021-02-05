@@ -2,13 +2,15 @@ package com.xhb.uibase.demo.test;
 
 import android.graphics.Color;
 
+import androidx.databinding.Bindable;
+
 import com.google.auto.service.AutoService;
-import com.xhb.uibase.demo.core.Author;
 import com.xhb.uibase.demo.core.Component;
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.FragmentComponent;
 import com.xhb.uibase.demo.core.ViewModel;
-import com.xhb.uibase.demo.core.ViewStyle;
+import com.xhb.uibase.demo.core.ViewStyles;
+import com.xhb.uibase.demo.core.annotation.Author;
 import com.xhb.uibase.demo.databinding.TestBinding;
 
 @AutoService(Component.class)
@@ -19,8 +21,23 @@ public class TestComponent extends FragmentComponent<TestBinding, TestComponent.
         public String text = "Hello world!";
     }
 
-    public static class Style extends ViewStyle {
+    public enum EnumStyle {
+        Value1,
+        Value2,
+        Value3
+    }
+
+    public static class Style extends ViewStyles {
+        @Bindable
         public int color = Color.RED;
+        @Bindable
+        public boolean boolStype = false;
+        @Bindable
+        public int intStyle = 0;
+        @Bindable
+        public String stringStyle = "String";
+        @Bindable
+        public EnumStyle enumStyle = null;
     }
 
     @Override

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.xhb.uibase.app.ui.main.StylesViewModel.StyleValue"/>
+        <variable
+            name="value"
+            type="StyleValue" />
+    </data>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked='@={value.checked}'
+        android:text="@{value.value}">
+
+    </androidx.appcompat.widget.AppCompatCheckBox>
+
+</layout>

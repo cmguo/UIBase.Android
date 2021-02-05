@@ -2,7 +2,7 @@ package com.xhb.uibase.demo.colors;
 
 import com.google.auto.service.AutoService;
 import com.xhb.uibase.demo.R;
-import com.xhb.uibase.demo.core.Author;
+import com.xhb.uibase.demo.core.annotation.Author;
 import com.xhb.uibase.demo.core.Component;
 
 @AutoService(Component.class)

@@ -4,11 +4,11 @@ import android.graphics.Color;
 
 import com.google.auto.service.AutoService;
 import com.xhb.uibase.demo.R;
-import com.xhb.uibase.demo.core.Author;
+import com.xhb.uibase.demo.core.annotation.Author;
 import com.xhb.uibase.demo.core.Component;
 import com.xhb.uibase.demo.core.FragmentComponent;
 import com.xhb.uibase.demo.core.ViewModel;
-import com.xhb.uibase.demo.core.ViewStyle;
+import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.databinding.Test2Binding;
 
 @AutoService(Component.class)
@@ -19,7 +19,7 @@ public class TestComponent2 extends FragmentComponent<Test2Binding, TestComponen
         public String text = "Hello world2!";
     }
 
-    public static class Style extends ViewStyle {
+    public static class Style extends ViewStyles {
         public int color = Color.BLUE;
     }
 

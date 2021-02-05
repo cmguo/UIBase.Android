@@ -20,7 +20,7 @@ import java.util.ServiceLoader;
 import java.util.TreeMap;
 
 public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
-        Model extends ViewModel, Style extends ViewStyle
+        Model extends ViewModel, Style extends ViewStyles
         > extends Fragment implements Component {
 
     public static Map<Integer, List<FragmentComponent>> collectComponents() {
@@ -71,7 +71,7 @@ public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
     }
 
     @Override
-    public ViewStyle style() {
+    public ViewStyles styles() {
         return style_;
     }
 

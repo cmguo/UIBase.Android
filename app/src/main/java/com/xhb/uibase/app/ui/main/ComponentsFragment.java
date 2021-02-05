@@ -2,7 +2,6 @@ package com.xhb.uibase.app.ui.main;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,13 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.xhb.uibase.app.MainActivity;
 import com.xhb.uibase.app.R;
-import com.xhb.uibase.demo.core.FragmentComponent;
-
-import java.util.Observable;
+import com.xhb.uibase.demo.core.ComponentInfo;
 
 public class ComponentsFragment extends Fragment {
 
