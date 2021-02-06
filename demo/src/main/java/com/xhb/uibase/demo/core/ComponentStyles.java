@@ -1,5 +1,7 @@
 package com.xhb.uibase.demo.core;
 
+import androidx.databinding.Bindable;
+
 import com.ustc.base.prop.PropertySet;
 import com.ustc.base.util.data.Collections;
 
@@ -43,6 +45,8 @@ public class ComponentStyles {
             if ((m & Modifier.PUBLIC) == 0)
                 continue;
             if ((m & Modifier.FINAL) != 0)
+                continue;
+            if (!f.isAnnotationPresent(Bindable.class))
                 continue;
             this.styles.add(new ComponentStyle(f));
         }

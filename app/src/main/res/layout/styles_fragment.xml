@@ -22,8 +22,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/stylesList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_shadow_start_color"
+            android:layout_height="wrap_content"
+            android:background="@color/audio_border_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
