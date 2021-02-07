@@ -1,14 +1,44 @@
 package com.xhb.uibase.demo.core;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.StringRes;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.ServiceLoader;
+import java.util.TreeMap;
+
 public interface Component {
-    // return string res id
+    @IdRes
+    int id();
+    @StringRes
     int group();
-    // return drawable res id
+    @DrawableRes
     int icon();
-    // return string res id
+    @StringRes
     int title();
-    // return string res id
+    @StringRes
     int description();
 
-    ViewStyles styles();
+    Class<? extends ComponentFragment> fragmentClass();
+
+    static Map<Integer, List<Component>> collectComponents() {
+        Map<Integer, List<Component>> components = new TreeMap<>();
+        for (Component component : ServiceLoader.load(Component.class)) {
+            int g = component.group();
+            List<Component> group = components.get(g);
+            if (group == null) {
+                group = new ArrayList<>();
+                components.put(g, group);
+            }
+            group.add((Component) component);
+        }
+        return components;
+    }
+
+    default ComponentFragment createFragment() throws InstantiationException, IllegalAccessException {
+        return fragmentClass().newInstance();
+    }
 }

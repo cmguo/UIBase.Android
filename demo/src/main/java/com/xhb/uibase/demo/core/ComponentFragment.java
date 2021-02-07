@@ -19,25 +19,9 @@ import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.TreeMap;
 
-public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
+public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         Model extends ViewModel, Style extends ViewStyles
-        > extends Fragment implements Component {
-
-    public static Map<Integer, List<FragmentComponent>> collectComponents() {
-        Map<Integer, List<FragmentComponent>> components = new TreeMap<>();
-        for (Component controller : ServiceLoader.load(Component.class)) {
-            int g = controller.group();
-            int n = controller.title();
-            List<FragmentComponent> group = components.get(g);
-            if (group == null) {
-                group = new ArrayList<>();
-                components.put(g, group);
-            }
-            if (controller instanceof FragmentComponent)
-                group.add((FragmentComponent) controller);
-        }
-        return components;
-    }
+        > extends Fragment {
 
     DataBinding binding_;
     Model model_;
@@ -70,21 +54,24 @@ public abstract class FragmentComponent<DataBinding extends ViewDataBinding,
         super.onDestroy();
     }
 
-    @Override
-    public ViewStyles styles() {
+    public Model getModel() {
+        return model_;
+    }
+
+    public ViewStyles getStyles() {
         return style_;
     }
 
     protected Class<DataBinding> getDataBindingType() {
-        return Generic.getParamType(getClass(), FragmentComponent.class, 0);
+        return Generic.getParamType(getClass(), ComponentFragment.class, 0);
     }
 
     protected Class<Model> getModelType() {
-        return Generic.getParamType(getClass(), FragmentComponent.class, 1);
+        return Generic.getParamType(getClass(), ComponentFragment.class, 1);
     }
 
     protected Class<Style> getStyleType() {
-        return Generic.getParamType(getClass(), FragmentComponent.class, 2);
+        return Generic.getParamType(getClass(), ComponentFragment.class, 2);
     }
 
     protected DataBinding createDataBinding(@NonNull LayoutInflater inflater) {

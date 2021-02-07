@@ -9,8 +9,13 @@ public class Generic {
     public static <T> Class<T> getParamType(Class<?> clazz, Class<?> base, int index) {
         Type superclass = clazz.getGenericSuperclass();
         while (superclass != null) {
-            if (superclass instanceof ParameterizedType && ((ParameterizedType) superclass).getRawType() == base)
-                break;
+            if (superclass instanceof ParameterizedType) {
+                if (((ParameterizedType) superclass).getRawType() == base)
+                    break;
+                superclass = ((Class) ((ParameterizedType) superclass).getRawType()).getGenericSuperclass();
+            } else {
+                superclass = ((Class) superclass).getGenericSuperclass();
+            }
         }
         if (superclass == null) {
             throw new RuntimeException("Not found base!");

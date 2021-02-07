@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.xhb.uibase.app.BR;
 import com.xhb.uibase.app.R;
 import com.xhb.uibase.demo.core.Component;
+import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.core.ComponentStyle;
 import com.xhb.uibase.demo.core.ComponentStyles;
 import com.xhb.uibase.demo.core.ViewStyles;
@@ -72,8 +73,8 @@ public class StylesViewModel extends ViewModel {
 
     public MutableLiveData<List<StyleValue>> styleList = new MutableLiveData<>();
 
-    public void bindComponent(Component component) {
-        ViewStyles styles = component.styles();
+    public void bindComponent(ComponentFragment fragment) {
+        ViewStyles styles = fragment.getStyles();
         ComponentStyles css = ComponentStyles.get(styles.getClass());
         List<StyleValue> list = new ArrayList<>();
         for (ComponentStyle cs : css.allStyles()) {

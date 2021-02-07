@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.xhb.uibase.demo.buttons.ButtonsComponent.Model" />
-        <import type="com.xhb.uibase.demo.buttons.ButtonsComponent.Style" />
-        <import type="com.xhb.uibase.demo.buttons.ButtonsComponent" />
+        <import type="com.xhb.uibase.demo.buttons.ButtonsFragment.Model" />
+        <import type="com.xhb.uibase.demo.buttons.ButtonsFragment.Style" />
+        <import type="com.xhb.uibase.demo.buttons.ButtonsFragment" />
         <variable
-            name="component"
-            type="ButtonsComponent" />
+            name="fragment"
+            type="ButtonsFragment" />
         <variable
             name="model"
             type="Model" />
@@ -19,6 +19,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/component_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">
@@ -34,7 +35,7 @@
             app:data="@{model.styles}"
             app:itemLayout="@{style.itemLayout}"
             app:itemDecoration="@{style.itemDecoration}"
-            app:itemClicked="@{component.buttonClicked}">
+            app:itemClicked="@{fragment.buttonClicked}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

@@ -8,7 +8,7 @@ import com.xhb.uibase.demo.core.annotation.Author;
 //保存子行信息的类
 public class ComponentInfo {
 
-    private FragmentComponent component;
+    private Component component;
     //头像,用于设置给ImageView。
     private Drawable icon;
     //标题
@@ -20,7 +20,7 @@ public class ComponentInfo {
     //描述
     private String detail;
 
-    public ComponentInfo(Context context, FragmentComponent component) {
+    public ComponentInfo(Context context, Component component) {
         this.component = component;
         icon = context.getDrawable(component.icon());
         title = getText(context, component.title()).toString();
@@ -36,7 +36,7 @@ public class ComponentInfo {
         this.detail = detail;
     }
 
-    public FragmentComponent getComponent() {
+    public Component getComponent() {
         return component;
     }
 
