@@ -10,17 +10,21 @@ import android.view.Menu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.eazy.uibase.app.ui.main.StylesFragment;
 import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.ComponentFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavGraph;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.FragmentNavigator;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -30,7 +34,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity2 extends AppCompatActivity implements NavController.OnDestinationChangedListener {
+public class MainActivity2 extends AppCompatActivity implements NavController.OnDestinationChangedListener, FragmentManager.OnBackStackChangedListener {
 
     private static final String TAG = "MainActivity2";
 
@@ -65,6 +69,8 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         navController.addOnDestinationChangedListener(this);
+        Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
+        componentFragment.getChildFragmentManager().addOnBackStackChangedListener(this);
     }
 
     @Override
@@ -143,5 +149,16 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
                 }
            }
         }
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        Fragment stylesFragment = getSupportFragmentManager().findFragmentById(R.id.styles_fragment);
+        Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
+        List<Fragment> fragments = ((NavHostFragment) componentFragment).getChildFragmentManager().getFragments();
+        if (!fragments.isEmpty())
+            componentFragment = fragments.get(0);
+        if (componentFragment instanceof ComponentFragment)
+            ((StylesFragment) stylesFragment).bindComponent((ComponentFragment) componentFragment);
     }
 }
