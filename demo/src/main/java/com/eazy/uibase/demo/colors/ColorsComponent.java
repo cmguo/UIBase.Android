@@ -9,7 +9,7 @@ import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.annotation.Author;
 import com.eazy.uibase.demo.core.Component;
-import com.eazy.uibase.demo.core.FragmentComponent;
+import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.ColorsBinding;
@@ -19,37 +19,12 @@ import java.util.Map;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class ColorsComponent extends FragmentComponent<ColorsBinding, ColorsComponent.Model, ColorsComponent.Style> {
-
-    private static final String TAG = "ColorsComponent";
-
-    public static class Model extends ViewModel {
-        private Map<String, Integer> colors;
-        public Model(ColorsComponent component) {
-            colors = Colors.stdColors(component.getContext());
-        }
-
-        public Model(ColorsComponent2 component) {
-            colors = Colors.nonStdColors(component.getContext());
-        }
-
-        public Map<String, Integer> getColors() {
-            return colors;
-        }
+public class ColorsComponent implements Component
+{
+    @Override
+    public int id() {
+        return R.id.component_colors;
     }
-
-    public static class Style extends ViewStyles {
-        public int itemLayout = R.layout.color_item;
-        public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
-    }
-
-    // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener colorClicked = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int position, Object object) {
-            Log.d(TAG, "colorClicked" + object);
-        }
-    };
 
     @Override
     public int group() {
@@ -70,4 +45,10 @@ public class ColorsComponent extends FragmentComponent<ColorsBinding, ColorsComp
     public int description() {
         return R.string.component_colors_desc;
     }
+
+    @Override
+    public Class<? extends ComponentFragment> fragmentClass() {
+        return ColorsFragment.class;
+    }
 }
+

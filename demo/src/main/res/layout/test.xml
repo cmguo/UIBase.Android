@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.eazy.uibase.demo.test.TestComponent.Model" />
-        <import type="com.eazy.uibase.demo.test.TestComponent.Style" />
+        <import type="com.eazy.uibase.demo.test.TestFragment.Model" />
+        <import type="com.eazy.uibase.demo.test.TestFragment.Style" />
         <variable
             name="model"
             type="Model" />
@@ -15,6 +15,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/component_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">

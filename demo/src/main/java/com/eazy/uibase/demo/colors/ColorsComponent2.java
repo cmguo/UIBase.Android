@@ -10,6 +10,11 @@ import com.eazy.uibase.demo.core.Component;
 public class ColorsComponent2 extends ColorsComponent {
 
     @Override
+    public int id() {
+        return R.id.component_colors2;
+    }
+
+    @Override
     public int title() {
         return R.string.component_colors2;
     }

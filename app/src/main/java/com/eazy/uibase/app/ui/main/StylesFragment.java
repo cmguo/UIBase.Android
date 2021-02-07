@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import com.eazy.uibase.app.R;
 import com.eazy.uibase.app.databinding.StylesFragmentBinding;
 import com.eazy.uibase.binding.RecyclerViewAdapter;
-import com.eazy.uibase.demo.core.FragmentComponent;
+import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
 public class StylesFragment extends Fragment {
@@ -79,18 +79,18 @@ public class StylesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(StylesViewModel.class);
-        if (component != null)
-            mViewModel.bindComponent(component);
+        if (fragment != null)
+            mViewModel.bindComponent(fragment);
         DataBindingUtil.findBinding(getView()).setVariable(BR.model, mViewModel);
     }
 
-    private FragmentComponent component;
+    private ComponentFragment fragment;
 
-    public void bindComponent(FragmentComponent component) {
+    public void bindComponent(ComponentFragment fragment) {
         if (mViewModel != null)
-            mViewModel.bindComponent(component);
+            mViewModel.bindComponent(fragment);
         else
-            this.component = component;
+            this.fragment = fragment;
     }
 
 }

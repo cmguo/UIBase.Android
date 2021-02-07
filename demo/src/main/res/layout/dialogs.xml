@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.eazy.uibase.demo.layouts.DialogsComponent.Model" />
-        <import type="com.eazy.uibase.demo.layouts.DialogsComponent.Style" />
-        <import type="com.eazy.uibase.demo.layouts.DialogsComponent" />
+        <import type="com.eazy.uibase.demo.layouts.DialogsFragment.Model" />
+        <import type="com.eazy.uibase.demo.layouts.DialogsFragment.Style" />
+        <import type="com.eazy.uibase.demo.layouts.DialogsFragment" />
         <variable
             name="component"
-            type="DialogsComponent" />
+            type="DialogsFragment" />
         <variable
             name="model"
             type="Model" />
@@ -19,6 +19,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/component_dialogs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">

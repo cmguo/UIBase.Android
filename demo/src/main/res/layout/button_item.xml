@@ -6,7 +6,7 @@
 
     <data>
         <import type="java.util.Map.Entry" />
-        <import type="com.eazy.uibase.demo.buttons.ButtonsComponent.Style" />
+        <import type="com.eazy.uibase.demo.buttons.ButtonsFragment.Style" />
         <variable
             name="data"
             type="Entry&lt;String, Integer&gt;" />

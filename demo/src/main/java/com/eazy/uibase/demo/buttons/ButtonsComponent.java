@@ -12,7 +12,7 @@ import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.annotation.Author;
 import com.eazy.uibase.demo.core.Component;
-import com.eazy.uibase.demo.core.FragmentComponent;
+import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.ButtonsBinding;
@@ -22,51 +22,11 @@ import java.util.Map;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class ButtonsComponent extends FragmentComponent<ButtonsBinding, ButtonsComponent.Model, ButtonsComponent.Style> {
-
-    private static final String TAG = "ButtonsComponent";
-
-    public static class Model extends ViewModel {
-        private Map<String, Integer> styles;
-
-        public Model(ButtonsComponent component) {
-            styles = Styles.buttonStyles(component.getContext());
-        }
-
-        public Map<String, Integer> getStyles() {
-            return styles;
-        }
+public class ButtonsComponent implements Component{
+    @Override
+    public int id() {
+        return R.id.component_buttons;
     }
-
-    public static class Style extends ViewStyles {
-        public ButtonItemLayout itemLayout = new ButtonItemLayout(this);
-        public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
-        @Bindable
-        public int width = 400;
-    }
-
-    public static class ButtonItemLayout extends RecyclerViewAdapter.UnitTypeItemLayout<Map.Entry<String, Integer>> {
-        private final Style style;
-
-        public ButtonItemLayout(Style style) {
-            super(R.layout.button_item);
-            this.style = style;
-        }
-
-        @Override
-        public void bindView(ViewDataBinding binding, Map.Entry<String, Integer> item, int position) {
-            super.bindView(binding, item, position);
-            binding.setVariable(BR.style, style);
-        }
-    }
-
-    // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener buttonClicked = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int position, Object object) {
-            Log.d(TAG, "buttonClicked" + object);
-        }
-    };
 
     @Override
     public int group() {
@@ -87,4 +47,10 @@ public class ButtonsComponent extends FragmentComponent<ButtonsBinding, ButtonsC
     public int description() {
         return R.string.component_buttons_desc;
     }
+
+    @Override
+    public Class<? extends ComponentFragment> fragmentClass() {
+        return ButtonsFragment.class;
+    }
 }
+

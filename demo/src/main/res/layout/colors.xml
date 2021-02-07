@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.eazy.uibase.demo.colors.ColorsComponent.Model" />
-        <import type="com.eazy.uibase.demo.colors.ColorsComponent.Style" />
-        <import type="com.eazy.uibase.demo.colors.ColorsComponent" />
+        <import type="com.eazy.uibase.demo.colors.ColorsFragment.Model" />
+        <import type="com.eazy.uibase.demo.colors.ColorsFragment.Style" />
+        <import type="com.eazy.uibase.demo.colors.ColorsFragment" />
         <variable
             name="component"
-            type="ColorsComponent" />
+            type="ColorsFragment" />
         <variable
             name="model"
             type="Model" />
@@ -19,6 +19,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/component_colors"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">
