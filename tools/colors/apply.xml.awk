@@ -33,8 +33,6 @@ BEGINFILE {
       }
       records[NR] = r
     } else if (match($0, /<color name="(\w+)"/, result) > 0) {
-      s = result[1, "start"]
-      l = result[1, "length"]
       c = result[1]
       r = "Line " NR ": " c;
       if (c in map && map[c] != "") {
