@@ -1,8 +1,10 @@
 package com.xhb.uibase.app;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.Menu;
@@ -43,6 +45,8 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    private Fragment stylesFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +57,9 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                getSupportFragmentManager().beginTransaction()
+                        .show(stylesFragment)
+                        .commitNow();
             }
         });
         Map<Integer, List<Component>> components = Components.collectComponents();
@@ -74,6 +79,27 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         navController.addOnDestinationChangedListener(this);
         Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
         componentFragment.getChildFragmentManager().addOnBackStackChangedListener(this);
+        stylesFragment = getSupportFragmentManager().findFragmentById(R.id.styles_fragment);
+    }
+
+    private static final Rect RECT = new Rect();
+    private static final int[] LOCATION = new int[2];
+    private static final MotionEvent.PointerCoords COORDS = new MotionEvent.PointerCoords();
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean result = super.dispatchTouchEvent(ev);
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            ev.getPointerCoords(0, COORDS);
+            stylesFragment.getView().getDrawingRect(RECT);
+            stylesFragment.getView().getLocationInWindow(LOCATION);
+            if (!RECT.contains((int) COORDS.x - LOCATION[0], (int) COORDS.y - LOCATION[1])) {
+                getSupportFragmentManager().beginTransaction()
+                        .hide(stylesFragment)
+                        .commitNow();
+            }
+        }
+        return result;
     }
 
     @Override
@@ -157,7 +183,6 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     @Override
     public void onBackStackChanged() {
-        Fragment stylesFragment = getSupportFragmentManager().findFragmentById(R.id.styles_fragment);
         Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
         List<Fragment> fragments = ((NavHostFragment) componentFragment).getChildFragmentManager().getFragments();
         if (!fragments.isEmpty())

@@ -1,4 +1,4 @@
-package com.xhb.uibase.demo.layouts;
+package com.xhb.uibase.demo.core;
 
 import android.content.Context;
 import android.util.Log;

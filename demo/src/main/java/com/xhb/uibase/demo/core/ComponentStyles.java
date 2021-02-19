@@ -6,6 +6,7 @@ import com.ustc.base.prop.PropertySet;
 import com.ustc.base.util.data.Collections;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,13 +43,28 @@ public class ComponentStyles {
             int m = f.getModifiers();
             if ((m & Modifier.STATIC) != 0)
                 continue;
-            if ((m & Modifier.PUBLIC) == 0)
-                continue;
             if ((m & Modifier.FINAL) != 0)
                 continue;
             if (!f.isAnnotationPresent(Bindable.class))
                 continue;
-            this.styles.add(new ComponentStyle(f));
+            if ((m & Modifier.PUBLIC) != 0) {
+                this.styles.add(new ComponentStyle(f));
+            } else {
+                String name = f.getName();
+                name = name.substring(0, 1).toUpperCase() + name.substring(1);
+                Method getter = null;
+                Method setter = null;
+                try {
+                    getter = styles.getDeclaredMethod("get" + name);
+                } catch (NoSuchMethodException e) {
+                }
+                try {
+                    setter = styles.getDeclaredMethod("set" + name, f.getType());
+                } catch (NoSuchMethodException e) {
+                }
+                if (getter != null && setter != null)
+                    this.styles.add(new ComponentStyle(f, getter, setter));
+            }
         }
     }
 
