@@ -23,7 +23,7 @@
             android:id="@+id/stylesList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/audio_border_color"
+            android:background="@android:color/holo_green_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
