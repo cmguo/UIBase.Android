@@ -8,6 +8,7 @@ import com.niuedu.ListTree;
 import com.eazy.uibase.app.R;
 import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.ComponentInfo;
+import com.eazy.uibase.demo.core.Components;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class ComponentsViewModel extends ViewModel {
 
     // TODO: Implement the ViewModel
     private Map<Integer, List<Component>> components_ =
-            Component.collectComponents();
+            Components.collectComponents();
 
     ListTree buildTree(Context context) {
         ListTree tree = new ListTree();

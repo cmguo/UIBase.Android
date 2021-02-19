@@ -21,7 +21,7 @@ public class ColorsFragment extends ComponentFragment<ColorsBinding, ColorsFragm
     public static class Model extends ViewModel {
         private Map<String, Integer> colors;
         public Model(ColorsFragment fragment) {
-            if (fragment.getId() == R.id.component_colors)
+            if (fragment.getComponent().id() == R.id.component_colors)
                 colors = Colors.stdColors(fragment.getContext());
             else
                 colors = Colors.nonStdColors(fragment.getContext());

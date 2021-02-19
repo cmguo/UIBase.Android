@@ -13,23 +13,29 @@ import androidx.fragment.app.Fragment;
 import com.ustc.base.util.reflect.ClassWrapper;
 import com.ustc.base.util.reflect.ObjectWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.ServiceLoader;
-import java.util.TreeMap;
-
 public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         Model extends ViewModel, Style extends ViewStyles
         > extends Fragment {
 
+    Component component_;
     DataBinding binding_;
     Model model_;
     Style style_;
 
+    protected void setComponent(Component component_) {
+        this.component_ = component_;
+    }
+
+    public Component getComponent() {
+        return component_;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Integer componentId = getArguments().getInt("componentId");
+        if (componentId != null)
+            component_ = Components.getComponent(componentId);
     }
 
     @Nullable
