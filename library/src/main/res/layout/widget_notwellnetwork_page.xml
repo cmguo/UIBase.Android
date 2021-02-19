@@ -15,7 +15,7 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:textColor="@color/vi_assist_color"
+        android:textColor="@color/blue_600"
         tools:text="@string/page_reload" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_above="@id/not_well_network_reload_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/c_999999" />
+        android:textColor="@color/static_bluegrey_500" />
 
     <ImageView
         android:id="@+id/not_well_network_img"

@@ -36,7 +36,7 @@
         android:paddingRight="4dp"
         android:includeFontPadding="false"
         android:background="@drawable/home_spot_bg"
-        android:textColor="@color/func_tip_dot_text_color"
+        android:textColor="@color/static_white_100"
         android:textSize="11sp"
         tools:text="99+"/>
 

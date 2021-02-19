@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/btn_blue_text_disable_color" android:state_enabled="false" />
-    <item android:color="@color/btn_blue_text_disable_color" android:state_pressed="true" />
-    <item android:color="@color/btn_blue_text_disable_color" android:state_selected="true" />
-    <item android:color="@color/vi_assist_color" />
+    <item android:color="@color/bluegrey_500" android:state_enabled="false" />
+    <item android:color="@color/bluegrey_500" android:state_pressed="true" />
+    <item android:color="@color/bluegrey_500" android:state_selected="true" />
+    <item android:color="@color/blue_600" />
 </selector>

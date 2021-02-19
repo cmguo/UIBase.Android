@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/com_layer_bg_color" android:state_activated="true" />
-    <item android:drawable="@color/bg_list_white_color" android:state_activated="false" />
-    <item android:drawable="@color/bg_list_white_color" />
+    <item android:drawable="@color/bluegrey_05" android:state_activated="true" />
+    <item android:drawable="@color/static_white_100" android:state_activated="false" />
+    <item android:drawable="@color/static_white_100" />
 </selector>

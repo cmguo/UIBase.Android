@@ -8,6 +8,6 @@
 
     <stroke
         android:width="1dp"
-        android:color="@color/survey_commit_button_border_color" />
+        android:color="@color/bluegrey_900" />
 
 </shape>

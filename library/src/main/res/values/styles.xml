@@ -12,9 +12,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">44dp</item>
         <item name="android:background">@drawable/dialog_input_box_bg_color</item>
-        <item name="android:textColor">@color/dialog_input_box_text_color</item>
+        <item name="android:textColor">@color/static_bluegrey_900</item>
         <item name="android:textSize">17sp</item>
-        <item name="android:textColorHint">@color/dialog_input_box_prompt_text_color</item>
+        <item name="android:textColorHint">@color/static_bluegrey_300</item>
         <item name="android:padding">10dp</item>
     </style>
 
@@ -34,10 +34,10 @@
         <item name="android:layout_height">48dp</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
-        <item name="android:background">@color/com_base_bg_color</item>
+        <item name="android:background">@color/bluegrey_00</item>
         <item name="android:textSize">@dimen/big_textsize</item>
-        <item name="android:textColorHint">@color/com_normal_placeholder_color</item>
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColorHint">@color/bluegrey_300</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
         <item name="android:textCursorDrawable">@drawable/input_cursor</item>
     </style>
 
@@ -47,9 +47,9 @@
         <item name="android:layout_height">48dp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:textSize">@dimen/EditText_TextSize</item>
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
         <item name="android:background">@drawable/bg_edit_text_selector</item>
-        <item name="android:textColorHint">@color/com_normal_placeholder_color</item>
+        <item name="android:textColorHint">@color/bluegrey_300</item>
         <item name="android:textCursorDrawable">@drawable/shape_edit_text_cursor</item>
     </style>
 
@@ -110,7 +110,7 @@
         <!--<item name="android:textColor">@color/app_title_text_color</item>-->
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
     </style>
 
     <!--5.0 发送验证码按钮-->
@@ -130,7 +130,7 @@
         <item name="android:background">@drawable/round_rect_corner_4_f2f3f5</item>
         <item name="android:layout_height">46dp</item>
         <item name="android:layout_width">46dp</item>
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
         <item name="android:textSize">22sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
@@ -141,7 +141,7 @@
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/com_button_neighbor_color</item>
+        <item name="android:textColor">@color/bluegrey_500</item>
         <item name="android:textSize">20sp</item>
         <item name="android:gravity">center</item>
     </style>
@@ -151,7 +151,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/commonlib_shape_gray_corner_2</item>
-        <item name="android:textColor">@color/com_form_subtitle_color</item>
+        <item name="android:textColor">@color/bluegrey_700</item>
         <item name="android:textSize">@dimen/small_textsize</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingLeft">8dp</item>
@@ -194,10 +194,10 @@
         <!--<item name="android:windowDisablePreview">true</item>-->
         <!-- 设置activity切换动画 -->
         <item name="android:windowAnimationStyle">@style/activityAnimation</item>
-        <item name="android:windowBackground">@color/home_card_bg_color</item>
-        <item name="colorPrimary">@color/home_card_bg_color</item>
-        <item name="colorPrimaryDark">@color/home_card_bg_color</item>
-        <item name="colorAccent">@color/vi_main_color</item>
+        <item name="android:windowBackground">@color/bluegrey_00</item>
+        <item name="colorPrimary">@color/bluegrey_00</item>
+        <item name="colorPrimaryDark">@color/bluegrey_00</item>
+        <item name="colorAccent">@color/brand_500</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
@@ -257,7 +257,7 @@
     </style>
 
     <style name="TextViewMemberDetail">
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
         <item name="android:textSize">@dimen/big_textsize</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginLeft">8dp</item>
@@ -265,7 +265,7 @@
 
     <style name="TextViewMemberDetailTips">
         <item name="android:layout_marginTop">6dp</item>
-        <item name="android:textColor">@color/com_button_neighbor_color</item>
+        <item name="android:textColor">@color/bluegrey_500</item>
         <item name="android:textSize">@dimen/normal_textsize</item>
     </style>
 
@@ -287,7 +287,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/com_button_neighbor_color</item>
+        <item name="android:textColor">@color/bluegrey_500</item>
         <item name="android:textSize">@dimen/normal_textsize</item>
     </style>
 
@@ -354,7 +354,7 @@
     </style>
 
     <style name="Transparent" parent="@style/Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@color/translucence</item>
+        <item name="android:windowBackground">@color/static_black_50</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
         <item name="android:windowNoTitle">true</item>
@@ -418,7 +418,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowAnimationStyle">@style/animation_from_bottom</item>
-        <item name="colorPrimaryDark">@color/com_base_bg_color</item>
+        <item name="colorPrimaryDark">@color/bluegrey_00</item>
     </style>
 
     <style name="slip_working_data_style">
@@ -426,7 +426,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:button">@null</item>
         <!--<item name="android:background">@drawable/slip_selected_style</item>-->
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
     </style>
 
     <style name="DialogTheme" parent="@android:style/Theme.Dialog">
@@ -454,7 +454,7 @@
         <item name="android:drawablePadding">4dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:textSize">@dimen/normal_textsize</item>
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
     </style>
 
     <!--4.2.0标准字-->
@@ -493,7 +493,7 @@
         <item name="android:minWidth">16dp</item>
         <item name="android:paddingLeft">4dp</item>
         <item name="android:paddingRight">4dp</item>
-        <item name="android:textColor">@color/func_tip_dot_text_color</item>
+        <item name="android:textColor">@color/static_white_100</item>
         <item name="android:textSize">11sp</item>
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
@@ -527,17 +527,17 @@
     <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
         <item name="android:editTextStyle">@style/PickerTextColorStyle</item>
         <item name="android:textViewStyle">@style/PickerTitleTextColorStyle</item>
-        <item name="android:colorAccent">@color/vi_assist_color</item>
-        <item name="android:background">@color/com_base_bg_color</item>
+        <item name="android:colorAccent">@color/blue_600</item>
+        <item name="android:background">@color/bluegrey_00</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="PickerTextColorStyle" parent="android:Widget.Material.Light.EditText">
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
     </style>
 
     <style name="PickerTitleTextColorStyle" parent="android:Widget.Material.Light.TextView">
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
     </style>
 
     <style name="LoginLeftAndRightMarginStyle">
@@ -551,9 +551,9 @@
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/com_title_color</item>
-        <item name="android:textColorHint">@color/com_normal_placeholder_color</item>
-        <item name="android:background">@color/home_card_bg_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
+        <item name="android:textColorHint">@color/bluegrey_300</item>
+        <item name="android:background">@color/bluegrey_00</item>
     </style>
 
     <!--500白色线框主按钮样式-->
@@ -620,7 +620,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
-        <item name="android:background">@color/home_card_bg_color</item>
+        <item name="android:background">@color/bluegrey_00</item>
     </style>
 
     <!--5.0.0单行列表项固定高度背景样式-->
@@ -701,7 +701,7 @@
 
     <style name="Theme.Translucence" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@color/translucence</item>
+        <item name="android:windowBackground">@color/static_black_50</item>
     </style>
 
     <!--直播讨论，消息间距-->
@@ -715,11 +715,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
-        <item name="android:background">@color/home_card_bg_color</item>
+        <item name="android:background">@color/bluegrey_00</item>
         <item name="android:layout_height">72dp</item>
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
         <item name="android:drawablePadding">@dimen/dp_10</item>
         <item name="android:drawableRight">@drawable/icon_12px_arrow_right</item>
     </style>
@@ -731,9 +731,9 @@
         <item name="android:layout_height">45dp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:textSize">@dimen/EditText_TextSize</item>
-        <item name="android:textColor">@color/com_title_color</item>
+        <item name="android:textColor">@color/bluegrey_900</item>
         <item name="android:background">@drawable/bg_edit_text_selector</item>
-        <item name="android:textColorHint">@color/com_normal_placeholder_color</item>
+        <item name="android:textColorHint">@color/bluegrey_300</item>
         <item name="android:textCursorDrawable">@drawable/shape_edit_text_cursor</item>
         <item name="android:drawableRight">@drawable/icon_12px_arrow_right</item>
         <item name="android:textStyle">bold</item>
@@ -757,7 +757,7 @@
         <item name="android:paddingTop">@dimen/dp_2</item>
         <item name="android:paddingEnd">5dp</item>
         <item name="android:paddingBottom">@dimen/dp_2</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/static_white_100</item>
         <item name="android:textSize">@dimen/app_tv_extra_size</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -782,10 +782,10 @@
     <style name="common_AppTheme" parent="@style/Theme.AppCompat">
         <!-- 设置activity切换动画 -->
         <item name="android:windowAnimationStyle">@style/activityAnimation</item>
-        <item name="android:windowBackground">@color/home_card_bg_color</item>
-        <item name="colorPrimary">@color/home_card_bg_color</item>
-        <item name="colorPrimaryDark">@color/home_card_bg_color</item>
-        <item name="colorAccent">@color/vi_main_color</item>
+        <item name="android:windowBackground">@color/bluegrey_00</item>
+        <item name="colorPrimary">@color/bluegrey_00</item>
+        <item name="colorPrimaryDark">@color/bluegrey_00</item>
+        <item name="colorAccent">@color/brand_500</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!--        <item name="alertDialogStyle">@style/AlertDialog.SkinCompat</item>-->

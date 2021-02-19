@@ -17,7 +17,7 @@
             android:paddingLeft="11.5dp"
             android:paddingRight="11.5dp"
             android:gravity="center"
-            android:textColor="@color/com_button_neighbor_color"
+            android:textColor="@color/bluegrey_500"
             android:textSize="16sp"
             tools:text="打卡"/>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="52dp"
-    android:background="@color/home_card_bg_color">
+    android:background="@color/bluegrey_00">
 
     <TextView
         android:id="@+id/tv_content"
@@ -13,7 +13,7 @@
         android:gravity="start"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:textColor="@color/com_title_color"
+        android:textColor="@color/bluegrey_900"
         android:textSize="@dimen/sp_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginStart="16dp"
-        android:background="@color/com_separator_color"
+        android:background="@color/bluegrey_300"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
