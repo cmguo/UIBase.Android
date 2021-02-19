@@ -13,15 +13,18 @@ import com.google.android.material.navigation.NavigationView;
 import com.xhb.uibase.app.ui.main.StylesFragment;
 import com.xhb.uibase.demo.core.Component;
 import com.xhb.uibase.demo.core.ComponentFragment;
+import com.xhb.uibase.demo.core.Components;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavArgument;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavGraph;
+import androidx.navigation.NavType;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
@@ -54,7 +57,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
                         .setAction("Action", null).show();
             }
         });
-        Map<Integer, List<Component>> components = Component.collectComponents();
+        Map<Integer, List<Component>> components = Components.collectComponents();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         buildNavMenu(navigationView.getMenu(), components);
@@ -130,6 +133,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
                 FragmentNavigator.Destination destination = navigator.createDestination();
                 destination.setId(c.id());
                 destination.setLabel(getText(c.title()));
+                destination.addArgument("componentId", new NavArgument.Builder().setDefaultValue(c.id()).build());
                 destination.setClassName(c.fragmentClass().getName());
                 graph.addDestination(destination);
             }
