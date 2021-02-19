@@ -25,7 +25,7 @@
         tools:context=".TestComponent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/colorsList"
+            android:id="@+id/buttonsList"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

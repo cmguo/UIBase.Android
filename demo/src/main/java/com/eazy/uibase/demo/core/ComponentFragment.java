@@ -60,6 +60,10 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         super.onDestroy();
     }
 
+    public DataBinding getBinding() {
+        return binding_;
+    }
+
     public Model getModel() {
         return model_;
     }

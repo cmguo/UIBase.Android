@@ -42,9 +42,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:width="@{style.width}"
                 app:style="@{data.value}"
-                android:text="按钮"/>
+                app:autoWidth="@{style.width}"
+                android:enabled="@{!style.disabled}"
+                android:text="@{style.text}"/>
 
         </LinearLayout>
 

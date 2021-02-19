@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
+import com.eazy.uibase.demo.core.Layouts;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.DialogsBinding;

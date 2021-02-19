@@ -1,11 +1,13 @@
-package com.eazy.uibase.demo.buttons;
+package com.eazy.uibase.demo.core;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.airbnb.paris.Paris;
 import com.eazy.uibase.demo.R;
+import com.eazy.uibase.demo.colors.Colors;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -17,8 +19,17 @@ public class Styles {
     private static final String TAG = "Styles";
 
     public static Map<String, Integer> buttonStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("[Bb]utton"));
+        return getStyles(context, R.style.class, Pattern.compile("ButtonStyle"));
         // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
+    }
+
+    public static Map<String, Integer> buttonStyles2(Context context) {
+        Map<String, Integer> allButtons = getStyles(context, R.style.class, Pattern.compile("[bB]utton"));
+        Map<String, Integer> buttons = buttonStyles(context);
+        for (String k : buttons.keySet()) {
+            allButtons.remove(k);
+        }
+        return allButtons;
     }
 
     public static Map<String, Integer> getStyles(Context context, Class<?> clazz, Pattern pattern) {
@@ -46,4 +57,12 @@ public class Styles {
         }
     }
 
+
+    @androidx.databinding.BindingAdapter("autoWidth")
+    public static <T> void setAutoWidth(TextView view, int width) {
+        if (view.getLayoutParams().width == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            return;
+        }
+        view.setWidth(width);
+    }
 }

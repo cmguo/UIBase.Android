@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.layouts;
+package com.eazy.uibase.demo.core;
 
 import android.content.Context;
 import android.util.Log;

@@ -52,5 +52,6 @@ public class ButtonsComponent implements Component{
     public Class<? extends ComponentFragment> fragmentClass() {
         return ButtonsFragment.class;
     }
+
 }
 
