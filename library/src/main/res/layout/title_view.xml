@@ -4,7 +4,7 @@
     android:id="@+id/title_view"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_height"
-    android:background="@color/home_card_bg_color">
+    android:background="@color/bluegrey_00">
 
     <RelativeLayout
         android:id="@+id/layout_left"
@@ -20,7 +20,7 @@
             android:maxEms="5"
             android:paddingLeft="16dp"
             android:singleLine="true"
-            android:textColor="@color/com_title_color"
+            android:textColor="@color/bluegrey_900"
             android:textSize="@dimen/big_textsize"
             android:visibility="gone"
             tools:visibility="visible"
@@ -58,7 +58,7 @@
             android:layout_marginLeft="11dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/com_title_color"
+            android:textColor="@color/bluegrey_900"
             android:textStyle="bold"
             android:textSize="@dimen/big_textsize"
             tools:text="靠左标题" />
@@ -138,7 +138,7 @@
             android:layout_gravity="center_horizontal"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/com_title_color"
+            android:textColor="@color/bluegrey_900"
             android:textStyle="bold"
             android:textSize="@dimen/big_textsize"
             tools:text="主标标题主标题主标题主标题主标题主标题" />

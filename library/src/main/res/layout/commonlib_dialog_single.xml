@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@color/com_title_color"
+            android:textColor="@color/bluegrey_900"
             android:textSize="@dimen/sp_16"
             tools:text="@string/select_grade" />
 
@@ -41,7 +41,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/com_separator_color" />
+        android:background="@color/bluegrey_300" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

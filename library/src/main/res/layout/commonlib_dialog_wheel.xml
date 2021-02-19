@@ -24,7 +24,7 @@
             android:paddingEnd="16dp"
             android:gravity="center"
             android:text="取消"
-            android:textColor="@color/vi_assist_color"
+            android:textColor="@color/blue_600"
             android:textSize="@dimen/sp_16"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="标题"
-            android:textColor="@color/com_title_color"
+            android:textColor="@color/bluegrey_900"
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -47,7 +47,7 @@
             android:paddingEnd="16dp"
             android:gravity="center"
             android:text="确定"
-            android:textColor="@color/vi_assist_color"
+            android:textColor="@color/blue_600"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
             android:visibility="gone"
@@ -59,7 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="1dp"
-        android:background="@color/home_card_bg_color"
+        android:background="@color/bluegrey_00"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="@color/vi_main_color" />
+            android:background="@color/brand_500" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

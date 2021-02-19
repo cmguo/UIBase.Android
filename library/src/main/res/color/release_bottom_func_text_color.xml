@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/com_button_neighbor_color" android:state_selected="false" android:state_enabled="true" />
-    <item android:color="@color/vi_assist_color" android:state_selected="true" android:state_enabled="true" />
+    <item android:color="@color/bluegrey_500" android:state_selected="false" android:state_enabled="true" />
+    <item android:color="@color/blue_600" android:state_selected="true" android:state_enabled="true" />
     <item android:color="#AA9EA3AF" android:state_enabled="false" />
 </selector>

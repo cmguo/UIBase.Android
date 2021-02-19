@@ -14,6 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:textColor="@color/toast_text_color"
+        android:textColor="@color/static_white_100"
         android:textSize="@dimen/big_textsize" />
 </FrameLayout>

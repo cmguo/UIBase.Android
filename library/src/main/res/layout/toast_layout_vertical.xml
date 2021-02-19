@@ -48,7 +48,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:gravity="center"
-                android:textColor="@color/toast_text_color"
+                android:textColor="@color/static_white_100"
                 android:textSize="@dimen/big_textsize"
                 tools:text="@string/hello_world" />
         </LinearLayout>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/home_card_bg_color"
+    android:background="@color/bluegrey_00"
     android:orientation="vertical">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
-        android:textColor="@color/com_title_color"
+        android:textColor="@color/bluegrey_900"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold"
         tools:text="幼儿园" />

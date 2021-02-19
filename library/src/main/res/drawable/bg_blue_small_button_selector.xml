@@ -3,13 +3,13 @@
     <item android:state_selected="true">
         <shape android:shape="rectangle">
             <corners android:radius="16dp" />
-            <stroke android:width="1dp" android:color="@color/vi_assist_color" />
+            <stroke android:width="1dp" android:color="@color/blue_600" />
         </shape>
     </item>
     <item android:state_selected="false">
         <shape android:shape="rectangle">
             <corners android:radius="16dp" />
-            <solid android:color="@color/tag_bg_color" />
+            <solid android:color="@color/bluegrey_05" />
         </shape>
     </item>
 </selector>
