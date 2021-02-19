@@ -28,6 +28,7 @@ BEGINFILE {
         } else {
           $0 = substr($0, 1, s - 1) map[c] substr($0, s + l);
           r = r " -> " map[c]
+          start = s + length(map[c]);
           replace++
         }
       } else {
