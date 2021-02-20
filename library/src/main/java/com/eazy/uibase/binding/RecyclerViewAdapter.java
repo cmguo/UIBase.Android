@@ -55,7 +55,15 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
     public static <T> void setRecyclerViewOnItemClickListener(RecyclerView recyclerView, OnItemClickListener listener) {
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
-            adapter.setOnItemClickListener(listener);
+            OnItemClickListener old = adapter.setOnItemClickListener(listener);
+            if ((old == null) == (listener == null))
+                return;
+            for (int i = 0, n = recyclerView.getChildCount(); i < n; ++i) {
+                RecyclerView.ViewHolder holder = recyclerView.getChildViewHolder(recyclerView.getChildAt(i));
+                if (holder instanceof BindingViewHolder) {
+                    ((BindingViewHolder) holder).updateListener();
+                }
+            }
         }
     }
 
@@ -171,7 +179,7 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
     @Override
     public BindingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ViewDataBinding binding = mItemBinding.createBinding(parent, viewType);
-        return new BindingViewHolder(binding, mOnItemClickListener);
+        return new BindingViewHolder(this, binding);
     }
 
     @Override
@@ -241,8 +249,10 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener(OnItemClickListener l) {
+    public OnItemClickListener setOnItemClickListener(OnItemClickListener l) {
+        OnItemClickListener old = mOnItemClickListener;
         this.mOnItemClickListener = l;
+        return old;
     }
 
     public int findPosition(T item) {
@@ -251,23 +261,30 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
 
     public static class BindingViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private RecyclerViewAdapter mAdapter;
         private ViewDataBinding mBinding;
-        private OnItemClickListener mOnItemClickListener;
         private int mPosition;
         private T mItem;
 
-        public BindingViewHolder(@NonNull ViewDataBinding binding, OnItemClickListener l) {
+        public BindingViewHolder(@NonNull RecyclerViewAdapter adapter, @NonNull ViewDataBinding binding) {
             super(binding.getRoot());
-            mOnItemClickListener = l;
-
-            binding.getRoot().setOnClickListener(this);
+            mAdapter = adapter;
+            if (mAdapter.mOnItemClickListener != null)
+                binding.getRoot().setOnClickListener(this);
             mBinding = binding;
+        }
+
+        void updateListener() {
+            if (mAdapter.mOnItemClickListener != null)
+                mBinding.getRoot().setOnClickListener(this);
+            else
+                mBinding.getRoot().setOnClickListener(null);
         }
 
         @Override
         public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(mPosition, mItem);
+            if (mAdapter.mOnItemClickListener != null) {
+                mAdapter.mOnItemClickListener.onItemClick(mPosition, mItem);
             }
         }
 
