@@ -46,8 +46,8 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         model_ = createModel();
         style_ = createStyle();
         ObjectWrapper<DataBinding> wrapper = ObjectWrapper.wrap(binding);
-        if (wrapper.hasMethod("setComponent", getClass()))
-            ObjectWrapper.wrap(binding).invoke("setComponent", this);
+        if (wrapper.hasMethod("setFragment", getClass()))
+            ObjectWrapper.wrap(binding).invoke("setFragment", this);
         if (wrapper.hasMethod("setModel", model_.getClass()))
             ObjectWrapper.wrap(binding).invoke("setModel", model_);
         if (wrapper.hasMethod("setStyle", style_.getClass()))

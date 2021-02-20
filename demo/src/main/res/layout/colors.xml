@@ -8,7 +8,7 @@
         <import type="com.xhb.uibase.demo.colors.ColorsFragment.Style" />
         <import type="com.xhb.uibase.demo.colors.ColorsFragment" />
         <variable
-            name="component"
+            name="fragment"
             type="ColorsFragment" />
         <variable
             name="model"
@@ -35,7 +35,7 @@
             app:data="@{model.colors}"
             app:itemLayout="@{style.itemLayout}"
             app:itemDecoration="@{style.itemDecoration}"
-            app:itemClicked="@{component.colorClicked}">
+            app:itemClicked="@{fragment.colorClicked}">
 
         </androidx.recyclerview.widget.RecyclerView>
 
