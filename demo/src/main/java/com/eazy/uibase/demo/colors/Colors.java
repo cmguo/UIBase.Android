@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.eazy.uibase.R;
+import com.eazy.uibase.demo.core.SkinManager;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class Colors {
     private static final String TAG = "Colors";
 
     public static Map<String, Integer> stdColors(Context context) {
-        return getColors(context, R.color.class, Pattern.compile("^[a-z]{2,}_\\d+"));
+        return getColors(context, R.color.class, Pattern.compile("^([a-z]{2,}_)+\\d+"));
     }
 
     public static Map<String, Integer> nonStdColors(Context context) {
@@ -34,7 +35,7 @@ public class Colors {
                 if (pattern == null || pattern.matcher(f.getName()).find()) {
                     Log.d(TAG, f.getName());
                     int id = (Integer) f.get(clazz);
-                    colors.put(f.getName(), context.getColor(id));
+                    colors.put(f.getName(), SkinManager.getColor(context, id));
                 }
             }
         } catch (IllegalAccessException e) {
@@ -49,5 +50,16 @@ public class Colors {
 
     public static String text(int color) {
         return "#" + Integer.toHexString(color);
+    }
+
+    public static void update(Context context, Map<String, Integer> colors) {
+        Class clazz = R.color.class;
+        try {
+            for (Map.Entry<String, Integer> e : colors.entrySet()) {
+                int id = (Integer) clazz.getDeclaredField(e.getKey()).get(clazz);
+                e.setValue(SkinManager.getColor(context, id));
+            }
+        } catch (Throwable e) {
+        }
     }
 }

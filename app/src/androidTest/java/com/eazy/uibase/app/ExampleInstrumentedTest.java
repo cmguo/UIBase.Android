@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo;
+package com.eazy.uibase.app;
 
 import android.content.Context;
 

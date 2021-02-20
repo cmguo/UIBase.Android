@@ -16,6 +16,13 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url "http://nexus.xiaoheiban.cn/repository/maven-public/"
+            credentials {
+                username = "guest"
+                password = "xhb123"
+            }
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo;
+package com.eazy.uibase.app;
 
 import org.junit.Test;
 
