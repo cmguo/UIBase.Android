@@ -1,7 +1,12 @@
 package com.eazy.uibase.demo.layouts;
 
 import android.app.Dialog;
+import android.graphics.drawable.StateListDrawable;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +21,8 @@ import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
 
-public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFragment.Model, DialogsFragment.Style> {
+public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFragment.Model, DialogsFragment.Style>
+        implements View.OnClickListener {
 
     private static final String TAG = "DialogsFragment";
 
@@ -44,11 +50,35 @@ public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFr
             Log.d(TAG, "dialogClicked" + object);
             Dialog dialog = new Dialog(DialogsFragment.this.getContext());
             try {
-                dialog.setContentView(((Map.Entry<String, Integer>) object).getValue());
+                int layoutId = ((Map.Entry<String, Integer>) object).getValue();
+                View view = LayoutInflater.from(getActivity()).inflate(layoutId, null);
+                applyStyles(view);
+                dialog.setContentView(view);
                 dialog.show();
             } catch (Throwable e) {
                 Log.w(TAG, "", e);
             }
         }
     };
+
+    private void applyStyles(View view) {
+        view.setVisibility(View.VISIBLE);
+        if (view instanceof ViewGroup) {
+            for (int i = 0, n = ((ViewGroup) view).getChildCount(); i < n; ++i) {
+                applyStyles(((ViewGroup) view).getChildAt(i));
+            }
+        } else if (view instanceof TextView) {
+            if (((TextView) view).getText().length() == 0)
+                ((TextView) view).setText("文字");
+        }
+        if (view.getBackground() instanceof StateListDrawable) {
+            view.setOnClickListener(this);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
 }

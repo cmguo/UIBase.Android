@@ -8,7 +8,7 @@
         <import type="com.eazy.uibase.demo.layouts.DialogsFragment.Style" />
         <import type="com.eazy.uibase.demo.layouts.DialogsFragment" />
         <variable
-            name="component"
+            name="fragment"
             type="DialogsFragment" />
         <variable
             name="model"
@@ -35,7 +35,7 @@
             app:data="@{model.styles}"
             app:itemLayout="@{style.itemLayout}"
             app:itemDecoration="@{style.itemDecoration}"
-            app:itemClicked="@{component.dialogClicked}">
+            app:itemClicked="@{fragment.dialogClicked}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

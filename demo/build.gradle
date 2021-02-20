@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.databinding:databinding-runtime:4.1.1'
     implementation 'com.google.auto.service:auto-service:1.0-rc6'
-    implementation fileTree(dir: 'libs', includes: ['*.aar'])
+    api fileTree(dir: 'libs', includes: ['*.aar'])
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation project(':library')
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
