@@ -1,4 +1,4 @@
-package com.xhb.uibase.demo;
+package com.xhb.uibase.app;
 
 import android.content.Context;
 

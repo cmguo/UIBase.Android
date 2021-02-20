@@ -6,4 +6,14 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_skin_normal"
+        android:orderInCategory="100"
+        android:title="@string/action_skin_normal"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_skin_dark"
+        android:orderInCategory="100"
+        android:title="@string/action_skin_dark"
+        app:showAsAction="never" />
 </menu>

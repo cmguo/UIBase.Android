@@ -27,14 +27,14 @@ public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFr
     private static final String TAG = "DialogsFragment";
 
     public static class Model extends ViewModel {
-        private Map<String, Integer> styles;
+        private Map<String, Integer> layouts;
 
         public Model(DialogsFragment fragment) {
-            styles = Layouts.dialogLayouts(fragment.getContext());
+            layouts = Layouts.dialogLayouts(fragment.getContext());
         }
 
-        public Map<String, Integer> getStyles() {
-            return styles;
+        public Map<String, Integer> getLayouts() {
+            return layouts;
         }
     }
 
@@ -48,7 +48,7 @@ public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFr
         @Override
         public void onItemClick(int position, Object object) {
             Log.d(TAG, "dialogClicked" + object);
-            Dialog dialog = new Dialog(DialogsFragment.this.getContext());
+            Dialog dialog = new Dialog(DialogsFragment.this.getContext(), R.style.dialog);
             try {
                 int layoutId = ((Map.Entry<String, Integer>) object).getValue();
                 View view = LayoutInflater.from(getActivity()).inflate(layoutId, null);

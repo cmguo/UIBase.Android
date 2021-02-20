@@ -3,38 +3,38 @@ package com.xhb.uibase.app;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.Menu;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-import com.xhb.uibase.app.ui.main.StylesFragment;
-import com.xhb.uibase.demo.core.Component;
-import com.xhb.uibase.demo.core.ComponentFragment;
-import com.xhb.uibase.demo.core.Components;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavArgument;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavGraph;
-import androidx.navigation.NavType;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.xhb.uibase.app.ui.main.StylesFragment;
+import com.xhb.uibase.demo.core.Component;
+import com.xhb.uibase.demo.core.ComponentFragment;
+import com.xhb.uibase.demo.core.Components;
+import com.xhb.uibase.demo.core.SkinManager;
 
 import java.util.List;
 import java.util.Map;
@@ -120,6 +120,18 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_skin_normal) {
+            SkinManager.switchMode(false);
+            return true;
+        } else if (item.getItemId() == R.id.action_skin_dark) {
+            SkinManager.switchMode(true);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.component_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -190,4 +202,10 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         if (componentFragment instanceof ComponentFragment)
             ((StylesFragment) stylesFragment).bindComponent((ComponentFragment) componentFragment);
     }
+
+    @Override
+    public AppCompatDelegate getDelegate() {
+        return SkinManager.getDelegate(this);
+    }
+
 }

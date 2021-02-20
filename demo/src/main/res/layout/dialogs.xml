@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:data="@{model.styles}"
+            app:data="@{model.layouts}"
             app:itemLayout="@{style.itemLayout}"
             app:itemDecoration="@{style.itemDecoration}"
             app:itemClicked="@{fragment.dialogClicked}">
