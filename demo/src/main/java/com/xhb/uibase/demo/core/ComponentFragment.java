@@ -41,18 +41,18 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        DataBinding binding = createDataBinding(inflater);
-        binding.setLifecycleOwner(this);
+        binding_ = createDataBinding(inflater);
+        binding_.setLifecycleOwner(this);
         model_ = createModel();
         style_ = createStyle();
-        ObjectWrapper<DataBinding> wrapper = ObjectWrapper.wrap(binding);
+        ObjectWrapper<DataBinding> wrapper = ObjectWrapper.wrap(binding_);
         if (wrapper.hasMethod("setFragment", getClass()))
-            ObjectWrapper.wrap(binding).invoke("setFragment", this);
+            ObjectWrapper.wrap(binding_).invoke("setFragment", this);
         if (wrapper.hasMethod("setModel", model_.getClass()))
-            ObjectWrapper.wrap(binding).invoke("setModel", model_);
+            ObjectWrapper.wrap(binding_).invoke("setModel", model_);
         if (wrapper.hasMethod("setStyle", style_.getClass()))
-            ObjectWrapper.wrap(binding).invoke("setStyle", style_);
-        return binding.getRoot();
+            ObjectWrapper.wrap(binding_).invoke("setStyle", style_);
+        return binding_.getRoot();
     }
 
     @Override

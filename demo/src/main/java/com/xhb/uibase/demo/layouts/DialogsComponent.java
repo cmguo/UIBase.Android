@@ -29,7 +29,7 @@ public class DialogsComponent implements Component
 
     @Override
     public int group() {
-        return R.string.group_dialogs;
+        return R.string.group_styles;
     }
 
     @Override

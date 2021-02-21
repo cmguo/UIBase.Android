@@ -1,10 +1,9 @@
-package com.xhb.uibase.demo.colors;
+package com.xhb.uibase.demo.core;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.xhb.uibase.R;
-import com.xhb.uibase.demo.core.SkinManager;
 
 import java.lang.reflect.Field;
 import java.util.Map;

@@ -6,7 +6,7 @@
 
     <data>
         <import type="java.util.Map.Entry" />
-        <import type="com.xhb.uibase.demo.colors.Colors" />
+        <import type="com.xhb.uibase.demo.core.Colors" />
         <variable
             name="data"
             type="Entry&lt;String, Integer&gt;" />

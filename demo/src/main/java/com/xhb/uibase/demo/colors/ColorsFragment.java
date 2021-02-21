@@ -9,8 +9,8 @@ import androidx.databinding.Bindable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xhb.uibase.binding.RecyclerViewAdapter;
-import com.xhb.uibase.demo.BR;
 import com.xhb.uibase.demo.R;
+import com.xhb.uibase.demo.core.Colors;
 import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.core.SkinManager;
 import com.xhb.uibase.demo.core.ViewModel;
@@ -30,7 +30,7 @@ public class ColorsFragment extends ComponentFragment<ColorsBinding, ColorsFragm
 
     public static class Model extends ViewModel {
 
-        private Map<String, Integer> colors;
+        private final Map<String, Integer> colors;
 
         public Model(ColorsFragment fragment) {
             if (fragment.getComponent().id() == R.id.component_colors)
@@ -46,7 +46,6 @@ public class ColorsFragment extends ComponentFragment<ColorsBinding, ColorsFragm
 
         void updateColors(Context context) {
             Colors.update(context, colors);
-            notifyPropertyChanged(BR.colors);
         }
     }
 
@@ -56,12 +55,7 @@ public class ColorsFragment extends ComponentFragment<ColorsBinding, ColorsFragm
     }
 
     // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener colorClicked = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int position, Object object) {
-            Log.d(TAG, "colorClicked" + object);
-        }
-    };
+    public RecyclerViewAdapter.OnItemClickListener colorClicked = (position, object) -> Log.d(TAG, "colorClicked" + object);
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,5 +72,6 @@ public class ColorsFragment extends ComponentFragment<ColorsBinding, ColorsFragm
     @Override
     public void updateSkin(SkinObservable observable, Object o) {
         getModel().updateColors(getContext());
+        getBinding().colorsList.getAdapter().notifyItemRangeChanged(0, getModel().getColors().size());
     }
 }

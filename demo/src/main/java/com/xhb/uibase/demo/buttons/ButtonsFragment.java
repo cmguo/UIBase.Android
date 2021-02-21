@@ -1,8 +1,10 @@
 package com.xhb.uibase.demo.buttons;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
 import androidx.databinding.ViewDataBinding;
 import androidx.databinding.library.baseAdapters.BR;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.xhb.uibase.binding.RecyclerViewAdapter;
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.ComponentFragment;
+import com.xhb.uibase.demo.core.SkinManager;
 import com.xhb.uibase.demo.core.Styles;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
@@ -22,7 +25,11 @@ import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
 
-public class ButtonsFragment extends ComponentFragment<ButtonsBinding, ButtonsFragment.Model, ButtonsFragment.Style> {
+import skin.support.observe.SkinObservable;
+import skin.support.observe.SkinObserver;
+
+public class ButtonsFragment extends ComponentFragment<ButtonsBinding, ButtonsFragment.Model, ButtonsFragment.Style>
+        implements SkinObserver {
 
     private static final String TAG = "ButtonsComponent";
 
@@ -98,4 +105,21 @@ public class ButtonsFragment extends ComponentFragment<ButtonsBinding, ButtonsFr
             Log.d(TAG, "buttonClicked" + object);
         }
     };
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SkinManager.addObserver(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        SkinManager.removeObserver(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public void updateSkin(SkinObservable observable, Object o) {
+        getBinding().buttonsList.getAdapter().notifyItemRangeChanged(0, getModel().styles.size());
+    }
 }
