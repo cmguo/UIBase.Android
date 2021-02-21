@@ -1,10 +1,9 @@
-package com.eazy.uibase.demo.colors;
+package com.eazy.uibase.demo.core;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.eazy.uibase.R;
-import com.eazy.uibase.demo.core.SkinManager;
 
 import java.lang.reflect.Field;
 import java.util.Map;

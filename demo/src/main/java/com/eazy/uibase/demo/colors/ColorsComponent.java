@@ -28,7 +28,7 @@ public class ColorsComponent implements Component
 
     @Override
     public int group() {
-        return R.string.group_colors;
+        return R.string.group_styles;
     }
 
     @Override

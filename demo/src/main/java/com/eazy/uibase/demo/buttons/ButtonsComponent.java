@@ -30,7 +30,7 @@ public class ButtonsComponent implements Component{
 
     @Override
     public int group() {
-        return R.string.group_buttons;
+        return R.string.group_styles;
     }
 
     @Override
