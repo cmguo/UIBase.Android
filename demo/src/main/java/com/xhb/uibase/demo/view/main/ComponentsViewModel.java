@@ -1,11 +1,11 @@
-package com.xhb.uibase.app.ui.main;
+package com.xhb.uibase.demo.view.main;
 
 import android.content.Context;
 
 import androidx.lifecycle.ViewModel;
 
 import com.niuedu.ListTree;
-import com.xhb.uibase.app.R;
+import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.Component;
 import com.xhb.uibase.demo.core.ComponentInfo;
 import com.xhb.uibase.demo.core.Components;

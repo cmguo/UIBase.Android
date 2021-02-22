@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.StylesFragment">
+    tools:context="com.xhb.uibase.demo.view.main.StylesFragment">
 
     <data>
-        <import type="com.xhb.uibase.app.ui.main.StylesFragment"/>
+        <import type="com.xhb.uibase.demo.view.main.StylesFragment"/>
         <variable
             name="fragment"
             type="StylesFragment" />
-        <import type="com.xhb.uibase.app.ui.main.StylesViewModel"/>
+        <import type="com.xhb.uibase.demo.view.main.StylesViewModel"/>
         <variable
             name="model"
             type="StylesViewModel" />

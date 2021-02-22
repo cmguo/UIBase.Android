@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.xhb.uibase.app.ui.main.ComponentsFragment;
-import com.xhb.uibase.app.ui.main.StylesFragment;
+import com.xhb.uibase.demo.view.main.ComponentsFragment;
+import com.xhb.uibase.demo.view.main.StylesFragment;
 import com.xhb.uibase.demo.core.Component;
 import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.test.TestComponent;

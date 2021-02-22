@@ -1,4 +1,4 @@
-package com.xhb.uibase.app.ui.main;
+package com.xhb.uibase.demo.view.main;
 
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.niuedu.ListTree;
 import com.niuedu.ListTreeAdapter;
-import com.xhb.uibase.app.R;
+import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.ComponentInfo;
 
 /**

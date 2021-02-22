@@ -1,4 +1,4 @@
-package com.xhb.uibase.app.ui.main;
+package com.xhb.uibase.demo.view.main;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -16,8 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xhb.uibase.app.R;
-import com.xhb.uibase.app.databinding.StylesFragmentBinding;
+import com.xhb.uibase.demo.R;
+import com.xhb.uibase.demo.databinding.StylesFragmentBinding;
 import com.xhb.uibase.binding.RecyclerViewAdapter;
 import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration;

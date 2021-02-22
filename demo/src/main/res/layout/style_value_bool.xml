@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.xhb.uibase.app.ui.main.StylesViewModel.StyleValue"/>
+        <import type="com.xhb.uibase.demo.view.main.StylesViewModel.StyleValue"/>
         <variable
             name="value"
             type="StyleValue" />
