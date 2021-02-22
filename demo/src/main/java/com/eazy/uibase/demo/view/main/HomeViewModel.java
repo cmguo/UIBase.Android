@@ -1,4 +1,4 @@
-package com.eazy.uibase.app.ui.home;
+package com.eazy.uibase.demo.view.main;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

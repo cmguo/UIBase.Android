@@ -1,11 +1,3 @@
 <resources>
     <string name="app_name">基础控件演示</string>
-    <string name="nav_header_title">晓黑板架构组</string>
-    <string name="nav_header_subtitle">xiaoheibang@tal.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">设置</string>
-    <string name="action_skin_normal">白天模式</string>
-    <string name="action_skin_dark">夜间模式</string>
-
-    <string name="menu_home">主页</string>
 </resources>

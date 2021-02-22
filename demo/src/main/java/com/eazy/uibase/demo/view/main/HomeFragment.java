@@ -1,4 +1,4 @@
-package com.eazy.uibase.app.ui.home;
+package com.eazy.uibase.demo.view.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.eazy.uibase.app.R;
+import com.eazy.uibase.demo.R;
 
 public class HomeFragment extends Fragment {
 

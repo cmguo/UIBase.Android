@@ -62,7 +62,8 @@ public class StylesFragment extends Fragment {
     }
 
     private StylesViewModel mViewModel;
-
+    private ComponentFragment fragment;
+    
     public StyleItemLayout itemLayout = new StyleItemLayout();
     public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
 
@@ -83,8 +84,6 @@ public class StylesFragment extends Fragment {
             mViewModel.bindComponent(fragment);
         DataBindingUtil.findBinding(getView()).setVariable(BR.model, mViewModel);
     }
-
-    private ComponentFragment fragment;
 
     public void bindComponent(ComponentFragment fragment) {
         if (mViewModel != null)
