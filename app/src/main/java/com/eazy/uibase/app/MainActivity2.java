@@ -30,7 +30,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.eazy.uibase.app.ui.main.StylesFragment;
+import com.eazy.uibase.demo.view.main.StylesFragment;
 import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.Components;

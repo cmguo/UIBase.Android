@@ -1,4 +1,4 @@
-package com.eazy.uibase.app.ui.main;
+package com.eazy.uibase.demo.view.main;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,8 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.eazy.uibase.app.MainActivity;
-import com.eazy.uibase.app.R;
+import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentInfo;
 
 public class ComponentsFragment extends Fragment {
@@ -42,7 +41,7 @@ public class ComponentsFragment extends Fragment {
         listView.setAdapter(new ComponentsAdapter(mViewModel.buildTree(getContext()), new ComponentsAdapter.OnItemClickListener<ComponentInfo>() {
             @Override
             public void onClick(RecyclerView recyclerView, View view, ComponentInfo data) {
-                ((MainActivity) getActivity()).switchComponent(data.getComponent());
+                //((MainActivity) getActivity()).switchComponent(data.getComponent());
             }
         }, null));
     }

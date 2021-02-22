@@ -1,4 +1,4 @@
-package com.eazy.uibase.app.ui.main;
+package com.eazy.uibase.demo.view.main;
 
 import android.util.Log;
 
@@ -7,9 +7,8 @@ import androidx.databinding.Bindable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.eazy.uibase.app.BR;
-import com.eazy.uibase.app.R;
-import com.eazy.uibase.demo.core.Component;
+import com.eazy.uibase.demo.BR;
+import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.ComponentStyle;
 import com.eazy.uibase.demo.core.ComponentStyles;

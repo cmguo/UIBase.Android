@@ -1,4 +1,4 @@
-package com.eazy.uibase.app.ui.main;
+package com.eazy.uibase.demo.view.main;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -16,8 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.eazy.uibase.app.R;
-import com.eazy.uibase.app.databinding.StylesFragmentBinding;
+import com.eazy.uibase.demo.R;
+import com.eazy.uibase.demo.databinding.StylesFragmentBinding;
 import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;

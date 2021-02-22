@@ -1,11 +1,11 @@
-package com.eazy.uibase.app.ui.main;
+package com.eazy.uibase.demo.view.main;
 
 import android.content.Context;
 
 import androidx.lifecycle.ViewModel;
 
 import com.niuedu.ListTree;
-import com.eazy.uibase.app.R;
+import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.ComponentInfo;
 import com.eazy.uibase.demo.core.Components;

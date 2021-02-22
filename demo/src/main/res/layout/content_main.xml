@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/styles_fragment"
-        android:name="com.eazy.uibase.app.ui.main.StylesFragment"
+        android:name="com.eazy.uibase.demo.view.main.StylesFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"

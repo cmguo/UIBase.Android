@@ -5,17 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.eazy.uibase.app.ui.main.StylesViewModel.StyleValue"/>
+        <import type="com.eazy.uibase.demo.view.main.StylesViewModel.StyleValue"/>
         <variable
             name="value"
             type="StyleValue" />
     </data>
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@={value.value}">
+        android:checked='@={value.checked}'
+        android:text="@{value.value}">
 
-    </androidx.appcompat.widget.AppCompatEditText>
+    </androidx.appcompat.widget.AppCompatCheckBox>
 
 </layout>

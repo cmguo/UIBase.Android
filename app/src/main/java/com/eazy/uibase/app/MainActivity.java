@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.eazy.uibase.app.ui.main.ComponentsFragment;
-import com.eazy.uibase.app.ui.main.StylesFragment;
+import com.eazy.uibase.demo.view.main.ComponentsFragment;
+import com.eazy.uibase.demo.view.main.StylesFragment;
 import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.test.TestComponent;

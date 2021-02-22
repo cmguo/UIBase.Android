@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/half_dark"
-    tools:context=".ui.main.ComponentsFragment">
+    tools:context="com.eazy.uibase.demo.view.main.ComponentsFragment">
 
     <ImageView
         android:id="@+id/image"
