@@ -30,6 +30,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.xhb.uibase.demo.view.main.InformationFragment;
 import com.xhb.uibase.demo.view.main.StylesFragment;
 import com.xhb.uibase.demo.core.Component;
 import com.xhb.uibase.demo.core.ComponentFragment;
@@ -45,6 +46,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    private Fragment informationFragment;
     private Fragment stylesFragment;
 
     @Override
@@ -79,6 +81,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         navController.addOnDestinationChangedListener(this);
         Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
         componentFragment.getChildFragmentManager().addOnBackStackChangedListener(this);
+        informationFragment = getSupportFragmentManager().findFragmentById(R.id.information_fragment);
         stylesFragment = getSupportFragmentManager().findFragmentById(R.id.styles_fragment);
     }
 
@@ -199,8 +202,10 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         List<Fragment> fragments = ((NavHostFragment) componentFragment).getChildFragmentManager().getFragments();
         if (!fragments.isEmpty())
             componentFragment = fragments.get(0);
-        if (componentFragment instanceof ComponentFragment)
+        if (componentFragment instanceof ComponentFragment) {
+            ((InformationFragment) informationFragment).bindComponent((ComponentFragment) componentFragment);
             ((StylesFragment) stylesFragment).bindComponent((ComponentFragment) componentFragment);
+        }
     }
 
     @Override

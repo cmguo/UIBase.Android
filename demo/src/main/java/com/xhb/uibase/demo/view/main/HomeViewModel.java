@@ -1,4 +1,4 @@
-package com.xhb.uibase.app.ui.home;
+package com.xhb.uibase.demo.view.main;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
