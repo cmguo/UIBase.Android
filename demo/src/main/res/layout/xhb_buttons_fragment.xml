@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.buttons.XHBButtonsFragment.Model" />
+
+        <import type="com.xhb.uibase.demo.buttons.XHBButtonsFragment.Style" />
+
+        <import type="com.xhb.uibase.demo.buttons.XHBButtonsFragment" />
+
+        <variable
+            name="fragment"
+            type="XHBButtonsFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="style"
+            type="Style" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/xhb_component_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TestComponent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/buttonsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:data="@{model.styles}"
+            app:itemDecoration="@{style.itemDecoration}"
+            app:itemLayout="@{style.itemLayout}">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </FrameLayout>
+
+</layout>

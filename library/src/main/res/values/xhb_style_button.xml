@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="XHBButtonLoadingLayout">
+        <attr name="loadingDrawable" format="reference" />
+        <attr name="loadingText" format="reference" />
+    </declare-styleable>
+
+    <style name="XHB.Button" parent="XHB">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="XHB.Button.Primary" parent="XHB.Button">
+        <item name="android:background">@drawable/xhb_button_primary_bg</item>
+        <item name="android:textColor">@color/static_bluegrey_900</item>
+    </style>
+
+    <style name="XHB.Button.Primary.Large" parent="XHB.Button.Primary">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="XHB.Button.Primary.Medium" parent="XHB.Button.Primary">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="XHB.Button.Primary.Small" parent="XHB.Button.Primary">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

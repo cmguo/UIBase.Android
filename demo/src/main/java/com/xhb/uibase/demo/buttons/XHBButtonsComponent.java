@@ -7,11 +7,11 @@ import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.core.annotation.Author;
 
 @AutoService(Component.class)
-@Author("cmguo")
-public class XHBButtonsComponent implements Component{
+@Author("Fish")
+public class XHBButtonsComponent implements Component {
     @Override
     public int id() {
-        return R.id.component_buttons;
+        return R.id.xhb_component_buttons;
     }
 
     @Override
@@ -26,17 +26,17 @@ public class XHBButtonsComponent implements Component{
 
     @Override
     public int title() {
-        return R.string.component_buttons;
+        return R.string.component_xhb_buttons;
     }
 
     @Override
     public int description() {
-        return R.string.component_buttons_desc;
+        return R.string.component_xhb_buttons_des;
     }
 
     @Override
     public Class<? extends ComponentFragment> fragmentClass() {
-        return ButtonsFragment.class;
+        return XHBButtonsFragment.class;
     }
 
 }

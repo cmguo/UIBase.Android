@@ -31,8 +31,13 @@ public class Styles {
 
     private static final String TAG = "Styles";
 
+    public static Map<String, Integer> xhbButtonStyles(Context context) {
+        return getStyles(context, R.style.class, Pattern.compile("^XHB.Button."));
+        // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
+    }
+
     public static Map<String, Integer> buttonStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("ButtonStyle"));
+        return getStyles(context, R.style.class, Pattern.compile("Button"));
         // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
     }
 

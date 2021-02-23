@@ -25,4 +25,9 @@
     <string name="component_dialogs_desc">对话框</string>
     <string name="menu_home">主页</string>
 
+    <!--    standard ui comopent start here     -->
+    <string name="component_xhb_buttons">XHB 按钮</string>
+    <string name="component_xhb_buttons_des">XHB UI组件库 按钮页面</string>
+
+
 </resources>
