@@ -83,10 +83,13 @@ public class ZButtonLoadingView extends SkinCompatFrameLayout {
                     " can only have one text/button child, but current count is " + getChildCount());
         }
         mButton = getChildAt(0);
-        mLoadingLayout.setClickable(true);
+        FrameLayout.LayoutParams buttonLayoutParams = (LayoutParams) mButton.getLayoutParams();
+        buttonLayoutParams.gravity = Gravity.CENTER;
+        mButton.setLayoutParams(buttonLayoutParams);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.CENTER;
         addView(mLoadingLayout, params);
+        mLoadingLayout.setClickable(true);
         setLoading(false);
     }
 
