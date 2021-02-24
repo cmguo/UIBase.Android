@@ -19,7 +19,6 @@ import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.core.annotation.Title;
 import com.xhb.uibase.demo.core.annotation.Values;
-import com.xhb.uibase.demo.databinding.ButtonsBinding;
 import com.xhb.uibase.demo.databinding.XhbButtonsFragmentBinding;
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
 import com.xhb.uibase.widget.XHBButtonLoadingView;
@@ -104,7 +103,6 @@ public class XHBButtonsFragment extends ComponentFragment<XhbButtonsFragmentBind
         @Override
         public void onItemClick(int position, Object object) {
             Log.d(TAG, "buttonClicked" + object);
-
         }
     };
 

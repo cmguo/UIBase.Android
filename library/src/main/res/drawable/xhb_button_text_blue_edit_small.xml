@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="12dp"
+        android:height="12dp"
+        android:top="3dp"
+
+        >
+        <bitmap android:src="@drawable/xhb_button_text_blue_edit"></bitmap>
+    </item>
+</layer-list>
