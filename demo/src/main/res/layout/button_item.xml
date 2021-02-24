@@ -50,15 +50,17 @@
 
                 <com.eazy.uibase.widget.ZButtonLoadingView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:style="@{data.value}"
+                    >
 
                     <TextView
                         android:id="@+id/button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:enabled="@{!style.disabled}"
-                        android:text="@{style.text}"
                         android:onClick="@{(view) -> ZButtonsFragment.testButtonClick(view)}"
+                        android:text="@{style.text}"
                         app:style="@{data.value}" />
                 </com.eazy.uibase.widget.ZButtonLoadingView>
 

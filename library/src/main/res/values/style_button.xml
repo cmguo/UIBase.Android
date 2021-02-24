@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="ZButtonLoadingLayout">
+    <declare-styleable name="ZButtonLoadingView">
         <attr name="loadingDrawable" format="reference" />
-        <attr name="loadingText" format="reference" />
+        <attr name="loadingText" format="string" />
     </declare-styleable>
 
     <style name="Z.Button" parent="Z">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
+        <item name="loadingText">""</item>
+        <item name="loadingDrawable">@drawable/button_loading_primary_anim</item>
     </style>
 
     <style name="Z.Button.Primary" parent="Z.Button">
         <item name="android:background">@drawable/button_primary_bg</item>
-        <item name="android:textColor">@color/static_bluegrey_900</item>
+        <item name="android:textColor">@color/button_textcolor_primary</item>
+        <item name="android:drawable">@color/button_textcolor_primary</item>
     </style>
 
     <style name="Z.Button.Primary.Large" parent="Z.Button.Primary">
@@ -22,6 +25,7 @@
         <item name="android:paddingRight">24dp</item>
         <item name="android:layout_height">44dp</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:drawablePadding">5dp</item>
     </style>
 
     <style name="Z.Button.Primary.Medium" parent="Z.Button.Primary">
@@ -29,6 +33,7 @@
         <item name="android:paddingRight">16dp</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:drawablePadding">4dp</item>
     </style>
 
     <style name="Z.Button.Primary.Small" parent="Z.Button.Primary">
@@ -36,6 +41,169 @@
         <item name="android:paddingRight">12dp</item>
         <item name="android:layout_height">24dp</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:drawablePadding">3dp</item>
+    </style>
+
+
+    <style name="Z.Button.Secondary" parent="Z.Button"></style>
+
+    <style name="Z.Button.Secondary.Blue" parent="Z.Button.Secondary">
+        <item name="android:background">@drawable/button_secondary_blue_bg</item>
+        <item name="android:textColor">@color/button_textcolor_secondary_blue</item>
+        <item name="loadingDrawable">@drawable/button_loading_secondary_blue_anim</item>
+    </style>
+
+    <style name="Z.Button.Secondary.Blue.Large" parent="Z.Button.Secondary.Blue">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+    <style name="Z.Button.Secondary.Blue.Medium" parent="Z.Button.Secondary.Blue">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawablePadding">4dp</item>
+    </style>
+
+    <style name="Z.Button.Secondary.Blue.Small" parent="Z.Button.Secondary.Blue">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:drawablePadding">3dp</item>
+    </style>
+
+
+    <style name="Z.Button.Third" parent="Z.Button"></style>
+
+    <style name="Z.Button.Third.Normal" parent="Z.Button.Third">
+        <item name="android:background">@drawable/button_third_normal_bg</item>
+        <item name="android:textColor">@color/button_textcolor_third_normal</item>
+        <item name="loadingDrawable">@drawable/button_loading_third_normal_anim</item>
+    </style>
+
+    <style name="Z.Button.Third.Normal.Large" parent="Z.Button.Third.Normal">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+    <style name="Z.Button.Third.Normal.Large.Add" parent="Z.Button.Third.Normal.Large">
+        <item name="android:drawableLeft">@drawable/button_third_normal_left_icon_add_large
+        </item>
+    </style>
+
+    <style name="Z.Button.Third.Normal.Medium.Add" parent="Z.Button.Third.Normal.Medium">
+        <item name="android:drawableLeft">@drawable/button_third_normal_left_icon_add_medium
+        </item>
+    </style>
+
+    <style name="Z.Button.Third.Normal.Small.Add" parent="Z.Button.Third.Normal.Small">
+        <item name="android:drawableLeft">@drawable/button_third_normal_left_icon_add_small
+        </item>
+    </style>
+
+    <style name="Z.Button.Third.Normal.Medium" parent="Z.Button.Third.Normal">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawablePadding">4dp</item>
+    </style>
+
+    <style name="Z.Button.Third.Normal.Small" parent="Z.Button.Third.Normal">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:drawablePadding">3dp</item>
+    </style>
+
+
+    <style name="Z.Button.Alert" parent="Z.Button">
+        <item name="android:background">@drawable/button_alert_bg</item>
+        <item name="android:textColor">@color/button_textcolor_alert</item>
+        <item name="loadingDrawable">@drawable/button_loading_alert_anim</item>
+
+    </style>
+
+    <style name="Z.Button.Alert.Large" parent="Z.Button.Alert">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+    <style name="Z.Button.Alert.Medium" parent="Z.Button.Alert">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawablePadding">4dp</item>
+    </style>
+
+    <style name="Z.Button.Alert.Small" parent="Z.Button.Alert">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:drawablePadding">3dp</item>
+    </style>
+
+
+    <style name="Z.Button.Text" parent="Z.Button">
+        <item name="loadingText">"加载中..."</item>
+    </style>
+
+    <style name="Z.Button.Text.Blue" parent="Z.Button.Text">
+        <item name="android:background">@drawable/button_text_blue_bg</item>
+        <item name="android:textColor">@color/button_textcolor_text_blue</item>
+        <item name="android:paddingLeft">1dp</item>
+        <item name="android:paddingRight">1dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="loadingDrawable">@drawable/button_loading_text_blue_anim</item>
+    </style>
+
+    <style name="Z.Button.Text.Blue.Large" parent="Z.Button.Text.Blue">
+        <item name="android:layout_height">28dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+    <style name="Z.Button.Text.Blue.Medium" parent="Z.Button.Text.Blue">
+        <item name="android:layout_height">24dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawablePadding">4dp</item>
+    </style>
+
+    <style name="Z.Button.Text.Blue.Small" parent="Z.Button.Text.Blue">
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:drawablePadding">3dp</item>
+    </style>
+
+
+    <style name="Z.Button.Text.Blue.Large.Edit" parent="Z.Button.Text.Blue.Large">
+        <item name="android:drawableLeft">@drawable/button_text_blue_edit_large
+        </item>
+    </style>
+
+    <style name="Z.Button.Text.Blue.Medium.Edit" parent="Z.Button.Text.Blue.Medium">
+        <item name="android:drawableLeft">@drawable/button_text_blue_edit_medium
+        </item>
+    </style>
+
+    <style name="Z.Button.Text.Blue.Small.Edit" parent="Z.Button.Text.Blue.Small">
+        <item name="android:drawableLeft">@drawable/button_text_blue_edit_small
+        </item>
     </style>
 
 </resources>

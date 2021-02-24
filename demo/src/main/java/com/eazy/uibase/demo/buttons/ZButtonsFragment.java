@@ -19,7 +19,6 @@ import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.core.annotation.Title;
 import com.eazy.uibase.demo.core.annotation.Values;
-import com.eazy.uibase.demo.databinding.ButtonsBinding;
 import com.eazy.uibase.demo.databinding.XhbButtonsFragmentBinding;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 import com.eazy.uibase.widget.ZButtonLoadingView;
@@ -104,7 +103,6 @@ public class ZButtonsFragment extends ComponentFragment<XhbButtonsFragmentBindin
         @Override
         public void onItemClick(int position, Object object) {
             Log.d(TAG, "buttonClicked" + object);
-
         }
     };
 

@@ -3,11 +3,14 @@ package com.eazy.uibase.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,10 +20,12 @@ import androidx.annotation.Nullable;
 
 import com.eazy.uibase.R;
 
+import skin.support.widget.SkinCompatFrameLayout;
+
 /**
  * Adding loading ability for Button.
  */
-public class ZButtonLoadingView extends FrameLayout {
+public class ZButtonLoadingView extends SkinCompatFrameLayout {
 
     private View mLoadingLayout;
     private ProgressBar mLoadingProgressBar;
@@ -37,21 +42,37 @@ public class ZButtonLoadingView extends FrameLayout {
         mLoadingProgressBar = mLoadingLayout.findViewById(R.id.loading_progress);
         mLoadingText = mLoadingLayout.findViewById(R.id.loading_text);
         if (attrs != null) {
-            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ZButtonLoadingLayout, 0, 0);
-            // Set drawable resource
-            Drawable drawableRes = a.getDrawable(R.styleable.ZButtonLoadingLayout_loadingDrawable);
-            if (drawableRes != null) {
-                mLoadingProgressBar.setIndeterminateDrawable(drawableRes);
-            }
-            int text = a.getResourceId(R.styleable.ZButtonLoadingLayout_loadingText, 0);
-            if (text > 0) {
-                mLoadingText.setText(text);
-            } else {
-                CharSequence textString = a.getText(R.styleable.ZButtonLoadingLayout_loadingText);
-                mLoadingText.setText(textString);
-            }
-            a.recycle();
+            TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ZButtonLoadingView, 0, 0);
+            setAttribute(a);
         }
+    }
+
+    public void setStyle(int style) {
+        if (style > 0) {
+            TypedArray a = getContext().obtainStyledAttributes(style, R.styleable.ZButtonLoadingView);
+            setAttribute(a);
+        }
+    }
+
+    private void setAttribute(TypedArray a) {
+        // Set drawable resource
+        Drawable drawableRes = a.getDrawable(R.styleable.ZButtonLoadingView_loadingDrawable);
+        if (drawableRes != null) {
+            mLoadingProgressBar.setIndeterminateDrawable(drawableRes);
+        }
+        int text = a.getResourceId(R.styleable.ZButtonLoadingView_loadingText, 0);
+        if (text > 0) {
+            mLoadingText.setText(text);
+        } else {
+            CharSequence textString = a.getText(R.styleable.ZButtonLoadingView_loadingText);
+            mLoadingText.setText(textString);
+        }
+        if (!TextUtils.isEmpty(mLoadingText.getText())) {
+            mLoadingText.setVisibility(VISIBLE);
+        } else {
+            mLoadingText.setVisibility(GONE);
+        }
+        a.recycle();
     }
 
     @Override
@@ -77,13 +98,24 @@ public class ZButtonLoadingView extends FrameLayout {
         mLoadingText.setText(value);
     }
 
-
     public boolean isLoading() {
         return mLoadingLayout.getVisibility() == VISIBLE;
     }
 
     public void setLoading(boolean loading) {
-        this.setBackground(mButton.getBackground());
+        if (this.getBackground() == null) {
+            this.setBackground(mButton.getBackground());
+            mLoadingLayout.setPadding(mButton.getPaddingLeft(), 0, mButton.getPaddingRight(), 0);
+            if (mButton instanceof TextView) {
+                final float textSize = ((TextView) mButton).getTextSize();
+                mLoadingText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+                mLoadingText.setTextColor(((TextView) mButton).getTextColors().getDefaultColor());
+                ViewGroup.LayoutParams params = mLoadingProgressBar.getLayoutParams();
+                params.width = (int) textSize;
+                params.height = (int) textSize;
+                mLoadingProgressBar.setLayoutParams(params);
+            }
+        }
         if (loading) {
             mButton.setVisibility(INVISIBLE);
             mLoadingLayout.setVisibility(VISIBLE);
@@ -93,9 +125,15 @@ public class ZButtonLoadingView extends FrameLayout {
         }
     }
 
+
     @androidx.databinding.BindingAdapter("loading")
     public static <T> void bindLoading(ZButtonLoadingView view, boolean loading) {
         view.setLoading(loading);
+    }
+
+    @androidx.databinding.BindingAdapter("style")
+    public static <T> void bindStyle(ZButtonLoadingView view, int style) {
+        view.setStyle(style);
     }
 
     public static void setLoading(View buttonView, boolean value) {
@@ -106,4 +144,6 @@ public class ZButtonLoadingView extends FrameLayout {
                     ", but current is " + buttonView.getParent());
         }
     }
+
+
 }
