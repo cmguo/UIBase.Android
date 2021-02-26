@@ -34,16 +34,11 @@ public class Styles {
     private static final String TAG = "Styles";
 
     public static Map<String, Integer> xhbButtonStyles(Context context) {
-        Map<String, Integer> map = new LinkedHashMap<>();
-        map.putAll(getStyles(context, R.style.class, Pattern.compile("^XHB.Button.*.Large.*")));
-        map.putAll(getStyles(context, R.style.class, Pattern.compile("^XHB.Button.*.Medium.*")));
-        map.putAll(getStyles(context, R.style.class, Pattern.compile("^XHB.Button.*.Small.*")));
-        return map;
-        // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
+        return getStyles(context, R.style.class, Pattern.compile("^XHB_Button_\\w+_\\w+"));
     }
 
     public static Map<String, Integer> buttonStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("Button"));
+        return getStyles(context, R.style.class, Pattern.compile("ButtonStyle"));
         // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
     }
 

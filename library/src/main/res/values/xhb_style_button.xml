@@ -45,15 +45,13 @@
     </style>
 
 
-    <style name="XHB.Button.Secondary" parent="XHB.Button"></style>
-
-    <style name="XHB.Button.Secondary.Blue" parent="XHB.Button.Secondary">
+    <style name="XHB.Button.Secondary" parent="XHB.Button">
         <item name="android:background">@drawable/xhb_button_secondary_blue_bg</item>
         <item name="android:textColor">@color/xhb_button_textcolor_secondary_blue</item>
         <item name="loadingDrawable">@drawable/xhb_button_loading_secondary_blue_anim</item>
     </style>
 
-    <style name="XHB.Button.Secondary.Blue.Large" parent="XHB.Button.Secondary.Blue">
+    <style name="XHB.Button.Secondary.Large" parent="XHB.Button.Secondary">
         <item name="android:paddingLeft">24dp</item>
         <item name="android:paddingRight">24dp</item>
         <item name="android:layout_height">44dp</item>
@@ -61,7 +59,7 @@
         <item name="android:drawablePadding">5dp</item>
     </style>
 
-    <style name="XHB.Button.Secondary.Blue.Medium" parent="XHB.Button.Secondary.Blue">
+    <style name="XHB.Button.Secondary.Medium" parent="XHB.Button.Secondary">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:layout_height">36dp</item>
@@ -69,7 +67,7 @@
         <item name="android:drawablePadding">4dp</item>
     </style>
 
-    <style name="XHB.Button.Secondary.Blue.Small" parent="XHB.Button.Secondary.Blue">
+    <style name="XHB.Button.Secondary.Small" parent="XHB.Button.Secondary">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>
         <item name="android:layout_height">24dp</item>
@@ -78,15 +76,13 @@
     </style>
 
 
-    <style name="XHB.Button.Third" parent="XHB.Button"></style>
-
-    <style name="XHB.Button.Third.Normal" parent="XHB.Button.Third">
+    <style name="XHB.Button.Tertiary" parent="XHB.Button">
         <item name="android:background">@drawable/xhb_button_third_normal_bg</item>
         <item name="android:textColor">@color/xhb_button_textcolor_third_normal</item>
         <item name="loadingDrawable">@drawable/xhb_button_loading_third_normal_anim</item>
     </style>
 
-    <style name="XHB.Button.Third.Normal.Large" parent="XHB.Button.Third.Normal">
+    <style name="XHB.Button.Tertiary.Large" parent="XHB.Button.Tertiary">
         <item name="android:paddingLeft">24dp</item>
         <item name="android:paddingRight">24dp</item>
         <item name="android:layout_height">44dp</item>
@@ -94,22 +90,7 @@
         <item name="android:drawablePadding">5dp</item>
     </style>
 
-    <style name="XHB.Button.Third.Normal.Large.Add" parent="XHB.Button.Third.Normal.Large">
-        <item name="android:drawableLeft">@drawable/xhb_button_third_normal_left_icon_add_large
-        </item>
-    </style>
-
-    <style name="XHB.Button.Third.Normal.Medium.Add" parent="XHB.Button.Third.Normal.Medium">
-        <item name="android:drawableLeft">@drawable/xhb_button_third_normal_left_icon_add_medium
-        </item>
-    </style>
-
-    <style name="XHB.Button.Third.Normal.Small.Add" parent="XHB.Button.Third.Normal.Small">
-        <item name="android:drawableLeft">@drawable/xhb_button_third_normal_left_icon_add_small
-        </item>
-    </style>
-
-    <style name="XHB.Button.Third.Normal.Medium" parent="XHB.Button.Third.Normal">
+    <style name="XHB.Button.Tertiary.Medium" parent="XHB.Button.Tertiary">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:layout_height">36dp</item>
@@ -117,7 +98,7 @@
         <item name="android:drawablePadding">4dp</item>
     </style>
 
-    <style name="XHB.Button.Third.Normal.Small" parent="XHB.Button.Third.Normal">
+    <style name="XHB.Button.Tertiary.Small" parent="XHB.Button.Tertiary">
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>
         <item name="android:layout_height">24dp</item>
@@ -159,10 +140,6 @@
 
 
     <style name="XHB.Button.Text" parent="XHB.Button">
-        <item name="loadingText">"加载中..."</item>
-    </style>
-
-    <style name="XHB.Button.Text.Blue" parent="XHB.Button.Text">
         <item name="android:background">@drawable/xhb_button_text_blue_bg</item>
         <item name="android:textColor">@color/xhb_button_textcolor_text_blue</item>
         <item name="android:paddingLeft">1dp</item>
@@ -170,40 +147,25 @@
         <item name="android:paddingTop">2dp</item>
         <item name="android:paddingBottom">2dp</item>
         <item name="loadingDrawable">@drawable/xhb_button_loading_text_blue_anim</item>
+        <item name="loadingText">"加载中..."</item>
     </style>
 
-    <style name="XHB.Button.Text.Blue.Large" parent="XHB.Button.Text.Blue">
+    <style name="XHB.Button.Text.Large" parent="XHB.Button.Text">
         <item name="android:layout_height">28dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:drawablePadding">5dp</item>
     </style>
 
-    <style name="XHB.Button.Text.Blue.Medium" parent="XHB.Button.Text.Blue">
+    <style name="XHB.Button.Text.Medium" parent="XHB.Button.Text">
         <item name="android:layout_height">24dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:drawablePadding">4dp</item>
     </style>
 
-    <style name="XHB.Button.Text.Blue.Small" parent="XHB.Button.Text.Blue">
+    <style name="XHB.Button.Text.Small" parent="XHB.Button.Text">
         <item name="android:layout_height">20dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:drawablePadding">3dp</item>
-    </style>
-
-
-    <style name="XHB.Button.Text.Blue.Large.Edit" parent="XHB.Button.Text.Blue.Large">
-        <item name="android:drawableLeft">@drawable/xhb_button_text_blue_edit_large
-        </item>
-    </style>
-
-    <style name="XHB.Button.Text.Blue.Medium.Edit" parent="XHB.Button.Text.Blue.Medium">
-        <item name="android:drawableLeft">@drawable/xhb_button_text_blue_edit_medium
-        </item>
-    </style>
-
-    <style name="XHB.Button.Text.Blue.Small.Edit" parent="XHB.Button.Text.Blue.Small">
-        <item name="android:drawableLeft">@drawable/xhb_button_text_blue_edit_small
-        </item>
     </style>
 
 </resources>

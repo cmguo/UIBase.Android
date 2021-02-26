@@ -7,9 +7,9 @@
 
         <import type="java.util.Map.Entry" />
 
-        <import type="com.xhb.uibase.demo.buttons.XHBButtonsFragment.Style" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBButtonFragment.Style" />
 
-        <import type="com.xhb.uibase.demo.buttons.XHBButtonsFragment" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBButtonFragment" />
 
         <variable
             name="data"
@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:enabled="@{!style.disabled}"
-                        android:onClick="@{(view) -> XHBButtonsFragment.testButtonClick(view)}"
+                        android:onClick="@{(view) -> XHBButtonFragment.testButtonClick(view)}"
                         android:text="@{style.text}"
                         app:style="@{data.value}" />
                 </com.xhb.uibase.widget.XHBButtonLoadingView>

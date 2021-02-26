@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import com.ustc.base.prop.PropValue;
 import com.ustc.base.util.reflect.ClassWrapper;
 import com.xhb.uibase.demo.BR;
+import com.xhb.uibase.demo.core.annotation.Description;
 import com.xhb.uibase.demo.core.annotation.Title;
 import com.xhb.uibase.demo.core.annotation.Values;
 
@@ -24,8 +25,9 @@ public class ComponentStyle {
     private static final String TAG = "ComponentStyle";
 
     private Field field_;
-    private String title_;
     private String name_;
+    private String title_;
+    private String desc_;
     private Method getter_;
     private Method setter_;
     private Class<?> valueType_;
@@ -37,14 +39,14 @@ public class ComponentStyle {
 
     public ComponentStyle(Field field, Method getter, Method setter) {
         field_ = field;
-        title_ = field.getName();
         name_ = field.getName();
         getter_ = getter;
         setter_ = setter;
         valueType_ = field.getType();
         Title title = field.getAnnotation(Title.class);
-        if (title != null)
-            title_ = title.value();
+        title_ = title == null ? upperFirst(name_) : title.value();
+        Description description = field.getAnnotation(Description.class);
+        desc_ = description == null ? name_ : description.value();
         Values values = field.getAnnotation(Values.class);
         if (values != null) {
             values_ = Arrays.asList(values.value());
@@ -56,12 +58,16 @@ public class ComponentStyle {
         }
     }
 
+    public String getName() {
+        return name_;
+    }
+
     public String getTitle() {
         return title_;
     }
 
-    public String getName() {
-        return name_;
+    public String getDesc() {
+        return desc_;
     }
 
     public Class<?> getValueType() {
@@ -105,5 +111,9 @@ public class ComponentStyle {
             fieldBindings_.put(name, b);
         }
         return b;
+    }
+
+    private String upperFirst(String s) {
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 }

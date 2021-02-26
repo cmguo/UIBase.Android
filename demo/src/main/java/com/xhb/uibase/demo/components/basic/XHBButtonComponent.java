@@ -1,4 +1,4 @@
-package com.xhb.uibase.demo.buttons;
+package com.xhb.uibase.demo.components.basic;
 
 import com.google.auto.service.AutoService;
 import com.xhb.uibase.demo.R;
@@ -8,7 +8,7 @@ import com.xhb.uibase.demo.core.annotation.Author;
 
 @AutoService(Component.class)
 @Author("Fish")
-public class XHBButtonsComponent implements Component {
+public class XHBButtonComponent implements Component {
     @Override
     public int id() {
         return R.id.xhb_component_buttons;
@@ -16,7 +16,7 @@ public class XHBButtonsComponent implements Component {
 
     @Override
     public int group() {
-        return R.string.group_styles;
+        return R.string.group_basic;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class XHBButtonsComponent implements Component {
 
     @Override
     public Class<? extends ComponentFragment> fragmentClass() {
-        return XHBButtonsFragment.class;
+        return XHBButtonFragment.class;
     }
 
 }

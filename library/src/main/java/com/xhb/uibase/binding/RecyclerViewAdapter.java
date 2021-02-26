@@ -25,6 +25,15 @@ import java.util.Map;
  */
 public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAdapter.BindingViewHolder> {
 
+    @BindingAdapter("adapter")
+    public static void setRecyclerViewData(RecyclerView recyclerView, RecyclerViewAdapter adapter) {
+        RecyclerView.Adapter old = recyclerView.getAdapter();
+        if (old instanceof RecyclerViewAdapter) {
+            adapter.adopt(((RecyclerViewAdapter) old));
+        }
+        recyclerView.setAdapter(adapter);
+    }
+
     @BindingAdapter("data")
     public static <LT> void setRecyclerViewData(RecyclerView recyclerView, LT data) {
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
@@ -259,7 +268,13 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         return mItems.indexOf(item);
     }
 
-    public static class BindingViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private void adopt(RecyclerViewAdapter old) {
+        mItems = old.mItems;
+        mItemBinding = old.mItemBinding;
+        mOnItemClickListener = old.mOnItemClickListener;
+    }
+
+    protected static class BindingViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private RecyclerViewAdapter mAdapter;
         private ViewDataBinding mBinding;
@@ -293,6 +308,10 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
             mItem = item;
             binding.bindView(mBinding, item, position);
             //mBinding.executePendingBindings();
+        }
+
+        public void setItemPosition(int orig) {
+            mPosition = orig;
         }
     }
 

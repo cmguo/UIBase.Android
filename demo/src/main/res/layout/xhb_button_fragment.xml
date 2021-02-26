@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.xhb.uibase.demo.buttons.XHBButtonsFragment.Model" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBButtonFragment.Model" />
 
-        <import type="com.xhb.uibase.demo.buttons.XHBButtonsFragment.Style" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBButtonFragment.Style" />
 
-        <import type="com.xhb.uibase.demo.buttons.XHBButtonsFragment" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBButtonFragment" />
 
         <variable
             name="fragment"
-            type="XHBButtonsFragment" />
+            type="XHBButtonFragment" />
 
         <variable
             name="model"

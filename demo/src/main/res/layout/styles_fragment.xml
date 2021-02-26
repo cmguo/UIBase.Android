@@ -23,14 +23,16 @@
             android:id="@+id/stylesList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_dark"
+            android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:adapter="@{fragment.adapter}"
             app:itemLayout="@{fragment.itemLayout}"
             app:itemDecoration="@{fragment.itemDecoration}"
-            app:data="@{model.styleList}">
+            app:data="@{model.styleList}"
+            app:itemClicked="@{fragment.itemClicked}">
 
         </androidx.recyclerview.widget.RecyclerView>
 
