@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.buttons;
+package com.eazy.uibase.demo.components.basic;
 
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.demo.R;
@@ -8,7 +8,7 @@ import com.eazy.uibase.demo.core.annotation.Author;
 
 @AutoService(Component.class)
 @Author("Fish")
-public class ZButtonsComponent implements Component {
+public class ZButtonComponent implements Component {
     @Override
     public int id() {
         return R.id.component_buttons;
@@ -16,7 +16,7 @@ public class ZButtonsComponent implements Component {
 
     @Override
     public int group() {
-        return R.string.group_styles;
+        return R.string.group_basic;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ZButtonsComponent implements Component {
 
     @Override
     public Class<? extends ComponentFragment> fragmentClass() {
-        return ZButtonsFragment.class;
+        return ZButtonFragment.class;
     }
 
 }

@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.buttons.ZButtonsFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.buttons.ZButtonsFragment.Style" />
+        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment.Style" />
 
-        <import type="com.eazy.uibase.demo.buttons.ZButtonsFragment" />
+        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment" />
 
         <variable
             name="fragment"
-            type="ZButtonsFragment" />
+            type="ZButtonFragment" />
 
         <variable
             name="model"

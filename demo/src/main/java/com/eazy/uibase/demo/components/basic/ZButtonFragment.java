@@ -1,8 +1,9 @@
-package com.eazy.uibase.demo.buttons;
+package com.eazy.uibase.demo.components.basic;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
@@ -17,9 +18,10 @@ import com.eazy.uibase.demo.core.SkinManager;
 import com.eazy.uibase.demo.core.Styles;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
+import com.eazy.uibase.demo.core.annotation.Description;
 import com.eazy.uibase.demo.core.annotation.Title;
 import com.eazy.uibase.demo.core.annotation.Values;
-import com.eazy.uibase.demo.databinding.XhbButtonsFragmentBinding;
+import com.eazy.uibase.demo.databinding.XhbButtonFragmentBinding;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 import com.eazy.uibase.widget.ZButtonLoadingView;
 
@@ -28,14 +30,14 @@ import java.util.Map;
 import skin.support.observe.SkinObservable;
 import skin.support.observe.SkinObserver;
 
-public class ZButtonsFragment extends ComponentFragment<XhbButtonsFragmentBinding, ZButtonsFragment.Model, ZButtonsFragment.Style> implements SkinObserver {
+public class ZButtonFragment extends ComponentFragment<XhbButtonFragmentBinding, ZButtonFragment.Model, ZButtonFragment.Style> implements SkinObserver {
 
-    private static final String TAG = ZButtonsFragment.class.getSimpleName();
+    private static final String TAG = "ZButtonFragment";
 
     public static class Model extends ViewModel {
         private Map<String, Integer> styles;
 
-        public Model(ZButtonsFragment fragment) {
+        public Model(ZButtonFragment fragment) {
             styles = Styles.xhbButtonStyles(fragment.getContext());
         }
 
@@ -45,35 +47,55 @@ public class ZButtonsFragment extends ComponentFragment<XhbButtonsFragmentBindin
     }
 
     public static class Style extends ViewStyles {
+
+        enum ButtonType {
+            Primitive,
+            Secondary,
+            Tertiary,
+            Danger,
+            TextLink,
+        }
+
+        enum ButtonSize {
+            Small,
+            Middle,
+            Large,
+        }
+
+        enum ButtonWidth {
+            WrapContent,
+            MatchParent,
+        }
+
         public ButtonItemLayout itemLayout = new ButtonItemLayout(this);
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
+
         @Bindable
-        @Title("宽度")
-        @Values({"100", "200", "300", "400", "500", "600"})
-        private int width = 400;
-        @Bindable
-        @Title("文字")
-        @Values({"按钮", "按钮文字", "按钮长长长长长长文字"})
-        public String text = "按钮";
-        @Bindable
-        @Title("禁用")
+        @Title("禁用") @Description("切换到禁用状态")
         public boolean disabled = false;
 
-        private ZButtonsFragment fragment_;
+        @Bindable
+        @Title("加载") @Description("切换到加载状态")
+        public boolean loading = false;
 
-        public Style(ZButtonsFragment fragment) {
+        @Bindable
+        @Title("尺寸模式") @Description("有下列尺寸模式：大（Large）、中（Middle）、小（Small），默认：Large")
+        public ButtonSize sizeMode = ButtonSize.Large;
+
+        @Bindable
+        @Title("宽度模式") @Description("有下列宽度模式：适应内容（WrapContent）、适应布局（MatchParent），默认：WrapContent")
+        public ButtonWidth widthMode = ButtonWidth.WrapContent;
+
+        @Bindable
+        @Title("文字") @Description("改变文字，按钮会自动适应文字宽度")
+        public String text = "按钮";
+
+        private ZButtonFragment fragment_;
+
+        public Style(ZButtonFragment fragment) {
             this.fragment_ = fragment;
         }
 
-        public void setWidth(int width) {
-            this.width = width;
-            notifyPropertyChanged(BR.width);
-            fragment_.updateWidth();
-        }
-
-        public int getWidth() {
-            return width;
-        }
     }
 
     private void updateWidth() {

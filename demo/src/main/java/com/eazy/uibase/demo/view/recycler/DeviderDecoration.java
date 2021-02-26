@@ -18,9 +18,9 @@ public class DeviderDecoration extends RecyclerView.ItemDecoration {
         //设置画笔
         dividerPaint = new Paint();
         //设置分割线颜色
-        dividerPaint.setColor(Color.RED);
+        dividerPaint.setColor(Color.GRAY);
         //设置分割线宽度
-        deviderHeight = 6;
+        deviderHeight = 3;
     }
 
     @Override
