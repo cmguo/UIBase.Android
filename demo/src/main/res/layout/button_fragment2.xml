@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment2.Model" />
+
+        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment2.Style" />
+
+        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment2" />
+
+        <variable
+            name="fragment"
+            type="ZButtonFragment2" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="style"
+            type="Style" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/component_buttons2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TestComponent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/buttonsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:data="@{model.types}"
+            app:itemDecoration="@{style.itemDecoration}"
+            app:itemLayout="@{style.itemLayout}">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </FrameLayout>
+
+</layout>

@@ -26,7 +26,7 @@ import java.util.Map;
 public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAdapter.BindingViewHolder> {
 
     @BindingAdapter("adapter")
-    public static void setRecyclerViewData(RecyclerView recyclerView, RecyclerViewAdapter adapter) {
+    public static void setRecyclerViewAdapter(RecyclerView recyclerView, RecyclerViewAdapter adapter) {
         RecyclerView.Adapter old = recyclerView.getAdapter();
         if (old instanceof RecyclerViewAdapter) {
             adapter.adopt(((RecyclerViewAdapter) old));
