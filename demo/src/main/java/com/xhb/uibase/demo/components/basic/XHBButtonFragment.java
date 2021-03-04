@@ -23,6 +23,7 @@ import com.xhb.uibase.demo.core.annotation.Title;
 import com.xhb.uibase.demo.core.annotation.Values;
 import com.xhb.uibase.demo.databinding.XhbButtonFragmentBinding;
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
+import com.xhb.uibase.widget.XHBButton;
 import com.xhb.uibase.widget.XHBButtonLoadingView;
 
 import java.util.Map;
@@ -48,23 +49,20 @@ public class XHBButtonFragment extends ComponentFragment<XhbButtonFragmentBindin
 
     public static class Style extends ViewStyles {
 
-        enum ButtonType {
-            Primitive,
-            Secondary,
-            Tertiary,
-            Danger,
-            TextLink,
-        }
-
-        enum ButtonSize {
-            Small,
-            Middle,
-            Large,
-        }
-
         enum ButtonWidth {
-            WrapContent,
-            MatchParent,
+            WrapContent(ViewGroup.LayoutParams.WRAP_CONTENT),
+            MatchParent(ViewGroup.LayoutParams.MATCH_PARENT),
+            ;
+
+            private int layoutWidth_;
+
+            ButtonWidth(int layoutWidth) {
+                layoutWidth_ = layoutWidth;
+            }
+
+            public int layoutWidth() {
+                return layoutWidth_;
+            }
         }
 
         public ButtonItemLayout itemLayout = new ButtonItemLayout(this);
@@ -80,7 +78,7 @@ public class XHBButtonFragment extends ComponentFragment<XhbButtonFragmentBindin
 
         @Bindable
         @Title("尺寸模式") @Description("有下列尺寸模式：大（Large）、中（Middle）、小（Small），默认：Large")
-        public ButtonSize sizeMode = ButtonSize.Large;
+        public XHBButton.ButtonSize sizeMode = XHBButton.ButtonSize.Large;
 
         @Bindable
         @Title("宽度模式") @Description("有下列宽度模式：适应内容（WrapContent）、适应布局（MatchParent），默认：WrapContent")
@@ -121,11 +119,8 @@ public class XHBButtonFragment extends ComponentFragment<XhbButtonFragmentBindin
 
 
     // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener buttonClicked = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int position, Object object) {
-            Log.d(TAG, "buttonClicked" + object);
-        }
+    public RecyclerViewAdapter.OnItemClickListener buttonClicked = (int position, Object object) -> {
+        Log.d(TAG, "buttonClicked " + object);
     };
 
     public void onClick(View view) {

@@ -20,12 +20,10 @@ import androidx.annotation.Nullable;
 
 import com.xhb.uibase.R;
 
-import skin.support.widget.SkinCompatFrameLayout;
-
 /**
  * Adding loading ability for Button.
  */
-public class XHBButtonLoadingView extends SkinCompatFrameLayout {
+public class XHBButtonLoadingView extends FrameLayout {
 
     private View mLoadingLayout;
     private ProgressBar mLoadingProgressBar;
