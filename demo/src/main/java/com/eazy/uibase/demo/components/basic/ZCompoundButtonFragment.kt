@@ -15,19 +15,26 @@ import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.annotation.Description
 import com.eazy.uibase.demo.core.annotation.Title
-import com.eazy.uibase.demo.databinding.CheckBoxFragmentBinding
+import com.eazy.uibase.demo.databinding.CompoundButtonFragmentBinding
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration
 import com.eazy.uibase.widget.ZCheckBox
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
-class ZCheckBoxFragment : ComponentFragment<CheckBoxFragmentBinding?, ZCheckBoxFragment.Model?, ZCheckBoxFragment.Style?>(), SkinObserver {
-    class Model(fragment: ZCheckBoxFragment?) : ViewModel() {
-        var states = ZCheckBox.CheckedState.values().asList()
+class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?, ZCompoundButtonFragment.Model?, ZCompoundButtonFragment.Style?>(), SkinObserver {
+
+    class Model(fragment: ZCompoundButtonFragment?) : ViewModel() {
+        var states: List<Any?>
+        init {
+            states = when (fragment!!.component.id()) {
+                R.id.component_z_check_boxes -> ZCheckBox.CheckedState.values().asList()
+                else -> arrayListOf(false, true)
+            }
+        }
     }
 
-    class Style : ViewStyles() {
-        var itemLayout = CheckBoxItemLayout(this)
+    class Style(fragment: ZCompoundButtonFragment?) : ViewStyles() {
+        var itemLayout: ItemLayout
         var itemDecoration: RecyclerView.ItemDecoration = PaddingDecoration()
 
         @Bindable
@@ -38,15 +45,29 @@ class ZCheckBoxFragment : ComponentFragment<CheckBoxFragmentBinding?, ZCheckBoxF
         @Bindable
         @Title("文字")
         @Description("改变文字，按钮会自动适应文字宽度")
-        var text = "复选框"
+        var text = "文字"
 
-        fun testCheckBoxClick(view: View) {
+        fun testCompoundButtonClick(view: View) {
 
         }
+
+        private val fragment_ = fragment
+
+        init {
+            itemLayout = ItemLayout(this)
+        }
+
+        val itemLayoutId: Int
+            get() = when (fragment_!!.component.id()) {
+                R.id.component_z_check_boxes -> R.layout.check_box_item
+                R.id.component_z_radio_buttons -> R.layout.radio_button_item
+                R.id.component_z_switch_buttons -> R.layout.switch_button_item
+                else -> 0
+            }
     }
 
-    class CheckBoxItemLayout(private val style: Style) : RecyclerViewAdapter.UnitTypeItemLayout<ZCheckBox.CheckedState>(R.layout.check_box_item) {
-        override fun bindView(binding: ViewDataBinding?, item: ZCheckBox.CheckedState, position: Int) {
+    class ItemLayout(private val style: Style) : RecyclerViewAdapter.UnitTypeItemLayout<Any>(style.itemLayoutId) {
+        override fun bindView(binding: ViewDataBinding?, item: Any, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.style, style)
         }
@@ -69,10 +90,10 @@ class ZCheckBoxFragment : ComponentFragment<CheckBoxFragmentBinding?, ZCheckBoxF
     }
 
     override fun updateSkin(observable: SkinObservable, o: Any) {
-        binding!!.checkBoxList.adapter!!.notifyItemRangeChanged(0, model!!.states.size)
+        binding!!.compoundButtonList.adapter!!.notifyItemRangeChanged(0, model!!.states.size)
     }
 
     companion object {
-        private const val TAG = "ZCheckBoxFragment"
+        private const val TAG = "ZCompoundButtonFragment"
     }
 }

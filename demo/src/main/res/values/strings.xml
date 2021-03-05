@@ -22,32 +22,38 @@
     <string name="component_colors2_desc">非标准色</string>
 
     <!-- buttons styles -->
-    <string name="component_buttons">标准按钮</string>
-    <string name="component_buttons_desc">标准按钮</string>
-    <id name="component_buttons2"></id>
-    <string name="component_buttons2">其他按钮</string>
-    <string name="component_buttons2_desc">其他按钮</string>
+    <id name="component_buttons"></id>
+    <string name="component_buttons">按钮</string>
+    <string name="component_buttons_desc">按钮</string>
 
     <!-- checkboxes styles -->
+    <id name="component_check_boxes"></id>
     <string name="component_checkboxes">复选框</string>
     <string name="component_checkboxes_desc">复选框</string>
-    <id name="component_radios"></id>
-    <string name="component_radios">单选框</string>
-    <string name="component_radios_desc">单选框</string>
+    <id name="component_radio_buttons"></id>
+    <string name="component_radio_buttons">单选框</string>
+    <string name="component_radio_buttons_desc">单选框</string>
+    <id name="component_switches"></id>
+    <string name="component_switches">开关</string>
+    <string name="component_switches_desc">开关</string>
 
     <!-- dialogs layouts -->
     <string name="component_dialogs">对话框</string>
     <string name="component_dialogs_desc">对话框</string>
 
-    <!--    standard ui comopent start here     -->
     <string name="group_basic">基础交互控件</string>
     <string name="component_z_buttons">按钮</string>
     <string name="component_z_buttons2">按钮2</string>
     <string name="component_z_buttons_des">按钮页面</string>
 
-    <string name="component_z_checkboxes">复选框</string>
-    <string name="component_z_checkboxes_desc">复选框</string>
-    <string name="component_z_radiobuttons">单选框</string>
-    <string name="component_z_radiobuttons_desc">单选框</string>
+    <id name="component_z_check_boxes"></id>
+    <string name="component_z_check_boxes">复选框</string>
+    <string name="component_z_check_boxes_desc">复选框</string>
+    <id name="component_z_radio_buttons"></id>
+    <string name="component_z_radio_buttons">单选框</string>
+    <string name="component_z_radio_buttons_desc">单选框</string>
+    <id name="component_z_switch_buttons"></id>
+    <string name="component_z_switch_buttons">开关</string>
+    <string name="component_z_switch_buttons_desc">开关</string>
 
 </resources>

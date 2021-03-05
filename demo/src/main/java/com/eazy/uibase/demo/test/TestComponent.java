@@ -1,17 +1,10 @@
 package com.eazy.uibase.demo.test;
 
-import android.graphics.Color;
-
-import androidx.databinding.Bindable;
-
 import com.google.auto.service.AutoService;
-import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.R;
+import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.ComponentFragment;
-import com.eazy.uibase.demo.core.ViewModel;
-import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.core.annotation.Author;
-import com.eazy.uibase.demo.databinding.TestBinding;
 
 @AutoService(Component.class)
 @Author("cmguo")

@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.components.basic;
+package com.eazy.uibase.demo.styles;
 
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.demo.R;
@@ -7,8 +7,8 @@ import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.annotation.Author;
 
 @AutoService(Component.class)
-@Author("Fish")
-public class ZCheckBoxComponent implements Component {
+@Author("cmguo")
+public class CheckBoxesComponent implements Component{
     @Override
     public int id() {
         return R.id.component_check_boxes;
@@ -16,7 +16,7 @@ public class ZCheckBoxComponent implements Component {
 
     @Override
     public int group() {
-        return R.string.group_basic;
+        return R.string.group_styles;
     }
 
     @Override
@@ -26,17 +26,17 @@ public class ZCheckBoxComponent implements Component {
 
     @Override
     public int title() {
-        return R.string.component_z_checkboxes;
+        return R.string.component_checkboxes;
     }
 
     @Override
     public int description() {
-        return R.string.component_z_checkboxes_desc;
+        return R.string.component_checkboxes_desc;
     }
 
     @Override
     public Class<? extends ComponentFragment> fragmentClass() {
-        return ZCheckBoxFragment.class;
+        return StylesFragment.class;
     }
 
 }

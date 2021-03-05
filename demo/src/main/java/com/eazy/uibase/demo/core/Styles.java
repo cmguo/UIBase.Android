@@ -38,27 +38,19 @@ public class Styles {
     }
 
     public static Map<String, Integer> buttonStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("ButtonStyle"));
-        // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
+        return getStyles(context, R.style.class, Pattern.compile("Button"));
     }
 
     public static Map<String, Integer> checkboxStyles(Context context) {
         return getStyles(context, R.style.class, Pattern.compile("CheckBox"));
-        // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
     }
 
     public static Map<String, Integer> radioStyles(Context context) {
         return getStyles(context, R.style.class, Pattern.compile("Radio"));
-        // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
     }
 
-    public static Map<String, Integer> buttonStyles2(Context context) {
-        Map<String, Integer> allButtons = getStyles(context, R.style.class, Pattern.compile("[bB]utton"));
-        Map<String, Integer> buttons = buttonStyles(context);
-        for (String k : buttons.keySet()) {
-            allButtons.remove(k);
-        }
-        return allButtons;
+    public static Map<String, Integer> switchStyles(Context context) {
+        return getStyles(context, R.style.class, Pattern.compile("Switch"));
     }
 
     public static Map<String, Integer> getStyles(Context context, Class<?> clazz, Pattern pattern) {

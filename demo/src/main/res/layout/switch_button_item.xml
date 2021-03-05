@@ -6,15 +6,11 @@
 
     <data>
 
-        <import type="com.eazy.uibase.widget.ZCheckBox.CheckedState" />
-
         <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Style" />
-
-        <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment" />
 
         <variable
             name="data"
-            type="CheckedState" />
+            type="Boolean" />
 
         <variable
             name="style"
@@ -30,15 +26,14 @@
         <TextView
             android:id="@+id/title"
             style="@style/Demo.ResourceItemTitle"
-            android:text="@{data.toString()}" />
+            android:text="@{data.toString()}"/>
 
-        <com.eazy.uibase.widget.ZCheckBox
-            android:id="@+id/check_box"
-            style="@style/ZCheckBox"
-            app:checkedState="@{data}"
+        <com.eazy.uibase.widget.ZSwitchButton
+            android:id="@+id/switch_button"
+            style="@style/ZSwitchButton"
+            android:checked="@{data}"
             android:enabled="@{!style.disabled}"
-            android:onClick="@{(view) -> style.testCompoundButtonClick(view)}"
-            android:text="@{style.text}"/>
+            android:onClick="@{(view) -> style.testCompoundButtonClick(view)}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

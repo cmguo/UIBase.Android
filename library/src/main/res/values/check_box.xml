@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="states">
+        <attr name="half_checked" format="boolean" />
+    </declare-styleable>
+
+    <dimen name="check_box_height">24dp</dimen>
+    <dimen name="check_box_textSize">16sp</dimen>
+    <dimen name="check_box_radius">4dp</dimen>
+    <dimen name="check_box_icon_size">18dp</dimen>
+    <dimen name="check_box_border_size">2dp</dimen>
+
+    <style name="ZCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/check_box_height</item>
+        <item name="android:textSize">@dimen/check_box_textSize</item>
+    </style>
+
+</resources>

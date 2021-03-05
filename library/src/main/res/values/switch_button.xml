@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="switch_button_width">40dp</dimen>
+    <dimen name="switch_button_height">24dp</dimen>
+    <dimen name="switch_button_radius">12dp</dimen>
+    <dimen name="switch_button_thumb_size">20dp</dimen>
+    <dimen name="switch_button_thumb_radius">10dp</dimen>
+
+    <style name="ZSwitchButton" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:layout_width">@dimen/switch_button_width</item>
+        <item name="android:layout_height">@dimen/switch_button_height</item>
+    </style>
+
+</resources>

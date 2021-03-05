@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="radio_button_height">24dp</dimen>
+    <dimen name="radio_button_textSize">16sp</dimen>
+    <dimen name="radio_button_radius">9dp</dimen>
+    <dimen name="radio_button_icon_size">18dp</dimen>
+    <dimen name="radio_button_border_size">2dp</dimen>
+
+    <style name="ZRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/radio_button_height</item>
+        <item name="android:textSize">@dimen/radio_button_textSize</item>
+    </style>
+
+</resources>

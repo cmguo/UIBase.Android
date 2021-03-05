@@ -21,7 +21,6 @@
     <style name="ZButton" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
         <item name="loadingDrawable2">@drawable/button_loading_primary_anim</item>
         <item name="loadingText2">"加载中..."</item>
     </style>

@@ -1,6 +1,7 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
+import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.ShapeDrawable
@@ -136,7 +137,7 @@ public class ZButton @JvmOverloads constructor(
         set(value) {
             loadingDrawable_ = value
             if (loading_)
-                setCompoundDrawables(loadingDrawable_, null, null, null)
+                setCompoundDrawablesWithIntrinsicBounds(loadingDrawable_, null, null, null)
         }
 
     var loadingText: CharSequence?
@@ -155,9 +156,16 @@ public class ZButton @JvmOverloads constructor(
                 return
             loading_ = value
             // swap
-            val d = compoundDrawables[0]
-            setCompoundDrawables(loadingDrawable_, null, null, null)
-            loadingDrawable_ = d
+            val d = loadingDrawable_;
+            val o = compoundDrawables[0]
+            // How to center icon and text in a android button with width set to “fill parent”
+            // https://stackoverflow.com/questions/3634191/how-to-center-icon-and-text-in-a-android-button-with-width-set-to-fill-parent
+            setCompoundDrawablesWithIntrinsicBounds(d, null, null, null)
+            if (d is Animatable)
+                d.start()
+            if (o is Animatable)
+                o.stop()
+            loadingDrawable_ = o
             // swap text
             val t = text
             text = loadingText_

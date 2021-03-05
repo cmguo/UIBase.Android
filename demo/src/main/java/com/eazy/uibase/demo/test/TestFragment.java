@@ -7,9 +7,9 @@ import androidx.databinding.Bindable;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
-import com.eazy.uibase.demo.databinding.TestBinding;
+import com.eazy.uibase.demo.databinding.TestFragmentBinding;
 
-public class TestFragment extends ComponentFragment<TestBinding, TestFragment.Model, TestFragment.Style> {
+public class TestFragment extends ComponentFragment<TestFragmentBinding, TestFragment.Model, TestFragment.Style> {
 
     public static class Model extends ViewModel {
         public String text = "Hello world!";

@@ -7,10 +7,10 @@ import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
-@Author("cmguo")
-class ZButtonComponent2 : Component {
+@Author("Fish")
+class ZCheckBoxComponent : Component {
     override fun id(): Int {
-        return R.id.component_buttons2
+        return R.id.component_z_check_boxes
     }
 
     override fun group(): Int {
@@ -22,14 +22,14 @@ class ZButtonComponent2 : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_z_buttons2
+        return R.string.component_z_check_boxes
     }
 
     override fun description(): Int {
-        return R.string.component_z_buttons_des
+        return R.string.component_z_check_boxes_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return ZButtonFragment2::class.java
+        return ZCompoundButtonFragment::class.java
     }
 }
