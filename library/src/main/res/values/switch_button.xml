@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="switch_button_width">40dp</dimen>
+    <dimen name="switch_button_width">48dp</dimen> <!-- TODO: 40dp -->
     <dimen name="switch_button_height">24dp</dimen>
     <dimen name="switch_button_radius">12dp</dimen>
-    <dimen name="switch_button_thumb_size">20dp</dimen>
-    <dimen name="switch_button_thumb_radius">10dp</dimen>
+    <dimen name="switch_button_thumb_padding">2dp</dimen>
+    <dimen name="switch_button_thumb_size">24dp</dimen>
+    <dimen name="switch_button_thumb_radius">12dp</dimen>
 
     <style name="XHBSwitchButton" parent="Widget.AppCompat.CompoundButton.Switch">
         <item name="android:layout_width">@dimen/switch_button_width</item>

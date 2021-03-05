@@ -15,11 +15,11 @@ class XHBSwitchButton @JvmOverloads constructor(
         val trackDrawableConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
             R.dimen.switch_button_radius, R.color.xhb_bluegrey300_checked,
             0, 0,
-            R.dimen.switch_button_width, R.dimen.switch_button_height
+            0, 0
         )
         val thumbDrawableConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
             R.dimen.switch_button_thumb_radius, R.color.bluegrey_00,
-            0, 0,
+            R.dimen.switch_button_thumb_padding, R.color.transparent,
             R.dimen.switch_button_thumb_size, R.dimen.switch_button_thumb_size
         )
     }
