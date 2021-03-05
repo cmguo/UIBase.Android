@@ -42,6 +42,16 @@ public class Styles {
         // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
     }
 
+    public static Map<String, Integer> checkboxStyles(Context context) {
+        return getStyles(context, R.style.class, Pattern.compile("CheckBox"));
+        // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
+    }
+
+    public static Map<String, Integer> radioStyles(Context context) {
+        return getStyles(context, R.style.class, Pattern.compile("Radio"));
+        // return getStyles(context, R.style.class, Pattern.compile("YellowLargeButtonStyle"));
+    }
+
     public static Map<String, Integer> buttonStyles2(Context context) {
         Map<String, Integer> allButtons = getStyles(context, R.style.class, Pattern.compile("[bB]utton"));
         Map<String, Integer> buttons = buttonStyles(context);

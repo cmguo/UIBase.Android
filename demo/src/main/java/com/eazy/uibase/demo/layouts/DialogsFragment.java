@@ -16,12 +16,12 @@ import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.Layouts;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
-import com.eazy.uibase.demo.databinding.DialogsBinding;
+import com.eazy.uibase.demo.databinding.DialogsFragmentBinding;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
 
-public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFragment.Model, DialogsFragment.Style>
+public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, DialogsFragment.Model, DialogsFragment.Style>
         implements View.OnClickListener {
 
     private static final String TAG = "DialogsFragment";
@@ -48,7 +48,7 @@ public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFr
         @Override
         public void onItemClick(int position, Object object) {
             Log.d(TAG, "dialogClicked" + object);
-            Dialog dialog = new Dialog(DialogsFragment.this.getContext(), R.style.dialog);
+            Dialog dialog = new Dialog(DialogsFragment.this.getContext(), 0);
             try {
                 int layoutId = ((Map.Entry<String, Integer>) object).getValue();
                 View view = LayoutInflater.from(getActivity()).inflate(layoutId, null);

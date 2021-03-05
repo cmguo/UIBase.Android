@@ -119,7 +119,7 @@ class ZButtonFragment2 : ComponentFragment<ButtonFragment2Binding?,
     }
 
     private fun updateButtons() {
-        binding!!.buttonsList.adapter!!.notifyItemRangeChanged(0, model!!.types.size)
+        binding!!.buttonList.adapter!!.notifyItemRangeChanged(0, model!!.types.size)
     }
 
     companion object {

@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment2.Model" />
+        <import type="com.eazy.uibase.demo.components.basic.ZRadioButtonFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment2.Style" />
+        <import type="com.eazy.uibase.demo.components.basic.ZRadioButtonFragment.Style" />
 
-        <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment2" />
+        <import type="com.eazy.uibase.demo.components.basic.ZRadioButtonFragment" />
 
         <variable
             name="fragment"
-            type="ZButtonFragment2" />
+            type="ZRadioButtonFragment" />
 
         <variable
             name="model"
@@ -25,16 +25,16 @@
     </data>
 
     <FrameLayout
-        android:id="@+id/component_buttons2"
+        android:id="@+id/component_radio_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/button_list"
+            android:id="@+id/radio_button_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:data="@{model.types}"
+            app:data="@{model.states}"
             app:itemDecoration="@{style.itemDecoration}"
             app:itemLayout="@{style.itemLayout}">
 

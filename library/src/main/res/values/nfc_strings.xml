@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">NFC Library</string>
-
-    <string name="dialog_nfc_not_enabled_title">NFC没有启用</string>
-    <string name="dialog_nfc_not_enabled">NFC适配器没有启用，请先到设置中启用？</string>
-    <string name="action_confirm">设置</string>
-    <string name="action_cancel">取消</string>
-</resources>

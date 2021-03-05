@@ -30,7 +30,6 @@
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                style="@style/YellowLargeButtonStyle"
                 android:text="@{data.key}"/>
 
         </LinearLayout>

@@ -15,7 +15,7 @@ import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.SkinManager;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
-import com.eazy.uibase.demo.databinding.ColorsBinding;
+import com.eazy.uibase.demo.databinding.ColorsFragmentBinding;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
@@ -23,7 +23,7 @@ import java.util.Map;
 import skin.support.observe.SkinObservable;
 import skin.support.observe.SkinObserver;
 
-public class ColorsFragment extends ComponentFragment<ColorsBinding, ColorsFragment.Model, ColorsFragment.Style>
+public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, ColorsFragment.Model, ColorsFragment.Style>
     implements SkinObserver {
 
     private static final String TAG = "ColorsComponent";

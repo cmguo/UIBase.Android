@@ -11,6 +11,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.appcompat.widget.AppCompatButton
 import com.eazy.uibase.R
+import com.eazy.uibase.resources.ShapeDrawables
 import top.defaults.drawabletoolbox.DrawableBuilder
 
 public class ZButton @JvmOverloads constructor(
@@ -40,11 +41,11 @@ public class ZButton @JvmOverloads constructor(
         )
 
         private val sizeStyles: Map<ButtonSize, SizeStyles> = mapOf(
-            ButtonSize.Small to SizeStyles (R.dimen.button_heigth_small, R.dimen.button_radius_small,
+            ButtonSize.Small to SizeStyles (R.dimen.button_height_small, R.dimen.button_radius_small,
                 R.dimen.button_padding_small, R.dimen.button_textSize_small, R.dimen.button_iconPadding_small),
-            ButtonSize.Middle to SizeStyles (R.dimen.button_heigth_middle, R.dimen.button_radius_middle,
+            ButtonSize.Middle to SizeStyles (R.dimen.button_height_middle, R.dimen.button_radius_middle,
                 R.dimen.button_padding_middle, R.dimen.button_textSize_middle, R.dimen.button_iconPadding_middle),
-            ButtonSize.Large to SizeStyles(R.dimen.button_heigth_large, R.dimen.button_radius_large,
+            ButtonSize.Large to SizeStyles(R.dimen.button_height_large, R.dimen.button_radius_large,
                 R.dimen.button_padding_large, R.dimen.button_textSize_large, R.dimen.button_iconPadding_large),
         )
 
@@ -68,11 +69,9 @@ public class ZButton @JvmOverloads constructor(
 //                solidColorStateList(context.resources.getColorStateList(types.backgroundColor))
 //                cornerRadius(context.resources.getDimensionPixelSize(sizes.radius))
 //            }.build();
-            val drawable = GradientDrawable()
-            drawable.shape = GradientDrawable.RECTANGLE
-            drawable.cornerRadius = context.resources.getDimension(sizes.radius)
-            drawable.color = context.resources.getColorStateList(types.backgroundColor)
-            return drawable
+            val config = ShapeDrawables.Config(GradientDrawable.RECTANGLE, sizes.radius, types.backgroundColor,
+                0, 0, 0, 0)
+            return ShapeDrawables.getDrawable(context, config)
         }
     }
 

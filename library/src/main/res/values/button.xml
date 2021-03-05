@@ -18,7 +18,7 @@
         <attr name="loadingText2" format="string" />
     </declare-styleable>
 
-    <style name="ZButton" parent="Z">
+    <style name="ZButton" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
@@ -26,13 +26,13 @@
         <item name="loadingText2">"加载中..."</item>
     </style>
 
-    <dimen name="button_heigth_small">24dp</dimen>
-    <dimen name="button_heigth_middle">36dp</dimen>
-    <dimen name="button_heigth_large">44dp</dimen>
+    <dimen name="button_height_small">24dp</dimen>
+    <dimen name="button_height_middle">36dp</dimen>
+    <dimen name="button_height_large">44dp</dimen>
 
-    <dimen name="button_radius_small">100dp</dimen>
-    <dimen name="button_radius_middle">100dp</dimen>
-    <dimen name="button_radius_large">100dp</dimen>
+    <dimen name="button_radius_small">12dp</dimen>
+    <dimen name="button_radius_middle">18dp</dimen>
+    <dimen name="button_radius_large">24dp</dimen>
 
     <dimen name="button_padding_small">12dp</dimen>
     <dimen name="button_padding_middle">16dp</dimen>
