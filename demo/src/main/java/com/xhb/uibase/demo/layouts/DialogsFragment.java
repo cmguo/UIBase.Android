@@ -16,12 +16,12 @@ import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.core.Layouts;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
-import com.xhb.uibase.demo.databinding.DialogsBinding;
+import com.xhb.uibase.demo.databinding.DialogsFragmentBinding;
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
 
-public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFragment.Model, DialogsFragment.Style>
+public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, DialogsFragment.Model, DialogsFragment.Style>
         implements View.OnClickListener {
 
     private static final String TAG = "DialogsFragment";
@@ -48,7 +48,7 @@ public class DialogsFragment extends ComponentFragment<DialogsBinding, DialogsFr
         @Override
         public void onItemClick(int position, Object object) {
             Log.d(TAG, "dialogClicked" + object);
-            Dialog dialog = new Dialog(DialogsFragment.this.getContext(), R.style.dialog);
+            Dialog dialog = new Dialog(DialogsFragment.this.getContext(), 0);
             try {
                 int layoutId = ((Map.Entry<String, Integer>) object).getValue();
                 View view = LayoutInflater.from(getActivity()).inflate(layoutId, null);

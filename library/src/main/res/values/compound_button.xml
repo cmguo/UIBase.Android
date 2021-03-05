@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="states">
+        <attr name="half_checked" format="boolean" />
+    </declare-styleable>
+
+    <style name="XHBCompatButton" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:layout_height">@dimen/radio_heigth</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@android:drawable/btn_radio</item>
+        <item name="android:textSize">@dimen/radio_textSize</item>
+        <item name="android:textColor">@color/bluegrey_800</item>
+    </style>
+
+    <dimen name="checkbox_heigth">24dp</dimen>
+    <dimen name="checkbox_textSize">16sp</dimen>
+    <dimen name="checkbox_radius">4dp</dimen>
+    <dimen name="checkbox_icon_size">18dp</dimen>
+    <dimen name="checkbox_border_size">2dp</dimen>
+
+    <dimen name="radio_heigth">24dp</dimen>
+    <dimen name="radio_textSize">16sp</dimen>
+    <dimen name="radio_radius">9dp</dimen>
+    <dimen name="radio_icon_size">18dp</dimen>
+    <dimen name="radio_border_size">2dp</dimen>
+
+</resources>

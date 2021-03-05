@@ -1,20 +1,74 @@
 <resources>
-
-    <!--   color for the app bar and other primary UI elements -->
-    <color name="colorPrimary">#3F51B5</color>
-
-    <!--   a darker variant of the primary color, used for
-           the status bar (on Android 5.0+) and contextual app bars -->
-    <color name="colorPrimaryDark">#303F9F</color>
-
-    <!--   a secondary color for controls like checkboxes and text fields -->
-    <color name="colorAccent">#FF4081</color>
-
-
-
-    <color name="orange_600_80">#80FF8C00</color>   <!--深色对应 #A9701A-->
-
-    <!-- 4.2.0 换肤颜色定义-->
     <color name="transparent">#00000000</color>
-
+    <color name="white_card">#FFFFFF</color>  <!-- dark #212630, -->
+    <color name="bluegrey_00">#FFFFFF</color>  <!-- dark #191E26, white_bg-->
+    <color name="bluegrey_05">#F7F8F9</color>  <!-- dark #262C36, -->
+    <color name="bluegrey_50">#F7F8F9</color>  <!-- dark #0B1117, bluegrey_bg-->
+    <color name="bluegrey_100">#F2F3F4</color>  <!-- dark #262D38, -->
+    <color name="bluegrey_200">#EBECED</color>  <!-- dark , -->
+    <color name="bluegrey_300">#E4E6E8</color>  <!-- dark #2D3440, -->
+    <color name="bluegrey_400">#D5D7DB</color>  <!-- dark , -->
+    <color name="bluegrey_500">#B7BBBF</color>  <!-- dark #4D5666, -->
+    <color name="bluegrey_600">#9CA0A6</color>  <!-- dark , -->
+    <color name="bluegrey_700">#81858C</color>  <!-- dark #707C8C, -->
+    <color name="bluegrey_800">#4E5359</color>  <!-- dark #A3AFBF, -->
+    <color name="bluegrey_900">#1D2126</color>  <!-- dark #E2ECFA, -->
+    <color name="brand_100">#FFFCD4</color>  <!-- dark #524C23, -->
+    <color name="brand_500">#FFD630</color>  <!-- dark #FFD630, -->
+    <color name="brand_600">#F2C121</color>  <!-- dark #D9B629, -->
+    <color name="red_100">#FFEDED</color>  <!-- dark #3D2929, -->
+    <color name="red_500">#FF6666</color>  <!-- dark #DA7171, -->
+    <color name="red_600">#EB3B3B</color>  <!-- dark #E48484, -->
+    <color name="redorange_100">#FFEDE5</color>  <!-- dark #3E322E, -->
+    <color name="redorange_500">#FF6D2E</color>  <!-- dark #DA825E, -->
+    <color name="redorange_600">#FF4D00</color>  <!-- dark #E69472, -->
+    <color name="orange_100">#FFF0DB</color>  <!-- dark #3C3325, -->
+    <color name="orange_500">#FFA319</color>  <!-- dark #E6A15C, -->
+    <color name="orange_600">#FF8C00</color>  <!-- dark #F2AF6C, -->
+    <color name="green_100">#E8F7F0</color>  <!-- dark #203A32, -->
+    <color name="green_500">#00CC66</color>  <!-- dark #61BA8D, -->
+    <color name="green_600">#00B058</color>  <!-- dark #71C99D, -->
+    <color name="cyan_100">#E1F9FA</color>  <!-- dark #233738, -->
+    <color name="cyan_500">#00D1D9</color>  <!-- dark #5DC3C6, -->
+    <color name="cyan_600">#00B9BF</color>  <!-- dark #6DD1D4, -->
+    <color name="blue_100">#EDF4FF</color>  <!-- dark #213452, -->
+    <color name="blue_200">#CCE0FF</color>  <!-- dark #324563, -->
+    <color name="blue_500">#4F94FF</color>  <!-- dark #6B99DE, -->
+    <color name="blue_600">#1970F2</color>  <!-- dark #7FA6E2, -->
+    <color name="purple_100">#F2F0FD</color>  <!-- dark #343146, -->
+    <color name="purple_500">#8C79F2</color>  <!-- dark #8C79F2, -->
+    <color name="purple_600">#6A54E0</color>  <!-- dark #988BDC, -->
+    <color name="static_bluegrey_05">#F7F8F9</color>  <!-- dark #F7F8F9, -->
+    <color name="static_bluegrey_50">#F7F8F9</color>  <!-- dark #F7F8F9, -->
+    <color name="static_bluegrey_100">#F2F3F4</color>  <!-- dark #F2F3F4, -->
+    <color name="static_bluegrey_200">#EBECED</color>  <!-- dark #EBECED, -->
+    <color name="static_bluegrey_300">#E4E6E8</color>  <!-- dark #E4E6E8, -->
+    <color name="static_bluegrey_400">#D5D7DB</color>  <!-- dark #D5D7DB, -->
+    <color name="static_bluegrey_500">#B7BBBF</color>  <!-- dark #B7BBBF, -->
+    <color name="static_bluegrey_600">#9CA0A6</color>  <!-- dark #9CA0A6, -->
+    <color name="static_bluegrey_700">#81858C</color>  <!-- dark #81858C, -->
+    <color name="static_bluegrey_800">#4E5359</color>  <!-- dark #4E5359, -->
+    <color name="static_bluegrey_900">#1D2126</color>  <!-- dark #1D2126, -->
+    <color name="static_white_100">#FFFFFF</color>  <!-- dark #FFFFFF, -->
+    <color name="static_white_90">#E5FFFFFF</color>  <!-- dark #FFFFFF 90%, 90% -->
+    <color name="static_white_80">#CCFFFFFF</color>  <!-- dark #FFFFFF 80%, 80% -->
+    <color name="static_white_70">#B2FFFFFF</color>  <!-- dark #FFFFFF 70%, 70% -->
+    <color name="static_white_60">#99FFFFFF</color>  <!-- dark #FFFFFF 60%, 60% -->
+    <color name="static_white_50">#7FFFFFFF</color>  <!-- dark #FFFFFF 50%, 50% -->
+    <color name="static_white_40">#66FFFFFF</color>  <!-- dark #FFFFFF 40%, 40% -->
+    <color name="static_white_30">#4CFFFFFF</color>  <!-- dark #FFFFFF 30%, 30% -->
+    <color name="static_white_20">#33FFFFFF</color>  <!-- dark #FFFFFF 20%, 20% -->
+    <color name="static_white_10">#19FFFFFF</color>  <!-- dark #FFFFFF 10%, 10% -->
+    <color name="static_white_05">#0CFFFFFF</color>  <!-- dark #FFFFFF 5%, 5% -->
+    <color name="static_black_100">#000000</color>  <!-- dark #000000, -->
+    <color name="static_black_90">#E5000000</color>  <!-- dark #000000 90%, 90% -->
+    <color name="static_black_80">#CC000000</color>  <!-- dark #000000 80%, 80% -->
+    <color name="static_black_70">#B2000000</color>  <!-- dark #000000 70%, 70% -->
+    <color name="static_black_60">#99000000</color>  <!-- dark #000000 60%, 60% -->
+    <color name="static_black_50">#7F000000</color>  <!-- dark #000000 50%, 50% -->
+    <color name="static_black_40">#66000000</color>  <!-- dark #000000 40%, 40% -->
+    <color name="static_black_30">#4C000000</color>  <!-- dark #000000 30%, 30% -->
+    <color name="static_black_20">#33000000</color>  <!-- dark #000000 20%, 20% -->
+    <color name="static_black_10">#19000000</color>  <!-- dark #000000 10%, 10% -->
+    <color name="static_black_05">#0C000000</color>  <!-- dark #000000 5%, 5% -->
 </resources>

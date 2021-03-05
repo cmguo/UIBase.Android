@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.xhb.uibase.demo.components.basic.XHBButtonFragment2.Model" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBRadioButtonFragment.Model" />
 
-        <import type="com.xhb.uibase.demo.components.basic.XHBButtonFragment2.Style" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBRadioButtonFragment.Style" />
 
-        <import type="com.xhb.uibase.demo.components.basic.XHBButtonFragment2" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBRadioButtonFragment" />
 
         <variable
             name="fragment"
-            type="XHBButtonFragment2" />
+            type="XHBRadioButtonFragment" />
 
         <variable
             name="model"
@@ -25,16 +25,16 @@
     </data>
 
     <FrameLayout
-        android:id="@+id/xhb_component_buttons2"
+        android:id="@+id/xhb_component_radio_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/button_list"
+            android:id="@+id/radio_button_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:data="@{model.types}"
+            app:data="@{model.states}"
             app:itemDecoration="@{style.itemDecoration}"
             app:itemLayout="@{style.itemLayout}">
 
