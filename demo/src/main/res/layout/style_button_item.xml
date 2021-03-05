@@ -6,7 +6,7 @@
 
     <data>
         <import type="java.util.Map.Entry" />
-        <import type="com.xhb.uibase.demo.checkboxes.CheckBoxesFragment.Style" />
+        <import type="com.xhb.uibase.demo.styles.StylesFragment.Style" />
         <variable
             name="data"
             type="Entry&lt;String, Integer&gt;" />
@@ -28,15 +28,10 @@
 
             <TextView
                 android:id="@+id/title"
-                android:paddingStart="5dp"
-                android:textSize="20dp"
-                android:textFontWeight="2"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                style="@style/Demo.ResourceItemTitle"
                 android:text="@{data.key}"/>
 
-            <CheckBox
+            <TextView
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

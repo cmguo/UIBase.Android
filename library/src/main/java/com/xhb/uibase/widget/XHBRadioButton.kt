@@ -13,9 +13,9 @@ class XHBRadioButton @JvmOverloads constructor(
 
     companion object {
         val backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.radio_radius, R.color.xhb_bluegrey00_checked_disabled,
-            R.dimen.radio_border_size, R.color.xhb_bluegrey500_checked_disabled,
-            R.dimen.radio_icon_size, R.dimen.radio_icon_size
+            R.dimen.radio_button_radius, R.color.xhb_bluegrey00_checked_disabled,
+            R.dimen.radio_button_border_size, R.color.xhb_bluegrey500_checked_disabled,
+            R.dimen.radio_button_icon_size, R.dimen.radio_button_icon_size
         )
     }
 

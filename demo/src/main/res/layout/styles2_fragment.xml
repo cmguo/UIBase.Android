@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.xhb.uibase.demo.checkboxes.CheckBoxesFragment.Model" />
-        <import type="com.xhb.uibase.demo.checkboxes.CheckBoxesFragment.Style" />
-        <import type="com.xhb.uibase.demo.checkboxes.CheckBoxesFragment" />
+        <import type="com.xhb.uibase.demo.styles.StylesFragment" />
+        <import type="com.xhb.uibase.demo.styles.StylesFragment.Style" />
+        <import type="com.xhb.uibase.demo.styles.StylesFragment.Model" />
         <variable
             name="fragment"
-            type="CheckBoxesFragment" />
+            type="StylesFragment" />
         <variable
             name="model"
             type="Model" />
@@ -19,14 +19,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/component_check_boxes"
+        android:id="@+id/component_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/buttonsList"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +34,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:data="@{model.styles}"
             app:itemLayout="@{style.itemLayout}"
-            app:itemDecoration="@{style.itemDecoration}"
-            app:itemClicked="@{fragment.buttonClicked}">
+            app:itemDecoration="@{style.itemDecoration}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

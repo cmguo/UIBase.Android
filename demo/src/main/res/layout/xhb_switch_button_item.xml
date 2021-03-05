@@ -6,15 +6,11 @@
 
     <data>
 
-        <import type="com.xhb.uibase.widget.XHBCheckBox.CheckedState" />
-
         <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.Style" />
-
-        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment" />
 
         <variable
             name="data"
-            type="CheckedState" />
+            type="Boolean" />
 
         <variable
             name="style"
@@ -30,15 +26,14 @@
         <TextView
             android:id="@+id/title"
             style="@style/Demo.ResourceItemTitle"
-            android:text="@{data.toString()}" />
+            android:text="@{data.toString()}"/>
 
-        <com.xhb.uibase.widget.XHBCheckBox
-            android:id="@+id/check_box"
-            style="@style/XHBCheckBox"
-            app:checkedState="@{data}"
+        <com.xhb.uibase.widget.XHBSwitchButton
+            android:id="@+id/switch_button"
+            style="@style/XHBSwitchButton"
+            android:checked="@{data}"
             android:enabled="@{!style.disabled}"
-            android:onClick="@{(view) -> style.testCompoundButtonClick(view)}"
-            android:text="@{style.text}"/>
+            android:onClick="@{(view) -> style.testCompoundButtonClick(view)}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

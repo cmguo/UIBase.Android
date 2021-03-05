@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="Demo">
+
+    </style>
+
+    <style name="Demo.ResourceItemTitle">
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">25dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+</resources>

@@ -40,13 +40,10 @@
 
         <com.xhb.uibase.widget.XHBButton
             android:id="@+id/button"
+            style="@style/XHBButton"
             xhb:buttonType="@{data}"
             xhb:buttonSize="@{style.sizeMode}"
             app:loading="@{style.loading}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:enabled="@{!style.disabled}"
             android:onClick="@{(view) -> style.testButtonClick(view)}"
             android:text="@{style.text}"/>

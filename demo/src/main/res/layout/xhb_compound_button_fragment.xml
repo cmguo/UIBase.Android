@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.xhb.uibase.demo.components.basic.XHBCheckBoxFragment.Model" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.Model" />
 
-        <import type="com.xhb.uibase.demo.components.basic.XHBCheckBoxFragment.Style" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.Style" />
 
-        <import type="com.xhb.uibase.demo.components.basic.XHBCheckBoxFragment" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment" />
 
         <variable
             name="fragment"
-            type="XHBCheckBoxFragment" />
+            type="XHBCompoundButtonFragment" />
 
         <variable
             name="model"
@@ -25,13 +25,13 @@
     </data>
 
     <FrameLayout
-        android:id="@+id/xhb_component_check_boxes"
+        android:id="@+id/xhb_component_compound_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/check_box_list"
+            android:id="@+id/compound_button_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:data="@{model.states}"

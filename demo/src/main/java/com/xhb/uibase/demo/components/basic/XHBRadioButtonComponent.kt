@@ -8,9 +8,9 @@ import com.xhb.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
 @Author("cmguo")
-class XHBButtonComponent2 : Component {
+class XHBRadioButtonComponent : Component {
     override fun id(): Int {
-        return R.id.xhb_component_buttons2
+        return R.id.component_xhb_radio_buttons
     }
 
     override fun group(): Int {
@@ -22,14 +22,14 @@ class XHBButtonComponent2 : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_xhb_buttons2
+        return R.string.component_xhb_radio_buttons
     }
 
     override fun description(): Int {
-        return R.string.component_xhb_buttons_des
+        return R.string.component_xhb_radio_buttons_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return XHBButtonFragment2::class.java
+        return XHBCompoundButtonFragment::class.java
     }
 }

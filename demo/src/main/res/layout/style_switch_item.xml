@@ -6,7 +6,7 @@
 
     <data>
         <import type="java.util.Map.Entry" />
-        <import type="com.xhb.uibase.demo.buttons.ButtonsFragment.Style" />
+        <import type="com.xhb.uibase.demo.styles.StylesFragment.Style" />
         <variable
             name="data"
             type="Entry&lt;String, Integer&gt;" />
@@ -28,22 +28,15 @@
 
             <TextView
                 android:id="@+id/title"
-                android:paddingStart="5dp"
-                android:textSize="20dp"
-                android:textFontWeight="2"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                style="@style/Demo.ResourceItemTitle"
                 android:text="@{data.key}"/>
 
-            <TextView
-                android:id="@+id/button"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
                 app:style="@{data.value}"
-                app:autoWidth="@{style.width}"
                 android:enabled="@{!style.disabled}"
                 android:text="@{style.text}"/>
 

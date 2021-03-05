@@ -1,4 +1,4 @@
-package com.xhb.uibase.demo.buttons;
+package com.xhb.uibase.demo.styles;
 
 import com.google.auto.service.AutoService;
 import com.xhb.uibase.demo.R;
@@ -8,10 +8,10 @@ import com.xhb.uibase.demo.core.annotation.Author;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class ButtonsComponent implements Component{
+public class CheckBoxesComponent implements Component{
     @Override
     public int id() {
-        return R.id.component_buttons;
+        return R.id.component_check_boxes;
     }
 
     @Override
@@ -26,17 +26,17 @@ public class ButtonsComponent implements Component{
 
     @Override
     public int title() {
-        return R.string.component_buttons;
+        return R.string.component_checkboxes;
     }
 
     @Override
     public int description() {
-        return R.string.component_buttons_desc;
+        return R.string.component_checkboxes_desc;
     }
 
     @Override
     public Class<? extends ComponentFragment> fragmentClass() {
-        return ButtonsFragment.class;
+        return StylesFragment.class;
     }
 
 }

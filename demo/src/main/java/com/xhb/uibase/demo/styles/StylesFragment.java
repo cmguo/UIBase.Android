@@ -1,7 +1,6 @@
-package com.xhb.uibase.demo.checkboxes;
+package com.xhb.uibase.demo.styles;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
@@ -17,7 +16,7 @@ import com.xhb.uibase.demo.core.Styles;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.core.annotation.Title;
-import com.xhb.uibase.demo.databinding.CheckBoxesFragmentBinding;
+import com.xhb.uibase.demo.databinding.Styles2FragmentBinding;
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
@@ -25,19 +24,25 @@ import java.util.Map;
 import skin.support.observe.SkinObservable;
 import skin.support.observe.SkinObserver;
 
-public class CheckBoxesFragment extends ComponentFragment<CheckBoxesFragmentBinding, CheckBoxesFragment.Model, CheckBoxesFragment.Style>
+public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, StylesFragment.Model, StylesFragment.Style>
         implements SkinObserver {
 
-    private static final String TAG = "ButtonsComponent";
+    private static final String TAG = "StylesFragment";
 
     public static class Model extends ViewModel {
         private Map<String, Integer> styles;
 
-        public Model(CheckBoxesFragment fragment) {
-            if (fragment.getComponent().id() == R.id.component_check_boxes)
+        public Model(StylesFragment fragment) {
+            if (fragment.getComponent().id() == R.id.component_buttons)
+                styles = Styles.buttonStyles(fragment.getContext());
+            else if (fragment.getComponent().id() == R.id.component_check_boxes)
                 styles = Styles.checkboxStyles(fragment.getContext());
-            else
+            else if (fragment.getComponent().id() == R.id.component_radio_buttons)
                 styles = Styles.radioStyles(fragment.getContext());
+            else if (fragment.getComponent().id() == R.id.component_switches)
+                styles = Styles.switchStyles(fragment.getContext());
+            else
+                styles = null;
         }
 
         public Map<String, Integer> getStyles() {
@@ -46,26 +51,41 @@ public class CheckBoxesFragment extends ComponentFragment<CheckBoxesFragmentBind
     }
 
     public static class Style extends ViewStyles {
-        public ItemLayout itemLayout = new ItemLayout(this);
+        public ItemLayout itemLayout;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
 
         @Bindable @Title("文字")
-        public String text = "选择我吗？";
+        public String text = "文字";
+
         @Bindable @Title("禁用")
         public boolean disabled = false;
-    }
 
-    private void updateWidth() {
-        RecyclerView listView = getView().findViewById(R.id.buttonsList);
-        listView.measure(0,listView.getHeight());
-        // TODO: 让按钮变小
+        private StylesFragment fragment_;
+
+        public int itemLayoutId() {
+            if (fragment_.getComponent().id() == R.id.component_buttons)
+                return R.layout.style_button_item;
+            else if (fragment_.getComponent().id() == R.id.component_check_boxes)
+                return R.layout.style_check_box_item;
+            else if (fragment_.getComponent().id() == R.id.component_radio_buttons)
+                return R.layout.style_radio_button_item;
+            else if (fragment_.getComponent().id() == R.id.component_switches)
+                return R.layout.style_switch_item;
+            else
+                return 0;
+        }
+
+        public Style(StylesFragment fragment) {
+            this.fragment_ = fragment;
+            itemLayout = new ItemLayout(this);
+        }
     }
 
     public static class ItemLayout extends RecyclerViewAdapter.UnitTypeItemLayout<Map.Entry<String, Integer>> {
         private final Style style;
 
         public ItemLayout(Style style) {
-            super(R.layout.check_box_item);
+            super(style.itemLayoutId());
             this.style = style;
         }
 
@@ -75,14 +95,6 @@ public class CheckBoxesFragment extends ComponentFragment<CheckBoxesFragmentBind
             binding.setVariable(BR.style, style);
         }
     }
-
-    // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener buttonClicked = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int position, Object object) {
-            Log.d(TAG, "checkBoxClicked" + object);
-        }
-    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

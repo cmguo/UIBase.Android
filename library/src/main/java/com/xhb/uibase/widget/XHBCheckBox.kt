@@ -19,9 +19,9 @@ class XHBCheckBox @JvmOverloads constructor(
 
     companion object {
         val backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.checkbox_radius, R.color.xhb_bluegrey00_checked_disabled,
-            R.dimen.checkbox_border_size, R.color.xhb_bluegrey500_checked_disabled,
-            R.dimen.checkbox_icon_size, R.dimen.checkbox_icon_size
+            R.dimen.check_box_radius, R.color.xhb_bluegrey00_checked_disabled,
+            R.dimen.check_box_border_size, R.color.xhb_bluegrey500_checked_disabled,
+            R.dimen.check_box_icon_size, R.dimen.check_box_icon_size
         )
     }
 
