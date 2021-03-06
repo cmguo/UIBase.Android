@@ -7,10 +7,12 @@
     <dimen name="radio_button_radius">9dp</dimen>
     <dimen name="radio_button_border_size">2dp</dimen>
     <dimen name="radio_button_border_size2">8dp</dimen>
+    <dimen name="radio_button_text_padding">7dp</dimen>
 
     <style name="ZRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/radio_button_height</item>
+        <item name="android:paddingLeft">@dimen/radio_button_text_padding</item>
         <item name="android:textSize">@dimen/radio_button_textSize</item>
     </style>
 

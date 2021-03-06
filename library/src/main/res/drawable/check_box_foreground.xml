@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/svg_check_box_half_checked"
+        android:left="4dp" android:right="4dp"
+        android:top="8dp" android:bottom="8dp"
+        />
+    <item android:drawable="@drawable/svg_check_box_checked"
+        android:left="3dp" android:right="3dp"
+        android:top="5dp" android:bottom="5dp"
+        />
+</layer-list>
