@@ -25,16 +25,16 @@
     </data>
 
     <FrameLayout
-        android:id="@+id/xhb_component_buttons"
+        android:id="@+id/component_xhb_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TestComponent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/buttonsList"
+            android:id="@+id/button_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:data="@{model.styles}"
+            app:data="@{model.types}"
             app:itemDecoration="@{style.itemDecoration}"
             app:itemLayout="@{style.itemLayout}">
 

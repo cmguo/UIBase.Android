@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="group_test">测试分组</string>
+    <string name="component_test">测试控件</string>
+    <string name="component_test_desc">测试控件, MVVM 数据绑定</string>
+
+    <string name="group_styles">基础样式</string>
+
+    <!-- colors -->
+    <string name="component_colors">标准色</string>
+    <string name="component_colors_desc">标准色</string>
+    <id name="component_colors2"></id>
+    <string name="component_colors2">非标准色</string>
+    <string name="component_colors2_desc">非标准色</string>
+
+    <!-- buttons styles -->
+    <id name="component_buttons"></id>
+    <string name="component_buttons">按钮</string>
+    <string name="component_buttons_desc">按钮</string>
+
+    <!-- checkboxes styles -->
+    <id name="component_check_boxes"></id>
+    <string name="component_checkboxes">复选框</string>
+    <string name="component_checkboxes_desc">复选框</string>
+    <id name="component_radio_buttons"></id>
+    <string name="component_radio_buttons">单选框</string>
+    <string name="component_radio_buttons_desc">单选框</string>
+    <id name="component_switches"></id>
+    <string name="component_switches">开关</string>
+    <string name="component_switches_desc">开关</string>
+
+    <!-- dialogs layouts -->
+    <string name="component_dialogs">对话框</string>
+    <string name="component_dialogs_desc">对话框</string>
+    
+</resources>

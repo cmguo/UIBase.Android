@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.xhb.uibase.binding.RecyclerViewAdapter.OnItemClickListener
 import com.xhb.uibase.binding.RecyclerViewAdapter.UnitTypeItemLayout
@@ -18,22 +17,21 @@ import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.annotation.Description
 import com.xhb.uibase.demo.core.annotation.Title
-import com.xhb.uibase.demo.databinding.XhbButtonFragment2Binding
-import com.xhb.uibase.demo.databinding.XhbButtonItem2Binding
+import com.xhb.uibase.demo.databinding.XhbButtonFragmentBinding
+import com.xhb.uibase.demo.databinding.XhbButtonItemBinding
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration
 import com.xhb.uibase.widget.XHBButton
-import com.xhb.uibase.widget.XHBButtonLoadingView
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
-class XHBButtonFragment2 : ComponentFragment<XhbButtonFragment2Binding?,
-    XHBButtonFragment2.Model?, XHBButtonFragment2.Style?>(), SkinObserver {
+class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
+    XHBButtonFragment.Model?, XHBButtonFragment.Style?>(), SkinObserver {
 
-    class Model(fragment: XHBButtonFragment2) : ViewModel() {
+    class Model(fragment: XHBButtonFragment) : ViewModel() {
         val types = XHBButton.ButtonType.values().asList()
     }
 
-    class Style(private val fragment_: XHBButtonFragment2) : ViewStyles() {
+    class Style(private val fragment_: XHBButtonFragment) : ViewStyles() {
         enum class ButtonWidth(private val layoutWidth_: Int) {
             WrapContent(ViewGroup.LayoutParams.WRAP_CONTENT), MatchParent(ViewGroup.LayoutParams.MATCH_PARENT);
             fun layoutWidth(): Int {
@@ -88,11 +86,11 @@ class XHBButtonFragment2 : ComponentFragment<XhbButtonFragment2Binding?,
         }
     }
 
-    class ButtonItemLayout(private val style: Style) : UnitTypeItemLayout<XHBButton.ButtonType>(R.layout.xhb_button_item2) {
+    class ButtonItemLayout(private val style: Style) : UnitTypeItemLayout<XHBButton.ButtonType>(R.layout.xhb_button_item) {
         override fun bindView(binding: ViewDataBinding?, item: XHBButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.style, style)
-            val button = (binding as XhbButtonItem2Binding)!!.button
+            val button = (binding as XhbButtonItemBinding)!!.button
             val lp = button.layoutParams
             lp.width = style.widthMode.layoutWidth()
             button.layoutParams = lp
