@@ -98,7 +98,7 @@ public class XHBButton @JvmOverloads constructor(
         val types = typeStyles[type_]!!
         val sizes = sizeStyles[size_]!!
         background = backgroundDrawable(context, types, sizes)
-        setTextColor(context.resources.getColor(types.textColor))
+        setTextColor(context.resources.getColorStateList(types.textColor))
         height = context.resources.getDimensionPixelSize(sizes.height)
         val padding = context.resources.getDimensionPixelSize(sizes.padding)
         setPadding(padding, 0, padding, 0)
@@ -114,7 +114,7 @@ public class XHBButton @JvmOverloads constructor(
             type_ = value
             background = backgroundDrawable(context, type_, size_)
             val types = typeStyles[type_]!!
-            setTextColor(context.resources.getColor(types.textColor))
+            setTextColor(context.resources.getColorStateList(types.textColor))
         }
 
     var buttonSize: ButtonSize

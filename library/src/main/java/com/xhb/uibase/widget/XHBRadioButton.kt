@@ -2,6 +2,7 @@ package com.xhb.uibase.widget
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatRadioButton
 import com.xhb.uibase.R
@@ -12,14 +13,22 @@ class XHBRadioButton @JvmOverloads constructor(
 ) : AppCompatRadioButton(context, attrs, defStyleAttr) {
 
     companion object {
-        val backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.radio_button_radius, R.color.xhb_bluegrey00_checked_disabled,
-            R.dimen.radio_button_border_size, R.color.xhb_bluegrey500_checked_disabled,
-            R.dimen.radio_button_icon_size, R.dimen.radio_button_icon_size
+        var backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
+                R.dimen.radio_button_radius, R.color.xhb_bluegrey00_disabled,
+                R.dimen.radio_button_border_size, R.color.xhb_bluegrey500_checked_disabled,
+                R.dimen.radio_button_icon_size, R.dimen.radio_button_icon_size
+        )
+        var foregroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
+                R.dimen.radio_button_radius, R.color.xhb_transparent_checked_disabled,
+                R.dimen.radio_button_border_size2, R.color.transparent,
+                R.dimen.radio_button_icon_size, R.dimen.radio_button_icon_size
         )
     }
 
     init {
-        buttonDrawable = ShapeDrawables.getDrawable(context, backgroundDrawable)
+        val background = ShapeDrawables.getDrawable(context, backgroundDrawable)
+        val foreground = ShapeDrawables.getDrawable(context, foregroundDrawable)
+        val layer = LayerDrawable(arrayOf(background, foreground))
+        buttonDrawable = layer
     }
 }
