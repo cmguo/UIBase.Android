@@ -13,7 +13,7 @@ class XHBSwitchButton @JvmOverloads constructor(
 
     companion object {
         val trackDrawableConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.switch_button_radius, R.color.xhb_bluegrey300_checked,
+            R.dimen.switch_button_radius, R.color.bluegrey300_checked,
             0, 0,
             0, 0
         )

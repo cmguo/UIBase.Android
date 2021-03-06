@@ -14,12 +14,12 @@ class XHBRadioButton @JvmOverloads constructor(
 
     companion object {
         var backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-                R.dimen.radio_button_radius, R.color.xhb_bluegrey00_disabled,
-                R.dimen.radio_button_border_size, R.color.xhb_bluegrey500_checked_disabled,
+                R.dimen.radio_button_radius, R.color.bluegrey00_disabled,
+                R.dimen.radio_button_border_size, R.color.bluegrey500_checked_disabled,
                 R.dimen.radio_button_icon_size, R.dimen.radio_button_icon_size
         )
         var foregroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-                R.dimen.radio_button_radius, R.color.xhb_transparent_checked_disabled,
+                R.dimen.radio_button_radius, R.color.transparent_checked_disabled,
                 R.dimen.radio_button_border_size2, R.color.transparent,
                 R.dimen.radio_button_icon_size, R.dimen.radio_button_icon_size
         )

@@ -4,8 +4,6 @@ import android.content.Context
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.RectShape
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.ColorRes
@@ -13,7 +11,6 @@ import androidx.annotation.DimenRes
 import androidx.appcompat.widget.AppCompatButton
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.ShapeDrawables
-import top.defaults.drawabletoolbox.DrawableBuilder
 
 public class XHBButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -34,11 +31,11 @@ public class XHBButton @JvmOverloads constructor(
                               @DimenRes val padding : Int, @DimenRes val textSize : Int, @DimenRes val iconPadding : Int)
 
         private val typeStyles: Map<ButtonType, TypeStyles> = mapOf(
-            ButtonType.Primitive to TypeStyles(R.color.xhb_bluegrey900_disabled, R.color.xhb_brand500_pressed_disabled),
-            ButtonType.Secondary to TypeStyles(R.color.xhb_blue600_disabled, R.color.xhb_blue100_pressed_disabled),
-            ButtonType.Tertiary to TypeStyles(R.color.xhb_bluegrey800_disabled, R.color.xhb_bluegrey100_pressed_disabled),
-            ButtonType.Danger to TypeStyles(R.color.xhb_red600_disabled, R.color.xhb_red100_pressed_disabled),
-            ButtonType.Text to TypeStyles(R.color.xhb_blue600_disabled, R.color.xhb_transparent_pressed_disabled),
+            ButtonType.Primitive to TypeStyles(R.color.bluegrey900_disabled, R.color.brand500_pressed_disabled),
+            ButtonType.Secondary to TypeStyles(R.color.blue600_disabled, R.color.blue100_pressed_disabled),
+            ButtonType.Tertiary to TypeStyles(R.color.bluegrey800_disabled, R.color.bluegrey100_pressed_disabled),
+            ButtonType.Danger to TypeStyles(R.color.red600_disabled, R.color.red100_pressed_disabled),
+            ButtonType.Text to TypeStyles(R.color.blue600_disabled, R.color.transparent_pressed_disabled),
         )
 
         private val sizeStyles: Map<ButtonSize, SizeStyles> = mapOf(
