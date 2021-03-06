@@ -18,9 +18,16 @@ class ShapeDrawables {
         private val drawables: MutableMap<Config, Drawable> = mutableMapOf()
 
         fun getDrawable(context: Context, config: Config) : Drawable {
-            return drawables.getOrPut(config) {
-                return createDrawable(context, config)
+//            return drawables.getOrPut(config) {
+//                return createDrawable(context, config)
+//            }
+            var drawable = drawables.get(config)
+            if (drawable == null) {
+                drawable = createDrawable(context, config)
+                if (!drawable.isStateful())
+                    drawables.put(config, drawable)
             }
+            return drawable
         }
 
         fun createDrawable(context: Context, config: Config) : Drawable {

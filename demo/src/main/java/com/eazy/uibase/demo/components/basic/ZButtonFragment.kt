@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.eazy.uibase.binding.RecyclerViewAdapter.OnItemClickListener
 import com.eazy.uibase.binding.RecyclerViewAdapter.UnitTypeItemLayout
@@ -18,22 +17,21 @@ import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.annotation.Description
 import com.eazy.uibase.demo.core.annotation.Title
-import com.eazy.uibase.demo.databinding.ButtonFragment2Binding
-import com.eazy.uibase.demo.databinding.ButtonItem2Binding
+import com.eazy.uibase.demo.databinding.ButtonFragmentBinding
+import com.eazy.uibase.demo.databinding.ButtonItemBinding
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration
 import com.eazy.uibase.widget.ZButton
-import com.eazy.uibase.widget.ZButtonLoadingView
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
-class ZButtonFragment2 : ComponentFragment<ButtonFragment2Binding?,
-    ZButtonFragment2.Model?, ZButtonFragment2.Style?>(), SkinObserver {
+class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
+    ZButtonFragment.Model?, ZButtonFragment.Style?>(), SkinObserver {
 
-    class Model(fragment: ZButtonFragment2) : ViewModel() {
+    class Model(fragment: ZButtonFragment) : ViewModel() {
         val types = ZButton.ButtonType.values().asList()
     }
 
-    class Style(private val fragment_: ZButtonFragment2) : ViewStyles() {
+    class Style(private val fragment_: ZButtonFragment) : ViewStyles() {
         enum class ButtonWidth(private val layoutWidth_: Int) {
             WrapContent(ViewGroup.LayoutParams.WRAP_CONTENT), MatchParent(ViewGroup.LayoutParams.MATCH_PARENT);
             fun layoutWidth(): Int {
@@ -88,11 +86,11 @@ class ZButtonFragment2 : ComponentFragment<ButtonFragment2Binding?,
         }
     }
 
-    class ButtonItemLayout(private val style: Style) : UnitTypeItemLayout<ZButton.ButtonType>(R.layout.button_item2) {
+    class ButtonItemLayout(private val style: Style) : UnitTypeItemLayout<ZButton.ButtonType>(R.layout.button_item) {
         override fun bindView(binding: ViewDataBinding?, item: ZButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.style, style)
-            val button = (binding as ButtonItem2Binding)!!.button
+            val button = (binding as ButtonItemBinding)!!.button
             val lp = button.layoutParams
             lp.width = style.widthMode.layoutWidth()
             button.layoutParams = lp
