@@ -27,6 +27,7 @@ class ZCheckBox @JvmOverloads constructor(
     }
 
     private var half_checked_: Boolean = false
+    private var text_padding_ : Int? = null
 
     init {
         val background = ShapeDrawables.getDrawable(context, backgroundDrawable)
@@ -45,6 +46,19 @@ class ZCheckBox @JvmOverloads constructor(
             half_checked_ = value == CheckedState.HalfChecked
             refreshDrawableState()
         }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        text_padding_ = paddingLeft
+        if (text.isNullOrEmpty())
+            setPadding(0, paddingTop, paddingRight, paddingBottom)
+    }
+
+    override fun setText(text: CharSequence?, type: BufferType?) {
+        super.setText(text, type)
+        if (text_padding_ != null)
+            setPadding(if (text.isNullOrEmpty()) 0 else text_padding_!!, paddingTop, paddingRight, paddingBottom)
+    }
 
     override fun setChecked(checked: Boolean) {
         half_checked_ = false

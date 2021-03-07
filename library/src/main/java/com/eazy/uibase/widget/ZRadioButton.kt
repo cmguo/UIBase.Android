@@ -25,10 +25,26 @@ class ZRadioButton @JvmOverloads constructor(
         )
     }
 
+    private var text_padding_ : Int? = null
+
     init {
         val background = ShapeDrawables.getDrawable(context, backgroundDrawable)
         val foreground = ShapeDrawables.getDrawable(context, foregroundDrawable)
         val layer = LayerDrawable(arrayOf(background, foreground))
         buttonDrawable = layer
     }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        text_padding_ = paddingLeft
+        if (text.isNullOrEmpty())
+            setPadding(0, paddingTop, paddingRight, paddingBottom)
+    }
+
+    override fun setText(text: CharSequence?, type: BufferType?) {
+        super.setText(text, type)
+        if (text_padding_ != null)
+            setPadding(if (text.isNullOrEmpty()) 0 else text_padding_!!, paddingTop, paddingRight, paddingBottom)
+    }
+
 }
