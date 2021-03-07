@@ -8,13 +8,13 @@ import com.xhb.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
 @Author("cmguo")
-class XHBButtonComponent : Component {
+class XHBBadgeViewComponent : Component {
     override fun id(): Int {
-        return R.id.component_xhb_buttons
+        return R.id.component_xhb_badge_views
     }
 
     override fun group(): Int {
-        return R.string.group_basic
+        return R.string.group_basic2
     }
 
     override fun icon(): Int {
@@ -22,14 +22,14 @@ class XHBButtonComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_xhb_buttons
+        return R.string.component_xhb_badge_views
     }
 
     override fun description(): Int {
-        return R.string.component_xhb_buttons_desc
+        return R.string.component_xhb_badge_views_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return XHBButtonFragment::class.java
+        return XHBBadgeViewFragment::class.java
     }
 }

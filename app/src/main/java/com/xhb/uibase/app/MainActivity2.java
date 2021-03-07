@@ -143,7 +143,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private void buildNavMenu(Menu menu, Map<Integer, List<Component>> components) {
         for (Map.Entry<Integer, List<Component>> g : components.entrySet()) {
-            SubMenu sm = menu.addSubMenu(g.getKey());
+            SubMenu sm = menu.addSubMenu(0, g.getKey(), 0, g.getKey());
             for (Component c : g.getValue()) {
                 Log.d(TAG, "buildNavMenu id=" + c.id() + ", title=" + c.title());
                 sm.add(0, c.id(), 0, c.title()).setIcon(c.icon());

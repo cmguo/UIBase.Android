@@ -7,7 +7,7 @@
 
         <import type="com.xhb.uibase.widget.XHBCheckBox.CheckedState" />
 
-        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.Style" />
+        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.Styles" />
 
         <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment" />
 
@@ -16,8 +16,8 @@
             type="CheckedState" />
 
         <variable
-            name="style"
-            type="Style" />
+            name="styles"
+            type="Styles" />
 
     </data>
 
@@ -35,9 +35,9 @@
             android:id="@+id/check_box"
             style="@style/XHBCheckBox"
             app:checkedState="@{data}"
-            android:enabled="@{!style.disabled}"
-            android:onClick="@{(view) -> style.testCompoundButtonClick(view)}"
-            android:text="@{style.text}"/>
+            android:enabled="@{!styles.disabled}"
+            android:onClick="@{(view) -> styles.testCompoundButtonClick(view)}"
+            android:text="@{styles.text}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:xhb="http://schemas.android.com/apk/com.xhb.uibase"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.components.basic.XHBBadgeViewFragment.Styles" />
+
+        <import type="com.xhb.uibase.demo.components.basic.XHBBadgeViewFragment" />
+
+        <variable
+            name="fragment"
+            type="XHBBadgeViewFragment" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <com.xhb.uibase.widget.badgeview.XHBBadgeView
+        android:id="@+id/badgeview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xhb:badgeGravity="@{styles.gravity.gravity()}"
+        xhb:gravityOffset="@{styles.offset}"
+        xhb:draggable="@{styles.draggabe}"
+        xhb:exactly="@{styles.exactly}"
+        xhb:badgeNumber="@{styles.number}"
+        xhb:badgeText="@{styles.text}"
+        xhb:dragState="@={styles.dragState}"
+        />
+
+
+</layout>

@@ -12,7 +12,6 @@ import com.xhb.uibase.binding.RecyclerViewAdapter;
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.core.SkinManager;
-import com.xhb.uibase.demo.core.Styles;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.core.annotation.Title;
@@ -24,7 +23,7 @@ import java.util.Map;
 import skin.support.observe.SkinObservable;
 import skin.support.observe.SkinObserver;
 
-public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, StylesFragment.Model, StylesFragment.Style>
+public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, StylesFragment.Model, StylesFragment.Styles>
         implements SkinObserver {
 
     private static final String TAG = "StylesFragment";
@@ -34,13 +33,13 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
         public Model(StylesFragment fragment) {
             if (fragment.getComponent().id() == R.id.component_buttons)
-                styles = Styles.buttonStyles(fragment.getContext());
+                styles = com.xhb.uibase.demo.core.Styles.buttonStyles(fragment.getContext());
             else if (fragment.getComponent().id() == R.id.component_check_boxes)
-                styles = Styles.checkboxStyles(fragment.getContext());
+                styles = com.xhb.uibase.demo.core.Styles.checkboxStyles(fragment.getContext());
             else if (fragment.getComponent().id() == R.id.component_radio_buttons)
-                styles = Styles.radioStyles(fragment.getContext());
+                styles = com.xhb.uibase.demo.core.Styles.radioStyles(fragment.getContext());
             else if (fragment.getComponent().id() == R.id.component_switches)
-                styles = Styles.switchStyles(fragment.getContext());
+                styles = com.xhb.uibase.demo.core.Styles.switchStyles(fragment.getContext());
             else
                 styles = null;
         }
@@ -50,7 +49,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         }
     }
 
-    public static class Style extends ViewStyles {
+    public static class Styles extends ViewStyles {
         public ItemLayout itemLayout;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
 
@@ -75,24 +74,24 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
                 return 0;
         }
 
-        public Style(StylesFragment fragment) {
+        public Styles(StylesFragment fragment) {
             this.fragment_ = fragment;
             itemLayout = new ItemLayout(this);
         }
     }
 
     public static class ItemLayout extends RecyclerViewAdapter.UnitTypeItemLayout<Map.Entry<String, Integer>> {
-        private final Style style;
+        private final Styles styles;
 
-        public ItemLayout(Style style) {
-            super(style.itemLayoutId());
-            this.style = style;
+        public ItemLayout(Styles styles) {
+            super(styles.itemLayoutId());
+            this.styles = styles;
         }
 
         @Override
         public void bindView(ViewDataBinding binding, Map.Entry<String, Integer> item, int position) {
             super.bindView(binding, item, position);
-            binding.setVariable(BR.style, style);
+            binding.setVariable(BR.styles, styles);
         }
     }
 

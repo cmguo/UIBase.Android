@@ -14,13 +14,13 @@ import com.ustc.base.util.reflect.ClassWrapper;
 import com.ustc.base.util.reflect.ObjectWrapper;
 
 public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
-        Model extends ViewModel, Style extends ViewStyles
+        Model extends ViewModel, Styles extends ViewStyles
         > extends Fragment {
 
     Component component_;
     DataBinding binding_;
     Model model_;
-    Style style_;
+    Styles styles_;
 
     protected void setComponent(Component component_) {
         this.component_ = component_;
@@ -44,14 +44,14 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         binding_ = createDataBinding(inflater);
         binding_.setLifecycleOwner(this);
         model_ = createModel();
-        style_ = createStyle();
+        styles_ = createStyle();
         ObjectWrapper<DataBinding> wrapper = ObjectWrapper.wrap(binding_);
         if (wrapper.hasMethod("setFragment", getClass()))
             ObjectWrapper.wrap(binding_).invoke("setFragment", this);
         if (wrapper.hasMethod("setModel", model_.getClass()))
             ObjectWrapper.wrap(binding_).invoke("setModel", model_);
-        if (wrapper.hasMethod("setStyle", style_.getClass()))
-            ObjectWrapper.wrap(binding_).invoke("setStyle", style_);
+        if (wrapper.hasMethod("setStyles", styles_.getClass()))
+            ObjectWrapper.wrap(binding_).invoke("setStyles", styles_);
         return binding_.getRoot();
     }
 
@@ -68,8 +68,8 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         return model_;
     }
 
-    public ViewStyles getStyles() {
-        return style_;
+    public Styles getStyles() {
+        return styles_;
     }
 
     protected Class<DataBinding> getDataBindingType() {
@@ -80,7 +80,7 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         return Generic.getParamType(getClass(), ComponentFragment.class, 1);
     }
 
-    protected Class<Style> getStyleType() {
+    protected Class<Styles> getStyleType() {
         return Generic.getParamType(getClass(), ComponentFragment.class, 2);
     }
 
@@ -103,8 +103,8 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         }
     }
 
-    protected Style createStyle() {
-        Class<Style> clzS = getStyleType();
+    protected Styles createStyle() {
+        Class<Styles> clzS = getStyleType();
         ClassWrapper wrapper = ClassWrapper.wrap(clzS);
         if (wrapper.hasConstructor(getClass())) {
             return ClassWrapper.wrap(clzS).newInstance(this);

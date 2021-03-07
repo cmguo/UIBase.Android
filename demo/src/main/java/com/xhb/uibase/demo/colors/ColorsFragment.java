@@ -23,7 +23,7 @@ import java.util.Map;
 import skin.support.observe.SkinObservable;
 import skin.support.observe.SkinObserver;
 
-public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, ColorsFragment.Model, ColorsFragment.Style>
+public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, ColorsFragment.Model, ColorsFragment.Styles>
     implements SkinObserver {
 
     private static final String TAG = "ColorsComponent";
@@ -49,7 +49,7 @@ public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, Col
         }
     }
 
-    public static class Style extends ViewStyles {
+    public static class Styles extends ViewStyles {
         public int itemLayout = R.layout.color_item;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
     }

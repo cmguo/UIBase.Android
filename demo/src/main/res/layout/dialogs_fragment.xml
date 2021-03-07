@@ -5,7 +5,7 @@
 
     <data>
         <import type="com.xhb.uibase.demo.layouts.DialogsFragment.Model" />
-        <import type="com.xhb.uibase.demo.layouts.DialogsFragment.Style" />
+        <import type="com.xhb.uibase.demo.layouts.DialogsFragment.Styles" />
         <import type="com.xhb.uibase.demo.layouts.DialogsFragment" />
         <variable
             name="fragment"
@@ -14,8 +14,8 @@
             name="model"
             type="Model" />
         <variable
-            name="style"
-            type="Style" />
+            name="styles"
+            type="com.xhb.uibase.demo.layouts.DialogsFragment.Styles" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,8 +33,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:data="@{model.layouts}"
-            app:itemLayout="@{style.itemLayout}"
-            app:itemDecoration="@{style.itemDecoration}"
+            app:itemLayout="@{styles.itemLayout}"
+            app:itemDecoration="@{styles.itemDecoration}"
             app:itemClicked="@{fragment.dialogClicked}">
 
         </androidx.recyclerview.widget.RecyclerView>

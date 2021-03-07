@@ -21,7 +21,7 @@ import com.xhb.uibase.widget.XHBCheckBox
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
-class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBinding?, XHBCompoundButtonFragment.Model?, XHBCompoundButtonFragment.Style?>(), SkinObserver {
+class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBinding?, XHBCompoundButtonFragment.Model?, XHBCompoundButtonFragment.Styles?>(), SkinObserver {
 
     class Model(fragment: XHBCompoundButtonFragment?) : ViewModel() {
         var states: List<Any?>
@@ -33,7 +33,7 @@ class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBin
         }
     }
 
-    class Style(fragment: XHBCompoundButtonFragment?) : ViewStyles() {
+    class Styles(fragment: XHBCompoundButtonFragment?) : ViewStyles() {
         var itemLayout: ItemLayout
         var itemDecoration: RecyclerView.ItemDecoration = PaddingDecoration()
 
@@ -66,10 +66,10 @@ class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBin
             }
     }
 
-    class ItemLayout(private val style: Style) : RecyclerViewAdapter.UnitTypeItemLayout<Any>(style.itemLayoutId) {
+    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemLayout<Any>(styles.itemLayoutId) {
         override fun bindView(binding: ViewDataBinding?, item: Any, position: Int) {
             super.bindView(binding, item, position)
-            binding!!.setVariable(BR.style, style)
+            binding!!.setVariable(BR.styles, styles)
         }
     }
 

@@ -25,13 +25,13 @@ import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
 class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
-    XHBButtonFragment.Model?, XHBButtonFragment.Style?>(), SkinObserver {
+    XHBButtonFragment.Model?, XHBButtonFragment.Styles?>(), SkinObserver {
 
     class Model(fragment: XHBButtonFragment) : ViewModel() {
         val types = XHBButton.ButtonType.values().asList()
     }
 
-    class Style(private val fragment_: XHBButtonFragment) : ViewStyles() {
+    class Styles(private val fragment_: XHBButtonFragment) : ViewStyles() {
         enum class ButtonWidth(private val layoutWidth_: Int) {
             WrapContent(ViewGroup.LayoutParams.WRAP_CONTENT), MatchParent(ViewGroup.LayoutParams.MATCH_PARENT);
             fun layoutWidth(): Int {
@@ -39,18 +39,18 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
             }
         }
 
-        var itemLayout = ButtonItemLayout(this)
+        var itemLayout = ItemLayout(this)
         var itemDecoration: ItemDecoration = PaddingDecoration()
 
         @Bindable
         @Title("禁用")
         @Description("切换到禁用状态")
-        @JvmField var disabled = false
+        var disabled = false
 
         @Bindable
         @Title("加载")
         @Description("切换到加载状态")
-        @JvmField var loading = false
+        var loading = false
 
         @Bindable
         @Title("尺寸模式")
@@ -86,13 +86,13 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         }
     }
 
-    class ButtonItemLayout(private val style: Style) : UnitTypeItemLayout<XHBButton.ButtonType>(R.layout.xhb_button_item) {
+    class ItemLayout(private val styles: Styles) : UnitTypeItemLayout<XHBButton.ButtonType>(R.layout.xhb_button_item) {
         override fun bindView(binding: ViewDataBinding?, item: XHBButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
-            binding!!.setVariable(BR.style, style)
+            binding!!.setVariable(BR.styles, styles)
             val button = (binding as XhbButtonItemBinding)!!.button
             val lp = button.layoutParams
-            lp.width = style.widthMode.layoutWidth()
+            lp.width = styles.widthMode.layoutWidth()
             button.layoutParams = lp
         }
     }

@@ -5,7 +5,7 @@
 
     <data>
         <import type="com.xhb.uibase.demo.colors.ColorsFragment.Model" />
-        <import type="com.xhb.uibase.demo.colors.ColorsFragment.Style" />
+        <import type="com.xhb.uibase.demo.colors.ColorsFragment.Styles" />
         <import type="com.xhb.uibase.demo.colors.ColorsFragment" />
         <variable
             name="fragment"
@@ -14,8 +14,8 @@
             name="model"
             type="Model" />
         <variable
-            name="style"
-            type="Style" />
+            name="styles"
+            type="Styles" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,8 +33,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:data="@{model.colors}"
-            app:itemLayout="@{style.itemLayout}"
-            app:itemDecoration="@{style.itemDecoration}"
+            app:itemLayout="@{styles.itemLayout}"
+            app:itemDecoration="@{styles.itemDecoration}"
             app:itemClicked="@{fragment.colorClicked}">
 
         </androidx.recyclerview.widget.RecyclerView>

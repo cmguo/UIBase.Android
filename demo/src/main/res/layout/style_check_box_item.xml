@@ -6,13 +6,13 @@
 
     <data>
         <import type="java.util.Map.Entry" />
-        <import type="com.xhb.uibase.demo.styles.StylesFragment.Style" />
+        <import type="com.xhb.uibase.demo.styles.StylesFragment.Styles" />
         <variable
             name="data"
             type="Entry&lt;String, Integer&gt;" />
         <variable
-            name="style"
-            type="Style" />
+            name="styles"
+            type="Styles" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -38,8 +38,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 app:style="@{data.value}"
-                android:enabled="@{!style.disabled}"
-                android:text="@{style.text}"/>
+                android:enabled="@{!styles.disabled}"
+                android:text="@{styles.text}"/>
 
         </LinearLayout>
 

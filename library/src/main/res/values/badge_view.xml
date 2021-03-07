@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="badge_view_background_color">#FFE84E40</color>
+    <color name="badge_view_text_color">#FFFFFFFF</color>
+    <dimen name="badge_view_text_size">11dp</dimen>
+    <dimen name="badge_view_padding">5dp</dimen>
+    <dimen name="badge_view_gravity_offset_x">1dp</dimen>
+    <dimen name="badge_view_gravity_offset_y">1dp</dimen>
+    <dimen name="badge_view_final_drag_distance">90dp</dimen>
+    <dimen name="badge_view_default_radius">7dp</dimen>
+    <dimen name="badge_view_bitmap_inflect">3dp</dimen>
+    <dimen name="badge_view_shadow_offset_x">1dp</dimen>
+    <dimen name="badge_view_shadow_offset_y">1.5dp</dimen>
+    <dimen name="badge_view_shadow_radius">2dp</dimen>
+    <dimen name="badge_view_drag_start_radius">1.5dp</dimen>
+
+    <!-- No need styleable because we never use BadgeView in layout -->
+
+</resources>
