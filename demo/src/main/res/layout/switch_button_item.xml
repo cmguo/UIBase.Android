@@ -6,15 +6,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Style" />
+        <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Styles" />
 
         <variable
             name="data"
             type="Boolean" />
 
         <variable
-            name="style"
-            type="Style" />
+            name="styles"
+            type="Styles" />
 
     </data>
 
@@ -32,8 +32,8 @@
             android:id="@+id/switch_button"
             style="@style/ZSwitchButton"
             android:checked="@{data}"
-            android:enabled="@{!style.disabled}"
-            android:onClick="@{(view) -> style.testCompoundButtonClick(view)}"/>
+            android:enabled="@{!styles.disabled}"
+            android:onClick="@{(view) -> styles.testCompoundButtonClick(view)}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

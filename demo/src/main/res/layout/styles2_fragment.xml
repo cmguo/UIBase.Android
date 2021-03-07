@@ -5,7 +5,7 @@
 
     <data>
         <import type="com.eazy.uibase.demo.styles.StylesFragment" />
-        <import type="com.eazy.uibase.demo.styles.StylesFragment.Style" />
+        <import type="com.eazy.uibase.demo.styles.StylesFragment.Styles" />
         <import type="com.eazy.uibase.demo.styles.StylesFragment.Model" />
         <variable
             name="fragment"
@@ -14,8 +14,8 @@
             name="model"
             type="Model" />
         <variable
-            name="style"
-            type="Style" />
+            name="styles"
+            type="Styles" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,8 +33,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:data="@{model.styles}"
-            app:itemLayout="@{style.itemLayout}"
-            app:itemDecoration="@{style.itemDecoration}">
+            app:itemLayout="@{styles.itemLayout}"
+            app:itemDecoration="@{styles.itemDecoration}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

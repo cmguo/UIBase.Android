@@ -9,7 +9,7 @@ import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.TestFragmentBinding;
 
-public class TestFragment extends ComponentFragment<TestFragmentBinding, TestFragment.Model, TestFragment.Style> {
+public class TestFragment extends ComponentFragment<TestFragmentBinding, TestFragment.Model, TestFragment.Styles> {
 
     public static class Model extends ViewModel {
         public String text = "Hello world!";
@@ -21,7 +21,7 @@ public class TestFragment extends ComponentFragment<TestFragmentBinding, TestFra
         Value3
     }
 
-    public static class Style extends ViewStyles {
+    public static class Styles extends ViewStyles {
         @Bindable
         public int color = Color.RED;
         @Bindable

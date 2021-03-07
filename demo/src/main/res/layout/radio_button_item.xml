@@ -6,15 +6,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Style" />
+        <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Styles" />
 
         <variable
             name="data"
             type="Boolean" />
 
         <variable
-            name="style"
-            type="Style" />
+            name="styles"
+            type="Styles" />
 
     </data>
 
@@ -32,9 +32,9 @@
             android:id="@+id/radio_button"
             style="@style/ZRadioButton"
             android:checked="@{data}"
-            android:enabled="@{!style.disabled}"
-            android:onClick="@{(view) -> style.testCompoundButtonClick(view)}"
-            android:text="@{style.text}"/>
+            android:enabled="@{!styles.disabled}"
+            android:onClick="@{(view) -> styles.testCompoundButtonClick(view)}"
+            android:text="@{styles.text}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

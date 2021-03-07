@@ -8,13 +8,13 @@ import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
 @Author("cmguo")
-class ZButtonComponent : Component {
+class ZBadgeViewComponent : Component {
     override fun id(): Int {
-        return R.id.component_z_buttons
+        return R.id.component_z_badge_views
     }
 
     override fun group(): Int {
-        return R.string.group_basic
+        return R.string.group_basic2
     }
 
     override fun icon(): Int {
@@ -22,14 +22,14 @@ class ZButtonComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_z_buttons
+        return R.string.component_z_badge_views
     }
 
     override fun description(): Int {
-        return R.string.component_z_buttons_desc
+        return R.string.component_z_badge_views_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return ZButtonFragment::class.java
+        return ZBadgeViewFragment::class.java
     }
 }

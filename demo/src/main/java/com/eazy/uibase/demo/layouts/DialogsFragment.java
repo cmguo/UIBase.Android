@@ -21,7 +21,7 @@ import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
 import java.util.Map;
 
-public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, DialogsFragment.Model, DialogsFragment.Style>
+public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, DialogsFragment.Model, DialogsFragment.Styles>
         implements View.OnClickListener {
 
     private static final String TAG = "DialogsFragment";
@@ -38,7 +38,7 @@ public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, D
         }
     }
 
-    public static class Style extends ViewStyles {
+    public static class Styles extends ViewStyles {
         public int itemLayout = R.layout.dialog_item;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
     }

@@ -7,7 +7,7 @@
 
         <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Style" />
+        <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Styles" />
 
         <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment" />
 
@@ -20,8 +20,8 @@
             type="Model" />
 
         <variable
-            name="style"
-            type="Style" />
+            name="styles"
+            type="Styles" />
     </data>
 
     <FrameLayout
@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:data="@{model.states}"
-            app:itemDecoration="@{style.itemDecoration}"
-            app:itemLayout="@{style.itemLayout}">
+            app:itemDecoration="@{styles.itemDecoration}"
+            app:itemLayout="@{styles.itemLayout}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

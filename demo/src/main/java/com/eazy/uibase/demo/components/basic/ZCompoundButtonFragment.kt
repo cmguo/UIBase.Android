@@ -21,7 +21,7 @@ import com.eazy.uibase.widget.ZCheckBox
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
-class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?, ZCompoundButtonFragment.Model?, ZCompoundButtonFragment.Style?>(), SkinObserver {
+class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?, ZCompoundButtonFragment.Model?, ZCompoundButtonFragment.Styles?>(), SkinObserver {
 
     class Model(fragment: ZCompoundButtonFragment?) : ViewModel() {
         var states: List<Any?>
@@ -33,7 +33,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         }
     }
 
-    class Style(fragment: ZCompoundButtonFragment?) : ViewStyles() {
+    class Styles(fragment: ZCompoundButtonFragment?) : ViewStyles() {
         var itemLayout: ItemLayout
         var itemDecoration: RecyclerView.ItemDecoration = PaddingDecoration()
 
@@ -66,10 +66,10 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
             }
     }
 
-    class ItemLayout(private val style: Style) : RecyclerViewAdapter.UnitTypeItemLayout<Any>(style.itemLayoutId) {
+    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemLayout<Any>(styles.itemLayoutId) {
         override fun bindView(binding: ViewDataBinding?, item: Any, position: Int) {
             super.bindView(binding, item, position)
-            binding!!.setVariable(BR.style, style)
+            binding!!.setVariable(BR.styles, styles)
         }
     }
 
