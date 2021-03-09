@@ -8,12 +8,6 @@
 
         <import type="com.eazy.uibase.demo.components.basic.ZBadgeViewFragment.Styles" />
 
-        <import type="com.eazy.uibase.demo.components.basic.ZBadgeViewFragment" />
-
-        <variable
-            name="fragment"
-            type="ZBadgeViewFragment" />
-
         <variable
             name="styles"
             type="Styles" />
