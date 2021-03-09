@@ -4,6 +4,7 @@ import androidx.databinding.Bindable;
 
 import com.ustc.base.prop.PropertySet;
 import com.ustc.base.util.data.Collections;
+import com.xhb.uibase.demo.core.annotation.Ignore;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -44,6 +45,8 @@ public class ComponentStyles {
             if ((m & Modifier.STATIC) != 0)
                 continue;
             if ((m & Modifier.FINAL) != 0)
+                continue;
+            if (f.isAnnotationPresent(Ignore.class))
                 continue;
             if (!f.isAnnotationPresent(Bindable.class))
                 continue;

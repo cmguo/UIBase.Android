@@ -8,12 +8,6 @@
 
         <import type="com.xhb.uibase.demo.components.basic.XHBBadgeViewFragment.Styles" />
 
-        <import type="com.xhb.uibase.demo.components.basic.XHBBadgeViewFragment" />
-
-        <variable
-            name="fragment"
-            type="XHBBadgeViewFragment" />
-
         <variable
             name="styles"
             type="Styles" />

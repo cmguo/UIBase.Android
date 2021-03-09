@@ -13,6 +13,7 @@ import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.BR
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.annotation.Description
+import com.xhb.uibase.demo.core.annotation.Ignore
 import com.xhb.uibase.demo.core.annotation.Title
 import com.xhb.uibase.demo.databinding.XhbBadgeViewFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbBadgeViewItemBinding
@@ -54,7 +55,7 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
         var offset = SizeF(0f, 0f)
 
         @Bindable
-        @Title("可拖拽删除")
+        @Title("拖拽删除")
         @Description("通过拖拽小圆点，可以将其删除，拖拽过程中会有事件回调")
         var draggabe = false
 
@@ -73,7 +74,7 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
         @Description("改变文字，小圆点会自动适应文字宽度")
         var text = "1"
 
-        @Bindable
+        @Bindable @Ignore
         var dragState: XHBBadgeView.DragState? = null
             set(value) {
                 field = value
@@ -104,9 +105,8 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
 
     fun addBadge(inflater: LayoutInflater, target: View) {
         val binding = XhbBadgeViewItemBinding.inflate(inflater);
-        binding.fragment = this
         binding.styles = styles!!
-        (binding.root as XHBBadgeView)!!.bindTarget(target)
+        (binding.root as XHBBadgeView).bindTarget(target)
     }
 
     companion object {
