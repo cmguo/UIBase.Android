@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.xhb.uibase.binding.RecyclerViewAdapter.OnItemClickListener
 import com.xhb.uibase.binding.RecyclerViewAdapter.UnitTypeItemLayout
@@ -17,6 +19,8 @@ import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.annotation.Description
 import com.xhb.uibase.demo.core.annotation.Title
+import com.xhb.uibase.demo.core.annotation.ValueTitles
+import com.xhb.uibase.demo.core.annotation.Values
 import com.xhb.uibase.demo.databinding.XhbButtonFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbButtonItemBinding
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration
@@ -32,12 +36,6 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
     }
 
     class Styles(private val fragment_: XHBButtonFragment) : ViewStyles() {
-        enum class ButtonWidth(private val layoutWidth_: Int) {
-            WrapContent(ViewGroup.LayoutParams.WRAP_CONTENT), MatchParent(ViewGroup.LayoutParams.MATCH_PARENT);
-            fun layoutWidth(): Int {
-                return layoutWidth_
-            }
-        }
 
         var itemLayout = ItemLayout(this)
         var itemDecoration: ItemDecoration = PaddingDecoration()
@@ -60,7 +58,9 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         @Bindable
         @Title("宽度模式")
         @Description("有下列宽度模式：适应内容（WrapContent）、适应布局（MatchParent），默认：WrapContent")
-        var widthMode = ButtonWidth.WrapContent
+        @ValueTitles("WrapContent", "MatchParent")
+        @Values("-2", "-1")
+        var widthMode = ViewGroup.LayoutParams.WRAP_CONTENT
 
         @Bindable
         @Title("文字")
@@ -92,7 +92,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
             binding!!.setVariable(BR.styles, styles)
             val button = (binding as XhbButtonItemBinding)!!.button
             val lp = button.layoutParams
-            lp.width = styles.widthMode.layoutWidth()
+            lp.width = styles.widthMode
             button.layoutParams = lp
         }
     }
@@ -117,7 +117,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
     }
 
     private fun updateButtons() {
-        binding!!.buttonList.adapter!!.notifyItemRangeChanged(0, model!!.types.size)
+        binding!!.buttonList.adapter!!.notifyDataSetChanged()
     }
 
     companion object {
