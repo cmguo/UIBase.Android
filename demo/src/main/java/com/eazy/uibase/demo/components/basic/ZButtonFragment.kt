@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.eazy.uibase.binding.RecyclerViewAdapter.OnItemClickListener
 import com.eazy.uibase.binding.RecyclerViewAdapter.UnitTypeItemLayout
@@ -17,6 +19,8 @@ import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.annotation.Description
 import com.eazy.uibase.demo.core.annotation.Title
+import com.eazy.uibase.demo.core.annotation.ValueTitles
+import com.eazy.uibase.demo.core.annotation.Values
 import com.eazy.uibase.demo.databinding.ButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.ButtonItemBinding
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration
@@ -32,12 +36,6 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
     }
 
     class Styles(private val fragment_: ZButtonFragment) : ViewStyles() {
-        enum class ButtonWidth(private val layoutWidth_: Int) {
-            WrapContent(ViewGroup.LayoutParams.WRAP_CONTENT), MatchParent(ViewGroup.LayoutParams.MATCH_PARENT);
-            fun layoutWidth(): Int {
-                return layoutWidth_
-            }
-        }
 
         var itemLayout = ItemLayout(this)
         var itemDecoration: ItemDecoration = PaddingDecoration()
@@ -60,7 +58,9 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         @Bindable
         @Title("宽度模式")
         @Description("有下列宽度模式：适应内容（WrapContent）、适应布局（MatchParent），默认：WrapContent")
-        var widthMode = ButtonWidth.WrapContent
+        @ValueTitles("WrapContent", "MatchParent")
+        @Values("-2", "-1")
+        var widthMode = ViewGroup.LayoutParams.WRAP_CONTENT
 
         @Bindable
         @Title("文字")
@@ -92,7 +92,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
             binding!!.setVariable(BR.styles, styles)
             val button = (binding as ButtonItemBinding)!!.button
             val lp = button.layoutParams
-            lp.width = styles.widthMode.layoutWidth()
+            lp.width = styles.widthMode
             button.layoutParams = lp
         }
     }
@@ -117,7 +117,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
     }
 
     private fun updateButtons() {
-        binding!!.buttonList.adapter!!.notifyItemRangeChanged(0, model!!.types.size)
+        binding!!.buttonList.adapter!!.notifyDataSetChanged()
     }
 
     companion object {

@@ -9,6 +9,7 @@ import com.ustc.base.util.reflect.ClassWrapper;
 import com.eazy.uibase.demo.BR;
 import com.eazy.uibase.demo.core.annotation.Description;
 import com.eazy.uibase.demo.core.annotation.Title;
+import com.eazy.uibase.demo.core.annotation.ValueTitles;
 import com.eazy.uibase.demo.core.annotation.Values;
 
 import java.lang.reflect.Field;
@@ -32,6 +33,7 @@ public class ComponentStyle {
     private Method setter_;
     private Class<?> valueType_;
     private List<String> values_;
+    private List<String> valueTitles_;
 
     public ComponentStyle(Field field) {
         this(field, null, null);
@@ -46,10 +48,14 @@ public class ComponentStyle {
         Title title = field.getAnnotation(Title.class);
         title_ = title == null ? upperFirst(name_) : title.value();
         Description description = field.getAnnotation(Description.class);
-        desc_ = description == null ? name_ : description.value();
+        desc_ = name_ + ": " + valueType_.getName() + "\n"
+                + (description == null ? "暂无详细信息" : description.value());
         Values values = field.getAnnotation(Values.class);
         if (values != null) {
             values_ = Arrays.asList(values.value());
+            ValueTitles valueTitles = field.getAnnotation(ValueTitles.class);
+            if (valueTitles != null)
+                valueTitles_ = Arrays.asList(valueTitles.value());
         } else if (valueType_.isEnum()) {
             values_ = new ArrayList<>();
             for (Object e : valueType_.getEnumConstants()) {
@@ -75,13 +81,17 @@ public class ComponentStyle {
     }
 
     public List<String> getValues() {
-        return values_;
+        return valueTitles_ == null ? values_ : valueTitles_;
     }
 
     public String get(ViewStyles styles) {
         try {
             Object value = getter_ != null ? getter_.invoke(styles) : field_.get(styles);
-            return PropValue.toString(value);
+            String svalue = PropValue.toString(value);
+            if (valueTitles_ == null)
+                return svalue;
+            else
+                return valueTitles_.get(values_.indexOf(svalue));
         } catch (IllegalAccessException | InvocationTargetException e) {
             Log.w(TAG, "get", e);
             return "";
@@ -90,6 +100,9 @@ public class ComponentStyle {
 
     public void set(ViewStyles styles, String value) {
         try {
+            if (valueTitles_ != null) {
+                value = values_.get(valueTitles_.indexOf(value));
+            }
             Object value2 = PropValue.fromString(valueType_, value);
             if (setter_ != null)
                 setter_.invoke(styles, value2);
