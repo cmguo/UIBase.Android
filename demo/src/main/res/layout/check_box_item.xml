@@ -33,7 +33,8 @@
 
         <com.eazy.uibase.widget.ZCheckBox
             android:id="@+id/check_box"
-            style="@style/ZCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:checkedState="@{data}"
             android:enabled="@{!styles.disabled}"
             android:onClick="@{(view) -> styles.testCompoundButtonClick(view)}"

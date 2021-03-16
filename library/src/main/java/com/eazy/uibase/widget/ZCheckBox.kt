@@ -10,7 +10,7 @@ import com.eazy.uibase.resources.ShapeDrawables
 
 class ZCheckBox @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AppCompatCheckBox(context, attrs, defStyleAttr) {
+) : AppCompatCheckBox(context, attrs) {
 
     enum class CheckedState {
         NotChecked,

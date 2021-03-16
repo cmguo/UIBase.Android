@@ -30,7 +30,8 @@
 
         <com.eazy.uibase.widget.ZRadioButton
             android:id="@+id/radio_button"
-            style="@style/ZRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:checked="@{data}"
             android:enabled="@{!styles.disabled}"
             android:onClick="@{(view) -> styles.testCompoundButtonClick(view)}"

@@ -10,7 +10,7 @@ import com.eazy.uibase.resources.ShapeDrawables
 
 class ZRadioButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AppCompatRadioButton(context, attrs, defStyleAttr) {
+) : AppCompatRadioButton(context, attrs) {
 
     companion object {
         var backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
