@@ -9,7 +9,7 @@ import com.xhb.uibase.resources.ShapeDrawables
 
 class XHBSwitchButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : SwitchCompat(context, attrs, defStyleAttr) {
+) : SwitchCompat(context, attrs) {
 
     companion object {
         val trackDrawableConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,

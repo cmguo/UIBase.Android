@@ -40,7 +40,8 @@
 
         <com.xhb.uibase.widget.XHBButton
             android:id="@+id/button"
-            style="@style/XHBButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             xhb:buttonType="@{data}"
             xhb:buttonSize="@{styles.sizeMode}"
             app:loading="@{styles.loading}"

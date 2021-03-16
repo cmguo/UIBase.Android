@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.XHB.Light" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="buttonStyle">@style/XHBButton</item>
+        <item name="checkboxStyle">@style/XHBCheckBox</item>
+        <item name="radioButtonStyle">@style/XHBRadioButton</item>
+        <item name="switchStyle">@style/XHBSwitchButton</item>
+    </style>
+
+</resources>

@@ -14,7 +14,7 @@ import com.xhb.uibase.resources.ShapeDrawables
 
 public class XHBButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AppCompatButton(context, attrs, defStyleAttr)
+) : AppCompatButton(context, attrs)
 {
     enum class ButtonType {
         Primitive, Secondary, Tertiary, Danger, Text
@@ -46,19 +46,14 @@ public class XHBButton @JvmOverloads constructor(
             ButtonSize.Large to SizeStyles(R.dimen.button_height_large, R.dimen.button_radius_large,
                 R.dimen.button_padding_large, R.dimen.button_textSize_large, R.dimen.button_iconPadding_large),
         )
-
-        val backgroundDrawables: MutableMap<TypeStyles, MutableMap<SizeStyles, Drawable>> = mutableMapOf()
-
+        
         fun backgroundDrawable(context: Context, type: ButtonType, size: ButtonSize) : Drawable {
             return backgroundDrawable(context, typeStyles[type]!!, sizeStyles[size]!!)
         }
 
         fun backgroundDrawable(context: Context, types: TypeStyles, sizes: SizeStyles) : Drawable {
-            return backgroundDrawables.getOrPut(types) {
-                mutableMapOf();
-            }.getOrPut(sizes) {
-                createBackgroundDrawable(context, types, sizes)
-            }
+            // it's stateful, so can't shard
+            return createBackgroundDrawable(context, types, sizes)
         }
 
         fun createBackgroundDrawable(context: Context, types: TypeStyles, sizes: SizeStyles) : Drawable {
@@ -81,7 +76,8 @@ public class XHBButton @JvmOverloads constructor(
 
     init {
         if (attrs != null) {
-            val a = context.obtainStyledAttributes(attrs, R.styleable.XHBButton, 0, R.style.XHBButton)
+            val a = context.obtainStyledAttributes(attrs, R.styleable.XHBButton,
+                    R.attr.buttonStyle, 0)
             val type = a.getInt(R.styleable.XHBButton_buttonType, -1)
             if (type >= 0)
                 type_ = ButtonType.values()[type]
@@ -169,4 +165,7 @@ public class XHBButton @JvmOverloads constructor(
             loadingText_ = t
         }
 
+    override fun setGravity(gravity: Int) {
+        super.setGravity(gravity)
+    }
 }

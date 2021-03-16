@@ -30,7 +30,8 @@
 
         <com.xhb.uibase.widget.XHBSwitchButton
             android:id="@+id/switch_button"
-            style="@style/XHBSwitchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:checked="@{data}"
             android:enabled="@{!styles.disabled}"
             android:onClick="@{(view) -> styles.testCompoundButtonClick(view)}"/>
