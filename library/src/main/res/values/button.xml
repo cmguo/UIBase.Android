@@ -14,14 +14,15 @@
             <enum name="middle" value="1"/>
             <enum name="large" value="2"/>
         </attr>
-        <attr name="loadingDrawable2" format="reference" />
-        <attr name="loadingText2" format="string" />
+        <attr name="icon" format="reference" />
+        <attr name="loadingDrawable" format="reference" />
+        <attr name="loadingText" format="reference|string" />
     </declare-styleable>
 
     <style name="XHBButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->
         <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="loadingDrawable2">@drawable/button_loading_primary_anim</item>
-        <item name="loadingText2">"加载中..."</item>
+        <item name="loadingDrawable">@drawable/button_loading_primary_anim</item>
+        <item name="loadingText">"加载中..."</item>
     </style>
 
     <dimen name="button_height_small">24dp</dimen>

@@ -1,9 +1,11 @@
 package com.xhb.uibase.widget
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.ColorRes
@@ -46,7 +48,7 @@ public class XHBButton @JvmOverloads constructor(
             ButtonSize.Large to SizeStyles(R.dimen.button_height_large, R.dimen.button_radius_large,
                 R.dimen.button_padding_large, R.dimen.button_textSize_large, R.dimen.button_iconPadding_large),
         )
-        
+
         fun backgroundDrawable(context: Context, type: ButtonType, size: ButtonSize) : Drawable {
             return backgroundDrawable(context, typeStyles[type]!!, sizeStyles[size]!!)
         }
@@ -70,6 +72,7 @@ public class XHBButton @JvmOverloads constructor(
 
     private var type_ = ButtonType.Primitive
     private var size_ = ButtonSize.Large
+    private var icon_: Drawable? = null
     private var loadingDrawable_: Drawable? = null
     private var loadingText_: CharSequence? = null
     private var loading_ = false
@@ -84,8 +87,9 @@ public class XHBButton @JvmOverloads constructor(
             val size = a.getInt(R.styleable.XHBButton_buttonSize, -1)
             if (size >= 0)
                 size_ = ButtonSize.values()[size]
-            loadingDrawable_ = a.getDrawable(R.styleable.XHBButton_loadingDrawable2)
-            loadingText_ = a.getText(R.styleable.XHBButton_loadingText2)
+            icon_ = a.getDrawable(R.styleable.XHBButton_icon)
+            loadingDrawable_ = a.getDrawable(R.styleable.XHBButton_loadingDrawable)
+            loadingText_ = a.getText(R.styleable.XHBButton_loadingText)
             a.recycle()
         }
         val types = typeStyles[type_]!!
@@ -97,6 +101,7 @@ public class XHBButton @JvmOverloads constructor(
         setPadding(padding, 0, padding, 0)
         setTextSize(TypedValue.COMPLEX_UNIT_PX,  context.resources.getDimension(sizes.textSize))
         setCompoundDrawablePadding(context.resources.getDimensionPixelSize(sizes.iconPadding))
+        applyIcon(icon_)
     }
 
     var buttonType: ButtonType
@@ -123,6 +128,13 @@ public class XHBButton @JvmOverloads constructor(
             setPadding(padding, 0, padding, 0)
             setTextSize(TypedValue.COMPLEX_UNIT_PX,  context.resources.getDimension(sizes.textSize))
             setCompoundDrawablePadding(context.resources.getDimensionPixelSize(sizes.iconPadding))
+        }
+
+    var icon: Drawable?
+        get() = icon_
+        set(value) {
+            icon_ = value
+            applyIcon(icon_)
         }
 
     var loadingDrawable: Drawable?
@@ -165,7 +177,14 @@ public class XHBButton @JvmOverloads constructor(
             loadingText_ = t
         }
 
-    override fun setGravity(gravity: Int) {
-        super.setGravity(gravity)
+    private fun applyIcon(icon: Drawable?) {
+        if (icon is VectorDrawable) {
+            val types = typeStyles[type_]!!
+            icon.setTintList(context.resources.getColorStateList(types.textColor))
+            icon.setTintMode(PorterDuff.Mode.DST)
+        }
+        if (!loading_) {
+            setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null)
+        }
     }
 }
