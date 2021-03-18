@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             xhb:buttonType="@{data}"
             xhb:buttonSize="@{styles.sizeMode}"
+            app:icon="@drawable/ic_plus"
             app:loading="@{styles.loading}"
             android:enabled="@{!styles.disabled}"
             android:onClick="@{(view) -> styles.testButtonClick(view)}"
