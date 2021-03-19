@@ -1,6 +1,7 @@
 package com.xhb.uibase.demo.core;
 
 import android.util.Log;
+import android.util.SizeF;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -104,6 +105,11 @@ public class ComponentStyle {
                 value = values_.get(valueTitles_.indexOf(value));
             }
             Object value2 = PropValue.fromString(valueType_, value);
+            if (value2 == null) {
+                if (valueType_ == SizeF.class) {
+                    value2 = SizeF.parseSizeF(value);
+                }
+            }
             if (setter_ != null)
                 setter_.invoke(styles, value2);
             else

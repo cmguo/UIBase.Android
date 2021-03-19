@@ -3,6 +3,7 @@ package com.xhb.uibase.binding;
 import android.util.SizeF;
 import android.view.View;
 
+import androidx.annotation.ColorRes;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
@@ -10,6 +11,16 @@ import androidx.databinding.InverseBindingListener;
 import com.xhb.uibase.widget.badgeview.XHBBadgeView;
 
 public class XHBBadgeViewBindings {
+
+    @BindingAdapter(value = "borderColor")
+    public static void setBadgeBorderWidth(final XHBBadgeView view, final int color) {
+        view.setColorBackgroundBorder(color);
+    }
+
+    @BindingAdapter(value = "borderWidth")
+    public static void setBadgeBorderWidth(final XHBBadgeView view, final float width) {
+        view.setBackgroundBorderWidth(width);
+    }
 
     @BindingAdapter(value = "badgeGravity")
     public static void setBadgeGravity(final XHBBadgeView view, final int gravity) {

@@ -17,6 +17,8 @@
         android:id="@+id/badgeview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        xhb:borderColor="@{@android:color/white}"
+        xhb:borderWidth="@{styles.borderWidth}"
         xhb:badgeGravity="@{styles.gravity.gravity()}"
         xhb:gravityOffset="@{styles.offset}"
         xhb:draggable="@{styles.draggabe}"
