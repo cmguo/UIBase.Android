@@ -5,12 +5,13 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.appcompat.widget.AppCompatButton
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.ShapeDrawables
 
@@ -28,9 +29,9 @@ public class XHBButton @JvmOverloads constructor(
 
     companion object {
 
-        data class TypeStyles(@ColorRes val textColor: Int, @ColorRes val backgroundColor : Int)
-        data class SizeStyles(@DimenRes val height: Int, @DimenRes val radius : Int,
-                              @DimenRes val padding : Int, @DimenRes val textSize : Int, @DimenRes val iconPadding : Int)
+        data class TypeStyles(@ColorRes val textColor: Int, @ColorRes val backgroundColor: Int)
+        data class SizeStyles(@DimenRes val height: Int, @DimenRes val radius: Int,
+                              @DimenRes val padding: Int, @DimenRes val textSize: Int, @DimenRes val iconPadding: Int)
 
         private val typeStyles: Map<ButtonType, TypeStyles> = mapOf(
             ButtonType.Primitive to TypeStyles(R.color.bluegrey900_disabled, R.color.brand500_pressed_disabled),
@@ -41,9 +42,9 @@ public class XHBButton @JvmOverloads constructor(
         )
 
         private val sizeStyles: Map<ButtonSize, SizeStyles> = mapOf(
-            ButtonSize.Small to SizeStyles (R.dimen.button_height_small, R.dimen.button_radius_small,
+            ButtonSize.Small to SizeStyles(R.dimen.button_height_small, R.dimen.button_radius_small,
                 R.dimen.button_padding_small, R.dimen.button_textSize_small, R.dimen.button_iconPadding_small),
-            ButtonSize.Middle to SizeStyles (R.dimen.button_height_middle, R.dimen.button_radius_middle,
+            ButtonSize.Middle to SizeStyles(R.dimen.button_height_middle, R.dimen.button_radius_middle,
                 R.dimen.button_padding_middle, R.dimen.button_textSize_middle, R.dimen.button_iconPadding_middle),
             ButtonSize.Large to SizeStyles(R.dimen.button_height_large, R.dimen.button_radius_large,
                 R.dimen.button_padding_large, R.dimen.button_textSize_large, R.dimen.button_iconPadding_large),
@@ -80,14 +81,15 @@ public class XHBButton @JvmOverloads constructor(
     init {
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.XHBButton,
-                    R.attr.buttonStyle, 0)
+                R.attr.buttonStyle, 0)
             val type = a.getInt(R.styleable.XHBButton_buttonType, -1)
             if (type >= 0)
                 type_ = ButtonType.values()[type]
             val size = a.getInt(R.styleable.XHBButton_buttonSize, -1)
             if (size >= 0)
                 size_ = ButtonSize.values()[size]
-            icon_ = a.getDrawable(R.styleable.XHBButton_icon)
+            //icon_ = a.getDrawable(R.styleable.XHBButton_icon)
+            icon_ = VectorDrawableCompat.create(resources, a.getResourceId(R.styleable.XHBButton_icon, 0), null)
             loadingDrawable_ = a.getDrawable(R.styleable.XHBButton_loadingDrawable)
             loadingText_ = a.getText(R.styleable.XHBButton_loadingText)
             a.recycle()
@@ -99,7 +101,7 @@ public class XHBButton @JvmOverloads constructor(
         height = context.resources.getDimensionPixelSize(sizes.height)
         val padding = context.resources.getDimensionPixelSize(sizes.padding)
         setPadding(padding, 0, padding, 0)
-        setTextSize(TypedValue.COMPLEX_UNIT_PX,  context.resources.getDimension(sizes.textSize))
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(sizes.textSize))
         setCompoundDrawablePadding(context.resources.getDimensionPixelSize(sizes.iconPadding))
         applyIcon(icon_)
     }
@@ -113,6 +115,7 @@ public class XHBButton @JvmOverloads constructor(
             background = backgroundDrawable(context, type_, size_)
             val types = typeStyles[type_]!!
             setTextColor(context.resources.getColorStateList(types.textColor))
+            icon_?.setTintList(textColors)
         }
 
     var buttonSize: ButtonSize
@@ -126,7 +129,7 @@ public class XHBButton @JvmOverloads constructor(
             height = context.resources.getDimensionPixelSize(sizes.height)
             val padding = context.resources.getDimensionPixelSize(sizes.padding)
             setPadding(padding, 0, padding, 0)
-            setTextSize(TypedValue.COMPLEX_UNIT_PX,  context.resources.getDimension(sizes.textSize))
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(sizes.textSize))
             setCompoundDrawablePadding(context.resources.getDimensionPixelSize(sizes.iconPadding))
         }
 
@@ -178,13 +181,37 @@ public class XHBButton @JvmOverloads constructor(
         }
 
     private fun applyIcon(icon: Drawable?) {
-        if (icon is VectorDrawable) {
-            val types = typeStyles[type_]!!
-            icon.setTintList(context.resources.getColorStateList(types.textColor))
-            icon.setTintMode(PorterDuff.Mode.DST)
+        if (icon != null) {
+            icon.setTintMode(PorterDuff.Mode.SRC_IN)
+            icon.setTintList(textColors)
         }
         if (!loading_) {
             setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null)
         }
     }
+
+   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        if (widthMode != MeasureSpec.EXACTLY) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+            return
+        }
+        val width = MeasureSpec.getSize(widthMeasureSpec)
+        super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.UNSPECIFIED), heightMeasureSpec)
+        val width2 = measuredWidth
+        if (width2 < width) {
+            val d = (width - width2) / 2
+            setPadding(paddingLeft + d, paddingTop, paddingRight + d, paddingBottom)
+        }
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    }
+
+    override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
+        super.setLayoutParams(params)
+        // restore padding
+        val sizes = sizeStyles[size_]!!
+        val padding = context.resources.getDimensionPixelSize(sizes.padding)
+        setPadding(padding, 0, padding, 0)
+    }
+
 }
