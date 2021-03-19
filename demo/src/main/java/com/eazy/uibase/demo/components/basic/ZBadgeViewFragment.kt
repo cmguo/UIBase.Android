@@ -45,6 +45,11 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
         }
 
         @Bindable
+        @Title("边框宽度")
+        @Description("加上边框；如果徽标显示在复杂图形上或者带有强烈色彩的图标上，建议具有1px容器背景色（通常为白色）的描边。")
+        var borderWidth = 1.0f
+
+        @Bindable
         @Title("对齐方式")
         @Description("对齐到哪个角落，9个点；可结合位置偏移来精确定位；默认右上角")
         var gravity = ViewGravity.RigthTop

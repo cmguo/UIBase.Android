@@ -26,6 +26,7 @@ import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
 
 import com.eazy.uibase.R;
@@ -691,6 +692,16 @@ public class ZBadgeView extends View {
         }
         invalidate();
         return this;
+    }
+
+    public void setColorBackgroundBorder(int color) {
+        this.mColorBackgroundBorder = color;
+        invalidate();
+    }
+
+    public void setBackgroundBorderWidth(float width) {
+        this.mBackgroundBorderWidth = dp2px(getContext(), width);
+        invalidate();
     }
 
     public ZBadgeView stroke(int color, float width, boolean isDpValue) {
