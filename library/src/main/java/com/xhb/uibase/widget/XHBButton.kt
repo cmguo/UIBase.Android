@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.appcompat.widget.AppCompatButton
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.ShapeDrawables
 
@@ -71,61 +71,29 @@ public class XHBButton @JvmOverloads constructor(
         }
     }
 
-    private var type_ = ButtonType.Primitive
-    private var size_ = ButtonSize.Large
     private var icon_: Drawable? = null
     private var loadingDrawable_: Drawable? = null
     private var loadingText_: CharSequence? = null
     private var loading_ = false
 
-    init {
-        if (attrs != null) {
-            val a = context.obtainStyledAttributes(attrs, R.styleable.XHBButton,
-                R.attr.buttonStyle, 0)
-            val type = a.getInt(R.styleable.XHBButton_buttonType, -1)
-            if (type >= 0)
-                type_ = ButtonType.values()[type]
-            val size = a.getInt(R.styleable.XHBButton_buttonSize, -1)
-            if (size >= 0)
-                size_ = ButtonSize.values()[size]
-            //icon_ = a.getDrawable(R.styleable.XHBButton_icon)
-            icon_ = VectorDrawableCompat.create(resources, a.getResourceId(R.styleable.XHBButton_icon, 0), null)
-            loadingDrawable_ = a.getDrawable(R.styleable.XHBButton_loadingDrawable)
-            loadingText_ = a.getText(R.styleable.XHBButton_loadingText)
-            a.recycle()
-        }
-        val types = typeStyles[type_]!!
-        val sizes = sizeStyles[size_]!!
-        background = backgroundDrawable(context, types, sizes)
-        setTextColor(context.resources.getColorStateList(types.textColor))
-        height = context.resources.getDimensionPixelSize(sizes.height)
-        val padding = context.resources.getDimensionPixelSize(sizes.padding)
-        setPadding(padding, 0, padding, 0)
-        setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(sizes.textSize))
-        setCompoundDrawablePadding(context.resources.getDimensionPixelSize(sizes.iconPadding))
-        applyIcon(icon_)
-    }
-
-    var buttonType: ButtonType
-        get() = type_
+    var buttonType: ButtonType = ButtonType.Primitive
         set(value) {
-            if (type_ == value)
+            if (field == value)
                 return
-            type_ = value
-            background = backgroundDrawable(context, type_, size_)
-            val types = typeStyles[type_]!!
+            field = value
+            background = backgroundDrawable(context, value, buttonSize)
+            val types = typeStyles[value]!!
             setTextColor(context.resources.getColorStateList(types.textColor))
             icon_?.setTintList(textColors)
         }
 
-    var buttonSize: ButtonSize
-        get() = size_
+    var buttonSize: ButtonSize = ButtonSize.Large
         set(value) {
-            if (size_ == value)
+            if (field == value)
                 return
-            size_ = value
-            background = backgroundDrawable(context, type_, size_)
-            val sizes = sizeStyles[size_]!!
+            field = value
+            background = backgroundDrawable(context, buttonType, value)
+            val sizes = sizeStyles[value]!!
             height = context.resources.getDimensionPixelSize(sizes.height)
             val padding = context.resources.getDimensionPixelSize(sizes.padding)
             setPadding(padding, 0, padding, 0)
@@ -133,11 +101,24 @@ public class XHBButton @JvmOverloads constructor(
             setCompoundDrawablePadding(context.resources.getDimensionPixelSize(sizes.iconPadding))
         }
 
-    var icon: Drawable?
-        get() = icon_
+    var icon: Int? = null
         set(value) {
-            icon_ = value
-            applyIcon(icon_)
+            if (field == value)
+                return
+            field = value
+            icon_ = if (value != null && value > 0)
+                DrawableCompat.wrap(context.getDrawable(value)!!)
+            else
+                null
+            applyIcon()
+        }
+
+    var iconAtRight = false
+        set(value) {
+            if (field == value)
+                return
+            field = value
+            applyIcon()
         }
 
     var loadingDrawable: Drawable?
@@ -168,7 +149,9 @@ public class XHBButton @JvmOverloads constructor(
             val o = compoundDrawables[0]
             // How to center icon and text in a android button with width set to “fill parent”
             // https://stackoverflow.com/questions/3634191/how-to-center-icon-and-text-in-a-android-button-with-width-set-to-fill-parent
-            setCompoundDrawablesWithIntrinsicBounds(d, null, null, null)
+            val left = if (iconAtRight) null else d
+            val right = if (iconAtRight) d else null
+            setCompoundDrawablesWithIntrinsicBounds(left, null, right, null)
             if (d is Animatable)
                 d.start()
             if (o is Animatable)
@@ -180,13 +163,44 @@ public class XHBButton @JvmOverloads constructor(
             loadingText_ = t
         }
 
-    private fun applyIcon(icon: Drawable?) {
+    init {
+        if (attrs != null) {
+            val a = context.obtainStyledAttributes(attrs, R.styleable.XHBButton,
+                    R.attr.buttonStyle, 0)
+            val type = a.getInt(R.styleable.XHBButton_buttonType, -1)
+            if (type >= 0)
+                this.buttonType = ButtonType.values()[type]
+            val size = a.getInt(R.styleable.XHBButton_buttonSize, -1)
+            if (size >= 0)
+                this.buttonSize = ButtonSize.values()[size]
+            //icon_ = a.getDrawable(R.styleable.XHBButton_icon)
+            this.icon = a.getResourceId(R.styleable.XHBButton_icon, 0)
+            loadingDrawable_ = a.getDrawable(R.styleable.XHBButton_loadingDrawable)
+            loadingText_ = a.getText(R.styleable.XHBButton_loadingText)
+            a.recycle()
+        }
+        val types = typeStyles[buttonType]!!
+        val sizes = sizeStyles[buttonSize]!!
+        background = backgroundDrawable(context, types, sizes)
+        setTextColor(context.resources.getColorStateList(types.textColor))
+        height = context.resources.getDimensionPixelSize(sizes.height)
+        val padding = context.resources.getDimensionPixelSize(sizes.padding)
+        setPadding(padding, 0, padding, 0)
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(sizes.textSize))
+        setCompoundDrawablePadding(context.resources.getDimensionPixelSize(sizes.iconPadding))
+        applyIcon()
+    }
+
+    private fun applyIcon() {
+        val icon = icon_
         if (icon != null) {
             icon.setTintMode(PorterDuff.Mode.SRC_IN)
             icon.setTintList(textColors)
         }
         if (!loading_) {
-            setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null)
+            val left = if (iconAtRight) null else icon
+            val right = if (iconAtRight) icon else null
+            setCompoundDrawablesWithIntrinsicBounds(left, null, right, null)
         }
     }
 
@@ -209,7 +223,7 @@ public class XHBButton @JvmOverloads constructor(
     override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
         super.setLayoutParams(params)
         // restore padding
-        val sizes = sizeStyles[size_]!!
+        val sizes = sizeStyles[buttonSize]!!
         val padding = context.resources.getDimensionPixelSize(sizes.padding)
         setPadding(padding, 0, padding, 0)
     }
