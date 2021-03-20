@@ -26,7 +26,7 @@ class ZSwitchButtonComponent : Component {
     }
 
     override fun description(): Int {
-        return R.string.component_z_radio_buttons_desc
+        return R.string.component_z_switch_buttons_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {

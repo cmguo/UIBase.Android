@@ -7,7 +7,7 @@ import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
-@Author("Fish")
+@Author("cmguo")
 class ZCheckBoxComponent : Component {
     override fun id(): Int {
         return R.id.component_z_check_boxes

@@ -14,7 +14,6 @@ import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.SkinManager;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
-import com.eazy.uibase.demo.core.annotation.Title;
 import com.eazy.uibase.demo.databinding.Styles2FragmentBinding;
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
 
@@ -53,10 +52,10 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         public ItemLayout itemLayout;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
 
-        @Bindable @Title("文字")
+        @Bindable
         public String text = "文字";
 
-        @Bindable @Title("禁用")
+        @Bindable
         public boolean disabled = false;
 
         private StylesFragment fragment_;

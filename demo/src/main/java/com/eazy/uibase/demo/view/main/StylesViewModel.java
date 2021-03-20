@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModel;
 import com.eazy.uibase.demo.BR;
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
-import com.eazy.uibase.demo.core.ComponentStyle;
-import com.eazy.uibase.demo.core.ComponentStyles;
+import com.eazy.uibase.demo.core.style.ComponentStyle;
+import com.eazy.uibase.demo.core.style.ComponentStyles;
 import com.eazy.uibase.demo.core.ViewStyles;
 
 import java.util.ArrayList;

@@ -1,72 +1,38 @@
 package com.eazy.uibase.demo.core;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.content.res.TypedArray;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.core.content.res.ResourcesCompat;
-
 import com.airbnb.paris.Paris;
-import com.airbnb.paris.styles.ResourceStyle;
-import com.airbnb.paris.styles.Style;
-import com.airbnb.paris.typed_array_wrappers.TypedArrayWrapper;
 import com.eazy.uibase.demo.R;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import skin.support.content.res.SkinCompatResources;
-
-public class Styles {
+public class Styles extends Resources {
 
     private static final String TAG = "Styles";
 
     public static Map<String, Integer> xhbButtonStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("^Z_Button_\\w+_\\w+"));
+        return getResources(context, R.style.class, Pattern.compile("^Z_Button_\\w+_\\w+"));
     }
 
     public static Map<String, Integer> buttonStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("Button"));
+        return getResources(context, R.style.class, Pattern.compile("Button"));
     }
 
     public static Map<String, Integer> checkboxStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("CheckBox"));
+        return getResources(context, R.style.class, Pattern.compile("CheckBox"));
     }
 
     public static Map<String, Integer> radioStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("Radio"));
+        return getResources(context, R.style.class, Pattern.compile("Radio"));
     }
 
     public static Map<String, Integer> switchStyles(Context context) {
-        return getStyles(context, R.style.class, Pattern.compile("Switch"));
-    }
-
-    public static Map<String, Integer> getStyles(Context context, Class<?> clazz, Pattern pattern) {
-        Map<String, Integer> styles = new TreeMap<>();
-        try {
-            for (Field f : clazz.getDeclaredFields()) {
-                if (pattern == null || pattern.matcher(f.getName()).find()) {
-                    Log.d(TAG, f.getName());
-                    int id = (Integer) f.get(clazz);
-                    styles.put(f.getName(), id);
-                }
-            }
-        } catch (IllegalAccessException e) {
-            Log.w(TAG, "", e);
-        }
-        return styles;
+        return getResources(context, R.style.class, Pattern.compile("Switch"));
     }
 
     @androidx.databinding.BindingAdapter("style")

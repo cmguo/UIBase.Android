@@ -1,17 +1,16 @@
-package com.eazy.uibase.demo.core;
+package com.eazy.uibase.demo.core.style;
 
 import android.util.Log;
 import android.util.SizeF;
 
-import androidx.databinding.DataBindingUtil;
-
 import com.ustc.base.prop.PropValue;
 import com.ustc.base.util.reflect.ClassWrapper;
 import com.eazy.uibase.demo.BR;
-import com.eazy.uibase.demo.core.annotation.Description;
-import com.eazy.uibase.demo.core.annotation.Title;
-import com.eazy.uibase.demo.core.annotation.ValueTitles;
-import com.eazy.uibase.demo.core.annotation.Values;
+import com.eazy.uibase.demo.core.ViewStyles;
+import com.eazy.uibase.demo.core.style.annotation.Description;
+import com.eazy.uibase.demo.core.style.annotation.Title;
+import com.eazy.uibase.demo.core.style.annotation.ValueTitles;
+import com.eazy.uibase.demo.core.style.annotation.Values;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -88,7 +87,7 @@ public class ComponentStyle {
     public String get(ViewStyles styles) {
         try {
             Object value = getter_ != null ? getter_.invoke(styles) : field_.get(styles);
-            String svalue = PropValue.toString(value);
+            String svalue = valueToString(value);
             if (valueTitles_ == null)
                 return svalue;
             else
@@ -104,12 +103,7 @@ public class ComponentStyle {
             if (valueTitles_ != null) {
                 value = values_.get(valueTitles_.indexOf(value));
             }
-            Object value2 = PropValue.fromString(valueType_, value);
-            if (value2 == null) {
-                if (valueType_ == SizeF.class) {
-                    value2 = SizeF.parseSizeF(value);
-                }
-            }
+            Object value2 = valueFromString(value);
             if (setter_ != null)
                 setter_.invoke(styles, value2);
             else
@@ -118,6 +112,29 @@ public class ComponentStyle {
         } catch (IllegalAccessException | InvocationTargetException e) {
             Log.w(TAG, "set", e);
         }
+    }
+
+    protected void setValues(List<String> values) {
+        setValues(values, null);
+    }
+
+    protected void setValues(List<String> values, List<String> titles) {
+        values_ = values;
+        valueTitles_ = titles;
+    }
+
+    protected String valueToString(Object value) {
+        return PropValue.toString(value);
+    }
+
+    protected Object valueFromString(String value) {
+        Object value2 = PropValue.fromString(valueType_, value);
+        if (value2 == null) {
+            if (valueType_ == SizeF.class) {
+                value2 = SizeF.parseSizeF(value);
+            }
+        }
+        return value2;
     }
 
     private static Map<String, Integer> fieldBindings_ = new TreeMap<>();

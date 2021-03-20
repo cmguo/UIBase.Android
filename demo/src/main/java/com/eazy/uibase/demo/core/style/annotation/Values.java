@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.core.annotation;
+package com.eazy.uibase.demo.core.style.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Description {
-    String value();
+public @interface Values {
+    String[] value();
 }

@@ -44,8 +44,9 @@
             android:layout_height="wrap_content"
             xhb:buttonType="@{data}"
             xhb:buttonSize="@{styles.sizeMode}"
-            app:icon="@drawable/ic_erase"
-            app:loading="@{styles.loading}"
+            xhb:icon="@{styles.icon}"
+            xhb:iconAtRight="@{styles.iconAtRight}"
+            xhb:loading="@{styles.loading}"
             android:enabled="@{!styles.disabled}"
             android:onClick="@{(view) -> styles.testButtonClick(view)}"
             android:text="@{styles.text}"/>

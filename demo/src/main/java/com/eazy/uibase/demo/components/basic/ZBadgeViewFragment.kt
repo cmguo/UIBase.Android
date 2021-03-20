@@ -12,9 +12,7 @@ import com.eazy.uibase.demo.core.SkinManager
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.core.annotation.Description
-import com.eazy.uibase.demo.core.annotation.Ignore
-import com.eazy.uibase.demo.core.annotation.Title
+import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.BadgeViewFragmentBinding
 import com.eazy.uibase.demo.databinding.BadgeViewItemBinding
 import com.eazy.uibase.widget.badgeview.ZBadgeView

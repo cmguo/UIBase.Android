@@ -7,6 +7,8 @@ import androidx.databinding.Bindable;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
+import com.eazy.uibase.demo.core.style.ColorStyle;
+import com.eazy.uibase.demo.core.style.annotation.Style;
 import com.eazy.uibase.demo.databinding.TestFragmentBinding;
 
 public class TestFragment extends ComponentFragment<TestFragmentBinding, TestFragment.Model, TestFragment.Styles> {
@@ -23,9 +25,10 @@ public class TestFragment extends ComponentFragment<TestFragmentBinding, TestFra
 
     public static class Styles extends ViewStyles {
         @Bindable
+        @Style(ColorStyle.class)
         public int color = Color.RED;
         @Bindable
-        public boolean boolStype = false;
+        public boolean boolStyle = false;
         @Bindable
         public int intStyle = 0;
         @Bindable
