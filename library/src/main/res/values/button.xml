@@ -15,6 +15,7 @@
             <enum name="large" value="2"/>
         </attr>
         <attr name="icon" format="reference" />
+        <attr name="iconAtRight" format="boolean" />
         <attr name="loadingDrawable" format="reference" />
         <attr name="loadingText" format="reference|string" />
     </declare-styleable>
