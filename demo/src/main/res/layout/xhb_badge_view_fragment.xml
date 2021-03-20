@@ -44,7 +44,7 @@
 
             <ImageView
                 android:id="@+id/imageview"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/side_nav_bar" />
@@ -53,7 +53,6 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Button" />
 
         </LinearLayout>
