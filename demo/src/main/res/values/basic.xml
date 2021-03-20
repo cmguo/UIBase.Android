@@ -20,4 +20,8 @@
     <string name="component_z_badge_views">徽章（小圆点）</string>
     <string name="component_z_badge_views_desc">徽章（小圆点）是出现在按钮、图标旁的数字或状态标记。</string>
 
+    <id name="component_z_avatars"></id>
+    <string name="component_z_avatars">头像</string>
+    <string name="component_z_avatars_desc">展示用户的头像。</string>
+
 </resources>

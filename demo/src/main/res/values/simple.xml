@@ -4,11 +4,11 @@
 
     <id name="component_z_text_areas"></id>
     <string name="component_z_text_areas">文本域</string>
-    <string name="component_z_text_areas_desc">文本域</string>
+    <string name="component_z_text_areas_desc">用于长文本输入，提供换行功能，支持多段落格式，通常搭配输入长度限制。</string>
 
     <id name="component_z_text_inputs"></id>
     <string name="component_z_text_inputs">输入框</string>
-    <string name="component_z_text_inputs_desc">输入框</string>
+    <string name="component_z_text_inputs_desc">用于单行文字输入</string>
 
     <id name="component_z_tool_tips"></id>
     <string name="component_z_tool_tips">气泡提示</string>
@@ -21,5 +21,56 @@
     <id name="component_z_notice_bars"></id>
     <string name="component_z_notice_bars">横幅提示</string>
     <string name="component_z_notice_bars_desc">横幅提示：1.用于提示用户，告知相关信息(常用于告知用户网络异常) 2.引导用户执行相关操作。</string>
+
+    <id name="component_z_steppers"></id>
+    <string name="component_z_steppers">步进器</string>
+    <string name="component_z_steppers_desc">用于增加或减少数量的控件。</string>
+
+    <id name="component_z_search_boxes"></id>
+    <string name="component_z_search_boxes">搜索框</string>
+    <string name="component_z_search_boxes_desc">当应用内包含大量的信息的时候，用户通过搜索快速地定位到特定的内容。</string>
+
+    <id name="component_z_drop_downs"></id>
+    <string name="component_z_drop_downs">下拉菜单</string>
+    <string name="component_z_drop_downs_desc">用于提供快速到达其他功能入口的导航，默认收起，点击出现。</string>
+
+
+
+    <string name="group_navigation">页面跳转控件</string>
+
+    <id name="component_z_app_bars"></id>
+    <string name="component_z_app_bars">导航栏</string>
+    <string name="component_z_app_bars_desc">导航栏出现在屏幕顶部的状态栏下方，并可以通过⼀系列分层屏幕进行导航。当显示新屏幕时，通常标有前⼀屏幕的后退按钮出现在栏的左侧。有时，导航栏的右侧包含⼀个控件，如编辑或完成按钮，⽤于管理活动视图中的内容。</string>
+
+    <id name="component_z_tab_bars"></id>
+    <string name="component_z_tab_bars">底部栏</string>
+    <string name="component_z_tab_bars_desc">位于页面底部，用于一级目录的导航，提示用户当前位置及用户切换统一层级之间的不同模块，一般最多不超过五个标签。</string>
+
+    <id name="component_z_tool_bars"></id>
+    <string name="component_z_tool_bars">工具栏</string>
+    <string name="component_z_tool_bars_desc">⼯具栏出现在 App 屏幕底部，包含了执行当前视图或包含内容相关操作的按钮。 通常在⽤户不太需要时，可设置为隐藏。</string>
+
+    <id name="component_z_tabs"></id>
+    <string name="component_z_tabs">选项卡</string>
+    <string name="component_z_tabs_desc">一般作为二级导航，将页面内容按照不同视图进行分类，用户点击可切换到不同视图。</string>
+
+    <id name="component_z_panels"></id>
+    <string name="component_z_panels">浮层面板</string>
+    <string name="component_z_panels_desc">浮层面板作为临时的视图容器，可以在不改变或跳出当前页面的前提下，提供额外的信息展示或操作交互。</string>
+
+
+    <string name="group_data_view">数据展示控件</string>
+
+    <id name="component_z_lists"></id>
+    <string name="component_z_lists">列表</string>
+    <string name="component_z_lists_desc">列表将数据呈现为可以分为平铺和分组形式。使用列表以清单的形式干净，高效地显示大量或少量信息。一般来说，列表是基于文本内容的理想选择，也可以在列表中加入图标、按钮、箭头等其他元素扩展场景。</string>
+
+    <id name="component_z_grids"></id>
+    <string name="component_z_grids">宫格</string>
+    <string name="component_z_grids_desc">宫格主要作为信息聚合的目的，通过图标集合清晰展现各个入口。在这种界面中，用户的行为主要在寻找信息入口。信息呈现的内容比较少，效率比较高。用户也比较容易记住各入口位置，但是宫格不宜过多，宫格越多，用户的选择压力越多。</string>
+
+    <id name="component_z_carousels"></id>
+    <string name="component_z_carousels">走马灯</string>
+    <string name="component_z_carousels_desc">通过自动切换和手动横滑切换展示相关内容。目前主要用于Banner切换。</string>
 
 </resources>

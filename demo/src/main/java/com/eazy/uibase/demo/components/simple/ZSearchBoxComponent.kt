@@ -3,13 +3,11 @@ package com.eazy.uibase.demo.components.simple
 import com.google.auto.service.AutoService
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.Component
-import com.eazy.uibase.demo.core.ComponentFragment
-import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
-class ZNoticeBarComponent : Component {
+class ZSearchBoxComponent : Component {
     override fun id(): Int {
-        return R.id.component_z_notice_bars
+        return R.id.component_z_search_boxes
     }
 
     override fun group(): Int {
@@ -21,14 +19,11 @@ class ZNoticeBarComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_z_notice_bars
+        return R.string.component_z_search_boxes
     }
 
     override fun description(): Int {
-        return R.string.component_z_notice_bars_desc
+        return R.string.component_z_search_boxes_desc
     }
 
-    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return ZToolTipFragment::class.java
-    }
 }
