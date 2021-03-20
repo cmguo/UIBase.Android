@@ -12,9 +12,7 @@ import com.xhb.uibase.demo.core.SkinManager
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.BR
 import com.xhb.uibase.demo.core.ViewStyles
-import com.xhb.uibase.demo.core.annotation.Description
-import com.xhb.uibase.demo.core.annotation.Ignore
-import com.xhb.uibase.demo.core.annotation.Title
+import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbBadgeViewFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbBadgeViewItemBinding
 import com.xhb.uibase.widget.badgeview.XHBBadgeView

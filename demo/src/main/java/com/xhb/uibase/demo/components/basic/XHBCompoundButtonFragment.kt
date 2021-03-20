@@ -13,8 +13,7 @@ import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.SkinManager
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
-import com.xhb.uibase.demo.core.annotation.Description
-import com.xhb.uibase.demo.core.annotation.Title
+import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbCompoundButtonFragmentBinding
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration
 import com.xhb.uibase.widget.XHBCheckBox
@@ -78,7 +77,6 @@ class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBin
         Log.d(TAG, "itemClicked$`object`")
     }
 
-    fun onClick(view: View?) {}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SkinManager.addObserver(this)

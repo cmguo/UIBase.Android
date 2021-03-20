@@ -26,7 +26,7 @@ class XHBSwitchButtonComponent : Component {
     }
 
     override fun description(): Int {
-        return R.string.component_xhb_radio_buttons_desc
+        return R.string.component_xhb_switch_buttons_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {

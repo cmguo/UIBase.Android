@@ -7,7 +7,7 @@ import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
-@Author("Fish")
+@Author("cmguo")
 class XHBCheckBoxComponent : Component {
     override fun id(): Int {
         return R.id.component_xhb_check_boxes

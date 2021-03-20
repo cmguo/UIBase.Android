@@ -4,23 +4,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.xhb.uibase.binding.RecyclerViewAdapter.OnItemClickListener
 import com.xhb.uibase.binding.RecyclerViewAdapter.UnitTypeItemLayout
 import com.xhb.uibase.demo.R
-import com.xhb.uibase.demo.core.ComponentFragment
-import com.xhb.uibase.demo.core.SkinManager
-import com.xhb.uibase.demo.core.ViewModel
-import com.xhb.uibase.demo.core.ViewStyles
-import com.xhb.uibase.demo.core.annotation.Description
-import com.xhb.uibase.demo.core.annotation.Title
-import com.xhb.uibase.demo.core.annotation.ValueTitles
-import com.xhb.uibase.demo.core.annotation.Values
+import com.xhb.uibase.demo.core.*
+import com.xhb.uibase.demo.core.style.IconStyle
+import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbButtonFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbButtonItemBinding
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration
@@ -66,6 +59,17 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         @Title("文字")
         @Description("改变文字，按钮会自动适应文字宽度")
         var text = "按钮"
+
+        @Bindable
+        @Title("图标")
+        @Description("按钮图标，资源ID类型，图标颜色随文字颜色变化")
+        @Style(IconStyle::class)
+        var icon = 0
+
+        @Bindable
+        @Title("图标在右")
+        @Description("设为true，则按钮图标在文字的右边，默认在左边")
+        var iconAtRight = false
 
         fun testButtonClick(view: View) {
             if (view is XHBButton) {

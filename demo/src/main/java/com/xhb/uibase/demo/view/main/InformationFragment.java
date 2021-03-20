@@ -14,16 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.ComponentFragment;
-import com.xhb.uibase.demo.core.ComponentStyle;
-import com.xhb.uibase.demo.core.ComponentStyles;
-import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.databinding.InformationFragmentBinding;
-import com.xhb.uibase.demo.databinding.StylesFragmentBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class InformationFragment extends Fragment {
 

@@ -1,4 +1,6 @@
-package com.xhb.uibase.demo.core.annotation;
+package com.xhb.uibase.demo.core.style.annotation;
+
+import com.xhb.uibase.demo.core.style.ComponentStyle;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface ValueTitles {
-    String[] value();
+public @interface Style {
+    Class<? extends ComponentStyle> value();
 }
