@@ -4,16 +4,15 @@ import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
 import com.xhb.uibase.demo.core.ComponentFragment
-import com.xhb.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
-class XHBNoticeBarComponent : Component {
+class XHBAppBarComponent : Component {
     override fun id(): Int {
-        return R.id.component_xhb_notice_bars
+        return R.id.component_xhb_app_bars
     }
 
     override fun group(): Int {
-        return R.string.group_simple
+        return R.string.group_navigation
     }
 
     override fun icon(): Int {
@@ -21,14 +20,11 @@ class XHBNoticeBarComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_xhb_notice_bars
+        return R.string.component_xhb_app_bars
     }
 
     override fun description(): Int {
-        return R.string.component_xhb_notice_bars_desc
+        return R.string.component_xhb_app_bars_desc
     }
 
-    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return XHBToolTipFragment::class.java
-    }
 }

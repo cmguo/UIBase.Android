@@ -4,6 +4,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
 
+import com.xhb.uibase.demo.view.main.ContributionRequestFragment;
+
 public interface Component {
     @IdRes
     int id();
@@ -16,7 +18,9 @@ public interface Component {
     @StringRes
     int description();
 
-    Class<? extends ComponentFragment> fragmentClass();
+    default Class<? extends ComponentFragment> fragmentClass() {
+        return ContributionRequestFragment.class;
+    }
 
     default ComponentFragment createFragment() throws InstantiationException, IllegalAccessException {
         ComponentFragment fragment = fragmentClass().newInstance();
