@@ -15,9 +15,7 @@
     <string name="component_z_switch_buttons">开关</string>
     <string name="component_z_switch_buttons_desc">开关表示两种相互对立的状态间的切换，例如开/关、是/否状态。</string>
 
-    <string name="group_basic2">基础交互控件2</string>
-
-    <string name="component_z_badge_views">徽章（小圆点）</string>
+    <string name="component_z_badge_views">徽章</string>
     <string name="component_z_badge_views_desc">徽章（小圆点）是出现在按钮、图标旁的数字或状态标记。</string>
 
     <id name="component_z_avatars"></id>
