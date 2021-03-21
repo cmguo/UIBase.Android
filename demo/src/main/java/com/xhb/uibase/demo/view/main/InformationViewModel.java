@@ -11,6 +11,6 @@ public class InformationViewModel extends ViewModel {
     public MutableLiveData<ComponentInfo> componentInfo = new MutableLiveData<>();
 
     public void bindComponent(ComponentFragment fragment) {
-        componentInfo.postValue(new ComponentInfo(fragment.getContext(), fragment.getComponent()));
+        componentInfo.postValue(fragment == null ? null : new ComponentInfo(fragment.getContext(), fragment.getComponent()));
     }
 }
