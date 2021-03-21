@@ -101,11 +101,6 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         }
     }
 
-    // this should be in view model, but fragment may simplify things
-    val buttonClicked = OnItemClickListener<Any> { position, `object` ->
-        Log.d(TAG, "buttonClicked$`object`")
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SkinManager.addObserver(this)

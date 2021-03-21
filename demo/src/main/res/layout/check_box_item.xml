@@ -9,11 +9,13 @@
 
         <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.Styles" />
 
+        <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment.StateItem" />
+
         <import type="com.eazy.uibase.demo.components.basic.ZCompoundButtonFragment" />
 
         <variable
             name="data"
-            type="CheckedState" />
+            type="StateItem" />
 
         <variable
             name="styles"
@@ -29,15 +31,14 @@
         <TextView
             android:id="@+id/title"
             style="@style/Demo.ResourceItemTitle"
-            android:text="@{data.toString()}" />
+            android:text="@{data.state.toString()}" />
 
         <com.eazy.uibase.widget.ZCheckBox
             android:id="@+id/check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:checkedState="@{data}"
+            app:checkedState="@={(CheckedState) data.state}"
             android:enabled="@{!styles.disabled}"
-            android:onClick="@{(view) -> styles.testCompoundButtonClick(view)}"
             android:text="@{styles.text}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

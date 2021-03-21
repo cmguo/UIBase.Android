@@ -4,12 +4,13 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
+import android.widget.CompoundButton
 import androidx.appcompat.widget.AppCompatCheckBox
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.ShapeDrawables
 
 class ZCheckBox @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatCheckBox(context, attrs) {
 
     enum class CheckedState {
@@ -20,14 +21,20 @@ class ZCheckBox @JvmOverloads constructor(
 
     companion object {
         val backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.check_box_radius, R.color.bluegrey00_checked_disabled,
-            R.dimen.check_box_border_size, R.color.bluegrey500_checked_disabled,
-            R.dimen.check_box_icon_size, R.dimen.check_box_icon_size
+                R.dimen.check_box_radius, R.color.bluegrey00_checked_disabled,
+                R.dimen.check_box_border_size, R.color.bluegrey500_checked_disabled,
+                R.dimen.check_box_icon_size, R.dimen.check_box_icon_size
         )
+    }
+
+    @FunctionalInterface
+    interface OnCheckedStateChangeListener {
+        fun onCheckedStateChanged(buttonView: ZCheckBox?, state: CheckedState)
     }
 
     private var half_checked_: Boolean = false
     private var text_padding_ : Int? = null
+    private var onCheckedStateChangeListener: OnCheckedStateChangeListener? = null
 
     init {
         val background = ShapeDrawables.getDrawable(context, backgroundDrawable)
@@ -45,6 +52,7 @@ class ZCheckBox @JvmOverloads constructor(
             isChecked = value == CheckedState.FullChecked
             half_checked_ = value == CheckedState.HalfChecked
             refreshDrawableState()
+            onCheckedStateChangeListener?.onCheckedStateChanged(this, checkedState)
         }
 
     override fun onFinishInflate() {
@@ -52,6 +60,10 @@ class ZCheckBox @JvmOverloads constructor(
         text_padding_ = paddingLeft
         if (text.isNullOrEmpty())
             setPadding(0, paddingTop, paddingRight, paddingBottom)
+    }
+
+    fun setOnCheckedStateChangeListener(listener: OnCheckedStateChangeListener?) {
+        onCheckedStateChangeListener = listener
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
@@ -63,6 +75,7 @@ class ZCheckBox @JvmOverloads constructor(
     override fun setChecked(checked: Boolean) {
         half_checked_ = false
         super.setChecked(checked)
+        onCheckedStateChangeListener?.onCheckedStateChanged(this, checkedState)
     }
 
     override fun onCreateDrawableState(extraSpace: Int): IntArray {
