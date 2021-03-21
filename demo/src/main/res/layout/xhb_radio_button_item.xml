@@ -8,9 +8,11 @@
 
         <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.Styles" />
 
+        <import type="com.xhb.uibase.demo.components.basic.XHBCompoundButtonFragment.StateItem" />
+
         <variable
             name="data"
-            type="Boolean" />
+            type="StateItem" />
 
         <variable
             name="styles"
@@ -26,15 +28,15 @@
         <TextView
             android:id="@+id/title"
             style="@style/Demo.ResourceItemTitle"
-            android:text="@{data.toString()}" />
+            android:text="@{data.state.toString()}" />
 
         <com.xhb.uibase.widget.XHBRadioButton
             android:id="@+id/radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="@{data}"
+            android:onCheckedChanged="@{styles.radioCheckedChange}"
+            android:checked="@={(Boolean) data.state}"
             android:enabled="@{!styles.disabled}"
-            android:onClick="@{(view) -> styles.testCompoundButtonClick(view)}"
             android:text="@{styles.text}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

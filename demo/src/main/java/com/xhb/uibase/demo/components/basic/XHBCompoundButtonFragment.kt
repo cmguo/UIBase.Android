@@ -3,7 +3,12 @@ package com.xhb.uibase.demo.components.basic
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.databinding.Bindable
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
@@ -15,19 +20,32 @@ import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbCompoundButtonFragmentBinding
+import com.xhb.uibase.demo.databinding.XhbRadioButtonItemBinding
 import com.xhb.uibase.demo.view.recycler.PaddingDecoration
 import com.xhb.uibase.widget.XHBCheckBox
+import com.xhb.uibase.widget.XHBRadioButton
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
 class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBinding?, XHBCompoundButtonFragment.Model?, XHBCompoundButtonFragment.Styles?>(), SkinObserver {
 
+    class StateItem(state: Any) : ViewModel() {
+        @Bindable
+        var state = state
+            set(value) {
+                if (field == value)
+                    return
+                field = value
+                notifyPropertyChanged(BR.state)
+            }
+    }
+
     class Model(fragment: XHBCompoundButtonFragment?) : ViewModel() {
-        var states: List<Any?>
+        var states: List<StateItem>
         init {
             states = when (fragment!!.component.id()) {
-                R.id.component_xhb_check_boxes -> XHBCheckBox.CheckedState.values().asList()
-                else -> arrayListOf(false, true)
+                R.id.component_xhb_check_boxes -> XHBCheckBox.CheckedState.values().asList().map {StateItem(it) }
+                else -> arrayListOf(false, true).map { StateItem(it) }
             }
         }
     }
@@ -46,8 +64,16 @@ class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBin
         @Description("改变文字，按钮会自动适应文字宽度")
         var text = "文字"
 
-        fun testCompoundButtonClick(view: View) {
-
+        // simulate radio group
+        val radioCheckedChange = CompoundButton.OnCheckedChangeListener { view: View, isChecked: Boolean ->
+            if (isChecked) {
+                val binding: XhbRadioButtonItemBinding = DataBindingUtil.findBinding(view.parent as ViewGroup)!!
+                for (item in fragment_!!.model!!.states) {
+                    if (item != binding.data) {
+                        item.state = false
+                    }
+                }
+            }
         }
 
         private val fragment_ = fragment
@@ -65,8 +91,8 @@ class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBin
             }
     }
 
-    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemLayout<Any>(styles.itemLayoutId) {
-        override fun bindView(binding: ViewDataBinding?, item: Any, position: Int) {
+    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemLayout<StateItem>(styles.itemLayoutId) {
+        override fun bindView(binding: ViewDataBinding?, item: StateItem, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)
         }
