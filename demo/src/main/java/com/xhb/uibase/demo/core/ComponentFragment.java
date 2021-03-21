@@ -13,9 +13,12 @@ import androidx.fragment.app.Fragment;
 import com.ustc.base.util.reflect.ClassWrapper;
 import com.ustc.base.util.reflect.ObjectWrapper;
 
+import skin.support.observe.SkinObservable;
+import skin.support.observe.SkinObserver;
+
 public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         Model extends ViewModel, Styles extends ViewStyles
-        > extends Fragment {
+        > extends Fragment implements SkinObserver {
 
     Component component_;
     DataBinding binding_;
@@ -36,6 +39,7 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         Integer componentId = getArguments().getInt("componentId");
         if (componentId != null)
             component_ = Components.getComponent(componentId);
+        SkinManager.addObserver(this);
     }
 
     @Nullable
@@ -57,6 +61,7 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
 
     @Override
     public void onDestroy() {
+        SkinManager.removeObserver(this);
         super.onDestroy();
     }
 
@@ -111,5 +116,9 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         } else {
             return ClassWrapper.wrap(clzS).newInstance();
         }
+    }
+
+    @Override
+    public void updateSkin(SkinObservable observable, Object o) {
     }
 }

@@ -3,11 +3,12 @@ package com.xhb.uibase.demo.components.simple
 import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
+import com.xhb.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
-class XHBStepperComponent : Component {
+class XHBNumberViewComponent : Component {
     override fun id(): Int {
-        return R.id.component_xhb_steppers
+        return R.id.component_xhb_number_views
     }
 
     override fun group(): Int {
@@ -19,11 +20,14 @@ class XHBStepperComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_xhb_steppers
+        return R.string.component_xhb_number_views
     }
 
     override fun description(): Int {
-        return R.string.component_xhb_steppers_desc
+        return R.string.component_xhb_number_views_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return XHBNumberViewFragment::class.java
+    }
 }

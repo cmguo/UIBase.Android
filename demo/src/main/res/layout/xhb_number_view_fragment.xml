@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBNumberViewFragment.Styles" />
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBNumberViewFragment" />
+
+        <variable
+            name="fragment"
+            type="XHBNumberViewFragment" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="150dp"
+            android:padding="10dp"
+            android:background="@color/blue_600"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.xhb.uibase.widget.XHBNumberView
+                android:id="@+id/amountView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/brand_500"
+                app:minimum="@{styles.minimun}"
+                app:maximum="@{styles.maximun}"
+                app:amount="@={styles.amount}"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
