@@ -11,7 +11,7 @@ class XHBAvatarComponent : Component {
     }
 
     override fun group(): Int {
-        return R.string.group_basic2
+        return R.string.group_basic
     }
 
     override fun icon(): Int {
