@@ -52,7 +52,6 @@ class ZCheckBox @JvmOverloads constructor(
             isChecked = value == CheckedState.FullChecked
             half_checked_ = value == CheckedState.HalfChecked
             refreshDrawableState()
-            onCheckedStateChangeListener?.onCheckedStateChanged(this, checkedState)
         }
 
     override fun onFinishInflate() {

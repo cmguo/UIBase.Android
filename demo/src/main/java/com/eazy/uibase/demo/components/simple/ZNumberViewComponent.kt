@@ -3,11 +3,12 @@ package com.eazy.uibase.demo.components.simple
 import com.google.auto.service.AutoService
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.Component
+import com.eazy.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
-class ZStepperComponent : Component {
+class ZNumberViewComponent : Component {
     override fun id(): Int {
-        return R.id.component_z_steppers
+        return R.id.component_z_number_views
     }
 
     override fun group(): Int {
@@ -19,11 +20,14 @@ class ZStepperComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_z_steppers
+        return R.string.component_z_number_views
     }
 
     override fun description(): Int {
-        return R.string.component_z_steppers_desc
+        return R.string.component_z_number_views_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return ZNumberViewFragment::class.java
+    }
 }

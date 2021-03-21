@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ZNumberView">
+        <!-- 主题属性 -->
+        <attr name="numberViewStyle" format="reference" />
+        <!-- 左右2边+-按钮的宽度 -->
+        <attr name="buttonSize2" format="dimension" />
+        <attr name="buttonBackgroundColor" format="color" />
+        <attr name="buttonForegroundColor" format="color" />
+        <attr name="android:textSize"/>
+        <attr name="android:textColor"/>
+        <attr name="android:background"/>
+    </declare-styleable>
+
+    <dimen name="number_view_width">98dp</dimen>
+    <dimen name="number_view_height">32dp</dimen>
+    <dimen name="number_view_padding">1dp</dimen>
+    <dimen name="number_view_radius">16dp</dimen>
+    <color name="number_view_background_color">@color/bluegrey_100</color>
+    <dimen name="number_view_button_size">30dp</dimen>
+    <dimen name="number_view_button_radius">15dp</dimen>
+    <dimen name="number_view_button_padding">3dp</dimen>
+    <color name="number_view_button_background_color">@color/bluegrey_00</color>
+    <color name="number_view_button_foreground_color">@color/bluegrey900_disabled_bluegrey300</color>
+    <dimen name="number_view_text_size">16sp</dimen>
+    <color name="number_view_text_color">@color/bluegrey_800</color>
+
+    <style name="ZNumberView">
+        <item name="android:layout_width">@dimen/number_view_width</item>
+        <item name="android:layout_height">@dimen/number_view_height</item>
+        <item name="buttonSize2">@dimen/number_view_button_size</item>
+        <item name="buttonBackgroundColor">@color/number_view_button_background_color</item>
+        <item name="buttonForegroundColor">@color/number_view_button_foreground_color</item>
+        <item name="android:textSize">@dimen/number_view_text_size</item>
+        <item name="android:textColor">@dimen/number_view_text_size</item>
+    </style>
+
+</resources>
