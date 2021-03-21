@@ -73,6 +73,10 @@ public class StylesViewModel extends ViewModel {
     public MutableLiveData<List<StyleValue>> styleList = new MutableLiveData<>();
 
     public void bindComponent(ComponentFragment fragment) {
+        if (fragment == null) {
+            styleList.postValue(new ArrayList<>());
+            return;
+        }
         ViewStyles styles = fragment.getStyles();
         ComponentStyles css = ComponentStyles.get(styles.getClass());
         List<StyleValue> list = new ArrayList<>();

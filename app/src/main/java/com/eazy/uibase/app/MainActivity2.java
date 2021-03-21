@@ -205,6 +205,9 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         if (componentFragment instanceof ComponentFragment) {
             ((InformationFragment) informationFragment).bindComponent((ComponentFragment) componentFragment);
             ((StylesFragment) stylesFragment).bindComponent((ComponentFragment) componentFragment);
+        } else {
+            ((InformationFragment) informationFragment).bindComponent(null);
+            ((StylesFragment) stylesFragment).bindComponent(null);
         }
     }
 
