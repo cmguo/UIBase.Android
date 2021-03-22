@@ -3,6 +3,7 @@ package com.eazy.uibase.demo.components.basic
 import com.google.auto.service.AutoService
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.Component
+import com.eazy.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
 class ZAvatarComponent : Component {
@@ -26,4 +27,7 @@ class ZAvatarComponent : Component {
         return R.string.component_z_avatars_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
+        return ZAvatarViewFragment::class.java
+    }
 }
