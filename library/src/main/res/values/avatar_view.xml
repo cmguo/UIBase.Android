@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="XHBAvatarView">
+        <attr name="clipType">
+            <enum name="none" value="0"/>
+            <enum name="circle" value="1"/>
+            <enum name="ellipse" value="2"/>
+        </attr>
+        <attr name="roundMode">
+            <enum name="view" value="0"/>
+            <enum name="drawable" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <style name="XHBAvatarView">
+    </style>
+
+</resources>

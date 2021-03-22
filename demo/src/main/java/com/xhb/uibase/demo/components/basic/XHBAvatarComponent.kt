@@ -3,6 +3,7 @@ package com.xhb.uibase.demo.components.basic
 import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
+import com.xhb.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
 class XHBAvatarComponent : Component {
@@ -26,4 +27,7 @@ class XHBAvatarComponent : Component {
         return R.string.component_xhb_avatars_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
+        return XHBAvatarViewFragment::class.java
+    }
 }

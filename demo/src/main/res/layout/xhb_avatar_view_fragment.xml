@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.components.basic.XHBAvatarViewFragment.Styles" />
+
+        <import type="com.xhb.uibase.demo.components.basic.XHBAvatarViewFragment" />
+
+        <variable
+            name="fragment"
+            type="XHBAvatarViewFragment" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/component_xhb_badge_views"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:background="@color/bluegrey_100"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.xhb.uibase.widget.XHBAvatarView
+                android:id="@+id/avatarView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/component"
+                app:clipType="@{styles.clipType}"
+                app:roundMode="@{styles.roundMode}"
+                app:borderWidth="@{styles.borderWidth}"
+                app:borderColor="@{styles.borderColor}"
+                app:fillColor="@{styles.fillColor}"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
