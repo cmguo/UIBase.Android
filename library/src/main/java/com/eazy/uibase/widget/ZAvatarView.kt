@@ -6,6 +6,7 @@ import android.graphics.*
 import android.os.Build
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
+import kotlin.math.min
 
 class ZAvatarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -66,88 +67,78 @@ class ZAvatarView @JvmOverloads constructor(
         }
 
 
-    private var borderPaint: Paint
-    private var fillPaint: Paint
-    private var imagePaint: Paint
-    private var portPaint: Paint
-    private val bounds = Rect()
-    private var radius = 0f
-    private var cx = 0f
-    private var cy = 0f
+    private var maskPaint: Paint = Paint()
+    private var xferPaint: Paint = Paint()
+    private var fillPaint: Paint = Paint()
+    private var borderPaint: Paint = Paint()
+    private val bounds = RectF()
 
     init {
-        portPaint = Paint()
-        portPaint.isAntiAlias = true
-        borderPaint = Paint()
+        maskPaint.isAntiAlias = true
+        xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
+        fillPaint.color = fillColor
+        fillPaint.style = Paint.Style.FILL
         borderPaint.isAntiAlias = true
         borderPaint.color = borderColor
         borderPaint.strokeWidth = borderWidth
         borderPaint.style = Paint.Style.STROKE
-        fillPaint = Paint()
-        fillPaint.isAntiAlias = true
-        fillPaint.color = fillColor
-        fillPaint.style = Paint.Style.FILL
-        imagePaint = Paint()
-        imagePaint.isAntiAlias = true
-        imagePaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
     }
 
     override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
         if (clipType == ClipType.None) {
-            super.onDraw(canvas)
             return
         }
         if (drawable == null && roundMode == RoundMode.Drawable) {
-            super.onDraw(canvas)
             return
         }
-        computeRoundBounds()
         drawCircle(canvas)
-        drawImage(canvas)
     }
 
-    @SuppressLint("WrongCall")
-    private fun drawImage(canvas: Canvas) {
-        val src = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444)
-        super.onDraw(Canvas(src))
-        val port = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444)
-        val portCanvas = Canvas(port)
-        val saveCount = portCanvas.saveCount
-        portCanvas.save()
-        adjustCanvas(portCanvas)
-        portCanvas.drawCircle(cx, cy, radius, portPaint!!)
-        portCanvas.restoreToCount(saveCount)
-        portCanvas.drawBitmap(src, 0f, 0f, imagePaint)
-        src.recycle()
-        canvas.drawBitmap(port, 0f, 0f, null)
-        port.recycle()
-    }
+    private var src = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
 
     private fun drawCircle(canvas: Canvas) {
-        val saveCount = canvas.saveCount
-        canvas.save()
-        adjustCanvas(canvas)
-        canvas.drawCircle(cx, cy, radius, fillPaint!!)
-        if (borderWidth > 0) {
-            canvas.drawCircle(cx, cy, radius - borderWidth / 2f, borderPaint!!)
+        drawable.colorFilter = ColorMatrixColorFilter()
+        if (width != src.width || height != src.height) {
+            src.recycle()
+            src = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            src.eraseColor(0)
+            val srcCanvas = Canvas(src)
+            computeRoundBounds()
+            srcCanvas.drawOval(bounds, maskPaint)
+            val l = src.getPixel(0, 0)
+            val r = src.getPixel(0, 1)
         }
-        canvas.restoreToCount(saveCount)
+        canvas.drawBitmap(src, 0f, 0f, xferPaint)
+        if (borderWidth > 0) {
+            canvas.drawOval(bounds, borderPaint)
+        }
     }
 
     private fun computeRoundBounds() {
         if (roundMode == RoundMode.View) {
-            bounds.left = paddingLeft
-            bounds.top = paddingTop
-            bounds.right = width - paddingRight
-            bounds.bottom = height - paddingBottom
+            bounds.left = 0f
+            bounds.top = 0f
+            bounds.right = width.toFloat()
+            bounds.bottom = height.toFloat()
         } else if (roundMode == RoundMode.Drawable) {
-            drawable.copyBounds(bounds)
-        } else {
-            throw RuntimeException("unknown round mode:$roundMode")
+            bounds.left = 0f
+            bounds.top = 0f
+            bounds.right = drawable.intrinsicWidth.toFloat()
+            bounds.bottom = drawable.intrinsicHeight.toFloat()
+            imageMatrix.mapRect(bounds)
         }
-        radius = Math.min(bounds.width(), bounds.height()) / 2f
-        cx = bounds.left + bounds.width() / 2f
-        cy = bounds.top + bounds.height() / 2f
+        if (clipType == ClipType.Circle) {
+            if (bounds.width() > bounds.height()) {
+                val c = bounds.centerX()
+                bounds.left = c - bounds.height() / 2
+                bounds.right = c + bounds.height() / 2
+            } else {
+                val c = bounds.centerY()
+                bounds.top = c - bounds.width() / 2
+                bounds.bottom = c + bounds.width() / 2
+            }
+        }
     }
 
     private fun adjustCanvas(canvas: Canvas) {
