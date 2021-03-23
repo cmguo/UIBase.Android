@@ -1,3 +1,4 @@
+include ':libshape'
 include ':demo'
 include ':library'
 include ':app'

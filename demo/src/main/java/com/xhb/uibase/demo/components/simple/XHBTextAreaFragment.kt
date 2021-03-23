@@ -1,7 +1,12 @@
 package com.xhb.uibase.demo.components.simple
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.databinding.Bindable
+import com.ui.shapeutils.DevShapeUtils
+import com.ui.shapeutils.shape.DevShape
+import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.SkinManager
 import com.xhb.uibase.demo.core.ViewModel
@@ -10,6 +15,8 @@ import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbCompoundButtonFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbTextAreaFragmentBinding
+import com.xhb.uibase.widget.edittext.LabelEditText
+import kotlinx.android.synthetic.main.xhb_text_area_fragment.*
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
@@ -56,12 +63,37 @@ class XHBTextAreaFragment : ComponentFragment<XhbTextAreaFragmentBinding?, XHBTe
         SkinManager.addObserver(this)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+
     override fun onDestroy() {
         SkinManager.removeObserver(this)
         super.onDestroy()
     }
 
     override fun updateSkin(observable: SkinObservable, o: Any) {
+    }
+
+    private fun initView() {
+        labelEditText0.background =
+            DevShapeUtils.shape(DevShape.RECTANGLE).solid(R.color.white_card).radius(50f).build()
+        float_edit_text_error.background =
+            DevShapeUtils.shape(DevShape.RECTANGLE).solid(R.color.white_card).radius(50f).build()
+
+        sms_edit_text.setOnSmsCodeClickedListener {
+//            Toast.makeText(this,"已发送手机验证码至手机",Toast.LENGTH_SHORT)
+        }
+        error_style_2.editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus && error_style_2.editText.text.isNotEmpty()) {
+                error_style_2.setErrorMessage("出错了")
+            } else {
+                error_style_2.setErrorMessage("")
+            }
+        }
+        float_edit_text_error.setErrorMessage("出错了")
+        "".replace(" ","a")
     }
 
     companion object {

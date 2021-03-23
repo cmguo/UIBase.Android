@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Common Widget</string>
+
+    <string name="count_down_text_view_default_pre_text">发送校验码</string>
+    <string name="count_down_text_view_default_after_text">重新发送</string>
+    <string name="count_down_text_view_time">%1$d%2$s</string>
+    <string name="common_list_item_default_title">主标题</string>
+    <string name="common_list_item_default_right_content">右侧文字</string>
+</resources>
