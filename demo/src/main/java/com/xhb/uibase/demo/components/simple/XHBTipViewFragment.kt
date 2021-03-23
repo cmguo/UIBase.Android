@@ -3,8 +3,6 @@ package com.xhb.uibase.demo.components.simple
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
@@ -16,13 +14,13 @@ import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
-import com.xhb.uibase.demo.databinding.XhbToolTipViewBinding
-import com.xhb.uibase.demo.databinding.XhbToastTipViewBinding
 import com.xhb.uibase.demo.databinding.XhbTipViewFragmentBinding
+import com.xhb.uibase.demo.databinding.XhbToastTipViewBinding
+import com.xhb.uibase.demo.databinding.XhbToolTipViewBinding
 import com.xhb.uibase.widget.XHBButton
 import com.xhb.uibase.widget.XHBTipView
 
-class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipViewFragment.Model?, XHBTipViewFragment.Styles?>() {
+class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipViewFragment.Model?, XHBTipViewFragment.Styles?>(), XHBTipView.TipViewListener {
 
     class Model(fragment: XHBTipViewFragment) : ViewModel() {
 
@@ -34,8 +32,11 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
         var tipButton: XHBButton = {
             val button = XHBButton(fragment.context!!)
             button.buttonType = XHBButton.ButtonType.Text
+            button.buttonSize = XHBButton.ButtonSize.Small
+            button.height = 60
             button.icon = R.drawable.ic_plus
             button.iconAtRight = true
+            button.text = "去查看"
             button
         } ()
     }
@@ -63,10 +64,6 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
 
         init {
             itemLayout = ItemLayout(this)
-//            if (fragment!!.component.id() == R.id.component_xhb_snack_bars)
-//                location = XHBTipView.Location.AutoToast
-//            else
-//                location = XHBTipView.Location.ManualLayout
         }
 
         open fun buttonClick(view: View) {}
@@ -89,7 +86,7 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
             val binding = XhbToolTipViewBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
             binding.executePendingBindings()
-            binding.tipView.popAt(view)
+            binding.tipView.popAt(view, fragment)
         }
     }
 
@@ -113,17 +110,37 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
         @Style(IconStyle::class)
         var rightIcon = 0
 
+        @Bindable
+        @Title("附加按钮")
+        @Description("右侧附加的按钮，类型为 View，按钮点击的具体行为由使用者定义")
+        @Values("<null>", "text")
+        var button = "<null>"
+
+        init {
+            maxWidth = -100
+            fragment.model!!.tipButton.setOnClickListener { view ->
+                (view.parent as XHBTipView).dismiss()
+                showTip(fragment.requireView(), true)
+            }
+        }
+
         override fun buttonClick(view: View) {
+            showTip(view, fragment.component.id() == R.id.component_xhb_toasts)
+        }
+
+        private fun showTip(view: View, toast: Boolean) {
             val binding = XhbToastTipViewBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
             binding.executePendingBindings()
-            if (fragment.component.id() == R.id.component_xhb_toasts) {
+            binding.tipView.button = if ("text" == button) fragment.model!!.tipButton else null
+            if (toast) {
                 binding.tipView.location = XHBTipView.Location.AutoToast
-                binding.tipView.popAt(view)
+                binding.tipView.popAt(view, fragment)
             } else {
                 binding.tipView.location = XHBTipView.Location.ManualLayout
                 val index = (view.parent.parent as ViewGroup).indexOfChild(view.parent as View)
-                binding.tipView.popAt(if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding!!.root)
+                val target = if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding!!.root
+                binding.tipView.popAt(target, fragment)
             }
         }
     }
@@ -133,6 +150,12 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)
         }
+    }
+
+    override fun tipViewIconTapped(view: XHBTipView, index: Int) {
+        val tip = XHBTipView(requireContext(), null)
+        tip.message = "点击了图标${index}"
+        tip.popAt(view)
     }
 
     override fun createStyle(): Styles {
