@@ -15,9 +15,9 @@ class ShapeDrawables {
 
     companion object {
 
-        private val drawables: MutableMap<Config, Drawable> = mutableMapOf()
+        private val drawables: MutableMap<Config, GradientDrawable> = mutableMapOf()
 
-        fun getDrawable(context: Context, config: Config) : Drawable {
+        fun getDrawable(context: Context, config: Config) : GradientDrawable {
 //            return drawables.getOrPut(config) {
 //                return createDrawable(context, config)
 //            }
@@ -30,7 +30,7 @@ class ShapeDrawables {
             return drawable
         }
 
-        fun createDrawable(context: Context, config: Config) : Drawable {
+        fun createDrawable(context: Context, config: Config) : GradientDrawable {
             val drawable = GradientDrawable()
             drawable.shape = config.shape
             if (config.width != 0 && config.height != 0) {

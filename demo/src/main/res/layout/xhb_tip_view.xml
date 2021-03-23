@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBTipViewFragment.ToastStyles" />
+
+        <variable
+            name="styles"
+            type="ToastStyles" />
+
+    </data>
+
+    <com.xhb.uibase.widget.XHBTipView
+        android:id="@+id/tipView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        app:maxWidth="@{styles.maxWidth}"
+        app:message="@{styles.message}"
+        app:location="@{styles.location}"
+        app:leftIcon="@{styles.leftIcon}"
+        app:rightIcon="@{styles.rightIcon}"
+        app:icon="@{styles.icon}"/>
+
+</layout>

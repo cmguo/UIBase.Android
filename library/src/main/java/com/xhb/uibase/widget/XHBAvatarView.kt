@@ -7,10 +7,11 @@ import android.os.Build
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import kotlin.math.min
+import com.xhb.uibase.R
 
 class XHBAvatarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs) {
+) : AppCompatImageView(context, attrs, R.attr.avatarViewStyle) {
 
     enum class ClipType {
         None,

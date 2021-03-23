@@ -4,7 +4,6 @@ import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
 import com.xhb.uibase.demo.core.ComponentFragment
-import com.xhb.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
 class XHBToolTipComponent : Component {
@@ -29,6 +28,6 @@ class XHBToolTipComponent : Component {
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return XHBToolTipFragment::class.java
+        return XHBTipViewFragment::class.java
     }
 }

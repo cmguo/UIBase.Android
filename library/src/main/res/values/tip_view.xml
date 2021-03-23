@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="tipViewStyle" format="reference"/>
+
+    <declare-styleable name="XHBTipView">
+        <attr name="location">
+            <enum name="topLeft" value="0"/>
+            <enum name="topCenter" value="1"/>
+            <enum name="topRight" value="2"/>
+            <enum name="bottomLeft" value="3"/>
+            <enum name="bottomCenter" value="4"/>
+            <enum name="bottomRight" value="5"/>
+            <enum name="autoToast" value="6"/>
+            <enum name="manualLayout" value="7"/>
+        </attr>
+        <attr name="maxWidth" format="dimension"/>
+        <attr name="arrowSize" format="dimension"/>
+        <attr name="arrowOffset" format="dimension"/>
+        <attr name="leftIcon" format="reference"/>
+        <attr name="rightIcon" format="reference"/>
+        <attr name="icon"/>
+        <attr name="frameColor" format="color"/>
+        <attr name="frameRadius" format="dimension"/>
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+    </declare-styleable>
+
+    <dimen name="tip_view_arrow_size">6dp</dimen>
+    <dimen name="tip_view_arrow_offset">16dp</dimen>
+    <dimen name="tip_view_frame_radius">6dp</dimen>
+    <dimen name="tip_view_padding_x">16dp</dimen>
+    <dimen name="tip_view_padding_y">12dp</dimen>
+    <dimen name="tip_view_icon_size">16dp</dimen>
+    <dimen name="tip_view_icon_padding">8dp</dimen>
+    <color name="tip_view_frame_color">#1D2126</color>
+    <color name="tip_view_text_color">@color/bluegrey_00</color>
+    <dimen name="tip_view_text_size">16sp</dimen>
+    <dimen name="tip_view_small_text_size">14sp</dimen>
+
+    <style name="XHBTipView">
+        <item name="frameColor">@color/tip_view_frame_color</item>
+        <item name="android:textColor">@color/tip_view_text_color</item>
+        <item name="android:textSize">@dimen/tip_view_text_size</item>
+        <item name="frameRadius">@dimen/tip_view_frame_radius</item>
+        <item name="arrowSize">@dimen/tip_view_arrow_size</item>
+        <item name="arrowOffset">@dimen/tip_view_arrow_offset</item>
+    </style>
+
+</resources>
