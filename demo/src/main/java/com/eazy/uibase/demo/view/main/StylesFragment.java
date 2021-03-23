@@ -116,7 +116,7 @@ public class StylesFragment extends Fragment {
     private ComponentFragment fragment;
 
     public StylesAdapter adapter = new StylesAdapter();
-    public StyleItemLayout itemLayout = new StyleItemLayout();
+    public StyleItemLayout itemBinding = new StyleItemLayout();
     public RecyclerView.ItemDecoration itemDecoration = new DeviderDecoration(getContext());
     public RecyclerViewAdapter.OnItemClickListener itemClicked = new RecyclerViewAdapter.OnItemClickListener() {
         @Override

@@ -50,7 +50,7 @@ public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, Col
     }
 
     public static class Styles extends ViewStyles {
-        public int itemLayout = R.layout.color_item;
+        public int itemBinding = R.layout.color_item;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
     }
 

@@ -45,7 +45,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
 
         val layoutManager = GridLayoutManager(fragment.context, 4)
 
-        val itemLayout: ItemLayout
+        val itemBinding: ItemLayout
 
         @Bindable
         @Title("最大宽度")
@@ -63,7 +63,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         var message = "你点击了按钮"
 
         init {
-            itemLayout = ItemLayout(this)
+            itemBinding = ItemLayout(this)
         }
 
         open fun buttonClick(view: View) {}
@@ -145,7 +145,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         }
     }
 
-    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemLayout<Any>(R.layout.tip_view_button_item) {
+    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemBinding<Any>(R.layout.tip_view_button_item) {
         override fun bindView(binding: ViewDataBinding?, item: Any?, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

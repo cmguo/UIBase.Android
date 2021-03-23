@@ -1,15 +1,13 @@
 package com.eazy.uibase.demo.components.basic
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.eazy.uibase.binding.RecyclerViewAdapter.OnItemClickListener
-import com.eazy.uibase.binding.RecyclerViewAdapter.UnitTypeItemLayout
+import com.eazy.uibase.binding.RecyclerViewAdapter.UnitTypeItemBinding
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.*
 import com.eazy.uibase.demo.core.style.IconStyle
@@ -30,7 +28,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
 
     class Styles(private val fragment_: ZButtonFragment) : ViewStyles() {
 
-        var itemLayout = ItemLayout(this)
+        var itemBinding = ItemLayout(this)
         var itemDecoration: ItemDecoration = PaddingDecoration()
 
         @Bindable
@@ -90,7 +88,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         }
     }
 
-    class ItemLayout(private val styles: Styles) : UnitTypeItemLayout<ZButton.ButtonType>(R.layout.button_item) {
+    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<ZButton.ButtonType>(R.layout.button_item) {
         override fun bindView(binding: ViewDataBinding?, item: ZButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

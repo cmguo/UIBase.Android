@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             app:data="@{model.states}"
             app:itemDecoration="@{styles.itemDecoration}"
-            app:itemLayout="@{styles.itemLayout}">
+            app:itemBinding="@{styles.itemBinding}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

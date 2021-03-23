@@ -5,8 +5,6 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.databinding.Bindable
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -23,7 +21,6 @@ import com.eazy.uibase.demo.databinding.CompoundButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.RadioButtonItemBinding
 import com.eazy.uibase.demo.view.recycler.PaddingDecoration
 import com.eazy.uibase.widget.ZCheckBox
-import com.eazy.uibase.widget.ZRadioButton
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
@@ -51,7 +48,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
     }
 
     class Styles(fragment: ZCompoundButtonFragment?) : ViewStyles() {
-        var itemLayout: ItemLayout
+        var itemBinding: ItemLayout
         var itemDecoration: RecyclerView.ItemDecoration = PaddingDecoration()
 
         @Bindable
@@ -79,10 +76,10 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         private val fragment_ = fragment
 
         init {
-            itemLayout = ItemLayout(this)
+            itemBinding = ItemLayout(this)
         }
 
-        val itemLayoutId: Int
+        val itemBindingId: Int
             get() = when (fragment_!!.component.id()) {
                 R.id.component_z_check_boxes -> R.layout.check_box_item
                 R.id.component_z_radio_buttons -> R.layout.radio_button_item
@@ -91,7 +88,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
             }
     }
 
-    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemLayout<StateItem>(styles.itemLayoutId) {
+    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemBinding<StateItem>(styles.itemBindingId) {
         override fun bindView(binding: ViewDataBinding?, item: StateItem, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

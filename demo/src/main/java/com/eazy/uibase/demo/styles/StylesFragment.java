@@ -49,7 +49,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
     }
 
     public static class Styles extends ViewStyles {
-        public ItemLayout itemLayout;
+        public ItemLayout itemBinding;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
 
         @Bindable
@@ -60,7 +60,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
         private StylesFragment fragment_;
 
-        public int itemLayoutId() {
+        public int itemBindingId() {
             if (fragment_.getComponent().id() == R.id.component_buttons)
                 return R.layout.style_button_item;
             else if (fragment_.getComponent().id() == R.id.component_check_boxes)
@@ -75,15 +75,15 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
         public Styles(StylesFragment fragment) {
             this.fragment_ = fragment;
-            itemLayout = new ItemLayout(this);
+            itemBinding = new ItemLayout(this);
         }
     }
 
-    public static class ItemLayout extends RecyclerViewAdapter.UnitTypeItemLayout<Map.Entry<String, Integer>> {
+    public static class ItemLayout extends RecyclerViewAdapter.UnitTypeItemBinding<Map.Entry<String, Integer>> {
         private final Styles styles;
 
         public ItemLayout(Styles styles) {
-            super(styles.itemLayoutId());
+            super(styles.itemBindingId());
             this.styles = styles;
         }
 
