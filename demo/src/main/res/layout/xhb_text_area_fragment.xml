@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -21,28 +20,177 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:background="#f0f0f0"
         android:orientation="vertical">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textview"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:text="Text"
-                android:textColor="@color/brand_500"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <com.xhb.uibase.widget.edittext.LabelEditText
+                    android:id="@+id/labelEditText0"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    app:hint="请输入内容" />
 
+                <com.xhb.uibase.widget.edittext.LabelEditText
+                    android:id="@+id/largeLabel1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    app:hint="请输入内容"
+                    app:labelText="单行输入" />
+
+                <com.xhb.uibase.widget.edittext.LabelEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    app:hint="请输入内容"
+                    app:labelDrawable="@drawable/ic_eighth"
+                    app:labelText="单行输入" />
+
+                <com.xhb.uibase.widget.edittext.FloatInputLayout
+                    android:id="@+id/text1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:hintText="请输入内容">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:ellipsize="end"
+                        android:maxEms="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/static_bluegrey_700"
+                        android:textSize="16sp" />
+
+                </com.xhb.uibase.widget.edittext.FloatInputLayout>
+
+                <com.xhb.uibase.widget.edittext.FloatInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:padding="10dp"
+                    app:counterEnabled="true"
+                    app:hintEnabled="false"
+                    app:hintText="请输入内容"
+                    app:maxCounter="100">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="start|top"
+                        android:maxLength="100"
+                        android:textColor="@color/static_bluegrey_700"
+                        android:textSize="16sp" />
+
+                </com.xhb.uibase.widget.edittext.FloatInputLayout>
+
+                <com.xhb.uibase.widget.edittext.LabelEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:hint="请输入密码"
+                    app:labelText="标签文本"
+                    app:passwordToggleButtonEnable="true" />
+
+                <com.xhb.uibase.widget.edittext.LabelEditText
+                    android:id="@+id/sms_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:hint="请输入验证码"
+                    app:labelText="标签文本"
+                    app:smsCodeEnable="true" />
+
+                <com.xhb.uibase.widget.edittext.LabelEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:hint="请输入验证码"
+                    app:imageCodeEnable="true"
+                    app:labelText="标签文本" />
+
+                <com.xhb.uibase.widget.edittext.LabelEditText
+                    android:id="@+id/error_style_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:hint="请输入内容"
+                    app:labelText="标签文本" />
+
+                <com.xhb.uibase.widget.edittext.LabelEditText
+                    android:id="@+id/error_style_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff"
+                    app:bottomLineEnable="true"
+                    app:hint="请输入内容"
+                    app:labelPaddingHorizon="10dp"
+                    app:labelText="标签文本" />
+
+                <com.xhb.uibase.widget.edittext.FloatInputLayout
+                    android:id="@+id/float_edit_text_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    app:hintText="请输入内容">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:ellipsize="end"
+                        android:maxEms="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/static_bluegrey_700"
+                        android:textSize="16sp" />
+
+                </com.xhb.uibase.widget.edittext.FloatInputLayout>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </layout>
