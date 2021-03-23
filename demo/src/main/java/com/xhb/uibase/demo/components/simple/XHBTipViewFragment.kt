@@ -43,7 +43,7 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
         @Bindable
         @Title("最大宽度")
         @Description("整体最大宽度，设置负数，则自动加上窗口宽度")
-        var maxWidth = 400
+        var maxWidth = 600
 
         @Bindable
         @Title("单行文字")
@@ -67,6 +67,7 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
     }
 
     class ToolStyles(fragment: XHBTipViewFragment) : Styles(fragment) {
+
         @Bindable
         @Title("建议位置")
         @Description("建议弹出位置，如果左右或者上下超过窗口区域，则会分别自动调整为其他适当位置")
@@ -87,13 +88,6 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
     }
 
     class ToastStyles(fragment: XHBTipViewFragment) : Styles(fragment) {
-
-        @Bindable
-        @Title("建议位置")
-        @Description("建议弹出位置，如果左右或者上下超过窗口区域，则会分别自动调整为其他适当位置")
-        var location = XHBTipView.Location.TopRight
-
-        //val location: XHBTipView.Location
 
         @Bindable
         @Title("左侧图标")
@@ -117,6 +111,7 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
             val binding = XhbToastTipViewBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
             binding.executePendingBindings()
+            binding.tipView.location = XHBTipView.Location.AutoToast
             binding.tipView.popAt(view)
         }
     }
