@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:adapter="@{fragment.adapter}"
-            app:itemLayout="@{fragment.itemLayout}"
+            app:itemBinding="@{fragment.itemBinding}"
             app:itemDecoration="@{fragment.itemDecoration}"
             app:data="@{model.styleList}"
             app:itemClicked="@{fragment.itemClicked}">
