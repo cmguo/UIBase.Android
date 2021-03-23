@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:data="@{model.colors}"
-            app:itemLayout="@{styles.itemLayout}"
+            app:itemBinding="@{styles.itemBinding}"
             app:itemDecoration="@{styles.itemDecoration}"
             app:itemClicked="@{fragment.colorClicked}">
 

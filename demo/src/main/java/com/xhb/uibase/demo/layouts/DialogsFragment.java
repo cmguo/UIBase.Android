@@ -39,7 +39,7 @@ public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, D
     }
 
     public static class Styles extends ViewStyles {
-        public int itemLayout = R.layout.dialog_item;
+        public int itemBinding = R.layout.dialog_item;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
     }
 
