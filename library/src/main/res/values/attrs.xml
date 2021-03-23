@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CountDownTextView">
+        <attr name="preText" format="string" />
+        <attr name="afterText" format="string" />
+        <attr name="totalTime" format="integer" />
+        <attr name="unit" format="string" />
+        <attr name="enableColor" format="color" />
+        <attr name="disableColor" format="color" />
+    </declare-styleable>
+
+    <!--附带标签的EditText输入框-->
+    <declare-styleable name="LabelEditText">
+
+        <attr name="labelPaddingHorizon" format="dimension" />
+        <attr name="labelPaddingVertical" format="dimension" />
+        <attr name="passwordEnable" format="boolean" />
+        <attr name="passwordToggleButtonEnable" format="boolean" />
+        <attr name="passwordVisibleDrawable" format="reference" />
+        <attr name="passwordInvisibleDrawable" format="reference" />
+        <attr name="labelDrawable" format="reference" />
+        <attr name="labelDrawablePadding" format="dimension" />
+        <attr name="labelEditPadding" format="dimension" />
+        <attr name="editRightPadding" format="dimension" />
+        <attr name="labelText" format="string" />
+        <attr name="labelTextColor" format="color" />
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="labelWidth" format="dimension" />
+        <attr name="text" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="hint" format="string" />
+        <attr name="hintTextColor" format="color" />
+        <attr name="maxLength" format="integer" />
+        <attr name="smsTextEnableColor" format="color" />
+        <attr name="smsTextDisableColor" format="color" />
+        <attr name="smsTotalTime" format="integer" />
+        <attr name="smsPreText" format="string" />
+        <attr name="smsAfterText" format="string" />
+        <attr name="smsCodeEnable" format="boolean" />
+        <attr name="imageCodeEnable" format="boolean" />
+        <attr name="errorMessage" format="string" />
+        <attr name="errorTextColor" format="color" />
+        <attr name="errorTextSize" format="dimension" />
+        <attr name="bottomLineEnable" format="boolean" />
+        <attr name="bottomLineHeight" format="dimension" />
+        <attr name="bottomLineBgColor" format="color" />
+        <attr name="errorViewTopMargin" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="FloatInputLayout">
+        <attr name="floatLabelTextAppearance" format="reference" />
+        <attr name="hintText" format="string" />
+        <attr name="hintEnabled" format="boolean" />
+        <attr name="textColorHint" format="color" />
+        <attr name="textSizeHint" format="dimension" />
+        <attr name="textHintPadding" format="dimension" />
+        <attr name="counterFlowTextColor" format="color" />
+        <attr name="counterTextColor2" format="color" />
+        <attr name="counterTextSize" format="dimension" />
+        <attr name="counterEnabled" format="boolean" />
+        <attr name="maxCounter" format="integer" />
+        <attr name="errorEnable" format="boolean" />
+        <attr name="floatInputErrorMessage" format="string" />
+        <attr name="floatInputErrorTextColor" format="color" />
+    </declare-styleable>
+</resources>
