@@ -22,7 +22,6 @@
         app:maxWidth="@{styles.maxWidth}"
         app:message="@{styles.message}"
         app:singleLine="@{styles.singleLine}"
-        app:location="@{styles.location}"
         app:leftIcon="@{styles.leftIcon}"
         app:rightIcon="@{styles.rightIcon}"
         app:icon="@{styles.icon}"/>
