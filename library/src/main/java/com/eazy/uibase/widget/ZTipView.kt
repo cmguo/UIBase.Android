@@ -156,6 +156,17 @@ class ZTipView @JvmOverloads constructor(
             }
         }
 
+    var button: View? = null
+        set(value) {
+            if (value?.parent != null)
+                return
+            if (field != null)
+                removeView(field)
+            field = value
+            if (field != null)
+                addView(field)
+        }
+
     private var textView: TextView
     private var imageView: ImageView
     private var leftImageView: ImageView
@@ -211,7 +222,7 @@ class ZTipView @JvmOverloads constructor(
             rightImageView.setOnClickListener(null)
         }
         var mWidth = maxWidth
-        if (mWidth < 0) {
+        if (mWidth <= 0) {
             mWidth += target.rootView.width
         }
         if (location == Location.ManualLayout) {
@@ -247,7 +258,9 @@ class ZTipView @JvmOverloads constructor(
 
     fun dismiss(timeout: Boolean = false) {
         --toastCount
-        (parent as ViewGroup).removeView(this)
+        if (button != null)
+            removeView(button)
+        (parent as? ViewGroup)?.removeView(this)
         listener?.tipViewDismissed(this, timeout)
     }
 
