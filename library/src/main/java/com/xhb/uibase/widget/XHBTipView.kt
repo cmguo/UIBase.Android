@@ -240,6 +240,7 @@ class XHBTipView @JvmOverloads constructor(
     }
 
     fun dismiss(timeout: Boolean = false) {
+        --toastCount
         if (location2 == Location.ManualLayout) {
             visibility = View.GONE
         } else {
@@ -301,6 +302,9 @@ class XHBTipView @JvmOverloads constructor(
 
         private val TAG = "XHBTipView"
 
+        private var toastCount = 0
+        private var toastY = 0
+
         val frameConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
             R.dimen.tip_view_frame_radius, R.color.tip_view_frame_color,
             0, 0,
@@ -335,9 +339,6 @@ class XHBTipView @JvmOverloads constructor(
         super.onLayout(changed, l, t, r, bb)
         layoutBackground()
     }
-
-    private var toastCount = 0
-    private var toastY = 0
 
     private fun calcLocation(target: View, size: Size): Point {
         val location = this.location!!
