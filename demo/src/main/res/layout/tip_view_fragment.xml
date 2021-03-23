@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.ToastStyles" />
+        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.Styles" />
 
         <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.Model" />
 
@@ -21,7 +21,7 @@
 
         <variable
             name="styles"
-            type="ToastStyles" />
+            type="Styles" />
     </data>
 
     <LinearLayout
