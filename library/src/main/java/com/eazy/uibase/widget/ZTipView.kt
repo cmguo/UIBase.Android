@@ -2,6 +2,7 @@ package com.eazy.uibase.widget
 
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
@@ -220,16 +221,21 @@ class ZTipView @JvmOverloads constructor(
         val loc = calcLocation(target, size)
         updateArrow()
         // pop
+        val lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        lp.leftMargin = loc.x
+        lp.topMargin = loc.y
         if (location2 == Location.ManualLayout) {
-            //val lp = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        } else {
-            val lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            lp.leftMargin = loc.x
-            lp.topMargin = loc.y
-            (target.context as? Activity)?.window?.addContentView(this, lp)
-            if (dismissDelay > 0)
-                postDelayed(DismissRunnable(this), dismissDelay)
+            lp.width = mWidth
         }
+        var context = target.context
+        while (context is ContextWrapper) {
+            if (context is Activity)
+                break
+            context = (context as ContextWrapper).baseContext
+        }
+        (context as? Activity)?.window?.addContentView(this, lp)
+        if (dismissDelay > 0)
+            postDelayed(DismissRunnable(this), dismissDelay)
     }
 
     class DismissRunnable(view: ZTipView) : Runnable {
@@ -241,12 +247,7 @@ class ZTipView @JvmOverloads constructor(
 
     fun dismiss(timeout: Boolean = false) {
         --toastCount
-        if (location2 == Location.ManualLayout) {
-            visibility = View.GONE
-        } else {
-            visibility = View.GONE
-            // TODO: remove
-        }
+        (parent as ViewGroup).removeView(this)
         listener?.tipViewDismissed(this, timeout)
     }
 
@@ -318,7 +319,7 @@ class ZTipView @JvmOverloads constructor(
         var width = MeasureSpec.getSize(widthMeasureSpec)
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
         var height = MeasureSpec.getSize(heightMeasureSpec)
-        if (maxWidth in 1 until width) {
+        if (location2 != Location.ManualLayout && maxWidth in 1 until width) {
             width = maxWidth
         }
         if (location2.ordinal < Location.BottomRight.ordinal && heightMode != MeasureSpec.UNSPECIFIED)
@@ -343,7 +344,10 @@ class ZTipView @JvmOverloads constructor(
     private fun calcLocation(target: View, size: Size): Point {
         val location = this.location!!
         if (location == Location.ManualLayout) {
-            return Point()
+            val loc = intArrayOf(0, 0)
+            target.getLocationInWindow(loc)
+            location2 = location
+            return Point(loc[0], loc[1])
         }
         val wbounds = Rect()
         target.rootView.getLocalVisibleRect(wbounds)

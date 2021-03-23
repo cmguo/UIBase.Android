@@ -2,6 +2,9 @@ package com.eazy.uibase.demo.components.simple
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
@@ -23,7 +26,10 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
 
     class Model(fragment: ZTipViewFragment) : ViewModel() {
 
-        var buttons = arrayOfNulls<Any>(24).toList()
+        var buttons = arrayOfNulls<Any>(when (fragment.component.id()) {
+            R.id.component_z_tool_tips -> 24
+            R.id.component_z_snack_bars -> 2
+            else -> 1 }).toList()
 
         var tipButton: ZButton = {
             val button = ZButton(fragment.context!!)
@@ -111,8 +117,14 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
             val binding = ToastTipViewBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
             binding.executePendingBindings()
-            binding.tipView.location = ZTipView.Location.AutoToast
-            binding.tipView.popAt(view)
+            if (fragment.component.id() == R.id.component_z_toasts) {
+                binding.tipView.location = ZTipView.Location.AutoToast
+                binding.tipView.popAt(view)
+            } else {
+                binding.tipView.location = ZTipView.Location.ManualLayout
+                val index = (view.parent.parent as ViewGroup).indexOfChild(view.parent as View)
+                binding.tipView.popAt(if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding!!.root)
+            }
         }
     }
 

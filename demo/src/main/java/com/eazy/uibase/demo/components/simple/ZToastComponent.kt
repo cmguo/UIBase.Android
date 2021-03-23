@@ -6,9 +6,9 @@ import com.eazy.uibase.demo.core.Component
 import com.eazy.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
-class ZNoticeBarComponent : Component {
+class ZToastComponent : Component {
     override fun id(): Int {
-        return R.id.component_z_notice_bars
+        return R.id.component_z_toasts
     }
 
     override fun group(): Int {
@@ -20,11 +20,11 @@ class ZNoticeBarComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_z_notice_bars
+        return R.string.component_z_toasts
     }
 
     override fun description(): Int {
-        return R.string.component_z_notice_bars_desc
+        return R.string.component_z_toasts_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
