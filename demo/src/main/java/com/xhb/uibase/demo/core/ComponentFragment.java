@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.fragment.app.Fragment;
 
 import com.ustc.base.util.reflect.ClassWrapper;
@@ -49,13 +50,9 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         binding_.setLifecycleOwner(this);
         model_ = createModel();
         styles_ = createStyle();
-        ObjectWrapper<DataBinding> wrapper = ObjectWrapper.wrap(binding_);
-        if (wrapper.hasMethod("setFragment", getClass()))
-            ObjectWrapper.wrap(binding_).invoke("setFragment", this);
-        if (wrapper.hasMethod("setModel", model_.getClass()))
-            ObjectWrapper.wrap(binding_).invoke("setModel", model_);
-        if (wrapper.hasMethod("setStyles", styles_.getClass()))
-            ObjectWrapper.wrap(binding_).invoke("setStyles", styles_);
+        binding_.setVariable(BR.fragment, this);
+        binding_.setVariable(BR.model, model_);
+        binding_.setVariable(BR.styles, styles_);
         return binding_.getRoot();
     }
 
@@ -100,7 +97,7 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
 
     protected Model createModel() {
         Class<Model> clzM = getModelType();
-        ClassWrapper wrapper = ClassWrapper.wrap(clzM);
+        ClassWrapper<?> wrapper = ClassWrapper.wrap(clzM);
         if (wrapper.hasConstructor(getClass())) {
             return ClassWrapper.wrap(clzM).newInstance(this);
         } else {
@@ -110,7 +107,7 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
 
     protected Styles createStyle() {
         Class<Styles> clzS = getStyleType();
-        ClassWrapper wrapper = ClassWrapper.wrap(clzS);
+        ClassWrapper<?> wrapper = ClassWrapper.wrap(clzS);
         if (wrapper.hasConstructor(getClass())) {
             return ClassWrapper.wrap(clzS).newInstance(this);
         } else {

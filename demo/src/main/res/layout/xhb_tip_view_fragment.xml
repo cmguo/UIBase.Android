@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.xhb.uibase.demo.components.simple.XHBTipViewFragment.ToastStyles" />
+        <import type="com.xhb.uibase.demo.components.simple.XHBTipViewFragment.Styles" />
 
         <import type="com.xhb.uibase.demo.components.simple.XHBTipViewFragment.Model" />
 
@@ -21,7 +21,7 @@
 
         <variable
             name="styles"
-            type="ToastStyles" />
+            type="Styles" />
     </data>
 
     <LinearLayout
