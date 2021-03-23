@@ -2,21 +2,19 @@ package com.xhb.uibase.demo.components.simple
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.GridLayoutManager
 import com.xhb.uibase.binding.RecyclerViewAdapter
 import com.xhb.uibase.demo.R
-import com.xhb.uibase.demo.components.basic.XHBButtonFragment
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
-import com.xhb.uibase.demo.databinding.XhbTipViewBinding
-import com.xhb.uibase.demo.databinding.XhbTipViewButtonItemBindingImpl
+import com.xhb.uibase.demo.databinding.XhbToolTipViewBinding
+import com.xhb.uibase.demo.databinding.XhbToastTipViewBinding
 import com.xhb.uibase.demo.databinding.XhbTipViewFragmentBinding
 import com.xhb.uibase.widget.XHBButton
 import com.xhb.uibase.widget.XHBTipView
@@ -36,11 +34,16 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
         } ()
     }
 
-    open class Styles : ViewStyles() {
+    open class Styles(protected val fragment: XHBTipViewFragment) : ViewStyles() {
+
+        val layoutManager = GridLayoutManager(fragment.context, 4)
+
+        val itemLayout: ItemLayout
+
         @Bindable
         @Title("最大宽度")
         @Description("整体最大宽度，设置负数，则自动加上窗口宽度")
-        var maxWidth = 200
+        var maxWidth = 400
 
         @Bindable
         @Title("单行文字")
@@ -51,9 +54,19 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
         @Title("消息内容")
         @Description("自适应消息内容的宽度和高度")
         var message = "你点击了按钮"
+
+        init {
+            itemLayout = ItemLayout(this)
+//            if (fragment!!.component.id() == R.id.component_xhb_snack_bars)
+//                location = XHBTipView.Location.AutoToast
+//            else
+//                location = XHBTipView.Location.ManualLayout
+        }
+
+        open fun buttonClick(view: View) {}
     }
 
-    class ToolStyles : Styles() {
+    class ToolStyles(fragment: XHBTipViewFragment) : Styles(fragment) {
         @Bindable
         @Title("建议位置")
         @Description("建议弹出位置，如果左右或者上下超过窗口区域，则会分别自动调整为其他适当位置")
@@ -64,13 +77,16 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
         @Description("右侧显示的图标，资源ID类型，一般用于关闭，也可以自定义其他行为")
         @Style(IconStyle::class)
         var rightIcon = 0
+
+        override fun buttonClick(view: View) {
+            val binding = XhbToolTipViewBinding.inflate(LayoutInflater.from(fragment.context))
+            binding.styles = this
+            binding.executePendingBindings()
+            binding.tipView.popAt(view)
+        }
     }
 
-    class ToastStyles(fragment: XHBTipViewFragment) : Styles() {
-
-        val layoutManager = GridLayoutManager(fragment!!.context, 4)
-
-        val itemLayout: ItemLayout
+    class ToastStyles(fragment: XHBTipViewFragment) : Styles(fragment) {
 
         @Bindable
         @Title("建议位置")
@@ -97,22 +113,11 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
         @Style(IconStyle::class)
         var rightIcon = 0
 
-        private val fragment: XHBTipViewFragment
-
-        init {
-            this.fragment = fragment
-            itemLayout = ItemLayout(this)
-//            if (fragment!!.component.id() == R.id.component_xhb_snack_bars)
-//                location = XHBTipView.Location.AutoToast
-//            else
-//                location = XHBTipView.Location.ManualLayout
-        }
-
-        fun buttonClick(view: View) {
-            val binding = XhbTipViewBinding.inflate(LayoutInflater.from(fragment!!.context))
+        override fun buttonClick(view: View) {
+            val binding = XhbToastTipViewBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
+            binding.executePendingBindings()
             binding.tipView.popAt(view)
-            //fragment?.binding?.tipView?.popAt(view)
         }
     }
 
@@ -123,8 +128,8 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
         }
     }
 
-    override fun createStyle(): Styles? {
-        return ToastStyles(this)
+    override fun createStyle(): Styles {
+        return if (component.id() == R.id.component_xhb_tool_tips) ToolStyles(this) else ToastStyles(this)
     }
 
     companion object {
