@@ -35,14 +35,16 @@
 
             <com.eazy.uibase.widget.ZAvatarView
                 android:id="@+id/avatarView"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/brand_500"
                 android:src="@drawable/component"
                 app:clipType="@{styles.clipType}"
-                app:roundMode="@{styles.roundMode}"
+                app:clipRegion="@{styles.clipRegion}"
                 app:borderWidth="@{styles.borderWidth}"
                 app:borderColor="@{styles.borderColor}"
-                app:fillColor="@{styles.fillColor}"
                 />
 
         </LinearLayout>
