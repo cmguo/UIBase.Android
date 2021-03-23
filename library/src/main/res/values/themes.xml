@@ -6,6 +6,7 @@
         <item name="checkboxStyle">@style/ZCheckBox</item>
         <item name="radioButtonStyle">@style/ZRadioButton</item>
         <item name="switchStyle">@style/ZSwitchButton</item>
+        <item name="tipViewStyle">@style/ZTipView</item>
     </style>
 
 </resources>

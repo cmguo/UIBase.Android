@@ -4,7 +4,6 @@ import com.google.auto.service.AutoService
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.Component
 import com.eazy.uibase.demo.core.ComponentFragment
-import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
 class ZSnackBarComponent : Component {
@@ -29,6 +28,6 @@ class ZSnackBarComponent : Component {
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return ZToolTipFragment::class.java
+        return ZTipViewFragment::class.java
     }
 }

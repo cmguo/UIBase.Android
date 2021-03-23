@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.ToastStyles" />
+
+        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.Model" />
+
+        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment" />
+
+        <variable
+            name="fragment"
+            type="ZTipViewFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="styles"
+            type="ToastStyles" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:itemLayout="@{styles.itemLayout}"
+            app:data="@{model.buttons}"
+            app:layoutManager="@{styles.layoutManager}"/>
+
+    </LinearLayout>
+
+</layout>
