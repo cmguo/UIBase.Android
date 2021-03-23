@@ -244,7 +244,11 @@ class ZTipView @JvmOverloads constructor(
                 break
             context = (context as ContextWrapper).baseContext
         }
+        if (location2 == Location.AutoToast) {
+            ++toastCount
+        }
         (context as? Activity)?.window?.addContentView(this, lp)
+        textView.requestFocus()
         if (dismissDelay > 0)
             postDelayed(DismissRunnable(this), dismissDelay)
     }
@@ -257,19 +261,62 @@ class ZTipView @JvmOverloads constructor(
     }
 
     fun dismiss(timeout: Boolean = false) {
-        --toastCount
+        if (location2 == Location.AutoToast) {
+            --toastCount
+        }
         if (button != null)
             removeView(button)
         (parent as? ViewGroup)?.removeView(this)
         listener?.tipViewDismissed(this, timeout)
     }
 
-    private fun calcSize(maxWidth: Int) : Size {
-        val widthMeasureSpec = MeasureSpec.makeMeasureSpec(maxWidth, MeasureSpec.AT_MOST)
-        val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
-        measure(widthMeasureSpec, heightMeasureSpec)
-        return Size(measuredWidth, measuredHeight)
+    companion object {
+
+        private val TAG = "ZTipView"
+
+        private var toastCount = 0
+        private var toastY = 0
+
+        val frameConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
+            R.dimen.tip_view_frame_radius, R.color.tip_view_frame_color,
+            0, 0,
+            0, 0
+        )
     }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        Log.d(TAG, "onMeasure: " + MeasureSpec.toString(widthMeasureSpec) + " " + MeasureSpec.toString(heightMeasureSpec))
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        var width = MeasureSpec.getSize(widthMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        var height = MeasureSpec.getSize(heightMeasureSpec)
+        var mWidth = maxWidth
+        if (mWidth <= 0) {
+            mWidth += rootView.width
+        }
+        if (location2 != Location.ManualLayout && mWidth in 1 until width) {
+            width = mWidth
+        }
+        if (location2.ordinal < Location.BottomRight.ordinal && heightMode != MeasureSpec.UNSPECIFIED)
+            height -= arrowSize
+        super.onMeasure(MeasureSpec.makeMeasureSpec(width, widthMode), MeasureSpec.makeMeasureSpec(height, heightMode))
+        if (location2.ordinal < Location.BottomRight.ordinal)
+            setMeasuredDimension(measuredWidth, measuredHeight + arrowSize)
+        Log.d(TAG, "onMeasure: $measuredWidth $measuredHeight")
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        var tt = t
+        var bb = b
+        if (location2.ordinal <= Location.TopRight.ordinal)
+            bb -= arrowSize
+        else if (location2.ordinal <= Location.BottomRight.ordinal)
+            tt += arrowSize
+        super.onLayout(changed, l, t, r, bb)
+        layoutBackground()
+    }
+
+    /* private */
 
     private fun updateArrow() {
         val path = Path()
@@ -312,46 +359,11 @@ class ZTipView @JvmOverloads constructor(
         }
     }
 
-    companion object {
-
-        private val TAG = "ZTipView"
-
-        private var toastCount = 0
-        private var toastY = 0
-
-        val frameConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.tip_view_frame_radius, R.color.tip_view_frame_color,
-            0, 0,
-            0, 0
-        )
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        Log.d(TAG, "onMeasure: " + MeasureSpec.toString(widthMeasureSpec) + " " + MeasureSpec.toString(heightMeasureSpec))
-        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
-        var width = MeasureSpec.getSize(widthMeasureSpec)
-        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
-        var height = MeasureSpec.getSize(heightMeasureSpec)
-        if (location2 != Location.ManualLayout && maxWidth in 1 until width) {
-            width = maxWidth
-        }
-        if (location2.ordinal < Location.BottomRight.ordinal && heightMode != MeasureSpec.UNSPECIFIED)
-            height -= arrowSize
-        super.onMeasure(MeasureSpec.makeMeasureSpec(width, widthMode), MeasureSpec.makeMeasureSpec(height, heightMode))
-        if (location2.ordinal < Location.BottomRight.ordinal)
-            setMeasuredDimension(measuredWidth, measuredHeight + arrowSize)
-        Log.d(TAG, "onMeasure: $measuredWidth $measuredHeight")
-    }
-
-    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        var tt = t
-        var bb = b
-        if (location2.ordinal <= Location.TopRight.ordinal)
-            bb -= arrowSize
-        else if (location2.ordinal <= Location.BottomRight.ordinal)
-            tt += arrowSize
-        super.onLayout(changed, l, t, r, bb)
-        layoutBackground()
+    private fun calcSize(maxWidth: Int) : Size {
+        val widthMeasureSpec = MeasureSpec.makeMeasureSpec(maxWidth, MeasureSpec.AT_MOST)
+        val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+        measure(widthMeasureSpec, heightMeasureSpec)
+        return Size(measuredWidth, measuredHeight)
     }
 
     private fun calcLocation(target: View, size: Size): Point {
@@ -371,7 +383,6 @@ class ZTipView @JvmOverloads constructor(
             } else {
                 toastY -= size.height + 20
             }
-            toastCount += 1
             location2 = location
             return Point(wbounds.centerX() - size.width / 2, toastY - size.height / 2)
         }
