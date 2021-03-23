@@ -32,21 +32,14 @@ class XHBAvatarViewFragment : ComponentFragment<XhbAvatarViewFragmentBinding?,
 
         @Bindable
         @Title("边框宽度")
-        @Description("加上边框；")
+        @Description("设置头像边框宽度，设为0，则没有边框")
         var borderWidth = 0f
 
         @Bindable
         @Title("边框颜色")
-        @Description("边框颜色")
+        @Description("设置头像边框颜色")
         @Style(ColorStyle::class)
         var borderColor = Color.RED
-
-        @Bindable
-        @Title("填充颜色")
-        @Description("填充颜色")
-        @Style(ColorStyle::class)
-        var fillColor = Color.BLUE
-
     }
 
     companion object {
