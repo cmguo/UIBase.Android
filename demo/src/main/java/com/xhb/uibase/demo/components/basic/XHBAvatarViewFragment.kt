@@ -26,9 +26,9 @@ class XHBAvatarViewFragment : ComponentFragment<XhbAvatarViewFragmentBinding?,
         var clipType = XHBAvatarView.ClipType.Circle
 
         @Bindable
-        @Title("技术方案")
-        @Description("剪切技术方案，有 View，Drawable 两种方式")
-        var roundMode = XHBAvatarView.RoundMode.Drawable
+        @Title("剪切区域")
+        @Description("剪切区域，有视图区域（WholeView）、图片区域（Drawable）两种方式")
+        var clipRegion = XHBAvatarView.ClipRegion.Drawable
 
         @Bindable
         @Title("边框宽度")

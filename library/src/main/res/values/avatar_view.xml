@@ -9,10 +9,12 @@
             <enum name="circle" value="1"/>
             <enum name="ellipse" value="2"/>
         </attr>
-        <attr name="roundMode">
-            <enum name="view" value="0"/>
+        <attr name="clipRegion">
+            <enum name="wholeView" value="0"/>
             <enum name="drawable" value="1"/>
         </attr>
+        <attr name="borderColor" format="color" />
+        <attr name="borderWidth" />
     </declare-styleable>
 
     <style name="XHBAvatarView">

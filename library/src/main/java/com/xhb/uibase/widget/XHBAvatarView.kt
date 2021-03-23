@@ -1,13 +1,12 @@
 package com.xhb.uibase.widget
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
-import android.os.Build
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
-import kotlin.math.min
 import com.xhb.uibase.R
+import java.lang.reflect.Method
 
 class XHBAvatarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -19,8 +18,8 @@ class XHBAvatarView @JvmOverloads constructor(
         Ellipse,
     }
 
-    enum class RoundMode {
-        View,
+    enum class ClipRegion {
+        WholeView,
         Drawable
     }
 
@@ -28,14 +27,21 @@ class XHBAvatarView @JvmOverloads constructor(
         set(value) {
             if (field != value) {
                 field = value
+                val drawable = this.drawable
+                if (drawable != null) {
+                    setXfermode?.invoke(drawable, PorterDuffXfermode(
+                        if (value == ClipType.None) PorterDuff.Mode.SRC_OVER else PorterDuff.Mode.DST_OVER))
+                }
+                computeRoundBounds()
                 invalidate()
             }
         }
 
-    var roundMode = RoundMode.Drawable
+    var clipRegion = ClipRegion.Drawable
         set(value) {
             if (field != value) {
                 field = value
+                computeRoundBounds()
                 invalidate()
             }
         }
@@ -58,108 +64,128 @@ class XHBAvatarView @JvmOverloads constructor(
             }
         }
 
-    var fillColor = 0
-        set(value) {
-            if (field != value) {
-                field = value
-                fillPaint.color = value
-                invalidate()
-            }
-        }
-
-
-    private var maskPaint: Paint = Paint()
     private var xferPaint: Paint = Paint()
-    private var fillPaint: Paint = Paint()
     private var borderPaint: Paint = Paint()
-    private val bounds = RectF()
+    private val circleBounds = RectF()
+    private val clipBounds = RectF()
+
+    private var setXfermode: Method? = null
 
     init {
-        maskPaint.isAntiAlias = true
-        xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
-        fillPaint.color = fillColor
-        fillPaint.style = Paint.Style.FILL
+        xferPaint.isAntiAlias = true
+        xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+        xferPaint.color = 0
+        xferPaint.style = Paint.Style.FILL
         borderPaint.isAntiAlias = true
         borderPaint.color = borderColor
         borderPaint.strokeWidth = borderWidth
         borderPaint.style = Paint.Style.STROKE
+
+        val a = context.obtainStyledAttributes(attrs, R.styleable.XHBAvatarView, R.attr.avatarViewStyle, 0)
+        val cr = a.getInt(R.styleable.XHBAvatarView_clipRegion, -1)
+        if (cr >= 0) clipRegion = ClipRegion.values()[cr]
+        val ct = a.getInt(R.styleable.XHBAvatarView_clipType, -1)
+        if (ct >= 0) clipType = ClipType.values()[ct]
+        borderWidth = a.getDimensionPixelSize(R.styleable.XHBAvatarView_borderWidth, borderWidth.toInt()).toFloat()
+        borderColor = a.getColor(R.styleable.XHBAvatarView_borderColor, borderColor)
+    }
+
+    override fun setImageDrawable(drawable: Drawable?) {
+        super.setImageDrawable(drawable)
+        setXfermode = drawable?.javaClass?.getMethod("setXfermode", Xfermode::class.java)
+        setXfermode?.isAccessible = true
+        setXfermode?.invoke(drawable, PorterDuffXfermode(
+            if (clipType == ClipType.None) PorterDuff.Mode.SRC_OVER else PorterDuff.Mode.DST_OVER))
+    }
+
+    override fun setFrame(l: Int, t: Int, r: Int, b: Int): Boolean {
+        return super.setFrame(l, t, r, b)
+        computeRoundBounds()
     }
 
     override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
         if (clipType == ClipType.None) {
+            super.onDraw(canvas)
             return
         }
-        if (drawable == null && roundMode == RoundMode.Drawable) {
+        if (drawable == null && clipRegion == ClipRegion.Drawable) {
+            super.onDraw(canvas)
             return
         }
-        drawCircle(canvas)
+        computeRoundBounds()
+        drawMask(canvas)
+        super.onDraw(canvas)
+        drawBorder(canvas)
     }
 
-    private var src = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+//    private var src = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
 
-    private fun drawCircle(canvas: Canvas) {
-        drawable.colorFilter = ColorMatrixColorFilter()
-        if (width != src.width || height != src.height) {
-            src.recycle()
-            src = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-            src.eraseColor(0)
-            val srcCanvas = Canvas(src)
-            computeRoundBounds()
-            srcCanvas.drawOval(bounds, maskPaint)
-            val l = src.getPixel(0, 0)
-            val r = src.getPixel(0, 1)
-        }
-        canvas.drawBitmap(src, 0f, 0f, xferPaint)
+    private fun drawMask(canvas: Canvas) {
+//        if (width != src.width || height != src.height) {
+//            src.recycle()
+//            src = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+//            src.eraseColor(0)
+//            val srcCanvas = Canvas(src)
+//            computeRoundBounds()
+//            srcCanvas.drawOval(bounds, maskPaint)
+//            val l = src.getPixel(0, 0)
+//            val r = src.getPixel(0, 1)
+//        }
+        canvas.save()
+        canvas.clipRect(clipBounds)
+        canvas.drawOval(circleBounds, xferPaint)
+        canvas.restore()
+    }
+
+    private fun drawBorder(canvas: Canvas) {
         if (borderWidth > 0) {
-            canvas.drawOval(bounds, borderPaint)
+            canvas.drawOval(circleBounds, borderPaint)
         }
     }
 
     private fun computeRoundBounds() {
-        if (roundMode == RoundMode.View) {
-            bounds.left = 0f
-            bounds.top = 0f
-            bounds.right = width.toFloat()
-            bounds.bottom = height.toFloat()
-        } else if (roundMode == RoundMode.Drawable) {
-            bounds.left = 0f
-            bounds.top = 0f
-            bounds.right = drawable.intrinsicWidth.toFloat()
-            bounds.bottom = drawable.intrinsicHeight.toFloat()
-            imageMatrix.mapRect(bounds)
+        if (clipType == ClipType.None)
+            return
+        val viewBounds = RectF(0f, 0f, width.toFloat(), height.toFloat())
+        val imageBounds = RectF(0f, 0f, drawable.intrinsicWidth.toFloat(), drawable.intrinsicHeight.toFloat())
+        imageMatrix.mapRect(imageBounds)
+        if (clipRegion == ClipRegion.WholeView) {
+            circleBounds.set(viewBounds)
+        } else {
+            circleBounds.set(imageBounds)
         }
         if (clipType == ClipType.Circle) {
-            if (bounds.width() > bounds.height()) {
-                val c = bounds.centerX()
-                bounds.left = c - bounds.height() / 2
-                bounds.right = c + bounds.height() / 2
+            if (circleBounds.width() > circleBounds.height()) {
+                val c = circleBounds.centerX()
+                circleBounds.left = c - circleBounds.height() / 2
+                circleBounds.right = c + circleBounds.height() / 2
             } else {
-                val c = bounds.centerY()
-                bounds.top = c - bounds.width() / 2
-                bounds.bottom = c + bounds.width() / 2
+                val c = circleBounds.centerY()
+                circleBounds.top = c - circleBounds.width() / 2
+                circleBounds.bottom = c + circleBounds.width() / 2
             }
         }
+        clipBounds.set(imageBounds)
     }
 
-    private fun adjustCanvas(canvas: Canvas) {
-        if (roundMode == RoundMode.Drawable) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                if (cropToPadding) {
-                    val scrollX = scrollX
-                    val scrollY = scrollY
-                    canvas.clipRect(scrollX + paddingLeft, scrollY + paddingTop,
-                        scrollX + right - left - paddingRight,
-                        scrollY + bottom - top - paddingBottom)
-                }
-            }
-            canvas.translate(paddingLeft.toFloat(), paddingTop.toFloat())
-            if (imageMatrix != null) {
-                val m = Matrix(imageMatrix)
-                canvas.concat(m)
-            }
-        }
-    }
+//    private fun adjustCanvas(canvas: Canvas) {
+//        if (roundMode == RoundMode.Drawable) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                if (cropToPadding) {
+//                    val scrollX = scrollX
+//                    val scrollY = scrollY
+//                    canvas.clipRect(scrollX + paddingLeft, scrollY + paddingTop,
+//                        scrollX + right - left - paddingRight,
+//                        scrollY + bottom - top - paddingBottom)
+//                }
+//            }
+//            canvas.translate(paddingLeft.toFloat(), paddingTop.toFloat())
+//            if (imageMatrix != null) {
+//                val m = Matrix(imageMatrix)
+//                canvas.concat(m)
+//            }
+//        }
+//    }
 
 }
 
