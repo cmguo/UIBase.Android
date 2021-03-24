@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -35,7 +34,8 @@
             android:layout_height="match_parent"
             app:itemBinding="@{styles.itemBinding}"
             app:data="@{model.buttons}"
-            app:layoutManager="@{styles.layoutManager}"/>
+            app:itemLayout="@{styles.itemLayout}"
+            app:layoutManager="@{styles.layoutManager}" />
 
     </LinearLayout>
 
