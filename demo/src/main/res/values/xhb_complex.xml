@@ -3,34 +3,34 @@
     <string name="group_complex">复杂交互控件</string>
 
     <id name="component_xhb_activity_views"></id>
-    <string name="component_xhb_activity_views">活动视图</string>
+    <string name="component_xhb_activity_views">活动视图（五期）</string>
     <string name="component_xhb_activity_views_desc">可以用于承载一次性操作，如分享、复制、收藏、刷新等；面板类型为宫格类；</string>
 
     <id name="component_xhb_action_sheets"></id>
-    <string name="component_xhb_action_sheets">操作表单</string>
+    <string name="component_xhb_action_sheets">操作表单（四期）</string>
     <string name="component_xhb_action_sheets_desc">操作表单是响应于控件或动作出现的特定风格的面板，并呈现与当前上下文相关的一组两个或多个选项。使用操作菜单让人们启动任务，或者在执行潜在的破坏性操作之前请求确认。</string>
 
     <id name="component_xhb_pickers"></id>
-    <string name="component_xhb_pickers">选择器</string>
+    <string name="component_xhb_pickers">选择器（四期）</string>
     <string name="component_xhb_pickers_desc">临时浮层，用户出发选择操作时出现。从众多选项中选项中选择一个选项。</string>
 
-    <id name="component_xhb_time_pickers"></id>
-    <string name="component_xhb_time_pickers">时间选择器</string>
+    <id name="component_xhb_time_pickers"></id>7
+    <string name="component_xhb_time_pickers">时间选择器（三期）</string>
     <string name="component_xhb_time_pickers_desc">一般由选择框触发，弹层的形式建立可滚动视图，并在视图中分段选取时间值。</string>
 
     <id name="component_xhb_filters"></id>
-    <string name="component_xhb_filters">筛选</string>
+    <string name="component_xhb_filters">筛选（五期）</string>
     <string name="component_xhb_filters_desc">提供用户在多个选项中进行筛选。</string>
 
     <id name="component_xhb_dialogs"></id>
-    <string name="component_xhb_dialogs">对话框</string>
+    <string name="component_xhb_dialogs">对话框（三期）</string>
     <string name="component_xhb_dialogs_desc">1.需要用户做出简单的选择且选项较少时（如进行一些重要操作时的简单确认弹窗）\n
         2.前置或后置的提示性内容，又不希望跳转页面时（如在开始录音时弹窗提示用户注意事项）\n
         3.当需要展示的信息不由用户主动触发，不在用户正常操作流程习惯中时，或者不符合用户的使用预期时一般使用弹窗（如提示用户开启通知权限）\n
         4.非主动触发的引导性信息（如常规的运营弹窗等）。</string>
 
     <id name="component_xhb_cards"></id>
-    <string name="component_xhb_cards">卡片</string>
+    <string name="component_xhb_cards">卡片（六期）</string>
     <string name="component_xhb_cards_desc"></string>
 
 </resources>
