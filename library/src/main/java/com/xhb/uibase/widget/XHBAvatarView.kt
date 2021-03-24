@@ -138,9 +138,12 @@ class XHBAvatarView @JvmOverloads constructor(
         dstCanvas.drawOval(circleBounds, xferPaint)
         // take photo of src
         if (setXfermode != null) {
+            val callback = drawable.callback
+            drawable.callback = null
             setXfermode!!.invoke(drawable, PorterDuffXfermode(PorterDuff.Mode.SRC_IN))
-            super.onDraw(canvas)
+            super.onDraw(dstCanvas)
             setXfermode!!.invoke(drawable, PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
+            drawable.callback = callback
         } else {
             val srcCanvas = Canvas(srcImage)
             super.onDraw(srcCanvas) // SRC_OVER
@@ -148,11 +151,11 @@ class XHBAvatarView @JvmOverloads constructor(
             xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
             dstCanvas.drawBitmap(srcImage, 0f, 0f, xferPaint)
         }
+        canvas.drawBitmap(dstImage, 0f, 0f, borderPaint)
         // border
         if (borderWidth > 0) {
-            dstCanvas.drawOval(circleBounds, borderPaint)
+            canvas.drawOval(circleBounds, borderPaint)
         }
-        canvas.drawBitmap(dstImage, 0f, 0f, borderPaint)
     }
 
 
