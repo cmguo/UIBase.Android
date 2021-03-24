@@ -48,15 +48,15 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         }
     }
 
-    @BindingAdapter("itemLayout")
-    public static <T> void setRecyclerViewItemLayout(RecyclerView recyclerView, T layout) {
+    @BindingAdapter("itemBinding")
+    public static <T> void setRecyclerViewItemBinding(RecyclerView recyclerView, T binding) {
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
-            if (layout instanceof Integer)
-                adapter.setItemLayout(
-                        new UnitTypeItemLayout(recyclerView.getContext(), (Integer) layout));
-            else if (layout instanceof ItemLayout)
-                adapter.setItemLayout((ItemLayout) layout);
+            if (binding instanceof Integer)
+                adapter.setItemBinding(
+                        new UnitTypeItemBinding(recyclerView.getContext(), (Integer) binding));
+            else if (binding instanceof RecyclerViewAdapter.ItemBinding)
+                adapter.setItemBinding((ItemBinding) binding);
         }
     }
 
@@ -94,7 +94,7 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         view.setHasFixedSize(hasFixedSize);
     }
 
-    public interface ItemLayout<T> {
+    public interface ItemBinding<T> {
         int getItemViewType(T item);
 
         ViewDataBinding createBinding(@NonNull ViewGroup parent, int viewType);
@@ -114,19 +114,19 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         return adapter instanceof RecyclerViewAdapter ? (RecyclerViewAdapter) adapter : null;
     }
 
-    public static class UnitTypeItemLayout<T> extends BaseItemLayout<T> {
+    public static class UnitTypeItemBinding<T> extends BaseItemLayout<T> {
 
         private int mItemLayout;
 
-        public UnitTypeItemLayout(Context context) {
+        public UnitTypeItemBinding(Context context) {
             super(context);
         }
 
-        public UnitTypeItemLayout(int itemLayout) {
+        public UnitTypeItemBinding(int itemLayout) {
             mItemLayout = itemLayout;
         }
 
-        public UnitTypeItemLayout(Context context, int itemLayout) {
+        public UnitTypeItemBinding(Context context, int itemLayout) {
             super(context);
             mItemLayout = itemLayout;
         }
@@ -137,7 +137,7 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         }
     }
 
-    public abstract static class BaseItemLayout<T> implements ItemLayout<T> {
+    public abstract static class BaseItemLayout<T> implements ItemBinding<T> {
 
         private LayoutInflater mInflater;
         private RecyclerView.Adapter mAdapter;
@@ -174,14 +174,14 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
 
     private List<T> mItems = new ArrayList<>();
 
-    private ItemLayout mItemBinding;
+    private ItemBinding mItemBinding;
 
     private OnItemClickListener mOnItemClickListener;
 
-    public void setItemLayout(ItemLayout binding) {
+    public void setItemBinding(ItemBinding binding) {
         mItemBinding = binding;
-        if (binding instanceof UnitTypeItemLayout)
-            ((UnitTypeItemLayout) mItemBinding).setAdapter(this);
+        if (binding instanceof RecyclerViewAdapter.UnitTypeItemBinding)
+            ((UnitTypeItemBinding) mItemBinding).setAdapter(this);
     }
 
     @NonNull
@@ -303,7 +303,7 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
             }
         }
 
-        public void bind(ItemLayout binding, T item, int position) {
+        public void bind(ItemBinding binding, T item, int position) {
             mPosition = position;
             mItem = item;
             binding.bindView(mBinding, item, position);

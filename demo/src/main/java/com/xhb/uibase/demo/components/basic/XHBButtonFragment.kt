@@ -1,15 +1,13 @@
 package com.xhb.uibase.demo.components.basic
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.xhb.uibase.binding.RecyclerViewAdapter.OnItemClickListener
-import com.xhb.uibase.binding.RecyclerViewAdapter.UnitTypeItemLayout
+import com.xhb.uibase.binding.RecyclerViewAdapter.UnitTypeItemBinding
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.*
 import com.xhb.uibase.demo.core.style.IconStyle
@@ -30,7 +28,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
 
     class Styles(private val fragment_: XHBButtonFragment) : ViewStyles() {
 
-        var itemLayout = ItemLayout(this)
+        var itemBinding = ItemLayout(this)
         var itemDecoration: ItemDecoration = PaddingDecoration()
 
         @Bindable
@@ -90,7 +88,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         }
     }
 
-    class ItemLayout(private val styles: Styles) : UnitTypeItemLayout<XHBButton.ButtonType>(R.layout.xhb_button_item) {
+    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<XHBButton.ButtonType>(R.layout.xhb_button_item) {
         override fun bindView(binding: ViewDataBinding?, item: XHBButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

@@ -6,11 +6,11 @@
 
     <data>
 
-        <import type="com.xhb.uibase.demo.components.simple.XHBTipViewFragment.ToastStyles" />
+        <import type="com.xhb.uibase.demo.components.simple.XHBTipViewFragment.Styles" />
 
         <variable
             name="styles"
-            type="ToastStyles" />
+            type="Styles" />
 
     </data>
 

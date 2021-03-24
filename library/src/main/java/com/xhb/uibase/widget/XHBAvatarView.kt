@@ -1,5 +1,6 @@
 package com.xhb.uibase.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -10,7 +11,7 @@ import java.lang.reflect.Method
 
 class XHBAvatarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, R.attr.avatarViewStyle) {
+) : AppCompatImageView(context, attrs, if (defStyleAttr == 0) R.attr.avatarViewStyle else defStyleAttr) {
 
     enum class ClipType {
         None,
@@ -27,11 +28,6 @@ class XHBAvatarView @JvmOverloads constructor(
         set(value) {
             if (field != value) {
                 field = value
-                val drawable = this.drawable
-                if (drawable != null) {
-                    setXfermode?.invoke(drawable, PorterDuffXfermode(
-                        if (value == ClipType.None) PorterDuff.Mode.SRC_OVER else PorterDuff.Mode.DST_OVER))
-                }
                 computeRoundBounds()
                 invalidate()
             }
@@ -69,12 +65,13 @@ class XHBAvatarView @JvmOverloads constructor(
     private val circleBounds = RectF()
     private val clipBounds = RectF()
 
+    private var dstImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+    private var srcImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
     private var setXfermode: Method? = null
 
     init {
         xferPaint.isAntiAlias = true
-        xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-        xferPaint.color = 0
+        xferPaint.color = Color.WHITE
         xferPaint.style = Paint.Style.FILL
         borderPaint.isAntiAlias = true
         borderPaint.color = borderColor
@@ -88,21 +85,43 @@ class XHBAvatarView @JvmOverloads constructor(
         if (ct >= 0) clipType = ClipType.values()[ct]
         borderWidth = a.getDimensionPixelSize(R.styleable.XHBAvatarView_borderWidth, borderWidth.toInt()).toFloat()
         borderColor = a.getColor(R.styleable.XHBAvatarView_borderColor, borderColor)
+        a.recycle()
     }
+
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
-        setXfermode = drawable?.javaClass?.getMethod("setXfermode", Xfermode::class.java)
-        setXfermode?.isAccessible = true
-        setXfermode?.invoke(drawable, PorterDuffXfermode(
-            if (clipType == ClipType.None) PorterDuff.Mode.SRC_OVER else PorterDuff.Mode.DST_OVER))
+        if (xfermodeClass != null) {
+            setXfermode = try { drawable?.javaClass?.getMethod("setXfermode", xfermodeClass) } catch (e: Throwable) { null }
+            setXfermode?.isAccessible = true
+        }
     }
 
     override fun setFrame(l: Int, t: Int, r: Int, b: Int): Boolean {
-        return super.setFrame(l, t, r, b)
+        val result = super.setFrame(l, t, r, b)
         computeRoundBounds()
+        if (width != dstImage.width || height != dstImage.height) {
+            dstImage.recycle()
+            dstImage = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            dstImage.eraseColor(0)
+            if (setXfermode == null) {
+                srcImage.recycle()
+                srcImage = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                srcImage.eraseColor(0)
+            }
+        }
+        return result
     }
 
+    override fun invalidate() {
+        super.invalidate()
+        if (dstImage != null)
+            dstImage.eraseColor(0)
+        if (srcImage != null)
+            srcImage.eraseColor(0)
+    }
+
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         if (clipType == ClipType.None) {
             super.onDraw(canvas)
@@ -112,36 +131,33 @@ class XHBAvatarView @JvmOverloads constructor(
             super.onDraw(canvas)
             return
         }
-        computeRoundBounds()
-        drawMask(canvas)
-        super.onDraw(canvas)
-        drawBorder(canvas)
-    }
-
-//    private var src = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-
-    private fun drawMask(canvas: Canvas) {
-//        if (width != src.width || height != src.height) {
-//            src.recycle()
-//            src = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-//            src.eraseColor(0)
-//            val srcCanvas = Canvas(src)
-//            computeRoundBounds()
-//            srcCanvas.drawOval(bounds, maskPaint)
-//            val l = src.getPixel(0, 0)
-//            val r = src.getPixel(0, 1)
-//        }
-        canvas.save()
-        canvas.clipRect(clipBounds)
-        canvas.drawOval(circleBounds, xferPaint)
-        canvas.restore()
-    }
-
-    private fun drawBorder(canvas: Canvas) {
+        val dstCanvas = Canvas(dstImage)
+        dstCanvas.clipRect(clipBounds)
+        // prepare mask
+        xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OVER)
+        dstCanvas.drawOval(circleBounds, xferPaint)
+        // take photo of src
+        if (setXfermode != null) {
+            val callback = drawable.callback
+            drawable.callback = null
+            setXfermode!!.invoke(drawable, PorterDuffXfermode(PorterDuff.Mode.SRC_IN))
+            super.onDraw(dstCanvas)
+            setXfermode!!.invoke(drawable, PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
+            drawable.callback = callback
+        } else {
+            val srcCanvas = Canvas(srcImage)
+            super.onDraw(srcCanvas) // SRC_OVER
+            // paint photo on mask
+            xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+            dstCanvas.drawBitmap(srcImage, 0f, 0f, xferPaint)
+        }
+        canvas.drawBitmap(dstImage, 0f, 0f, borderPaint)
+        // border
         if (borderWidth > 0) {
             canvas.drawOval(circleBounds, borderPaint)
         }
     }
+
 
     private fun computeRoundBounds() {
         if (clipType == ClipType.None)
@@ -168,24 +184,13 @@ class XHBAvatarView @JvmOverloads constructor(
         clipBounds.set(imageBounds)
     }
 
-//    private fun adjustCanvas(canvas: Canvas) {
-//        if (roundMode == RoundMode.Drawable) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                if (cropToPadding) {
-//                    val scrollX = scrollX
-//                    val scrollY = scrollY
-//                    canvas.clipRect(scrollX + paddingLeft, scrollY + paddingTop,
-//                        scrollX + right - left - paddingRight,
-//                        scrollY + bottom - top - paddingBottom)
-//                }
-//            }
-//            canvas.translate(paddingLeft.toFloat(), paddingTop.toFloat())
-//            if (imageMatrix != null) {
-//                val m = Matrix(imageMatrix)
-//                canvas.concat(m)
-//            }
-//        }
-//    }
+    companion object {
+        val xfermodeClass: Class<*>? = try {
+            Class.forName("android.graphics.Xfermode");
+        } catch (e: Throwable) {
+            null
+        }
+    }
 
 }
 

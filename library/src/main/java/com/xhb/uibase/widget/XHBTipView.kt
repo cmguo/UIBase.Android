@@ -2,16 +2,15 @@ package com.xhb.uibase.widget
 
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.VectorDrawable
 import android.graphics.drawable.shapes.PathShape
-import android.graphics.drawable.shapes.Shape
 import android.util.AttributeSet
+import android.util.Log
 import android.util.Size
-import android.util.SizeF
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -23,11 +22,11 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.ShapeDrawables
-import top.defaults.drawabletoolbox.PathShapeDrawableBuilder
+import java.lang.ref.WeakReference
 
 class XHBTipView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayoutCompat(context, attrs) {
+) : LinearLayoutCompat(context, attrs, if (defStyleAttr == 0) R.attr.tipViewStyle else defStyleAttr) {
 
     enum class Location {
         TopLeft,
@@ -38,6 +37,11 @@ class XHBTipView @JvmOverloads constructor(
         BottomRight,
         AutoToast,
         ManualLayout,
+    }
+
+    interface TipViewListener {
+        fun tipViewIconTapped(view: XHBTipView, index: Int) {}
+        fun tipViewDismissed(view: XHBTipView, timeout: Boolean) {}
     }
 
     var location: Location? = Location.TopRight
@@ -75,8 +79,10 @@ class XHBTipView @JvmOverloads constructor(
     var message: CharSequence?
         get() = textView.text
         set(value) {
-            textView.setText(value)
+            textView.text = value
         }
+
+    var dismissDelay: Long = 0
 
     var textSize: Float
         get() = textView.textSize
@@ -108,7 +114,7 @@ class XHBTipView @JvmOverloads constructor(
     var singleLine: Boolean
         get() = textView.isSingleLine
         set(value) {
-            textView.setSingleLine(value)
+            textView.isSingleLine = value
         }
 
     @DrawableRes
@@ -150,6 +156,17 @@ class XHBTipView @JvmOverloads constructor(
             }
         }
 
+    var button: View? = null
+        set(value) {
+            if (value?.parent != null)
+                return
+            if (field != null)
+                removeView(field)
+            field = value
+            if (field != null)
+                addView(field)
+        }
+
     private var textView: TextView
     private var imageView: ImageView
     private var leftImageView: ImageView
@@ -160,6 +177,7 @@ class XHBTipView @JvmOverloads constructor(
     private val layerDrawable: LayerDrawable
 
     private var target: View? = null
+    private var listener: TipViewListener? = null
     private var location2 = Location.TopRight
 
     init {
@@ -180,18 +198,31 @@ class XHBTipView @JvmOverloads constructor(
         rightIcon = a.getResourceId(R.styleable.XHBTipView_rightIcon, 0)
         if (a.hasValue(R.styleable.XHBTipView_android_text))
             message = a.getText(R.styleable.XHBTipView_android_text)
+        dismissDelay = a.getInt(R.styleable.XHBTipView_dismissDelay, dismissDelay.toInt()).toLong()
         textColor = a.getColor(R.styleable.XHBTipView_android_textColor, textColor)
         textSize = a.getDimensionPixelSize(R.styleable.XHBTipView_android_textSize, textSize.toInt()).toFloat()
         frameColor = a.getColor(R.styleable.XHBTipView_frameColor, frameColor)
         frameRadius = a.getDimension(R.styleable.XHBTipView_frameRadius, frameRadius)
         arrowSize = a.getDimensionPixelSize(R.styleable.XHBTipView_arrowSize, arrowSize)
         arrowOffset = a.getDimensionPixelSize(R.styleable.XHBTipView_arrowOffset, arrowOffset)
+        a.recycle()
     }
 
-    fun popAt(target: View) {
+    fun popAt(target: View, listener: TipViewListener? = null) {
         this.target = target
+        this.listener = listener
+        if (listener != null) {
+            val onClick: (View) -> Unit = {view ->
+                listener.tipViewIconTapped(this, if (view == leftImageView) 0 else 1)
+            }
+            leftImageView.setOnClickListener(onClick)
+            rightImageView.setOnClickListener(onClick)
+        } else {
+            leftImageView.setOnClickListener(null)
+            rightImageView.setOnClickListener(null)
+        }
         var mWidth = maxWidth
-        if (mWidth < 0) {
+        if (mWidth <= 0) {
             mWidth += target.rootView.width
         }
         if (location == Location.ManualLayout) {
@@ -199,59 +230,125 @@ class XHBTipView @JvmOverloads constructor(
         }
         val size = calcSize(mWidth)
         val loc = calcLocation(target, size)
-        updateArrow(location2)
-        updateBackground(location2)
+        updateArrow()
+        // pop
+        val lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        lp.leftMargin = loc.x
+        lp.topMargin = loc.y
         if (location2 == Location.ManualLayout) {
-            var lp = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        } else {
-            var lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            lp.leftMargin = loc.x
-            lp.topMargin = loc.y
-            (target.context as? Activity)?.window?.addContentView(this, lp)
+            lp.width = mWidth
+        }
+        var context = target.context
+        while (context is ContextWrapper) {
+            if (context is Activity)
+                break
+            context = (context as ContextWrapper).baseContext
+        }
+        if (location2 == Location.AutoToast) {
+            ++toastCount
+        }
+        (context as? Activity)?.window?.addContentView(this, lp)
+        textView.requestFocus()
+        if (dismissDelay > 0)
+            postDelayed(DismissRunnable(this), dismissDelay)
+    }
+
+    class DismissRunnable(view: XHBTipView) : Runnable {
+        private val view: WeakReference<XHBTipView> = WeakReference(view)
+        override fun run() {
+            view.get()?.dismiss()
         }
     }
 
-    private fun calcSize(maxWidth: Int) : Size {
-        val widthMeasureSpec = MeasureSpec.makeMeasureSpec(maxWidth, MeasureSpec.AT_MOST)
-        val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
-        measure(widthMeasureSpec, heightMeasureSpec)
-        return Size(measuredWidth, measuredHeight)
+    fun dismiss(timeout: Boolean = false) {
+        if (location2 == Location.AutoToast) {
+            --toastCount
+        }
+        if (button != null)
+            removeView(button)
+        (parent as? ViewGroup)?.removeView(this)
+        listener?.tipViewDismissed(this, timeout)
     }
 
-    private fun updateArrow(location: Location) {
+    companion object {
+
+        private val TAG = "XHBTipView"
+
+        private var toastCount = 0
+        private var toastY = 0
+
+        val frameConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
+            R.dimen.tip_view_frame_radius, R.color.tip_view_frame_color,
+            0, 0,
+            0, 0
+        )
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        Log.d(TAG, "onMeasure: " + MeasureSpec.toString(widthMeasureSpec) + " " + MeasureSpec.toString(heightMeasureSpec))
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        var width = MeasureSpec.getSize(widthMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        var height = MeasureSpec.getSize(heightMeasureSpec)
+        var mWidth = maxWidth
+        if (mWidth <= 0) {
+            mWidth += rootView.width
+        }
+        if (location2 != Location.ManualLayout && mWidth in 1 until width) {
+            width = mWidth
+        }
+        if (location2.ordinal < Location.BottomRight.ordinal && heightMode != MeasureSpec.UNSPECIFIED)
+            height -= arrowSize
+        super.onMeasure(MeasureSpec.makeMeasureSpec(width, widthMode), MeasureSpec.makeMeasureSpec(height, heightMode))
+        if (location2.ordinal < Location.BottomRight.ordinal)
+            setMeasuredDimension(measuredWidth, measuredHeight + arrowSize)
+        Log.d(TAG, "onMeasure: $measuredWidth $measuredHeight")
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        var tt = t
+        var bb = b
+        if (location2.ordinal <= Location.TopRight.ordinal)
+            bb -= arrowSize
+        else if (location2.ordinal <= Location.BottomRight.ordinal)
+            tt += arrowSize
+        super.onLayout(changed, l, t, r, bb)
+        layoutBackground()
+    }
+
+    /* private */
+
+    private fun updateArrow() {
         val path = Path()
-        val x = location.ordinal % 3
-        val y = location.ordinal >= 3
+        val y = location2.ordinal >= 3
         val s = arrowSize.toFloat()
         if (!y) { // down
             path.moveTo(0f, 0f)
             path.lineTo(s * 2, 0f)
             path.lineTo(s, s)
-            setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom + arrowSize)
         } else {
             path.moveTo(0f, s)
             path.lineTo(s * 2, s)
             path.lineTo(s, 0f)
-            setPadding(paddingLeft, paddingTop + arrowSize, paddingRight, paddingBottom)
         }
         path.close()
         val shape = PathShape(path,s * 2, s)
         arrowDrawable.shape = shape
     }
 
-    private fun updateBackground(location: Location) {
-        if (location.ordinal >= Location.AutoToast.ordinal) {
+    private fun layoutBackground() {
+        if (location2.ordinal >= Location.AutoToast.ordinal) {
             background = frameDrawable
         } else {
             background = layerDrawable
-            val x = location.ordinal % 3
-            val y = location.ordinal >= 3
+            val x = location2.ordinal % 3
+            val y = location2.ordinal >= 3
             if (!y) {
                 layerDrawable.setLayerInset(0, 0, 0, 0, arrowSize)
             } else {
                 layerDrawable.setLayerInset(0, 0, arrowSize, 0, 0)
             }
-            var loc = Point()
+            val loc = Point()
             loc.x = when (x) {
                 0 -> width - arrowOffset - arrowSize
                 1 -> width / 2 - arrowSize
@@ -262,36 +359,20 @@ class XHBTipView @JvmOverloads constructor(
         }
     }
 
-    companion object {
-        val frameConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.tip_view_frame_radius, R.color.tip_view_frame_color,
-            0, 0,
-            0, 0
-        )
+    private fun calcSize(maxWidth: Int) : Size {
+        val widthMeasureSpec = MeasureSpec.makeMeasureSpec(maxWidth, MeasureSpec.AT_MOST)
+        val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+        measure(widthMeasureSpec, heightMeasureSpec)
+        return Size(measuredWidth, measuredHeight)
     }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
-        val width = MeasureSpec.getSize(widthMeasureSpec)
-        var widthMeasureSpec2 = widthMeasureSpec
-        if (maxWidth > 0 && width > maxWidth) {
-            widthMeasureSpec2 = MeasureSpec.makeMeasureSpec(widthMode, maxWidth)
-        }
-        super.onMeasure(widthMeasureSpec2, heightMeasureSpec)
-    }
-
-    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        super.onLayout(changed, l, t, r, b)
-        updateBackground(location2)
-    }
-
-    private var toastCount = 0
-    private var toastY = 0
 
     private fun calcLocation(target: View, size: Size): Point {
-        var location = this.location!!
+        val location = this.location!!
         if (location == Location.ManualLayout) {
-            return Point()
+            val loc = intArrayOf(0, 0)
+            target.getLocationInWindow(loc)
+            location2 = location
+            return Point(loc[0], loc[1])
         }
         val wbounds = Rect()
         target.rootView.getLocalVisibleRect(wbounds)
@@ -302,12 +383,11 @@ class XHBTipView @JvmOverloads constructor(
             } else {
                 toastY -= size.height + 20
             }
-            toastCount += 1
-            location2 = location!!
+            location2 = location
             return Point(wbounds.centerX() - size.width / 2, toastY - size.height / 2)
         }
         // for arrow locations
-        var frame = Rect(0, 0, size.width, size.height)
+        val frame = Rect(0, 0, size.width, size.height)
         val loc = intArrayOf(0, 0)
         target.getLocationInWindow(loc)
         val tbounds = Rect(loc[0], loc[1], loc[0] + target.width, loc[1] + target.height)
@@ -343,10 +423,7 @@ class XHBTipView @JvmOverloads constructor(
                 frame.bottom = tbounds.top
                 frame.top = frame.bottom - size.height
             }
-            if ((frame.top >= wbounds.top && frame.bottom <= wbounds.bottom) || (frame.top < wbounds.top && frame.bottom > wbounds.bottom)) {
-                true
-            }
-            false
+            (frame.top >= wbounds.top && frame.bottom <= wbounds.bottom) || (frame.top < wbounds.top && frame.bottom > wbounds.bottom)
         }
 
         var x = location.ordinal % 3
@@ -362,7 +439,7 @@ class XHBTipView @JvmOverloads constructor(
             val d1 = checkX(x)
             if (d1 != 0 && d1 != d) {
                 x -= d
-                d = checkX(x)
+                checkX(x)
                 break
             }
             d = d1
