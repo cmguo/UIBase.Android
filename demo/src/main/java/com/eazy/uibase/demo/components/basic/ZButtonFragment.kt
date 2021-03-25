@@ -14,7 +14,7 @@ import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.ButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.ButtonItemBinding
-import com.eazy.uibase.demo.view.recycler.PaddingDecoration
+import com.eazy.uibase.view.PaddingDecoration
 import com.eazy.uibase.widget.ZButton
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver

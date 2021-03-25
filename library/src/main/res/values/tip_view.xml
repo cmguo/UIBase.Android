@@ -41,7 +41,6 @@
     <dimen name="tip_view_small_text_size">14sp</dimen>
 
     <style name="ZTipView">
-
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingLeft">@dimen/tip_view_padding_x</item>
         <item name="android:paddingRight">@dimen/tip_view_padding_x</item>

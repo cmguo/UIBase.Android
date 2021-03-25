@@ -16,7 +16,7 @@ import com.eazy.uibase.demo.core.SkinManager;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.ColorsFragmentBinding;
-import com.eazy.uibase.demo.view.recycler.PaddingDecoration;
+import com.eazy.uibase.view.PaddingDecoration;
 
 import java.util.Map;
 

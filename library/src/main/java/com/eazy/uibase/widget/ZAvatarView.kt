@@ -56,6 +56,7 @@ class ZAvatarView @JvmOverloads constructor(
             if (field != value) {
                 field = value
                 borderPaint.strokeWidth = value
+                computeRoundBounds()
                 invalidate()
             }
         }
@@ -181,6 +182,8 @@ class ZAvatarView @JvmOverloads constructor(
                 circleBounds.bottom = c + circleBounds.width() / 2
             }
         }
+        if (borderWidth > 0)
+            circleBounds.inset(borderWidth / 2f, borderWidth / 2f)
         clipBounds.set(imageBounds)
     }
 

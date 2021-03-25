@@ -19,7 +19,7 @@ import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.CompoundButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.RadioButtonItemBinding
-import com.eazy.uibase.demo.view.recycler.PaddingDecoration
+import com.eazy.uibase.view.PaddingDecoration
 import com.eazy.uibase.widget.ZCheckBox
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
