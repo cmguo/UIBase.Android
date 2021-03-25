@@ -8,10 +8,8 @@ import com.eazy.uibase.demo.core.SkinManager
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.databinding.DialogFragmentBinding
-import com.eazy.uibase.dialog.CommonActionListener
-import com.eazy.uibase.dialog.CommonDialog
-import com.eazy.uibase.dialog.InputActionListener
-import com.eazy.uibase.dialog.InputDialog
+import com.eazy.uibase.dialog.*
+import com.eazy.uibase.dialog.bean.ItemBean
 import kotlinx.android.synthetic.main.dialog_fragment.*
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
@@ -78,6 +76,55 @@ class ZDialogFragment : ComponentFragment<DialogFragmentBinding?, ZDialogFragmen
                 })
                 .show(childFragmentManager, "input dialog")
         }
+
+        btn_single_dialog.setOnClickListener {
+            val builder = SingleSelectDialog.Builder(context)
+            builder.withTitle("选择学科")
+                .withData(getSubjectData())
+                .withConfirmListener(object : OnSingleSelectionConfirmListener {
+                    override fun onConfirm(mode: ItemBean?) {
+                    }
+
+                })
+                .setCancelable(true)
+                .show(childFragmentManager, "single choose dialog")
+        }
+
+        btn_bottom_dialog.setOnClickListener {
+            BottomDialog.Builder(context)
+                .withAction("QQ邀请", object : BottomActionListener {
+                    override fun onClick(dialog: BottomDialog) {
+                        dialog.dismiss()
+                    }
+                })
+                .withAction("通讯录邀请", object : BottomActionListener {
+                    override fun onClick(dialog: BottomDialog) {
+                        dialog.dismiss()
+                    }
+                })
+                .withAction("手机号邀请", object : BottomActionListener {
+                    override fun onClick(dialog: BottomDialog) {
+                        dialog.dismiss()
+
+                    }
+                })
+                .withAction("取消", object : BottomActionListener {
+                    override fun onClick(dialog: BottomDialog) {
+                        dialog.dismiss()
+                    }
+                })
+                .show(childFragmentManager, "otherInviteDialog")
+        }
+    }
+
+    private fun getSubjectData(): ArrayList<ItemBean> {
+        val list = ArrayList<ItemBean>()
+        list.add(ItemBean("语文", true))
+        list.add(ItemBean("数学"))
+        list.add(ItemBean("英语"))
+        list.add(ItemBean("物理"))
+        list.add(ItemBean("化学"))
+        return list
     }
 
     companion object {
