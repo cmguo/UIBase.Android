@@ -1,4 +1,4 @@
-package com.eazy.uibase.view;
+package com.eazy.uibase.view.list;
 
 import android.content.Context;
 import android.graphics.Canvas;

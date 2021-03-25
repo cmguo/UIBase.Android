@@ -11,23 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.eazy.uibase.demo.R;
-import com.eazy.uibase.demo.databinding.StyleItemBinding;
 import com.eazy.uibase.demo.databinding.StylesFragmentBinding;
-import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.core.ComponentFragment;
-import com.eazy.uibase.view.DeviderDecoration;
+import com.eazy.uibase.view.list.BaseItemBinding;
+import com.eazy.uibase.view.list.DeviderDecoration;
+import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
 public class StylesFragment extends Fragment {
 
-    public static class StyleItemLayout extends RecyclerViewAdapter.BaseItemLayout<StylesViewModel.StyleValue> {
+    public static class StyleItemBinding extends BaseItemBinding<StylesViewModel.StyleValue> {
 
-        public StyleItemLayout() {
+        public StyleItemBinding() {
         }
 
         @Override
@@ -41,21 +42,21 @@ public class StylesFragment extends Fragment {
         }
 
         @Override
-        public ViewDataBinding createBinding(@NonNull ViewGroup parent, int viewType) {
+        public ViewBinding createBinding(@NonNull ViewGroup parent, int viewType) {
             if (viewType == R.layout.style_desc) {
                 return super.createBinding(parent, viewType);
             }
-            ViewDataBinding binding = super.createBinding(parent, R.layout.style_item);
+            ViewBinding binding = super.createBinding(parent, R.layout.style_item);
             ViewGroup group = (ViewGroup) binding.getRoot().findViewById(R.id.value);
-            ViewDataBinding valueBinding = super.createBinding(group, viewType);
+            ViewBinding valueBinding = super.createBinding(group, viewType);
             group.addView(valueBinding.getRoot());
             return binding;
         }
 
         @Override
-        public void bindView(ViewDataBinding binding, StylesViewModel.StyleValue item, int position) {
+        public void bindView(ViewBinding binding, StylesViewModel.StyleValue item, int position) {
             super.bindView(binding, item, position);
-            if (binding instanceof StyleItemBinding) {
+            if (binding instanceof com.eazy.uibase.demo.databinding.StyleItemBinding) {
                 ViewGroup group = (ViewGroup) binding.getRoot().findViewById(R.id.value);
                 ViewDataBinding valueBinding = DataBindingUtil.findBinding(group.getChildAt(0));
                 valueBinding.setVariable(BR.value, item);
@@ -98,11 +99,9 @@ public class StylesFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
-            int orig = position;
             if (expandSyle > 0 && position >= expandSyle)
                 --position;
             super.onBindViewHolder(holder, position);
-            holder.setItemPosition(orig);
         }
     }
 
@@ -114,7 +113,7 @@ public class StylesFragment extends Fragment {
     private ComponentFragment fragment;
 
     public StylesAdapter adapter = new StylesAdapter();
-    public StyleItemLayout itemBinding = new StyleItemLayout();
+    public StyleItemBinding itemBinding = new StyleItemBinding();
     public RecyclerView.ItemDecoration itemDecoration = new DeviderDecoration(getContext());
     public RecyclerViewAdapter.OnItemClickListener itemClicked = new RecyclerViewAdapter.OnItemClickListener() {
         @Override

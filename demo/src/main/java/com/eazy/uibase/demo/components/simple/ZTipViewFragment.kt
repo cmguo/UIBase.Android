@@ -7,7 +7,6 @@ import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.GridLayoutManager
-import com.eazy.uibase.binding.RecyclerViewAdapter
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
@@ -17,6 +16,7 @@ import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.TipViewFragmentBinding
 import com.eazy.uibase.demo.databinding.ToastTipViewBinding
 import com.eazy.uibase.demo.databinding.ToolTipViewBinding
+import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZButton
 import com.eazy.uibase.widget.ZTipView
 
@@ -145,7 +145,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         }
     }
 
-    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemBinding<Any>(R.layout.tip_view_button_item) {
+    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.tip_view_button_item) {
         override fun bindView(binding: ViewDataBinding?, item: Any?, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

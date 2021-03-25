@@ -10,14 +10,15 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.Layouts;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.DialogsFragmentBinding;
-import com.eazy.uibase.view.PaddingDecoration;
+import com.eazy.uibase.view.list.DeviderDecoration;
+import com.eazy.uibase.view.list.PaddingDecoration;
+import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
 import java.util.Map;
 

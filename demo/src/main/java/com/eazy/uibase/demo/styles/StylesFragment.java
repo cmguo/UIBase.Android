@@ -8,14 +8,14 @@ import androidx.databinding.ViewDataBinding;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.eazy.uibase.binding.RecyclerViewAdapter;
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.SkinManager;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.Styles2FragmentBinding;
-import com.eazy.uibase.view.PaddingDecoration;
+import com.eazy.uibase.view.list.PaddingDecoration;
+import com.eazy.uibase.view.list.UnitTypeItemBinding;
 
 import java.util.Map;
 
@@ -79,7 +79,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         }
     }
 
-    public static class ItemLayout extends RecyclerViewAdapter.UnitTypeItemBinding<Map.Entry<String, Integer>> {
+    public static class ItemLayout extends UnitTypeItemBinding<Map.Entry<String, Integer>> {
         private final Styles styles;
 
         public ItemLayout(Styles styles) {

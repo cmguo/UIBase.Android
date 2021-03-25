@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
-import com.eazy.uibase.view.DeviderDecoration
+import com.eazy.uibase.view.list.DeviderDecoration
 
 class ZDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : LinearLayoutCompat(context, attrs, R.attr.dropDownStyle) {

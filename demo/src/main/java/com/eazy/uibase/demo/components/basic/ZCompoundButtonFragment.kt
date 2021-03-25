@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
-import com.eazy.uibase.binding.RecyclerViewAdapter
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.SkinManager
@@ -19,7 +18,9 @@ import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.CompoundButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.RadioButtonItemBinding
-import com.eazy.uibase.view.PaddingDecoration
+import com.eazy.uibase.view.list.PaddingDecoration
+import com.eazy.uibase.view.list.RecyclerViewAdapter
+import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZCheckBox
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
@@ -88,7 +89,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
             }
     }
 
-    class ItemLayout(private val styles: Styles) : RecyclerViewAdapter.UnitTypeItemBinding<StateItem>(styles.itemBindingId) {
+    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<StateItem>(styles.itemBindingId) {
         override fun bindView(binding: ViewDataBinding?, item: StateItem, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

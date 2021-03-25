@@ -7,14 +7,14 @@ import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.eazy.uibase.binding.RecyclerViewAdapter.UnitTypeItemBinding
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.*
 import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.ButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.ButtonItemBinding
-import com.eazy.uibase.view.PaddingDecoration
+import com.eazy.uibase.view.list.PaddingDecoration
+import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZButton
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
