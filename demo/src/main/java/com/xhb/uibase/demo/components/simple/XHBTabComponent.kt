@@ -3,6 +3,7 @@ package com.xhb.uibase.demo.components.simple
 import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
+import com.xhb.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
 class XHBTabComponent : Component {
@@ -26,4 +27,7 @@ class XHBTabComponent : Component {
         return R.string.component_xhb_tabs_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return XHBTabFragment::class.java
+    }
 }

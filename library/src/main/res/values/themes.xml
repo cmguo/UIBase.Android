@@ -8,6 +8,8 @@
         <item name="switchStyle">@style/XHBSwitchButton</item>
         <item name="tipViewStyle">@style/XHBTipView</item>
         <item name="dropDownStyle">@style/XHBDropDown</item>
+        <item name="lineIndicatorStyle">@style/XHBLineIndicator</item>
+        <item name="tabTitleStyle">@style/XHBTabTitleView</item>
     </style>
 
 </resources>
