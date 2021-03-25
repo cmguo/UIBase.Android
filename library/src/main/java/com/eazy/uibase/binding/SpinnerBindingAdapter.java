@@ -1,19 +1,16 @@
 package com.eazy.uibase.binding;
 
-import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.databinding.BindingAdapter;
 
+import com.eazy.uibase.view.list.SpinnerAdapter;
+
 import java.util.List;
 
-public class SpinnerAdapter<T> extends ArrayAdapter implements android.widget.SpinnerAdapter {
+public class SpinnerBindingAdapter {
 
     @BindingAdapter("entries")
     public static <T> void setSpinnerEntries(AppCompatSpinner spinner, List<T> data) {
@@ -71,13 +68,4 @@ public class SpinnerAdapter<T> extends ArrayAdapter implements android.widget.Sp
         return adapter instanceof SpinnerAdapter ? (SpinnerAdapter) adapter : null;
     }
 
-    public SpinnerAdapter(@NonNull Context context) {
-        super(context, 0);
-    }
-
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        return super.getDropDownView(position, convertView, parent);
-    }
 }
