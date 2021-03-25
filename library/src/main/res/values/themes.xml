@@ -7,6 +7,7 @@
         <item name="radioButtonStyle">@style/XHBRadioButton</item>
         <item name="switchStyle">@style/XHBSwitchButton</item>
         <item name="tipViewStyle">@style/XHBTipView</item>
+        <item name="dropDownStyle">@style/XHBDropDown</item>
     </style>
 
 </resources>

@@ -34,7 +34,7 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
             button.buttonType = XHBButton.ButtonType.Text
             button.buttonSize = XHBButton.ButtonSize.Small
             button.height = 60
-            button.icon = R.drawable.ic_plus
+            button.icon = R.drawable.icon_plus
             button.iconAtRight = true
             button.text = "去查看"
             button

@@ -15,7 +15,7 @@ import com.xhb.uibase.demo.core.SkinManager;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.databinding.Styles2FragmentBinding;
-import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
+import com.xhb.uibase.view.PaddingDecoration;
 
 import java.util.Map;
 

@@ -17,7 +17,7 @@ import com.xhb.uibase.demo.core.Layouts;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.databinding.DialogsFragmentBinding;
-import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
+import com.xhb.uibase.view.PaddingDecoration;
 
 import java.util.Map;
 

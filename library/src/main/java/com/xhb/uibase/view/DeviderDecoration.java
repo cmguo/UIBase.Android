@@ -1,4 +1,4 @@
-package com.xhb.uibase.demo.view.recycler;
+package com.xhb.uibase.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,6 +9,8 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xhb.uibase.R;
+
 public class DeviderDecoration extends RecyclerView.ItemDecoration {
 
     private int deviderHeight;
@@ -18,9 +20,9 @@ public class DeviderDecoration extends RecyclerView.ItemDecoration {
         //设置画笔
         dividerPaint = new Paint();
         //设置分割线颜色
-        dividerPaint.setColor(Color.GRAY);
+        dividerPaint.setColor(context == null ? Color.GRAY : context.getColor(R.color.bluegrey_100));
         //设置分割线宽度
-        deviderHeight = 3;
+        deviderHeight = 1;
     }
 
     @Override

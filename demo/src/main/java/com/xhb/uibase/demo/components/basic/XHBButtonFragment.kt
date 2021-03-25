@@ -14,7 +14,7 @@ import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbButtonFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbButtonItemBinding
-import com.xhb.uibase.demo.view.recycler.PaddingDecoration
+import com.xhb.uibase.view.PaddingDecoration
 import com.xhb.uibase.widget.XHBButton
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
