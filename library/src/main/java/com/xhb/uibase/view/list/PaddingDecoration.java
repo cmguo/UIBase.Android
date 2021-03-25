@@ -1,4 +1,4 @@
-package com.xhb.uibase.view;
+package com.xhb.uibase.view.list;
 
 import android.content.Context;
 import android.graphics.Rect;

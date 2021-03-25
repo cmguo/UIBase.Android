@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xhb.uibase.binding.RecyclerViewAdapter;
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.Colors;
 import com.xhb.uibase.demo.core.ComponentFragment;
@@ -16,7 +15,8 @@ import com.xhb.uibase.demo.core.SkinManager;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.databinding.ColorsFragmentBinding;
-import com.xhb.uibase.view.PaddingDecoration;
+import com.xhb.uibase.view.list.PaddingDecoration;
+import com.xhb.uibase.view.list.RecyclerViewAdapter;
 
 import java.util.Map;
 

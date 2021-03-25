@@ -7,14 +7,14 @@ import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.xhb.uibase.binding.RecyclerViewAdapter.UnitTypeItemBinding
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.*
 import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbButtonFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbButtonItemBinding
-import com.xhb.uibase.view.PaddingDecoration
+import com.xhb.uibase.view.list.PaddingDecoration
+import com.xhb.uibase.view.list.UnitTypeItemBinding
 import com.xhb.uibase.widget.XHBButton
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver

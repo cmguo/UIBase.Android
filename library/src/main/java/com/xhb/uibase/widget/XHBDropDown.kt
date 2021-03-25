@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xhb.uibase.R
-import com.xhb.uibase.view.DeviderDecoration
+import com.xhb.uibase.view.list.DeviderDecoration
 
 class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : LinearLayoutCompat(context, attrs, R.attr.dropDownStyle) {
