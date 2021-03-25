@@ -1,58 +1,57 @@
 package com.eazy.uibase.demo.components.simple
 
-import android.view.LayoutInflater
-import android.view.View
+import android.content.Context
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.Fragment
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
-import com.eazy.uibase.demo.databinding.DropDownFragmentBinding
-import com.eazy.uibase.demo.databinding.DropDownBinding
+import com.eazy.uibase.demo.databinding.TabFragmentBinding
 import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZDropDown
 import com.eazy.uibase.widget.ZTipView
+import com.eazy.uibase.widget.tabs.ZLineIndicator
 
-class ZDropDownFragment : ComponentFragment<DropDownFragmentBinding?, ZDropDownFragment.Model?, ZDropDownFragment.Styles?>(), ZDropDown.DropDownListener {
+class ZTabFragment : ComponentFragment<TabFragmentBinding?, ZTabFragment.Model?, ZTabFragment.Styles?>(), ZDropDown.DropDownListener {
 
     class Model : ViewModel() {
 
-        var buttons = arrayOfNulls<Any>(24).toList()
+        val titles = arrayOf("项目1", "项目2", "项目3", "项目4", "项目5").toList()
 
-        val titles = arrayListOf("菜单项目1", "菜单项目2", "菜单项目3", "菜单项目4", "菜单项目5")
-        val icons = IconStyle.icons.toList()
+        val titles2 = arrayListOf("项目1", "项目2", "项目3", "项目4", "项目5",
+            "项目6", "项目7", "项目8", "项目9", "项目10", "项目11", "项目12", "项目13", "项目14", "项目15")
     }
 
-    class Styles(private val fragment: ZDropDownFragment) : ViewStyles() {
+    class Styles(private val fragment: ZTabFragment) : ViewStyles() {
 
-        val layoutManager = GridLayoutManager(fragment.context, 4)
-
-        val itemBinding: ItemLayout = ItemLayout(this)
+        val lineIndicator = R.layout.line_indicator
 
         @Bindable
-        @Title("宽度")
-        @Description("整体宽度，设置负数，则自动加上窗口宽度，设置为 0，自动计算宽度；通过 layout_width 或者 minimumWidth 设置")
-        var width = 600
+        var widthMode = ZLineIndicator.WidthMode.Exactly
 
-        fun buttonClick(view: View) {
-            val binding = DropDownBinding.inflate(LayoutInflater.from(fragment.context))
-            binding.styles = this
-            binding.model = fragment.model
-            binding.executePendingBindings()
-            if (width > 0) {
-                binding.dropDown.minimumWidth = width
-            }
-            binding.dropDown.popAt(view, fragment)
+        @Bindable
+        var lineWidth = 40f
+
+        @Bindable
+        var lineHeight = 8f
+
+
+        val itemBinding = ItemBinding(fragment.requireContext(), this)
+
+        val pagerTemplates = mutableMapOf<Class<*>, Class<out Fragment>>()
+
+        init {
+            pagerTemplates[String::class.java] = Fragment::class.java
         }
+
     }
 
-    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.drop_down_button_item) {
-        override fun bindView(binding: ViewDataBinding?, item: Any?, position: Int) {
+    class ItemBinding(context: Context, private val styles: Styles) : UnitTypeItemBinding<String?>(context, R.layout.tab_title) {
+        override fun bindView(binding: ViewDataBinding?, item: String?, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)
         }
@@ -66,6 +65,6 @@ class ZDropDownFragment : ComponentFragment<DropDownFragmentBinding?, ZDropDownF
     }
 
     companion object {
-        private const val TAG = "ZDropDownFragment"
+        private const val TAG = "ZTabFragment"
     }
 }

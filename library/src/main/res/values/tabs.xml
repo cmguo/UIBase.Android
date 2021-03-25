@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ZLineIndicator -->
+
+    <attr name="lineIndicatorStyle" format="reference"/>
+
+    <declare-styleable name="ZLineIndicator">
+        <attr name="widthMode">
+            <enum name="match_edge" value="0"/>
+            <enum name="wrap_content" value="1"/>
+            <enum name="exactily" value="2"/>
+        </attr>
+        <attr name="lineWidth" format="dimension" />
+        <attr name="lineHeight" format="dimension" />
+        <attr name="borderRadius"/>
+        <attr name="offsetX" format="dimension"/>
+        <attr name="offsetY" format="dimension"/>
+        <attr name="color"/>
+    </declare-styleable>
+
+    <dimen name="line_indicator_line_width">24dp</dimen>
+    <dimen name="line_indicator_line_height">4dp</dimen>
+    <dimen name="line_indicator_border_radius">4dp</dimen>
+    <dimen name="line_indicator_offset_x">4dp</dimen>
+    <dimen name="line_indicator_offset_y">0dp</dimen>
+    <color name="line_indicator_color">@color/brand_500</color>
+
+    <style name="ZLineIndicator">
+        <item name="widthMode">exactily</item>
+        <item name="lineWidth">@dimen/line_indicator_line_width</item>
+        <item name="lineHeight">@dimen/line_indicator_line_height</item>
+        <item name="borderRadius">@dimen/line_indicator_border_radius</item>
+        <item name="offsetX">@dimen/line_indicator_offset_x</item>
+        <item name="offsetY">@dimen/line_indicator_offset_y</item>
+        <item name="color">@color/line_indicator_color</item>
+    </style>
+
+    <!-- ZTabTitleView -->
+
+    <attr name="tabTitleStyle" format="reference"/>
+
+    <declare-styleable name="ZTabTitleView">
+        <attr name="android:textColor"/>
+        <attr name="textSizeNormal" format="dimension" />
+        <attr name="textSizeSelected" format="dimension" />
+    </declare-styleable>
+
+    <color name="tab_title_color">@color/bluegrey800_selected</color>
+    <dimen name="tab_text_size_normal">16sp</dimen>
+    <dimen name="tab_text_size_selected">18sp</dimen>
+
+    <style name="ZTabTitleView">
+        <item name="android:textColor">@color/tab_title_color</item>
+        <item name="textSizeNormal">@dimen/tab_text_size_normal</item>
+        <item name="textSizeSelected">@dimen/tab_text_size_selected</item>
+    </style>
+
+</resources>

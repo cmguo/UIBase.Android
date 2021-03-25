@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:xhb="http://schemas.android.com/apk/com.eazy.uibase"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.eazy.uibase.demo.components.simple.ZTabFragment.Styles" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+
+    </data>
+
+    <com.eazy.uibase.widget.tabs.ZLineIndicator
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        xhb:widthMode="{@styles.widthMode}"
+        xhb:lineWidth="@{styles.lineWidth}"/>
+
+</layout>
