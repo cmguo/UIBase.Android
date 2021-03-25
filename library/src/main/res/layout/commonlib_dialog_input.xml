@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/commonlib_dialog_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:padding="24dp">
+
+        <ImageView
+            android:id="@+id/dialog_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="-24dp"
+            android:layout_marginStart="-24dp"
+            android:layout_marginEnd="-24dp"
+            android:visibility="gone"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            tools:visibility="visible"
+            tools:src="@drawable/shape_dialog_blue_button_nor_bg" />
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/bluegrey_900"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:visibility="gone"
+            tools:text="我是标题"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/dialog_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/bluegrey_800"
+            android:textSize="16sp"
+            android:visibility="gone"
+            tools:text="我是副标题"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/commonlib_dialog_input_bg"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <com.xhb.uibase.widget.edittext.FloatInputLayout
+                android:id="@+id/floatInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:counterEnabled="true"
+                app:hintEnabled="false"
+                app:hintText="hint"
+                app:maxCounter="6">
+
+                <EditText
+                    android:id="@+id/dialog_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="start|top"
+                    android:inputType="text"
+                    android:maxLines="10"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:textColor="@color/bluegrey_800"
+                    android:textColorHint="@color/bluegrey_500"
+                    android:textCursorDrawable="@drawable/shape_edit_text_cursor"
+                    android:textSize="16sp"
+                    tools:text="我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框我是输入框" />
+
+            </com.xhb.uibase.widget.edittext.FloatInputLayout>
+
+            <CheckBox
+                android:id="@+id/cb_pwd_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_login_code_display_selector"
+                android:button="@null"
+                android:checked="false"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dialog_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/action1"
+                style="@style/DialogGreyButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="action1" />
+
+            <TextView
+                android:id="@+id/action2"
+                style="@style/DialogYellowButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="action2" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/dialog_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:padding="12dp"
+        android:src="@drawable/icon_16px_close_light"/>
+</RelativeLayout>
