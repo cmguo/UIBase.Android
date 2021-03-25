@@ -1,4 +1,4 @@
-package com.xhb.uibase.demo.view.recycler;
+package com.xhb.uibase.view;
 
 import android.content.Context;
 import android.graphics.Rect;

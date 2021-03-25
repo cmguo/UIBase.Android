@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,7 @@ import com.xhb.uibase.demo.databinding.StyleItemBinding;
 import com.xhb.uibase.demo.databinding.StylesFragmentBinding;
 import com.xhb.uibase.binding.RecyclerViewAdapter;
 import com.xhb.uibase.demo.core.ComponentFragment;
-import com.xhb.uibase.demo.view.recycler.DeviderDecoration;
-import com.xhb.uibase.demo.view.recycler.PaddingDecoration;
+import com.xhb.uibase.view.DeviderDecoration;
 
 public class StylesFragment extends Fragment {
 

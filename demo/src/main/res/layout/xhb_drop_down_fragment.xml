@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBDropDownFragment.Styles" />
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBDropDownFragment.Model" />
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBDropDownFragment" />
+
+        <variable
+            name="fragment"
+            type="XHBDropDownFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:itemBinding="@{styles.itemBinding}"
+            app:data="@{model.buttons}"
+            app:layoutManager="@{styles.layoutManager}" />
+
+    </LinearLayout>
+
+</layout>

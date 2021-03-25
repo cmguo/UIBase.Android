@@ -19,7 +19,7 @@ import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbCompoundButtonFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbRadioButtonItemBinding
-import com.xhb.uibase.demo.view.recycler.PaddingDecoration
+import com.xhb.uibase.view.PaddingDecoration
 import com.xhb.uibase.widget.XHBCheckBox
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
