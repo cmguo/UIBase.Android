@@ -7,6 +7,7 @@ import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
+@Author("jianghziguo")
 class ZTextInputComponent : Component {
     override fun id(): Int {
         return R.id.component_z_text_inputs

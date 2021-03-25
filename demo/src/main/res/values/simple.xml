@@ -8,7 +8,7 @@
 
     <id name="component_z_text_inputs"></id>
     <string name="component_z_text_inputs">输入框</string>
-    <string name="component_z_text_inputs_desc">用于单行文字输入</string>
+    <string name="component_z_text_inputs_desc">用于文字输入</string>
 
     <id name="component_z_tool_tips"></id>
     <string name="component_z_tool_tips">气泡提示</string>
