@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTabFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.simple.ZTabBarFragment.Styles" />
 
         <variable
             name="data"
@@ -18,7 +18,7 @@
 
     </data>
 
-    <com.eazy.uibase.widget.tabs.ZTabTitleView
+    <com.eazy.uibase.widget.tabbar.ZTabTitleView
         android:id="@+id/titleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

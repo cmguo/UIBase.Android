@@ -14,15 +14,13 @@
 
     </data>
 
-    <com.eazy.uibase.widget.tabbar.ZLineIndicator
+    <com.eazy.uibase.widget.tabbar.ZRoundIndicator
         android:id="@+id/lineIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        xhb:widthMode="{@styles.widthMode}"
-        xhb:lineWidth="@{styles.lineWidth}"
-        xhb:lineHeight="@{styles.lineHeight}"
-        xhb:offsetX="@{styles.offsetX}"
-        xhb:offsetY="@{styles.offsetY}"
+        xhb:borderRadius="@{styles.borderRadius}"
+        xhb:paddingX="@{styles.paddingX}"
+        xhb:paddingY="@{styles.paddingY}"
         />
 
 </layout>

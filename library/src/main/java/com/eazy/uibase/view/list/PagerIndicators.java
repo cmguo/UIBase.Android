@@ -8,6 +8,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerInd
 public class PagerIndicators {
 
     public static IPagerIndicator get(Context context, Object viewOrLayout) {
+        if (viewOrLayout == null)
+            return null;
         if (viewOrLayout instanceof IPagerIndicator)
             return (IPagerIndicator) viewOrLayout;
         return (IPagerIndicator) LayoutInflater.from(context).inflate((Integer) viewOrLayout, null);

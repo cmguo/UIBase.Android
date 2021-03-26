@@ -6,9 +6,9 @@ import com.eazy.uibase.demo.core.Component
 import com.eazy.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
-class ZTabComponent : Component {
+class ZBottomTabComponent : Component {
     override fun id(): Int {
-        return R.id.component_z_tabs
+        return R.id.component_z_bottom_bars
     }
 
     override fun group(): Int {
@@ -20,14 +20,14 @@ class ZTabComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_z_tabs
+        return R.string.component_z_bottom_bars
     }
 
     override fun description(): Int {
-        return R.string.component_z_tabs_desc
+        return R.string.component_z_bottom_bars_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
-        return ZTabFragment::class.java
+        return ZTabBarFragment::class.java
     }
 }

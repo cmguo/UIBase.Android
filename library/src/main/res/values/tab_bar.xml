@@ -9,7 +9,7 @@
         <attr name="widthMode">
             <enum name="match_edge" value="0"/>
             <enum name="wrap_content" value="1"/>
-            <enum name="exactily" value="2"/>
+            <enum name="exactly" value="2"/>
         </attr>
         <attr name="lineWidth" format="dimension" />
         <attr name="lineHeight" format="dimension" />
@@ -27,13 +27,32 @@
     <color name="line_indicator_color">@color/brand_500</color>
 
     <style name="ZLineIndicator">
-        <item name="widthMode">exactily</item>
+        <item name="widthMode">exactly</item>
         <item name="lineWidth">@dimen/line_indicator_line_width</item>
         <item name="lineHeight">@dimen/line_indicator_line_height</item>
         <item name="borderRadius">@dimen/line_indicator_border_radius</item>
         <item name="offsetX">@dimen/line_indicator_offset_x</item>
         <item name="offsetY">@dimen/line_indicator_offset_y</item>
         <item name="color">@color/line_indicator_color</item>
+    </style>
+
+    <!-- ZLineIndicator -->
+
+    <attr name="roundIndicatorStyle" format="reference"/>
+
+    <declare-styleable name="ZRoundIndicator">
+        <attr name="borderRadius"/>
+        <attr name="paddingX" format="dimension"/>
+        <attr name="paddingY" format="dimension"/>
+        <attr name="color"/>
+    </declare-styleable>
+
+    <dimen name="round_indicator_border_radius">8dp</dimen>
+    <color name="round_indicator_color">@color/bluegrey_00</color>
+
+    <style name="ZRoundIndicator">
+        <item name="borderRadius">@dimen/round_indicator_border_radius</item>
+        <item name="color">@color/round_indicator_color</item>
     </style>
 
     <!-- ZTabTitleView -->
@@ -54,6 +73,35 @@
         <item name="android:textColor">@color/tab_title_color</item>
         <item name="textSizeNormal">@dimen/tab_text_size_normal</item>
         <item name="textSizeSelected">@dimen/tab_text_size_selected</item>
+    </style>
+
+    <!-- ZTabBar -->
+
+    <attr name="tabBarStyle" format="reference"/>
+
+    <declare-styleable name="ZTabBar">
+        <attr name="backgroundColor"/>
+        <attr name="borderRadius"/>
+    </declare-styleable>
+
+    <color name="tab_bar_frame_background_color">@color/bluegrey_05</color>
+    <color name="tab_bar_round_background_color">@color/bluegrey_05</color>
+    <dimen name="tab_bar_border_radius">8dp</dimen>
+
+    <style name="ZTabBar">
+    </style>
+
+    <style name="ZTabBar.Flat" parent="ZTabBar">
+    </style>
+
+    <style name="ZTabBar.Round" parent="ZTabBar">
+        <item name="backgroundColor">@color/tab_bar_round_background_color</item>
+        <item name="borderRadius">@dimen/tab_bar_border_radius</item>
+    </style>
+
+    <style name="ZTabBar.Frame" parent="ZTabBar">
+        <item name="backgroundColor">@color/tab_bar_frame_background_color</item>
+        <item name="borderRadius">@dimen/tab_bar_border_radius</item>
     </style>
 
 </resources>

@@ -9,6 +9,7 @@
         <item name="tipViewStyle">@style/ZTipView</item>
         <item name="dropDownStyle">@style/ZDropDown</item>
         <item name="lineIndicatorStyle">@style/ZLineIndicator</item>
+        <item name="roundIndicatorStyle">@style/ZRoundIndicator</item>
         <item name="tabTitleStyle">@style/ZTabTitleView</item>
     </style>
 

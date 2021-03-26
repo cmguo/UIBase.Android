@@ -3,6 +3,7 @@ package com.eazy.uibase.demo.components.simple
 import com.google.auto.service.AutoService
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.Component
+import com.eazy.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
 class ZTabBarComponent : Component {
@@ -26,4 +27,7 @@ class ZTabBarComponent : Component {
         return R.string.component_z_tab_bars_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return ZTabBarFragment::class.java
+    }
 }
