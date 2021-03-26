@@ -32,7 +32,7 @@ class XHBDropDownFragment : ComponentFragment<XhbDropDownFragmentBinding?, XHBDr
 
         val layoutManager = GridLayoutManager(fragment.context, 4)
 
-        val itemBinding: ItemLayout = ItemLayout(this)
+        val itemBinding: ItemBinding = ItemBinding(this)
 
         @Bindable
         @Title("宽度")
@@ -51,7 +51,7 @@ class XHBDropDownFragment : ComponentFragment<XhbDropDownFragmentBinding?, XHBDr
         }
     }
 
-    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.xhb_drop_down_button_item) {
+    class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.xhb_drop_down_button_item) {
         override fun bindView(binding: ViewDataBinding?, item: Any?, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

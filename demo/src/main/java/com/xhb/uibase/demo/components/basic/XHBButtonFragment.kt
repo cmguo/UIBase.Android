@@ -28,7 +28,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
 
     class Styles(private val fragment_: XHBButtonFragment) : ViewStyles() {
 
-        var itemBinding = ItemLayout(this)
+        var itemBinding = ItemBinding(this)
         var itemDecoration: ItemDecoration = PaddingDecoration()
 
         @Bindable
@@ -88,7 +88,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         }
     }
 
-    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<XHBButton.ButtonType>(R.layout.xhb_button_item) {
+    class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<XHBButton.ButtonType>(R.layout.xhb_button_item) {
         override fun bindView(binding: ViewDataBinding?, item: XHBButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

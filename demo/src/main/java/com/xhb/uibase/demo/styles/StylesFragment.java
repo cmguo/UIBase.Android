@@ -22,8 +22,7 @@ import java.util.Map;
 import skin.support.observe.SkinObservable;
 import skin.support.observe.SkinObserver;
 
-public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, StylesFragment.Model, StylesFragment.Styles>
-        implements SkinObserver {
+public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, StylesFragment.Model, StylesFragment.Styles> {
 
     private static final String TAG = "StylesFragment";
 
@@ -49,7 +48,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
     }
 
     public static class Styles extends ViewStyles {
-        public ItemLayout itemBinding;
+        public ItemBinding itemBinding;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
 
         @Bindable
@@ -75,14 +74,14 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
         public Styles(StylesFragment fragment) {
             this.fragment_ = fragment;
-            itemBinding = new ItemLayout(this);
+            itemBinding = new ItemBinding(this);
         }
     }
 
-    public static class ItemLayout extends UnitTypeItemBinding<Map.Entry<String, Integer>> {
+    public static class ItemBinding extends UnitTypeItemBinding<Map.Entry<String, Integer>> {
         private final Styles styles;
 
-        public ItemLayout(Styles styles) {
+        public ItemBinding(Styles styles) {
             super(styles.itemBindingId());
             this.styles = styles;
         }
@@ -92,18 +91,6 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
             super.bindView(binding, item, position);
             binding.setVariable(BR.styles, styles);
         }
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        SkinManager.addObserver(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        SkinManager.removeObserver(this);
-        super.onDestroy();
     }
 
     @Override
