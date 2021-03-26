@@ -20,9 +20,10 @@ import java.util.List;
 
 public class MagicIndicatorBindingAdapter {
 
-    @BindingAdapter(value = {"titles", "itemBinding", "indicator", "itemClicked", "viewPager"}, requireAll = false)
+    @BindingAdapter(value = {"titles", "itemBinding", "indicator", "navigator", "itemClicked", "viewPager"}, requireAll = false)
     public static <T> void setMagicIndicatorTitles(MagicIndicator magicIndicator, List<T> titles, Object itemBinding,
-                                                   Object indicator, XHBTabAdapter.TitleSelectListener listener, Object viewPagerOrId) {
+                                                   Object indicator, Object navigator,
+                                                   XHBTabAdapter.TitleSelectListener listener, Object viewPagerOrId) {
         if (titles != null && itemBinding != null) {
             Context context = magicIndicator.getContext();
             XHBTabAdapter<T> adapter = new XHBTabAdapter(titles, ItemBindings.get(context, itemBinding),
@@ -38,9 +39,13 @@ public class MagicIndicatorBindingAdapter {
                 ((XHBTabAdapter) adapter).bindViewPager(viewPager);
                 ViewPagerHelper.bind(magicIndicator, viewPager);
             }
-            CommonNavigator indicatorNavigator = new CommonNavigator(magicIndicator.getContext());
-            indicatorNavigator.setAdapter(adapter);
-            magicIndicator.setNavigator(indicatorNavigator);
+            if (magicIndicator.getNavigator() instanceof CommonNavigator) {
+                ((CommonNavigator) magicIndicator.getNavigator()).setAdapter(adapter);
+            } else {
+                CommonNavigator indicatorNavigator = new CommonNavigator(magicIndicator.getContext());
+                indicatorNavigator.setAdapter(adapter);
+                magicIndicator.setNavigator(indicatorNavigator);
+            }
         }
     }
 

@@ -1,11 +1,10 @@
-package com.xhb.uibase.widget.tabs
+package com.xhb.uibase.widget.tabbar
 
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
 import com.xhb.uibase.R
-import net.lucode.hackware.magicindicator.buildins.ArgbEvaluatorHolder
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView
 
 class XHBTabTitleView @JvmOverloads constructor(

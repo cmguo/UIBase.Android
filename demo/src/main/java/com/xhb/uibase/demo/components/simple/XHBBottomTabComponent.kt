@@ -6,9 +6,9 @@ import com.xhb.uibase.demo.core.Component
 import com.xhb.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
-class XHBTabComponent : Component {
+class XHBBottomTabComponent : Component {
     override fun id(): Int {
-        return R.id.component_xhb_tabs
+        return R.id.component_xhb_bottom_bars
     }
 
     override fun group(): Int {
@@ -20,14 +20,14 @@ class XHBTabComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_xhb_tabs
+        return R.string.component_xhb_bottom_bars
     }
 
     override fun description(): Int {
-        return R.string.component_xhb_tabs_desc
+        return R.string.component_xhb_bottom_bars_desc
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
-        return XHBTabFragment::class.java
+        return XHBTabBarFragment::class.java
     }
 }

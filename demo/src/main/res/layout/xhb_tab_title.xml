@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="com.xhb.uibase.demo.components.simple.XHBTabFragment.Styles" />
+        <import type="com.xhb.uibase.demo.components.simple.XHBTabBarFragment.Styles" />
 
         <variable
             name="data"
@@ -18,7 +18,7 @@
 
     </data>
 
-    <com.xhb.uibase.widget.tabs.XHBTabTitleView
+    <com.xhb.uibase.widget.tabbar.XHBTabTitleView
         android:id="@+id/titleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

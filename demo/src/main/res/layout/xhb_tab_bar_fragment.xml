@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBTabBarFragment.Styles" />
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBTabBarFragment.Model" />
+
+        <import type="com.xhb.uibase.demo.components.simple.XHBTabBarFragment" />
+
+        <variable
+            name="fragment"
+            type="XHBTabBarFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+
+        <com.xhb.uibase.widget.tabbar.XHBTabBar
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/XHBTabBar.Frame"
+            app:titles="@{model.titles2}"
+            app:itemBinding="@{styles.itemBinding1}"
+            app:indicator="@{styles.lineIndicator1}"
+            app:viewPager="@{@id/viewPager2}"
+            />
+
+        <com.xhb.uibase.widget.tabbar.XHBTabBar
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/XHBTabBar.Frame"
+            app:titles="@{model.titles2}"
+            app:itemBinding="@{styles.itemBinding1}"
+            app:indicator="@{styles.lineIndicator2}"
+            app:viewPager="@{@id/viewPager2}"
+            />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:data="@{model.titles2}"
+            app:preload="@{true}"
+            app:template="@{styles.pagerTemplates}"/>
+
+
+        <com.xhb.uibase.widget.tabbar.XHBTabBar
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            style="@style/XHBTabBar.Flat"
+            app:titles="@{model.titles1}"
+            app:itemBinding="@{styles.itemBinding2}"
+            app:indicator="@{styles.lineIndicator3}"
+            app:viewPager="@{@id/viewPager1}"
+            />
+
+        <com.xhb.uibase.widget.tabbar.XHBTabBar
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            style="@style/XHBTabBar.Round"
+            app:titles="@{model.titles1}"
+            app:itemBinding="@{styles.itemBinding2}"
+            app:indicator="@{styles.roundIndicator1}"
+            app:viewPager="@{@id/viewPager1}"
+            />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager1"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:data="@{model.titles1}"
+            app:preload="@{true}"
+            app:template="@{styles.pagerTemplates}"/>
+
+
+    </LinearLayout>
+
+</layout>
