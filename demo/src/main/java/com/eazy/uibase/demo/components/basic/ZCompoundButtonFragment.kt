@@ -49,7 +49,8 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
     }
 
     class Styles(fragment: ZCompoundButtonFragment?) : ViewStyles() {
-        var itemBinding: ItemLayout
+
+        var itemBinding: ItemBinding = ItemBinding(this)
         var itemDecoration: RecyclerView.ItemDecoration = PaddingDecoration()
 
         @Bindable
@@ -76,10 +77,6 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
 
         private val fragment_ = fragment
 
-        init {
-            itemBinding = ItemLayout(this)
-        }
-
         val itemBindingId: Int
             get() = when (fragment_!!.component.id()) {
                 R.id.component_z_check_boxes -> R.layout.check_box_item
@@ -89,7 +86,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
             }
     }
 
-    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<StateItem>(styles.itemBindingId) {
+    class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<StateItem>(styles.itemBindingId) {
         override fun bindView(binding: ViewDataBinding?, item: StateItem, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)

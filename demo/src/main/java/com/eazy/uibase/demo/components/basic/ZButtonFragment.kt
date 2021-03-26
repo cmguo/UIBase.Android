@@ -28,7 +28,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
 
     class Styles(private val fragment_: ZButtonFragment) : ViewStyles() {
 
-        var itemBinding = ItemLayout(this)
+        var itemBinding = ItemBinding(this)
         var itemDecoration: ItemDecoration = PaddingDecoration()
 
         @Bindable
@@ -88,7 +88,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         }
     }
 
-    class ItemLayout(private val styles: Styles) : UnitTypeItemBinding<ZButton.ButtonType>(R.layout.button_item) {
+    class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<ZButton.ButtonType>(R.layout.button_item) {
         override fun bindView(binding: ViewDataBinding?, item: ZButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)
