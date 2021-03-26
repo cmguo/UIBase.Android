@@ -7,7 +7,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Li
 
 class XHBLineIndicator @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinePagerIndicator(context) {
+) : LinePagerIndicator(context, attrs, if (defStyleAttr == 0) R.attr.lineIndicatorStyle else defStyleAttr) {
 
     enum class WidthMode
     {
@@ -37,7 +37,6 @@ class XHBLineIndicator @JvmOverloads constructor(
         set(value) { setColors(value) }
     
     init {
-        tag = attrs?.getAttributeValue("http://schemas.android.com/apk/res/android", "tag")
         val style = if (defStyleAttr == 0) R.attr.lineIndicatorStyle else defStyleAttr
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBLineIndicator, style, 0)
         mode = a.getInt(R.styleable.XHBLineIndicator_widthMode, mode)

@@ -9,13 +9,12 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorT
 
 class XHBTabTitleView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ColorTransitionPagerTitleView(context) {
+) : ColorTransitionPagerTitleView(context, attrs, if (defStyleAttr == 0) R.attr.tabTitleStyle else defStyleAttr) {
 
     var textSizeNormal = 16f
     var textSizeSelected = 16f
 
     init {
-        tag = attrs?.getAttributeValue("http://schemas.android.com/apk/res/android", "tag")
         val style = if (defStyleAttr == 0) R.attr.tabTitleStyle else defStyleAttr
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBTabTitleView, style, 0)
         val color = a.getColorStateList(R.styleable.XHBTabTitleView_android_textColor)
