@@ -7,7 +7,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Wr
 
 class ZRoundIndicator @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : WrapPagerIndicator(context) {
+) : WrapPagerIndicator(context, attrs, if (defStyleAttr == 0) R.attr.roundIndicatorStyle else defStyleAttr) {
 
     var paddingX: Int
         get() = horizontalPadding
@@ -26,7 +26,6 @@ class ZRoundIndicator @JvmOverloads constructor(
         set(value) { fillColor = value }
     
     init {
-        tag = attrs?.getAttributeValue("http://schemas.android.com/apk/res/android", "tag")
         val style = if (defStyleAttr == 0) R.attr.roundIndicatorStyle else defStyleAttr
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZRoundIndicator, style, 0)
         paddingX = a.getDimensionPixelSize(R.styleable.ZRoundIndicator_paddingX, paddingX)
