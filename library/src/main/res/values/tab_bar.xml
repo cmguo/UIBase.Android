@@ -42,17 +42,23 @@
 
     <declare-styleable name="ZRoundIndicator">
         <attr name="borderRadius"/>
+        <attr name="shadowRadius"/>
+        <attr name="widthMode" />
         <attr name="paddingX" format="dimension"/>
         <attr name="paddingY" format="dimension"/>
         <attr name="color"/>
     </declare-styleable>
 
     <dimen name="round_indicator_border_radius">8dp</dimen>
+    <dimen name="round_indicator_shadow_radius">1dp</dimen>
     <color name="round_indicator_color">@color/bluegrey_00</color>
 
     <style name="ZRoundIndicator">
         <item name="borderRadius">@dimen/round_indicator_border_radius</item>
+        <item name="shadowRadius">@dimen/round_indicator_shadow_radius</item>
         <item name="color">@color/round_indicator_color</item>
+        <item name="paddingX">7dp</item>
+        <item name="paddingY">-1dp</item>
     </style>
 
     <!-- ZTabTitleView -->
@@ -70,9 +76,40 @@
     <dimen name="tab_text_size_selected">18sp</dimen>
 
     <style name="ZTabTitleView">
+        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/tab_title_color</item>
         <item name="textSizeNormal">@dimen/tab_text_size_normal</item>
         <item name="textSizeSelected">@dimen/tab_text_size_selected</item>
+    </style>
+
+    <!-- ZTabNavigator -->
+
+    <attr name="tabNavigatorStyle" format="reference"/>
+
+    <declare-styleable name="ZTabNavigator">
+        <attr name="backgroundColor"/>
+        <attr name="borderRadius"/>
+    </declare-styleable>
+
+    <color name="tab_nav_frame_background_color">@color/bluegrey_05</color>
+    <color name="tab_nav_round_background_color">@color/bluegrey_05</color>
+    <dimen name="tab_nav_height">48dp</dimen>
+    <dimen name="tab_nav_border_radius">8dp</dimen>
+
+    <style name="ZTabNavigator">
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="ZTabNavigator.Flat" parent="ZTabNavigator">
+    </style>
+
+    <style name="ZTabNavigator.Round" parent="ZTabNavigator">
+        <item name="backgroundColor">@color/tab_nav_round_background_color</item>
+        <item name="borderRadius">@dimen/tab_nav_border_radius</item>
+    </style>
+
+    <style name="ZTabNavigator.Frame" parent="ZTabNavigator">
+        <item name="backgroundColor">@color/tab_nav_frame_background_color</item>
     </style>
 
     <!-- ZTabBar -->
@@ -80,28 +117,10 @@
     <attr name="tabBarStyle" format="reference"/>
 
     <declare-styleable name="ZTabBar">
-        <attr name="backgroundColor"/>
-        <attr name="borderRadius"/>
+        <attr name="navigatorStyle" format="reference"/>
     </declare-styleable>
 
-    <color name="tab_bar_frame_background_color">@color/bluegrey_05</color>
-    <color name="tab_bar_round_background_color">@color/bluegrey_05</color>
-    <dimen name="tab_bar_border_radius">8dp</dimen>
-
     <style name="ZTabBar">
-    </style>
-
-    <style name="ZTabBar.Flat" parent="ZTabBar">
-    </style>
-
-    <style name="ZTabBar.Round" parent="ZTabBar">
-        <item name="backgroundColor">@color/tab_bar_round_background_color</item>
-        <item name="borderRadius">@dimen/tab_bar_border_radius</item>
-    </style>
-
-    <style name="ZTabBar.Frame" parent="ZTabBar">
-        <item name="backgroundColor">@color/tab_bar_frame_background_color</item>
-        <item name="borderRadius">@dimen/tab_bar_border_radius</item>
     </style>
 
 </resources>

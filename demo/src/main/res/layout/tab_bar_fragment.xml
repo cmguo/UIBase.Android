@@ -29,11 +29,11 @@
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-
         <com.eazy.uibase.widget.tabbar.ZTabBar
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/ZTabBar.Frame"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
+            app:navigatorStyle="@style/ZTabNavigator.Frame"
             app:titles="@{model.titles2}"
             app:itemBinding="@{styles.itemBinding1}"
             app:indicator="@{styles.lineIndicator1}"
@@ -42,8 +42,8 @@
 
         <com.eazy.uibase.widget.tabbar.ZTabBar
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/ZTabBar.Frame"
+            android:layout_height="48dp"
+            app:navigatorStyle="@style/ZTabNavigator.Frame"
             app:titles="@{model.titles2}"
             app:itemBinding="@{styles.itemBinding1}"
             app:indicator="@{styles.lineIndicator2}"
@@ -53,17 +53,19 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager2"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             app:data="@{model.titles2}"
             app:preload="@{true}"
             app:template="@{styles.pagerTemplates}"/>
 
 
         <com.eazy.uibase.widget.tabbar.ZTabBar
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal"
-            style="@style/ZTabBar.Flat"
+            app:navigatorStyle="@style/ZTabNavigator.Flat"
             app:titles="@{model.titles1}"
             app:itemBinding="@{styles.itemBinding2}"
             app:indicator="@{styles.lineIndicator3}"
@@ -72,9 +74,9 @@
 
         <com.eazy.uibase.widget.tabbar.ZTabBar
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:layout_gravity="center_horizontal"
-            style="@style/ZTabBar.Round"
+            app:navigatorStyle="@style/ZTabNavigator.Round"
             app:titles="@{model.titles1}"
             app:itemBinding="@{styles.itemBinding2}"
             app:indicator="@{styles.roundIndicator1}"
@@ -84,7 +86,8 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager1"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             app:data="@{model.titles1}"
             app:preload="@{true}"
             app:template="@{styles.pagerTemplates}"/>

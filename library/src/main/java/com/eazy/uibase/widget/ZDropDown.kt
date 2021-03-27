@@ -58,7 +58,7 @@ class ZDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         listView.layoutManager = LinearLayoutManager(context)
 
         setWillNotDraw(false)
-        setLayerType(LAYER_TYPE_SOFTWARE, null)
+        //setLayerType(LAYER_TYPE_SOFTWARE, null)
 
         backgroundPaint.style = Paint.Style.FILL
 
