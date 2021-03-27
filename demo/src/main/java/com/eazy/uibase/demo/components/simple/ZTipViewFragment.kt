@@ -11,6 +11,7 @@ import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
+import com.eazy.uibase.demo.core.style.DimemDpStyle
 import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.TipViewFragmentBinding
@@ -50,7 +51,8 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         @Bindable
         @Title("最大宽度")
         @Description("整体最大宽度，设置负数，则自动加上窗口宽度")
-        var maxWidth = 600
+        @Style(DimemDpStyle::class)
+        var maxWidth = 300
 
         @Bindable
         @Title("单行文字")

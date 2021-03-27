@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eazy.uibase.demo.R;
+import com.eazy.uibase.demo.core.style.DimemDpStyle;
 import com.eazy.uibase.demo.databinding.StylesFragmentBinding;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.view.list.BaseItemBinding;
@@ -66,40 +67,40 @@ public class StylesFragment extends Fragment {
 
     public static class StylesAdapter extends RecyclerViewAdapter {
 
-        private int expandSyle = 0;
+        private int expandStyle = 0;
 
         public void toggle(int position) {
-            if (expandSyle > 0) {
-                if (expandSyle == position)
+            if (expandStyle > 0) {
+                if (expandStyle == position)
                     return;
-                if (position > expandSyle)
+                if (position > expandStyle)
                     --position;
             }
-            if (position == expandSyle - 1) {
-                expandSyle = 0;
+            if (position == expandStyle - 1) {
+                expandStyle = 0;
             } else {
-                expandSyle = position + 1;
+                expandStyle = position + 1;
             }
             notifyDataSetChanged();
         }
 
         @Override
         public int getItemCount() {
-            return super.getItemCount() + (expandSyle > 0 ? 1 : 0);
+            return super.getItemCount() + (expandStyle > 0 ? 1 : 0);
         }
 
         @Override
         public int getItemViewType(int position) {
-            if (expandSyle > 0 && position == expandSyle)
+            if (expandStyle > 0 && position == expandStyle)
                 return R.layout.style_desc;
-            if (expandSyle > 0 && position > expandSyle)
+            if (expandStyle > 0 && position > expandStyle)
                 --position;
             return super.getItemViewType(position);
         }
 
         @Override
         public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
-            if (expandSyle > 0 && position >= expandSyle)
+            if (expandStyle > 0 && position >= expandStyle)
                 --position;
             super.onBindViewHolder(holder, position);
         }
@@ -134,6 +135,7 @@ public class StylesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        DimemDpStyle.init(getContext());
         mViewModel = new ViewModelProvider(this).get(StylesViewModel.class);
         if (fragment != null)
             mViewModel.bindComponent(fragment);

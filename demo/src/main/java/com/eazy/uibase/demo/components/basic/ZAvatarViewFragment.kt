@@ -6,6 +6,7 @@ import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.ColorStyle
+import com.eazy.uibase.demo.core.style.DimemDpStyle
 import com.eazy.uibase.demo.core.style.annotation.Description
 import com.eazy.uibase.demo.core.style.annotation.Style
 import com.eazy.uibase.demo.core.style.annotation.Title
@@ -33,7 +34,8 @@ class ZAvatarViewFragment : ComponentFragment<AvatarViewFragmentBinding?,
         @Bindable
         @Title("边框宽度")
         @Description("设置头像边框宽度，设为0，则没有边框")
-        var borderWidth = 0f
+        @Style(DimemDpStyle::class)
+        var borderWidth = 0.5f
 
         @Bindable
         @Title("边框颜色")

@@ -81,6 +81,7 @@ public class StylesViewModel extends ViewModel {
         ComponentStyles css = ComponentStyles.get(styles.getClass());
         List<StyleValue> list = new ArrayList<>();
         for (ComponentStyle cs : css.allStyles()) {
+            cs.init(styles);
             StyleValue sv = new StyleValue();
             sv.styles = styles;
             sv.style = cs;
