@@ -49,16 +49,23 @@
         <attr name="paddingX" format="dimension"/>
         <attr name="paddingY" format="dimension"/>
         <attr name="color"/>
+        <attr name="splitterHeight" format="dimension"/>
+        <attr name="splitterColor" format="color"/>
     </declare-styleable>
 
     <dimen name="round_indicator_border_radius">8dp</dimen>
     <dimen name="round_indicator_shadow_radius">1dp</dimen>
+    <dimen name="round_indicator_splitter_width">1dp</dimen>
+    <dimen name="round_indicator_splitter_height">20dp</dimen>
     <color name="round_indicator_color">@color/bluegrey_00</color>
+    <color name="round_indicator_splitter_color">@color/bluegrey_300</color>
 
     <style name="ZRoundIndicator">
         <item name="borderRadius">@dimen/round_indicator_border_radius</item>
         <item name="shadowRadius">@dimen/round_indicator_shadow_radius</item>
+        <item name="splitterHeight">@dimen/round_indicator_splitter_height</item>
         <item name="color">@color/round_indicator_color</item>
+        <item name="splitterColor">@color/round_indicator_splitter_color</item>
         <item name="paddingX">7dp</item>
         <item name="paddingY">-1dp</item>
     </style>

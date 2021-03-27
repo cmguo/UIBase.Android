@@ -33,8 +33,8 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
 
         val titles1 = arrayOf("语文", "数学", "英语").toList()
 
-        val titles2 = arrayListOf("项目1", "项目2", "项目3", "项目4", "项目5",
-            "项目6", "项目7", "项目8", "项目9", "项目10", "项目11", "项目12", "项目13", "项目14", "项目15")
+        val titles2 = arrayListOf("上海", "北京", "江苏", "浙江", "湖南",
+            "山东", "安徽", "福建", "江西", "台湾", "广东", "香港", "湖南", "湖北", "澳门")
 
     }
 
