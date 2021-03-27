@@ -16,7 +16,7 @@ class XHBTabNavigator @JvmOverloads constructor(
     var borderRadius = 0f
         set(value) {
             field = value
-            if (titleContainer != null) {
+            if (titleContainer != null && value > 0) {
                 val i = borderRadius.toInt()
                 val lp = titleContainer.layoutParams as FrameLayout.LayoutParams
                 lp.marginStart = i
@@ -28,6 +28,10 @@ class XHBTabNavigator @JvmOverloads constructor(
             }
         }
 
+    var gravityCenter: Boolean
+        get() = isAdjustMode
+        set(value) { isAdjustMode = value }
+
     private val backgroundPaint = Paint()
     private val bounds = RectF()
 
@@ -35,6 +39,7 @@ class XHBTabNavigator @JvmOverloads constructor(
         val style = if (defStyleAttr == 0) R.attr.tabNavigatorStyle else defStyleAttr
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBTabNavigator, style, defStyleRes)
         borderRadius = a.getDimension(R.styleable.XHBTabNavigator_borderRadius, borderRadius)
+        gravityCenter = a.getBoolean(R.styleable.XHBTabNavigator_gravityCenter, gravityCenter)
         backgroundPaint.color = a.getColor(R.styleable.XHBTabNavigator_backgroundColor, -1)
         a.recycle()
 

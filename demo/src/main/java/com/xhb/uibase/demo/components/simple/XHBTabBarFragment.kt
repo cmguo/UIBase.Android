@@ -42,9 +42,11 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
 
         companion object {
             // can't share
-            fun createLineIndicator(fragment: XHBTabBarFragment, styles: Styles): IPagerIndicator {
+            fun createLineIndicator(fragment: XHBTabBarFragment, styles: Styles, longLine: Boolean = false): IPagerIndicator {
                 val binding = XhbLineIndicatorBinding.inflate(LayoutInflater.from(fragment.context))
                 binding.styles = styles
+                if (longLine)
+                    binding.lineIndicator.longLineHeight = DimemDpStyle.dp2px(1f);
                 return binding.lineIndicator
             }
             fun createRoundIndicator(fragment: XHBTabBarFragment, styles: Styles): IPagerIndicator {
@@ -56,7 +58,7 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
 
         val lineIndicator1 = createLineIndicator(fragment, this)
         val lineIndicator2 = createLineIndicator(fragment, this)
-        val lineIndicator3 = createLineIndicator(fragment, this)
+        val lineIndicator3 = createLineIndicator(fragment, this, true)
 
         @Bindable
         @Title("宽度模式")
