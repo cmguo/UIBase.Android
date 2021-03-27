@@ -38,7 +38,8 @@ class ShapeDrawables {
                 val height = context.resources.getDimensionPixelSize(config.height)
                 drawable.setSize(width, height)
             }
-            drawable.cornerRadius = context.resources.getDimension(config.radius)
+            if (config.radius > 0)
+                drawable.cornerRadius = context.resources.getDimension(config.radius)
             drawable.color = context.resources.getColorStateList(config.fillColor)
             if (config.borderSize != 0) {
                 drawable.setStroke(context.resources.getDimensionPixelSize(config.borderSize),
