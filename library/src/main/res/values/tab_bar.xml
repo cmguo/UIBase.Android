@@ -13,6 +13,7 @@
         </attr>
         <attr name="lineWidth" format="dimension" />
         <attr name="lineHeight" format="dimension" />
+        <attr name="longLineHeight" format="dimension" />
         <attr name="borderRadius"/>
         <attr name="offsetX" format="dimension"/>
         <attr name="offsetY" format="dimension"/>
@@ -21,6 +22,7 @@
 
     <dimen name="line_indicator_line_width">24dp</dimen>
     <dimen name="line_indicator_line_height">4dp</dimen>
+    <dimen name="line_indicator_long_line_height">1dp</dimen>
     <dimen name="line_indicator_border_radius">4dp</dimen>
     <dimen name="line_indicator_offset_x">4dp</dimen>
     <dimen name="line_indicator_offset_y">0dp</dimen>
@@ -89,6 +91,7 @@
     <declare-styleable name="ZTabNavigator">
         <attr name="backgroundColor"/>
         <attr name="borderRadius"/>
+        <attr name="gravityCenter" format="boolean"/>
     </declare-styleable>
 
     <color name="tab_nav_frame_background_color">@color/bluegrey_05</color>
@@ -101,6 +104,7 @@
     </style>
 
     <style name="ZTabNavigator.Flat" parent="ZTabNavigator">
+        <item name="gravityCenter">true</item>
     </style>
 
     <style name="ZTabNavigator.Round" parent="ZTabNavigator">

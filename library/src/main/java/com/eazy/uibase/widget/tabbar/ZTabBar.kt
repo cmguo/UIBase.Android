@@ -28,9 +28,9 @@ class ZTabBar @JvmOverloads constructor(
 
         // use defStyleAttr 1 to disable defStyleAttr and use defStyleRes
         val navigator = ZTabNavigator(context, null, 1, navigatorStyle)
-        val lp = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
-        lp.gravity = Gravity.CENTER_HORIZONTAL
-        navigator.layoutParams = lp
+        //val lp = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
+        //lp.gravity = Gravity.CENTER_HORIZONTAL
+        //navigator.layoutParams = lp
         setNavigator(navigator)
     }
 
