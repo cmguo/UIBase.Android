@@ -58,7 +58,7 @@ class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSe
         listView.layoutManager = LinearLayoutManager(context)
 
         setWillNotDraw(false)
-        setLayerType(LAYER_TYPE_SOFTWARE, null)
+        //setLayerType(LAYER_TYPE_SOFTWARE, null)
 
         backgroundPaint.style = Paint.Style.FILL
 

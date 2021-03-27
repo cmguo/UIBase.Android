@@ -14,6 +14,10 @@ import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
+import com.xhb.uibase.demo.core.style.DimemDpStyle
+import com.xhb.uibase.demo.core.style.annotation.Description
+import com.xhb.uibase.demo.core.style.annotation.Style
+import com.xhb.uibase.demo.core.style.annotation.Title
 import com.xhb.uibase.demo.databinding.XhbLineIndicatorBinding
 import com.xhb.uibase.demo.databinding.XhbRoundIndicatorBinding
 import com.xhb.uibase.demo.databinding.XhbTabBarFragmentBinding
@@ -55,34 +59,57 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
         val lineIndicator3 = createLineIndicator(fragment, this)
 
         @Bindable
+        @Title("宽度模式")
+        @Description("指示器的宽度模式，可用于线段指示器、圆角指示器；有适应边界（MatchEdge）、适应内容（WrapContent)、外部指定（Exactly）三种模式")
         var widthMode = XHBLineIndicator.WidthMode.Exactly
 
         @Bindable
-        var lineWidth = 40f
+        @Title("线段宽度")
+        @Description("线段指示器的宽度，仅在外部指定（Exactly）有意义")
+        @Style(DimemDpStyle::class)
+        var lineWidth = 24f
 
         @Bindable
-        var lineHeight = 8f
+        @Title("线段高度")
+        @Description("线段指示器的高度")
+        @Style(DimemDpStyle::class)
+        var lineHeight = 4f
 
         @Bindable
-        var offsetX = 8f
+        @Title("横向偏移")
+        @Description("线段指示器的横行偏移，实际是padding，向内偏移")
+        @Style(DimemDpStyle::class)
+        var offsetX = 0f
 
         @Bindable
-        var offsetY = 8f
+        @Title("纵向偏移")
+        @Description("线段指示器的纵行偏移，从底部向上的偏移")
+        @Style(DimemDpStyle::class)
+        var offsetY = 0f
 
         val roundIndicator1 = createRoundIndicator(fragment, this)
 
         @Bindable
-        var borderRadius = 16f
+        @Title("圆角尺寸")
+        @Description("圆角指示器的圆角半径")
+        @Style(DimemDpStyle::class)
+        var borderRadius = 8f
 
         @Bindable
-        var paddingX = 60
+        @Title("横向填充")
+        @Description("圆角指示器的横向填充大小，在外部指定（Exactly），用作实际宽度")
+        @Style(DimemDpStyle::class)
+        var paddingX = 7
 
         @Bindable
-        var paddingY = 16
+        @Title("纵向填充")
+        @Description("圆角指示器的纵向填充大小，在外部指定（Exactly），用作实际高度")
+        @Style(DimemDpStyle::class)
+        var paddingY = -1
 
-        val itemBinding1 = ItemBinding(fragment.requireContext(), this, false)
+        val itemBinding1 = ItemBinding(fragment.requireContext(), this, 0)
 
-        val itemBinding2 = ItemBinding(fragment.requireContext(), this, true)
+        val itemBinding2 = ItemBinding(fragment.requireContext(), this, 240)
 
         val pagerTemplates = mutableMapOf<Class<*>, Class<out Fragment>>()
 
@@ -101,12 +128,14 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
         }
     }
 
-    class ItemBinding(context: Context, private val styles: Styles, private val padding: Boolean) : UnitTypeItemBinding<String?>(context, R.layout.xhb_tab_title) {
+    class ItemBinding(context: Context, private val styles: Styles, private val width: Int) : UnitTypeItemBinding<String?>(context, R.layout.xhb_tab_title) {
         override fun bindView(binding: ViewDataBinding?, item: String?, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)
-            if (padding) {
-                binding.root.setPadding(60, 0, 60, 0)
+            if (width > 0) {
+                val lp = binding.root.layoutParams
+                lp.width = width
+                binding.root.layoutParams = lp
             }
         }
     }

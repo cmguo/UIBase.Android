@@ -5,9 +5,11 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.view.Gravity
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.xhb.uibase.R
 import net.lucode.hackware.magicindicator.MagicIndicator
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 
 class XHBTabBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -21,11 +23,15 @@ class XHBTabBar @JvmOverloads constructor(
     init {
         val style = if (defStyleAttr == 0) R.attr.tabBarStyle else defStyleAttr
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBTabBar, style, 0)
-        borderRadius = a.getDimension(R.styleable.XHBTabBar_borderRadius, borderRadius)
-        backgroundPaint.color = a.getColor(R.styleable.XHBTabBar_backgroundColor, -1)
+        val navigatorStyle = a.getResourceId(R.styleable.XHBTabBar_navigatorStyle, 0);
         a.recycle()
 
-        setWillNotDraw(false)
+        // use defStyleAttr 1 to disable defStyleAttr and use defStyleRes
+        val navigator = XHBTabNavigator(context, null, 1, navigatorStyle)
+        val lp = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
+        lp.gravity = Gravity.CENTER_HORIZONTAL
+        navigator.layoutParams = lp
+        setNavigator(navigator)
     }
 
     override fun draw(canvas: Canvas) {

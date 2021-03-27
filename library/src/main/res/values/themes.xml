@@ -11,6 +11,8 @@
         <item name="lineIndicatorStyle">@style/XHBLineIndicator</item>
         <item name="roundIndicatorStyle">@style/XHBRoundIndicator</item>
         <item name="tabTitleStyle">@style/XHBTabTitleView</item>
+        <item name="tabNavigatorStyle">@style/XHBTabNavigator</item>
+        <item name="tabBarStyle">@style/XHBTabBar</item>
     </style>
 
 </resources>

@@ -27,8 +27,8 @@ class XHBTabAdapter<T>(val titles: List<T>, val itemBinding: ItemBinding<T>, pri
         }
     }
 
-    override fun getTitleView(context: Context?, index: Int): IPagerTitleView {
-        val binding = itemBinding.createBinding(null, itemBinding.getItemViewType(titles[index]))
+    override fun getTitleView(parent: ViewGroup?, index: Int): IPagerTitleView {
+        val binding = itemBinding.createBinding(parent, itemBinding.getItemViewType(titles[index]))
         itemBinding.bindView(binding, titles[index], index)
         binding.root.setOnClickListener(this)
         return binding.root as IPagerTitleView
@@ -36,7 +36,7 @@ class XHBTabAdapter<T>(val titles: List<T>, val itemBinding: ItemBinding<T>, pri
 
     override fun getCount(): Int = titles.size
 
-    override fun getIndicator(context: Context?): IPagerIndicator {
+    override fun getIndicator(parent: ViewGroup?): IPagerIndicator {
         return indicator
     }
 
