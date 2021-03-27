@@ -10,10 +10,12 @@
             <enum name="text" value="4"/>
         </attr>
         <attr name="buttonSize">
-            <enum name="small" value="0"/>
+            <enum name="large" value="0"/>
             <enum name="middle" value="1"/>
-            <enum name="large" value="2"/>
+            <enum name="small" value="2"/>
+            <enum name="thin" value="3"/>
         </attr>
+        <attr name="content" format="reference" />
         <attr name="icon" format="reference" />
         <attr name="iconAtRight" format="boolean" />
         <attr name="loadingDrawable" format="reference" />
