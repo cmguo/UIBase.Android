@@ -10,6 +10,7 @@ import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
+import com.xhb.uibase.demo.core.style.DimemDpStyle
 import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbDropDownFragmentBinding
@@ -37,7 +38,8 @@ class XHBDropDownFragment : ComponentFragment<XhbDropDownFragmentBinding?, XHBDr
         @Bindable
         @Title("宽度")
         @Description("整体宽度，设置负数，则自动加上窗口宽度，设置为 0，自动计算宽度；通过 layout_width 或者 minimumWidth 设置")
-        var width = 600
+        @Style(DimemDpStyle::class)
+        var width = 200
 
         fun buttonClick(view: View) {
             val binding = XhbDropDownBinding.inflate(LayoutInflater.from(fragment.context))

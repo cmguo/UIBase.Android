@@ -11,6 +11,7 @@ import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.SkinManager
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
+import com.xhb.uibase.demo.core.style.DimemDpStyle
 import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbCompoundButtonFragmentBinding
@@ -33,10 +34,12 @@ class XHBTextAreaFragment : ComponentFragment<XhbTextAreaFragmentBinding?, XHBTe
 
         @Bindable
         @Title("最小高度") @Description("没有文字时的高度")
+        @Style(DimemDpStyle::class)
         var minimunHeight = 100f
 
         @Bindable
         @Title("最大高度") @Description("高度随文字变化，需要指定最大高度；包含字数指示（如果有的话）")
+        @Style(DimemDpStyle::class)
         var maximunHeight = 300f
 
         @Bindable

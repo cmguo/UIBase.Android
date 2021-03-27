@@ -12,6 +12,7 @@ import com.xhb.uibase.demo.core.SkinManager
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.BR
 import com.xhb.uibase.demo.core.ViewStyles
+import com.xhb.uibase.demo.core.style.DimemDpStyle
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbBadgeViewFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbBadgeViewItemBinding
@@ -45,7 +46,8 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
         @Bindable
         @Title("边框宽度")
         @Description("加上边框；如果徽标显示在复杂图形上或者带有强烈色彩的图标上，建议具有1px容器背景色（通常为白色）的描边。")
-        var borderWidth = 1.0f
+        @Style(DimemDpStyle::class)
+        var borderWidth = 0.5f
 
         @Bindable
         @Title("对齐方式")
@@ -55,6 +57,7 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
         @Bindable
         @Title("位置偏移")
         @Description("相对于对齐点的偏移量，向中心偏移；如果某一边是中间对齐，则这边无法再调整")
+        @Style(DimemDpStyle::class)
         var offset = SizeF(0f, 0f)
 
         @Bindable

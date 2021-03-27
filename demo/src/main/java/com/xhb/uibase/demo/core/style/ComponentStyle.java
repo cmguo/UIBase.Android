@@ -84,30 +84,42 @@ public class ComponentStyle {
         return valueTitles_ == null ? values_ : valueTitles_;
     }
 
+    public void init(ViewStyles styles) {
+
+    }
+
     public String get(ViewStyles styles) {
+        Object value = getRaw(styles);
+        String string = valueToString(value);
+        if (valueTitles_ == null)
+            return string;
+        else
+            return valueTitles_.get(values_.indexOf(string));
+    }
+
+    public void set(ViewStyles styles, String string) {
+        if (valueTitles_ != null) {
+            string = values_.get(valueTitles_.indexOf(string));
+        }
+        Object value = valueFromString(string);
+        setRaw(styles, value);
+    }
+
+    protected Object getRaw(ViewStyles styles) {
         try {
-            Object value = getter_ != null ? getter_.invoke(styles) : field_.get(styles);
-            String svalue = valueToString(value);
-            if (valueTitles_ == null)
-                return svalue;
-            else
-                return valueTitles_.get(values_.indexOf(svalue));
+            return getter_ != null ? getter_.invoke(styles) : field_.get(styles);
         } catch (IllegalAccessException | InvocationTargetException e) {
             Log.w(TAG, "get", e);
-            return "";
+            return null;
         }
     }
 
-    public void set(ViewStyles styles, String value) {
+    protected void setRaw(ViewStyles styles, Object value) {
         try {
-            if (valueTitles_ != null) {
-                value = values_.get(valueTitles_.indexOf(value));
-            }
-            Object value2 = valueFromString(value);
             if (setter_ != null)
-                setter_.invoke(styles, value2);
+                setter_.invoke(styles, value);
             else
-                field_.set(styles, value2);
+                field_.set(styles, value);
             styles.notifyPropertyChanged(getFieldBinding(name_));
         } catch (IllegalAccessException | InvocationTargetException e) {
             Log.w(TAG, "set", e);
