@@ -20,6 +20,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.ShapeDrawables
 import java.lang.ref.WeakReference
@@ -125,7 +126,7 @@ class XHBTipView @JvmOverloads constructor(
             if (value == 0) {
                 leftImageView.visibility = View.GONE
             } else {
-                leftImageView.setImageDrawable(context.getDrawable(value))
+                leftImageView.setImageDrawable(ContextCompat.getDrawable(context, value))
                 leftImageView.visibility = View.VISIBLE
             }
         }
@@ -138,7 +139,7 @@ class XHBTipView @JvmOverloads constructor(
             if (value == 0) {
                 rightImageView.visibility = View.GONE
             } else {
-                rightImageView.setImageDrawable(context.getDrawable(value))
+                rightImageView.setImageDrawable(ContextCompat.getDrawable(context, value))
                 rightImageView.visibility = View.VISIBLE
             }
         }
@@ -151,7 +152,7 @@ class XHBTipView @JvmOverloads constructor(
             if (value == 0) {
                 imageView.visibility = View.GONE
             } else {
-                imageView.setImageDrawable(context.getDrawable(value))
+                imageView.setImageDrawable(ContextCompat.getDrawable(context, value))
                 imageView.visibility = View.VISIBLE
             }
         }
@@ -242,7 +243,7 @@ class XHBTipView @JvmOverloads constructor(
         while (context is ContextWrapper) {
             if (context is Activity)
                 break
-            context = (context as ContextWrapper).baseContext
+            context = context.baseContext
         }
         if (location2 == Location.AutoToast) {
             ++toastCount
@@ -272,7 +273,7 @@ class XHBTipView @JvmOverloads constructor(
 
     companion object {
 
-        private val TAG = "XHBTipView"
+        private const val TAG = "XHBTipView"
 
         private var toastCount = 0
         private var toastY = 0

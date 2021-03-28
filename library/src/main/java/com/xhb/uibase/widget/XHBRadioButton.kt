@@ -25,7 +25,7 @@ class XHBRadioButton @JvmOverloads constructor(
         )
     }
 
-    private var text_padding_ : Int? = null
+    private var _textPadding : Int? = null
 
     init {
         val background = ShapeDrawables.getDrawable(context, backgroundDrawable)
@@ -36,15 +36,15 @@ class XHBRadioButton @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        text_padding_ = paddingLeft
+        _textPadding = paddingLeft
         if (text.isNullOrEmpty())
             setPadding(0, paddingTop, paddingRight, paddingBottom)
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
         super.setText(text, type)
-        if (text_padding_ != null)
-            setPadding(if (text.isNullOrEmpty()) 0 else text_padding_!!, paddingTop, paddingRight, paddingBottom)
+        if (_textPadding != null)
+            setPadding(if (text.isNullOrEmpty()) 0 else _textPadding!!, paddingTop, paddingRight, paddingBottom)
     }
 
 }

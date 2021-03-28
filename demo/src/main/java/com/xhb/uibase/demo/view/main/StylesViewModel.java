@@ -21,7 +21,7 @@ public class StylesViewModel extends ViewModel {
 
     private static final String TAG = "StylesViewModel";
 
-    public class StyleValue extends BaseObservable {
+    public static class StyleValue extends BaseObservable {
 
         ViewStyles styles;
         public ComponentStyle style;
@@ -54,7 +54,7 @@ public class StylesViewModel extends ViewModel {
         }
 
         public void setValue(String value) {
-            if (value == this.value)
+            if (value.equals(this.value))
                 return;
             try {
                 style.set(styles, value);
