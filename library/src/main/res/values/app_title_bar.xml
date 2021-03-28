@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="appTitleBarStyle" format="reference"/>
+
+    <dimen name="xhb_app_title_bar_icon_padding">8dp</dimen>
+
+    <array name="xhb_app_title_button">
+        <item>@drawable/icon_minus</item>
+        <item>@string/app_name</item>
+    </array>
+
+    <declare-styleable name="XHBAppTitleBar">
+        <attr name="leftButton" format="reference"/>
+        <attr name="rightButton" format="reference"/>
+        <attr name="rightButton2" format="reference"/>
+        <attr name="title" format="string"/>
+        <attr name="android:textAppearance"/>
+        <attr name="content"/>
+    </declare-styleable>
+
+    <style name="XHBAppTitleBar">
+    </style>
+
+</resources>
