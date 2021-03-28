@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.ShapeDrawables
 
@@ -78,7 +79,7 @@ class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeS
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     override fun afterTextChanged(s: Editable) {
         if (s.toString().isEmpty()) return
-        var value = Integer.valueOf(s.toString())
+        val value = Integer.valueOf(s.toString())
         inCallbacks = true
         amount = value
         inCallbacks = false
@@ -88,6 +89,7 @@ class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeS
     }
 
     companion object {
+
         private const val TAG = "ZAmountView"
 
         val backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
@@ -114,10 +116,10 @@ class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeS
         etAmount.addTextChangedListener(this)
 
         background = ShapeDrawables.getDrawable(context!!, backgroundDrawable)
-        val buttonBackground = ShapeDrawables.getDrawable(context!!, buttonBackgroundDrawable)
-        val buttonForegroundDec = context.getDrawable(R.drawable.icon_minus)
-        val buttonForegroundInc = context.getDrawable(R.drawable.icon_plus)
-        val buttonForegroundColor = context.resources.getColorStateList(R.color.number_view_button_foreground_color)
+        val buttonBackground = ShapeDrawables.getDrawable(context, buttonBackgroundDrawable)
+        val buttonForegroundDec = ContextCompat.getDrawable(context, R.drawable.icon_minus)
+        val buttonForegroundInc = ContextCompat.getDrawable(context, R.drawable.icon_plus)
+        val buttonForegroundColor = ContextCompat.getColorStateList(context, R.color.number_view_button_foreground_color)
         buttonForegroundDec!!.setTintList(buttonForegroundColor)
         buttonForegroundInc!!.setTintList(buttonForegroundColor)
         val drawableDec = LayerDrawable(arrayOf(buttonBackground, buttonForegroundDec))
