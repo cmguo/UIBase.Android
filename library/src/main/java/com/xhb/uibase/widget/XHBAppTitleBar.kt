@@ -88,9 +88,30 @@ class XHBAppTitleBar @JvmOverloads constructor(
         a.recycle()
     }
 
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        var l = _textView.left
+        var r = (_rightButton.parent as View).left
+        val padding = resources.getDimensionPixelSize(R.dimen.xhb_app_title_bar_text_padding);
+        if (leftButton != 0) {
+            l = _leftButton.right
+            val c = left + right
+            if (l + r > c)
+                r = c - l
+            else
+                l = c - r
+            l += padding
+        }
+        val w = r - l - padding
+        if (w < _textView.width)
+            _textView.maxWidth = w
+    }
+
     companion object {
         private const val TAG = "XHBAppTitleBar"
     }
+
+    /* private */
 
     private fun syncButton(button: XHBButton, content: Int) {
         if (content == 0) {
@@ -99,23 +120,26 @@ class XHBAppTitleBar @JvmOverloads constructor(
             button.content = content
             button.visibility = VISIBLE
         }
+        if (_textView.maxWidth < width)
+            _textView.maxWidth = width
     }
-
-    /* private */
 
     private fun updateLayout() {
         val lp = _textView.layoutParams as LayoutParams
         var ta = 0
+        var tg = Gravity.START or Gravity.CENTER_VERTICAL
         if (leftButton == 0) {
             lp.gravity = Gravity.START or Gravity.CENTER_VERTICAL
             ta = R.style.TextAppearance_XHB_Head0
         } else {
             lp.gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
             ta = R.style.TextAppearance_XHB_Head2
+            tg = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
         }
         if (textAppearance > 0)
             ta = textAppearance
         _textView.layoutParams = lp
+        _textView.gravity = tg
         TextViewCompat.setTextAppearance(_textView, ta)
     }
 

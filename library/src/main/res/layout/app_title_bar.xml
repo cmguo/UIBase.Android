@@ -20,18 +20,21 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:ellipsize="marquee"/>
+        android:singleLine="true"
+        android:ellipsize="end"/>
     
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
+        android:orientation="horizontal"
         >
 
         <com.xhb.uibase.widget.XHBButton
             android:id="@+id/rightButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/xhb_app_title_bar_icon_padding"
             app:buttonType="text"
             app:buttonSize="thin"
             android:visibility="gone"/>
@@ -40,7 +43,6 @@
             android:id="@+id/rightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/xhb_app_title_bar_icon_padding"
             app:buttonType="text"
             app:buttonSize="thin"
             android:visibility="gone"/>

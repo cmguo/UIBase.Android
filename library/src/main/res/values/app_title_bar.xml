@@ -6,6 +6,7 @@
     <dimen name="xhb_app_title_bar_height">48dp</dimen>
     <dimen name="xhb_app_title_bar_padding">16dp</dimen>
     <dimen name="xhb_app_title_bar_icon_padding">12dp</dimen>
+    <dimen name="xhb_app_title_bar_text_padding">20dp</dimen>
 
     <array name="xhb_app_title_button">
         <item>@drawable/icon_minus</item>
