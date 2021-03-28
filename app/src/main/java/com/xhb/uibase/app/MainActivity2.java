@@ -201,7 +201,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
         List<Fragment> fragments = ((NavHostFragment) componentFragment).getChildFragmentManager().getFragments();
         if (!fragments.isEmpty())
-            componentFragment = fragments.get(0);
+            componentFragment = fragments.get(fragments.size() - 1);
         if (componentFragment instanceof ComponentFragment) {
             ((InformationFragment) informationFragment).bindComponent((ComponentFragment) componentFragment);
             ((StylesFragment) stylesFragment).bindComponent((ComponentFragment) componentFragment);

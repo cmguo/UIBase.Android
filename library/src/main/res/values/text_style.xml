@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.XHB" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/bluegrey_900</item>
+    </style>
+
+    <style name="TextAppearance.XHB.Head" parent="TextAppearance.XHB">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.XHB.Head0" parent="TextAppearance.XHB.Head">
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="TextAppearance.XHB.Head1" parent="TextAppearance.XHB.Head">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="TextAppearance.XHB.Head2" parent="TextAppearance.XHB.Head">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TextAppearance.XHB.Head3" parent="TextAppearance.XHB.Head">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.XHB.Head4" parent="TextAppearance.XHB.Head">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/bluegrey_800</item>
+    </style>
+
+    <style name="TextAppearance.XHB.Body" parent="TextAppearance.XHB">
+    </style>
+    <style name="TextAppearance.XHB.Body.Large" parent="TextAppearance.XHB.Body">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TextAppearance.XHB.Body.Middle" parent="TextAppearance.XHB.Body">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.XHB.Body.Small" parent="TextAppearance.XHB.Body">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/bluegrey_800</item>
+    </style>
+
+    <style name="TextAppearance.XHB.Secondary" parent="TextAppearance.XHB">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/bluegrey_700</item>
+    </style>
+    <style name="TextAppearance.XHB.Tip" parent="TextAppearance.XHB">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/bluegrey_700</item>
+    </style>
+
+</resources>

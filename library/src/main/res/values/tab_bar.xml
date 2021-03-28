@@ -103,7 +103,6 @@
 
     <color name="xhb_tab_nav_frame_background_color">@color/bluegrey_05</color>
     <color name="xhb_tab_nav_round_background_color">@color/bluegrey_05</color>
-    <dimen name="xhb_tab_nav_height">48dp</dimen>
     <dimen name="xhb_tab_nav_border_radius">8dp</dimen>
 
     <style name="XHBTabNavigator">
@@ -128,10 +127,15 @@
     <attr name="tabBarStyle" format="reference"/>
 
     <declare-styleable name="XHBTabBar">
+        <attr name="titles" format="reference"/>
         <attr name="navigatorStyle" format="reference"/>
     </declare-styleable>
 
+    <dimen name="xhb_tab_bar_height">48dp</dimen>
+
     <style name="XHBTabBar">
+        <item name="android:minHeight">@dimen/xhb_tab_bar_height</item>
+        <item name="android:maxHeight">@dimen/xhb_tab_bar_height</item>
     </style>
 
 </resources>

@@ -4,11 +4,13 @@ import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
 import com.xhb.uibase.demo.core.ComponentFragment
+import com.xhb.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
-class XHBAppBarComponent : Component {
+@Author("cmguo")
+class XHBAppTitleBarComponent : Component {
     override fun id(): Int {
-        return R.id.component_xhb_app_bars
+        return R.id.component_xhb_app_title_bars
     }
 
     override fun group(): Int {
@@ -20,11 +22,14 @@ class XHBAppBarComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_xhb_app_bars
+        return R.string.component_xhb_app_title_bars
     }
 
     override fun description(): Int {
-        return R.string.component_xhb_app_bars_desc
+        return R.string.component_xhb_app_title_bars_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return XHBAppTitleBarFragment::class.java
+    }
 }

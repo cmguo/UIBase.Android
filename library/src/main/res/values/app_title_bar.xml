@@ -3,7 +3,9 @@
 
     <attr name="appTitleBarStyle" format="reference"/>
 
-    <dimen name="xhb_app_title_bar_icon_padding">8dp</dimen>
+    <dimen name="xhb_app_title_bar_height">48dp</dimen>
+    <dimen name="xhb_app_title_bar_padding">16dp</dimen>
+    <dimen name="xhb_app_title_bar_icon_padding">12dp</dimen>
 
     <array name="xhb_app_title_button">
         <item>@drawable/icon_minus</item>
@@ -20,6 +22,13 @@
     </declare-styleable>
 
     <style name="XHBAppTitleBar">
+        <item name="android:minHeight">@dimen/xhb_app_title_bar_height</item>
+        <item name="android:maxHeight">@dimen/xhb_app_title_bar_height</item>
+        <item name="android:paddingLeft">@dimen/xhb_app_title_bar_padding</item>
+        <item name="android:paddingRight">@dimen/xhb_app_title_bar_padding</item>
+        <item name="android:background">@color/bluegrey_00</item>
+        <item name="leftButton">@drawable/icon_left</item>
+        <item name="rightButton">@drawable/icon_more</item>
     </style>
 
 </resources>

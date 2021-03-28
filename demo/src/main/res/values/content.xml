@@ -1,15 +1,26 @@
 <resources>
 
     <array name="button_icon_text">
-        <item>@drawable/icon_minus</item>
-        <item>@string/app_name</item>
+        <item>@drawable/icon_exit</item>
+        <item>@string/action_settings</item>
     </array>
 
-    <style name="button_content_style">
-        <item name="android:text">@string/action_settings</item>
-        <item name="icon">@drawable/icon_plus</item>
-        <item name="buttonType">alert</item>
+    <style name="button_content_prim_style">
+        <item name="content">@string/action_settings</item>
+        <item name="buttonType">primitive</item>
         <item name="buttonSize">small</item>
+    </style>
+
+    <string-array name="xhb_tab_titles">
+        <item>上海</item>
+        <item>北京</item>
+    </string-array>
+
+    <style name="button_content_text_style">
+        <item name="content">@array/button_icon_text</item>
+        <item name="buttonType">text</item>
+        <item name="buttonSize">thin</item>
+        <item name="iconAtRight">true</item>
     </style>
 
 </resources>

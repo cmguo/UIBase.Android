@@ -13,6 +13,7 @@
         <item name="tabTitleStyle">@style/XHBTabTitleView</item>
         <item name="tabNavigatorStyle">@style/XHBTabNavigator</item>
         <item name="tabBarStyle">@style/XHBTabBar</item>
+        <item name="appTitleBarStyle">@style/XHBAppTitleBar</item>
     </style>
 
 </resources>

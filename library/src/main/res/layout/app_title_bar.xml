@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,14 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
+        app:buttonType="text"
+        app:buttonSize="thin"
         android:visibility="gone"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:ellipsize="marquee"/>
     
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -30,6 +32,8 @@
             android:id="@+id/rightButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:buttonType="text"
+            app:buttonSize="thin"
             android:visibility="gone"/>
 
         <com.xhb.uibase.widget.XHBButton
@@ -37,6 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/xhb_app_title_bar_icon_padding"
+            app:buttonType="text"
+            app:buttonSize="thin"
             android:visibility="gone"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
