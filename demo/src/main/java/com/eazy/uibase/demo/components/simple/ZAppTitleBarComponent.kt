@@ -4,11 +4,13 @@ import com.google.auto.service.AutoService
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.Component
 import com.eazy.uibase.demo.core.ComponentFragment
+import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
-class ZAppBarComponent : Component {
+@Author("cmguo")
+class ZAppTitleBarComponent : Component {
     override fun id(): Int {
-        return R.id.component_z_app_bars
+        return R.id.component_z_app_title_bars
     }
 
     override fun group(): Int {
@@ -20,11 +22,14 @@ class ZAppBarComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_z_app_bars
+        return R.string.component_z_app_title_bars
     }
 
     override fun description(): Int {
-        return R.string.component_z_app_bars_desc
+        return R.string.component_z_app_title_bars_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return ZAppTitleBarFragment::class.java
+    }
 }

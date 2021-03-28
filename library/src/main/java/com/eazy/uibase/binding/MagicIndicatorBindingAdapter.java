@@ -13,6 +13,7 @@ import net.lucode.hackware.magicindicator.abs.IPagerNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 
+import com.eazy.uibase.view.list.Items;
 import com.eazy.uibase.view.list.PagerIndicators;
 import com.eazy.uibase.view.ZTabAdapter;
 
@@ -21,12 +22,12 @@ import java.util.List;
 public class MagicIndicatorBindingAdapter {
 
     @BindingAdapter(value = {"titles", "itemBinding", "indicator", "navigator", "itemClicked", "viewPager"}, requireAll = false)
-    public static <T> void setMagicIndicatorTitles(MagicIndicator magicIndicator, List<T> titles, Object itemBinding,
+    public static <T> void setMagicIndicatorTitles(MagicIndicator magicIndicator, Object titles, Object itemBinding,
                                                    Object indicator, Object navigator,
                                                    ZTabAdapter.TitleSelectListener listener, Object viewPagerOrId) {
         if (titles != null && itemBinding != null) {
             Context context = magicIndicator.getContext();
-            ZTabAdapter<T> adapter = new ZTabAdapter(titles, ItemBindings.get(context, itemBinding),
+            ZTabAdapter<T> adapter = new ZTabAdapter(Items.get(context, titles), ItemBindings.get(context, itemBinding),
                 PagerIndicators.get(context, indicator));
             if (listener != null) {
                 ((ZTabAdapter) adapter).setListener(listener);

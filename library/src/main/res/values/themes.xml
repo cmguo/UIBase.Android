@@ -13,6 +13,7 @@
         <item name="tabTitleStyle">@style/ZTabTitleView</item>
         <item name="tabNavigatorStyle">@style/ZTabNavigator</item>
         <item name="tabBarStyle">@style/ZTabBar</item>
+        <item name="appTitleBarStyle">@style/ZAppTitleBar</item>
     </style>
 
 </resources>

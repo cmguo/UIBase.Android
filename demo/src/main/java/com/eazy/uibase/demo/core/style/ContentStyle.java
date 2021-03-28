@@ -6,12 +6,23 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-public class ContentStyle extends ComponentStyle {
+public class ContentStyle extends ResourceStyle {
 
     public static int[] icons = {
-        R.drawable.ic_erase,
+        R.drawable.icon_left,
+        R.drawable.icon_exit,
         R.array.button_icon_text,
-        R.style.button_content_style
+        R.style.button_content_prim_style,
+        R.style.button_content_text_style,
+    };
+
+    private static final String[] resources = new String[]{
+        "drawable/icon_left",
+        "drawable/icon_exit",
+        "string/app_name",
+        "icon&text:array/button_icon_text",
+        "prim_style:style/button_content_prim_style",
+        "text_style:style/button_content_text_style"
     };
 
     public ContentStyle(Field field) {
@@ -19,14 +30,6 @@ public class ContentStyle extends ComponentStyle {
     }
 
     public ContentStyle(Field field, Method getter, Method setter) {
-        super(field, getter, setter);
-        String[] values = {"0",
-            String.valueOf(R.drawable.ic_erase),
-            String.valueOf(R.string.app_name),
-            String.valueOf(R.array.button_icon_text),
-            String.valueOf(R.style.button_content_style)
-        };
-        String[] valueTitles = {"<null>", "ic_erase", "app_name", "icon_text", "style"};
-        setValues(Arrays.asList(values), Arrays.asList(valueTitles));
+        super(field, getter, setter, resources);
     }
 }

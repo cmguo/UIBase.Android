@@ -1,16 +1,24 @@
 package com.eazy.uibase.view
 
-import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.databinding.ViewDataBinding
 import androidx.viewpager.widget.ViewPager
 import com.eazy.uibase.view.list.ItemBinding
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
 
-class ZTabAdapter<T>(val titles: List<T>, val itemBinding: ItemBinding<T>, private val indicator: IPagerIndicator)
+class ZTabAdapter<T>(titles: Iterator<T>, val itemBinding: ItemBinding<T>, private val indicator: IPagerIndicator)
     : CommonNavigatorAdapter(), View.OnClickListener {
+
+    var titles = mutableListOf<T>()
+
+    init {
+        for (t in titles)
+            this.titles.add(t)
+    }
 
     @FunctionalInterface
     interface TitleSelectListener<T> {
@@ -30,6 +38,9 @@ class ZTabAdapter<T>(val titles: List<T>, val itemBinding: ItemBinding<T>, priva
     override fun getTitleView(parent: ViewGroup?, index: Int): IPagerTitleView {
         val binding = itemBinding.createBinding(parent, itemBinding.getItemViewType(titles[index]))
         itemBinding.bindView(binding, titles[index], index)
+        if (!(binding is ViewDataBinding)) {
+            (binding.root as? TextView)?.text = titles[index].toString()
+        }
         binding.root.setOnClickListener(this)
         return binding.root as IPagerTitleView
     }

@@ -14,6 +14,7 @@ import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.ShapeDrawables
 
@@ -200,7 +201,7 @@ class ZButton @JvmOverloads constructor(
         super.setLayoutParams(params)
         // restore padding
         val sizes = sizeStyles[buttonSize]!!
-        val padding = context.resources.getDimensionPixelSize(sizes.padding)
+        val padding = if (sizes.padding > 0) context.resources.getDimensionPixelSize(sizes.padding) else 0
         setPadding(padding, 0, padding, 0)
     }
 

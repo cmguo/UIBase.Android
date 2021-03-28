@@ -44,11 +44,13 @@ public abstract class BaseItemBinding<T> implements ItemBinding<T> {
         if (mInflater == null)
             mInflater = LayoutInflater.from(parent.getContext());
         try {
-            return createDataBinding(mInflater, parent, viewType);
+            ViewDataBinding binding = createDataBinding(mInflater, parent, viewType);
+            if (binding != null)
+                return binding;
         } catch (Throwable e) {
-            View view = mInflater.inflate(viewType, parent, false);
-            return new ViewHolder(view);
         }
+        View view = mInflater.inflate(viewType, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override

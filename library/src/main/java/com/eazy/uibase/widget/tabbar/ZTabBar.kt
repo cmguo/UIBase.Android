@@ -9,6 +9,8 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.eazy.uibase.R
+import com.eazy.uibase.binding.MagicIndicatorBindingAdapter
+import com.eazy.uibase.view.ZTabAdapter
 import net.lucode.hackware.magicindicator.MagicIndicator
 
 class ZTabBar @JvmOverloads constructor(
@@ -24,6 +26,7 @@ class ZTabBar @JvmOverloads constructor(
         val style = if (defStyleAttr == 0) R.attr.tabBarStyle else defStyleAttr
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZTabBar, style, 0)
         val navigatorStyle = a.getResourceId(R.styleable.ZTabBar_navigatorStyle, 0);
+        val titles = a.getResourceId(R.styleable.ZTabBar_titles, 0)
         a.recycle()
 
         // use defStyleAttr 1 to disable defStyleAttr and use defStyleRes
@@ -32,6 +35,11 @@ class ZTabBar @JvmOverloads constructor(
         //lp.gravity = Gravity.CENTER_HORIZONTAL
         //navigator.layoutParams = lp
         setNavigator(navigator)
+
+        if (titles > 0) {
+            MagicIndicatorBindingAdapter.setMagicIndicatorTitles<String>(this,
+                titles, R.layout.tab_title, R.layout.round_indicator, null, null, null);
+        }
     }
 
     override fun draw(canvas: Canvas) {

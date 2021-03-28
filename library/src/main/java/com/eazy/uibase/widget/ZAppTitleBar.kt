@@ -2,7 +2,7 @@ package com.eazy.uibase.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -21,22 +21,22 @@ class ZAppTitleBar @JvmOverloads constructor(
             _textView.text = value
         }
 
-    var textSize: Float
-        get() = _textView.textSize
+    var textAppearance: Int = 0
         set(value) {
-            _textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, value)
-        }
-
-    var textColor: Int
-        get() = _textView.currentTextColor
-        set(value) {
-            _textView.setTextColor(value)
+            if (field == value)
+                return
+            field = value
+            if (value > 0)
+                TextViewCompat.setTextAppearance(_textView, value)
+            else
+                updateLayout()
         }
 
     @DrawableRes
     var leftButton: Int = 0
         set(value) {
-            if (field == value) return
+            if (field == value)
+                return
             field = value
             syncButton(_leftButton, value)
             updateLayout()
@@ -62,7 +62,8 @@ class ZAppTitleBar @JvmOverloads constructor(
         set(value) {
             if (field == value)
                 return
-
+            field = value
+            syncContent()
         }
 
     private var _textView: TextView
@@ -72,7 +73,7 @@ class ZAppTitleBar @JvmOverloads constructor(
     private var _content: View? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.tip_view, this)
+        LayoutInflater.from(context).inflate(R.layout.app_title_bar, this)
         _leftButton = findViewById(R.id.leftButton)
         _textView = findViewById(R.id.textView)
         _rightButton = findViewById(R.id.rightButton)
@@ -82,11 +83,8 @@ class ZAppTitleBar @JvmOverloads constructor(
         leftButton = a.getResourceId(R.styleable.ZAppTitleBar_leftButton, 0)
         rightButton = a.getResourceId(R.styleable.ZAppTitleBar_rightButton, 0)
         rightButton2 = a.getResourceId(R.styleable.ZAppTitleBar_rightButton2, 0)
-        if (a.hasValue(R.styleable.ZAppTitleBar_title))
-            title = a.getText(R.styleable.ZAppTitleBar_title)
-        val textAppearance = a.getResourceId(R.styleable.ZAppTitleBar_android_textAppearance, 0)
-        if (textAppearance > 0)
-            TextViewCompat.setTextAppearance(_textView, textAppearance)
+        title = a.getText(R.styleable.ZAppTitleBar_title)
+        textAppearance = a.getResourceId(R.styleable.ZAppTitleBar_android_textAppearance, 0)
         a.recycle()
     }
 
@@ -103,13 +101,35 @@ class ZAppTitleBar @JvmOverloads constructor(
         }
     }
 
-    private fun updateLayout() {
-        if (leftButton == 0) {
+    /* private */
 
+    private fun updateLayout() {
+        val lp = _textView.layoutParams as LayoutParams
+        var ta = 0
+        if (leftButton == 0) {
+            lp.gravity = Gravity.START or Gravity.CENTER_VERTICAL
+            ta = R.style.TextAppearance_Z_Head0
+        } else {
+            lp.gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
+            ta = R.style.TextAppearance_Z_Head2
         }
+        if (textAppearance > 0)
+            ta = textAppearance
+        _textView.layoutParams = lp
+        TextViewCompat.setTextAppearance(_textView, ta)
     }
 
-    /* private */
+    private fun syncContent() {
+        if (_content != null)
+            removeView(_content)
+        if (content == 0)
+            return
+        val view = LayoutInflater.from(context).inflate(content, this, false)
+        val lp = view.layoutParams as LayoutParams
+        lp.gravity = Gravity.CENTER_HORIZONTAL
+        addView(view, indexOfChild(_textView) + 1, lp)
+        _content = view
+    }
 
 }
 
