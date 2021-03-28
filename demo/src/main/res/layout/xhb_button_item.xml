@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             xhb:buttonType="@{data}"
             xhb:buttonSize="@{styles.sizeMode}"
+            xhb:content="@{styles.conntent}"
             xhb:icon="@{styles.icon}"
             xhb:iconAtRight="@{styles.iconAtRight}"
             xhb:loading="@{styles.loading}"

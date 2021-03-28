@@ -1,6 +1,7 @@
 package com.xhb.uibase.widget
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.PorterDuff
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
@@ -74,15 +75,13 @@ class XHBButton @JvmOverloads constructor(
         }
     }
 
-    private var _icon: Drawable? = null
-    private var _text: CharSequence? = null
-
     var buttonType: ButtonType = ButtonType.Primitive
         set(value) {
             if (field == value)
                 return
             field = value
-            updateType()
+            if (_inited)
+                syncType()
         }
 
     var buttonSize: ButtonSize = ButtonSize.Large
@@ -90,19 +89,29 @@ class XHBButton @JvmOverloads constructor(
             if (field == value)
                 return
             field = value
-            updateSize()
+            if (_inited)
+                syncSize()
         }
 
-    var icon: Int? = null
+    var content: Int = 0
         set(value) {
             if (field == value)
                 return
             field = value
-            _icon = if (value != null && value > 0)
+            syncContent()
+        }
+
+    var icon: Int = 0
+        set(value) {
+            if (field == value)
+                return
+            field = value
+            _icon = if (value > 0)
                 ContextCompat.getDrawable(context, value)!!
             else
                 null
-            applyIcon()
+            if (_inited)
+                syncIcon()
         }
 
     var iconAtRight = false
@@ -110,7 +119,8 @@ class XHBButton @JvmOverloads constructor(
             if (field == value)
                 return
             field = value
-            applyIcon()
+            if (_inited)
+                syncIcon()
         }
 
     var loadingDrawable: Drawable? = null
@@ -148,26 +158,20 @@ class XHBButton @JvmOverloads constructor(
             setTextInner(t)
         }
 
+    private var _inited = false
+    private var _icon: Drawable? = null
+    private var _text: CharSequence? = null
+
     init {
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.XHBButton,
                     R.attr.buttonStyle, 0)
-            val type = a.getInt(R.styleable.XHBButton_buttonType, -1)
-            if (type >= 0 && type != buttonType.ordinal)
-                buttonType = ButtonType.values()[type]
-            else
-                updateType()
-            val size = a.getInt(R.styleable.XHBButton_buttonSize, -1)
-            if (size >= 0 && size != buttonSize.ordinal)
-                buttonSize = ButtonSize.values()[size]
-            else
-                updateSize()
-            icon = a.getResourceId(R.styleable.XHBButton_icon, 0)
-            loadingDrawable = a.getDrawable(R.styleable.XHBButton_loadingDrawable)
-            loadingText = a.getText(R.styleable.XHBButton_loadingText)
+            applyStyle(a)
             a.recycle()
         }
-        applyIcon()
+        _inited = true
+        syncIcon()
+        syncTypeSize()
     }
 
     override fun setText(text: CharSequence?, type: BufferType) {
@@ -200,34 +204,80 @@ class XHBButton @JvmOverloads constructor(
         setPadding(padding, 0, padding, 0)
     }
 
+    /* private */
+
+    private fun applyStyle(a: TypedArray) {
+        val type = a.getInt(R.styleable.XHBButton_buttonType, -1)
+        if (type >= 0 && type != buttonType.ordinal)
+            buttonType = ButtonType.values()[type]
+        val size = a.getInt(R.styleable.XHBButton_buttonSize, -1)
+        if (size >= 0 && size != buttonSize.ordinal)
+            buttonSize = ButtonSize.values()[size]
+        icon = a.getResourceId(R.styleable.XHBButton_icon, 0)
+        content = a.getResourceId(R.styleable.XHBButton_content, 0)
+        loadingDrawable = a.getDrawable(R.styleable.XHBButton_loadingDrawable)
+        loadingText = a.getText(R.styleable.XHBButton_loadingText)
+    }
+
     private fun setTextInner(text: CharSequence?, type: BufferType = BufferType.NORMAL) {
         super.setText(text, type)
-        if (buttonSize != null)
-            updateIconPadding(sizeStyles[buttonSize]!!)
+        if (_inited)
+            syncIconPadding(sizeStyles[buttonSize]!!)
     }
 
-    private fun updateType() {
-        background = backgroundDrawable(context, buttonType, buttonSize)
+    private fun syncTypeSize(type: Boolean = true, size: Boolean = true) {
         val types = typeStyles[buttonType]!!
-        setTextColor(AppCompatResources.getColorStateList(context, (types.textColor)))
-        _icon?.setTintList(textColors)
-    }
-
-    private fun updateSize() {
-        background = backgroundDrawable(context, buttonType, buttonSize)
         val sizes = sizeStyles[buttonSize]!!
-        height = context.resources.getDimensionPixelSize(sizes.height)
-        val padding = if (sizes.padding > 0) context.resources.getDimensionPixelSize(sizes.padding) else 0
-        setPadding(padding, 0, padding, 0)
-        setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(sizes.textSize))
-        updateIconPadding(sizes)
+        background = backgroundDrawable(context, buttonType, buttonSize)
+        if (type) {
+            setTextColor(AppCompatResources.getColorStateList(context, (types.textColor)))
+            _icon?.setTintList(textColors)
+        }
+        if (size) {
+            height = context.resources.getDimensionPixelSize(sizes.height)
+            val padding = if (sizes.padding > 0) context.resources.getDimensionPixelSize(sizes.padding) else 0
+            setPadding(padding, 0, padding, 0)
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(sizes.textSize))
+            syncIconPadding(sizes)
+        }
     }
 
-    private fun updateIconPadding(sizes: SizeStyles) {
-        compoundDrawablePadding = if (text.count() == 0) 0 else context.resources.getDimensionPixelSize(sizes.iconPadding)
+    private fun syncType() {
+        syncTypeSize(size = false)
     }
 
-    private fun applyIcon() {
+    private fun syncSize() {
+        syncTypeSize(type = false)
+    }
+
+    private fun syncContent() {
+        if (content == 0)
+            return
+        when (resources.getResourceTypeName(content)) {
+            "drawable" -> { icon = content; text = null }
+            "string" -> { icon = 0; setText(content) }
+            "array" -> {
+                icon = 0
+                text = null
+                val typedArray = resources.obtainTypedArray(content)
+                for (i in 0 until typedArray.length()) {
+                    val id = typedArray.getResourceId(i, 0)
+                    when (resources.getResourceTypeName(id)) {
+                        "drawable" -> icon = id
+                        "string" -> setText(id)
+                    }
+                }
+                typedArray.recycle()
+            }
+            "style" -> {
+                val typedArray = context.obtainStyledAttributes(content, R.styleable.XHBButton)
+                applyStyle(typedArray)
+                typedArray.recycle()
+            }
+        }
+    }
+
+    private fun syncIcon() {
         val icon = _icon
         if (icon != null) {
             icon.setTintMode(PorterDuff.Mode.SRC_IN)
@@ -238,6 +288,10 @@ class XHBButton @JvmOverloads constructor(
             val right = if (iconAtRight) icon else null
             setCompoundDrawablesWithIntrinsicBounds(left, null, right, null)
         }
+    }
+
+    private fun syncIconPadding(sizes: SizeStyles) {
+        compoundDrawablePadding = if (text.count() == 0) 0 else context.resources.getDimensionPixelSize(sizes.iconPadding)
     }
 
 }

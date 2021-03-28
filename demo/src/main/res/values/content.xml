@@ -1,0 +1,15 @@
+<resources>
+
+    <array name="button_icon_text">
+        <item>@drawable/icon_minus</item>
+        <item>@string/app_name</item>
+    </array>
+
+    <style name="button_content_style">
+        <item name="android:text">@string/action_settings</item>
+        <item name="icon">@drawable/icon_plus</item>
+        <item name="buttonType">alert</item>
+        <item name="buttonSize">small</item>
+    </style>
+
+</resources>

@@ -9,6 +9,7 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.*
+import com.xhb.uibase.demo.core.style.ContentStyle
 import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbButtonFragmentBinding
@@ -52,6 +53,12 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         @ValueTitles("WrapContent", "MatchParent")
         @Values("-2", "-1")
         var widthMode = ViewGroup.LayoutParams.WRAP_CONTENT
+
+        @Bindable
+        @Title("内容")
+        @Description("包含文字或者图标，或者文字和图标及其他样式；资源ID类型，可以是 drawable、string、array 或者 style")
+        @Style(ContentStyle::class)
+        var conntent = 0
 
         @Bindable
         @Title("文字")
