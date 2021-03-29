@@ -34,6 +34,10 @@
     <string name="component_xhb_drop_downs">下拉菜单</string>
     <string name="component_xhb_drop_downs_desc">用于提供快速到达其他功能入口的导航，默认收起，点击出现。</string>
 
+    <id name="component_xhb_picker_views"></id>
+    <string name="component_xhb_picker_views">选择器</string>
+    <string name="component_xhb_picker_views_desc">临时浮层，用户出发选择操作时出现。从众多选项中选项中选择一个选项。</string>
+
 
 
     <string name="group_navigation">页面跳转控件</string>

@@ -1,17 +1,18 @@
-package com.xhb.uibase.demo.components.complex
+package com.xhb.uibase.demo.components.simple
 
 import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
+import com.xhb.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
 class XHBPickerComponent : Component {
     override fun id(): Int {
-        return R.id.component_xhb_pickers
+        return R.id.component_xhb_picker_views
     }
 
     override fun group(): Int {
-        return R.string.group_complex
+        return R.string.group_simple
     }
 
     override fun icon(): Int {
@@ -19,11 +20,14 @@ class XHBPickerComponent : Component {
     }
 
     override fun title(): Int {
-        return R.string.component_xhb_pickers
+        return R.string.component_xhb_picker_views
     }
 
     override fun description(): Int {
-        return R.string.component_xhb_pickers_desc
+        return R.string.component_xhb_picker_views_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return XHBPickerViewFragment::class.java
+    }
 }
