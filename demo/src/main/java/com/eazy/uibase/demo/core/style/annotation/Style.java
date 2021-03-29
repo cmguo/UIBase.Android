@@ -11,4 +11,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Style {
     Class<? extends ComponentStyle> value();
+    String[] params() default {};
 }

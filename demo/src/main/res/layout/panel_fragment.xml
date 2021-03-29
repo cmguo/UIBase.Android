@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.eazy.uibase.demo.components.simple.ZPanelFragment.Styles" />
+
+        <import type="com.eazy.uibase.demo.components.simple.ZPanelFragment" />
+
+        <variable
+            name="fragment"
+            type="ZPanelFragment" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/bluegrey_300"
+            android:padding="20dp">
+
+            <com.eazy.uibase.widget.ZPanel
+                android:id="@+id/panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:titleBar="@{styles.titleBar}"
+                app:content="@{styles.content}"
+                app:bottomButton="@{styles.bottomButton}"
+                />
+
+        </FrameLayout>
+
+        <com.eazy.uibase.widget.ZButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="bottom"
+            android:text="弹出面板"
+            android:onClick="@{fragment.buttonClick}"
+            />
+
+    </LinearLayout>
+
+</layout>

@@ -27,7 +27,7 @@ import com.eazy.uibase.widget.ZTipView
 import com.eazy.uibase.widget.tabbar.ZLineIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 
-class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragment.Model?, ZTabBarFragment.Styles?>(), ZDropDown.DropDownListener {
+class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragment.Model?, ZTabBarFragment.Styles?>() {
 
     class Model : ViewModel() {
 
@@ -140,13 +140,6 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
                 binding.root.layoutParams = lp
             }
         }
-    }
-
-    override fun dropDownFinished(selection: Int?) {
-        val tip = ZTipView(requireContext(), null)
-        tip.message = "选择了项目${selection}"
-        tip.location = ZTipView.Location.AutoToast
-        tip.popAt(requireView())
     }
 
     companion object {

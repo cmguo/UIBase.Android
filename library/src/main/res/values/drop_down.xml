@@ -17,8 +17,8 @@
     <dimen name="drop_down_item_padding_y">12dp</dimen>
     <dimen name="drop_down_icon_size">24dp</dimen>
     <dimen name="drop_down_icon_padding">8dp</dimen>
-    <color name="drop_down_text_color">@color/bluegrey_900</color>
-    <dimen name="drop_down_text_size">16sp</dimen>
+    <!-- TODO: why can't use -->
+    <style name="drop_down_text_appearance">@style/TextAppearance.Z.Body.Middle</style>
 
     <style name="ZDropDown">
         <item name="android:orientation">vertical</item>

@@ -4,16 +4,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/drop_down_item_padding_y"
-        android:paddingBottom="@dimen/drop_down_item_padding_y"
+        android:paddingTop="@dimen/picker_view_item_padding_y"
+        android:paddingBottom="@dimen/picker_view_item_padding_y"
         android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="@dimen/drop_down_icon_size"
-        android:layout_height="@dimen/drop_down_icon_size"
+        android:layout_width="@dimen/picker_view_icon_size"
+        android:layout_height="@dimen/picker_view_icon_size"
         android:layout_gravity="center"
-        android:paddingRight="@dimen/drop_down_icon_padding"
+        android:paddingRight="@dimen/picker_view_icon_padding"
         />
 
     <TextView
@@ -25,6 +25,14 @@
         android:textAppearance="@style/TextAppearance.Z.Body.Middle"
         android:singleLine="true"
         android:ellipsize="end"
+        />
+
+    <com.eazy.uibase.widget.ZCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/picker_view_icon_padding"
         />
 
 </LinearLayout>

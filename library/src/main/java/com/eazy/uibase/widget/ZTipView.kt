@@ -41,7 +41,7 @@ class ZTipView @JvmOverloads constructor(
     }
 
     interface TipViewListener {
-        fun tipViewIconTapped(view: ZTipView, index: Int) {}
+        fun tipViewIconTapped(view: ZTipView, viewId: Int) {}
         fun tipViewDismissed(view: ZTipView, timeout: Boolean) {}
     }
 
@@ -214,7 +214,7 @@ class ZTipView @JvmOverloads constructor(
         this.listener = listener
         if (listener != null) {
             val onClick: (View) -> Unit = {view ->
-                listener.tipViewIconTapped(this, if (view == leftImageView) 0 else 1)
+                listener.tipViewIconTapped(this, view.id)
             }
             leftImageView.setOnClickListener(onClick)
             rightImageView.setOnClickListener(onClick)

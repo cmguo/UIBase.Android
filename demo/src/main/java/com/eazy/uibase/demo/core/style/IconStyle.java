@@ -18,7 +18,7 @@ public class IconStyle extends ResourceStyle {
     };
 
     private static String[] resources = new String[] {
-        "drawable/ic_erase", "icon_plus", "icon_minus", "ic_more", "icon_left", "icon_exit"};
+        "drawable/ic_erase", "icon_plus", "icon_minus", "icon_more", "icon_left", "icon_exit"};
 
     public IconStyle(Field field) {
         this(field, null, null);

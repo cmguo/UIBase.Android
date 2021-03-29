@@ -1,6 +1,7 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -66,6 +67,13 @@ class ZAppTitleBar @JvmOverloads constructor(
             syncContent()
         }
 
+    @FunctionalInterface
+    interface TitleBarListener {
+        fun titleBarButtonClicked(bar: ZAppTitleBar, viewId: Int)
+    }
+
+    var listener: TitleBarListener? = null
+
     private var _textView: TextView
     private var _leftButton: ZButton
     private var _rightButton: ZButton
@@ -80,11 +88,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         _rightButton2 = findViewById(R.id.rightButton2)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZAppTitleBar, R.attr.appTitleBarStyle, 0)
-        leftButton = a.getResourceId(R.styleable.ZAppTitleBar_leftButton, 0)
-        rightButton = a.getResourceId(R.styleable.ZAppTitleBar_rightButton, 0)
-        rightButton2 = a.getResourceId(R.styleable.ZAppTitleBar_rightButton2, 0)
-        title = a.getText(R.styleable.ZAppTitleBar_title)
-        textAppearance = a.getResourceId(R.styleable.ZAppTitleBar_android_textAppearance, 0)
+        applyStyle(a)
         a.recycle()
     }
 
@@ -92,7 +96,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         super.onLayout(changed, left, top, right, bottom)
         var l = _textView.left
         var r = (_rightButton.parent as View).left
-        val padding = resources.getDimensionPixelSize(R.dimen.app_title_bar_text_padding);
+        val padding = resources.getDimensionPixelSize(R.dimen.app_title_bar_text_padding)
         if (leftButton != 0) {
             l = _leftButton.right
             val c = left + right
@@ -113,12 +117,23 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     /* private */
 
+    private fun applyStyle(a: TypedArray) {
+        leftButton = a.getResourceId(R.styleable.ZAppTitleBar_leftButton, 0)
+        rightButton = a.getResourceId(R.styleable.ZAppTitleBar_rightButton, 0)
+        rightButton2 = a.getResourceId(R.styleable.ZAppTitleBar_rightButton2, 0)
+        title = a.getText(R.styleable.ZAppTitleBar_title)
+        textAppearance = a.getResourceId(R.styleable.ZAppTitleBar_android_textAppearance, 0)
+    }
+
     private fun syncButton(button: ZButton, content: Int) {
         if (content == 0) {
             button.visibility = GONE
         } else {
             button.content = content
             button.visibility = VISIBLE
+            button.setOnClickListener() {
+                listener?.titleBarButtonClicked(this, it.id)
+            }
         }
         if (_textView.maxWidth < width)
             _textView.maxWidth = width
@@ -126,7 +141,7 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     private fun updateLayout() {
         val lp = _textView.layoutParams as LayoutParams
-        var ta = 0
+        var ta: Int
         var tg = Gravity.START or Gravity.CENTER_VERTICAL
         if (leftButton == 0) {
             lp.gravity = Gravity.START or Gravity.CENTER_VERTICAL
@@ -148,11 +163,18 @@ class ZAppTitleBar @JvmOverloads constructor(
             removeView(_content)
         if (content == 0)
             return
-        val view = LayoutInflater.from(context).inflate(content, this, false)
-        val lp = view.layoutParams as LayoutParams
-        lp.gravity = Gravity.CENTER_HORIZONTAL
-        addView(view, indexOfChild(_textView) + 1, lp)
-        _content = view
+        val type = resources.getResourceTypeName(content)
+        if (type == "layout") {
+            val view = LayoutInflater.from(context).inflate(content, this, false)
+            val lp = view.layoutParams as LayoutParams
+            lp.gravity = Gravity.CENTER_HORIZONTAL
+            addView(view, indexOfChild(_textView) + 1, lp)
+            _content = view
+        } else if (type == "style") {
+            val typedArray = context.obtainStyledAttributes(content, R.styleable.ZAppTitleBar)
+            applyStyle(typedArray)
+            typedArray.recycle()
+        }
     }
 
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="panelStyle" format="reference"/>
+
+    <dimen name="panel_bottom_height">48dp</dimen>
+    <dimen name="panel_padding">16dp</dimen>
+    <dimen name="panel_border_radius">12dp</dimen>
+
+    <declare-styleable name="ZPanel">
+        <attr name="titleBar" format="reference"/>
+        <attr name="content"/>
+        <attr name="bottomButton" format="reference"/>
+        <attr name="borderRadius"/>
+    </declare-styleable>
+
+    <style name="ZPanel">
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:minHeight">200dp</item>
+        <item name="borderRadius">@dimen/panel_border_radius</item>
+    </style>
+
+</resources>

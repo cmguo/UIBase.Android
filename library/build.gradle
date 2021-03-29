@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
@@ -49,4 +50,10 @@ dependencies {
     api fileTree(dir: 'libs', includes: ['*.aar'])
 
     implementation 'com.github.duanhong169:drawabletoolbox:1.0.7'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    mavenCentral()
 }

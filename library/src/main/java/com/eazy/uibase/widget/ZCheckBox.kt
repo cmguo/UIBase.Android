@@ -29,7 +29,7 @@ class ZCheckBox @JvmOverloads constructor(
 
     @FunctionalInterface
     interface OnCheckedStateChangeListener {
-        fun onCheckedStateChanged(buttonView: ZCheckBox?, state: CheckedState)
+        fun onCheckedStateChanged(checkBox: ZCheckBox, state: CheckedState)
     }
 
     private var _halfChecked: Boolean = false
