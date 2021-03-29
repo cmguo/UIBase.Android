@@ -13,4 +13,10 @@
         android:paddingRight="@dimen/picker_view_item_padding_x"
         android:maxHeight="@dimen/picker_view_max_height"/>
 
+    <ImageView
+        android:id="@+id/selectImage"
+        android:layout_width="@dimen/picker_view_icon_size"
+        android:layout_height="@dimen/picker_view_icon_size"
+        android:src="@drawable/icon_correct"/>
+
 </merge>

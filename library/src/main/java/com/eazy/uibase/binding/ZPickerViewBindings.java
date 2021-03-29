@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ZPickerViewBindings {
 
-    @InverseBindingAdapter(attribute = "selections", event = "selectionAttrChanged")
+    @InverseBindingAdapter(attribute = "selections", event = "selectionsAttrChanged")
     public static List<Integer> getSelections(ZPickerView view) {
         return view.getSelections();
     }
@@ -20,18 +20,22 @@ public class ZPickerViewBindings {
         return view.getSelection();
     }
 
-    @BindingAdapter(value = {"onSelectionChanged", "selectionAttrChanged"},
+    @BindingAdapter(value = {"onSelectionChanged", "selectionsAttrChanged", "selectionAttrChanged"},
             requireAll = false)
     public static void setListeners(ZPickerView view, final ZPickerView.OnSelectionChangeListener listener,
-                                    final InverseBindingListener attrChange) {
-        if (attrChange == null) {
+                                    final InverseBindingListener attrChange,
+                                    final InverseBindingListener attrChange2) {
+        if (attrChange == null && attrChange2 == null) {
             view.setListener(listener);
         } else {
             view.setListener(picker -> {
                 if (listener != null) {
                     listener.onSelectionChanged(picker);
                 }
-                attrChange.onChange();
+                if (attrChange != null)
+                    attrChange.onChange();
+                if (attrChange2 != null)
+                    attrChange2.onChange();
             });
         }
     }

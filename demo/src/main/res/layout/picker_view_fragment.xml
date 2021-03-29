@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.eazy.uibase.demo.components.simple.ZPickerViewFragment.Styles" />
+
+        <import type="com.eazy.uibase.demo.components.simple.ZPickerViewFragment.Model" />
+
+        <import type="com.eazy.uibase.demo.components.simple.ZPickerViewFragment" />
+
+        <variable
+            name="fragment"
+            type="ZPickerViewFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.eazy.uibase.widget.ZPickerView
+                android:id="@+id/picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:titles="@array/picker_titles"
+                app:icons="@array/icons"
+                app:singleSelection="@{styles.singleSelection}"
+                app:selection="@={model.selection}"
+                app:selections="@={model.selections}"
+                />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:paddingLeft="100dp"
+            android:orientation="horizontal"
+            android:background="@color/bluegrey_300">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+                android:text="选中项"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+                android:text="@{model.selection == null ? null : String.valueOf(model.selection)}"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="100dp"
+            android:paddingBottom="50dp"
+            android:orientation="horizontal"
+            android:background="@color/bluegrey_300">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+                android:text="选中项集合"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+                android:text="@{String.valueOf(model.selections)}"
+                />
+
+        </LinearLayout>
+
+        <com.eazy.uibase.widget.ZButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="弹出面板"
+            android:onClick="@{fragment.buttonClick}"
+            />
+
+    </LinearLayout>
+
+</layout>

@@ -44,7 +44,9 @@
         <item>不可选择的未选择项</item>
         <item>普通选项</item>
         <item>普通选项</item>
+        <item>普通选项</item>
         <item>过于长的选项过于长的选项过于长的选项…</item>
+        <item>普通选项</item>
     </string-array>
 
     <array name="icons">
