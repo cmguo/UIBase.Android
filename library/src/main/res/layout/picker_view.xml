@@ -9,8 +9,8 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/xhb_drop_down_item_padding_x"
-        android:paddingRight="@dimen/xhb_drop_down_item_padding_x"
-        android:maxHeight="@dimen/xhb_drop_down_max_height"/>
+        android:paddingLeft="@dimen/xhb_picker_view_item_padding_x"
+        android:paddingRight="@dimen/xhb_picker_view_item_padding_x"
+        android:maxHeight="@dimen/xhb_picker_view_max_height"/>
 
 </merge>

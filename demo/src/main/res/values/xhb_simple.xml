@@ -55,7 +55,7 @@
     <string name="component_xhb_tab_bars_desc">一般作为二级导航，将页面内容按照不同视图进行分类，用户点击可切换到不同视图。</string>
 
     <id name="component_xhb_panels"></id>
-    <string name="component_xhb_panels">浮层面板（五期）</string>
+    <string name="component_xhb_panels">浮层面板</string>
     <string name="component_xhb_panels_desc">浮层面板作为临时的视图容器，可以在不改变或跳出当前页面的前提下，提供额外的信息展示或操作交互。</string>
 
 

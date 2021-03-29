@@ -29,7 +29,7 @@ class XHBCheckBox @JvmOverloads constructor(
 
     @FunctionalInterface
     interface OnCheckedStateChangeListener {
-        fun onCheckedStateChanged(buttonView: XHBCheckBox?, state: CheckedState)
+        fun onCheckedStateChanged(checkBox: XHBCheckBox, state: CheckedState)
     }
 
     private var _halfChecked: Boolean = false

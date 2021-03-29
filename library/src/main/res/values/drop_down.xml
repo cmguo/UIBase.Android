@@ -9,22 +9,22 @@
         <attr name="shadowRadius" format="dimension" />
     </declare-styleable>
 
-    <color name="drop_down_background_color">@color/bluegrey_00</color>
-    <dimen name="drop_down_shadow_radius">6dp</dimen>
-    <dimen name="drop_down_border_radius">8dp</dimen>
-    <dimen name="drop_down_max_height">400dp</dimen>
-    <dimen name="drop_down_item_padding_x">16dp</dimen>
-    <dimen name="drop_down_item_padding_y">12dp</dimen>
-    <dimen name="drop_down_icon_size">24dp</dimen>
-    <dimen name="drop_down_icon_padding">8dp</dimen>
-    <color name="drop_down_text_color">@color/bluegrey_900</color>
-    <dimen name="drop_down_text_size">16sp</dimen>
+    <color name="xhb_drop_down_background_color">@color/bluegrey_00</color>
+    <dimen name="xhb_drop_down_shadow_radius">6dp</dimen>
+    <dimen name="xhb_drop_down_border_radius">8dp</dimen>
+    <dimen name="xhb_drop_down_max_height">400dp</dimen>
+    <dimen name="xhb_drop_down_item_padding_x">16dp</dimen>
+    <dimen name="xhb_drop_down_item_padding_y">12dp</dimen>
+    <dimen name="xhb_drop_down_icon_size">24dp</dimen>
+    <dimen name="xhb_drop_down_icon_padding">8dp</dimen>
+    <!-- TODO: why can't use -->
+    <style name="xhb_drop_down_text_appearance">@style/TextAppearance.XHB.Body.Middle</style>
 
     <style name="XHBDropDown">
         <item name="android:orientation">vertical</item>
-        <item name="backgroundColor">@color/drop_down_background_color</item>
-        <item name="shadowRadius">@dimen/drop_down_shadow_radius</item>
-        <item name="borderRadius">@dimen/drop_down_border_radius</item>
+        <item name="backgroundColor">@color/xhb_drop_down_background_color</item>
+        <item name="shadowRadius">@dimen/xhb_drop_down_shadow_radius</item>
+        <item name="borderRadius">@dimen/xhb_drop_down_border_radius</item>
     </style>
 
 </resources>

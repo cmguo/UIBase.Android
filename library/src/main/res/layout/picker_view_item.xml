@@ -4,16 +4,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/xhb_drop_down_item_padding_y"
-        android:paddingBottom="@dimen/xhb_drop_down_item_padding_y"
+        android:paddingTop="@dimen/xhb_picker_view_item_padding_y"
+        android:paddingBottom="@dimen/xhb_picker_view_item_padding_y"
         android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="@dimen/xhb_drop_down_icon_size"
-        android:layout_height="@dimen/xhb_drop_down_icon_size"
+        android:layout_width="@dimen/xhb_picker_view_icon_size"
+        android:layout_height="@dimen/xhb_picker_view_icon_size"
         android:layout_gravity="center"
-        android:paddingRight="@dimen/xhb_drop_down_icon_padding"
+        android:paddingRight="@dimen/xhb_picker_view_icon_padding"
         />
 
     <TextView
@@ -25,6 +25,14 @@
         android:textAppearance="@style/TextAppearance.XHB.Body.Middle"
         android:singleLine="true"
         android:ellipsize="end"
+        />
+
+    <com.xhb.uibase.widget.XHBCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/xhb_picker_view_icon_padding"
         />
 
 </LinearLayout>

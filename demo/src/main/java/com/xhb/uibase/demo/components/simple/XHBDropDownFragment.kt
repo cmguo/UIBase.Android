@@ -60,7 +60,7 @@ class XHBDropDownFragment : ComponentFragment<XhbDropDownFragmentBinding?, XHBDr
         }
     }
 
-    override fun dropDownFinished(selection: Int?) {
+    override fun dropDownFinished(dropDown: XHBDropDown, selection: Int?) {
         val tip = XHBTipView(requireContext(), null)
         tip.message = "选择了项目${selection}"
         tip.location = XHBTipView.Location.AutoToast

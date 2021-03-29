@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="panelStyle" format="reference"/>
+
+    <dimen name="xhb_panel_bottom_height">48dp</dimen>
+    <dimen name="xhb_panel_padding">16dp</dimen>
+    <dimen name="xhb_panel_border_radius">12dp</dimen>
+
+    <declare-styleable name="XHBPanel">
+        <attr name="titleBar" format="reference"/>
+        <attr name="content"/>
+        <attr name="bottomButton" format="reference"/>
+        <attr name="borderRadius"/>
+    </declare-styleable>
+
+    <style name="XHBPanel">
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:minHeight">200dp</item>
+        <item name="borderRadius">@dimen/xhb_panel_border_radius</item>
+    </style>
+
+</resources>

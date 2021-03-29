@@ -14,7 +14,6 @@ import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
-import androidx.core.widget.TextViewCompat
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.ShapeDrawables
 
@@ -28,52 +27,6 @@ class XHBButton @JvmOverloads constructor(
 
     enum class ButtonSize {
         Large, Middle, Small, Thin
-    }
-
-    companion object {
-
-        data class TypeStyles(@ColorRes val textColor: Int, @ColorRes val backgroundColor: Int)
-        data class SizeStyles(@DimenRes val height: Int, @DimenRes val radius: Int,
-                              @DimenRes val padding: Int, @DimenRes val textSize: Int, @DimenRes val iconPadding: Int)
-
-        private val typeStyles: Map<ButtonType, TypeStyles> = mapOf(
-            ButtonType.Primitive to TypeStyles(R.color.bluegrey900_disabled, R.color.brand500_pressed_disabled),
-            ButtonType.Secondary to TypeStyles(R.color.blue600_disabled, R.color.blue100_pressed_disabled),
-            ButtonType.Tertiary to TypeStyles(R.color.bluegrey800_disabled, R.color.bluegrey100_pressed_disabled),
-            ButtonType.Danger to TypeStyles(R.color.red600_disabled, R.color.red100_pressed_disabled),
-            ButtonType.Text to TypeStyles(R.color.blue600_disabled, R.color.transparent_pressed_disabled),
-        )
-
-        private val sizeStyles: Map<ButtonSize, SizeStyles> = mapOf(
-            ButtonSize.Large to SizeStyles(R.dimen.button_height_large, R.dimen.button_radius_large,
-                R.dimen.button_padding_large, R.dimen.button_textSize_large, R.dimen.button_iconPadding_large),
-            ButtonSize.Middle to SizeStyles(R.dimen.button_height_middle, R.dimen.button_radius_middle,
-                R.dimen.button_padding_middle, R.dimen.button_textSize_middle, R.dimen.button_iconPadding_middle),
-            ButtonSize.Small to SizeStyles(R.dimen.button_height_small, R.dimen.button_radius_small,
-                R.dimen.button_padding_small, R.dimen.button_textSize_small, R.dimen.button_iconPadding_small),
-            ButtonSize.Thin to SizeStyles(R.dimen.button_height_small, 0,
-                0, R.dimen.button_textSize_small, R.dimen.button_iconPadding_small),
-        )
-
-        private fun backgroundDrawable(context: Context, type: ButtonType, size: ButtonSize) : Drawable {
-            return backgroundDrawable(context, typeStyles[type]!!, sizeStyles[size]!!)
-        }
-
-        private fun backgroundDrawable(context: Context, types: TypeStyles, sizes: SizeStyles) : Drawable {
-            // it's stateful, so can't shard
-            return createBackgroundDrawable(context, types, sizes)
-        }
-
-        private fun createBackgroundDrawable(context: Context, types: TypeStyles, sizes: SizeStyles) : Drawable {
-//            return DrawableBuilder().apply {
-//                rectangle()
-//                solidColorStateList(context.resources.getColorStateList(types.backgroundColor))
-//                cornerRadius(context.resources.getDimensionPixelSize(sizes.radius))
-//            }.build();
-            val config = ShapeDrawables.Config(GradientDrawable.RECTANGLE, sizes.radius, types.backgroundColor,
-                0, 0, 0, 0)
-            return ShapeDrawables.getDrawable(context, config)
-        }
     }
 
     var buttonType: ButtonType = ButtonType.Primitive
@@ -207,6 +160,52 @@ class XHBButton @JvmOverloads constructor(
 
     /* private */
 
+    companion object {
+
+        data class TypeStyles(@ColorRes val textColor: Int, @ColorRes val backgroundColor: Int)
+        data class SizeStyles(@DimenRes val height: Int, @DimenRes val radius: Int,
+                              @DimenRes val padding: Int, @DimenRes val textSize: Int, @DimenRes val iconPadding: Int)
+
+        private val typeStyles: Map<ButtonType, TypeStyles> = mapOf(
+                ButtonType.Primitive to TypeStyles(R.color.bluegrey900_disabled, R.color.brand500_pressed_disabled),
+                ButtonType.Secondary to TypeStyles(R.color.blue600_disabled, R.color.blue100_pressed_disabled),
+                ButtonType.Tertiary to TypeStyles(R.color.bluegrey800_disabled, R.color.bluegrey100_pressed_disabled),
+                ButtonType.Danger to TypeStyles(R.color.red600_disabled, R.color.red100_pressed_disabled),
+                ButtonType.Text to TypeStyles(R.color.blue600_disabled, R.color.transparent_pressed_disabled),
+        )
+
+        private val sizeStyles: Map<ButtonSize, SizeStyles> = mapOf(
+                ButtonSize.Large to SizeStyles(R.dimen.button_height_large, R.dimen.button_radius_large,
+                        R.dimen.button_padding_large, R.dimen.button_textSize_large, R.dimen.button_iconPadding_large),
+                ButtonSize.Middle to SizeStyles(R.dimen.button_height_middle, R.dimen.button_radius_middle,
+                        R.dimen.button_padding_middle, R.dimen.button_textSize_middle, R.dimen.button_iconPadding_middle),
+                ButtonSize.Small to SizeStyles(R.dimen.button_height_small, R.dimen.button_radius_small,
+                        R.dimen.button_padding_small, R.dimen.button_textSize_small, R.dimen.button_iconPadding_small),
+                ButtonSize.Thin to SizeStyles(R.dimen.button_height_small, 0,
+                        0, R.dimen.button_textSize_small, R.dimen.button_iconPadding_small),
+        )
+
+        private fun backgroundDrawable(context: Context, type: ButtonType, size: ButtonSize) : Drawable {
+            return backgroundDrawable(context, typeStyles[type]!!, sizeStyles[size]!!)
+        }
+
+        private fun backgroundDrawable(context: Context, types: TypeStyles, sizes: SizeStyles) : Drawable {
+            // it's stateful, so can't shard
+            return createBackgroundDrawable(context, types, sizes)
+        }
+
+        private fun createBackgroundDrawable(context: Context, types: TypeStyles, sizes: SizeStyles) : Drawable {
+//            return DrawableBuilder().apply {
+//                rectangle()
+//                solidColorStateList(context.resources.getColorStateList(types.backgroundColor))
+//                cornerRadius(context.resources.getDimensionPixelSize(sizes.radius))
+//            }.build();
+            val config = ShapeDrawables.Config(GradientDrawable.RECTANGLE, sizes.radius, types.backgroundColor,
+                    0, 0, 0, 0)
+            return ShapeDrawables.getDrawable(context, config)
+        }
+    }
+
     private fun applyStyle(a: TypedArray) {
         val type = a.getInt(R.styleable.XHBButton_buttonType, -1)
         if (type >= 0 && type != buttonType.ordinal)
@@ -218,6 +217,7 @@ class XHBButton @JvmOverloads constructor(
         content = a.getResourceId(R.styleable.XHBButton_content, 0)
         loadingDrawable = a.getDrawable(R.styleable.XHBButton_loadingDrawable)
         loadingText = a.getText(R.styleable.XHBButton_loadingText)
+        iconAtRight = a.getBoolean(R.styleable.XHBButton_iconAtRight, iconAtRight)
     }
 
     private fun setTextInner(text: CharSequence?, type: BufferType = BufferType.NORMAL) {

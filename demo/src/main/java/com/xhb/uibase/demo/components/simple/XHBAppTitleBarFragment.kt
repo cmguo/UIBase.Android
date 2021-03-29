@@ -5,42 +5,43 @@ import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.ContentStyle
-import com.xhb.uibase.demo.core.style.LayoutStyle
 import com.xhb.uibase.demo.core.style.annotation.Description
 import com.xhb.uibase.demo.core.style.annotation.Style
 import com.xhb.uibase.demo.core.style.annotation.TextAppearanceStyle
 import com.xhb.uibase.demo.core.style.annotation.Title
 import com.xhb.uibase.demo.databinding.XhbAppTitleBarFragmentBinding
+import com.xhb.uibase.widget.XHBAppTitleBar
+import com.xhb.uibase.widget.XHBTipView
 
-class XHBAppTitleBarFragment : ComponentFragment<XhbAppTitleBarFragmentBinding?, XHBAppTitleBarFragment.Model?, XHBAppTitleBarFragment.Styles?>() {
+class XHBAppTitleBarFragment : ComponentFragment<XhbAppTitleBarFragmentBinding?, XHBAppTitleBarFragment.Model?, XHBAppTitleBarFragment.Styles?>()
+    , XHBAppTitleBar.TitleBarListener {
 
-    class Model(fragment: XHBAppTitleBarFragment?) : ViewModel() {
-    }
+    class Model : ViewModel()
 
-    class Styles(fragment: XHBAppTitleBarFragment?) : ViewStyles() {
+    class Styles : ViewStyles() {
 
         @Bindable
-        @Title("左侧内容")
-        @Description("左侧按钮的内容，参见按的 content 样式")
-        @Style(ContentStyle::class)
+        @Title("左侧按钮")
+        @Description("左侧按钮的内容，参见按钮的 content 样式")
+        @Style(ContentStyle::class, params = ["button", "icon", "text"])
         var leftButton = 0
 
         @Bindable
-        @Title("右侧内容")
-        @Description("右侧按钮的内容，参见按的 content 样式")
-        @Style(ContentStyle::class)
+        @Title("右侧按钮")
+        @Description("右侧按钮的内容，参见按钮的 content 样式")
+        @Style(ContentStyle::class, params = ["button", "icon", "text"])
         var rightButton = 0
 
         @Bindable
-        @Title("右侧内容2")
-        @Description("右侧第2个按钮的内容，参见按的 content 样式")
-        @Style(ContentStyle::class)
+        @Title("右侧按钮2")
+        @Description("右侧第2个按钮的内容，参见按钮的 content 样式")
+        @Style(ContentStyle::class, params = ["button", "icon", "text"])
         var rightButton2 = 0
 
         @Bindable
-        @Title("中间内容")
-        @Description("中间内容，布局（style）资源ID")
-        @Style(LayoutStyle::class)
+        @Title("内容")
+        @Description("中间或者整体内容，资源ID：布局（layout，中间内容）或者样式（style，整体内容）")
+        @Style(ContentStyle::class, params = ["@layout"])
         var content = 0
 
         @Bindable
@@ -56,6 +57,14 @@ class XHBAppTitleBarFragment : ComponentFragment<XhbAppTitleBarFragmentBinding?,
     }
 
     companion object {
-        private const val TAG = "XHBAmountViewFragment"
+        private const val TAG = "XHBAppTitleBarFragment"
+    }
+
+    override fun titleBarButtonClicked(bar: XHBAppTitleBar, viewId: Int) {
+        val tip = XHBTipView(requireContext(), null)
+        val name = resources.getResourceEntryName(viewId)
+        tip.message = "点击了按钮${name}"
+        tip.location = XHBTipView.Location.AutoToast
+        tip.popAt(requireView())
     }
 }

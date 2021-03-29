@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.util.Log
 import android.util.Size
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -25,7 +24,7 @@ class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     @FunctionalInterface
     interface DropDownListener {
-        fun dropDownFinished(selection: Int?)
+        fun dropDownFinished(dropDown: XHBDropDown, selection: Int?)
     }
 
     var titles: Iterable<Any> = ArrayList()
@@ -73,20 +72,12 @@ class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSe
         val size = calcSize()
         // pop
         val window = PopupWindow(this, size.width, size.height, true)
-        adapter.listener = object : DropDownListener {
-            override fun dropDownFinished(selection: Int?) {
-                if (selection != null)
-                    window.dismiss()
-                listener.dropDownFinished(selection)
-            }
+        adapter.listener = {
+            if (it != null)
+                window.dismiss()
+            listener.dropDownFinished(this, it)
         }
         window.showAsDropDown(target, 0, 0, Gravity.TOP or Gravity.START)
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        Log.d(TAG, "onMeasure: " + MeasureSpec.toString(widthMeasureSpec) + " " + MeasureSpec.toString(heightMeasureSpec))
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        Log.d(TAG, "onMeasure: $measuredWidth $measuredHeight")
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -99,7 +90,7 @@ class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        adapter.listener?.dropDownFinished(null)
+        adapter.listener?.invoke(null)
         adapter.listener = null
     }
 
@@ -134,7 +125,7 @@ class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     class DropDownAdapter(private val outer: XHBDropDown) : RecyclerView.Adapter<DropDownHolder>(), OnClickListener {
 
-        var listener: DropDownListener? = null
+        var listener: ((Int?) -> Unit)? = null
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DropDownHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.drop_down_item, parent, false)
@@ -150,11 +141,11 @@ class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSe
             holder.bind(outer.icons?.elementAtOrNull(position), outer.titles.elementAt(position))
         }
 
-        override fun onClick(v: View?) {
-            val index = (v?.parent as ViewGroup).indexOfChild(v)
+        override fun onClick(view: View) {
+            val index = (view.parent as ViewGroup).indexOfChild(view)
             val l = listener
             listener = null
-            l?.dropDownFinished(index)
+            l?.invoke(index)
         }
     }
 

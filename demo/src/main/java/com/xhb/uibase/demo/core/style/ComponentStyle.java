@@ -8,6 +8,7 @@ import com.ustc.base.util.reflect.ClassWrapper;
 import com.xhb.uibase.demo.BR;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.core.style.annotation.Description;
+import com.xhb.uibase.demo.core.style.annotation.Style;
 import com.xhb.uibase.demo.core.style.annotation.Title;
 import com.xhb.uibase.demo.core.style.annotation.ValueTitles;
 import com.xhb.uibase.demo.core.style.annotation.Values;
@@ -147,6 +148,13 @@ public class ComponentStyle {
             }
         }
         return value2;
+    }
+
+    protected String[] styleParams() {
+        Style style = field_.getAnnotation(Style.class);
+        if (style == null)
+            return null;
+        return style.params();
     }
 
     private static Map<String, Integer> fieldBindings_ = new TreeMap<>();

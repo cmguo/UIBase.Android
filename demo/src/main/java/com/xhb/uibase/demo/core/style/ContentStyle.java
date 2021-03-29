@@ -20,9 +20,14 @@ public class ContentStyle extends ResourceStyle {
         "drawable/icon_left",
         "drawable/icon_exit",
         "string/app_name",
-        "icon&text:array/button_icon_text",
-        "prim_style:style/button_content_prim_style",
-        "text_style:style/button_content_text_style"
+        "button_icon&text:array/button_icon_text",
+        "button_prim:style/button_content_prim_style",
+        "button_text:style/button_content_text_style",
+        "title_icon:style/title_bar_icon",
+        "title_text:style/title_bar_text",
+        "title_text_only:style/title_bar_text_only",
+        "layout/xhb_tab_bar",
+        "layout/xhb_picker_view",
     };
 
     public ContentStyle(Field field) {

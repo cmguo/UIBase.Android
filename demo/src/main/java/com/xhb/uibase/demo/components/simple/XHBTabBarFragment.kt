@@ -27,7 +27,7 @@ import com.xhb.uibase.widget.XHBTipView
 import com.xhb.uibase.widget.tabbar.XHBLineIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 
-class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBarFragment.Model?, XHBTabBarFragment.Styles?>(), XHBDropDown.DropDownListener {
+class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBarFragment.Model?, XHBTabBarFragment.Styles?>() {
 
     class Model : ViewModel() {
 
@@ -140,13 +140,6 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
                 binding.root.layoutParams = lp
             }
         }
-    }
-
-    override fun dropDownFinished(selection: Int?) {
-        val tip = XHBTipView(requireContext(), null)
-        tip.message = "选择了项目${selection}"
-        tip.location = XHBTipView.Location.AutoToast
-        tip.popAt(requireView())
     }
 
     companion object {

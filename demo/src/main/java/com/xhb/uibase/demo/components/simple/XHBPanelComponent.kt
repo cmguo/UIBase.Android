@@ -3,6 +3,7 @@ package com.xhb.uibase.demo.components.simple
 import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
+import com.xhb.uibase.demo.core.ComponentFragment
 
 @AutoService(Component::class)
 class XHBPanelComponent : Component {
@@ -26,4 +27,7 @@ class XHBPanelComponent : Component {
         return R.string.component_xhb_panels
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return XHBPanelFragment::class.java
+    }
 }

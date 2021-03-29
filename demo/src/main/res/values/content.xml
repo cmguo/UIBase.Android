@@ -23,4 +23,37 @@
         <item name="iconAtRight">true</item>
     </style>
 
+    <style name="title_bar_icon">
+        <item name="title">标题</item>
+        <item name="leftButton">@drawable/icon_close</item>
+        <item name="rightButton">@drawable/icon_more</item>
+    </style>
+
+    <style name="title_bar_text">
+        <item name="title">标题</item>
+        <item name="leftButton">@string/confirm</item>
+        <item name="rightButton">@string/cancel</item>
+    </style>
+
+    <style name="title_bar_text_only">
+        <item name="title">标题</item>
+    </style>
+
+    <string-array name="xhb_picker_titles">
+        <item>不可选择的已选择项</item>
+        <item>不可选择的未选择项</item>
+        <item>普通选项</item>
+        <item>普通选项</item>
+        <item>过于长的选项过于长的选项过于长的选项…</item>
+    </string-array>
+
+    <array name="xhb_icons">
+        <item>@drawable/ic_erase</item>
+        <item>@drawable/icon_plus</item>
+        <item>@drawable/icon_minus</item>
+        <item>@drawable/icon_more</item>
+        <item>@drawable/icon_left</item>
+        <item>@drawable/icon_exit</item>
+    </array>
+
 </resources>
