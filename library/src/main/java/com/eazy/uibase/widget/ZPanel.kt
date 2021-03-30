@@ -66,6 +66,8 @@ class ZPanel @JvmOverloads constructor(
     private var _bottomButton: ZButton
     private var _content: View? = null
 
+    private var _inited = false
+
     init {
         LayoutInflater.from(context).inflate(R.layout.panel, this)
         _titleBar = findViewById(R.id.titleBar)
@@ -80,6 +82,8 @@ class ZPanel @JvmOverloads constructor(
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZPanel, R.attr.panelStyle, 0)
         applyStyle(a)
         a.recycle()
+
+        _inited = true
     }
 
     fun popUp(fragmentManager: FragmentManager) {
@@ -93,6 +97,23 @@ class ZPanel @JvmOverloads constructor(
 
     fun dismiss() {
         MaskDialog.dismiss(this)
+    }
+
+    override fun addView(child: View) {
+        addView(child, child.layoutParams)
+    }
+
+    override fun addView(child: View, params: ViewGroup.LayoutParams?) {
+        if (!_inited)
+            return super.addView(child, params)
+        if (_content != null) {
+            throw RuntimeException("Already has body!")
+        }
+        val lp = params as? LayoutParams ?: LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        lp.gravity = Gravity.CENTER_HORIZONTAL
+        lp.weight=1f
+        addView(child, indexOfChild(_titleBar.parent as View) + 1, lp)
+        _content = child
     }
 
     override fun onDetachedFromWindow() {
@@ -138,18 +159,16 @@ class ZPanel @JvmOverloads constructor(
     }
 
     private fun syncContent() {
-        if (_content != null)
+        if (_content != null) {
             removeView(_content)
+            _content = null
+        }
         if (content == 0)
             return
         val type = resources.getResourceTypeName(content)
         if (type == "layout") {
             val view = LayoutInflater.from(context).inflate(content, this, false)
-            val lp = view.layoutParams as LayoutParams
-            lp.gravity = Gravity.CENTER_HORIZONTAL
-            lp.weight=1f
-            addView(view, indexOfChild(_titleBar.parent as View) + 1, lp)
-            _content = view
+            addView(view)
         } else if (type == "style") {
             val typedArray = context.obtainStyledAttributes(content, R.styleable.ZPanel)
             applyStyle(typedArray)

@@ -271,6 +271,8 @@ class ZButton @JvmOverloads constructor(
                 typedArray.recycle()
             }
             "style" -> {
+                icon = 0
+                text = null
                 val typedArray = context.obtainStyledAttributes(content, R.styleable.ZButton)
                 applyStyle(typedArray)
                 typedArray.recycle()

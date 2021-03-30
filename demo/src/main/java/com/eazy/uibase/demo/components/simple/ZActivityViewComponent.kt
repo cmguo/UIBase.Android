@@ -13,7 +13,7 @@ class ZActivityViewComponent : Component {
     }
 
     override fun group(): Int {
-        return R.string.group_complex
+        return R.string.group_simple
     }
 
     override fun icon(): Int {

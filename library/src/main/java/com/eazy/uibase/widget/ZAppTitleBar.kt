@@ -171,13 +171,22 @@ class ZAppTitleBar @JvmOverloads constructor(
         if (content == 0)
             return
         val type = resources.getResourceTypeName(content)
-        if (type == "layout") {
+        if (type == "string") {
+            leftButton = 0
+            rightButton = 0
+            rightButton2 = 0
+            title = resources.getText(content)
+        } else if (type == "layout") {
             val view = LayoutInflater.from(context).inflate(content, this, false)
             val lp = view.layoutParams as LayoutParams
             lp.gravity = Gravity.CENTER_HORIZONTAL
             addView(view, indexOfChild(_textView) + 1, lp)
             _content = view
         } else if (type == "style") {
+            leftButton = 0
+            rightButton = 0
+            rightButton2 = 0
+            title = null
             val typedArray = context.obtainStyledAttributes(content, R.styleable.ZAppTitleBar)
             applyStyle(typedArray)
             typedArray.recycle()
