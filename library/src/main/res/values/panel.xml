@@ -16,7 +16,9 @@
 
     <style name="ZPanel">
         <item name="android:layout_gravity">bottom</item>
+        <item name="android:orientation">vertical</item>
         <item name="android:minHeight">200dp</item>
+        <item name="android:maxHeight">600dp</item>
         <item name="borderRadius">@dimen/panel_border_radius</item>
     </style>
 

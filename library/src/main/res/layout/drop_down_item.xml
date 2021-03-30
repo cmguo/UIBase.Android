@@ -13,7 +13,7 @@
         android:layout_width="@dimen/drop_down_icon_size"
         android:layout_height="@dimen/drop_down_icon_size"
         android:layout_gravity="center"
-        android:paddingRight="@dimen/drop_down_icon_padding"
+        android:layout_marginRight="@dimen/drop_down_icon_padding"
         />
 
     <TextView

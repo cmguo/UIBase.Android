@@ -7,6 +7,8 @@
     <dimen name="app_title_bar_padding">16dp</dimen>
     <dimen name="app_title_bar_icon_padding">12dp</dimen>
     <dimen name="app_title_bar_text_padding">20dp</dimen>
+    <!-- TODO: why can't use -->
+    <style name="app_title_bar_text_appearance">@style/TextAppearance.Z.Head3</style>
 
     <array name="app_title_button">
         <item>@drawable/icon_minus</item>
@@ -18,7 +20,9 @@
         <attr name="rightButton" format="reference"/>
         <attr name="rightButton2" format="reference"/>
         <attr name="title" format="string"/>
-        <attr name="android:textAppearance"/>
+        <!-- not use android:textAppearance, since we not assign style value by default style,
+            then we will face app default textAppearance -->
+        <attr name="textAppearance" format="reference"/>
         <attr name="content"/>
     </declare-styleable>
 
