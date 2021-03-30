@@ -1,6 +1,7 @@
 package com.xhb.uibase.widget
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.*
@@ -15,6 +16,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView

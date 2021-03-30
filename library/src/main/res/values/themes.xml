@@ -15,6 +15,7 @@
         <item name="tabBarStyle">@style/XHBTabBar</item>
         <item name="appTitleBarStyle">@style/XHBAppTitleBar</item>
         <item name="panelStyle">@style/XHBPanel</item>
+        <item name="searchBoxStyle">@style/XHBSearchBox</item>
     </style>
 
 </resources>

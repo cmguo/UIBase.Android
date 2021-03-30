@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="searchBoxStyle" format="reference"/>
+
+    <declare-styleable name="XHBSearchBox">
+        <attr name="rightButton"/>
+    </declare-styleable>
+
+    <dimen name="xhb_search_box_padding_x">16dp</dimen>
+    <dimen name="xhb_search_box_padding_y">8dp</dimen>
+    <dimen name="xhb_search_box_input_border_radius">18dp</dimen>
+    <color name="xhb_search_box_background_color">@color/bluegrey_00</color>
+    <color name="xhb_search_box_input_background_color">@color/bluegrey_05</color>
+
+    <style name="XHBSearchBox">
+        <item name="android:paddingLeft">@dimen/xhb_search_box_padding_x</item>
+        <item name="android:paddingRight">@dimen/xhb_search_box_padding_x</item>
+        <item name="android:paddingTop">@dimen/xhb_search_box_padding_y</item>
+        <item name="android:paddingBottom">@dimen/xhb_search_box_padding_y</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/xhb_search_box_background_color</item>
+    </style>
+
+</resources>

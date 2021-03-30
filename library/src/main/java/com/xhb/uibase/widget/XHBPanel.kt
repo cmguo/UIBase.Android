@@ -10,10 +10,14 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.fragment.app.FragmentManager
 import com.xhb.uibase.R
+import com.xhb.uibase.dialog.MaskDialog
 
 class XHBPanel @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -52,7 +56,7 @@ class XHBPanel @JvmOverloads constructor(
 
     @FunctionalInterface
     interface PanelListener {
-        fun panelButtonClicked(panel: XHBPanel, viewId: Int) {}
+        fun panelButtonClicked(panel: XHBPanel, btnId: Int) {}
         fun panelDismissed(panel: XHBPanel)
     }
 
@@ -67,13 +71,28 @@ class XHBPanel @JvmOverloads constructor(
         _titleBar = findViewById(R.id.titleBar)
         _bottomButton = findViewById(R.id.bottomButton)
 
+        _titleBar.listener = object : XHBAppTitleBar.TitleBarListener {
+            override fun titleBarButtonClicked(bar: XHBAppTitleBar, viewId: Int) {
+                listener?.panelButtonClicked(this@XHBPanel, viewId)
+            }
+        }
+
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBPanel, R.attr.panelStyle, 0)
         applyStyle(a)
         a.recycle()
     }
 
-    fun popUp() {
-        TODO("Not yet implemented")
+    fun popUp(fragmentManager: FragmentManager) {
+        val lp = layoutParams as? FrameLayout.LayoutParams ?: FrameLayout.LayoutParams(0, 0)
+        lp.width = LayoutParams.MATCH_PARENT
+        lp.height = LayoutParams.WRAP_CONTENT
+        lp.gravity = Gravity.BOTTOM
+        layoutParams = lp
+        MaskDialog(this).show(fragmentManager, "")
+    }
+
+    fun dismiss() {
+        MaskDialog.dismiss(this)
     }
 
     override fun onDetachedFromWindow() {
@@ -112,6 +131,9 @@ class XHBPanel @JvmOverloads constructor(
         } else {
             button.content = content
             parent2.visibility = VISIBLE
+            button.setOnClickListener {
+                listener?.panelButtonClicked(this, it.id)
+            }
         }
     }
 

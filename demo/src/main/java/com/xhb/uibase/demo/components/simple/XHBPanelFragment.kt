@@ -2,6 +2,7 @@ package com.xhb.uibase.demo.components.simple
 
 import android.view.View
 import androidx.databinding.Bindable
+import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
@@ -49,15 +50,15 @@ class XHBPanelFragment : ComponentFragment<XhbPanelFragmentBinding?, XHBPanelFra
         panel.bottomButton = styles!!.bottomButton
         panel.content = styles!!.content
         panel.listener = this
-        panel.popUp()
+        panel.popUp(parentFragmentManager)
     }
 
-    override fun panelButtonClicked(panel: XHBPanel, viewId: Int) {
+    override fun panelButtonClicked(panel: XHBPanel, btnId: Int) {
         val tip = XHBTipView(requireContext(), null)
-        val name = resources.getResourceEntryName(viewId)
+        val name = resources.getResourceEntryName(btnId)
         tip.message = "点击了按钮${name}"
         tip.location = XHBTipView.Location.AutoToast
-        tip.popAt(requireView())
+        tip.popAt(panel)
     }
 
     override fun panelDismissed(panel: XHBPanel) {

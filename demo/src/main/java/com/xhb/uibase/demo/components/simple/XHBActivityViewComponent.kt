@@ -1,4 +1,4 @@
-package com.xhb.uibase.demo.components.complex
+package com.xhb.uibase.demo.components.simple
 
 import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R

@@ -68,7 +68,7 @@ class XHBAppTitleBar @JvmOverloads constructor(
 
     @FunctionalInterface
     interface TitleBarListener {
-        fun titleBarButtonClicked(bar: XHBAppTitleBar, viewId: Int)
+        fun titleBarButtonClicked(bar: XHBAppTitleBar, btnId: Int)
     }
 
     var listener: TitleBarListener? = null

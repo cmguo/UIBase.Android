@@ -60,9 +60,9 @@ class XHBAppTitleBarFragment : ComponentFragment<XhbAppTitleBarFragmentBinding?,
         private const val TAG = "XHBAppTitleBarFragment"
     }
 
-    override fun titleBarButtonClicked(bar: XHBAppTitleBar, viewId: Int) {
+    override fun titleBarButtonClicked(bar: XHBAppTitleBar, btnId: Int) {
         val tip = XHBTipView(requireContext(), null)
-        val name = resources.getResourceEntryName(viewId)
+        val name = resources.getResourceEntryName(btnId)
         tip.message = "点击了按钮${name}"
         tip.location = XHBTipView.Location.AutoToast
         tip.popAt(requireView())

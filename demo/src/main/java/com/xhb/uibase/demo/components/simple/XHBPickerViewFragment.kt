@@ -3,16 +3,12 @@ package com.xhb.uibase.demo.components.simple
 import android.view.View
 import androidx.databinding.Bindable
 import com.xhb.uibase.demo.BR
-import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
-import com.xhb.uibase.demo.core.style.ContentStyle
 import com.xhb.uibase.demo.core.style.annotation.Description
-import com.xhb.uibase.demo.core.style.annotation.Style
 import com.xhb.uibase.demo.core.style.annotation.Title
 import com.xhb.uibase.demo.databinding.XhbPickerViewFragmentBinding
-import com.xhb.uibase.widget.XHBPanel
 
 class XHBPickerViewFragment : ComponentFragment<XhbPickerViewFragmentBinding?, XHBPickerViewFragment.Model?, XHBPickerViewFragment.Styles?>() {
 
@@ -43,7 +39,7 @@ class XHBPickerViewFragment : ComponentFragment<XhbPickerViewFragmentBinding?, X
     }
 
     companion object {
-        private const val TAG = "XHBPanelFragment"
+        private const val TAG = "XHBPickerViewFragment"
     }
 
     var buttonClick = View.OnClickListener {
