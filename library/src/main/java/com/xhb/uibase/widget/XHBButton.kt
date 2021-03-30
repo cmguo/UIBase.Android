@@ -271,6 +271,8 @@ class XHBButton @JvmOverloads constructor(
                 typedArray.recycle()
             }
             "style" -> {
+                icon = 0
+                text = null
                 val typedArray = context.obtainStyledAttributes(content, R.styleable.XHBButton)
                 applyStyle(typedArray)
                 typedArray.recycle()

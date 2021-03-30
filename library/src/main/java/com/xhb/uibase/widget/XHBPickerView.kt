@@ -102,6 +102,7 @@ class XHBPickerView @JvmOverloads constructor(context: Context, attrs: Attribute
         if (singleSelection) {
             (selections as ArrayList<Int>).clear()
             (selections as ArrayList<Int>).add(index)
+            selectImage.visibility = View.VISIBLE
             layoutSelectImage()
         } else if (selected) {
             (selections as ArrayList<Int>).add(selections.indexOfLast { it < index } + 1, index)

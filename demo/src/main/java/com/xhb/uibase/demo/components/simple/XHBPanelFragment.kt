@@ -24,7 +24,7 @@ class XHBPanelFragment : ComponentFragment<XhbPanelFragmentBinding?, XHBPanelFra
         @Bindable
         @Title("顶部栏")
         @Description("顶部标题栏栏，可选，参见标题栏的 content 样式")
-        @Style(ContentStyle::class, params = ["title"])
+        @Style(ContentStyle::class, params = ["title", "text"])
         var titleBar = 0
 
         @Bindable
