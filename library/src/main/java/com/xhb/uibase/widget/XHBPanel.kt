@@ -6,9 +6,11 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.xhb.uibase.R
@@ -123,6 +125,7 @@ class XHBPanel @JvmOverloads constructor(
             val view = LayoutInflater.from(context).inflate(content, this, false)
             val lp = view.layoutParams as LayoutParams
             lp.gravity = Gravity.CENTER_HORIZONTAL
+            lp.weight=1f
             addView(view, indexOfChild(_titleBar.parent as View) + 1, lp)
             _content = view
         } else if (type == "style") {

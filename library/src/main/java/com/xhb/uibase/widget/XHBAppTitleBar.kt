@@ -122,7 +122,7 @@ class XHBAppTitleBar @JvmOverloads constructor(
         rightButton = a.getResourceId(R.styleable.XHBAppTitleBar_rightButton, 0)
         rightButton2 = a.getResourceId(R.styleable.XHBAppTitleBar_rightButton2, 0)
         title = a.getText(R.styleable.XHBAppTitleBar_title)
-        textAppearance = a.getResourceId(R.styleable.XHBAppTitleBar_android_textAppearance, 0)
+        textAppearance = a.getResourceId(R.styleable.XHBAppTitleBar_textAppearance, 0)
     }
 
     private fun syncButton(button: XHBButton, content: Int) {
@@ -131,7 +131,7 @@ class XHBAppTitleBar @JvmOverloads constructor(
         } else {
             button.content = content
             button.visibility = VISIBLE
-            button.setOnClickListener() {
+            button.setOnClickListener {
                 listener?.titleBarButtonClicked(this, it.id)
             }
         }
