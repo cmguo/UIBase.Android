@@ -2,6 +2,7 @@ package com.eazy.uibase.demo.components.simple
 
 import android.view.View
 import androidx.databinding.Bindable
+import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
@@ -49,15 +50,15 @@ class ZPanelFragment : ComponentFragment<PanelFragmentBinding?, ZPanelFragment.M
         panel.bottomButton = styles!!.bottomButton
         panel.content = styles!!.content
         panel.listener = this
-        panel.popUp()
+        panel.popUp(parentFragmentManager)
     }
 
-    override fun panelButtonClicked(panel: ZPanel, viewId: Int) {
+    override fun panelButtonClicked(panel: ZPanel, btnId: Int) {
         val tip = ZTipView(requireContext(), null)
-        val name = resources.getResourceEntryName(viewId)
+        val name = resources.getResourceEntryName(btnId)
         tip.message = "点击了按钮${name}"
         tip.location = ZTipView.Location.AutoToast
-        tip.popAt(requireView())
+        tip.popAt(panel)
     }
 
     override fun panelDismissed(panel: ZPanel) {

@@ -68,7 +68,7 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     @FunctionalInterface
     interface TitleBarListener {
-        fun titleBarButtonClicked(bar: ZAppTitleBar, viewId: Int)
+        fun titleBarButtonClicked(bar: ZAppTitleBar, btnId: Int)
     }
 
     var listener: TitleBarListener? = null

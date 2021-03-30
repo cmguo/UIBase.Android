@@ -3,16 +3,12 @@ package com.eazy.uibase.demo.components.simple
 import android.view.View
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.BR
-import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.core.style.ContentStyle
 import com.eazy.uibase.demo.core.style.annotation.Description
-import com.eazy.uibase.demo.core.style.annotation.Style
 import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.PickerViewFragmentBinding
-import com.eazy.uibase.widget.ZPanel
 
 class ZPickerViewFragment : ComponentFragment<PickerViewFragmentBinding?, ZPickerViewFragment.Model?, ZPickerViewFragment.Styles?>() {
 
@@ -43,7 +39,7 @@ class ZPickerViewFragment : ComponentFragment<PickerViewFragmentBinding?, ZPicke
     }
 
     companion object {
-        private const val TAG = "ZPanelFragment"
+        private const val TAG = "ZPickerViewFragment"
     }
 
     var buttonClick = View.OnClickListener {

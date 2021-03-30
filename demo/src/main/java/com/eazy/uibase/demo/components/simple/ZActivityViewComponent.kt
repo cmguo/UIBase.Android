@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.components.complex
+package com.eazy.uibase.demo.components.simple
 
 import com.google.auto.service.AutoService
 import com.eazy.uibase.demo.R
