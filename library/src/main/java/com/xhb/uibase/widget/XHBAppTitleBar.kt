@@ -29,7 +29,7 @@ class XHBAppTitleBar @JvmOverloads constructor(
             field = value
             if (value > 0)
                 TextViewCompat.setTextAppearance(_textView, value)
-            else
+            else if (_inited)
                 updateLayout()
         }
 
@@ -40,7 +40,6 @@ class XHBAppTitleBar @JvmOverloads constructor(
                 return
             field = value
             syncButton(_leftButton, value)
-            updateLayout()
         }
 
     @DrawableRes
@@ -80,6 +79,8 @@ class XHBAppTitleBar @JvmOverloads constructor(
     private var _rightButton2: XHBButton
     private var _content: View? = null
 
+    private var _inited = false
+
     init {
         LayoutInflater.from(context).inflate(R.layout.app_title_bar, this)
         _leftButton = findViewById(R.id.leftButton)
@@ -90,6 +91,9 @@ class XHBAppTitleBar @JvmOverloads constructor(
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBAppTitleBar, R.attr.appTitleBarStyle, 0)
         applyStyle(a)
         a.recycle()
+
+        _inited = true
+        updateLayout()
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -135,15 +139,18 @@ class XHBAppTitleBar @JvmOverloads constructor(
                 listener?.titleBarButtonClicked(this, it.id)
             }
         }
-        if (_textView.maxWidth < width)
-            _textView.maxWidth = width
+        if (_inited) {
+            if (_textView.maxWidth < width)
+                _textView.maxWidth = width
+            updateLayout()
+        }
     }
 
     private fun updateLayout() {
         val lp = _textView.layoutParams as LayoutParams
         var ta: Int
         var tg = Gravity.START or Gravity.CENTER_VERTICAL
-        if (leftButton == 0) {
+        if (leftButton == 0 && (rightButton != 0 || rightButton2 != 0)) {
             lp.gravity = Gravity.START or Gravity.CENTER_VERTICAL
             ta = R.style.TextAppearance_XHB_Head0
         } else {

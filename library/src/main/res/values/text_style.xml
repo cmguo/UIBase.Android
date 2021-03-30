@@ -2,7 +2,7 @@
 <resources>
 
     <style name="TextAppearance.XHB" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/bluegrey_900</item>
+        <item name="android:textColor">@color/bluegrey900_disabled</item>
     </style>
 
     <style name="TextAppearance.XHB.Head" parent="TextAppearance.XHB">
@@ -22,7 +22,7 @@
     </style>
     <style name="TextAppearance.XHB.Head4" parent="TextAppearance.XHB.Head">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/bluegrey_800</item>
+        <item name="android:textColor">@color/bluegrey800_disabled</item>
     </style>
 
     <style name="TextAppearance.XHB.Body" parent="TextAppearance.XHB">
@@ -35,7 +35,7 @@
     </style>
     <style name="TextAppearance.XHB.Body.Small" parent="TextAppearance.XHB.Body">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/bluegrey_800</item>
+        <item name="android:textColor">@color/bluegrey800_disabled</item>
     </style>
 
     <style name="TextAppearance.XHB.Secondary" parent="TextAppearance.XHB">

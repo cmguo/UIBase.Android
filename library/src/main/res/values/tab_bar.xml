@@ -18,6 +18,7 @@
         <attr name="offsetX" format="dimension"/>
         <attr name="offsetY" format="dimension"/>
         <attr name="color"/>
+        <attr name="longLineColor" format="color"/>
     </declare-styleable>
 
     <dimen name="xhb_line_indicator_line_width">24dp</dimen>
@@ -27,6 +28,7 @@
     <dimen name="xhb_line_indicator_offset_x">4dp</dimen>
     <dimen name="xhb_line_indicator_offset_y">0dp</dimen>
     <color name="xhb_line_indicator_color">@color/brand_500</color>
+    <color name="xhb_line_indicator_long_line_color">@color/bluegrey_100</color>
 
     <style name="XHBLineIndicator">
         <item name="widthMode">exactly</item>
@@ -36,6 +38,7 @@
         <item name="offsetX">@dimen/xhb_line_indicator_offset_x</item>
         <item name="offsetY">@dimen/xhb_line_indicator_offset_y</item>
         <item name="color">@color/xhb_line_indicator_color</item>
+        <item name="longLineColor">@color/xhb_line_indicator_long_line_color</item>
     </style>
 
     <!-- XHBLineIndicator -->
