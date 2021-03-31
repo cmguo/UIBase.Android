@@ -81,6 +81,8 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
         get() = _options.date.time
         set(value) {
             val date = calendar(value)
+            if (date == _options.date)
+                return
             if (_inited) {
                 _picker.setDate(date) // will modify _options.date
             } else {
