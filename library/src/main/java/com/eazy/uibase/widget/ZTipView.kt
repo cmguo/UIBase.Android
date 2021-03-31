@@ -1,10 +1,11 @@
 package com.eazy.uibase.widget
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.content.ContextWrapper
-import android.graphics.*
+import android.graphics.Path
+import android.graphics.Point
+import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
@@ -16,7 +17,6 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView

@@ -56,6 +56,9 @@ class ZSearchBox @JvmOverloads constructor(
 
     override fun addView(child: View, params: ViewGroup.LayoutParams) {
         val editText = child.findViewByType(EditText::class.java) ?: return super.addView(child, params)
+        if (_textView != null) {
+            throw RuntimeException("Already has a edit text!")
+        }
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
