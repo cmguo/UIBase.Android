@@ -10,7 +10,7 @@ import androidx.databinding.InverseBindingListener;
 
 import com.xhb.uibase.widget.badgeview.XHBBadgeView;
 
-public class XHBBadgeViewBindings {
+public class XHBBadgeViewBindingAdapter {
 
     @BindingAdapter(value = "borderColor")
     public static void setBadgeBorderWidth(final XHBBadgeView view, final int color) {

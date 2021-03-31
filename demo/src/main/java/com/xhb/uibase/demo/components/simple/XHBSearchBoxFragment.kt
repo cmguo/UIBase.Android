@@ -39,7 +39,7 @@ class XHBSearchBoxFragment : ComponentFragment<XhbSearchBoxFragmentBinding?, XHB
         @Bindable
         @Title("右侧按钮")
         @Description("右侧操作按钮，可选，参见按纽的 content 样式")
-        @Style(ContentStyle::class, params = ["button", "icon", "text"])
+        @Style(ContentStyle::class, params = ["<button>"])
         var rightButton = 0
 
     }

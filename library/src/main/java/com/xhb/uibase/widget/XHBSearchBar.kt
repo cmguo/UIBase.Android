@@ -29,6 +29,12 @@ class XHBSearchBox @JvmOverloads constructor(
             syncButton(_rightButton, value)
         }
 
+    var text
+        get() = _textView?.text
+        set(value) {
+            _textView?.text = value
+        }
+
     @FunctionalInterface
     interface SearchBoxListener {
         fun searchBoxFocused(bar: XHBSearchBox) {}

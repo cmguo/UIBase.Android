@@ -10,7 +10,7 @@ import com.xhb.uibase.widget.XHBNumberView;
 
 import org.jetbrains.annotations.NotNull;
 
-public class XHBAmountViewBindings {
+public class XHBAmountViewBindingAdapter {
 
     @InverseBindingAdapter(attribute = "amount", event = "amountAttrChanged")
     public static int getAmount(XHBNumberView view) {

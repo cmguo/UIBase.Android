@@ -57,7 +57,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         @Bindable
         @Title("内容")
         @Description("包含文字或者图标，或者文字和图标及其他样式；资源ID类型，可以是 drawable、string、array 或者 style")
-        @Style(ContentStyle::class, params = ["string", "icon", "button"])
+        @Style(ContentStyle::class, params = ["text", "icon", "button"])
         var conntent = 0
 
         @Bindable

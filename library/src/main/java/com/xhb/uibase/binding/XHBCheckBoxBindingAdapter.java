@@ -11,7 +11,7 @@ import androidx.databinding.InverseBindingListener;
 import com.xhb.uibase.widget.XHBCheckBox;
 import com.xhb.uibase.widget.badgeview.XHBBadgeView;
 
-public class XHBCheckBoxBindings {
+public class XHBCheckBoxBindingAdapter {
 
     @InverseBindingAdapter(attribute = "checkedState", event = "checkedStateAttrChanged")
     public static XHBCheckBox.CheckedState getCheckedState(XHBCheckBox view) {

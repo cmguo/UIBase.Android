@@ -1,7 +1,6 @@
 package com.xhb.uibase.demo.core.style;
 
 import com.ustc.base.util.reflect.ClassWrapper;
-import com.xhb.uibase.demo.R;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ResourceStyle extends ComponentStyle {
 
@@ -17,9 +17,16 @@ public class ResourceStyle extends ComponentStyle {
         apply(resources);
     }
 
+    private static Map<String, String[]> paramTemplates = new TreeMap<>();
+
     private static final Map<String[], List<String>> typesMap = new HashMap<>();
     private static final Map<String[], List<String>> valuesMap = new HashMap<>();
     private static final Map<String[], List<String>> titlesMap = new HashMap<>();
+
+    static {
+        paramTemplates.put("<button>", new String[] {"button", "icon", "text"});
+        paramTemplates.put("<title>", new String[] {"title", "text"});
+    }
 
     private void apply(String[] resources) {
         if (!valuesMap.containsKey(resources)) {
@@ -47,7 +54,15 @@ public class ResourceStyle extends ComponentStyle {
         List<String> titles = new ArrayList<>();
         List<String> types = new ArrayList<>();
         for (String p : params) {
-            if (p.startsWith("@")) {
+            if (paramTemplates.containsKey(p)) {
+                for (String p1 : paramTemplates.get(p)) {
+                    if (p1.startsWith("@")) {
+                        types.add(p1.substring(1));
+                    } else {
+                        titles.add(p1);
+                    }
+                }
+            } else if (p.startsWith("@")) {
                 types.add(p.substring(1));
             } else {
                 titles.add(p);

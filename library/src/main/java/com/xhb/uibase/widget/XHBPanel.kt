@@ -6,13 +6,11 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.FragmentManager
@@ -53,6 +51,8 @@ class XHBPanel @JvmOverloads constructor(
             field = value
             syncBackground()
         }
+
+    val body get() = _content
 
     @FunctionalInterface
     interface PanelListener {
