@@ -58,7 +58,7 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private val adapter = PickerAdapter(this)
 
     companion object {
-        private const val TAG = "ZPicker"
+        private const val TAG = "ZPickerView"
     }
 
     init {
