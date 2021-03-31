@@ -41,7 +41,7 @@ public class RecyclerViewBindingAdapter {
 
     @BindingAdapter("itemBinding")
     public static <T> void setRecyclerViewItemBinding(RecyclerView recyclerView, T binding) {
-        RecyclerViewAdapter adapter = getAdapter(recyclerView);
+        RecyclerViewAdapter<T> adapter = getAdapter(recyclerView);
         if (adapter != null) {
             adapter.setItemBinding(ItemBindings.get(recyclerView.getContext(), binding));
         }
@@ -49,8 +49,8 @@ public class RecyclerViewBindingAdapter {
 
     @BindingAdapter("itemClicked")
     public static <T> void setRecyclerViewOnItemClickListener(RecyclerView recyclerView,
-                                                              RecyclerViewAdapter.OnItemClickListener listener) {
-        RecyclerViewAdapter adapter = getAdapter(recyclerView);
+                                                              RecyclerViewAdapter.OnItemClickListener<T> listener) {
+        RecyclerViewAdapter<T> adapter = getAdapter(recyclerView);
         if (adapter != null) {
             adapter.setOnItemClickListener(listener);
         }
@@ -74,16 +74,16 @@ public class RecyclerViewBindingAdapter {
         view.setHasFixedSize(hasFixedSize);
     }
 
-    private static RecyclerViewAdapter getAdapter(RecyclerView recyclerView) {
+    private static <T> RecyclerViewAdapter<T> getAdapter(RecyclerView recyclerView) {
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter == null) {
-            adapter = new RecyclerViewAdapter();
+            adapter = new RecyclerViewAdapter<T>();
             recyclerView.setAdapter(adapter);
         }
         if (recyclerView.getLayoutManager() == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         }
-        return adapter instanceof RecyclerViewAdapter ? (RecyclerViewAdapter) adapter : null;
+        return adapter instanceof RecyclerViewAdapter ? (RecyclerViewAdapter<T>) adapter : null;
     }
 
 }

@@ -10,7 +10,7 @@ import androidx.databinding.InverseBindingListener;
 
 import com.eazy.uibase.widget.badgeview.ZBadgeView;
 
-public class ZBadgeViewBindings {
+public class ZBadgeViewBindingAdapter {
 
     @BindingAdapter(value = "borderColor")
     public static void setBadgeBorderWidth(final ZBadgeView view, final int color) {

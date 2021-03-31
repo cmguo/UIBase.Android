@@ -11,7 +11,7 @@ import androidx.databinding.InverseBindingListener;
 import com.eazy.uibase.widget.ZCheckBox;
 import com.eazy.uibase.widget.badgeview.ZBadgeView;
 
-public class ZCheckBoxBindings {
+public class ZCheckBoxBindingAdapter {
 
     @InverseBindingAdapter(attribute = "checkedState", event = "checkedStateAttrChanged")
     public static ZCheckBox.CheckedState getCheckedState(ZCheckBox view) {

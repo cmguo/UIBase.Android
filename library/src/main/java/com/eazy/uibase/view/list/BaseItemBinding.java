@@ -65,7 +65,7 @@ public abstract class BaseItemBinding<T> implements ItemBinding<T> {
 
     @CallSuper
     protected void bindView(ViewDataBinding binding, T item, int position) {
-        ((ViewDataBinding) binding).setVariable(BR.data, item);
+        binding.setVariable(BR.data, item);
     }
 
     protected void bindView(View view, T item, int position) {

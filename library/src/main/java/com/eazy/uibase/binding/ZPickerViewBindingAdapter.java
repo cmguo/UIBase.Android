@@ -8,7 +8,7 @@ import com.eazy.uibase.widget.ZPickerView;
 
 import java.util.List;
 
-public class ZPickerViewBindings {
+public class ZPickerViewBindingAdapter {
 
     @InverseBindingAdapter(attribute = "selections", event = "selectionsAttrChanged")
     public static List<Integer> getSelections(ZPickerView view) {

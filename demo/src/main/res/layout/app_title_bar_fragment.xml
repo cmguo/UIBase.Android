@@ -34,6 +34,7 @@
             app:title="@{styles.title}"
             app:textAppearance="@{styles.textAppearance}"
             app:content="@{styles.content}"
+            app:data="@{styles.data}"
             app:listener="@{fragment}"
             />
 

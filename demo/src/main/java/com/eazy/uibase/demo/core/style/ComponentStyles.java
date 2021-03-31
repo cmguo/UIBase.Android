@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ComponentStyles {
 
-    private static Map<Class<?>, ComponentStyles> classStyles = new HashMap<>();
+    private static final Map<Class<?>, ComponentStyles> classStyles = new HashMap<>();
 
     static {
         classStyles.put(ViewStyles.class, new ComponentStyles());
@@ -66,11 +66,11 @@ public class ComponentStyles {
                 Method setter = null;
                 try {
                     getter = styles.getDeclaredMethod("get" + name);
-                } catch (NoSuchMethodException e) {
+                } catch (NoSuchMethodException ignored) {
                 }
                 try {
                     setter = styles.getDeclaredMethod("set" + name, f.getType());
-                } catch (NoSuchMethodException e) {
+                } catch (NoSuchMethodException ignored) {
                 }
                 if (getter != null && setter != null) {
                     if (styler != null) {

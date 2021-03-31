@@ -10,7 +10,7 @@ import com.eazy.uibase.widget.ZNumberView;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ZAmountViewBindings {
+public class ZAmountViewBindingAdapter {
 
     @InverseBindingAdapter(attribute = "amount", event = "amountAttrChanged")
     public static int getAmount(ZNumberView view) {

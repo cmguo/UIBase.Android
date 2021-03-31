@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
 
@@ -68,6 +67,8 @@ class ZAppTitleBar @JvmOverloads constructor(
             syncContent()
         }
 
+    val extensionBody get() = _content
+
     @FunctionalInterface
     interface TitleBarListener {
         fun titleBarButtonClicked(bar: ZAppTitleBar, btnId: Int)
@@ -107,8 +108,8 @@ class ZAppTitleBar @JvmOverloads constructor(
         if (_content != null) {
             throw RuntimeException("Already has a extension content!")
         }
-        val lp = params as? LinearLayoutCompat.LayoutParams
-            ?: LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT)
+        val lp = params as? LayoutParams
+            ?: LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         lp.gravity = Gravity.CENTER_HORIZONTAL
         addView(child, indexOfChild(_textView) + 1, lp)
         _content = child

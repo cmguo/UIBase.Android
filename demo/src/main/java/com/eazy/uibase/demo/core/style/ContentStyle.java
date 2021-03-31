@@ -4,7 +4,6 @@ import com.eazy.uibase.demo.R;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 public class ContentStyle extends ResourceStyle {
 
@@ -29,6 +28,7 @@ public class ContentStyle extends ResourceStyle {
         "title_only:style/title_bar_text_only",
         "layout_tab_bar:layout/tab_bar",
         "layout_picker:layout/picker_view",
+        "layout_text:layout/text_item",
     };
 
     public ContentStyle(Field field) {
