@@ -58,7 +58,7 @@ class XHBPickerView @JvmOverloads constructor(context: Context, attrs: Attribute
     private val adapter = PickerAdapter(this)
 
     companion object {
-        private const val TAG = "XHBPicker"
+        private const val TAG = "XHBPickerView"
     }
 
     init {

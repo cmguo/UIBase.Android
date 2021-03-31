@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="timePickerViewStyle" format="reference"/>
+
+    <dimen name="xhb_time_picker_view_max_height">360dp</dimen>
+    <dimen name="xhb_time_picker_view_item_padding_x">16dp</dimen>
+    <dimen name="xhb_time_picker_view_item_padding_y">12dp</dimen>
+    <dimen name="xhb_time_picker_view_icon_size">24dp</dimen>
+    <dimen name="xhb_time_picker_view_icon_padding">8dp</dimen>
+    <!-- TODO: why can't use -->
+    <style name="xhb_time_picker_view_text_appearance">@style/TextAppearance.XHB.Body.Middle</style>
+
+    <declare-styleable name="XHBTimePickerView">
+        <attr name="labels" format="string"/>
+        <attr name="itemsVisibleCount" format="integer"/>
+        <attr name="cyclic" format="boolean"/>
+        <attr name="centerLabel" format="boolean"/>
+        <attr name="lunar" format="boolean"/>
+        <attr name="selectTime" format="string"/>
+        <attr name="startTime" format="string"/>
+        <attr name="endTime" format="string"/>
+    </declare-styleable>
+
+    <style name="XHBTimePickerView">
+    </style>
+
+</resources>

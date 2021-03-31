@@ -3,8 +3,11 @@ package com.xhb.uibase.demo.components.complex
 import com.google.auto.service.AutoService
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.Component
+import com.xhb.uibase.demo.core.ComponentFragment
+import com.xhb.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
+@Author("cmguo")
 class XHBTimePickerComponent : Component {
     override fun id(): Int {
         return R.id.component_xhb_time_pickers
@@ -26,4 +29,7 @@ class XHBTimePickerComponent : Component {
         return R.string.component_xhb_time_pickers_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
+        return XHBTimePickerViewFragment::class.java
+    }
 }
