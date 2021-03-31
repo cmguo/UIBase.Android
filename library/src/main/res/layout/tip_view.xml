@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/leftImageView"
-        android:layout_width="@dimen/tip_view_icon_size"
-        android:layout_height="@dimen/tip_view_icon_size"
+    <com.eazy.uibase.widget.ZButton
+        android:id="@+id/leftButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="@dimen/tip_view_padding_x"
+        app:buttonType="text"
+        app:buttonSize="thin"
         android:visibility="gone"/>
 
     <ImageView
@@ -31,12 +34,14 @@
         android:focusableInTouchMode="true"
         android:ellipsize="marquee"/>
 
-    <ImageView
-        android:id="@+id/rightImageView"
-        android:layout_width="@dimen/tip_view_icon_size"
-        android:layout_height="@dimen/tip_view_icon_size"
+    <com.eazy.uibase.widget.ZButton
+        android:id="@+id/rightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/tip_view_padding_x"
+        app:buttonType="text"
+        app:buttonSize="thin"
         android:visibility="gone"/>
 
 </merge>

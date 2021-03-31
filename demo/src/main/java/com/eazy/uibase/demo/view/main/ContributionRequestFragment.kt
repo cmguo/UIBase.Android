@@ -15,11 +15,11 @@ import skin.support.observe.SkinObserver
 
 class ContributionRequestFragment : ComponentFragment<ContributionRequestFragmentBinding?, ContributionRequestFragment.Model?, ContributionRequestFragment.Styles?>(), SkinObserver {
 
-    class Model(fragment: ContributionRequestFragment?) : ViewModel() {
+    class Model : ViewModel() {
         val message = "很抱歉，该组件（控件）暂未实现。\n如果您有意愿加入并贡献一份力量，我们将非常欢迎！"
     }
 
-    class Styles(fragment: ContributionRequestFragment?) : ViewStyles() {
+    class Styles : ViewStyles() {
         @Bindable
         @Style(ColorStyle::class)
         var color = Color.RED

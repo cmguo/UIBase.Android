@@ -23,7 +23,7 @@ import skin.support.observe.SkinObserver
 class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
     ZButtonFragment.Model?, ZButtonFragment.Styles?>(), SkinObserver {
 
-    class Model(fragment: ZButtonFragment) : ViewModel() {
+    class Model : ViewModel() {
         val types = ZButton.ButtonType.values().asList()
     }
 
@@ -78,11 +78,10 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
 
         fun testButtonClick(view: View) {
             if (view is ZButton) {
-                val loadingView = view as ZButton
-                if (!loadingView.loading) {
+                if (!view.loading) {
                     view.postDelayed({ testButtonClick(view) }, 3000)
                 }
-                loadingView.loading = !loadingView.loading
+                view.loading = !view.loading
             }
         }
 
@@ -99,7 +98,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         override fun bindView(binding: ViewDataBinding?, item: ZButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)
-            val button = (binding as ButtonItemBinding)!!.button
+            val button = (binding as ButtonItemBinding).button
             val lp = button.layoutParams
             lp.width = styles.widthMode
             button.layoutParams = lp

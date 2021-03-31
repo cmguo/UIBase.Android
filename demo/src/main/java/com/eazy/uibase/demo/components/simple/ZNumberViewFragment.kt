@@ -10,10 +10,10 @@ import com.eazy.uibase.demo.databinding.NumberViewFragmentBinding
 
 class ZNumberViewFragment : ComponentFragment<NumberViewFragmentBinding?, ZNumberViewFragment.Model?, ZNumberViewFragment.Styles?>() {
 
-    class Model(fragment: ZNumberViewFragment?) : ViewModel() {
+    class Model : ViewModel() {
     }
 
-    class Styles(fragment: ZNumberViewFragment?) : ViewStyles() {
+    class Styles : ViewStyles() {
 
         @Bindable
         @Title("最小数量") @Description("最小输入数量；默认0")

@@ -21,8 +21,8 @@
         app:maxWidth="@{styles.maxWidth}"
         app:message="@{styles.message}"
         app:singleLine="@{styles.singleLine}"
-        app:leftIcon="@{styles.leftIcon}"
-        app:rightIcon="@{styles.rightIcon}"
+        app:leftButton="@{styles.leftButton}"
+        app:rightButton="@{styles.rightButton}"
         app:icon="@{styles.icon}"/>
 
 </layout>

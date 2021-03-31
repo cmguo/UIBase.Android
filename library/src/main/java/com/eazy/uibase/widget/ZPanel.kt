@@ -74,8 +74,8 @@ class ZPanel @JvmOverloads constructor(
         _bottomButton = findViewById(R.id.bottomButton)
 
         _titleBar.listener = object : ZAppTitleBar.TitleBarListener {
-            override fun titleBarButtonClicked(bar: ZAppTitleBar, viewId: Int) {
-                listener?.panelButtonClicked(this@ZPanel, viewId)
+            override fun titleBarButtonClicked(bar: ZAppTitleBar, btnId: Int) {
+                listener?.panelButtonClicked(this@ZPanel, btnId)
             }
         }
 

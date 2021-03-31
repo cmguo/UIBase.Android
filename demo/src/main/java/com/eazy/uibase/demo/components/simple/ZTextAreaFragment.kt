@@ -2,7 +2,6 @@ package com.eazy.uibase.demo.components.simple
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.Bindable
 import com.ui.shapeutils.DevShapeUtils
 import com.ui.shapeutils.shape.DevShape
@@ -14,19 +13,16 @@ import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.DimemDpStyle
 import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
-import com.eazy.uibase.demo.databinding.CompoundButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.TextAreaFragmentBinding
-import com.eazy.uibase.widget.edittext.LabelEditText
 import kotlinx.android.synthetic.main.text_area_fragment.*
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
 class ZTextAreaFragment : ComponentFragment<TextAreaFragmentBinding?, ZTextAreaFragment.Model?, ZTextAreaFragment.Styles?>(), SkinObserver {
 
-    class Model(fragment: ZTextAreaFragment?) : ViewModel() {
-    }
+    class Model : ViewModel()
 
-    class Styles(fragment: ZTextAreaFragment?) : ViewStyles() {
+    class Styles : ViewStyles() {
 
         @Bindable
         @Title("最大字数") @Description("设为0不限制；如果有限制，将展现字数指示")

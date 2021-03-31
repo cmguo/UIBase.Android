@@ -16,9 +16,9 @@ import skin.support.observe.SkinObserver
 
 class ZDialogFragment : ComponentFragment<DialogFragmentBinding?, ZDialogFragment.Model?, ZDialogFragment.Styles?>(), SkinObserver {
 
-    class Model(fragment: ZDialogFragment?) : ViewModel()
+    class Model : ViewModel()
 
-    class Styles(fragment: ZDialogFragment?) : ViewStyles()
+    class Styles : ViewStyles()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
