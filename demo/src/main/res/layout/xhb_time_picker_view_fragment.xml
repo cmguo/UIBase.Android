@@ -65,7 +65,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.XHB.Body.Middle"
-                android:text="当前时间"/>
+                android:text="选中时间"/>
 
             <TextView
                 android:layout_width="match_parent"
