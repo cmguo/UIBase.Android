@@ -70,7 +70,7 @@ class XHBPickerView @JvmOverloads constructor(context: Context, attrs: Attribute
         listView.addItemDecoration(DeviderDecoration(context))
         listView.layoutManager = LinearLayoutManager(context)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            listView.setOnScrollChangeListener(View.OnScrollChangeListener() { view: View, i: Int, i1: Int, i2: Int, i3: Int ->
+            listView.setOnScrollChangeListener(View.OnScrollChangeListener() { _: View, _: Int, _: Int, _: Int, _: Int ->
                 layoutSelectImage()
             })
         }

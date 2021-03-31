@@ -22,6 +22,6 @@
         app:message="@{styles.message}"
         app:singleLine="@{styles.singleLine}"
         app:location="@{styles.location}"
-        app:rightIcon="@{styles.rightIcon}"/>
+        app:rightButton="@{styles.rightButton}"/>
 
 </layout>

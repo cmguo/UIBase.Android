@@ -74,8 +74,8 @@ class XHBPanel @JvmOverloads constructor(
         _bottomButton = findViewById(R.id.bottomButton)
 
         _titleBar.listener = object : XHBAppTitleBar.TitleBarListener {
-            override fun titleBarButtonClicked(bar: XHBAppTitleBar, viewId: Int) {
-                listener?.panelButtonClicked(this@XHBPanel, viewId)
+            override fun titleBarButtonClicked(bar: XHBAppTitleBar, btnId: Int) {
+                listener?.panelButtonClicked(this@XHBPanel, btnId)
             }
         }
 

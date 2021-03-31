@@ -17,8 +17,8 @@
         <attr name="maxWidth" format="dimension"/>
         <attr name="arrowSize" format="dimension"/>
         <attr name="arrowOffset" format="dimension"/>
-        <attr name="leftIcon" format="reference"/>
-        <attr name="rightIcon" format="reference"/>
+        <attr name="leftButton"/>
+        <attr name="rightButton"/>
         <attr name="icon"/>
         <attr name="frameColor" format="color"/>
         <attr name="frameRadius" format="dimension"/>

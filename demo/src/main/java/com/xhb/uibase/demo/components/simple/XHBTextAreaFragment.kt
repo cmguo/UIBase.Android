@@ -2,7 +2,6 @@ package com.xhb.uibase.demo.components.simple
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.Bindable
 import com.ui.shapeutils.DevShapeUtils
 import com.ui.shapeutils.shape.DevShape
@@ -14,19 +13,16 @@ import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.DimemDpStyle
 import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
-import com.xhb.uibase.demo.databinding.XhbCompoundButtonFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbTextAreaFragmentBinding
-import com.xhb.uibase.widget.edittext.LabelEditText
 import kotlinx.android.synthetic.main.xhb_text_area_fragment.*
 import skin.support.observe.SkinObservable
 import skin.support.observe.SkinObserver
 
 class XHBTextAreaFragment : ComponentFragment<XhbTextAreaFragmentBinding?, XHBTextAreaFragment.Model?, XHBTextAreaFragment.Styles?>(), SkinObserver {
 
-    class Model(fragment: XHBTextAreaFragment?) : ViewModel() {
-    }
+    class Model : ViewModel()
 
-    class Styles(fragment: XHBTextAreaFragment?) : ViewStyles() {
+    class Styles : ViewStyles() {
 
         @Bindable
         @Title("最大字数") @Description("设为0不限制；如果有限制，将展现字数指示")
