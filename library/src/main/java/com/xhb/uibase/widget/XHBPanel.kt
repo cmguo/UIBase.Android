@@ -107,7 +107,7 @@ class XHBPanel @JvmOverloads constructor(
         if (!_inited)
             return super.addView(child, params)
         if (_content != null) {
-            throw RuntimeException("Already has body!")
+            throw RuntimeException("Already has a body!")
         }
         val lp = params as? LayoutParams ?: LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         lp.gravity = Gravity.CENTER_HORIZONTAL

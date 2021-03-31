@@ -6,9 +6,11 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.widget.TextViewCompat
 import com.xhb.uibase.R
 
@@ -96,6 +98,28 @@ class XHBAppTitleBar @JvmOverloads constructor(
         updateLayout()
     }
 
+    override fun addView(child: View) {
+        addView(child, child.layoutParams)
+    }
+
+    override fun addView(child: View, params: ViewGroup.LayoutParams?) {
+        if (!_inited) return super.addView(child, params)
+        if (_content != null) {
+            throw RuntimeException("Already has a extension content!")
+        }
+        val lp = params as? LinearLayoutCompat.LayoutParams
+            ?: LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT)
+        lp.gravity = Gravity.CENTER_HORIZONTAL
+        addView(child, indexOfChild(_textView) + 1, lp)
+        _content = child
+    }
+
+    override fun removeView(view: View) {
+        super.removeView(view)
+        if (view == _content)
+            _content = null
+    }
+
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         var l = _textView.left
@@ -166,8 +190,9 @@ class XHBAppTitleBar @JvmOverloads constructor(
     }
 
     private fun syncContent() {
-        if (_content != null)
-            removeView(_content)
+        if (_content != null) {
+            removeView(_content!!)
+        }
         if (content == 0)
             return
         val type = resources.getResourceTypeName(content)
@@ -178,10 +203,7 @@ class XHBAppTitleBar @JvmOverloads constructor(
             title = resources.getText(content)
         } else if (type == "layout") {
             val view = LayoutInflater.from(context).inflate(content, this, false)
-            val lp = view.layoutParams as LayoutParams
-            lp.gravity = Gravity.CENTER_HORIZONTAL
-            addView(view, indexOfChild(_textView) + 1, lp)
-            _content = view
+            addView(view)
         } else if (type == "style") {
             leftButton = 0
             rightButton = 0
