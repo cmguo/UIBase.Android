@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xhb.uibase.R
-import com.xhb.uibase.view.list.DeviderDecoration
+import com.xhb.uibase.view.list.DividerDecoration
 
 class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : LinearLayoutCompat(context, attrs, R.attr.dropDownStyle) {
@@ -53,7 +53,7 @@ class XHBDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSe
         LayoutInflater.from(context).inflate(R.layout.drop_down, this)
         listView = findViewById(R.id.listView)
         listView.adapter = adapter
-        listView.addItemDecoration(DeviderDecoration(context))
+        listView.addItemDecoration(DividerDecoration(VERTICAL, 1, ContextCompat.getColor(context, R.color.bluegrey_100)))
         listView.layoutManager = LinearLayoutManager(context)
 
         setWillNotDraw(false)

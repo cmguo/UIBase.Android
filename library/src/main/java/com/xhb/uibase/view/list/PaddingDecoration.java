@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PaddingDecoration extends RecyclerView.ItemDecoration{
+public class PaddingDecoration extends RecyclerView.ItemDecoration {
 
     private int padding;
 
@@ -24,4 +24,5 @@ public class PaddingDecoration extends RecyclerView.ItemDecoration{
         outRect.right = padding; //相当于 设置 right padding
         outRect.bottom = padding;  //相当于 设置 bottom padding
     }
+
 }

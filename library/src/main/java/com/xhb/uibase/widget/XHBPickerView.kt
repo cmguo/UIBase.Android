@@ -2,7 +2,6 @@ package com.xhb.uibase.widget
 
 import android.content.Context
 import android.graphics.Rect
-import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -10,13 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xhb.uibase.R
-import com.xhb.uibase.view.list.DeviderDecoration
+import com.xhb.uibase.view.list.DividerDecoration
 import kotlin.collections.ArrayList
 
 class XHBPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
@@ -67,12 +66,12 @@ class XHBPickerView @JvmOverloads constructor(context: Context, attrs: Attribute
         selectImage = findViewById(R.id.selectImage)
 
         listView.adapter = adapter
-        listView.addItemDecoration(DeviderDecoration(context))
+        listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1))
         listView.layoutManager = LinearLayoutManager(context)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            listView.setOnScrollChangeListener(View.OnScrollChangeListener() { _: View, _: Int, _: Int, _: Int, _: Int ->
+            listView.setOnScrollChangeListener { _: View, _: Int, _: Int, _: Int, _: Int ->
                 layoutSelectImage()
-            })
+            }
         }
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBPickerView, R.attr.pickerViewStyle, 0)

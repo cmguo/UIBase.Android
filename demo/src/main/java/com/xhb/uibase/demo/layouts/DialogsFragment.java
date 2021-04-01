@@ -16,7 +16,6 @@ import com.xhb.uibase.demo.core.Layouts;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.databinding.DialogsFragmentBinding;
-import com.xhb.uibase.view.list.DeviderDecoration;
 import com.xhb.uibase.view.list.PaddingDecoration;
 import com.xhb.uibase.view.list.RecyclerViewAdapter;
 

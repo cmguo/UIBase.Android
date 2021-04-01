@@ -4,8 +4,8 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="21"
-6-->/Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+6-->/Users/cmguo/work/xiaoheibang/UIBase.Android/badgelibrary/src/main/AndroidManifest.xml
 7        android:targetSdkVersion="30" />
-7-->/Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+7-->/Users/cmguo/work/xiaoheibang/UIBase.Android/badgelibrary/src/main/AndroidManifest.xml
 8
 9</manifest>

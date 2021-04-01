@@ -28,4 +28,8 @@ class XHBActivityViewComponent : Component {
         return R.string.component_xhb_activity_views_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return XHBActivityViewFragment::class.java
+    }
+
 }

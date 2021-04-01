@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
+import androidx.core.content.ContextCompat
 
 class ShapeDrawables {
 
@@ -45,10 +46,10 @@ class ShapeDrawables {
             }
             if (config.radius > 0)
                 drawable.cornerRadius = context.resources.getDimension(config.radius)
-            drawable.color = context.resources.getColorStateList(config.fillColor)
+            drawable.color = ContextCompat.getColorStateList(context, config.fillColor)
             if (config.borderSize != 0) {
                 drawable.setStroke(context.resources.getDimensionPixelSize(config.borderSize),
-                    context.resources.getColorStateList(config.borderColor))
+                    ContextCompat.getColorStateList(context, config.borderColor))
             }
             return drawable
 //            return DrawableBuilder().apply {

@@ -42,6 +42,10 @@
     <string name="component_xhb_activity_views">活动视图（四期）</string>
     <string name="component_xhb_activity_views_desc">可以用于承载一次性操作，如分享、复制、收藏、刷新等；面板类型为宫格类；</string>
 
+    <id name="component_xhb_action_sheets"></id>
+    <string name="component_xhb_action_sheets">操作表单（四期）</string>
+    <string name="component_xhb_action_sheets_desc">操作表单是响应于控件或动作出现的特定风格的面板，并呈现与当前上下文相关的一组两个或多个选项。使用操作菜单让人们启动任务，或者在执行潜在的破坏性操作之前请求确认。</string>
+
 
 
     <string name="group_navigation">页面跳转控件</string>
@@ -74,7 +78,7 @@
     <string name="component_xhb_lists_desc">列表将数据呈现为可以分为平铺和分组形式。使用列表以清单的形式干净，高效地显示大量或少量信息。一般来说，列表是基于文本内容的理想选择，也可以在列表中加入图标、按钮、箭头等其他元素扩展场景。</string>
 
     <id name="component_xhb_grids"></id>
-    <string name="component_xhb_grids">宫格（四期）</string>
+    <string name="component_xhb_grids">宫格（五期）</string>
     <string name="component_xhb_grids_desc">宫格主要作为信息聚合的目的，通过图标集合清晰展现各个入口。在这种界面中，用户的行为主要在寻找信息入口。信息呈现的内容比较少，效率比较高。用户也比较容易记住各入口位置，但是宫格不宜过多，宫格越多，用户的选择压力越多。</string>
 
     <id name="component_xhb_carousels"></id>

@@ -1,0 +1,40 @@
+<resources>
+
+    <string name="xhb_share_class">班级</string>
+    <string name="xhb_share_weixin">微信</string>
+    <string name="xhb_share_moment">朋友圈</string>
+    <string name="xhb_share_qq">QQ</string>
+    <string name="xhb_share_space">QQ空间</string>
+    <string name="xhb_share_more">更多</string>
+
+    <array name="xhb_share_class">
+        <item>@string/xhb_share_class</item>
+        <item>@drawable/img_share_class</item>
+    </array>
+
+    <array name="xhb_share_weixin">
+        <item>@string/xhb_share_weixin</item>
+        <item>@drawable/img_share_weixin</item>
+    </array>
+
+    <array name="xhb_share_moment">
+        <item>@string/xhb_share_moment</item>
+        <item>@drawable/img_share_moment</item>
+    </array>
+
+    <array name="xhb_share_qq">
+        <item>@string/xhb_share_qq</item>
+        <item>@drawable/img_share_qq</item>
+    </array>
+
+    <array name="xhb_share_space">
+        <item>@string/xhb_share_space</item>
+        <item>@drawable/img_share_space</item>
+    </array>
+
+    <array name="xhb_share_more">
+        <item>@string/xhb_share_more</item>
+        <item>@drawable/img_share_class</item>
+    </array>
+
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="java.util.List"/>
+        <import type="com.xhb.uibase.view.list.LayoutManagers"/>
+        <import type="com.xhb.uibase.view.list.ItemDecorations"/>
+        <import type="com.xhb.uibase.view.list.RecyclerViewAdapter.OnItemClickListener"/>
+        <import type="android.view.View"/>
+        <variable
+            name="list"
+            type="List&lt;Integer&gt;" />
+        <variable
+            name="listener"
+            type="OnItemClickListener" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/xhb_picker_view_item_padding_x"
+        android:paddingEnd="0dp"
+        app:itemBinding="@{@layout/activity_view_item}"
+        app:layoutManagerFactory="@{LayoutManagers.linear(0, false)}"
+        app:itemDecoration="@{ItemDecorations.divider(0, 12)}"
+        app:itemClicked="@{listener}"
+        app:data="@{list}"
+        android:visibility="@{(list == null || list.size() == 0) ? View.GONE : View.VISIBLE}"/>
+
+</layout>

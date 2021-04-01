@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="java.util.List"/>
+        <import type="com.xhb.uibase.view.list.RecyclerViewAdapter.OnItemClickListener"/>
+        <variable
+            name="lists"
+            type="List&lt;Integer&gt;[]" />
+        <variable
+            name="listener"
+            type="OnItemClickListener" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_view"
+            app:list="@{lists[0]}" app:listener="@{listener}"/>
+
+        <include layout="@layout/activity_view"
+            app:list="@{lists[1]}" app:listener="@{listener}"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>
