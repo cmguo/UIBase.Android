@@ -2,11 +2,7 @@
 
     <string name="group_complex">复杂交互控件</string>
 
-   <id name="component_z_action_sheets"></id>
-    <string name="component_z_action_sheets">操作表单（五期）</string>
-    <string name="component_z_action_sheets_desc">操作表单是响应于控件或动作出现的特定风格的面板，并呈现与当前上下文相关的一组两个或多个选项。使用操作菜单让人们启动任务，或者在执行潜在的破坏性操作之前请求确认。</string>
-
-    <id name="component_z_time_pickers"></id>7
+    <id name="component_z_time_pickers"></id>
     <string name="component_z_time_pickers">时间选择器</string>
     <string name="component_z_time_pickers_desc">一般由选择框触发，弹层的形式建立可滚动视图，并在视图中分段选取时间值。</string>
 
@@ -22,7 +18,7 @@
         4.非主动触发的引导性信息（如常规的运营弹窗等）。</string>
 
     <id name="component_z_cards"></id>
-    <string name="component_z_cards">卡片（六期）</string>
+    <string name="component_z_cards">卡片（五期）</string>
     <string name="component_z_cards_desc"></string>
 
 </resources>

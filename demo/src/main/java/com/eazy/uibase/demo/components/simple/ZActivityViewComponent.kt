@@ -28,4 +28,8 @@ class ZActivityViewComponent : Component {
         return R.string.component_z_activity_views_desc
     }
 
+    override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
+        return ZActivityViewFragment::class.java
+    }
+
 }

@@ -16,7 +16,7 @@ class MaskDialog(private val content: View) : DialogFragment() {
         setStyle(STYLE_NO_TITLE, R.style.Theme_Dialog_Z_Mask)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return content
     }
 
@@ -36,8 +36,8 @@ class MaskDialog(private val content: View) : DialogFragment() {
 
     companion object {
         fun dismiss(content: View) {
-            val dialog = content.getTag(R.id.dialog_container) as? WeakReference<MaskDialog>
-            dialog?.get()?.dismiss()
+            val dialog = content.getTag(R.id.dialog_container) as? WeakReference<*>
+            (dialog?.get() as? MaskDialog)?.dismiss()
         }
     }
 

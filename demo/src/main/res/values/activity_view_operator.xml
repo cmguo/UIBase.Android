@@ -1,0 +1,46 @@
+<resources>
+
+    <string name="op_stick">置顶</string>
+    <string name="op_copy">复制</string>
+    <string name="op_repost">分享</string>
+    <string name="op_recall">撤回</string>
+    <string name="op_star">收藏</string>
+    <string name="op_weblink">链接</string>
+    <string name="op_refresh">刷新</string>
+
+    <array name="op_stick">
+        <item>@string/op_stick</item>
+        <item>@drawable/icon_stick</item>
+    </array>
+
+    <array name="op_copy">
+        <item>@string/op_copy</item>
+        <item>@drawable/icon_copy</item>
+    </array>
+
+    <array name="op_repost">
+        <item>@string/op_repost</item>
+        <item>@drawable/icon_repost</item>
+    </array>
+
+    <array name="op_recall">
+        <item>@string/op_recall</item>
+        <item>@drawable/icon_recall</item>
+    </array>
+
+    <array name="op_star">
+        <item>@string/op_star</item>
+        <item>@drawable/icon_star</item>
+    </array>
+
+    <array name="op_weblink">
+        <item>@string/op_weblink</item>
+        <item>@drawable/icon_weblink</item>
+    </array>
+
+    <array name="op_refresh">
+        <item>@string/op_refresh</item>
+        <item>@drawable/icon_refresh</item>
+    </array>
+
+</resources>

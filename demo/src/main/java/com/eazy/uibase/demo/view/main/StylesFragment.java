@@ -16,13 +16,14 @@ import androidx.viewbinding.ViewBinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.style.DimemDpStyle;
 import com.eazy.uibase.demo.databinding.StylesFragmentBinding;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.view.list.BaseItemBinding;
-import com.eazy.uibase.view.list.DeviderDecoration;
+import com.eazy.uibase.view.list.DividerDecoration;
 import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
 public class StylesFragment extends Fragment {
@@ -115,7 +116,7 @@ public class StylesFragment extends Fragment {
 
     public StylesAdapter adapter = new StylesAdapter();
     public StyleItemBinding itemBinding = new StyleItemBinding();
-    public RecyclerView.ItemDecoration itemDecoration = new DeviderDecoration(getContext());
+    public RecyclerView.ItemDecoration itemDecoration = new DividerDecoration(LinearLayout.VERTICAL, 1);
     public RecyclerViewAdapter.OnItemClickListener itemClicked = new RecyclerViewAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(int position, Object object) {

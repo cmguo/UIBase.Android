@@ -16,7 +16,6 @@ import com.eazy.uibase.demo.core.Layouts;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.DialogsFragmentBinding;
-import com.eazy.uibase.view.list.DeviderDecoration;
 import com.eazy.uibase.view.list.PaddingDecoration;
 import com.eazy.uibase.view.list.RecyclerViewAdapter;
 

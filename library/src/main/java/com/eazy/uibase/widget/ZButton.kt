@@ -146,7 +146,7 @@ class ZButton @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
-        if (widthMode != MeasureSpec.EXACTLY) {
+        if (buttonAppearance != 0 || widthMode != MeasureSpec.EXACTLY) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
             return
         }
@@ -163,8 +163,7 @@ class ZButton @JvmOverloads constructor(
     override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
         super.setLayoutParams(params)
         // restore padding
-        val sizes = sizeStyles(context, buttonSize.resId)
-        val padding = sizes.padding
+        val padding = _sizeStyles.padding
         setPadding(padding, 0, padding, 0)
     }
 
@@ -234,7 +233,7 @@ class ZButton @JvmOverloads constructor(
     private fun setTextInner(text: CharSequence?, type: BufferType = BufferType.NORMAL) {
         super.setText(text, type)
         if (_inited)
-            syncIconPadding(sizeStyles(context, buttonSize.resId))
+            syncIconPadding()
     }
 
     private fun syncTypeSize(type: Boolean = true, size: Boolean = true) {
@@ -258,7 +257,7 @@ class ZButton @JvmOverloads constructor(
             loadingDrawable?.setBounds(0, 0, iconSize, iconSize)
             if (_inited)
                 syncCompoundDrawable()
-            syncIconPadding(_sizeStyles)
+            syncIconPadding()
         }
     }
 
@@ -331,8 +330,8 @@ class ZButton @JvmOverloads constructor(
             o.stop()
     }
 
-    private fun syncIconPadding(sizes: SizeStyles) {
-        compoundDrawablePadding = if (text.count() == 0) 0 else sizes.iconPadding
+    private fun syncIconPadding() {
+        compoundDrawablePadding = if (text.count() == 0) 0 else _sizeStyles.iconPadding
     }
 
 }

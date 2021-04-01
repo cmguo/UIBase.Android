@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.components.complex
+package com.eazy.uibase.demo.components.simple
 
 import com.google.auto.service.AutoService
 import com.eazy.uibase.demo.R
@@ -11,7 +11,7 @@ class ZActionSheetComponent : Component {
     }
 
     override fun group(): Int {
-        return R.string.group_complex
+        return R.string.group_simple
     }
 
     override fun icon(): Int {
