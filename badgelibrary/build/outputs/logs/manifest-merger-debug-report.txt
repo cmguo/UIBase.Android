@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml:1:1-39
+INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml:1:1-39
+INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml:1:1-39
+	package
+		ADDED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml:1:11-37
+		INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+		INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml:1:1-39
+uses-sdk
+INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+		ADDED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+		INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+		ADDED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml
+		INJECTED from /Users/jiangzhiguo/develop/jituan/xhbuibase/badgelibrary/src/main/AndroidManifest.xml

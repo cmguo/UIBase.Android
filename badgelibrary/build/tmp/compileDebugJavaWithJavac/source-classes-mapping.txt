@@ -1,0 +1,35 @@
+cn/xhb/badgeview/BGABadgeImageView.java
+ cn.xhb.badgeview.BGABadgeImageView
+cn/xhb/badgeview/BGABadgeRadioButton.java
+ cn.xhb.badgeview.BGABadgeRadioButton
+cn/xhb/badgeview/BGABadgeViewHelper.java
+ cn.xhb.badgeview.BGABadgeViewHelper
+ cn.xhb.badgeview.BGABadgeViewHelper$1
+ cn.xhb.badgeview.BGABadgeViewHelper$BadgeGravity
+cn/xhb/badgeview/BGABadgeView.java
+ cn.xhb.badgeview.BGABadgeView
+cn/xhb/badgeview/BuildConfig.java
+ cn.xhb.badgeview.BuildConfig
+cn/xhb/badgeview/BGADragBadgeView.java
+ cn.xhb.badgeview.BGADragBadgeView
+ cn.xhb.badgeview.BGADragBadgeView$1
+ cn.xhb.badgeview.BGADragBadgeView$2
+ cn.xhb.badgeview.BGADragBadgeView$3
+cn/xhb/badgeview/BGADragDismissDelegate.java
+ cn.xhb.badgeview.BGADragDismissDelegate
+cn/xhb/badgeview/BGABadgeTextView.java
+ cn.xhb.badgeview.BGABadgeTextView
+cn/xhb/badgeview/BGAExplosionAnimator.java
+ cn.xhb.badgeview.BGAExplosionAnimator
+ cn.xhb.badgeview.BGAExplosionAnimator$1
+ cn.xhb.badgeview.BGAExplosionAnimator$Particle
+cn/xhb/badgeview/BGABadgeViewUtil.java
+ cn.xhb.badgeview.BGABadgeViewUtil
+cn/xhb/badgeview/BGABadgeLinearLayout.java
+ cn.xhb.badgeview.BGABadgeLinearLayout
+cn/xhb/badgeview/BGABadgeRelativeLayout.java
+ cn.xhb.badgeview.BGABadgeRelativeLayout
+cn/xhb/badgeview/BGABadgeFrameLayout.java
+ cn.xhb.badgeview.BGABadgeFrameLayout
+cn/xhb/badgeview/BGABadgeable.java
+ cn.xhb.badgeview.BGABadgeable
