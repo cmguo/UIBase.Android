@@ -15,6 +15,7 @@ import com.xhb.uibase.demo.core.style.annotation.Title
 import com.xhb.uibase.demo.databinding.XhbTimePickerViewFragmentBinding
 import com.xhb.uibase.widget.XHBPanel
 import com.xhb.uibase.widget.XHBPickerView
+import com.xhb.uibase.widget.XHBTimePickerView
 import java.util.*
 
 class XHBTimePickerViewFragment : ComponentFragment<XhbTimePickerViewFragmentBinding?, XHBTimePickerViewFragment.Model?, XHBTimePickerViewFragment.Styles?>() {
@@ -81,7 +82,14 @@ class XHBTimePickerViewFragment : ComponentFragment<XhbTimePickerViewFragmentBin
         val panel = XHBPanel(requireContext())
         panel.titleBar = R.style.title_bar_text
         panel.bottomButton = R.string.cancel
-        val picker = LayoutInflater.from(requireContext()).inflate(R.layout.xhb_picker_view, panel, false) as XHBPickerView
+        val picker = LayoutInflater.from(requireContext()).inflate(R.layout.xhb_time_picker_view, panel, false) as XHBTimePickerView
+        picker.centerLabel = styles!!.centerLabel
+        picker.lunar = styles!!.lunar
+        picker.itemsVisibleCount = styles!!.itemsVisibleCount
+        picker.cyclic = styles!!.cyclic
+        picker.startTime = styles!!.startTime
+        picker.endTime = styles!!.endTime
+        picker.selectTime = styles!!.selectTime
         panel.addView(picker)
         panel.popUp(parentFragmentManager)
     }
