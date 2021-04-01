@@ -8,7 +8,7 @@ import com.xhb.uibase.widget.XHBPickerView;
 
 import java.util.List;
 
-public class XHBPickerViewBindings {
+public class XHBPickerViewBindingAdapter {
 
     @InverseBindingAdapter(attribute = "selections", event = "selectionsAttrChanged")
     public static List<Integer> getSelections(XHBPickerView view) {

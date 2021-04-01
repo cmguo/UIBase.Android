@@ -2,7 +2,18 @@ plugins {
     id 'com.android.application'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
+    signingConfigs {
+        XHB {
+            keyAlias properties.getProperty('ALIAS')
+            keyPassword properties.getProperty('ALIAS_PASSWORD')
+            storeFile file(properties.getProperty('KEYSTORE_PATH'))
+            storePassword properties.getProperty('KEYSTORE_PASSWORD')
+        }
+    }
     compileSdkVersion 30
 
     defaultConfig {
@@ -18,7 +29,8 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.XHB
         }
     }
     compileOptions {

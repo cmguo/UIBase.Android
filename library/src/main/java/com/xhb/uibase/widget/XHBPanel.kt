@@ -6,13 +6,11 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.FragmentManager
@@ -54,6 +52,8 @@ class XHBPanel @JvmOverloads constructor(
             syncBackground()
         }
 
+    val body get() = _content
+
     @FunctionalInterface
     interface PanelListener {
         fun panelButtonClicked(panel: XHBPanel, btnId: Int) {}
@@ -74,8 +74,8 @@ class XHBPanel @JvmOverloads constructor(
         _bottomButton = findViewById(R.id.bottomButton)
 
         _titleBar.listener = object : XHBAppTitleBar.TitleBarListener {
-            override fun titleBarButtonClicked(bar: XHBAppTitleBar, viewId: Int) {
-                listener?.panelButtonClicked(this@XHBPanel, viewId)
+            override fun titleBarButtonClicked(bar: XHBAppTitleBar, btnId: Int) {
+                listener?.panelButtonClicked(this@XHBPanel, btnId)
             }
         }
 
@@ -107,7 +107,7 @@ class XHBPanel @JvmOverloads constructor(
         if (!_inited)
             return super.addView(child, params)
         if (_content != null) {
-            throw RuntimeException("Already has body!")
+            throw RuntimeException("Already has a body!")
         }
         val lp = params as? LayoutParams ?: LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         lp.gravity = Gravity.CENTER_HORIZONTAL

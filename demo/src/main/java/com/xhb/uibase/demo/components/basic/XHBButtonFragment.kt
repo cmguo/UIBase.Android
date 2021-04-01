@@ -23,7 +23,7 @@ import skin.support.observe.SkinObserver
 class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
     XHBButtonFragment.Model?, XHBButtonFragment.Styles?>(), SkinObserver {
 
-    class Model(fragment: XHBButtonFragment) : ViewModel() {
+    class Model : ViewModel() {
         val types = XHBButton.ButtonType.values().asList()
     }
 
@@ -57,7 +57,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         @Bindable
         @Title("内容")
         @Description("包含文字或者图标，或者文字和图标及其他样式；资源ID类型，可以是 drawable、string、array 或者 style")
-        @Style(ContentStyle::class, params = ["string", "icon", "button"])
+        @Style(ContentStyle::class, params = ["text", "icon", "button"])
         var conntent = 0
 
         @Bindable
@@ -78,11 +78,10 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
 
         fun testButtonClick(view: View) {
             if (view is XHBButton) {
-                val loadingView = view as XHBButton
-                if (!loadingView.loading) {
+                if (!view.loading) {
                     view.postDelayed({ testButtonClick(view) }, 3000)
                 }
-                loadingView.loading = !loadingView.loading
+                view.loading = !view.loading
             }
         }
 
@@ -99,7 +98,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         override fun bindView(binding: ViewDataBinding?, item: XHBButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
             binding!!.setVariable(BR.styles, styles)
-            val button = (binding as XhbButtonItemBinding)!!.button
+            val button = (binding as XhbButtonItemBinding).button
             val lp = button.layoutParams
             lp.width = styles.widthMode
             button.layoutParams = lp

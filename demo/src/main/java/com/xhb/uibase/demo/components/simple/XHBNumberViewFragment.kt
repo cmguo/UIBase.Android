@@ -10,10 +10,10 @@ import com.xhb.uibase.demo.databinding.XhbNumberViewFragmentBinding
 
 class XHBNumberViewFragment : ComponentFragment<XhbNumberViewFragmentBinding?, XHBNumberViewFragment.Model?, XHBNumberViewFragment.Styles?>() {
 
-    class Model(fragment: XHBNumberViewFragment?) : ViewModel() {
+    class Model : ViewModel() {
     }
 
-    class Styles(fragment: XHBNumberViewFragment?) : ViewStyles() {
+    class Styles : ViewStyles() {
 
         @Bindable
         @Title("最小数量") @Description("最小输入数量；默认0")

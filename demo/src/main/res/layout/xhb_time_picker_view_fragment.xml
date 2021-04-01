@@ -5,15 +5,17 @@
 
     <data>
 
-        <import type="com.xhb.uibase.demo.components.simple.XHBPickerViewFragment.Styles" />
+        <import type="com.xhb.uibase.demo.components.complex.XHBTimePickerViewFragment.Styles" />
 
-        <import type="com.xhb.uibase.demo.components.simple.XHBPickerViewFragment.Model" />
+        <import type="com.xhb.uibase.demo.components.complex.XHBTimePickerViewFragment.Model" />
 
-        <import type="com.xhb.uibase.demo.components.simple.XHBPickerViewFragment" />
+        <import type="com.xhb.uibase.demo.components.complex.XHBTimePickerViewFragment" />
+
+        <import type="java.util.Date"/>
 
         <variable
             name="fragment"
-            type="XHBPickerViewFragment" />
+            type="XHBTimePickerViewFragment" />
 
         <variable
             name="model"
@@ -34,15 +36,18 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <com.xhb.uibase.widget.XHBPickerView
+            <com.xhb.uibase.widget.XHBTimePickerView
                 android:id="@+id/picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:titles="@array/xhb_picker_titles"
-                app:icons="@array/xhb_icons"
-                app:singleSelection="@{styles.singleSelection}"
-                app:selection="@={model.selection}"
-                app:selections="@={model.selections}"
+                android:layout_gravity="center_vertical"
+                app:lunar="@{styles.lunar}"
+                app:cyclic="@{styles.cyclic}"
+                app:centerLabel="@{styles.centerLabel}"
+                app:itemsVisibleCount="@{styles.itemsVisibleCount}"
+                app:selectTime="@={styles.selectTime}"
+                app:startTime="@{styles.startTime}"
+                app:endTime="@{styles.endTime}"
                 />
 
         </FrameLayout>
@@ -51,30 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="25dp"
-            android:paddingLeft="50dp"
-            android:orientation="horizontal"
-            android:background="@color/bluegrey_300">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.XHB.Body.Middle"
-                android:text="选中项"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.XHB.Body.Middle"
-                android:text="@{model.selection == null ? null : String.valueOf(model.selection)}"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
             android:paddingBottom="25dp"
+            android:paddingLeft="50dp"
             android:orientation="horizontal"
             android:background="@color/bluegrey_300">
 
@@ -82,13 +65,13 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.XHB.Body.Middle"
-                android:text="选中项集合"/>
+                android:text="选中时间"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.XHB.Body.Middle"
-                android:text="@{String.valueOf(model.selections)}"
+                android:text="@{styles.selectTime.toString()}"
                 />
 
         </LinearLayout>

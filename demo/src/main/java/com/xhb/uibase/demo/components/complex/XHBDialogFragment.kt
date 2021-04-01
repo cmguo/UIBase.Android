@@ -16,9 +16,9 @@ import skin.support.observe.SkinObserver
 
 class XHBDialogFragment : ComponentFragment<XhbDialogFragmentBinding?, XHBDialogFragment.Model?, XHBDialogFragment.Styles?>(), SkinObserver {
 
-    class Model(fragment: XHBDialogFragment?) : ViewModel()
+    class Model : ViewModel()
 
-    class Styles(fragment: XHBDialogFragment?) : ViewStyles()
+    class Styles : ViewStyles()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

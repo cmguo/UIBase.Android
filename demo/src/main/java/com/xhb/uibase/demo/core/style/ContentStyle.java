@@ -4,7 +4,6 @@ import com.xhb.uibase.demo.R;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 public class ContentStyle extends ResourceStyle {
 
@@ -27,8 +26,10 @@ public class ContentStyle extends ResourceStyle {
         "title_icon:style/title_bar_icon",
         "title_text:style/title_bar_text",
         "title_only:style/title_bar_text_only",
+        "layout_text:layout/text_item",
         "layout_tab_bar:layout/xhb_tab_bar",
         "layout_picker:layout/xhb_picker_view",
+        "layout_time:layout/xhb_time_picker_view",
     };
 
     public ContentStyle(Field field) {

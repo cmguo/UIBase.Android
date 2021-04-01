@@ -37,6 +37,7 @@
                 app:titleBar="@{styles.titleBar}"
                 app:content="@{styles.content}"
                 app:bottomButton="@{styles.bottomButton}"
+                app:data="@{styles.data}"
                 />
 
         </FrameLayout>

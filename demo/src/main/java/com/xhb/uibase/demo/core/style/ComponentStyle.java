@@ -20,19 +20,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 public class ComponentStyle {
 
     private static final String TAG = "ComponentStyle";
 
-    private Field field_;
-    private String name_;
-    private String title_;
-    private String desc_;
-    private Method getter_;
-    private Method setter_;
-    private Class<?> valueType_;
+    private final Field field_;
+    private final String name_;
+    private final String title_;
+    private final String desc_;
+    private final Method getter_;
+    private final Method setter_;
+    private final Class<?> valueType_;
     private List<String> values_;
     private List<String> valueTitles_;
 
@@ -59,7 +60,7 @@ public class ComponentStyle {
                 valueTitles_ = Arrays.asList(valueTitles.value());
         } else if (valueType_.isEnum()) {
             values_ = new ArrayList<>();
-            for (Object e : valueType_.getEnumConstants()) {
+            for (Object e : Objects.requireNonNull(valueType_.getEnumConstants())) {
                 values_.add(e.toString());
             }
         }
@@ -127,10 +128,6 @@ public class ComponentStyle {
         }
     }
 
-    protected void setValues(List<String> values) {
-        setValues(values, null);
-    }
-
     protected void setValues(List<String> values, List<String> titles) {
         values_ = values;
         valueTitles_ = titles;
@@ -145,6 +142,8 @@ public class ComponentStyle {
         if (value2 == null) {
             if (valueType_ == SizeF.class) {
                 value2 = SizeF.parseSizeF(value);
+            } else if (valueType_ == Object.class) {
+                value2 = value;
             }
         }
         return value2;
@@ -157,13 +156,13 @@ public class ComponentStyle {
         return style.params();
     }
 
-    private static Map<String, Integer> fieldBindings_ = new TreeMap<>();
-    private ClassWrapper<?> classBR = ClassWrapper.wrap(BR.class);
+    private static final Map<String, Integer> fieldBindings_ = new TreeMap<>();
+    private final ClassWrapper<?> classBR = ClassWrapper.wrap(BR.class);
 
     private int getFieldBinding(String name) {
         Integer b = fieldBindings_.get(name);
         if (b == null) {
-            b = (Integer) classBR.get(name);
+            b = classBR.get(name);
             fieldBindings_.put(name, b);
         }
         return b;
