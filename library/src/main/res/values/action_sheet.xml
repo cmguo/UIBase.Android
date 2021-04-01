@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="actionSheetStyle" format="reference"/>
+
+    <dimen name="action_sheet_max_height">360dp</dimen>
+    <dimen name="action_sheet_padding_y">12dp</dimen>
+    <dimen name="action_sheet_item_padding_y">12dp</dimen>
+    <dimen name="action_sheet_icon_size">40dp</dimen>
+    <dimen name="action_sheet_icon_padding">24dp</dimen>
+    <dimen name="action_sheet_title_padding">12dp</dimen>
+    <!-- TODO: why can't use -->
+    <style name="action_sheet_text_appearance">@style/TextAppearance.Z.Body.Middle</style>
+
+    <declare-styleable name="ZActionSheet">
+        <attr name="titles"/>
+        <attr name="title"/>
+        <attr name="subTitle"/>
+        <attr name="icon"/>
+    </declare-styleable>
+
+    <style name="ZActionSheet">
+    </style>
+
+</resources>

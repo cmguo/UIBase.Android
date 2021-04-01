@@ -7,6 +7,7 @@ import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
+@Author("cmguo")
 class ZActivityViewComponent : Component {
     override fun id(): Int {
         return R.id.component_z_activity_views
