@@ -1,3 +1,4 @@
+include ':badgelibrary'
 include ':libshape'
 include ':demo'
 include ':library'

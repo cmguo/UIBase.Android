@@ -64,4 +64,33 @@
         <attr name="floatInputErrorMessage" format="string" />
         <attr name="floatInputErrorTextColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="LabelTextView">
+        <attr name="rightView">
+            <flag name="textView" value="1" />
+            <flag name="imageView" value="2" />
+            <flag name="badgeView" value="4" />
+            <flag name="arrowView" value="8" />
+        </attr>
+        <attr name="mainTitle" format="string" />
+        <attr name="mainTitleTextSize" format="dimension" />
+        <attr name="mainTitleTextColor" format="color" />
+        <attr name="rightTextContent" format="string" />
+        <attr name="rightTextViewSize" format="dimension" />
+        <attr name="rightTextViewColor" format="color" />
+        <attr name="subTitle" format="string" />
+        <attr name="subtitleTextSize" format="dimension" />
+        <attr name="subtitleTextColor" format="color" />
+        <attr name="mainAndSubTitlePadding" format="dimension" />
+        <attr name="paddingHorizontal" format="dimension" />
+        <attr name="paddingVertical" format="dimension" />
+        <attr name="internalViewPadding" format="dimension" />
+        <attr name="leftIconDrawable" format="reference" />
+        <attr name="rightImageDrawable" format="reference" />
+        <attr name="rightIconDrawable" format="reference" />
+        <attr name="labelBottomLineEnable" format="boolean" />
+        <attr name="labelBottomLineHeight" format="dimension" />
+        <attr name="labelBottomLineColor" format="color" />
+        <attr name="labelBottomLinePaddingEnable" format="boolean" />
+    </declare-styleable>
 </resources>
