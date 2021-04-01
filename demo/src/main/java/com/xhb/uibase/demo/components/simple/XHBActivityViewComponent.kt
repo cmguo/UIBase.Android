@@ -7,6 +7,7 @@ import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
+@Author("cmguo")
 class XHBActivityViewComponent : Component {
     override fun id(): Int {
         return R.id.component_xhb_activity_views

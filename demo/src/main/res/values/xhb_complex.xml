@@ -2,23 +2,23 @@
 
     <string name="group_complex">复杂交互控件</string>
 
-    <id name="component_xhb_time_pickers"></id>
+    <id name="component_xhb_time_pickers"/>
     <string name="component_xhb_time_pickers">时间选择器</string>
     <string name="component_xhb_time_pickers_desc">一般由选择框触发，弹层的形式建立可滚动视图，并在视图中分段选取时间值。</string>
 
-    <id name="component_xhb_filters"></id>
+    <id name="component_xhb_filters"/>
     <string name="component_xhb_filters">筛选（五期）</string>
     <string name="component_xhb_filters_desc">提供用户在多个选项中进行筛选。</string>
 
-    <id name="component_xhb_dialogs"></id>
+    <id name="component_xhb_dialogs"/>
     <string name="component_xhb_dialogs">对话框</string>
     <string name="component_xhb_dialogs_desc">1.需要用户做出简单的选择且选项较少时（如进行一些重要操作时的简单确认弹窗）\n
         2.前置或后置的提示性内容，又不希望跳转页面时（如在开始录音时弹窗提示用户注意事项）\n
         3.当需要展示的信息不由用户主动触发，不在用户正常操作流程习惯中时，或者不符合用户的使用预期时一般使用弹窗（如提示用户开启通知权限）\n
         4.非主动触发的引导性信息（如常规的运营弹窗等）。</string>
 
-    <id name="component_xhb_cards"></id>
+    <id name="component_xhb_cards"/>
     <string name="component_xhb_cards">卡片（五期）</string>
-    <string name="component_xhb_cards_desc"></string>
+    <string name="component_xhb_cards_desc">xxx</string>
 
 </resources>
