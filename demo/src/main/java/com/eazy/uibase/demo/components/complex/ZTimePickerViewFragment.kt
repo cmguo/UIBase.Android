@@ -15,6 +15,7 @@ import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.TimePickerViewFragmentBinding
 import com.eazy.uibase.widget.ZPanel
 import com.eazy.uibase.widget.ZPickerView
+import com.eazy.uibase.widget.ZTimePickerView
 import java.util.*
 
 class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?, ZTimePickerViewFragment.Model?, ZTimePickerViewFragment.Styles?>() {
@@ -81,7 +82,14 @@ class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?
         val panel = ZPanel(requireContext())
         panel.titleBar = R.style.title_bar_text
         panel.bottomButton = R.string.cancel
-        val picker = LayoutInflater.from(requireContext()).inflate(R.layout.picker_view, panel, false) as ZPickerView
+        val picker = LayoutInflater.from(requireContext()).inflate(R.layout.time_picker_view, panel, false) as ZTimePickerView
+        picker.centerLabel = styles!!.centerLabel
+        picker.lunar = styles!!.lunar
+        picker.itemsVisibleCount = styles!!.itemsVisibleCount
+        picker.cyclic = styles!!.cyclic
+        picker.startTime = styles!!.startTime
+        picker.endTime = styles!!.endTime
+        picker.selectTime = styles!!.selectTime
         panel.addView(picker)
         panel.popUp(parentFragmentManager)
     }
