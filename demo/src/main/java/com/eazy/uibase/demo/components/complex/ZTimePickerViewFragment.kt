@@ -14,14 +14,12 @@ import com.eazy.uibase.demo.core.style.annotation.Style
 import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.TimePickerViewFragmentBinding
 import com.eazy.uibase.widget.ZPanel
-import com.eazy.uibase.widget.ZPickerView
 import com.eazy.uibase.widget.ZTimePickerView
 import java.util.*
 
 class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?, ZTimePickerViewFragment.Model?, ZTimePickerViewFragment.Styles?>() {
 
-    class Model : ViewModel() {
-    }
+    class Model : ViewModel()
 
     class Styles : ViewStyles() {
 

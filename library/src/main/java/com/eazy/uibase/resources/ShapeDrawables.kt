@@ -1,7 +1,7 @@
 package com.eazy.uibase.resources
 
 import android.content.Context
-import android.graphics.drawable.Drawable
+import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
@@ -12,6 +12,11 @@ class ShapeDrawables {
                        @DimenRes val radius: Int, @ColorRes val fillColor: Int,
                        @DimenRes val borderSize: Int, @ColorRes val borderColor: Int,
                        @DimenRes val width: Int, @DimenRes val height: Int)
+
+    data class RawConfig (val shape: Int,
+                       val radius: Float, val fillColor: ColorStateList?,
+                       val borderSize: Int, val borderColor: ColorStateList?,
+                       val width: Int, val height: Int)
 
     companion object {
 
@@ -58,5 +63,21 @@ class ShapeDrawables {
 //                strokeColorStateList(context.resources.getColorStateList(config.borderColor))
 //            }.build()
         }
+
+        fun createDrawable(config: RawConfig) : GradientDrawable {
+            val drawable = GradientDrawable()
+            drawable.shape = config.shape
+            if (config.width != 0 && config.height != 0) {
+                drawable.setSize(config.width, config.height)
+            }
+            if (config.radius > 0)
+                drawable.cornerRadius = config.radius
+            drawable.color = config.fillColor
+            if (config.borderSize != 0) {
+                drawable.setStroke(config.borderSize, config.borderColor)
+            }
+            return drawable
+        }
     }
+
 }

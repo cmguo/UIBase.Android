@@ -20,6 +20,21 @@
         <attr name="iconAtRight" format="boolean" />
         <attr name="loadingDrawable" format="reference" />
         <attr name="loadingText" format="reference|string" />
+        <attr name="buttonAppearance" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ZButton.Type">
+        <attr name="textColor"/>
+        <attr name="backgroundColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="ZButton.Size">
+        <attr name="height"/>
+        <attr name="borderRadius"/>
+        <attr name="paddingX"/>
+        <attr name="textSize"/>
+        <attr name="iconSize"/>
+        <attr name="iconPadding"/>
     </declare-styleable>
 
     <style name="ZButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->
@@ -28,24 +43,93 @@
         <item name="loadingText">"加载中..."</item>
     </style>
 
-    <dimen name="button_height_small">24dp</dimen>
-    <dimen name="button_height_middle">36dp</dimen>
-    <dimen name="button_height_large">44dp</dimen>
+    <!-- Type Styles -->
 
-    <dimen name="button_radius_small">12dp</dimen>
-    <dimen name="button_radius_middle">18dp</dimen>
-    <dimen name="button_radius_large">24dp</dimen>
+    <style name="ZButton.Primitive">
+        <item name="textColor">@color/bluegrey900_disabled</item>
+        <item name="backgroundColor">@color/brand500_pressed_disabled</item>
+    </style>
 
-    <dimen name="button_padding_small">12dp</dimen>
-    <dimen name="button_padding_middle">16dp</dimen>
-    <dimen name="button_padding_large">24dp</dimen>
+    <style name="ZButton.Secondary">
+        <item name="textColor">@color/blue600_disabled</item>
+        <item name="backgroundColor">@color/blue100_pressed_disabled</item>
+    </style>
 
-    <dimen name="button_iconPadding_small">3dp</dimen>
-    <dimen name="button_iconPadding_middle">4dp</dimen>
-    <dimen name="button_iconPadding_large">5dp</dimen>
+    <style name="ZButton.Tertiary">
+        <item name="textColor">@color/bluegrey800_disabled</item>
+        <item name="backgroundColor">@color/bluegrey100_pressed_disabled</item>
+    </style>
 
-    <dimen name="button_textSize_small">14sp</dimen>
-    <dimen name="button_textSize_middle">16sp</dimen>
-    <dimen name="button_textSize_large">18sp</dimen>
+    <style name="ZButton.Danger">
+        <item name="textColor">@color/red600_disabled</item>
+        <item name="backgroundColor">@color/red100_pressed_disabled</item>
+    </style>
+
+    <style name="ZButton.Text">
+        <item name="textColor">@color/blue600_disabled</item>
+        <item name="backgroundColor">@color/transparent_pressed_disabled</item>
+    </style>
+
+    <!-- Size Styles -->
+
+    <style name="ZButton.Large">
+        <item name="height">44dp</item>
+        <item name="borderRadius">24dp</item>
+        <item name="paddingX">24dp</item>
+        <item name="textSize">18sp</item>
+        <item name="iconSize">20dp</item>
+        <item name="iconPadding">5dp</item>
+    </style>
+
+    <style name="ZButton.Middle">
+        <item name="height">36dp</item>
+        <item name="borderRadius">18dp</item>
+        <item name="paddingX">16dp</item>
+        <item name="textSize">16sp</item>
+        <item name="iconSize">18dp</item>
+        <item name="iconPadding">4dp</item>
+    </style>
+
+    <style name="ZButton.Small">
+        <item name="height">24dp</item>
+        <item name="borderRadius">12dp</item>
+        <item name="paddingX">12dp</item>
+        <item name="textSize">14sp</item>
+        <item name="iconSize">16dp</item>
+        <item name="iconPadding">3dp</item>
+    </style>
+
+    <style name="ZButton.Thin">
+        <item name="height">24dp</item>
+        <item name="borderRadius">0dp</item>
+        <item name="paddingX">0dp</item>
+        <item name="textSize">14sp</item>
+        <item name="iconSize">16dp</item>
+        <item name="iconPadding">3dp</item>
+    </style>
+
+    <!-- Bottom Bar -->
+
+    <style name="ZButton.Bottom">
+        <item name="textColor">@color/bluegrey_700</item>
+        <item name="height">50dp</item>
+        <item name="borderRadius">0dp</item>
+        <item name="paddingX">0dp</item>
+        <item name="textSize">10sp</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+    <!-- Activity View -->
+
+    <style name="ZButton.Activity">
+        <item name="textColor">@color/bluegrey_700</item>
+        <item name="height">66dp</item>
+        <item name="borderRadius">0dp</item>
+        <item name="paddingX">0dp</item>
+        <item name="textSize">12sp</item>
+        <item name="iconSize">40dp</item>
+        <item name="iconPadding">8dp</item>
+    </style>
 
 </resources>
