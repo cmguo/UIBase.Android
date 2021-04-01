@@ -9,6 +9,7 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.*
+import com.xhb.uibase.demo.core.style.ButtonStyle
 import com.xhb.uibase.demo.core.style.ContentStyle
 import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
@@ -45,7 +46,13 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         @Bindable
         @Title("尺寸模式")
         @Description("有下列尺寸模式：大（Large）、中（Middle）、小（Small），默认：Large")
-        var sizeMode = XHBButton.ButtonSize.Large
+        var buttonSize = XHBButton.ButtonSize.Large
+
+        @Bindable
+        @Title("展示效果")
+        @Description("按钮展示效果的样式集合，包括类型、尺寸定义的所有的样式，如果设置改样式，则 buttonType、buttonSize 都无效")
+        @Style(ButtonStyle::class)
+        var buttonAppearance = 0
 
         @Bindable
         @Title("宽度模式")

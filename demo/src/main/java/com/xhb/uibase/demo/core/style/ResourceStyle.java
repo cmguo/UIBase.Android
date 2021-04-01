@@ -116,13 +116,13 @@ public class ResourceStyle extends ComponentStyle {
                         clazz = null;
                     }
                 }
-                if (clazz != null) {
-                    Integer value = clazz.get(r);
-                    if (value != null) {
-                        titles.add(n.length == 2 ? n[0] : r);
-                        types.add(type);
-                        values.add(String.valueOf(value));
-                    }
+            }
+            if (clazz != null) {
+                Integer value = clazz.get(r);
+                if (value != null) {
+                    titles.add(n.length == 2 ? n[0] : r);
+                    types.add(type);
+                    values.add(String.valueOf(value));
                 }
             }
         }

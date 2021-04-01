@@ -14,14 +14,12 @@ import com.xhb.uibase.demo.core.style.annotation.Style
 import com.xhb.uibase.demo.core.style.annotation.Title
 import com.xhb.uibase.demo.databinding.XhbTimePickerViewFragmentBinding
 import com.xhb.uibase.widget.XHBPanel
-import com.xhb.uibase.widget.XHBPickerView
 import com.xhb.uibase.widget.XHBTimePickerView
 import java.util.*
 
 class XHBTimePickerViewFragment : ComponentFragment<XhbTimePickerViewFragmentBinding?, XHBTimePickerViewFragment.Model?, XHBTimePickerViewFragment.Styles?>() {
 
-    class Model : ViewModel() {
-    }
+    class Model : ViewModel()
 
     class Styles : ViewStyles() {
 
