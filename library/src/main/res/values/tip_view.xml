@@ -3,6 +3,8 @@
 
     <attr name="tipViewStyle" format="reference"/>
 
+    <id name="tip_view_overly_frame"/>
+
     <declare-styleable name="ZTipView">
         <attr name="location">
             <enum name="topLeft" value="0"/>

@@ -35,7 +35,7 @@ public class StylesFragment extends Fragment {
 
         @Override
         public int getItemViewType(StylesViewModel.StyleValue item) {
-            Class type = item.style.getValueType();
+            Class<?> type = item.style.getValueType();
             if (item.style.getValues() != null)
                 return R.layout.style_value_list;
             if (type == Boolean.TYPE)
@@ -66,7 +66,7 @@ public class StylesFragment extends Fragment {
         }
     }
 
-    public static class StylesAdapter extends RecyclerViewAdapter {
+    public static class StylesAdapter extends RecyclerViewAdapter<StylesViewModel.StyleValue> {
 
         private int expandStyle = 0;
 
@@ -100,29 +100,20 @@ public class StylesFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull BindingViewHolder<StylesViewModel.StyleValue> holder, int position) {
             if (expandStyle > 0 && position >= expandStyle)
                 --position;
             super.onBindViewHolder(holder, position);
         }
     }
 
-    public static StylesFragment newInstance() {
-        return new StylesFragment();
-    }
-
     private StylesViewModel mViewModel;
-    private ComponentFragment fragment;
+    private ComponentFragment<?, ?, ?> fragment;
 
     public StylesAdapter adapter = new StylesAdapter();
     public StyleItemBinding itemBinding = new StyleItemBinding();
     public RecyclerView.ItemDecoration itemDecoration = new DividerDecoration(LinearLayout.VERTICAL, 1);
-    public RecyclerViewAdapter.OnItemClickListener itemClicked = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int position, Object object) {
-            adapter.toggle(position);
-        }
-    };
+    public RecyclerViewAdapter.OnItemClickListener<StylesViewModel.StyleValue> itemClicked = (position, object) -> adapter.toggle(position);
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -143,7 +134,7 @@ public class StylesFragment extends Fragment {
         DataBindingUtil.findBinding(getView()).setVariable(BR.model, mViewModel);
     }
 
-    public void bindComponent(ComponentFragment fragment) {
+    public void bindComponent(ComponentFragment<?, ?, ?> fragment) {
         if (mViewModel != null)
             mViewModel.bindComponent(fragment);
         else

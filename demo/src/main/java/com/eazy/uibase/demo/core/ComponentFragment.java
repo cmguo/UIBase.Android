@@ -62,15 +62,15 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         super.onDestroy();
     }
 
-    public DataBinding getBinding() {
+    public @NonNull DataBinding getBinding() {
         return binding_;
     }
 
-    public Model getModel() {
+    public @NonNull Model getModel() {
         return model_;
     }
 
-    public Styles getStyles() {
+    public @NonNull Styles getStyles() {
         return styles_;
     }
 

@@ -102,9 +102,9 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
     }
 
     class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<ZButton.ButtonType>(R.layout.button_item) {
-        override fun bindView(binding: ViewDataBinding?, item: ZButton.ButtonType, position: Int) {
+        override fun bindView(binding: ViewDataBinding, item: ZButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
-            binding!!.setVariable(BR.styles, styles)
+            binding.setVariable(BR.styles, styles)
             val button = (binding as ButtonItemBinding).button
             val lp = button.layoutParams
             lp.width = styles.widthMode

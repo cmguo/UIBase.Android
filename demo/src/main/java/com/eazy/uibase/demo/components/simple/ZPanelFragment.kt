@@ -2,7 +2,6 @@ package com.eazy.uibase.demo.components.simple
 
 import android.view.View
 import androidx.databinding.Bindable
-import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
@@ -53,9 +52,9 @@ class ZPanelFragment : ComponentFragment<PanelFragmentBinding?, ZPanelFragment.M
 
     var buttonClick = View.OnClickListener {
         val panel = ZPanel(requireContext())
-        panel.titleBar = styles!!.titleBar
-        panel.bottomButton = styles!!.bottomButton
-        panel.content = styles!!.content
+        panel.titleBar = styles.titleBar
+        panel.bottomButton = styles.bottomButton
+        panel.content = styles.content
         panel.listener = this
         panel.popUp(parentFragmentManager)
     }

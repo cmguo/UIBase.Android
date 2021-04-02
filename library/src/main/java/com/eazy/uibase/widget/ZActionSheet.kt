@@ -12,7 +12,6 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.eazy.uibase.R
 import com.eazy.uibase.view.list.BaseItemBinding
 import com.eazy.uibase.view.list.DividerDecoration
@@ -115,8 +114,8 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
             return R.layout.action_sheet_item
         }
 
-        override fun bindView(binding: ViewBinding, item: Any?, position: Int) {
-            binding.root.findViewById<TextView>(R.id.title).text = item.toString()
+        override fun bindView(view: View, item: Any?, position: Int) {
+            view.findViewById<TextView>(R.id.title).text = item.toString()
         }
 
     }
