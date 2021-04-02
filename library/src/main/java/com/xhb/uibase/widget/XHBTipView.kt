@@ -15,10 +15,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.Size
 import android.util.TypedValue
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -349,7 +346,7 @@ class XHBTipView @JvmOverloads constructor(
             }
 
             @SuppressLint("ClickableViewAccessibility")
-            override fun onTouchEvent(event: _root_ide_package_.android.view.MotionEvent?): Boolean {
+            override fun onTouchEvent(event: MotionEvent?): Boolean {
                 val listCopy = ArrayList(list)
                 for (v in listCopy)
                     v.dismiss()
