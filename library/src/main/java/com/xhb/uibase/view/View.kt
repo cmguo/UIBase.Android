@@ -1,7 +1,10 @@
 package com.xhb.uibase.view
 
+import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.FrameLayout
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -20,3 +23,7 @@ fun <T: View> View.findViewByType(type: Class<T>) : T? {
 }
 
 val View.dataBinding get() = DataBindings.get(this)
+
+val View.contentView: FrameLayout? get() {
+    return rootView.findViewById<View>(android.R.id.content) as? FrameLayout
+}

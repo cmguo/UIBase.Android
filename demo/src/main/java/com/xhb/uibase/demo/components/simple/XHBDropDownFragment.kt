@@ -54,9 +54,9 @@ class XHBDropDownFragment : ComponentFragment<XhbDropDownFragmentBinding?, XHBDr
     }
 
     class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.xhb_drop_down_button_item) {
-        override fun bindView(binding: ViewDataBinding?, item: Any?, position: Int) {
+        override fun bindView(binding: ViewDataBinding, item: Any?, position: Int) {
             super.bindView(binding, item, position)
-            binding!!.setVariable(BR.styles, styles)
+            binding.setVariable(BR.styles, styles)
         }
     }
 

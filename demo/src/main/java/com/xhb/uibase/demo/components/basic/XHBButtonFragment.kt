@@ -102,9 +102,9 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
     }
 
     class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<XHBButton.ButtonType>(R.layout.xhb_button_item) {
-        override fun bindView(binding: ViewDataBinding?, item: XHBButton.ButtonType, position: Int) {
+        override fun bindView(binding: ViewDataBinding, item: XHBButton.ButtonType, position: Int) {
             super.bindView(binding, item, position)
-            binding!!.setVariable(BR.styles, styles)
+            binding.setVariable(BR.styles, styles)
             val button = (binding as XhbButtonItemBinding).button
             val lp = button.layoutParams
             lp.width = styles.widthMode

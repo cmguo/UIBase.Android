@@ -49,11 +49,17 @@ class ViewDrawable(private val view: View) : Drawable() {
 
     class ViewHolder(private val drawable: ViewDrawable, private val view: View) : ViewGroup(view.context) {
 
+        init {
+            addView(view)
+        }
+        
         override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         }
 
         override fun requestLayout() {
             super.requestLayout()
+            if (view == null)
+                return
             view.measure(0, 0)
             view.layout(0, 0, view.measuredWidth, view.measuredHeight)
             drawable.invalidateSelf()

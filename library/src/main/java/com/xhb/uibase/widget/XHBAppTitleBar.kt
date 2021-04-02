@@ -31,7 +31,7 @@ class XHBAppTitleBar @JvmOverloads constructor(
             if (value == 0) {
                 _imageView.visibility = View.GONE
             } else {
-                _imageView.setImageDrawable(getDrawalbe(value))
+                _imageView.setImageDrawable(getDrawable(value))
                 _imageView.visibility = View.VISIBLE
             }
         }
@@ -198,7 +198,7 @@ class XHBAppTitleBar @JvmOverloads constructor(
         val titleView = _textView.parent as LinearLayoutCompat
         val lp = titleView.layoutParams as LayoutParams
         var ta: Int
-        var tg: Int
+        val tg: Int
         if (leftButton == 0 && (rightButton != 0 || rightButton2 != 0)) {
             lp.gravity = Gravity.START or Gravity.CENTER_VERTICAL
             tg = Gravity.START or Gravity.CENTER_VERTICAL
@@ -221,29 +221,31 @@ class XHBAppTitleBar @JvmOverloads constructor(
         }
         if (content == 0)
             return
-        val type = resources.getResourceTypeName(content)
-        if (type == "string") {
-            leftButton = 0
-            rightButton = 0
-            rightButton2 = 0
-            title = resources.getText(content)
-        } else if (type == "layout") {
-            val view = LayoutInflater.from(context).inflate(content, this, false)
-            addView(view)
-        } else if (type == "style") {
-            leftButton = 0
-            rightButton = 0
-            rightButton2 = 0
-            title = null
-            val typedArray = context.obtainStyledAttributes(content, R.styleable.XHBAppTitleBar)
-            applyStyle(typedArray)
-            typedArray.recycle()
+        when (resources.getResourceTypeName(content)) {
+            "string" -> {
+                leftButton = 0
+                rightButton = 0
+                rightButton2 = 0
+                title = resources.getText(content)
+            }
+            "layout" -> {
+                val view = LayoutInflater.from(context).inflate(content, this, false)
+                addView(view)
+            }
+            "style" -> {
+                leftButton = 0
+                rightButton = 0
+                rightButton2 = 0
+                title = null
+                val typedArray = context.obtainStyledAttributes(content, R.styleable.XHBAppTitleBar)
+                applyStyle(typedArray)
+                typedArray.recycle()
+            }
         }
     }
 
-    private fun getDrawalbe(value: Int): Drawable? {
-        val type = context.resources.getResourceTypeName(value)
-        return when (type) {
+    private fun getDrawable(value: Int): Drawable? {
+        return when (context.resources.getResourceTypeName(value)) {
             "drawable" -> ContextCompat.getDrawable(context, value)
             "layout" -> ViewDrawable(context, value)
             else -> null

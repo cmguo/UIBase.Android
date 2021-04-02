@@ -2,7 +2,6 @@ package com.xhb.uibase.demo.components.simple
 
 import android.view.View
 import androidx.databinding.Bindable
-import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
@@ -53,9 +52,9 @@ class XHBPanelFragment : ComponentFragment<XhbPanelFragmentBinding?, XHBPanelFra
 
     var buttonClick = View.OnClickListener {
         val panel = XHBPanel(requireContext())
-        panel.titleBar = styles!!.titleBar
-        panel.bottomButton = styles!!.bottomButton
-        panel.content = styles!!.content
+        panel.titleBar = styles.titleBar
+        panel.bottomButton = styles.bottomButton
+        panel.content = styles.content
         panel.listener = this
         panel.popUp(parentFragmentManager)
     }

@@ -26,7 +26,7 @@ public abstract class BaseItemBinding<T> implements ItemBinding<T> {
 
     static class ViewHolder implements ViewBinding {
 
-        private View view;
+        private final View view;
 
         ViewHolder(View view) {
             this.view = view;
@@ -47,7 +47,7 @@ public abstract class BaseItemBinding<T> implements ItemBinding<T> {
             ViewDataBinding binding = createDataBinding(mInflater, parent, viewType);
             if (binding != null)
                 return binding;
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
         }
         View view = mInflater.inflate(viewType, parent, false);
         return new ViewHolder(view);
@@ -57,10 +57,12 @@ public abstract class BaseItemBinding<T> implements ItemBinding<T> {
     public void bindView(ViewBinding binding, T item, int position) {
         if (binding instanceof ViewDataBinding)
             bindView((ViewDataBinding) binding, item, position);
+        else
+            bindView(binding.getRoot(), item, position);
     }
 
     protected ViewDataBinding createDataBinding(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
-        return DataBindingUtil.inflate(mInflater, viewType, parent, false);
+        return DataBindingUtil.inflate(inflater, viewType, parent, false);
     }
 
     @CallSuper

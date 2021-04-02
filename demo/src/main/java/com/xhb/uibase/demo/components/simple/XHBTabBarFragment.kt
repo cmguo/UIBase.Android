@@ -131,9 +131,9 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
     }
 
     class ItemBinding(context: Context, private val styles: Styles, private val width: Int) : UnitTypeItemBinding<String?>(context, R.layout.xhb_tab_title) {
-        override fun bindView(binding: ViewDataBinding?, item: String?, position: Int) {
+        override fun bindView(binding: ViewDataBinding, item: String?, position: Int) {
             super.bindView(binding, item, position)
-            binding!!.setVariable(BR.styles, styles)
+            binding.setVariable(BR.styles, styles)
             if (width > 0) {
                 val lp = binding.root.layoutParams
                 lp.width = width

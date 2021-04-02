@@ -122,9 +122,9 @@ class XHBTipViewFragment : ComponentFragment<XhbTipViewFragmentBinding?, XHBTipV
     }
 
     class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.xhb_tip_view_button_item) {
-        override fun bindView(binding: ViewDataBinding?, item: Any?, position: Int) {
+        override fun bindView(binding: ViewDataBinding, item: Any?, position: Int) {
             super.bindView(binding, item, position)
-            binding!!.setVariable(BR.styles, styles)
+            binding.setVariable(BR.styles, styles)
         }
     }
 

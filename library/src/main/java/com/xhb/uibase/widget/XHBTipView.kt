@@ -1,5 +1,6 @@
 package com.xhb.uibase.widget
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
@@ -15,6 +16,7 @@ import android.util.Log
 import android.util.Size
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -25,6 +27,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.ShapeDrawables
+import com.xhb.uibase.view.contentView
 import java.lang.ref.WeakReference
 
 class XHBTipView @JvmOverloads constructor(
@@ -229,10 +232,18 @@ class XHBTipView @JvmOverloads constructor(
         if (_location == Location.AutoToast) {
             ++toastCount
         }
-        (context as? Activity)?.window?.addContentView(this, lp)
-        _textView.requestFocus()
+        val content = target.contentView
+        if (content == null) {
+            Log.w(TAG, "popAt: not found window!")
+            return
+        }
         if (dismissDelay > 0)
             postDelayed(DismissRunnable(this), dismissDelay)
+        if (_location < Location.AutoToast) {
+            overlayFrame(content, true)?.attach(this)
+        }
+        content.addView(this, lp)
+        _textView.requestFocus()
     }
 
     class DismissRunnable(view: XHBTipView) : Runnable {
@@ -246,6 +257,7 @@ class XHBTipView @JvmOverloads constructor(
         if (_location == Location.AutoToast) {
             --toastCount
         }
+        overlayFrame(contentView)?.detach(this)
         (parent as? ViewGroup)?.removeView(this)
         _listener?.tipViewDismissed(this, timeout)
     }
@@ -262,6 +274,44 @@ class XHBTipView @JvmOverloads constructor(
             0, 0,
             0, 0
         )
+
+        @SuppressLint("ViewConstructor")
+        class OverlayFrame(content: FrameLayout) : FrameLayout(content.context) {
+
+            val list = mutableListOf<XHBTipView>()
+
+            init {
+                id = R.id.tip_view_overly_frame
+                content.addView(this, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+            }
+
+            fun attach(view: XHBTipView) {
+                if (!list.contains(view))
+                    list.add(view)
+                visibility = VISIBLE
+            }
+
+            fun detach(view: XHBTipView) {
+                if (list.remove(view) && list.isEmpty()) {
+                    visibility = GONE
+                }
+            }
+
+            @SuppressLint("ClickableViewAccessibility")
+            override fun onTouchEvent(event: MotionEvent?): Boolean {
+                val listCopy = ArrayList(list)
+                for (v in listCopy)
+                    v.dismiss()
+                return super.onTouchEvent(event)
+            }
+        }
+
+        fun overlayFrame(content: FrameLayout?, create: Boolean = false): OverlayFrame? {
+            var frame = content?.findViewById<OverlayFrame>(R.id.tip_view_overly_frame)
+            if (frame == null && create && content != null)
+                frame = OverlayFrame(content)
+            return frame
+        }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
