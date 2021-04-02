@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    android:textSize="12sp"
+    android:textColor="@color/blue_600"
+    android:background="@drawable/label_backgroud"
+    android:text="标签">
 
-    <data>
-        <variable
-            name="data"
-            type="String" />
-    </data>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:minHeight="48dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingLeft="8dp"
-        android:textAppearance="?textAppearanceSubtitle1"
-        android:text="@{data}">
-
-    </TextView>
-</layout>
+</TextView>

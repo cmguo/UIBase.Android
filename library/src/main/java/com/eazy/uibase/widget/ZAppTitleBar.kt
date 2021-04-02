@@ -2,20 +2,39 @@ package com.eazy.uibase.widget
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.RawRes
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
+import com.eazy.uibase.resources.ViewDrawable
 
 class ZAppTitleBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, if (defStyleAttr == 0) R.attr.appTitleBarStyle else defStyleAttr) {
+
+    @RawRes
+    var icon: Int = 0
+        set(value) {
+            if (field == value) return
+            field = value
+            if (value == 0) {
+                _imageView.visibility = View.GONE
+            } else {
+                _imageView.setImageDrawable(getDrawalbe(value))
+                _imageView.visibility = View.VISIBLE
+            }
+        }
 
     var title: CharSequence?
         get() = _textView.text
@@ -76,6 +95,7 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     var listener: TitleBarListener? = null
 
+    private var _imageView: ImageView
     private var _textView: TextView
     private var _leftButton: ZButton
     private var _rightButton: ZButton
@@ -87,6 +107,7 @@ class ZAppTitleBar @JvmOverloads constructor(
     init {
         LayoutInflater.from(context).inflate(R.layout.app_title_bar, this)
         _leftButton = findViewById(R.id.leftButton)
+        _imageView = findViewById(R.id.imageView)
         _textView = findViewById(R.id.textView)
         _rightButton = findViewById(R.id.rightButton)
         _rightButton2 = findViewById(R.id.rightButton2)
@@ -111,7 +132,8 @@ class ZAppTitleBar @JvmOverloads constructor(
         val lp = params as? LayoutParams
             ?: LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         lp.gravity = Gravity.CENTER_HORIZONTAL
-        addView(child, indexOfChild(_textView) + 1, lp)
+        val titleView = _textView.parent as LinearLayoutCompat
+        addView(child, indexOfChild(titleView) + 1, lp)
         _content = child
     }
 
@@ -150,6 +172,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         leftButton = a.getResourceId(R.styleable.ZAppTitleBar_leftButton, 0)
         rightButton = a.getResourceId(R.styleable.ZAppTitleBar_rightButton, 0)
         rightButton2 = a.getResourceId(R.styleable.ZAppTitleBar_rightButton2, 0)
+        icon = a.getResourceId(R.styleable.ZAppTitleBar_icon, 0)
         title = a.getText(R.styleable.ZAppTitleBar_title)
         textAppearance = a.getResourceId(R.styleable.ZAppTitleBar_textAppearance, 0)
     }
@@ -172,21 +195,23 @@ class ZAppTitleBar @JvmOverloads constructor(
     }
 
     private fun updateLayout() {
-        val lp = _textView.layoutParams as LayoutParams
+        val titleView = _textView.parent as LinearLayoutCompat
+        val lp = titleView.layoutParams as LayoutParams
         var ta: Int
-        var tg = Gravity.START or Gravity.CENTER_VERTICAL
+        var tg: Int
         if (leftButton == 0 && (rightButton != 0 || rightButton2 != 0)) {
             lp.gravity = Gravity.START or Gravity.CENTER_VERTICAL
+            tg = Gravity.START or Gravity.CENTER_VERTICAL
             ta = R.style.TextAppearance_Z_Head0
         } else {
             lp.gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
-            ta = R.style.TextAppearance_Z_Head2
             tg = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
+            ta = R.style.TextAppearance_Z_Head2
         }
         if (textAppearance > 0)
             ta = textAppearance
-        _textView.layoutParams = lp
-        _textView.gravity = tg
+        titleView.layoutParams = lp
+        titleView.gravity = tg
         TextViewCompat.setTextAppearance(_textView, ta)
     }
 
@@ -213,6 +238,15 @@ class ZAppTitleBar @JvmOverloads constructor(
             val typedArray = context.obtainStyledAttributes(content, R.styleable.ZAppTitleBar)
             applyStyle(typedArray)
             typedArray.recycle()
+        }
+    }
+
+    private fun getDrawalbe(value: Int): Drawable? {
+        val type = context.resources.getResourceTypeName(value)
+        return when (type) {
+            "drawable" -> ContextCompat.getDrawable(context, value)
+            "layout" -> ViewDrawable(context, value)
+            else -> null
         }
     }
 

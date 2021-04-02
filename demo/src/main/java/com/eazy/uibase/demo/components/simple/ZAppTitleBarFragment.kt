@@ -5,6 +5,7 @@ import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.ContentStyle
+import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.AppTitleBarFragmentBinding
 import com.eazy.uibase.widget.ZAppTitleBar
@@ -46,6 +47,12 @@ class ZAppTitleBarFragment : ComponentFragment<AppTitleBarFragmentBinding?, ZApp
         @Description("通过 BindingAdapter 实现的虚拟属性，间接设置给扩展内容，仅用于基于 DataBinding 的布局")
         @Values(value = ["1", "2", "xxx"])
         var data: String = ""
+
+        @Bindable
+        @Title("图标")
+        @Description("附加在文字标题左侧的图标，资源ID类型，不能点击")
+        @Style(ContentStyle::class, params = ["@drawable", "@layout"])
+        var icon = 0
 
         @Bindable
         @Title("标题")
