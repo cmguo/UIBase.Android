@@ -30,6 +30,7 @@
     </style>
 
     <style name="title_bar_text">
+        <item name="icon">@layout/xhb_label</item>
         <item name="title">标题</item>
         <item name="leftButton">@string/confirm</item>
         <item name="rightButton">@string/cancel</item>
