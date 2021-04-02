@@ -14,6 +14,7 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="@{value.inputType}"
         android:text="@={value.value}">
 
     </androidx.appcompat.widget.AppCompatEditText>

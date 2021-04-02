@@ -61,8 +61,12 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        binding!!.activityViews.root.setBackgroundColor(Color.WHITE)
+        binding.activityViews.root.setBackgroundColor(Color.WHITE)
         return view
+    }
+
+    override fun backgroudColor(): Int {
+        return Color.parseColor("#EDF4FF")
     }
 
     private var lp : ViewGroup.LayoutParams? = null
@@ -72,15 +76,15 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
         panel.titleBar = R.style.title_bar_text
         panel.bottomButton = R.string.cancel
         panel.listener = this
-        binding!!.frame.removeView(binding!!.activityViews.root)
-        lp = binding!!.activityViews.root.layoutParams
-        panel.addView(binding!!.activityViews.root)
+        binding.frame.removeView(binding.activityViews.root)
+        lp = binding.activityViews.root.layoutParams
+        panel.addView(binding.activityViews.root)
         panel.popUp(parentFragmentManager)
     }
 
     override fun panelDismissed(panel: ZPanel) {
-        panel.removeView(binding!!.activityViews.root)
-        binding!!.frame.addView(binding!!.activityViews.root, lp)
+        panel.removeView(binding.activityViews.root)
+        binding.frame.addView(binding.activityViews.root, lp)
     }
 
     override fun onItemClick(position: Int, `object`: Int?) {

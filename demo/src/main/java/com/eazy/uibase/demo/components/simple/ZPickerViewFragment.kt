@@ -52,8 +52,8 @@ class ZPickerViewFragment : ComponentFragment<PickerViewFragmentBinding?, ZPicke
         panel.titleBar = R.style.title_bar_text
         panel.bottomButton = R.string.cancel
         val picker = LayoutInflater.from(requireContext()).inflate(R.layout.picker_view, panel, false) as ZPickerView
-        picker.singleSelection = styles!!.singleSelection
-        picker.selections = model!!.selections
+        picker.singleSelection = styles.singleSelection
+        picker.selections = model.selections
         panel.addView(picker)
         panel.popUp(parentFragmentManager)
     }

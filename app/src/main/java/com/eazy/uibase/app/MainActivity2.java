@@ -30,6 +30,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.eazy.uibase.demo.view.GridDrawable;
 import com.eazy.uibase.demo.view.main.InformationFragment;
 import com.eazy.uibase.demo.view.main.StylesFragment;
 import com.eazy.uibase.demo.core.Component;
@@ -48,6 +49,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private Fragment informationFragment;
     private Fragment stylesFragment;
+    private GridDrawable gridDrawable = new GridDrawable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         componentFragment.getChildFragmentManager().addOnBackStackChangedListener(this);
         informationFragment = getSupportFragmentManager().findFragmentById(R.id.information_fragment);
         stylesFragment = getSupportFragmentManager().findFragmentById(R.id.styles_fragment);
+        findViewById(R.id.component_fragment).setBackground(gridDrawable);
     }
 
     private static final Rect RECT = new Rect();
@@ -124,11 +127,13 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_skin_normal) {
-            SkinManager.switchMode(false);
+        if (item.getItemId() == R.id.action_back_grid) {
+            item.setChecked(!item.isChecked());
+            gridDrawable.setGridOn(item.isChecked());
             return true;
         } else if (item.getItemId() == R.id.action_skin_dark) {
-            SkinManager.switchMode(true);
+            item.setChecked(!item.isChecked());
+            SkinManager.switchMode(item.isChecked());
             return true;
         }
         return super.onOptionsItemSelected(item);

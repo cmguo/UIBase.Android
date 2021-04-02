@@ -95,9 +95,9 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        addBadge(inflater, binding!!.textview)
-        addBadge(inflater, binding!!.imageview)
-        addBadge(inflater, binding!!.button)
+        addBadge(inflater, binding.textview)
+        addBadge(inflater, binding.imageview)
+        addBadge(inflater, binding.button)
         return view
     }
 
@@ -111,7 +111,7 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
 
     fun addBadge(inflater: LayoutInflater, target: View) {
         val binding = BadgeViewItemBinding.inflate(inflater);
-        binding.styles = styles!!
+        binding.styles = styles
         (binding.root as ZBadgeView).bindTarget(target)
     }
 

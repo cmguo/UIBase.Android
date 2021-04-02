@@ -7,14 +7,14 @@
     android:orientation="horizontal">
 
     <Button
-        android:id="@+id/btnDecrease"
+        android:id="@+id/buttonDec"
         android:layout_width="@dimen/number_view_button_size"
         android:layout_height="@dimen/number_view_button_size"
         android:layout_gravity="center_vertical"
         android:gravity="center"/>
 
     <EditText
-        android:id="@+id/etAmount"
+        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:minWidth="60dp"
@@ -27,7 +27,7 @@
         android:text="0"/>
 
     <Button
-        android:id="@+id/btnIncrease"
+        android:id="@+id/buttonInc"
         android:layout_width="@dimen/number_view_button_size"
         android:layout_height="@dimen/number_view_button_size"
         android:layout_gravity="center_vertical"

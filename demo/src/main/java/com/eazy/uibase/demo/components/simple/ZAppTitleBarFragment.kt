@@ -1,5 +1,6 @@
 package com.eazy.uibase.demo.components.simple
 
+import android.graphics.Color
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
@@ -68,6 +69,10 @@ class ZAppTitleBarFragment : ComponentFragment<AppTitleBarFragmentBinding?, ZApp
 
     companion object {
         private const val TAG = "ZAppTitleBarFragment"
+    }
+
+    override fun backgroudColor(): Int {
+        return Color.parseColor("#EDF4FF")
     }
 
     override fun titleBarButtonClicked(bar: ZAppTitleBar, btnId: Int) {

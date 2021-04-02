@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.ShapeDrawables
 
-class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null)
+class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : LinearLayout(context, attrs, R.attr.numberViewStyle), View.OnClickListener, TextWatcher {
 
     @FunctionalInterface
@@ -45,16 +45,16 @@ class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeS
                 return
             field = value
             if (!inCallbacks)
-                etAmount.setText(value.toString())
-            btnDecrease.isEnabled = value > minimum
-            btnIncrease.isEnabled = (maximum == 0) || (value < maximum)
+                _editText.setText(value.toString())
+            _buttonDec.isEnabled = value > minimum
+            _buttonInc.isEnabled = (maximum == 0) || (value < maximum)
             mListener?.onAmountChanged(this, value)
         }
 
     private var mListener: OnAmountChangeListener? = null
-    private val etAmount: EditText
-    private val btnDecrease: Button
-    private val btnIncrease: Button
+    private val _editText: EditText
+    private val _buttonDec: Button
+    private val _buttonInc: Button
     private var inCallbacks = false
 
     fun setOnAmountChangeListener(listener: OnAmountChangeListener?) {
@@ -63,12 +63,12 @@ class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeS
 
     override fun onClick(v: View) {
         val i = v.id
-        etAmount.clearFocus()
-        if (i == R.id.btnDecrease) {
+        _editText.clearFocus()
+        if (i == R.id.buttonDec) {
             if (amount > 0) {
                 amount--
             }
-        } else if (i == R.id.btnIncrease) {
+        } else if (i == R.id.buttonInc) {
             if (maximum == 0 || amount < maximum) {
                 amount++
             }
@@ -90,7 +90,7 @@ class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeS
 
     companion object {
 
-        private const val TAG = "ZAmountView"
+        private const val TAG = "ZNumberView"
 
         val backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
                 R.dimen.number_view_radius, R.color.number_view_background_color,
@@ -108,14 +108,14 @@ class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeS
 
     init {
         LayoutInflater.from(context).inflate(R.layout.number_view, this)
-        etAmount = findViewById<View>(R.id.etAmount) as EditText
-        btnDecrease = findViewById<View>(R.id.btnDecrease) as Button
-        btnIncrease = findViewById<View>(R.id.btnIncrease) as Button
-        btnDecrease.setOnClickListener(this)
-        btnIncrease.setOnClickListener(this)
-        etAmount.addTextChangedListener(this)
+        _editText = findViewById<View>(R.id.editText) as EditText
+        _buttonDec = findViewById<View>(R.id.buttonDec) as Button
+        _buttonInc = findViewById<View>(R.id.buttonInc) as Button
+        _buttonDec.setOnClickListener(this)
+        _buttonInc.setOnClickListener(this)
+        _editText.addTextChangedListener(this)
 
-        background = ShapeDrawables.getDrawable(context!!, backgroundDrawable)
+        background = ShapeDrawables.getDrawable(context, backgroundDrawable)
         val buttonBackground = ShapeDrawables.getDrawable(context, buttonBackgroundDrawable)
         val buttonForegroundDec = ContextCompat.getDrawable(context, R.drawable.icon_minus)
         val buttonForegroundInc = ContextCompat.getDrawable(context, R.drawable.icon_plus)
@@ -127,7 +127,7 @@ class ZNumberView @JvmOverloads constructor(context: Context?, attrs: AttributeS
         val buttonPadding = context.resources.getDimensionPixelSize(R.dimen.number_view_button_padding)
         drawableDec.setLayerInset(1, buttonPadding, buttonPadding, buttonPadding, buttonPadding)
         drawableInc.setLayerInset(1, buttonPadding, buttonPadding, buttonPadding, buttonPadding)
-        btnDecrease.background = drawableDec
-        btnIncrease.background = drawableInc
+        _buttonDec.background = drawableDec
+        _buttonInc.background = drawableInc
     }
 }

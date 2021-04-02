@@ -67,7 +67,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         val radioCheckedChange = CompoundButton.OnCheckedChangeListener { view: View, isChecked: Boolean ->
             if (isChecked) {
                 val binding: RadioButtonItemBinding = DataBindingUtil.findBinding(view.parent as ViewGroup)!!
-                for (item in fragment.model!!.states) {
+                for (item in fragment.model.states) {
                     if (item != binding.data) {
                         item.state = false
                     }
@@ -94,7 +94,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
     }
 
     override fun updateSkin(observable: SkinObservable, o: Any) {
-        binding!!.compoundButtonList.adapter!!.notifyItemRangeChanged(0, model!!.states.size)
+        binding.compoundButtonList.adapter!!.notifyItemRangeChanged(0, model.states.size)
     }
 
     companion object {

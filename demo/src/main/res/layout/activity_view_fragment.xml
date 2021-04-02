@@ -33,8 +33,7 @@
             android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/bluegrey_300">
+            android:layout_weight="1">
 
             <include layout="@layout/activity_views"
                 android:id="@+id/activityViews"

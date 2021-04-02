@@ -64,6 +64,6 @@ class ZSearchBoxFragment : ComponentFragment<SearchBoxFragmentBinding?, ZSearchB
     }
 
     override fun searchBoxTextChanged(bar: ZSearchBox, text: String) {
-        model?.filter(text)
+        model.filter(text)
     }
 }

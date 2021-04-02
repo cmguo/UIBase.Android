@@ -56,8 +56,12 @@ class ZActionSheetFragment : ComponentFragment<ActionSheetFragmentBinding?, ZAct
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        binding!!.actionSheet.setBackgroundColor(Color.WHITE)
+        binding.actionSheet.setBackgroundColor(Color.WHITE)
         return view
+    }
+
+    override fun backgroudColor(): Int {
+        return Color.parseColor("#EDF4FF")
     }
 
     private var lp : ViewGroup.LayoutParams? = null
@@ -66,17 +70,17 @@ class ZActionSheetFragment : ComponentFragment<ActionSheetFragmentBinding?, ZAct
         val panel = ZPanel(requireContext())
         panel.bottomButton = R.string.cancel
         panel.listener = this
-        binding!!.frame.removeView(binding!!.actionSheet)
-        lp = binding!!.actionSheet.layoutParams
-        binding!!.actionSheet.setBackgroundColor(0)
-        panel.addView(binding!!.actionSheet)
+        binding.frame.removeView(binding.actionSheet)
+        lp = binding.actionSheet.layoutParams
+        binding.actionSheet.setBackgroundColor(0)
+        panel.addView(binding.actionSheet)
         panel.popUp(parentFragmentManager)
     }
 
     override fun panelDismissed(panel: ZPanel) {
-        panel.removeView(binding!!.actionSheet)
-        binding!!.actionSheet.setBackgroundColor(Color.WHITE)
-        binding!!.frame.addView(binding!!.actionSheet, lp)
+        panel.removeView(binding.actionSheet)
+        binding.actionSheet.setBackgroundColor(Color.WHITE)
+        binding.frame.addView(binding.actionSheet, lp)
     }
 
     override fun onAction(sheet: ZActionSheet, index: Int) {

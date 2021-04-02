@@ -58,8 +58,7 @@
             android:paddingTop="25dp"
             android:paddingBottom="25dp"
             android:paddingLeft="50dp"
-            android:orientation="horizontal"
-            android:background="@color/bluegrey_300">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="100dp"

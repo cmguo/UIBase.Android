@@ -92,7 +92,6 @@ class ZTextAreaFragment : ComponentFragment<TextAreaFragmentBinding?, ZTextAreaF
             }
         }
         float_edit_text_error.setErrorMessage("出错了")
-        "".replace(" ","a")
     }
 
     companion object {

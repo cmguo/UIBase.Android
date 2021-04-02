@@ -127,7 +127,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
     }
 
     private fun updateButtons() {
-        binding!!.buttonList.adapter!!.notifyDataSetChanged()
+        binding.buttonList.adapter!!.notifyDataSetChanged()
     }
 
     companion object {
