@@ -3,6 +3,7 @@ package com.eazy.uibase.demo.components.simple
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
@@ -15,6 +16,7 @@ import com.eazy.uibase.demo.core.style.ContentStyle
 import com.eazy.uibase.demo.core.style.DimemDpStyle
 import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
+import com.eazy.uibase.demo.databinding.TipViewButtonItemBinding
 import com.eazy.uibase.demo.databinding.TipViewFragmentBinding
 import com.eazy.uibase.demo.databinding.ToastTipViewBinding
 import com.eazy.uibase.demo.databinding.ToolTipViewBinding
@@ -27,11 +29,10 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
 
         var buttons = arrayOfNulls<Any>(when (fragment.component.id()) {
             R.id.component_z_tool_tips -> 24
-            R.id.component_z_snack_bars -> 2
-            else -> 1 }).toList()
+            else -> 2 }).toList()
     }
 
-    open class Styles(protected val fragment: ZTipViewFragment) : ViewStyles() {
+    open class Styles(val fragment: ZTipViewFragment) : ViewStyles() {
 
         val layoutManager = GridLayoutManager(fragment.context, 4)
 
@@ -109,13 +110,16 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
             val binding = ToastTipViewBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
             binding.executePendingBindings()
+            val index = (view.parent.parent as ViewGroup).indexOfChild(view.parent as View)
             if (toast) {
                 binding.tipView.location = ZTipView.Location.AutoToast
-                binding.tipView.popAt(view, fragment)
+                if (index == 0)
+                    binding.tipView.popAt(view, fragment)
+                else
+                    binding.tipView.popUp(Toast.LENGTH_SHORT)
             } else {
                 binding.tipView.location = ZTipView.Location.ManualLayout
-                val index = (view.parent.parent as ViewGroup).indexOfChild(view.parent as View)
-                val target = if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding!!.root
+                val target = if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding.root
                 binding.tipView.popAt(target, fragment)
             }
         }
@@ -125,6 +129,16 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         override fun bindView(binding: ViewDataBinding, item: Any?, position: Int) {
             super.bindView(binding, item, position)
             binding.setVariable(BR.styles, styles)
+            when (styles.fragment.component.id()) {
+                R.id.component_z_snack_bars -> {
+                    (binding as TipViewButtonItemBinding).button.text =
+                        if (position == 0) "根视图" else "展示区域"
+                }
+                R.id.component_z_toasts -> {
+                    (binding as TipViewButtonItemBinding).button.text =
+                        if (position == 0) "普通View" else "系统Toast"
+                }
+            }
         }
     }
 

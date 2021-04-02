@@ -15,13 +15,12 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.Size
 import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
@@ -59,6 +58,8 @@ class ZTipView @JvmOverloads constructor(
                 textSize = context.resources.getDimensionPixelOffset(R.dimen.tip_view_small_text_size).toFloat()
                 if (value == Location.ManualLayout) {
                     frameRadius = 0f
+                    frameColor = ContextCompat.getColor(context, R.color.bluegrey_05)
+                    textColor = ContextCompat.getColor(context, R.color.bluegrey_800)
                 }
             }
             requestLayout()
@@ -246,6 +247,15 @@ class ZTipView @JvmOverloads constructor(
         _textView.requestFocus()
     }
 
+    fun popUp(duration: Int = Toast.LENGTH_SHORT) {
+        val toast = Toast(context)
+        toast.duration = duration
+        _location = Location.ManualLayout
+        toast.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 40)
+        toast.view = this
+        toast.show()
+    }
+
     class DismissRunnable(view: ZTipView) : Runnable {
         private val view: WeakReference<ZTipView> = WeakReference(view)
         override fun run() {
@@ -254,13 +264,52 @@ class ZTipView @JvmOverloads constructor(
     }
 
     fun dismiss(timeout: Boolean = false) {
-        if (_location == Location.AutoToast) {
-            --toastCount
-        }
         overlayFrame(contentView)?.detach(this)
         (parent as? ViewGroup)?.removeView(this)
         _listener?.tipViewDismissed(this, timeout)
     }
+
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        if (_location == Location.AutoToast) {
+            --toastCount
+        }
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        Log.d(TAG, "onMeasure: " + MeasureSpec.toString(widthMeasureSpec) + " " + MeasureSpec.toString(heightMeasureSpec))
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        var width = MeasureSpec.getSize(widthMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        var height = MeasureSpec.getSize(heightMeasureSpec)
+        var mWidth = maxWidth
+        if (mWidth <= 0) {
+            mWidth += rootView.width
+        }
+        if (_location != Location.ManualLayout && mWidth in 1 until width) {
+            width = mWidth
+        }
+        if (_location.ordinal < Location.BottomRight.ordinal && heightMode != MeasureSpec.UNSPECIFIED)
+            height -= arrowSize
+        super.onMeasure(MeasureSpec.makeMeasureSpec(width, widthMode), MeasureSpec.makeMeasureSpec(height, heightMode))
+        if (_location.ordinal < Location.BottomRight.ordinal)
+            setMeasuredDimension(measuredWidth, measuredHeight + arrowSize)
+        Log.d(TAG, "onMeasure: $measuredWidth $measuredHeight")
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        var tt = t
+        var bb = b
+        if (_location.ordinal <= Location.TopRight.ordinal)
+            bb -= arrowSize
+        else if (_location.ordinal <= Location.BottomRight.ordinal)
+            tt += arrowSize
+        super.onLayout(changed, l, t, r, bb)
+        layoutBackground()
+    }
+
+    /* private */
 
     companion object {
 
@@ -313,40 +362,6 @@ class ZTipView @JvmOverloads constructor(
             return frame
         }
     }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        Log.d(TAG, "onMeasure: " + MeasureSpec.toString(widthMeasureSpec) + " " + MeasureSpec.toString(heightMeasureSpec))
-        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
-        var width = MeasureSpec.getSize(widthMeasureSpec)
-        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
-        var height = MeasureSpec.getSize(heightMeasureSpec)
-        var mWidth = maxWidth
-        if (mWidth <= 0) {
-            mWidth += rootView.width
-        }
-        if (_location != Location.ManualLayout && mWidth in 1 until width) {
-            width = mWidth
-        }
-        if (_location.ordinal < Location.BottomRight.ordinal && heightMode != MeasureSpec.UNSPECIFIED)
-            height -= arrowSize
-        super.onMeasure(MeasureSpec.makeMeasureSpec(width, widthMode), MeasureSpec.makeMeasureSpec(height, heightMode))
-        if (_location.ordinal < Location.BottomRight.ordinal)
-            setMeasuredDimension(measuredWidth, measuredHeight + arrowSize)
-        Log.d(TAG, "onMeasure: $measuredWidth $measuredHeight")
-    }
-
-    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        var tt = t
-        var bb = b
-        if (_location.ordinal <= Location.TopRight.ordinal)
-            bb -= arrowSize
-        else if (_location.ordinal <= Location.BottomRight.ordinal)
-            tt += arrowSize
-        super.onLayout(changed, l, t, r, bb)
-        layoutBackground()
-    }
-
-    /* private */
 
     private fun syncButton(button: ZButton, content: Int) {
         if (content == 0) {
@@ -410,47 +425,46 @@ class ZTipView @JvmOverloads constructor(
 
     private fun calcLocation(target: View, size: Size): Point {
         val location = this.location!!
+        val loc = intArrayOf(0, 0)
         if (location == Location.ManualLayout) {
-            val loc = intArrayOf(0, 0)
             target.getLocationInWindow(loc)
             _location = location
             return Point(loc[0], loc[1])
         }
-        val wbounds = Rect()
-        target.rootView.getLocalVisibleRect(wbounds)
+        val rootView = target.rootView
+        rootView.getLocationInWindow(loc)
+        val wBounds = Rect(loc[0], loc[1], rootView.width, rootView.height)
         // for toast location
         if (location == Location.AutoToast) {
             if (toastCount <= 0) {
-                toastY = wbounds.bottom - wbounds.width() / 8
-            } else {
-                toastY -= size.height + 20
+                toastY = wBounds.bottom
             }
+            toastY -= size.height + 20
             _location = location
-            return Point(wbounds.centerX() - size.width / 2, toastY - size.height / 2)
+            return Point(wBounds.centerX() - size.width / 2, toastY)
         }
         // for arrow locations
         val frame = Rect(0, 0, size.width, size.height)
-        val loc = intArrayOf(0, 0)
         target.getLocationInWindow(loc)
-        val tbounds = Rect(loc[0], loc[1], loc[0] + target.width, loc[1] + target.height)
+        val tBounds = Rect(loc[0], loc[1], loc[0] + target.width, loc[1] + target.height)
         val checkX: (Int) -> Int = { x ->
             when (x) {
                 0 -> { // Left
-                    frame.right = tbounds.centerX() + arrowOffset
+                    frame.right = tBounds.centerX() + arrowOffset
                     frame.left = frame.right - size.width
                 }
                 1 -> {
-                    frame.left = tbounds.centerX() - frame.width() / 2
+                    frame.left = tBounds.centerX() - frame.width() / 2
                     frame.right = frame.left + size.width
                 }
                 2 -> {
-                    frame.left = tbounds.centerX() - arrowOffset
+                    frame.left = tBounds.centerX() - arrowOffset
                     frame.right = frame.left + size.width
                 }
             }
-            if ((frame.left >= wbounds.left && frame.right <= wbounds.right) || (frame.left < wbounds.left && frame.right > wbounds.right)) {
+            if ((frame.left >= wBounds.left && frame.right <= wBounds.right) || (frame.left < wBounds.left && frame.right > wBounds.right)) {
                 0
-            } else if (frame.left < wbounds.left) {
+            } else if (frame.left < wBounds.left) {
                 1
             } else {
                 -1
@@ -459,13 +473,13 @@ class ZTipView @JvmOverloads constructor(
 
         val checkY: (Boolean) -> Boolean = { y ->
             if (y) {
-                frame.top = tbounds.bottom
+                frame.top = tBounds.bottom
                 frame.bottom = frame.top + size.height
             } else {
-                frame.bottom = tbounds.top
+                frame.bottom = tBounds.top
                 frame.top = frame.bottom - size.height
             }
-            (frame.top >= wbounds.top && frame.bottom <= wbounds.bottom) || (frame.top < wbounds.top && frame.bottom > wbounds.bottom)
+            (frame.top >= wBounds.top && frame.bottom <= wBounds.bottom) || (frame.top < wBounds.top && frame.bottom > wBounds.bottom)
         }
 
         var x = location.ordinal % 3
