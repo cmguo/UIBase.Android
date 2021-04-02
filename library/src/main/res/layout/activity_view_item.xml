@@ -9,7 +9,7 @@
             type="int" />
     </data>
 
-    <com.xhb.uibase.widget.XHBButton
+    <com.xhb.uibase.widget.XHBActionButton
         android:layout_width="56dp"
         android:layout_height="wrap_content"
         app:buttonAppearance="@style/XHBButton.Activity"

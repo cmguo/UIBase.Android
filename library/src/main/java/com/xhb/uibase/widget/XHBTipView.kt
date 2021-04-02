@@ -15,6 +15,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.Size
 import android.util.TypedValue
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -198,7 +200,7 @@ class XHBTipView @JvmOverloads constructor(
         this._target = target
         this._listener = listener
         if (listener != null) {
-            val onClick: (View) -> Unit = {view ->
+            val onClick: (View) -> Unit = { view ->
                 listener.tipViewButtonClicked(this, view.id)
             }
             _leftButton.setOnClickListener(onClick)
@@ -347,7 +349,7 @@ class XHBTipView @JvmOverloads constructor(
             }
 
             @SuppressLint("ClickableViewAccessibility")
-            override fun onTouchEvent(event: MotionEvent?): Boolean {
+            override fun onTouchEvent(event: _root_ide_package_.android.view.MotionEvent?): Boolean {
                 val listCopy = ArrayList(list)
                 for (v in listCopy)
                     v.dismiss()

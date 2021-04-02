@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.ShapeDrawables
 
-class XHBButton @JvmOverloads constructor(
+open class XHBButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatButton(context, attrs)
 {
@@ -67,7 +67,7 @@ class XHBButton @JvmOverloads constructor(
             syncContent()
         }
 
-    var icon: Int = 0
+    open var icon: Int = 0
         set(value) {
             if (field == value)
                 return
@@ -87,6 +87,13 @@ class XHBButton @JvmOverloads constructor(
             field = value
             if (_inited && !loading)
                 syncCompoundDrawable()
+        }
+
+    var iconDrawable: Drawable?
+        get() = _icon
+        set(value) {
+            _icon = value
+            syncIcon()
         }
 
     var loadingDrawable: Drawable? = null
@@ -222,9 +229,9 @@ class XHBButton @JvmOverloads constructor(
         val size = a.getInt(R.styleable.XHBButton_buttonSize, -1)
         if (size >= 0 && size != buttonSize.ordinal)
             buttonSize = ButtonSize.values()[size]
+        content = a.getResourceId(R.styleable.XHBButton_content, 0)
         buttonAppearance = a.getResourceId(R.styleable.XHBButton_buttonAppearance, buttonAppearance)
         icon = a.getResourceId(R.styleable.XHBButton_icon, 0)
-        content = a.getResourceId(R.styleable.XHBButton_content, 0)
         loadingDrawable = a.getDrawable(R.styleable.XHBButton_loadingDrawable)
         loadingText = a.getText(R.styleable.XHBButton_loadingText)
         iconAtRight = a.getBoolean(R.styleable.XHBButton_iconAtRight, iconAtRight)
