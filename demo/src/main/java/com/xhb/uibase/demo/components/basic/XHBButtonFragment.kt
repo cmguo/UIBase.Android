@@ -127,7 +127,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
     }
 
     private fun updateButtons() {
-        binding!!.buttonList.adapter!!.notifyDataSetChanged()
+        binding.buttonList.adapter!!.notifyDataSetChanged()
     }
 
     companion object {

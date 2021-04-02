@@ -1,5 +1,6 @@
 package com.xhb.uibase.demo.components.complex
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.Bindable
@@ -76,18 +77,22 @@ class XHBTimePickerViewFragment : ComponentFragment<XhbTimePickerViewFragmentBin
         private const val TAG = "XHBPickerViewFragment"
     }
 
+    override fun backgroudColor(): Int {
+        return Color.parseColor("#EDF4FF")
+    }
+
     var buttonClick = View.OnClickListener {
         val panel = XHBPanel(requireContext())
         panel.titleBar = R.style.title_bar_text
         panel.bottomButton = R.string.cancel
         val picker = LayoutInflater.from(requireContext()).inflate(R.layout.xhb_time_picker_view, panel, false) as XHBTimePickerView
-        picker.centerLabel = styles!!.centerLabel
-        picker.lunar = styles!!.lunar
-        picker.itemsVisibleCount = styles!!.itemsVisibleCount
-        picker.cyclic = styles!!.cyclic
-        picker.startTime = styles!!.startTime
-        picker.endTime = styles!!.endTime
-        picker.selectTime = styles!!.selectTime
+        picker.centerLabel = styles.centerLabel
+        picker.lunar = styles.lunar
+        picker.itemsVisibleCount = styles.itemsVisibleCount
+        picker.cyclic = styles.cyclic
+        picker.startTime = styles.startTime
+        picker.endTime = styles.endTime
+        picker.selectTime = styles.selectTime
         panel.addView(picker)
         panel.popUp(parentFragmentManager)
     }

@@ -1,8 +1,5 @@
 package com.xhb.uibase.demo.styles;
 
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
 import androidx.databinding.ViewDataBinding;
 import androidx.databinding.library.baseAdapters.BR;
@@ -10,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.ComponentFragment;
-import com.xhb.uibase.demo.core.SkinManager;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.databinding.Styles2FragmentBinding;
@@ -20,14 +16,13 @@ import com.xhb.uibase.view.list.UnitTypeItemBinding;
 import java.util.Map;
 
 import skin.support.observe.SkinObservable;
-import skin.support.observe.SkinObserver;
 
 public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, StylesFragment.Model, StylesFragment.Styles> {
 
     private static final String TAG = "StylesFragment";
 
     public static class Model extends ViewModel {
-        private Map<String, Integer> styles;
+        private final Map<String, Integer> styles;
 
         public Model(StylesFragment fragment) {
             if (fragment.getComponent().id() == R.id.component_buttons)
@@ -57,7 +52,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         @Bindable
         public boolean disabled = false;
 
-        private StylesFragment fragment_;
+        private final StylesFragment fragment_;
 
         public int itemBindingId() {
             if (fragment_.getComponent().id() == R.id.component_buttons)

@@ -92,7 +92,6 @@ class XHBTextAreaFragment : ComponentFragment<XhbTextAreaFragmentBinding?, XHBTe
             }
         }
         float_edit_text_error.setErrorMessage("出错了")
-        "".replace(" ","a")
     }
 
     companion object {

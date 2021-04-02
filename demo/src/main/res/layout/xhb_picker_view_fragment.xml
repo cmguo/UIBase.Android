@@ -52,8 +52,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="25dp"
             android:paddingLeft="50dp"
-            android:orientation="horizontal"
-            android:background="@color/bluegrey_300">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="100dp"
@@ -75,8 +74,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="50dp"
             android:paddingBottom="25dp"
-            android:orientation="horizontal"
-            android:background="@color/bluegrey_300">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="100dp"

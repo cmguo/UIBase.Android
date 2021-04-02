@@ -95,9 +95,9 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        addBadge(inflater, binding!!.textview)
-        addBadge(inflater, binding!!.imageview)
-        addBadge(inflater, binding!!.button)
+        addBadge(inflater, binding.textview)
+        addBadge(inflater, binding.imageview)
+        addBadge(inflater, binding.button)
         return view
     }
 
@@ -111,7 +111,7 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
 
     fun addBadge(inflater: LayoutInflater, target: View) {
         val binding = XhbBadgeViewItemBinding.inflate(inflater);
-        binding.styles = styles!!
+        binding.styles = styles
         (binding.root as XHBBadgeView).bindTarget(target)
     }
 

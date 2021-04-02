@@ -52,8 +52,8 @@ class XHBPickerViewFragment : ComponentFragment<XhbPickerViewFragmentBinding?, X
         panel.titleBar = R.style.title_bar_text
         panel.bottomButton = R.string.cancel
         val picker = LayoutInflater.from(requireContext()).inflate(R.layout.xhb_picker_view, panel, false) as XHBPickerView
-        picker.singleSelection = styles!!.singleSelection
-        picker.selections = model!!.selections
+        picker.singleSelection = styles.singleSelection
+        picker.selections = model.selections
         panel.addView(picker)
         panel.popUp(parentFragmentManager)
     }

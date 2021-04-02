@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.ustc.base.util.reflect.ClassWrapper;
 import com.ustc.base.util.reflect.ObjectWrapper;
+import com.xhb.uibase.demo.view.GridDrawable;
 
 import skin.support.observe.SkinObservable;
 import skin.support.observe.SkinObserver;
@@ -57,6 +58,12 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((GridDrawable) ((View) getView().getParent()).getBackground()).setBackgroundColor(backgroudColor());
+    }
+
+    @Override
     public void onDestroy() {
         SkinManager.removeObserver(this);
         super.onDestroy();
@@ -85,6 +92,8 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
     protected Class<Styles> getStyleType() {
         return Generic.getParamType(getClass(), ComponentFragment.class, 2);
     }
+
+    protected int backgroudColor() { return 0; }
 
     protected DataBinding createDataBinding(@NonNull LayoutInflater inflater) {
         Class<DataBinding> clzB = getDataBindingType();

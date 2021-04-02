@@ -1,5 +1,6 @@
 package com.xhb.uibase.demo.view.main;
 
+import android.text.InputType;
 import android.util.Log;
 
 import androidx.databinding.BaseObservable;
@@ -25,7 +26,8 @@ public class StylesViewModel extends ViewModel {
 
         ViewStyles styles;
         public ComponentStyle style;
-        public int itemLayout = R.layout.style_value_list_item;
+        public int itemLayout = R.layout.style_value_list_item; // for list values
+        public int inputType = 0; // for text values
         private String value;
 
         @Bindable(value = "value")
@@ -72,7 +74,7 @@ public class StylesViewModel extends ViewModel {
 
     public MutableLiveData<List<StyleValue>> styleList = new MutableLiveData<>();
 
-    public void bindComponent(ComponentFragment fragment) {
+    public void bindComponent(ComponentFragment<?, ?, ?> fragment) {
         if (fragment == null) {
             styleList.postValue(new ArrayList<>());
             return;
@@ -86,6 +88,8 @@ public class StylesViewModel extends ViewModel {
             sv.styles = styles;
             sv.style = cs;
             sv.value = cs.get(styles);
+            sv.inputType = Number.class.isAssignableFrom(cs.getValueType()) || cs.getValueType().isPrimitive()
+                ? InputType.TYPE_CLASS_NUMBER : InputType.TYPE_CLASS_TEXT;
             list.add(sv);
         }
         styleList.postValue(list);

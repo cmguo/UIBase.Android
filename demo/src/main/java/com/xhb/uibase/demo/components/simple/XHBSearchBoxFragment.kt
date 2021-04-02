@@ -64,6 +64,6 @@ class XHBSearchBoxFragment : ComponentFragment<XhbSearchBoxFragmentBinding?, XHB
     }
 
     override fun searchBoxTextChanged(bar: XHBSearchBox, text: String) {
-        model?.filter(text)
+        model.filter(text)
     }
 }

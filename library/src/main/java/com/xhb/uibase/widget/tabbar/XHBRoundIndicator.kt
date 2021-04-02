@@ -55,6 +55,9 @@ class XHBRoundIndicator @JvmOverloads constructor(
     var splitterColor = 0
     
     init {
+        // TODO: fix conflict with padding
+        // setLayerType(LAYER_TYPE_SOFTWARE, null)
+
         val style = if (defStyleAttr == 0) R.attr.roundIndicatorStyle else defStyleAttr
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBRoundIndicator, style, 0)
         mode = a.getInt(R.styleable.XHBRoundIndicator_widthMode, mode)

@@ -1,5 +1,6 @@
 package com.xhb.uibase.demo.components.simple
 
+import android.graphics.Color
 import androidx.databinding.Bindable
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
@@ -68,6 +69,10 @@ class XHBAppTitleBarFragment : ComponentFragment<XhbAppTitleBarFragmentBinding?,
 
     companion object {
         private const val TAG = "XHBAppTitleBarFragment"
+    }
+
+    override fun backgroudColor(): Int {
+        return Color.parseColor("#EDF4FF")
     }
 
     override fun titleBarButtonClicked(bar: XHBAppTitleBar, btnId: Int) {
