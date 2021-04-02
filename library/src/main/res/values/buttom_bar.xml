@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Button Style -->
+
+    <style name="XHBButton.Bottom">
+        <item name="textColor">@color/bluegrey_700</item>
+        <item name="height">50dp</item>
+        <item name="borderRadius">0dp</item>
+        <item name="paddingX">0dp</item>
+        <item name="textSize">10sp</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+</resources>

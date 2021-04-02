@@ -20,18 +20,18 @@ class XHBButton @JvmOverloads constructor(
 ) : AppCompatButton(context, attrs)
 {
     enum class ButtonType(@StyleRes val resId: Int) {
-        Primitive(R.style.XHBButton_Primitive),
-        Secondary(R.style.XHBButton_Secondary),
-        Tertiary(R.style.XHBButton_Tertiary),
-        Danger(R.style.XHBButton_Danger),
-        Text(R.style.XHBButton_Text)
+        Primitive(R.style.XHBButton_Appearance_Primitive),
+        Secondary(R.style.XHBButton_Appearance_Secondary),
+        Tertiary(R.style.XHBButton_Appearance_Tertiary),
+        Danger(R.style.XHBButton_Appearance_Danger),
+        Text(R.style.XHBButton_Appearance_Text)
     }
 
     enum class ButtonSize(@StyleRes val resId: Int) {
-        Large(R.style.XHBButton_Large),
-        Middle(R.style.XHBButton_Middle),
-        Small(R.style.XHBButton_Small),
-        Thin(R.style.XHBButton_Thin)
+        Large(R.style.XHBButton_Appearance_Large),
+        Middle(R.style.XHBButton_Appearance_Middle),
+        Small(R.style.XHBButton_Appearance_Small),
+        Thin(R.style.XHBButton_Appearance_Thin)
     }
 
     var buttonType: ButtonType = ButtonType.Primitive
