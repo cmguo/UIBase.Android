@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.ShapeDrawables
 
-class ZButton @JvmOverloads constructor(
+open class ZButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatButton(context, attrs)
 {
@@ -67,7 +67,7 @@ class ZButton @JvmOverloads constructor(
             syncContent()
         }
 
-    var icon: Int = 0
+    open var icon: Int = 0
         set(value) {
             if (field == value)
                 return
@@ -87,6 +87,13 @@ class ZButton @JvmOverloads constructor(
             field = value
             if (_inited && !loading)
                 syncCompoundDrawable()
+        }
+
+    var iconDrawable: Drawable?
+        get() = _icon
+        set(value) {
+            _icon = value
+            syncIcon()
         }
 
     var loadingDrawable: Drawable? = null
@@ -222,9 +229,9 @@ class ZButton @JvmOverloads constructor(
         val size = a.getInt(R.styleable.ZButton_buttonSize, -1)
         if (size >= 0 && size != buttonSize.ordinal)
             buttonSize = ButtonSize.values()[size]
+        content = a.getResourceId(R.styleable.ZButton_content, 0)
         buttonAppearance = a.getResourceId(R.styleable.ZButton_buttonAppearance, buttonAppearance)
         icon = a.getResourceId(R.styleable.ZButton_icon, 0)
-        content = a.getResourceId(R.styleable.ZButton_content, 0)
         loadingDrawable = a.getDrawable(R.styleable.ZButton_loadingDrawable)
         loadingText = a.getText(R.styleable.ZButton_loadingText)
         iconAtRight = a.getBoolean(R.styleable.ZButton_iconAtRight, iconAtRight)
