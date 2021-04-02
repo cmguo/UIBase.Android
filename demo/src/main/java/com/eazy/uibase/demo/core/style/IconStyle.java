@@ -20,7 +20,7 @@ public class IconStyle extends ResourceStyle {
     };
 
     private static String[] resources = new String[] {
-        "drawable/ic_erase", "ic_navi", "ic_weixin",
+        "drawable/ic_erase", "ic_navi", "img_share_weixin",
         "icon_plus", "icon_minus", "icon_more", "icon_left", "icon_exit", "icon_search"};
 
     public IconStyle(Field field) {
