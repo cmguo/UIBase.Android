@@ -11,7 +11,6 @@ import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.annotation.Description
 import com.xhb.uibase.demo.core.style.annotation.Title
 import com.xhb.uibase.demo.databinding.XhbPickerViewFragmentBinding
-import com.xhb.uibase.view.list.Items
 import com.xhb.uibase.widget.XHBPanel
 import com.xhb.uibase.widget.XHBPickerView
 

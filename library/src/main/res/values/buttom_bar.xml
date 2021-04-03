@@ -4,7 +4,7 @@
     <!-- Button Style -->
 
     <style name="XHBButton.Bottom">
-        <item name="textColor">@color/bluegrey_700</item>
+        <item name="textColor">?attr/bluegrey_700</item>
         <item name="height">50dp</item>
         <item name="borderRadius">0dp</item>
         <item name="paddingX">0dp</item>

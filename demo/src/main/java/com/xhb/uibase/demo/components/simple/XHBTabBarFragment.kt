@@ -22,8 +22,6 @@ import com.xhb.uibase.demo.databinding.XhbLineIndicatorBinding
 import com.xhb.uibase.demo.databinding.XhbRoundIndicatorBinding
 import com.xhb.uibase.demo.databinding.XhbTabBarFragmentBinding
 import com.xhb.uibase.view.list.UnitTypeItemBinding
-import com.xhb.uibase.widget.XHBDropDown
-import com.xhb.uibase.widget.XHBTipView
 import com.xhb.uibase.widget.tabbar.XHBLineIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 
@@ -38,7 +36,7 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
 
     }
 
-    class Styles(private val fragment: XHBTabBarFragment) : ViewStyles() {
+    class Styles(fragment: XHBTabBarFragment) : ViewStyles() {
 
         companion object {
             // can't share
@@ -46,7 +44,7 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
                 val binding = XhbLineIndicatorBinding.inflate(LayoutInflater.from(fragment.context))
                 binding.styles = styles
                 if (longLine)
-                    binding.lineIndicator.longLineHeight = DimemDpStyle.dp2px(1f);
+                    binding.lineIndicator.longLineHeight = DimemDpStyle.dp2px(1f)
                 return binding.lineIndicator
             }
             fun createRoundIndicator(fragment: XHBTabBarFragment, styles: Styles): IPagerIndicator {
@@ -123,7 +121,7 @@ class XHBTabBarFragment : ComponentFragment<XhbTabBarFragmentBinding?, XHBTabBar
 
     class PageFragment : Fragment() {
 
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
             val view = inflater.inflate(R.layout.tab_title, container, false)
             (view as TextView).text = arguments?.getString("data")
             return view

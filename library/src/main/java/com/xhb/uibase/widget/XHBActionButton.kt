@@ -9,7 +9,7 @@ import com.xhb.uibase.R
 import com.xhb.uibase.resources.RoundWrapDrawable
 
 class XHBActionButton @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null
 ) : XHBButton(context, attrs)
 {
     override var icon = 0

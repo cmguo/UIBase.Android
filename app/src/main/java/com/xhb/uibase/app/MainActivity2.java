@@ -36,7 +36,6 @@ import com.xhb.uibase.demo.view.main.StylesFragment;
 import com.xhb.uibase.demo.core.Component;
 import com.xhb.uibase.demo.core.ComponentFragment;
 import com.xhb.uibase.demo.core.Components;
-import com.xhb.uibase.demo.core.SkinManager;
 
 import java.util.List;
 import java.util.Map;
@@ -133,7 +132,8 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
             return true;
         } else if (item.getItemId() == R.id.action_skin_dark) {
             item.setChecked(!item.isChecked());
-            SkinManager.switchMode(item.isChecked());
+            getDelegate().setLocalNightMode(item.isChecked()
+                ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -214,11 +214,6 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
             ((InformationFragment) informationFragment).bindComponent(null);
             ((StylesFragment) stylesFragment).bindComponent(null);
         }
-    }
-
-    @Override
-    public AppCompatDelegate getDelegate() {
-        return SkinManager.getDelegate(this);
     }
 
 }

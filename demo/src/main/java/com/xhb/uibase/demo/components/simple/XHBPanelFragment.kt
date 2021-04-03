@@ -3,6 +3,7 @@ package com.xhb.uibase.demo.components.simple
 import android.graphics.Color
 import android.view.View
 import androidx.databinding.Bindable
+import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
@@ -51,8 +52,8 @@ class XHBPanelFragment : ComponentFragment<XhbPanelFragmentBinding?, XHBPanelFra
         private const val TAG = "XHBPanelFragment"
     }
 
-    override fun backgroudColor(): Int {
-        return Color.parseColor("#EDF4FF")
+    override fun backgroundColor(): Int {
+        return R.color.blue_100
     }
 
     var buttonClick = View.OnClickListener {

@@ -60,8 +60,8 @@ class XHBActionSheetFragment : ComponentFragment<XhbActionSheetFragmentBinding?,
         return view
     }
 
-    override fun backgroudColor(): Int {
-        return Color.parseColor("#EDF4FF")
+    override fun backgroundColor(): Int {
+        return R.color.blue_100
     }
 
     private var lp : ViewGroup.LayoutParams? = null

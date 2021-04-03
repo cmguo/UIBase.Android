@@ -5,22 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.ViewDataBinding;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.fragment.app.Fragment;
 
 import com.ustc.base.util.reflect.ClassWrapper;
 import com.ustc.base.util.reflect.ObjectWrapper;
+import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.view.GridDrawable;
-
-import skin.support.observe.SkinObservable;
-import skin.support.observe.SkinObserver;
 
 public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         Model extends ViewModel, Styles extends ViewStyles
-        > extends Fragment implements SkinObserver {
+        > extends Fragment {
 
     Component component_;
     DataBinding binding_;
@@ -38,10 +38,9 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Integer componentId = getArguments().getInt("componentId");
-        if (componentId != null)
-            component_ = Components.getComponent(componentId);
-        SkinManager.addObserver(this);
+        assert getArguments() != null;
+        int componentId = getArguments().getInt("componentId", 0);
+        component_ = Components.getComponent(componentId);
     }
 
     @Nullable
@@ -60,12 +59,12 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
     @Override
     public void onResume() {
         super.onResume();
-        ((GridDrawable) ((View) getView().getParent()).getBackground()).setBackgroundColor(backgroudColor());
+        @ColorRes int color = backgroundColor();
+        ((GridDrawable) ((View) requireView().getParent()).getBackground()).setBackgroundColor(ContextCompat.getColor(requireContext(), color));
     }
 
     @Override
     public void onDestroy() {
-        SkinManager.removeObserver(this);
         super.onDestroy();
     }
 
@@ -93,7 +92,7 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         return Generic.getParamType(getClass(), ComponentFragment.class, 2);
     }
 
-    protected int backgroudColor() { return 0; }
+    protected @ColorRes int backgroundColor() { return R.color.bluegrey_00; }
 
     protected DataBinding createDataBinding(@NonNull LayoutInflater inflater) {
         Class<DataBinding> clzB = getDataBindingType();
@@ -124,7 +123,4 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         }
     }
 
-    @Override
-    public void updateSkin(SkinObservable observable, Object o) {
-    }
 }

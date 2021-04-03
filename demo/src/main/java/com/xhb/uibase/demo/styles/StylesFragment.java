@@ -15,8 +15,6 @@ import com.xhb.uibase.view.list.UnitTypeItemBinding;
 
 import java.util.Map;
 
-import skin.support.observe.SkinObservable;
-
 public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, StylesFragment.Model, StylesFragment.Styles> {
 
     private static final String TAG = "StylesFragment";
@@ -88,8 +86,4 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         }
     }
 
-    @Override
-    public void updateSkin(SkinObservable observable, Object o) {
-        getBinding().buttonsList.getAdapter().notifyItemRangeChanged(0, getModel().styles.size());
-    }
 }
