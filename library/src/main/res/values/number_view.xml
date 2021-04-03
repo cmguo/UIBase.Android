@@ -33,7 +33,7 @@
         <item name="buttonBackgroundColor">@color/number_view_button_background_color</item>
         <item name="buttonForegroundColor">@color/number_view_button_foreground_color</item>
         <item name="android:textSize">@dimen/number_view_text_size</item>
-        <item name="android:textColor">@dimen/number_view_text_size</item>
+        <item name="android:textColor">@color/number_view_text_color</item>
     </style>
 
     <!-- background drawable -->

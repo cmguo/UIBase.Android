@@ -1,6 +1,8 @@
 package com.xhb.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatCheckBox
@@ -27,12 +29,6 @@ class XHBCheckBox @JvmOverloads constructor(
     private var _textPadding : Int? = null
     private var onCheckedStateChangeListener: OnCheckedStateChangeListener? = null
 
-    init {
-        val background = RoundDrawable(context, R.style.XHBCheckBox_Background)
-        val foreground = ContextCompat.getDrawable(context, R.drawable.check_box_foreground)
-        buttonDrawable = LayerDrawable(arrayOf(background, foreground))
-    }
-
     var checkedState: CheckedState
         get() {
             return when {
@@ -47,15 +43,19 @@ class XHBCheckBox @JvmOverloads constructor(
             refreshDrawableState()
         }
 
+    init {
+        buttonDrawable = createButtonDrawable(context)
+    }
+
+    fun setOnCheckedStateChangeListener(listener: OnCheckedStateChangeListener?) {
+        onCheckedStateChangeListener = listener
+    }
+
     override fun onFinishInflate() {
         super.onFinishInflate()
         _textPadding = paddingLeft
         if (text.isNullOrEmpty())
             setPadding(0, paddingTop, paddingRight, paddingBottom)
-    }
-
-    fun setOnCheckedStateChangeListener(listener: OnCheckedStateChangeListener?) {
-        onCheckedStateChangeListener = listener
     }
 
     override fun setText(text: CharSequence?, type: BufferType?) {
@@ -77,8 +77,19 @@ class XHBCheckBox @JvmOverloads constructor(
         return drawableState
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        buttonDrawable = createButtonDrawable(context)
+    }
+
     companion object {
         private const val TAG = "XHBCheckBox"
+
+        private fun createButtonDrawable(context: Context) : Drawable {
+            val background = RoundDrawable(context, R.style.XHBCheckBox_Background)
+            val foreground = ContextCompat.getDrawable(context, R.drawable.check_box_foreground)
+            return LayerDrawable(arrayOf(background, foreground))
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package com.xhb.uibase.widget
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.content.res.TypedArray
 import android.graphics.PorterDuff
 import android.graphics.drawable.*
@@ -54,6 +55,8 @@ open class XHBButton @JvmOverloads constructor(
 
     var buttonAppearance: Int = 0
         set(value) {
+            if (field == value)
+                return
             field = value
             if (_inited)
                 syncTypeSize()
@@ -170,6 +173,11 @@ open class XHBButton @JvmOverloads constructor(
         // restore padding
         val padding = _sizeStyles.padding
         setPadding(padding, 0, padding, 0)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        syncType()
+        super.onConfigurationChanged(newConfig)
     }
 
     /* private */
@@ -292,7 +300,7 @@ open class XHBButton @JvmOverloads constructor(
         }
     }
 
-    private fun syncIcon(loading: Boolean = false) {
+     fun syncIcon(loading: Boolean = false) {
         val icon = if (loading) loadingDrawable else _icon
         if (icon != null) {
             if (icon is VectorDrawable) {
