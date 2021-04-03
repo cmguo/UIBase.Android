@@ -36,8 +36,9 @@ class RoundWrapDrawable(private val drawable: Drawable, private val size: Int = 
         return drawable.intrinsicHeight.coerceAtLeast(size)
     }
 
-    override fun setBounds(bounds: Rect) {
-        super.setBounds(bounds)
+    override fun setBounds(left: Int, top: Int, right: Int, bottom: Int) {
+        super.setBounds(left, top, right, bottom)
         borderRadius = bounds.width() / 2f
     }
+
 }

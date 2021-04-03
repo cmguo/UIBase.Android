@@ -1,5 +1,6 @@
 package com.eazy.uibase.demo.core;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,13 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
     @Override
     public void onResume() {
         super.onResume();
+        @ColorRes int color = backgroundColor();
+        ((GridDrawable) ((View) requireView().getParent()).getBackground()).setBackgroundColor(ContextCompat.getColor(requireContext(), color));
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
         @ColorRes int color = backgroundColor();
         ((GridDrawable) ((View) requireView().getParent()).getBackground()).setBackgroundColor(ContextCompat.getColor(requireContext(), color));
     }

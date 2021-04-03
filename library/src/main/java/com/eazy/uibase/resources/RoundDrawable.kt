@@ -81,7 +81,6 @@ open class RoundDrawable : Drawable {
     }
 
     override fun setColorFilter(colorFilter: ColorFilter?) {
-        TODO("Not yet implemented")
     }
 
     override fun getOpacity(): Int {

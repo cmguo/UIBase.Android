@@ -1,6 +1,7 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Rect
 import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
@@ -25,4 +26,11 @@ class ZActionButton @JvmOverloads constructor(
                 iconDrawable = drawable
             }
         }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        val icon1 = icon
+        icon = 0
+        icon = icon1
+    }
 }
