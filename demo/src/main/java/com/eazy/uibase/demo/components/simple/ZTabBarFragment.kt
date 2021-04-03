@@ -22,8 +22,6 @@ import com.eazy.uibase.demo.databinding.LineIndicatorBinding
 import com.eazy.uibase.demo.databinding.RoundIndicatorBinding
 import com.eazy.uibase.demo.databinding.TabBarFragmentBinding
 import com.eazy.uibase.view.list.UnitTypeItemBinding
-import com.eazy.uibase.widget.ZDropDown
-import com.eazy.uibase.widget.ZTipView
 import com.eazy.uibase.widget.tabbar.ZLineIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 
@@ -38,7 +36,7 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
 
     }
 
-    class Styles(private val fragment: ZTabBarFragment) : ViewStyles() {
+    class Styles(fragment: ZTabBarFragment) : ViewStyles() {
 
         companion object {
             // can't share
@@ -46,7 +44,7 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
                 val binding = LineIndicatorBinding.inflate(LayoutInflater.from(fragment.context))
                 binding.styles = styles
                 if (longLine)
-                    binding.lineIndicator.longLineHeight = DimemDpStyle.dp2px(1f);
+                    binding.lineIndicator.longLineHeight = DimemDpStyle.dp2px(1f)
                 return binding.lineIndicator
             }
             fun createRoundIndicator(fragment: ZTabBarFragment, styles: Styles): IPagerIndicator {
@@ -123,7 +121,7 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
 
     class PageFragment : Fragment() {
 
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
             val view = inflater.inflate(R.layout.tab_title, container, false)
             (view as TextView).text = arguments?.getString("data")
             return view

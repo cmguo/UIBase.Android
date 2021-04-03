@@ -1,6 +1,5 @@
 package com.eazy.uibase.demo.components.simple
 
-import android.view.View
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.core.Colors

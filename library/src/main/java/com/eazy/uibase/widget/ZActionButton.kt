@@ -9,7 +9,7 @@ import com.eazy.uibase.R
 import com.eazy.uibase.resources.RoundWrapDrawable
 
 class ZActionButton @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null
 ) : ZButton(context, attrs)
 {
     override var icon = 0

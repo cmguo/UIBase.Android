@@ -2,6 +2,7 @@ package com.eazy.uibase.demo.view
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import androidx.annotation.ColorRes
 
 class GridDrawable : Drawable() {
 

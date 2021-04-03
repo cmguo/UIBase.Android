@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Z.Light" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Z.Base" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="buttonStyle">@style/ZButton</item>
         <item name="checkboxStyle">@style/ZCheckBox</item>
         <item name="radioButtonStyle">@style/ZRadioButton</item>

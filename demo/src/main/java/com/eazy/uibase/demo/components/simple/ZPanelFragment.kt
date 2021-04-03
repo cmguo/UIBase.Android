@@ -3,6 +3,7 @@ package com.eazy.uibase.demo.components.simple
 import android.graphics.Color
 import android.view.View
 import androidx.databinding.Bindable
+import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
@@ -51,8 +52,8 @@ class ZPanelFragment : ComponentFragment<PanelFragmentBinding?, ZPanelFragment.M
         private const val TAG = "ZPanelFragment"
     }
 
-    override fun backgroudColor(): Int {
-        return Color.parseColor("#EDF4FF")
+    override fun backgroundColor(): Int {
+        return R.color.blue_100
     }
 
     var buttonClick = View.OnClickListener {

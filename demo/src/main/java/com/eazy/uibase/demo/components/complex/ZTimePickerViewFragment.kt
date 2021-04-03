@@ -77,8 +77,8 @@ class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?
         private const val TAG = "ZPickerViewFragment"
     }
 
-    override fun backgroudColor(): Int {
-        return Color.parseColor("#EDF4FF")
+    override fun backgroundColor(): Int {
+        return R.color.blue_100
     }
 
     var buttonClick = View.OnClickListener {

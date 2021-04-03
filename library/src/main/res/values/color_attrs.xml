@@ -1,0 +1,42 @@
+<resources>
+
+    <attr name="white_card" format="color"/>
+    <attr name="bluegrey_00" format="color"/>
+    <attr name="bluegrey_05" format="color"/>
+    <attr name="bluegrey_50" format="color"/>
+    <attr name="bluegrey_100" format="color"/>
+    <attr name="bluegrey_200" format="color"/>
+    <attr name="bluegrey_300" format="color"/>
+    <attr name="bluegrey_400" format="color"/>
+    <attr name="bluegrey_500" format="color"/>
+    <attr name="bluegrey_600" format="color"/>
+    <attr name="bluegrey_700" format="color"/>
+    <attr name="bluegrey_800" format="color"/>
+    <attr name="bluegrey_900" format="color"/>
+    <attr name="brand_100" format="color"/>
+    <attr name="brand_500" format="color"/>
+    <attr name="brand_600" format="color"/>
+    <attr name="red_100" format="color"/>
+    <attr name="red_500" format="color"/>
+    <attr name="red_600" format="color"/>
+    <attr name="redorange_100" format="color"/>
+    <attr name="redorange_500" format="color"/>
+    <attr name="redorange_600" format="color"/>
+    <attr name="orange_100" format="color"/>
+    <attr name="orange_500" format="color"/>
+    <attr name="orange_600" format="color"/>
+    <attr name="green_100" format="color"/>
+    <attr name="green_500" format="color"/>
+    <attr name="green_600" format="color"/>
+    <attr name="cyan_100" format="color"/>
+    <attr name="cyan_500" format="color"/>
+    <attr name="cyan_600" format="color"/>
+    <attr name="blue_100" format="color"/>
+    <attr name="blue_200" format="color"/>
+    <attr name="blue_500" format="color"/>
+    <attr name="blue_600" format="color"/>
+    <attr name="purple_100" format="color"/>
+    <attr name="purple_500" format="color"/>
+    <attr name="purple_600" format="color"/>
+
+</resources>

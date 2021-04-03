@@ -127,11 +127,11 @@ public class StylesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        DimemDpStyle.init(getContext());
+        DimemDpStyle.init(requireContext());
         mViewModel = new ViewModelProvider(this).get(StylesViewModel.class);
         if (fragment != null)
             mViewModel.bindComponent(fragment);
-        DataBindingUtil.findBinding(getView()).setVariable(BR.model, mViewModel);
+        DataBindingUtil.findBinding(requireView()).setVariable(BR.model, mViewModel);
     }
 
     public void bindComponent(ComponentFragment<?, ?, ?> fragment) {

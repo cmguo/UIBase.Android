@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.eazy.uibase.R
 import com.eazy.uibase.dialog.MaskDialog
@@ -179,7 +180,7 @@ class ZPanel @JvmOverloads constructor(
     private fun syncBackground() {
         val drawable = GradientDrawable()
         drawable.shape = GradientDrawable.RECTANGLE
-        drawable.color = ColorStateList.valueOf(Color.WHITE)
+        drawable.color = ContextCompat.getColorStateList(context, R.color.bluegrey_00)
         drawable.cornerRadii = floatArrayOf(borderRadius, borderRadius, borderRadius, borderRadius, 0f, 0f, 0f, 0f)
         background = drawable
     }

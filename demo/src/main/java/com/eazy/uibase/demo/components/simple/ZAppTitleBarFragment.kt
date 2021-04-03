@@ -1,12 +1,11 @@
 package com.eazy.uibase.demo.components.simple
 
-import android.graphics.Color
 import androidx.databinding.Bindable
+import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.ContentStyle
-import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.AppTitleBarFragmentBinding
 import com.eazy.uibase.widget.ZAppTitleBar
@@ -71,8 +70,8 @@ class ZAppTitleBarFragment : ComponentFragment<AppTitleBarFragmentBinding?, ZApp
         private const val TAG = "ZAppTitleBarFragment"
     }
 
-    override fun backgroudColor(): Int {
-        return Color.parseColor("#EDF4FF")
+    override fun backgroundColor(): Int {
+        return R.color.blue_100
     }
 
     override fun titleBarButtonClicked(bar: ZAppTitleBar, btnId: Int) {

@@ -134,12 +134,10 @@ open class ZButton @JvmOverloads constructor(
     private lateinit var _sizeStyles: SizeStyles
 
     init {
-        if (attrs != null) {
-            val a = context.obtainStyledAttributes(attrs, R.styleable.ZButton,
-                    R.attr.buttonStyle, 0)
-            applyStyle(a)
-            a.recycle()
-        }
+        val style = if (defStyleAttr == 0) R.attr.buttonStyle else defStyleAttr
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZButton, style, 0)
+        applyStyle(a)
+        a.recycle()
         syncTypeSize()
         syncIcon()
         _inited = true

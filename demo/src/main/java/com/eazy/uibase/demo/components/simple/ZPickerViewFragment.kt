@@ -11,7 +11,6 @@ import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.annotation.Description
 import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.PickerViewFragmentBinding
-import com.eazy.uibase.view.list.Items
 import com.eazy.uibase.widget.ZPanel
 import com.eazy.uibase.widget.ZPickerView
 
