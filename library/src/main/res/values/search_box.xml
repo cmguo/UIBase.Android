@@ -22,4 +22,11 @@
         <item name="android:background">@color/xhb_search_box_background_color</item>
     </style>
 
+    <!-- background drawable -->
+
+    <style name="XHBSearchBox.InputBackground">
+        <item name="backgroundColor">@color/xhb_search_box_input_background_color</item>
+        <item name="borderRadius">@dimen/xhb_search_box_input_border_radius</item>
+    </style>
+
 </resources>

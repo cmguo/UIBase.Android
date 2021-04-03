@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundDrawable">
+        <attr name="fillColor" format="color"/>
+        <attr name="borderColor"/>
+        <attr name="borderSize" format="dimension"/>
+        <attr name="borderRadius"/>
+        <attr name="android:width"/>
+        <attr name="android:height"/>
+    </declare-styleable>
+
+    <style name="RoundDrawable">
+    </style>
+
+</resources>

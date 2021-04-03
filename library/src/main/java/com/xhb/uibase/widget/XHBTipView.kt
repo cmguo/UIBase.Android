@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.res.ColorStateList
 import android.graphics.Path
 import android.graphics.Point
 import android.graphics.Rect
-import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.PathShape
@@ -24,7 +24,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import com.xhb.uibase.R
-import com.xhb.uibase.resources.ShapeDrawables
+import com.xhb.uibase.resources.RoundDrawable
 import com.xhb.uibase.view.contentView
 import java.lang.ref.WeakReference
 
@@ -105,14 +105,14 @@ class XHBTipView @JvmOverloads constructor(
     var frameRadius = 0f
         set(value) {
             field = value
-            _frameDrawable.cornerRadius = value
+            _frameDrawable.borderRadius = value
             invalidate()
         }
 
     var frameColor = 0
         set(value) {
             field = value
-            _frameDrawable.setColor(value)
+            _frameDrawable.fillColor = ColorStateList.valueOf(value)
             _arrowDrawable.setTint(value)
             invalidate()
         }
@@ -157,7 +157,7 @@ class XHBTipView @JvmOverloads constructor(
     private var _leftButton: XHBButton
     private var _rightButton: XHBButton
 
-    private val _frameDrawable: GradientDrawable
+    private val _frameDrawable: RoundDrawable
     private val _arrowDrawable: ShapeDrawable
     private val _layerDrawable: LayerDrawable
 
@@ -172,7 +172,7 @@ class XHBTipView @JvmOverloads constructor(
         _textView = findViewById(R.id.textView)
         _rightButton = findViewById(R.id.rightButton)
 
-        _frameDrawable = ShapeDrawables.getDrawable(context, frameConfig)
+        _frameDrawable = RoundDrawable(context, R.style.XHBTipView_Frame)
         _arrowDrawable = ShapeDrawable()
         _layerDrawable = LayerDrawable(arrayOf(_frameDrawable, _arrowDrawable))
 
@@ -316,12 +316,6 @@ class XHBTipView @JvmOverloads constructor(
 
         private var toastCount = 0
         private var toastY = 0
-
-        val frameConfig = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.tip_view_frame_radius, R.color.tip_view_frame_color,
-            0, 0,
-            0, 0
-        )
 
         @SuppressLint("ViewConstructor")
         class OverlayFrame(content: FrameLayout) : FrameLayout(content.context) {

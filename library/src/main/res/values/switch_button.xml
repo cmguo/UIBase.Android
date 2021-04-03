@@ -13,4 +13,21 @@
         <item name="android:layout_height">@dimen/switch_button_height</item>
     </style>
 
+    <!-- track drawable -->
+
+    <style name="XHBSwitchButton.Track">
+        <item name="fillColor">@color/bluegrey300_checked</item>
+        <item name="borderRadius">@dimen/switch_button_radius</item>
+    </style>
+
+    <!-- thumb drawable -->
+
+    <style name="XHBSwitchButton.Thumb">
+        <item name="fillColor">@color/bluegrey_00</item>
+        <item name="borderRadius">@dimen/switch_button_thumb_radius</item>
+        <item name="borderSize">@dimen/switch_button_thumb_padding</item>
+        <item name="android:width">@dimen/switch_button_thumb_size</item>
+        <item name="android:height">@dimen/switch_button_thumb_size</item>
+    </style>
+
 </resources>

@@ -36,4 +36,18 @@
         <item name="android:textColor">@dimen/number_view_text_size</item>
     </style>
 
+    <!-- background drawable -->
+
+    <style name="XHBNumberView.Background">
+        <item name="fillColor">@color/number_view_background_color</item>
+        <item name="borderRadius">@dimen/number_view_radius</item>
+    </style>
+
+    <!-- button background drawable -->
+
+    <style name="XHBNumberView.ButtonBackground">
+        <item name="fillColor">@color/number_view_button_background_color</item>
+        <item name="borderRadius">@dimen/number_view_button_radius</item>
+    </style>
+
 </resources>

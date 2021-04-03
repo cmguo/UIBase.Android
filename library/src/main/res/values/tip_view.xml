@@ -57,4 +57,11 @@
         <item name="dismissDelay">3000</item>
     </style>
 
+    <!-- frame drawable -->
+
+    <style name="XHBTipView.Frame">
+        <item name="fillColor">@color/tip_view_frame_color</item>
+        <item name="borderRadius">@dimen/tip_view_frame_radius</item>
+    </style>
+
 </resources>

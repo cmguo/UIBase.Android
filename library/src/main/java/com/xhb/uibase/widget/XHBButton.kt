@@ -13,7 +13,7 @@ import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.xhb.uibase.R
-import com.xhb.uibase.resources.ShapeDrawables
+import com.xhb.uibase.resources.RoundDrawable
 
 open class XHBButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -205,18 +205,7 @@ open class XHBButton @JvmOverloads constructor(
             // it's stateful, so can't shard
             if (types.backgroundColor == null)
                 return null
-            return createBackgroundDrawable(types, sizes)
-        }
-
-        private fun createBackgroundDrawable(types: TypeStyles, sizes: SizeStyles) : Drawable {
-//            return DrawableBuilder().apply {
-//                rectangle()
-//                solidColorStateList(context.resources.getColorStateList(types.backgroundColor))
-//                cornerRadius(context.resources.getDimensionPixelSize(sizes.radius))
-//            }.build();
-            val config = ShapeDrawables.RawConfig(GradientDrawable.RECTANGLE, sizes.radius, types.backgroundColor,
-                    0, null, 0, 0)
-            return ShapeDrawables.createDrawable(config)
+            return RoundDrawable(types.backgroundColor, sizes.radius)
         }
     }
 
