@@ -1,6 +1,7 @@
 package com.eazy.uibase.resources
 
 import android.graphics.Canvas
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.Size
 import com.eazy.uibase.view.size
@@ -35,4 +36,8 @@ class RoundWrapDrawable(private val drawable: Drawable, private val size: Int = 
         return drawable.intrinsicHeight.coerceAtLeast(size)
     }
 
+    override fun setBounds(bounds: Rect) {
+        super.setBounds(bounds)
+        borderRadius = bounds.width() / 2f
+    }
 }

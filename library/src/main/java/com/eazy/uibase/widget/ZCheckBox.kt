@@ -1,13 +1,12 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
-import com.eazy.uibase.resources.ShapeDrawables
+import com.eazy.uibase.resources.RoundDrawable
 
 class ZCheckBox @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -17,14 +16,6 @@ class ZCheckBox @JvmOverloads constructor(
         NotChecked,
         HalfChecked,
         FullChecked
-    }
-
-    companion object {
-        val backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-                R.dimen.check_box_radius, R.color.bluegrey00_checked_disabled,
-                R.dimen.check_box_border_size, R.color.bluegrey500_checked_disabled,
-                R.dimen.check_box_icon_size, R.dimen.check_box_icon_size
-        )
     }
 
     @FunctionalInterface
@@ -37,7 +28,7 @@ class ZCheckBox @JvmOverloads constructor(
     private var onCheckedStateChangeListener: OnCheckedStateChangeListener? = null
 
     init {
-        val background = ShapeDrawables.getDrawable(context, backgroundDrawable)
+        val background = RoundDrawable(context, R.style.ZCheckBox_Background)
         val foreground = ContextCompat.getDrawable(context, R.drawable.check_box_foreground)
         buttonDrawable = LayerDrawable(arrayOf(background, foreground))
     }
@@ -85,4 +76,9 @@ class ZCheckBox @JvmOverloads constructor(
             mergeDrawableStates(drawableState, intArrayOf(R.attr.state_half_checked))
         return drawableState
     }
+
+    companion object {
+        private const val TAG = "ZCheckBox"
+    }
+
 }

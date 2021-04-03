@@ -13,10 +13,21 @@
     <dimen name="check_box_text_padding">7dp</dimen>
 
     <style name="ZCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/check_box_height</item>
+        <item name="android:maxHeight">@dimen/check_box_height</item>
+        <item name="android:minHeight">@dimen/check_box_height</item>
         <item name="android:paddingLeft">@dimen/check_box_text_padding</item>
         <item name="android:textSize">@dimen/check_box_textSize</item>
+    </style>
+
+    <!-- background drawable -->
+
+    <style name="ZCheckBox.Background">
+        <item name="fillColor">@color/bluegrey00_checked_disabled</item>
+        <item name="borderRadius">@dimen/check_box_radius</item>
+        <item name="borderSize">@dimen/check_box_border_size</item>
+        <item name="borderColor">@color/bluegrey500_checked_disabled</item>
+        <item name="android:width">@dimen/check_box_icon_size</item>
+        <item name="android:height">@dimen/check_box_icon_size</item>
     </style>
 
 </resources>

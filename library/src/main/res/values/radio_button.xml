@@ -3,10 +3,10 @@
 
     <dimen name="radio_button_height">24dp</dimen>
     <dimen name="radio_button_textSize">16sp</dimen>
-    <dimen name="radio_button_icon_size">18dp</dimen>
-    <dimen name="radio_button_radius">9dp</dimen>
+    <dimen name="radio_button_icon_size">20dp</dimen>
+    <dimen name="radio_button_radius">10dp</dimen>
     <dimen name="radio_button_border_size">2dp</dimen>
-    <dimen name="radio_button_border_size2">8dp</dimen>
+    <dimen name="radio_button_border_size2">5dp</dimen>
     <dimen name="radio_button_text_padding">7dp</dimen>
 
     <style name="ZRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
@@ -14,6 +14,27 @@
         <item name="android:layout_height">@dimen/radio_button_height</item>
         <item name="android:paddingLeft">@dimen/radio_button_text_padding</item>
         <item name="android:textSize">@dimen/radio_button_textSize</item>
+    </style>
+
+    <!-- background drawable -->
+
+    <style name="ZRadioButton.Background">
+        <item name="fillColor">@color/bluegrey00_disabled</item>
+        <item name="borderRadius">@dimen/radio_button_radius</item>
+        <item name="borderSize">@dimen/radio_button_border_size</item>
+        <item name="borderColor">@color/bluegrey500_checked_disabled</item>
+        <item name="android:width">@dimen/radio_button_icon_size</item>
+        <item name="android:height">@dimen/radio_button_icon_size</item>
+    </style>
+
+    <!-- foreground drawable -->
+
+    <style name="ZRadioButton.Foreground">
+        <item name="fillColor">@color/transparent_checked_disabled</item>
+        <item name="borderRadius">@dimen/radio_button_radius</item>
+        <item name="borderSize">@dimen/radio_button_border_size2</item>
+        <item name="android:width">@dimen/check_box_icon_size</item>
+        <item name="android:height">@dimen/check_box_icon_size</item>
     </style>
 
 </resources>

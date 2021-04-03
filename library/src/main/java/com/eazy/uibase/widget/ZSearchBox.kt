@@ -2,7 +2,6 @@ package com.eazy.uibase.widget
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.drawable.GradientDrawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -13,7 +12,7 @@ import android.widget.EditText
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.eazy.uibase.R
-import com.eazy.uibase.resources.ShapeDrawables
+import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.view.findViewByType
 
 class ZSearchBox @JvmOverloads constructor(
@@ -53,7 +52,7 @@ class ZSearchBox @JvmOverloads constructor(
         _inputContainer = findViewById(R.id.inputContainer)
         _rightButton = findViewById(R.id.rightButton)
 
-        _inputContainer.background = ShapeDrawables.getDrawable(context, inputBackground)
+        _inputContainer.background = RoundDrawable(context, R.style.ZSearchBox_InputBackground)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZSearchBox, R.attr.searchBoxStyle, 0)
         applyStyle(a)
@@ -83,17 +82,11 @@ class ZSearchBox @JvmOverloads constructor(
         _inputContainer.addView(child)
     }
 
+    /* private */
+
     companion object {
         private const val TAG = "ZSearchBox"
-
-        private val inputBackground = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-            R.dimen.search_box_input_border_radius, R.color.search_box_input_background_color,
-            0, 0,
-            0, 0
-        )
     }
-
-    /* private */
 
     private fun applyStyle(a: TypedArray) {
         rightButton = a.getResourceId(R.styleable.ZSearchBox_rightButton, 0)

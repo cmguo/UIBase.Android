@@ -1,35 +1,21 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatRadioButton
 import com.eazy.uibase.R
-import com.eazy.uibase.resources.ShapeDrawables
+import com.eazy.uibase.resources.RoundDrawable
 
 class ZRadioButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatRadioButton(context, attrs) {
 
-    companion object {
-        var backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-                R.dimen.radio_button_radius, R.color.bluegrey00_disabled,
-                R.dimen.radio_button_border_size, R.color.bluegrey500_checked_disabled,
-                R.dimen.radio_button_icon_size, R.dimen.radio_button_icon_size
-        )
-        var foregroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-                R.dimen.radio_button_radius, R.color.transparent_checked_disabled,
-                R.dimen.radio_button_border_size2, R.color.transparent,
-                R.dimen.radio_button_icon_size, R.dimen.radio_button_icon_size
-        )
-    }
-
     private var _textPadding : Int? = null
 
     init {
-        val background = ShapeDrawables.getDrawable(context, backgroundDrawable)
-        val foreground = ShapeDrawables.getDrawable(context, foregroundDrawable)
+        val background = RoundDrawable(context, R.style.ZRadioButton_Background)
+        val foreground = RoundDrawable(context, R.style.ZRadioButton_Foreground)
         val layer = LayerDrawable(arrayOf(background, foreground))
         buttonDrawable = layer
     }
@@ -45,6 +31,10 @@ class ZRadioButton @JvmOverloads constructor(
         super.setText(text, type)
         if (_textPadding != null)
             setPadding(if (text.isNullOrEmpty()) 0 else _textPadding!!, paddingTop, paddingRight, paddingBottom)
+    }
+
+    companion object {
+        private const val TAG = "ZRadioButton"
     }
 
 }

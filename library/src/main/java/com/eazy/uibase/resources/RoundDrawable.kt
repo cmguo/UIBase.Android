@@ -1,10 +1,13 @@
 package com.eazy.uibase.resources
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import androidx.annotation.StyleRes
+import com.eazy.uibase.R
 
-open class RoundDrawable(private val size: Int = 0) : Drawable() {
+open class RoundDrawable : Drawable {
 
     var fillColor: ColorStateList? = null
 
@@ -12,26 +15,64 @@ open class RoundDrawable(private val size: Int = 0) : Drawable() {
 
     var borderSize = 0f
 
-    private val paint = Paint()
+    var borderRadius = 0f
 
-    init {
+    var width = 0
+
+    var height = 0
+
+    constructor()
+
+    constructor(context: Context, @StyleRes style: Int) {
+        val a = context.obtainStyledAttributes(style, R.styleable.RoundDrawable)
+        fillColor = a.getColorStateList(R.styleable.RoundDrawable_fillColor)
+        borderColor = a.getColorStateList(R.styleable.RoundDrawable_borderColor)
+        borderSize = a.getDimension(R.styleable.RoundDrawable_borderSize, borderSize)
+        borderRadius = a.getDimension(R.styleable.RoundDrawable_borderRadius, borderRadius)
+        width = a.getDimensionPixelSize(R.styleable.RoundDrawable_android_width, width)
+        height = a.getDimensionPixelSize(R.styleable.RoundDrawable_android_height, height)
+        a.recycle()
     }
+
+    constructor(fillColor: ColorStateList, borderRadius: Float) {
+        this.fillColor = fillColor
+        this.borderRadius = borderRadius
+    }
+
+    constructor(fillColor: ColorStateList, borderRadius: Float, borderColor: ColorStateList, borderSize: Float)
+        : this(fillColor, borderRadius)
+    {
+        this.borderColor = borderColor
+        this.borderSize = borderSize
+    }
+
+    private val paint = Paint()
 
     override fun draw(canvas: Canvas) {
         val bounds = RectF(this.bounds)
-        val rx = bounds.width() / 2
-        val ry = bounds.height() / 2
         if (fillColor != null) {
             paint.style = Paint.Style.FILL
             paint.color = fillColor!!.getColorForState(state, 0)
-            canvas.drawRoundRect(bounds, rx, ry, paint)
+            bounds.inset(borderSize, borderSize)
+            borderRadius -= borderSize
+            if (borderRadius > 0)
+                canvas.drawRoundRect(bounds, borderRadius, borderRadius, paint)
+            else
+                canvas.drawRect(bounds, paint)
+            borderRadius += borderSize
+            bounds.inset(-borderSize, -borderSize)
         }
-        if (borderSize > 0) {
+        if (borderSize > 0 && borderColor != null) {
             paint.style = Paint.Style.STROKE
             paint.color = borderColor?.getColorForState(state, 0) ?: 0
             paint.strokeWidth = borderSize
             bounds.inset(borderSize / 2f, borderSize / 2f)
-            canvas.drawRoundRect(bounds, rx, ry, paint)
+            borderRadius -= borderSize /2f
+            if (borderRadius > 0)
+                canvas.drawRoundRect(bounds, borderRadius, borderRadius, paint)
+            else
+                canvas.drawRect(bounds, paint)
+            borderRadius += borderSize /2f
         }
     }
 
@@ -48,11 +89,20 @@ open class RoundDrawable(private val size: Int = 0) : Drawable() {
     }
 
     override fun getIntrinsicWidth(): Int {
-        return size
+        return width
     }
 
     override fun getIntrinsicHeight(): Int {
-        return size
+        return height
+    }
+
+    override fun isStateful(): Boolean {
+        return (fillColor != null && fillColor!!.isStateful)
+            || (borderColor != null && borderColor!!.isStateful)
+    }
+
+    override fun onStateChange(state: IntArray?): Boolean {
+        return true
     }
 
 }

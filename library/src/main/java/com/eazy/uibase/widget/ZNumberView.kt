@@ -1,7 +1,6 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,7 +12,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
-import com.eazy.uibase.resources.ShapeDrawables
+import com.eazy.uibase.resources.RoundDrawable
 
 class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : LinearLayout(context, attrs, R.attr.numberViewStyle), View.OnClickListener, TextWatcher {
@@ -88,24 +87,6 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
     }
 
-    companion object {
-
-        private const val TAG = "ZNumberView"
-
-        val backgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-                R.dimen.number_view_radius, R.color.number_view_background_color,
-                0, 0,
-                0, 0
-        )
-
-        val buttonBackgroundDrawable = ShapeDrawables.Config(GradientDrawable.RECTANGLE,
-                R.dimen.number_view_button_radius, R.color.number_view_button_background_color,
-                0, 0,
-                0, 0
-        )
-
-    }
-
     init {
         LayoutInflater.from(context).inflate(R.layout.number_view, this)
         _editText = findViewById<View>(R.id.editText) as EditText
@@ -115,8 +96,8 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         _buttonInc.setOnClickListener(this)
         _editText.addTextChangedListener(this)
 
-        background = ShapeDrawables.getDrawable(context, backgroundDrawable)
-        val buttonBackground = ShapeDrawables.getDrawable(context, buttonBackgroundDrawable)
+        background = RoundDrawable(context, R.style.ZNumberView_Background)
+        val buttonBackground = RoundDrawable(context, R.style.ZNumberView_ButtonBackground)
         val buttonForegroundDec = ContextCompat.getDrawable(context, R.drawable.icon_minus)
         val buttonForegroundInc = ContextCompat.getDrawable(context, R.drawable.icon_plus)
         val buttonForegroundColor = ContextCompat.getColorStateList(context, R.color.number_view_button_foreground_color)
@@ -130,4 +111,9 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         _buttonDec.background = drawableDec
         _buttonInc.background = drawableInc
     }
+
+    companion object {
+        private const val TAG = "ZNumberView"
+    }
+
 }
