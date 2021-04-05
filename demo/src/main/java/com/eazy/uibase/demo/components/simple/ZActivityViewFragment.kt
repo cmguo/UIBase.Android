@@ -61,7 +61,7 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        binding.activityViews.root.setBackgroundColor(Color.WHITE)
+        //binding.activityViews.root.setBackgroundColor(Color.WHITE)
         return view
     }
 

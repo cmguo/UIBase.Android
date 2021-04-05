@@ -1,6 +1,7 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.drawable.LayerDrawable
 import android.text.Editable
 import android.text.TextWatcher
@@ -96,6 +97,19 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         _buttonInc.setOnClickListener(this)
         _editText.addTextChangedListener(this)
 
+        syncButtonBackground()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        syncButtonBackground()
+    }
+
+    companion object {
+        private const val TAG = "ZNumberView"
+    }
+
+    private fun syncButtonBackground() {
         background = RoundDrawable(context, R.style.ZNumberView_Background)
         val buttonBackground = RoundDrawable(context, R.style.ZNumberView_ButtonBackground)
         val buttonForegroundDec = ContextCompat.getDrawable(context, R.drawable.icon_minus)
@@ -110,10 +124,6 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         drawableInc.setLayerInset(1, buttonPadding, buttonPadding, buttonPadding, buttonPadding)
         _buttonDec.background = drawableDec
         _buttonInc.background = drawableInc
-    }
-
-    companion object {
-        private const val TAG = "ZNumberView"
     }
 
 }

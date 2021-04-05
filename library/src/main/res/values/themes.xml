@@ -16,6 +16,9 @@
         <item name="appTitleBarStyle">@style/ZAppTitleBar</item>
         <item name="panelStyle">@style/ZPanel</item>
         <item name="searchBoxStyle">@style/ZSearchBox</item>
+
+        <item name="viewInflaterClass">com.eazy.uibase.daynight.DayNightViewInflater</item>
+
     </style>
 
 </resources>

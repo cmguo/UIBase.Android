@@ -1,6 +1,5 @@
 package com.eazy.uibase.demo.components.basic
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.Bindable
@@ -8,7 +7,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.eazy.uibase.demo.R
-import com.eazy.uibase.demo.core.*
+import com.eazy.uibase.demo.core.ComponentFragment
+import com.eazy.uibase.demo.core.ViewModel
+import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.ButtonStyle
 import com.eazy.uibase.demo.core.style.ContentStyle
 import com.eazy.uibase.demo.core.style.IconStyle
@@ -18,11 +19,9 @@ import com.eazy.uibase.demo.databinding.ButtonItemBinding
 import com.eazy.uibase.view.list.PaddingDecoration
 import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZButton
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
 class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
-    ZButtonFragment.Model?, ZButtonFragment.Styles?>(), SkinObserver {
+    ZButtonFragment.Model?, ZButtonFragment.Styles?>() {
 
     class Model : ViewModel() {
         val types = ZButton.ButtonType.values().asList()
@@ -110,20 +109,6 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
             lp.width = styles.widthMode
             button.layoutParams = lp
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
-        updateButtons()
     }
 
     private fun updateButtons() {

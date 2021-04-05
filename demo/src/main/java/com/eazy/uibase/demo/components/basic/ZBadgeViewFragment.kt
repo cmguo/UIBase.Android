@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.core.ComponentFragment
-import com.eazy.uibase.demo.core.SkinManager
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.core.ViewStyles
@@ -17,17 +16,15 @@ import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.BadgeViewFragmentBinding
 import com.eazy.uibase.demo.databinding.BadgeViewItemBinding
 import com.eazy.uibase.widget.badgeview.ZBadgeView
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
 class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
-    ZBadgeViewFragment.Model?, ZBadgeViewFragment.Styles?>(), SkinObserver {
+    ZBadgeViewFragment.Model?, ZBadgeViewFragment.Styles?>() {
 
-    class Model : ViewModel() {
-    }
+    class Model : ViewModel()
 
-    class Styles(private val fragment_: ZBadgeViewFragment) : ViewStyles() {
+    class Styles : ViewStyles() {
 
+        @SuppressWarnings("unused")
         enum class ViewGravity(private val gravity_: Int) {
             LeftTop(Gravity.START or Gravity.TOP),
             CenterTop(Gravity.CENTER or Gravity.TOP),
@@ -88,11 +85,6 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
             }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         addBadge(inflater, binding.textview)
@@ -101,15 +93,7 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
         return view
     }
 
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
-    }
-
-    fun addBadge(inflater: LayoutInflater, target: View) {
+    private fun addBadge(inflater: LayoutInflater, target: View) {
         val binding = BadgeViewItemBinding.inflate(inflater);
         binding.styles = styles
         (binding.root as ZBadgeView).bindTarget(target)

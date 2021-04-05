@@ -7,7 +7,6 @@ import com.ui.shapeutils.DevShapeUtils
 import com.ui.shapeutils.shape.DevShape
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
-import com.eazy.uibase.demo.core.SkinManager
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.DimemDpStyle
@@ -15,10 +14,8 @@ import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.TextAreaFragmentBinding
 import kotlinx.android.synthetic.main.text_area_fragment.*
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
-class ZTextAreaFragment : ComponentFragment<TextAreaFragmentBinding?, ZTextAreaFragment.Model?, ZTextAreaFragment.Styles?>(), SkinObserver {
+class ZTextAreaFragment : ComponentFragment<TextAreaFragmentBinding?, ZTextAreaFragment.Model?, ZTextAreaFragment.Styles?>() {
 
     class Model : ViewModel()
 
@@ -57,22 +54,9 @@ class ZTextAreaFragment : ComponentFragment<TextAreaFragmentBinding?, ZTextAreaF
         var rightIcon = 0
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-    }
-
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
     }
 
     private fun initView() {

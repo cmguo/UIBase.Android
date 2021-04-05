@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +30,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.eazy.uibase.daynight.DayNightManager;
 import com.eazy.uibase.demo.view.GridDrawable;
 import com.eazy.uibase.demo.view.main.InformationFragment;
 import com.eazy.uibase.demo.view.main.StylesFragment;
@@ -134,8 +134,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
             return true;
         } else if (item.getItemId() == R.id.action_skin_dark) {
             item.setChecked(!item.isChecked());
-            getDelegate().setLocalNightMode(item.isChecked()
-                ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+            DayNightManager.getInstance().setDayNightModel(this, item.isChecked());
             return true;
         }
         return super.onOptionsItemSelected(item);

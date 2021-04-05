@@ -1,6 +1,5 @@
 package com.eazy.uibase.demo.components.basic
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -11,7 +10,6 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
-import com.eazy.uibase.demo.core.SkinManager
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.annotation.Description
@@ -21,10 +19,8 @@ import com.eazy.uibase.demo.databinding.RadioButtonItemBinding
 import com.eazy.uibase.view.list.PaddingDecoration
 import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZCheckBox
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
-class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?, ZCompoundButtonFragment.Model?, ZCompoundButtonFragment.Styles?>(), SkinObserver {
+class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?, ZCompoundButtonFragment.Model?, ZCompoundButtonFragment.Styles?>() {
 
     class StateItem(state: Any) : ViewModel() {
         @Bindable
@@ -81,20 +77,6 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
             super.bindView(binding, item, position)
             binding.setVariable(BR.styles, styles)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
-        binding.compoundButtonList.adapter!!.notifyItemRangeChanged(0, model.states.size)
     }
 
     companion object {

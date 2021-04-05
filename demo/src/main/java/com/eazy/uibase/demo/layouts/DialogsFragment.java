@@ -27,7 +27,8 @@ public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, D
     private static final String TAG = "DialogsFragment";
 
     public static class Model extends ViewModel {
-        private Map<String, Integer> layouts;
+
+        private final Map<String, Integer> layouts;
 
         public Model(DialogsFragment fragment) {
             layouts = Layouts.dialogLayouts(fragment.getContext());
@@ -44,20 +45,17 @@ public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, D
     }
 
     // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener dialogClicked = new RecyclerViewAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(int position, Object object) {
-            Log.d(TAG, "dialogClicked" + object);
-            Dialog dialog = new Dialog(DialogsFragment.this.getContext(), 0);
-            try {
-                int layoutId = ((Map.Entry<String, Integer>) object).getValue();
-                View view = LayoutInflater.from(getActivity()).inflate(layoutId, null);
-                applyStyles(view);
-                dialog.setContentView(view);
-                dialog.show();
-            } catch (Throwable e) {
-                Log.w(TAG, "", e);
-            }
+    public RecyclerViewAdapter.OnItemClickListener<Map.Entry<String, Integer>> dialogClicked = (position, object) -> {
+        Log.d(TAG, "dialogClicked" + object);
+        Dialog dialog = new Dialog(DialogsFragment.this.getContext(), 0);
+        try {
+            int layoutId = object.getValue();
+            View view = LayoutInflater.from(getActivity()).inflate(layoutId, null);
+            applyStyles(view);
+            dialog.setContentView(view);
+            dialog.show();
+        } catch (Throwable e) {
+            Log.w(TAG, "", e);
         }
     };
 

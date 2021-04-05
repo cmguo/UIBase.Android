@@ -4,38 +4,22 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.eazy.uibase.demo.core.ComponentFragment
-import com.eazy.uibase.demo.core.SkinManager
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.databinding.DialogFragmentBinding
 import com.eazy.uibase.dialog.*
 import com.eazy.uibase.dialog.bean.ItemBean
 import kotlinx.android.synthetic.main.dialog_fragment.*
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
-class ZDialogFragment : ComponentFragment<DialogFragmentBinding?, ZDialogFragment.Model?, ZDialogFragment.Styles?>(), SkinObserver {
+class ZDialogFragment : ComponentFragment<DialogFragmentBinding?, ZDialogFragment.Model?, ZDialogFragment.Styles?>() {
 
     class Model : ViewModel()
 
     class Styles : ViewStyles()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let { initView(it) }
-    }
-
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
     }
 
     private fun initView(context: Context) {
