@@ -1,17 +1,14 @@
 package com.xhb.uibase.demo.colors;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.core.Colors;
 import com.xhb.uibase.demo.core.ComponentFragment;
-import com.xhb.uibase.demo.core.SkinManager;
 import com.xhb.uibase.demo.core.ViewModel;
 import com.xhb.uibase.demo.core.ViewStyles;
 import com.xhb.uibase.demo.databinding.ColorsFragmentBinding;
@@ -19,12 +16,9 @@ import com.xhb.uibase.view.list.PaddingDecoration;
 import com.xhb.uibase.view.list.RecyclerViewAdapter;
 
 import java.util.Map;
+import java.util.Objects;
 
-import skin.support.observe.SkinObservable;
-import skin.support.observe.SkinObserver;
-
-public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, ColorsFragment.Model, ColorsFragment.Styles>
-    implements SkinObserver {
+public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, ColorsFragment.Model, ColorsFragment.Styles> {
 
     private static final String TAG = "ColorsComponent";
 
@@ -55,23 +49,10 @@ public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, Col
     }
 
     // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener colorClicked = (position, object) -> Log.d(TAG, "colorClicked" + object);
+    public RecyclerViewAdapter.OnItemClickListener<Map.Entry<String, Integer>> colorClicked = (position, object) -> Log.d(TAG, "colorClicked" + object);
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        SkinManager.addObserver(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        SkinManager.removeObserver(this);
-        super.onDestroy();
-    }
-
-    @Override
-    public void updateSkin(SkinObservable observable, Object o) {
+    private void update() {
         getModel().updateColors(getContext());
-        getBinding().colorsList.getAdapter().notifyItemRangeChanged(0, getModel().getColors().size());
+        Objects.requireNonNull(getBinding().colorsList.getAdapter()).notifyItemRangeChanged(0, getModel().getColors().size());
     }
 }

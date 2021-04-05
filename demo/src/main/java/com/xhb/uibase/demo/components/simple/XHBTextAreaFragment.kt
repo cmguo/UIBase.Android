@@ -7,7 +7,6 @@ import com.ui.shapeutils.DevShapeUtils
 import com.ui.shapeutils.shape.DevShape
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
-import com.xhb.uibase.demo.core.SkinManager
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.DimemDpStyle
@@ -15,10 +14,8 @@ import com.xhb.uibase.demo.core.style.IconStyle
 import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbTextAreaFragmentBinding
 import kotlinx.android.synthetic.main.xhb_text_area_fragment.*
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
-class XHBTextAreaFragment : ComponentFragment<XhbTextAreaFragmentBinding?, XHBTextAreaFragment.Model?, XHBTextAreaFragment.Styles?>(), SkinObserver {
+class XHBTextAreaFragment : ComponentFragment<XhbTextAreaFragmentBinding?, XHBTextAreaFragment.Model?, XHBTextAreaFragment.Styles?>() {
 
     class Model : ViewModel()
 
@@ -57,22 +54,9 @@ class XHBTextAreaFragment : ComponentFragment<XhbTextAreaFragmentBinding?, XHBTe
         var rightIcon = 0
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-    }
-
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
     }
 
     private fun initView() {

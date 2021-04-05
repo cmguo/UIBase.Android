@@ -1,6 +1,5 @@
 package com.xhb.uibase.demo.components.basic
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.Bindable
@@ -8,7 +7,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.xhb.uibase.demo.R
-import com.xhb.uibase.demo.core.*
+import com.xhb.uibase.demo.core.ComponentFragment
+import com.xhb.uibase.demo.core.ViewModel
+import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.ButtonStyle
 import com.xhb.uibase.demo.core.style.ContentStyle
 import com.xhb.uibase.demo.core.style.IconStyle
@@ -18,11 +19,9 @@ import com.xhb.uibase.demo.databinding.XhbButtonItemBinding
 import com.xhb.uibase.view.list.PaddingDecoration
 import com.xhb.uibase.view.list.UnitTypeItemBinding
 import com.xhb.uibase.widget.XHBButton
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
 class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
-    XHBButtonFragment.Model?, XHBButtonFragment.Styles?>(), SkinObserver {
+    XHBButtonFragment.Model?, XHBButtonFragment.Styles?>() {
 
     class Model : ViewModel() {
         val types = XHBButton.ButtonType.values().asList()
@@ -110,20 +109,6 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
             lp.width = styles.widthMode
             button.layoutParams = lp
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
-        updateButtons()
     }
 
     private fun updateButtons() {

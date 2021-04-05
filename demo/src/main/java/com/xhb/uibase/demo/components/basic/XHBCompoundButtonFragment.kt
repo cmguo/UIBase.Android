@@ -1,6 +1,5 @@
 package com.xhb.uibase.demo.components.basic
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -11,7 +10,6 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
-import com.xhb.uibase.demo.core.SkinManager
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.core.ViewStyles
 import com.xhb.uibase.demo.core.style.annotation.Description
@@ -21,10 +19,8 @@ import com.xhb.uibase.demo.databinding.XhbRadioButtonItemBinding
 import com.xhb.uibase.view.list.PaddingDecoration
 import com.xhb.uibase.view.list.UnitTypeItemBinding
 import com.xhb.uibase.widget.XHBCheckBox
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
-class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBinding?, XHBCompoundButtonFragment.Model?, XHBCompoundButtonFragment.Styles?>(), SkinObserver {
+class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBinding?, XHBCompoundButtonFragment.Model?, XHBCompoundButtonFragment.Styles?>() {
 
     class StateItem(state: Any) : ViewModel() {
         @Bindable
@@ -81,20 +77,6 @@ class XHBCompoundButtonFragment : ComponentFragment<XhbCompoundButtonFragmentBin
             super.bindView(binding, item, position)
             binding.setVariable(BR.styles, styles)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
-        binding.compoundButtonList.adapter!!.notifyItemRangeChanged(0, model.states.size)
     }
 
     companion object {

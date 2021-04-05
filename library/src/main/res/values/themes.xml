@@ -16,6 +16,9 @@
         <item name="appTitleBarStyle">@style/XHBAppTitleBar</item>
         <item name="panelStyle">@style/XHBPanel</item>
         <item name="searchBoxStyle">@style/XHBSearchBox</item>
+
+        <item name="viewInflaterClass">com.xhb.uibase.daynight.DayNightViewInflater</item>
+
     </style>
 
 </resources>

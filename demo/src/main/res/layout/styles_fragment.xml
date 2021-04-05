@@ -23,6 +23,7 @@
             android:id="@+id/stylesList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxHeight="400dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

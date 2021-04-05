@@ -38,7 +38,7 @@ public class Styles extends Resources {
     @androidx.databinding.BindingAdapter("style")
     public static <T> void setStyle(TextView view, int style) {
         try {
-            Paris.style(view).apply(new SkinResourceStyle(style));
+            Paris.style(view).apply(style);
         } catch (Throwable e) {
             Log.w(TAG, "setStyle " + view.getContext().getResources().getResourceEntryName(style), e);
         }

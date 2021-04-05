@@ -2,8 +2,8 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
-apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
@@ -43,13 +43,16 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation project(path: ':badgelibrary')
+    implementation 'com.google.auto.service:auto-service:1.0-rc6'
+
+    kapt 'com.google.auto.service:auto-service:1.0-rc6'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     api project(path: ':libshape')
+    implementation project(path: ':badgelibrary')
     api fileTree(dir: 'libs', includes: ['*.aar'])
 
     implementation 'com.github.duanhong169:drawabletoolbox:1.0.7'

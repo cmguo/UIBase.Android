@@ -18,6 +18,7 @@ import com.ustc.base.util.reflect.ClassWrapper;
 import com.ustc.base.util.reflect.ObjectWrapper;
 import com.xhb.uibase.demo.R;
 import com.xhb.uibase.demo.view.GridDrawable;
+import com.xhb.uibase.utils.Generic;
 
 public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         Model extends ViewModel, Styles extends ViewStyles

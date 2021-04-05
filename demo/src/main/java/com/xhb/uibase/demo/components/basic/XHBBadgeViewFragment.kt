@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.Bindable
 import com.xhb.uibase.demo.core.ComponentFragment
-import com.xhb.uibase.demo.core.SkinManager
 import com.xhb.uibase.demo.core.ViewModel
 import com.xhb.uibase.demo.BR
 import com.xhb.uibase.demo.core.ViewStyles
@@ -17,17 +16,15 @@ import com.xhb.uibase.demo.core.style.annotation.*
 import com.xhb.uibase.demo.databinding.XhbBadgeViewFragmentBinding
 import com.xhb.uibase.demo.databinding.XhbBadgeViewItemBinding
 import com.xhb.uibase.widget.badgeview.XHBBadgeView
-import skin.support.observe.SkinObservable
-import skin.support.observe.SkinObserver
 
 class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
-    XHBBadgeViewFragment.Model?, XHBBadgeViewFragment.Styles?>(), SkinObserver {
+    XHBBadgeViewFragment.Model?, XHBBadgeViewFragment.Styles?>() {
 
-    class Model : ViewModel() {
-    }
+    class Model : ViewModel()
 
-    class Styles(private val fragment_: XHBBadgeViewFragment) : ViewStyles() {
+    class Styles : ViewStyles() {
 
+        @SuppressWarnings("unused")
         enum class ViewGravity(private val gravity_: Int) {
             LeftTop(Gravity.START or Gravity.TOP),
             CenterTop(Gravity.CENTER or Gravity.TOP),
@@ -88,11 +85,6 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
             }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        SkinManager.addObserver(this)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         addBadge(inflater, binding.textview)
@@ -101,15 +93,7 @@ class XHBBadgeViewFragment : ComponentFragment<XhbBadgeViewFragmentBinding?,
         return view
     }
 
-    override fun onDestroy() {
-        SkinManager.removeObserver(this)
-        super.onDestroy()
-    }
-
-    override fun updateSkin(observable: SkinObservable, o: Any) {
-    }
-
-    fun addBadge(inflater: LayoutInflater, target: View) {
+    private fun addBadge(inflater: LayoutInflater, target: View) {
         val binding = XhbBadgeViewItemBinding.inflate(inflater);
         binding.styles = styles
         (binding.root as XHBBadgeView).bindTarget(target)

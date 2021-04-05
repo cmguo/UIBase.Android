@@ -37,7 +37,6 @@
                 android:id="@+id/amountView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/brand_500"
                 app:minimum="@{styles.minimun}"
                 app:maximum="@{styles.maximun}"
                 app:amount="@={styles.amount}"
