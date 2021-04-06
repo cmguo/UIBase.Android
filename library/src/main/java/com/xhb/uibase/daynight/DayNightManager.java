@@ -38,6 +38,8 @@ public class DayNightManager {
         AppCompatDelegate.setDefaultNightMode(mode);
         saveNightModel(isNight);
         if (activity.getDelegate().getLocalNightMode() != mode) {
+            // setLocalNightMode will cause onConfigurationChanged to be invoked
+            //  some customs views will response to onConfigurationChanged
             activity.getDelegate().setLocalNightMode(mode);
             for (DayNightViewInflater inflater : inflaterList)
                 inflater.updateViews();

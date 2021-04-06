@@ -1,8 +1,10 @@
 package com.xhb.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import com.bigkoo.pickerview.configure.PickerOptions
 import com.bigkoo.pickerview.listener.CustomListener
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener
@@ -104,6 +106,14 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
                 setRange()
         }
 
+    var textAppearance = 0
+        set(value) {
+            if (field == value)
+                return
+            field = value
+            updateTextAppearance()
+        }
+
     var listener: OnSelectTimeChangeListener? = null
 
     private val _options = PickerOptions(PickerOptions.TYPE_PICKER_TIME)
@@ -121,6 +131,7 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
         centerLabel = a.getBoolean(R.styleable.XHBTimePickerView_centerLabel, cyclic)
         lunar = a.getBoolean(R.styleable.XHBTimePickerView_lunar, lunar)
         itemsVisibleCount = a.getInt(R.styleable.XHBTimePickerView_itemsVisibleCount, itemsVisibleCount)
+        textAppearance = a.getResourceId(R.styleable.XHBTimePickerView_android_textAppearance, textAppearance)
         val date = a.getString(R.styleable.XHBTimePickerView_selectTime)
         val startDate = a.getString(R.styleable.XHBTimePickerView_startTime)
         val endDate = a.getString(R.styleable.XHBTimePickerView_endTime)
@@ -149,6 +160,11 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
     override fun onTimeSelectChanged(date: Date) {
         _options.date = calendar(date)
         listener?.onSelectTimeChanged(this, date)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        updateTextAppearance()
     }
 
     /* private */
@@ -182,6 +198,7 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
         _options.isDialog = false
         _options.decorView = this
         _options.timeSelectChangeListener = this
+        _options.outSideColor = ContextCompat.getColor(context, R.color.bluegrey_00)
     }
 
     private fun setRange() {
@@ -191,6 +208,25 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
 
     private fun refresh() {
         _picker.setDate(_options.date)
+    }
+
+    private fun updateTextAppearance() {
+        if (textAppearance == 0)
+            return
+        val a = context.obtainStyledAttributes(textAppearance, R.styleable.TextAppearance)
+        val color = a.getColorStateList(R.styleable.TextAppearance_android_textColor)
+        val size = a.getDimension(R.styleable.TextAppearance_android_textSize, 0f)
+        if (color != null) {
+            _options.textColorOut = color.defaultColor
+            _options.textColorCenter = color.getColorForState(intArrayOf(android.R.attr.state_selected), color.defaultColor)
+            if (_inited) {
+                _wheel.setTextColorOut(_options.textColorOut)
+                _wheel.setTextColorCenter(_options.textColorCenter)
+                refresh()
+            }
+        }
+         if (size > 0)
+            _options.textSizeContent = (size / context.getResources().getDisplayMetrics().density).toInt()
     }
 
 }

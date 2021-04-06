@@ -2,6 +2,7 @@ package com.xhb.uibase.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -120,6 +121,11 @@ class XHBPanel @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         listener?.panelDismissed(this)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        syncBackground()
     }
 
     companion object {

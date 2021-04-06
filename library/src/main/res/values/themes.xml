@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.XHB.Base" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.XHB" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="buttonStyle">@style/XHBButton</item>
         <item name="checkboxStyle">@style/XHBCheckBox</item>
         <item name="radioButtonStyle">@style/XHBRadioButton</item>
@@ -16,6 +16,7 @@
         <item name="appTitleBarStyle">@style/XHBAppTitleBar</item>
         <item name="panelStyle">@style/XHBPanel</item>
         <item name="searchBoxStyle">@style/XHBSearchBox</item>
+        <item name="timePickerViewStyle">@style/XHBTimePickerView</item>
 
         <item name="viewInflaterClass">com.xhb.uibase.daynight.DayNightViewInflater</item>
 

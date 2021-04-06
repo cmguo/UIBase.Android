@@ -8,8 +8,9 @@
     <dimen name="xhb_time_picker_view_item_padding_y">12dp</dimen>
     <dimen name="xhb_time_picker_view_icon_size">24dp</dimen>
     <dimen name="xhb_time_picker_view_icon_padding">8dp</dimen>
-    <!-- TODO: why can't use -->
-    <style name="xhb_time_picker_view_text_appearance">@style/TextAppearance.XHB.Body.Middle</style>
+    <style name="xhb_time_picker_view_text_appearance" parent="TextAppearance.XHB.Body.Large">
+        <item name="android:textColor">@color/bluegrey800_selected</item>
+    </style>
 
     <declare-styleable name="XHBTimePickerView">
         <attr name="labels" format="string"/>
@@ -20,9 +21,11 @@
         <attr name="selectTime" format="string"/>
         <attr name="startTime" format="string"/>
         <attr name="endTime" format="string"/>
+        <attr name="android:textAppearance"/>
     </declare-styleable>
 
     <style name="XHBTimePickerView">
+        <item name="android:textAppearance">@style/xhb_time_picker_view_text_appearance</item>
     </style>
 
 </resources>

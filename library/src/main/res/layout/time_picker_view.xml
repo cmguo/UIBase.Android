@@ -3,7 +3,7 @@
         android:id="@+id/timepicker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/bluegrey_00"
         android:gravity="center"
         android:minHeight="150dp"
         android:orientation="horizontal">

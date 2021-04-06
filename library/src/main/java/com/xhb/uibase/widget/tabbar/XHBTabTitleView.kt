@@ -1,6 +1,7 @@
 package com.xhb.uibase.widget.tabbar
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -18,10 +19,7 @@ class XHBTabTitleView @JvmOverloads constructor(
         val style = if (defStyleAttr == 0) R.attr.tabTitleStyle else defStyleAttr
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBTabTitleView, style, 0)
         val color = a.getColorStateList(R.styleable.XHBTabTitleView_android_textColor)
-        if (color != null) {
-            normalColor = color.defaultColor
-            selectedColor = color.getColorForState(intArrayOf(android.R.attr.state_selected), normalColor)
-        }
+        setTextColor(color)
         textSizeNormal = a.getDimension(R.styleable.XHBTabTitleView_textSizeNormal, textSizeNormal)
         textSizeSelected = a.getDimension(R.styleable.XHBTabTitleView_textSizeSelected, textSizeSelected)
         a.recycle()
@@ -41,4 +39,18 @@ class XHBTabTitleView @JvmOverloads constructor(
         typeface = Typeface.defaultFromStyle(if (leavePercent < 0.5f) Typeface.BOLD else Typeface.NORMAL)
     }
 
+    override fun onSelected(index: Int, totalCount: Int) {
+        isSelected = true
+    }
+
+    override fun onDeselected(index: Int, totalCount: Int) {
+        isSelected = false
+    }
+
+    override fun setTextColor(colors: ColorStateList?) {
+        val color = colors ?: return
+        super.setTextColor(colors)
+        normalColor = color.defaultColor
+        selectedColor = color.getColorForState(intArrayOf(android.R.attr.state_selected), normalColor)
+    }
 }

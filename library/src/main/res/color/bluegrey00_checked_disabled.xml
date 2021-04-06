@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xhb="http://schemas.android.com/apk/res-auto">
-    <item android:color="?attr/bluegrey_100" android:state_enabled="false" />
-    <item android:color="?attr/brand_500" android:state_checked="true" />
-    <item android:color="?attr/brand_500" xhb:state_half_checked="true" />
-    <item android:color="?attr/bluegrey_00" />
+    <item android:color="@color/bluegrey_100" android:state_enabled="false" />
+    <item android:color="@color/brand_500" android:state_checked="true" />
+    <item android:color="@color/brand_500" xhb:state_half_checked="true" />
+    <item android:color="@color/bluegrey_00" />
 </selector>

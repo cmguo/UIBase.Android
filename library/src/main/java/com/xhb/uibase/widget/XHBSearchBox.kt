@@ -1,6 +1,7 @@
 package com.xhb.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.TypedArray
 import android.text.Editable
 import android.text.TextWatcher
@@ -80,6 +81,11 @@ class XHBSearchBox @JvmOverloads constructor(
         _textView = editText
         child.background = null
         _inputContainer.addView(child)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        _inputContainer.background = RoundDrawable(context, R.style.XHBSearchBox_InputBackground)
     }
 
     /* private */

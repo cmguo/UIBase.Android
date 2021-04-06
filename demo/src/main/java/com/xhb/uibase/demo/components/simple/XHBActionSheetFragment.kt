@@ -1,12 +1,12 @@
 package com.xhb.uibase.demo.components.simple
 
-import android.graphics.Color
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.Bindable
-import com.xhb.uibase.demo.BR
 import com.xhb.uibase.demo.R
 import com.xhb.uibase.demo.core.ComponentFragment
 import com.xhb.uibase.demo.core.ViewModel
@@ -56,12 +56,17 @@ class XHBActionSheetFragment : ComponentFragment<XhbActionSheetFragmentBinding?,
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        binding.actionSheet.setBackgroundColor(Color.WHITE)
+        binding.actionSheet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bluegrey_00))
         return view
     }
 
     override fun backgroundColor(): Int {
         return R.color.blue_100
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        binding.actionSheet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bluegrey_00))
     }
 
     private var lp : ViewGroup.LayoutParams? = null
@@ -79,7 +84,7 @@ class XHBActionSheetFragment : ComponentFragment<XhbActionSheetFragmentBinding?,
 
     override fun panelDismissed(panel: XHBPanel) {
         panel.removeView(binding.actionSheet)
-        binding.actionSheet.setBackgroundColor(Color.WHITE)
+        binding.actionSheet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bluegrey_00))
         binding.frame.addView(binding.actionSheet, lp)
     }
 

@@ -28,6 +28,7 @@
         <TextView
             android:id="@+id/title"
             style="@style/Demo.ResourceItemTitle"
+            android:textAppearance="@style/TextAppearance.XHB.Head2"
             android:text="@{data.state.toString()}" />
 
         <com.xhb.uibase.widget.XHBRadioButton

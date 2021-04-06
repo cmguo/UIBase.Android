@@ -20,7 +20,7 @@
         android:minWidth="60dp"
         android:layout_weight="1"
         android:background="@null"
-        android:textColor="@color/number_view_text_color"
+        android:textColor="@color/bluegrey_800"
         android:textSize="@dimen/number_view_text_size"
         android:inputType="number"
         android:gravity="center"

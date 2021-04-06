@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.Path
 import android.graphics.Point
 import android.graphics.Rect
@@ -14,7 +15,6 @@ import android.graphics.drawable.shapes.PathShape
 import android.util.AttributeSet
 import android.util.Log
 import android.util.Size
-import android.util.TypedValue
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -23,6 +23,7 @@ import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
 import com.xhb.uibase.R
 import com.xhb.uibase.resources.RoundDrawable
 import com.xhb.uibase.view.contentView
@@ -53,13 +54,16 @@ class XHBTipView @JvmOverloads constructor(
             if (value == null)
                 return
             field = value
-            if (value.ordinal >= Location.AutoToast.ordinal) {
-                textSize = context.resources.getDimensionPixelOffset(R.dimen.tip_view_small_text_size).toFloat()
-                if (value == Location.ManualLayout) {
-                    frameRadius = 0f
-                    frameColor = ContextCompat.getColor(context, R.color.bluegrey_05)
-                    textColor = ContextCompat.getColor(context, R.color.bluegrey_800)
-                }
+            if (value.ordinal < Location.AutoToast.ordinal) {
+                _frameColorId = R.color.tip_view_toast_frame_color
+                textAppearance = R.style.tip_view_tool_text_appearance
+            } else if (value == Location.ManualLayout) {
+                frameRadius = 0f
+                _frameColorId = R.color.tip_view_snack_frame_color
+                textAppearance = R.style.tip_view_snack_text_appearance
+            } else {
+                _frameColorId = R.color.tip_view_toast_frame_color
+                textAppearance = R.style.tip_view_toast_text_appearance
             }
             requestLayout()
         }
@@ -90,16 +94,9 @@ class XHBTipView @JvmOverloads constructor(
 
     var dismissDelay: Long = 0
 
-    var textSize: Float
-        get() = _textView.textSize
+    var textAppearance = 0
         set(value) {
-            _textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, value)
-        }
-
-    var textColor: Int
-        get() = _textView.currentTextColor
-        set(value) {
-            _textView.setTextColor(value)
+            TextViewCompat.setTextAppearance(_textView, value)
         }
 
     var frameRadius = 0f
@@ -111,10 +108,13 @@ class XHBTipView @JvmOverloads constructor(
 
     var frameColor = 0
         set(value) {
+            if (field == value)
+                return
             field = value
-            _frameDrawable.fillColor = ColorStateList.valueOf(value)
-            _arrowDrawable.setTint(value)
-            invalidate()
+            if (value == 0)
+                _frameColorId = _frameColorId
+            else
+                _frameColor = value
         }
 
     var singleLine: Boolean
@@ -157,6 +157,22 @@ class XHBTipView @JvmOverloads constructor(
     private var _leftButton: XHBButton
     private var _rightButton: XHBButton
 
+    private var _frameColorId = 0
+        set(value) {
+            field = value
+            if (frameColor == 0) {
+                _frameColor = ContextCompat.getColor(context, value)
+            }
+        }
+
+    private var _frameColor = 0
+        set(value) {
+            field = value
+            _frameDrawable.fillColor = ColorStateList.valueOf(value)
+            _arrowDrawable.setTint(value)
+            invalidate()
+        }
+
     private val _frameDrawable: RoundDrawable
     private val _arrowDrawable: ShapeDrawable
     private val _layerDrawable: LayerDrawable
@@ -172,7 +188,7 @@ class XHBTipView @JvmOverloads constructor(
         _textView = findViewById(R.id.textView)
         _rightButton = findViewById(R.id.rightButton)
 
-        _frameDrawable = RoundDrawable(context, R.style.XHBTipView_Frame)
+        _frameDrawable = RoundDrawable()
         _arrowDrawable = ShapeDrawable()
         _layerDrawable = LayerDrawable(arrayOf(_frameDrawable, _arrowDrawable))
 
@@ -184,8 +200,7 @@ class XHBTipView @JvmOverloads constructor(
         if (a.hasValue(R.styleable.XHBTipView_android_text))
             message = a.getText(R.styleable.XHBTipView_android_text)
         dismissDelay = a.getInt(R.styleable.XHBTipView_dismissDelay, dismissDelay.toInt()).toLong()
-        textColor = a.getColor(R.styleable.XHBTipView_android_textColor, textColor)
-        textSize = a.getDimensionPixelSize(R.styleable.XHBTipView_android_textSize, textSize.toInt()).toFloat()
+        textAppearance = a.getResourceId(R.styleable.XHBTipView_android_textAppearance, 0)
         frameColor = a.getColor(R.styleable.XHBTipView_frameColor, frameColor)
         frameRadius = a.getDimension(R.styleable.XHBTipView_frameRadius, frameRadius)
         arrowSize = a.getDimensionPixelSize(R.styleable.XHBTipView_arrowSize, arrowSize)
@@ -255,13 +270,6 @@ class XHBTipView @JvmOverloads constructor(
         toast.show()
     }
 
-    class DismissRunnable(view: XHBTipView) : Runnable {
-        private val view: WeakReference<XHBTipView> = WeakReference(view)
-        override fun run() {
-            view.get()?.dismiss()
-        }
-    }
-
     fun dismiss(timeout: Boolean = false) {
         overlayFrame(contentView)?.detach(this)
         (parent as? ViewGroup)?.removeView(this)
@@ -308,7 +316,20 @@ class XHBTipView @JvmOverloads constructor(
         layoutBackground()
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        textAppearance = textAppearance
+        _frameColorId = _frameColorId
+    }
+
     /* private */
+
+    class DismissRunnable(view: XHBTipView) : Runnable {
+        private val view: WeakReference<XHBTipView> = WeakReference(view)
+        override fun run() {
+            view.get()?.dismiss()
+        }
+    }
 
     companion object {
 

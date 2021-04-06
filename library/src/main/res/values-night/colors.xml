@@ -1,0 +1,42 @@
+<resources>
+
+    <color name="white_card">#212630</color>  <!-- default #FFFFFF, -->
+    <color name="bluegrey_00">#191E26</color>  <!-- default #FFFFFF, white_bg-->
+    <color name="bluegrey_05">#262C36</color>  <!-- default #F7F8F9, -->
+    <color name="bluegrey_50">#0B1117</color>  <!-- default #F7F8F9, bluegrey_bg-->
+    <color name="bluegrey_100">#262D38</color>  <!-- default #F2F3F4, -->
+    <color name="bluegrey_200">#EBECED</color>  <!-- default #EBECED, -->
+    <color name="bluegrey_300">#2D3440</color>  <!-- default #E4E6E8, -->
+    <color name="bluegrey_400">#D5D7DB</color>  <!-- default #D5D7DB, -->
+    <color name="bluegrey_500">#4D5666</color>  <!-- default #B7BBBF, -->
+    <color name="bluegrey_600">#9CA0A6</color>  <!-- default #9CA0A6, -->
+    <color name="bluegrey_700">#707C8C</color>  <!-- default #81858C, -->
+    <color name="bluegrey_800">#A3AFBF</color>  <!-- default #4E5359, -->
+    <color name="bluegrey_900">#E2ECFA</color>  <!-- default #1D2126, -->
+    <color name="brand_100">#524C23</color>  <!-- default #FFFCD4, -->
+    <color name="brand_500">#FFD630</color>  <!-- default #FFD630, -->
+    <color name="brand_600">#D9B629</color>  <!-- default #F2C121, -->
+    <color name="red_100">#3D2929</color>  <!-- default #FFEDED, -->
+    <color name="red_500">#DA7171</color>  <!-- default #FF6666, -->
+    <color name="red_600">#E48484</color>  <!-- default #EB3B3B, -->
+    <color name="redorange_100">#3E322E</color>  <!-- default #FFEDE5, -->
+    <color name="redorange_500">#DA825E</color>  <!-- default #FF6D2E, -->
+    <color name="redorange_600">#E69472</color>  <!-- default #FF4D00, -->
+    <color name="orange_100">#3C3325</color>  <!-- default #FFF0DB, -->
+    <color name="orange_500">#E6A15C</color>  <!-- default #FFA319, -->
+    <color name="orange_600">#F2AF6C</color>  <!-- default #FF8C00, -->
+    <color name="green_100">#203A32</color>  <!-- default #E8F7F0, -->
+    <color name="green_500">#61BA8D</color>  <!-- default #00CC66, -->
+    <color name="green_600">#71C99D</color>  <!-- default #00B058, -->
+    <color name="cyan_100">#233738</color>  <!-- default #E1F9FA, -->
+    <color name="cyan_500">#5DC3C6</color>  <!-- default #00D1D9, -->
+    <color name="cyan_600">#6DD1D4</color>  <!-- default #00B9BF, -->
+    <color name="blue_100">#213452</color>  <!-- default #EDF4FF, -->
+    <color name="blue_200">#324563</color>  <!-- default #CCE0FF, -->
+    <color name="blue_500">#6B99DE</color>  <!-- default #4F94FF, -->
+    <color name="blue_600">#7FA6E2</color>  <!-- default #1970F2, -->
+    <color name="purple_100">#343146</color>  <!-- default #F2F0FD, -->
+    <color name="purple_500">#8C79F2</color>  <!-- default #8C79F2, -->
+    <color name="purple_600">#988BDC</color>  <!-- default #6A54E0, -->
+
+</resources>
