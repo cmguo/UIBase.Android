@@ -32,11 +32,10 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.Z.Head2"
             android:paddingStart="5dp"
             android:singleLine="true"
-            android:text="@{data.toString()}"
-            android:textFontWeight="3"
-            android:textSize="18dp" />
+            android:text="@{data.toString()}"/>
 
         <com.eazy.uibase.widget.ZButton
             android:id="@+id/button"

@@ -1,10 +1,11 @@
 package com.eazy.uibase.demo.components.simple
 
-import android.graphics.Color
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.R
@@ -61,12 +62,17 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        //binding.activityViews.root.setBackgroundColor(Color.WHITE)
+        binding.activityViews.root.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bluegrey_00))
         return view
     }
 
     override fun backgroundColor(): Int {
         return R.color.blue_100
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        binding.activityViews.root.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bluegrey_00))
     }
 
     private var lp : ViewGroup.LayoutParams? = null

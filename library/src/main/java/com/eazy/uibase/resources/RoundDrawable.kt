@@ -21,9 +21,13 @@ open class RoundDrawable : Drawable {
 
     var height = 0
 
-    constructor()
+    private val paint = Paint()
 
-    constructor(context: Context, @StyleRes style: Int) {
+    constructor() {
+        paint.isAntiAlias = true
+    }
+
+    constructor(context: Context, @StyleRes style: Int) : this() {
         val a = context.obtainStyledAttributes(style, R.styleable.RoundDrawable)
         fillColor = a.getColorStateList(R.styleable.RoundDrawable_fillColor)
         borderColor = a.getColorStateList(R.styleable.RoundDrawable_borderColor)
@@ -34,7 +38,7 @@ open class RoundDrawable : Drawable {
         a.recycle()
     }
 
-    constructor(fillColor: ColorStateList, borderRadius: Float) {
+    constructor(fillColor: ColorStateList, borderRadius: Float) : this() {
         this.fillColor = fillColor
         this.borderRadius = borderRadius
     }
@@ -45,8 +49,6 @@ open class RoundDrawable : Drawable {
         this.borderColor = borderColor
         this.borderSize = borderSize
     }
-
-    private val paint = Paint()
 
     override fun draw(canvas: Canvas) {
         val bounds = RectF(this.bounds)

@@ -1,6 +1,7 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -162,11 +163,16 @@ class ZAppTitleBar @JvmOverloads constructor(
             _textView.maxWidth = w
     }
 
-    companion object {
-        private const val TAG = "ZAppTitleBar"
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        updateLayout()
     }
 
     /* private */
+
+    companion object {
+        private const val TAG = "ZAppTitleBar"
+    }
 
     private fun applyStyle(a: TypedArray) {
         leftButton = a.getResourceId(R.styleable.ZAppTitleBar_leftButton, 0)

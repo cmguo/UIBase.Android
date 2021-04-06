@@ -46,8 +46,8 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
                     attrValueSet.put("textColor", getStyleable("textColor"), value.data, value.type == TypedValue.TYPE_ATTRIBUTE);
                 }
             }
-            attrValueSet.remove("textAppearance");
             a.recycle();
         }
+        attrValueSet.remove("textAppearance");
     }
 }

@@ -67,6 +67,7 @@ public class StyleableSet<E extends View> implements IStyleableSet<E> {
 
     @Override
     public void analyze(Context context, AttributeSet attrs, AttrValueSet<? extends E> attrValueSet) {
+        // TODO: analyze default Style
         for (Map.Entry<String, IStyleable<E>> os : mStyleables.entrySet()) {
             String attr = os.getKey();
             IStyleable<E> style = os.getValue();

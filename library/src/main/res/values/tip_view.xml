@@ -25,8 +25,7 @@
         <attr name="frameColor" format="color"/>
         <attr name="frameRadius" format="dimension"/>
         <attr name="android:text"/>
-        <attr name="android:textColor"/>
-        <attr name="android:textSize"/>
+        <attr name="android:textAppearance"/>
         <attr name="dismissDelay" format="integer" />
     </declare-styleable>
 
@@ -37,8 +36,17 @@
     <dimen name="tip_view_padding_y">12dp</dimen>
     <dimen name="tip_view_icon_size">16dp</dimen>
     <dimen name="tip_view_icon_padding">8dp</dimen>
-    <color name="tip_view_frame_color">#1D2126</color>
-    <color name="tip_view_text_color">@color/bluegrey_00</color>
+    <color name="tip_view_toast_frame_color">@color/bluegrey_900</color>
+    <color name="tip_view_snack_frame_color">@color/bluegrey_05</color>
+    <style name="tip_view_tool_text_appearance" parent="TextAppearance.Z.Body.Middle">
+        <item name="android:textColor">@color/bluegrey_00</item>
+    </style>
+    <style name="tip_view_toast_text_appearance" parent="TextAppearance.Z.Body.Small">
+        <item name="android:textColor">@color/bluegrey_00</item>
+    </style>
+    <style name="tip_view_snack_text_appearance" parent="TextAppearance.Z.Body.Small">
+        <item name="android:textColor">@color/bluegrey_800</item>
+    </style>
     <dimen name="tip_view_text_size">16sp</dimen>
     <dimen name="tip_view_small_text_size">14sp</dimen>
 
@@ -46,22 +54,12 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingLeft">@dimen/tip_view_padding_x</item>
         <item name="android:paddingRight">@dimen/tip_view_padding_x</item>
-        <item name="android:paddingTop">@dimen/tip_view_padding_x</item>
-        <item name="android:paddingBottom">@dimen/tip_view_padding_x</item>
-        <item name="frameColor">@color/tip_view_frame_color</item>
-        <item name="android:textColor">@color/tip_view_text_color</item>
-        <item name="android:textSize">@dimen/tip_view_text_size</item>
+        <item name="android:paddingTop">@dimen/tip_view_padding_y</item>
+        <item name="android:paddingBottom">@dimen/tip_view_padding_y</item>
         <item name="frameRadius">@dimen/tip_view_frame_radius</item>
         <item name="arrowSize">@dimen/tip_view_arrow_size</item>
         <item name="arrowOffset">@dimen/tip_view_arrow_offset</item>
         <item name="dismissDelay">3000</item>
-    </style>
-
-    <!-- frame drawable -->
-
-    <style name="ZTipView.Frame">
-        <item name="fillColor">@color/tip_view_frame_color</item>
-        <item name="borderRadius">@dimen/tip_view_frame_radius</item>
     </style>
 
 </resources>

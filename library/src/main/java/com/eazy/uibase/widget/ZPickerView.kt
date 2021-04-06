@@ -1,6 +1,7 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -93,6 +94,12 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         layoutSelectImage()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        listView.removeItemDecorationAt(0)
+        listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1, ContextCompat.getColor(context, R.color.blue_100)))
     }
 
     /* private */
