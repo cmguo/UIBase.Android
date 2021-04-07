@@ -18,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId "com.xhb.uibase.demo"
-        minSdkVersion 25
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -27,6 +27,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.XHB
+        }
         release {
             minifyEnabled false
             //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

@@ -25,7 +25,7 @@
     <!-- background drawable -->
 
     <style name="XHBSearchBox.InputBackground">
-        <item name="backgroundColor">@color/xhb_search_box_input_background_color</item>
+        <item name="fillColor">@color/xhb_search_box_input_background_color</item>
         <item name="borderRadius">@dimen/xhb_search_box_input_border_radius</item>
     </style>
 

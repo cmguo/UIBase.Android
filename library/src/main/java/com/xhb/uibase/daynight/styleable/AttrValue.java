@@ -7,52 +7,62 @@ import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
+import static android.content.pm.ActivityInfo.CONFIG_UI_MODE;
+
 public class AttrValue<E extends View> {
 
     private static final String TAG = "AttrValue";
 
-    public static <E extends View> AttrValue<E> make(IStyleable<E> styleable, int id, boolean fromTheme) {
+    public static <E extends View> AttrValue<E> make(IStyleable<E> styleable, TypedValue value) {
         AttrValue<E> attrValue = new AttrValue<>();
         attrValue.mStyleable = styleable;
-        attrValue.mValue = id;
-        attrValue.mFromTheme = fromTheme;
+        attrValue.mValue = value;
         return attrValue;
     }
 
     IStyleable<E> mStyleable;
-    int mValue;
-    boolean mFromTheme;
+    TypedValue mValue;
 
-    public int getValue() {
+    public TypedValue getValue() {
         return mValue;
     }
 
+    public static boolean maybeThemed(TypedValue v) {
+        return (v.changingConfigurations & CONFIG_UI_MODE) != 0
+            || v.type == TypedValue.TYPE_REFERENCE
+            || (v.type == TypedValue.TYPE_STRING && v.data != 0 && v.string.toString().startsWith("res/"));
+    }
+
     public boolean isFromTheme() {
-        return mFromTheme;
+        return mValue.type == TypedValue.TYPE_ATTRIBUTE;
+    }
+
+    public boolean isThemed() {
+        return mValue.type == TypedValue.TYPE_ATTRIBUTE || mValue.changingConfigurations != 0;
     }
 
     public void apply(E view) {
-        Log.d(TAG, "apply " + mValue + " " + mFromTheme);
+        Log.d(TAG, "apply " + mValue);
         Context context = view.getContext();
-        int id = mValue;
+        int id = mValue.resourceId;
         TypedValue value = new TypedValue();
-        if (mFromTheme) {
+        if (isFromTheme()) {
             if (!context.getTheme().resolveAttribute(id, value, false)) {
                 return;
             }
             if (value.type != TypedValue.TYPE_REFERENCE)
                 return;
         } else {
-            value.data = id;
+            value.resourceId = id;
             value.type = TypedValue.TYPE_REFERENCE;
         }
-        Log.d(TAG, "apply " + context.getResources().getResourceName(value.data));
+        Log.d(TAG, "apply " + context.getResources().getResourceName(value.resourceId));
         mStyleable.apply(view, value);
     }
 
     @NotNull
     @Override
     public String toString() {
-        return Integer.toHexString(mValue) + ": " + mStyleable;
+        return mValue.toString();
     }
 }
