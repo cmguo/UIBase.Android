@@ -16,7 +16,7 @@ class StyleableSetZRoundIndicator : StyleableSet<ZRoundIndicator>() {
             view.color = ContextCompat.getColor(view.context, value.resourceId)
         }
         addStyleable(R.attr.splitterColor) { view: ZRoundIndicator, value: TypedValue ->
-            view.splitterColor = ContextCompat.getColor(view.context, value.data)
+            view.splitterColor = ContextCompat.getColor(view.context, value.resourceId)
         }
     }
 

@@ -18,7 +18,7 @@ class ZRadioButtonComponent : Component {
     }
 
     override fun icon(): Int {
-        return android.R.drawable.btn_plus
+        return R.drawable.img_share_class
     }
 
     override fun title(): Int {

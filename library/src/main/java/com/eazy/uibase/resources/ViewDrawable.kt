@@ -4,10 +4,12 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.PixelFormat
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
 import androidx.annotation.LayoutRes
 
 class ViewDrawable(private val view: View) : Drawable() {

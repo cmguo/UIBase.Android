@@ -34,15 +34,15 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
     var singleSelection = false
         set(value) {
             field = value
-            adapter.notifyDataSetChanged()
-            selectImage.visibility = if (value && selection != null) View.VISIBLE else View.INVISIBLE
+            _adapter.notifyDataSetChanged()
+            _selectImage.visibility = if (value && selection != null) View.VISIBLE else View.INVISIBLE
         }
 
     var selections: List<Int> = ArrayList<Int>()
         set(value) {
             field = value
-            adapter.notifyDataSetChanged()
-            selectImage.visibility = if (singleSelection && selection != null) View.VISIBLE else View.INVISIBLE
+            _adapter.notifyDataSetChanged()
+            _selectImage.visibility = if (singleSelection && selection != null) View.VISIBLE else View.INVISIBLE
         }
 
     var selection: Int?
@@ -53,9 +53,9 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     var listener: OnSelectionChangeListener? = null
 
-    private val listView: RecyclerView
-    private val selectImage: ImageView
-    private val adapter = PickerAdapter(this)
+    private val _listView: RecyclerView
+    private val _selectImage: ImageView
+    private val _adapter = PickerAdapter(this)
 
     companion object {
         private const val TAG = "ZPickerView"
@@ -63,14 +63,14 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     init {
         LayoutInflater.from(context).inflate(R.layout.picker_view, this)
-        listView = findViewById(R.id.listView)
-        selectImage = findViewById(R.id.selectImage)
+        _listView = findViewById(R.id.listView)
+        _selectImage = findViewById(R.id.selectImage)
 
-        listView.adapter = adapter
-        listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1, ContextCompat.getColor(context, R.color.blue_100)))
-        listView.layoutManager = LinearLayoutManager(context)
+        _listView.adapter = _adapter
+        _listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.layoutManager = LinearLayoutManager(context)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            listView.setOnScrollChangeListener { _: View, _: Int, _: Int, _: Int, _: Int ->
+            _listView.setOnScrollChangeListener { _: View, _: Int, _: Int, _: Int, _: Int ->
                 layoutSelectImage()
             }
         }
@@ -98,8 +98,8 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
-        listView.removeItemDecorationAt(0)
-        listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.removeItemDecorationAt(0)
+        _listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1, ContextCompat.getColor(context, R.color.blue_100)))
     }
 
     /* private */
@@ -108,7 +108,7 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         if (singleSelection) {
             (selections as ArrayList<Int>).clear()
             (selections as ArrayList<Int>).add(index)
-            selectImage.visibility = View.VISIBLE
+            _selectImage.visibility = View.VISIBLE
             layoutSelectImage()
         } else if (selected) {
             (selections as ArrayList<Int>).add(selections.indexOfLast { it < index } + 1, index)
@@ -122,10 +122,10 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         if (!singleSelection)
             return
         val s = selection ?: return
-        val holder = listView.findViewHolderForAdapterPosition(s) as? PickerHolder
+        val holder = _listView.findViewHolderForAdapterPosition(s) as? PickerHolder
         if (holder != null) {
             val cb = holder.checkBoxBounds()
-            selectImage.layout(cb.left, cb.top, cb.right, cb.bottom)
+            _selectImage.layout(cb.left, cb.top, cb.right, cb.bottom)
         }
     }
 

@@ -166,6 +166,9 @@ class ZAppTitleBar @JvmOverloads constructor(
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
         updateLayout()
+        if (_imageView.drawable is ViewDrawable) {
+            _imageView.drawable.invalidateSelf()
+        }
     }
 
     /* private */
