@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="end"
+            android:textAppearance="@style/TextAppearance.XHB.Head2"
             android:text="@{data.style.title}"/>
 
         <TextView

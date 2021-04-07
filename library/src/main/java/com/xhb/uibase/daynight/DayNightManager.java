@@ -33,17 +33,25 @@ public class DayNightManager {
             AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 
-    public void setDayNightModel(AppCompatActivity activity, boolean isNight) {
+    public void setDayNightModel(boolean isNight) {
         int mode = isNight ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
         AppCompatDelegate.setDefaultNightMode(mode);
         saveNightModel(isNight);
-        if (activity.getDelegate().getLocalNightMode() != mode) {
-            // setLocalNightMode will cause onConfigurationChanged to be invoked
-            //  some customs views will response to onConfigurationChanged
-            activity.getDelegate().setLocalNightMode(mode);
-            for (DayNightViewInflater inflater : inflaterList)
-                inflater.updateViews();
+        for (DayNightViewInflater inflater : inflaterList) {
+            if (inflater.getActivity() instanceof  AppCompatActivity) {
+                AppCompatActivity activity = (AppCompatActivity) inflater.getActivity();
+                if (activity.getDelegate().getLocalNightMode() != mode) {
+                    // setLocalNightMode will cause onConfigurationChanged to be invoked
+                    //  some customs views will response to onConfigurationChanged
+                    activity.getDelegate().setLocalNightMode(mode);
+                }
+            }
+            inflater.updateViews();
         }
+    }
+
+    public boolean isNightMode() {
+        return AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
     }
 
     private final List<DayNightViewInflater> inflaterList = new ArrayList<>();

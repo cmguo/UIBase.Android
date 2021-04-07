@@ -161,7 +161,7 @@ open class XHBButton @JvmOverloads constructor(
         val width = MeasureSpec.getSize(widthMeasureSpec)
         super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.UNSPECIFIED), heightMeasureSpec)
         val width2 = measuredWidth
-        if (width2 < width) {
+        if (width2 != width) {
             val d = (width - width2) / 2
             setPadding(paddingLeft + d, paddingTop, paddingRight + d, paddingBottom)
         }

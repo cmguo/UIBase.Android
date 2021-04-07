@@ -16,7 +16,7 @@ class StyleableSetXHBRoundIndicator : StyleableSet<XHBRoundIndicator>() {
             view.color = ContextCompat.getColor(view.context, value.resourceId)
         }
         addStyleable(R.attr.splitterColor) { view: XHBRoundIndicator, value: TypedValue ->
-            view.splitterColor = ContextCompat.getColor(view.context, value.data)
+            view.splitterColor = ContextCompat.getColor(view.context, value.resourceId)
         }
     }
 

@@ -18,7 +18,7 @@ class XHBBadgeViewComponent : Component {
     }
 
     override fun icon(): Int {
-        return android.R.drawable.btn_plus
+        return R.drawable.img_share_space
     }
 
     override fun title(): Int {

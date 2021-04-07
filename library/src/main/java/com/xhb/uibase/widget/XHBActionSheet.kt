@@ -1,6 +1,7 @@
 package com.xhb.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -104,6 +105,12 @@ class XHBActionSheet @JvmOverloads constructor(context: Context, attrs: Attribut
         if (titlesId > 0) {
             titles = resources.getStringArray(titlesId).toList()
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        _listView.removeItemDecorationAt(0)
+        _listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1, ContextCompat.getColor(context, R.color.blue_100)))
     }
 
     /* private */

@@ -27,8 +27,7 @@
     <FrameLayout
         android:id="@+id/component_xhb_buttons"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".TestComponent">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/button_list"

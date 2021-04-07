@@ -18,7 +18,7 @@ class XHBCheckBoxComponent : Component {
     }
 
     override fun icon(): Int {
-        return android.R.drawable.btn_plus
+        return R.drawable.img_share_moment
     }
 
     override fun title(): Int {

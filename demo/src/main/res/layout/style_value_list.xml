@@ -14,6 +14,7 @@
     <androidx.appcompat.widget.AppCompatSpinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:popupBackground="@color/bluegrey_00"
         app:itemLayout="@{value.itemLayout}"
         app:entries="@{value.style.values}"
         android:selection="@={value.selection}">

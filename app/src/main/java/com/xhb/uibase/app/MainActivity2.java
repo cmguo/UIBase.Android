@@ -123,6 +123,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_activity2, menu);
+        menu.findItem(R.id.action_skin_dark).setChecked(DayNightManager.getInstance().isNightMode());
         return true;
     }
 
@@ -134,7 +135,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
             return true;
         } else if (item.getItemId() == R.id.action_skin_dark) {
             item.setChecked(!item.isChecked());
-            DayNightManager.getInstance().setDayNightModel(this, item.isChecked());
+            DayNightManager.getInstance().setDayNightModel(item.isChecked());
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -151,7 +152,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         for (Map.Entry<Integer, List<Component>> g : components.entrySet()) {
             SubMenu sm = menu.addSubMenu(0, g.getKey(), 0, g.getKey());
             for (Component c : g.getValue()) {
-                Log.d(TAG, "buildNavMenu id=" + c.id() + ", title=" + c.title());
+                Log.d(TAG, "buildNavMenu id=" + c.id() + ", title=" + c.title() + ", icon=" + c.icon());
                 sm.add(0, c.id(), 0, c.title()).setIcon(c.icon());
             }
         }

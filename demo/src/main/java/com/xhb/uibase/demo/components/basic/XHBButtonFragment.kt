@@ -58,7 +58,7 @@ class XHBButtonFragment : ComponentFragment<XhbButtonFragmentBinding?,
         @Description("有下列宽度模式：适应内容（WrapContent）、适应布局（MatchParent），默认：WrapContent")
         @ValueTitles("WrapContent", "MatchParent")
         @Values("-2", "-1")
-        var widthMode = ViewGroup.LayoutParams.WRAP_CONTENT
+        var widthMode = ViewGroup.LayoutParams.MATCH_PARENT
 
         @Bindable
         @Title("内容")
