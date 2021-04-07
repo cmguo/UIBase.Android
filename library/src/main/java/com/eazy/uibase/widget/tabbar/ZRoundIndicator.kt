@@ -47,7 +47,10 @@ class ZRoundIndicator @JvmOverloads constructor(
 
     var color: Int
         get() = fillColor
-        set(value) { fillColor = value }
+        set(value) {
+            fillColor = value
+            invalidate()
+        }
 
     var splitterWidth = 0f
     var splitterHeight = 0f

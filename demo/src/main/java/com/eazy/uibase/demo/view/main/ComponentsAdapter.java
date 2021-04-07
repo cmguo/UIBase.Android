@@ -1,5 +1,6 @@
 package com.eazy.uibase.demo.view.main;
 
+/*
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.eazy.uibase.demo.core.ComponentInfo;
 /**
  * 为RecyclerView提供数据
  */
+/*
 public class ComponentsAdapter extends
         ListTreeAdapter<ComponentsAdapter.BaseViewHolder> {
 
@@ -150,3 +152,4 @@ public class ComponentsAdapter extends
         }
     }
 }
+*/

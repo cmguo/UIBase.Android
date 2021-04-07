@@ -14,6 +14,7 @@ import com.google.auto.service.AutoService;
 import com.eazy.uibase.R;
 import com.eazy.uibase.daynight.styleable.AttrValue;
 import com.eazy.uibase.daynight.styleable.AttrValueSet;
+import com.eazy.uibase.daynight.styleable.IStyleable;
 import com.eazy.uibase.daynight.styleable.IStyleableSet;
 import com.eazy.uibase.daynight.styleable.StyleableSet;
 
@@ -23,31 +24,34 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
     private static final String TAG = "StyleableSetTextView";
 
     public StyleableSetTextView() {
-        addStyleable("textColor", (view, value) ->
-            view.setTextColor(ContextCompat.getColorStateList(view.getContext(), value.data)));
-        addStyleable("textAppearance", (view, value) ->
-            TextViewCompat.setTextAppearance(view, value.data));
-    }
-
-    @Override
-    public void analyze(Context context, AttributeSet attrs, AttrValueSet<? extends TextView> attrValueSet) {
-        super.analyze(context, attrs, attrValueSet);
-        AttrValue<?> textAppearance = attrValueSet.get("textAppearance");
-        if (textAppearance != null && !textAppearance.isFromTheme() && attrValueSet.get("textColor") == null) {
-            TypedArray a = context.obtainStyledAttributes(textAppearance.getValue(), R.styleable.StyleableSetTextView);
-            TypedValue value = new TypedValue();
-            if (a.getValue(R.styleable.StyleableSetTextView_android_textColor, value)) {
-                if (value.type == TypedValue.TYPE_STRING) { // xml color
-                    value.type = TypedValue.TYPE_REFERENCE;
-                    value.data = value.resourceId;
-                }
-                if (value.type == TypedValue.TYPE_ATTRIBUTE || value.type == TypedValue.TYPE_REFERENCE) {
-                    Log.d(TAG, "analyze textColor=" + context.getResources().getResourceName(value.data));
-                    attrValueSet.put("textColor", getStyleable("textColor"), value.data, value.type == TypedValue.TYPE_ATTRIBUTE);
+        addStyleable(android.R.attr.textColor, (view, value) ->
+            view.setTextColor(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
+        addStyleable(android.R.attr.textAppearance, new IStyleable<TextView>() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public void prepare(Context context, AttrValueSet<TextView> attrValueSet) {
+                AttrValue<TextView> textAppearance = (AttrValue<TextView>) attrValueSet.get(android.R.attr.textAppearance);
+                if (textAppearance == null || textAppearance.isThemed())
+                    return;
+                attrValueSet.remove(android.R.attr.textAppearance);
+                if (attrValueSet.get(android.R.attr.textColor) == null) {
+                    TypedValue value2 = textAppearance.getValue();
+                    TypedArray a = context.obtainStyledAttributes(value2.resourceId, R.styleable.StyleableSetTextView);
+                    TypedValue value = new TypedValue();
+                    if (a.getValue(R.styleable.StyleableSetTextView_android_textColor, value)) {
+                        if (AttrValue.maybeThemed(value)) {
+                            Log.d(TAG, "analyze textColor=" + context.getResources().getResourceName(value.resourceId));
+                            attrValueSet.put(android.R.attr.textColor, getStyleable(android.R.attr.textColor), value);
+                        }
+                    }
+                    a.recycle();
                 }
             }
-            a.recycle();
-        }
-        attrValueSet.remove("textAppearance");
+            @Override
+            public void apply(TextView view, TypedValue value) {
+                TextViewCompat.setTextAppearance(view, value.data);
+            }
+        });
     }
+
 }

@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eazy.uibase.demo.R;
-import com.eazy.uibase.demo.core.ComponentInfo;
+//import com.eazy.uibase.demo.core.ComponentInfo;
 
 public class ComponentsFragment extends Fragment {
 
@@ -38,12 +38,14 @@ public class ComponentsFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ComponentsViewModel.class);
         RecyclerView listView = (RecyclerView) getView().findViewById(R.id.componentsList);
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
+        /*
         listView.setAdapter(new ComponentsAdapter(mViewModel.buildTree(getContext()), new ComponentsAdapter.OnItemClickListener<ComponentInfo>() {
             @Override
             public void onClick(RecyclerView recyclerView, View view, ComponentInfo data) {
                 //((MainActivity) getActivity()).switchComponent(data.getComponent());
             }
         }, null));
+         */
     }
 
 }

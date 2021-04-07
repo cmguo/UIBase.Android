@@ -12,7 +12,7 @@ import com.eazy.uibase.daynight.styleable.StyleableSet;
 public class StyleableSetView extends StyleableSet<View> {
 
     public StyleableSetView() {
-        addStyleable("background", (view, value) ->
-            view.setBackground(ContextCompat.getDrawable(view.getContext(), value.data)));
+        addStyleable(android.R.attr.background, (view, value) ->
+            view.setBackground(ContextCompat.getDrawable(view.getContext(), value.resourceId)));
     }
 }

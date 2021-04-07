@@ -113,6 +113,7 @@
     </style>
 
     <style name="ZTabNavigator.Flat" parent="ZTabNavigator">
+        <item name="backgroundColor">@color/bluegrey_00</item>
         <item name="gravityCenter">true</item>
     </style>
 

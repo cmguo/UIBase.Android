@@ -47,4 +47,8 @@
         <item name="android:textColor">@color/bluegrey_700</item>
     </style>
 
+    <style name="EmptyTextAppearance">
+        <!-- for TextView sub class not controlled by textAppearance, for example ZButton -->
+    </style>
+
 </resources>

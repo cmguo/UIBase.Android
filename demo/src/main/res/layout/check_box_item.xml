@@ -34,13 +34,22 @@
             android:textAppearance="@style/TextAppearance.Z.Head2"
             android:text="@{data.state.toString()}" />
 
-        <com.eazy.uibase.widget.ZCheckBox
-            android:id="@+id/check_box"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:checkedState="@={(CheckedState) data.state}"
-            android:enabled="@{!styles.disabled}"
-            android:text="@{styles.text}"/>
+            android:layout_weight="1"
+            >
+
+            <com.eazy.uibase.widget.ZCheckBox
+                android:id="@+id/check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:checkedState="@={(CheckedState) data.state}"
+                android:enabled="@{!styles.disabled}"
+                android:text="@{styles.text}"/>
+
+        </FrameLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

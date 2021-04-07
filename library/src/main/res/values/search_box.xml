@@ -25,7 +25,7 @@
     <!-- background drawable -->
 
     <style name="ZSearchBox.InputBackground">
-        <item name="backgroundColor">@color/search_box_input_background_color</item>
+        <item name="fillColor">@color/search_box_input_background_color</item>
         <item name="borderRadius">@dimen/search_box_input_border_radius</item>
     </style>
 

@@ -29,28 +29,38 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
             android:textAppearance="@style/TextAppearance.Z.Head2"
             android:paddingStart="5dp"
             android:singleLine="true"
             android:text="@{data.toString()}"/>
 
-        <com.eazy.uibase.widget.ZButton
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            xhb:buttonType="@{data}"
-            xhb:buttonSize="@{styles.buttonSize}"
-            xhb:buttonAppearance="@{styles.buttonAppearance}"
-            xhb:content="@{styles.conntent}"
-            xhb:icon="@{styles.icon}"
-            xhb:iconAtRight="@{styles.iconAtRight}"
-            xhb:loading="@{styles.loading}"
-            android:enabled="@{!styles.disabled}"
-            android:onClick="@{(view) -> styles.testButtonClick(view)}"
-            android:text="@{styles.text}"/>
+            android:layout_weight="1"
+            >
+
+            <com.eazy.uibase.widget.ZButton
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                xhb:buttonType="@{data}"
+                xhb:buttonSize="@{styles.buttonSize}"
+                xhb:buttonAppearance="@{styles.buttonAppearance}"
+                xhb:content="@{styles.conntent}"
+                xhb:icon="@{styles.icon}"
+                xhb:iconAtRight="@{styles.iconAtRight}"
+                xhb:loading="@{styles.loading}"
+                android:enabled="@{!styles.disabled}"
+                android:onClick="@{(view) -> styles.testButtonClick(view)}"
+                android:text="@{styles.text}"/>
+
+        </FrameLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

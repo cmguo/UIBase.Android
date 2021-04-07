@@ -36,6 +36,7 @@ class ZTabBar @JvmOverloads constructor(
         //navigator.layoutParams = lp
         setNavigator(navigator)
 
+        // for test
         if (titles > 0) {
             MagicIndicatorBindingAdapter.setMagicIndicatorTitles<String>(this,
                 titles, R.layout.tab_title, R.layout.round_indicator, null, null, null);
