@@ -13,6 +13,12 @@
     </style>
 
     <declare-styleable name="XHBTimePickerView">
+        <attr name="timeMode" format="enum">
+            <enum name="yearMonthDay" value="0"/>
+            <enum name="yearMonthWithDayWithWeek" value="1"/>
+            <enum name="monthWithDayWithWeekHourMinute" value="2"/>
+        </attr>
+        <attr name="timeInterval" format="integer"/>
         <attr name="labels" format="string"/>
         <attr name="itemsVisibleCount" format="integer"/>
         <attr name="cyclic" format="boolean"/>
