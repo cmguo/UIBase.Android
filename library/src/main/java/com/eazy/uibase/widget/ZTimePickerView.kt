@@ -9,7 +9,7 @@ import com.bigkoo.pickerview.configure.PickerOptions
 import com.bigkoo.pickerview.listener.CustomListener
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener
 import com.bigkoo.pickerview.view.TimePickerView
-import com.bigkoo.pickerview.view.WheelTime
+import com.bigkoo.pickerview.view.WheelTime2
 import com.eazy.uibase.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,22 +22,52 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
         fun onSelectTimeChanged(picker: ZTimePickerView, time: Date)
     }
 
-    enum class TimeType {
-        YearMonthDay,
-
+    enum class TimeMode(val mode : Int) {
+        YearMonthDay(0b110100000),
+        YearMonthWithDayWithWeek(0b1110010000),
+        MonthWithDayWithWeekHourMinute(0b1010010110);
     }
 
-    var labels: Array<String>?
-        get() = arrayOf(_options.label_year, _options.label_month, _options.label_day,
-            _options.label_hours,  _options.label_minutes,  _options.label_seconds)
+    var timeMode: TimeMode = TimeMode.YearMonthDay
+        set(value) {
+            field = value
+            if (_inited && timeMode2 == 0) {
+                _wheel.setMode(value.mode shr 4, value.mode and 15)
+            }
+        }
+    
+    var timeMode2 = 0
+        set(value) {
+            if (_inited) {
+                field = value
+                if (value == 0)
+                    timeMode = timeMode
+                else
+                    _wheel.setMode(value shr 4, value and 15)
+            }
+        }
+
+    var timeInterval = 1
+        set(value) {
+            field = value
+            if (_inited) {
+                _wheel.setInterval(value)
+            }
+        }
+
+    var labels: Array<String?>?
+        get() = arrayOf(_options.label_year, _options.label_month, null, _options.label_day,
+            null, _options.label_hours,  _options.label_minutes,  _options.label_seconds)
         set(value) {
             if (value != null && value.size == 6) {
                 _options.label_year = value[0]
                 _options.label_month = value[1]
-                _options.label_day = value[2]
-                _options.label_hours = value[3]
-                _options.label_minutes = value[4]
-                _options.label_seconds = value[5]
+                // WEEK
+                _options.label_day = value[3]
+                // AM_PM
+                _options.label_hours = value[5]
+                _options.label_minutes = value[6]
+                _options.label_seconds = value[7]
             }
         }
 
@@ -118,7 +148,7 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
 
     private val _options = PickerOptions(PickerOptions.TYPE_PICKER_TIME)
     private var _picker: TimePickerView
-    private val _wheel: WheelTime
+    private val _wheel: WheelTime2
 
     private var _inited = false
 
@@ -126,6 +156,8 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
         initOptions(context)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZTimePickerView, R.attr.timePickerViewStyle, 0)
+        var type = a.getInt(R.styleable.ZTimePickerView_timeMode, 0)
+        var interval = a.getInt(R.styleable.ZTimePickerView_timeInterval, 1)
         val titles = a.getString(R.styleable.ZTimePickerView_labels)
         cyclic = a.getBoolean(R.styleable.ZTimePickerView_cyclic, cyclic)
         centerLabel = a.getBoolean(R.styleable.ZTimePickerView_centerLabel, cyclic)
@@ -152,8 +184,10 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
         }
 
         _picker = TimePickerView(_options)
-        _wheel = wheelTime.get(_picker) as WheelTime
+        _wheel = wheelTime.get(_picker) as WheelTime2
         _inited = true
+        timeInterval = interval
+        timeMode = TimeMode.values()[type];
         _picker.show()
     }
 
