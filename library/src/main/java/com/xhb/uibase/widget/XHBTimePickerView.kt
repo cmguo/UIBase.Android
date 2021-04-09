@@ -56,19 +56,9 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
         }
 
     var labels: Array<String?>?
-        get() = arrayOf(_options.label_year, _options.label_month, null, _options.label_day,
-            null, _options.label_hours,  _options.label_minutes,  _options.label_seconds)
+        get() = _options.labels
         set(value) {
-            if (value != null && value.size == 6) {
-                _options.label_year = value[0]
-                _options.label_month = value[1]
-                // WEEK
-                _options.label_day = value[3]
-                // AM_PM
-                _options.label_hours = value[5]
-                _options.label_minutes = value[6]
-                _options.label_seconds = value[7]
-            }
+            _options.labels = value
         }
 
     var centerLabel
@@ -77,7 +67,6 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
             _options.isCenterLabel = value
             if (_inited) {
                 _wheel.isCenterLabel(value)
-                refresh()
             }
         }
 
@@ -87,7 +76,6 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
             _options.itemsVisibleCount = value
             if (_inited) {
                 _wheel.setItemsVisible(value)
-                refresh()
             }
         }
 
@@ -97,7 +85,6 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
             _options.cyclic = value
             if (_inited) {
                 _wheel.setCyclic(value)
-                refresh()
             }
         }
 
@@ -115,10 +102,9 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
             val date = calendar(value)
             if (date == _options.date)
                 return
+            _options.date = date
             if (_inited) {
-                _picker.setDate(date) // will modify _options.date
-            } else {
-                _options.date = date
+                _picker.setDate(date)
             }
         }
 
@@ -126,6 +112,8 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
         get() = _options.startDate?.time
         set(value) {
             _options.startDate = calendar(value)
+            if (_inited)
+                setRange()
         }
 
     var endTime: Date?
@@ -156,8 +144,8 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
         initOptions(context)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.XHBTimePickerView, R.attr.timePickerViewStyle, 0)
-        var type = a.getInt(R.styleable.XHBTimePickerView_timeMode, 0)
-        var interval = a.getInt(R.styleable.XHBTimePickerView_timeInterval, 1)
+        val type = a.getInt(R.styleable.XHBTimePickerView_timeMode, 0)
+        val interval = a.getInt(R.styleable.XHBTimePickerView_timeInterval, 1)
         val titles = a.getString(R.styleable.XHBTimePickerView_labels)
         cyclic = a.getBoolean(R.styleable.XHBTimePickerView_cyclic, cyclic)
         centerLabel = a.getBoolean(R.styleable.XHBTimePickerView_centerLabel, cyclic)
@@ -187,7 +175,7 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
         _wheel = wheelTime.get(_picker) as WheelTime2
         _inited = true
         timeInterval = interval
-        timeMode = TimeMode.values()[type];
+        timeMode = TimeMode.values()[type]
         _picker.show()
     }
 
@@ -208,11 +196,9 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
         private const val TAG = "XHBTimePickerView"
 
         private val wheelTime = TimePickerView::class.java.getDeclaredField("wheelTime")
-        private val setRangDate = TimePickerView::class.java.getDeclaredMethod("setRangDate")
 
         init {
             wheelTime.isAccessible = true
-            setRangDate.isAccessible = true
         }
 
         private fun calendar(date: Date?) : Calendar? {
@@ -236,12 +222,7 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
     }
 
     private fun setRange() {
-        setRangDate(_picker)
-        refresh()
-    }
-
-    private fun refresh() {
-        _picker.setDate(_options.date)
+        _wheel.setRangDate(_options.startDate, _options.endDate)
     }
 
     private fun updateTextAppearance() {
@@ -256,11 +237,10 @@ class XHBTimePickerView @JvmOverloads constructor(context: Context, attrs: Attri
             if (_inited) {
                 _wheel.setTextColorOut(_options.textColorOut)
                 _wheel.setTextColorCenter(_options.textColorCenter)
-                refresh()
             }
         }
          if (size > 0)
-            _options.textSizeContent = (size / context.getResources().getDisplayMetrics().density).toInt()
+            _options.textSizeContent = (size / context.resources.displayMetrics.density).toInt()
     }
 
 }
