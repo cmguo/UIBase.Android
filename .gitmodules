@@ -2,3 +2,8 @@
 	path = Android-PickerView
 	url = https://github.com/cmguo/Android-PickerView.git
 	branch=master
+[submodule "MagicIndicator"]
+	path = MagicIndicator
+	url = https://github.com/cmguo/MagicIndicator.git
+	branch=master
+
