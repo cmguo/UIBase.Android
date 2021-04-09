@@ -176,7 +176,7 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
         _inited = true
         timeInterval = interval
         timeMode = TimeMode.values()[type]
-        _picker.show()
+        _picker.show(this, false)
     }
 
     override fun onTimeSelectChanged(date: Date) {
@@ -218,7 +218,7 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
         _options.isDialog = false
         _options.decorView = this
         _options.timeSelectChangeListener = this
-        _options.outSideColor = ContextCompat.getColor(context, R.color.bluegrey_00)
+        _options.outSideColor = 0
     }
 
     private fun setRange() {

@@ -446,8 +446,8 @@ class ZTipView @JvmOverloads constructor(
             return Point(loc[0], loc[1])
         }
         val rootView = target.rootView
-        rootView.getLocationInWindow(loc)
-        val wBounds = Rect(loc[0], loc[1], rootView.width, rootView.height)
+        val wBounds = Rect()
+        rootView.getWindowVisibleDisplayFrame(wBounds)
         // for toast location
         if (location == Location.AutoToast) {
             if (toastCount <= 0) {

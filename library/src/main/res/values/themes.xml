@@ -26,4 +26,9 @@
 
     </style>
 
+    <style name="Theme.Z.DayNight">
+        <!-- for day night inspect -->
+        <item name="viewInflaterClass">com.eazy.uibase.daynight.DayNightViewInflater</item>
+    </style>
+
 </resources>

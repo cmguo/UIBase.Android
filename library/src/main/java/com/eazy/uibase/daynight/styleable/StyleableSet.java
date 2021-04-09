@@ -2,6 +2,7 @@ package com.eazy.uibase.daynight.styleable;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -47,6 +48,9 @@ public class StyleableSet<E extends View> implements IStyleableSet<E> {
     @SuppressWarnings("unchecked")
     public static <E extends View> AttrValueSet<E> createAttrValueSet(E view, AttributeSet attrs) {
         Log.d(TAG, "createAttrValueSet " + view);
+//        if (view.getId() == R.id.information_fragment) {
+//            Log.d(TAG, "createAttrValueSet " + view);
+//        }
         Context context = view.getContext();
         Map<Integer, IStyleable<? extends E>> styleableAttrs = new TreeMap<>();
         Class<? extends View> cls = (Class<? extends View>) view.getClass();

@@ -7,6 +7,7 @@ import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
+import static android.content.pm.ActivityInfo.CONFIG_DENSITY;
 import static android.content.pm.ActivityInfo.CONFIG_UI_MODE;
 
 public class AttrValue<E extends View> {
@@ -28,7 +29,8 @@ public class AttrValue<E extends View> {
     }
 
     public static boolean maybeThemed(TypedValue v) {
-        return (v.changingConfigurations & CONFIG_UI_MODE) != 0
+        // TODO: SDK21(5.1) v.changingConfigurations = 4096
+        return (v.changingConfigurations & (CONFIG_UI_MODE | CONFIG_DENSITY)) != 0
             || v.type == TypedValue.TYPE_REFERENCE
             || (v.type == TypedValue.TYPE_STRING && v.data != 0 && v.string.toString().startsWith("res/"));
     }

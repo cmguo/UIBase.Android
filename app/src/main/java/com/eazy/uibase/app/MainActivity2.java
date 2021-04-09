@@ -83,12 +83,6 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         findViewById(R.id.component_fragment).setBackground(gridDrawable);
     }
 
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        findViewById(android.R.id.content).dispatchConfigurationChanged(newConfig);
-    }
-
     private static final Rect RECT = new Rect();
     private static final int[] LOCATION = new int[2];
     private static final MotionEvent.PointerCoords COORDS = new MotionEvent.PointerCoords();
