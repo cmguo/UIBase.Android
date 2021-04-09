@@ -1,0 +1,4 @@
+[submodule "Android-PickerView"]
+	path = Android-PickerView
+	url = https://github.com/cmguo/Android-PickerView.git
+	branch=master
