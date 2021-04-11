@@ -32,7 +32,7 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
 
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder<T> holder, int position) {
-        T item = mItems.get(position);
+        T item = getItem(position);
         holder.bind(mItemBinding, item, position);
     }
 
@@ -41,9 +41,13 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         return mItems.size();
     }
 
+    public T getItem(int position) {
+        return mItems.get(position);
+    }
+
     @Override
     public int getItemViewType(int position) {
-        return mItemBinding.getItemViewType(mItems.get(position));
+        return mItemBinding.getItemViewType(getItem(position));
     }
 
     public List<T> getData() {
@@ -115,7 +119,7 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
     public void onClick(View v) {
         int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
         if (mOnItemClickListener != null && position >= 0)
-            mOnItemClickListener.onItemClick(position, mItems.get(position));
+            mOnItemClickListener.onItemClick(position, getItem(position));
     }
 
     protected static class BindingViewHolder<T> extends RecyclerView.ViewHolder {

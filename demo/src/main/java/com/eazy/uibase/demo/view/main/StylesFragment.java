@@ -91,20 +91,19 @@ public class StylesFragment extends Fragment {
         }
 
         @Override
-        public int getItemViewType(int position) {
-            if (expandStyle > 0 && position == expandStyle)
-                return R.layout.style_desc;
-            if (expandStyle > 0 && position > expandStyle)
+        public StylesViewModel.StyleValue getItem(int position) {
+            if (expandStyle > 0 && position >= expandStyle)
                 --position;
-            return super.getItemViewType(position);
+            return super.getItem(position);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull BindingViewHolder<StylesViewModel.StyleValue> holder, int position) {
-            if (expandStyle > 0 && position >= expandStyle)
-                --position;
-            super.onBindViewHolder(holder, position);
+        public int getItemViewType(int position) {
+            if (expandStyle > 0 && position == expandStyle)
+                return R.layout.style_desc;
+            return super.getItemViewType(position);
         }
+
     }
 
     private StylesViewModel mViewModel;
