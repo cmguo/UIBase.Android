@@ -14,6 +14,7 @@ import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.annotation.Description
 import com.eazy.uibase.demo.core.style.annotation.Title
+import com.eazy.uibase.demo.databinding.CheckBoxItemBinding
 import com.eazy.uibase.demo.databinding.CompoundButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.RadioButtonItemBinding
 import com.eazy.uibase.view.list.PaddingDecoration
@@ -34,10 +35,34 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
     }
 
     class Model(fragment: ZCompoundButtonFragment) : ViewModel() {
+
         var states: List<StateItem> = when (fragment.component.id()) {
             R.id.component_z_check_boxes -> ZCheckBox.CheckedState.values().asList().map {StateItem(it) }
             else -> arrayListOf(false, true).map { StateItem(it) }
         }
+
+        @Bindable
+        var allCheckedState: ZCheckBox.CheckedState = ZCheckBox.CheckedState.HalfChecked
+            set(value) {
+                if (field == value)
+                    return
+                field = value
+                notifyPropertyChanged(BR.allCheckedState)
+                if (value == ZCheckBox.CheckedState.HalfChecked)
+                    return
+                for (s in states) {
+                    s.state = value
+                }
+            }
+
+        fun updateAllCheckedState() {
+            allCheckedState = when (states.filter { s -> s.state == ZCheckBox.CheckedState.FullChecked }.size) {
+                0 -> ZCheckBox.CheckedState.NotChecked
+                3 -> ZCheckBox.CheckedState.FullChecked
+                else -> ZCheckBox.CheckedState.HalfChecked
+            }
+        }
+
     }
 
     class Styles(private val fragment: ZCompoundButtonFragment) : ViewStyles() {
@@ -59,8 +84,14 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         @Description("改变文字，按钮会自动适应文字宽度")
         var text = "文字"
 
+        val checkBoxCheckedStateChanged = object : ZCheckBox.OnCheckedStateChangeListener {
+            override fun onCheckedStateChanged(checkBox: ZCheckBox, state: ZCheckBox.CheckedState) {
+                fragment.model.updateAllCheckedState()
+            }
+        }
+
         // simulate radio group
-        val radioCheckedChange = CompoundButton.OnCheckedChangeListener { view: View, isChecked: Boolean ->
+        val radioCheckedChanged = CompoundButton.OnCheckedChangeListener { view: View, isChecked: Boolean ->
             if (isChecked) {
                 val binding: RadioButtonItemBinding = DataBindingUtil.findBinding(view.parent as ViewGroup)!!
                 for (item in fragment.model.states) {

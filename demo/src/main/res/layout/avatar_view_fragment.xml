@@ -43,6 +43,7 @@
                 android:src="@drawable/component"
                 app:clipType="@{styles.clipType}"
                 app:clipRegion="@{styles.clipRegion}"
+                app:roundRadius="@{styles.roundRadius}"
                 app:borderWidth="@{styles.borderWidth}"
                 app:borderColor="@{styles.borderColor}"
                 />

@@ -23,13 +23,19 @@ class ZAvatarViewFragment : ComponentFragment<AvatarViewFragmentBinding?,
 
         @Bindable
         @Title("剪切方式")
-        @Description("剪切图片的方式，有 None，Circle，Ellipse三种方式，默认Circle方式")
+        @Description("剪切图片的方式，有 None，Circle，Ellipse，RoundSquare，RoundRect五种方式，默认Circle方式")
         var clipType = ZAvatarView.ClipType.Circle
 
         @Bindable
         @Title("剪切区域")
         @Description("剪切区域，有视图区域（WholeView）、图片区域（Drawable）两种方式")
         var clipRegion = ZAvatarView.ClipRegion.Drawable
+
+        @Bindable
+        @Title("剪切半径")
+        @Description("圆角剪切时，剪切圆角半径，设为0，则为直角")
+        @Style(DimemDpStyle::class)
+        var roundRadius = 0f
 
         @Bindable
         @Title("边框宽度")

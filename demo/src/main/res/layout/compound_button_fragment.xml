@@ -24,11 +24,42 @@
             type="Styles" />
     </data>
 
-    <FrameLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/component_compound_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".TestComponent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/Demo.ResourceItemTitle"
+                android:textAppearance="@style/TextAppearance.Z.Head2"
+                android:text="全选" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+
+                <com.eazy.uibase.widget.ZCheckBox
+                    android:id="@+id/check_box_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:checkedState="@={model.allCheckedState}"
+                    android:enabled="@{!styles.disabled}"
+                    android:text="@{styles.text}"/>
+
+            </FrameLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/compound_button_list"
@@ -41,6 +72,6 @@
         </androidx.recyclerview.widget.RecyclerView>
 
 
-    </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </layout>

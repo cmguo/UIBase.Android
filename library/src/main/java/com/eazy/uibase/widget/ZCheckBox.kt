@@ -40,8 +40,9 @@ class ZCheckBox @JvmOverloads constructor(
             }
         }
         set(value) {
-            isChecked = value == CheckedState.FullChecked
             _halfChecked = value == CheckedState.HalfChecked
+            super.setChecked(value == CheckedState.FullChecked)
+            onCheckedStateChangeListener?.onCheckedStateChanged(this, value)
             refreshDrawableState()
         }
 

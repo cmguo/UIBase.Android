@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:onCheckedChanged="@{styles.radioCheckedChange}"
+                android:onCheckedChanged="@{styles.radioCheckedChanged}"
                 android:checked="@={(Boolean) data.state}"
                 android:enabled="@{!styles.disabled}"
                 android:text="@{styles.text}"/>

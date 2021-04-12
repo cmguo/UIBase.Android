@@ -17,6 +17,8 @@ class ZAvatarView @JvmOverloads constructor(
         None,
         Circle,
         Ellipse,
+        RoundSquare,
+        RoundRect,
     }
 
     enum class ClipRegion {
@@ -40,6 +42,12 @@ class ZAvatarView @JvmOverloads constructor(
                 computeRoundBounds()
                 invalidate()
             }
+        }
+
+    var roundRadius = 0f
+        set(value) {
+            field = value
+            invalidate()
         }
 
     var borderColor = 0
@@ -136,7 +144,10 @@ class ZAvatarView @JvmOverloads constructor(
         dstCanvas.clipRect(clipBounds)
         // prepare mask
         xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OVER)
-        dstCanvas.drawOval(circleBounds, xferPaint)
+        if (clipType == ClipType.Circle || clipType == ClipType.Ellipse)
+            dstCanvas.drawOval(circleBounds, xferPaint)
+        else
+            dstCanvas.drawRoundRect(circleBounds, roundRadius, roundRadius, xferPaint)
         // take photo of src
         if (setXfermode != null) {
             val callback = drawable.callback
@@ -155,7 +166,10 @@ class ZAvatarView @JvmOverloads constructor(
         canvas.drawBitmap(dstImage, 0f, 0f, borderPaint)
         // border
         if (borderWidth > 0) {
-            canvas.drawOval(circleBounds, borderPaint)
+            if (clipType == ClipType.Circle || clipType == ClipType.Ellipse)
+                canvas.drawOval(circleBounds, borderPaint)
+            else
+                canvas.drawRoundRect(circleBounds, roundRadius, roundRadius, borderPaint)
         }
     }
 
@@ -171,7 +185,7 @@ class ZAvatarView @JvmOverloads constructor(
         } else {
             circleBounds.set(imageBounds)
         }
-        if (clipType == ClipType.Circle) {
+        if (clipType == ClipType.Circle || clipType == ClipType.RoundSquare) {
             if (circleBounds.width() > circleBounds.height()) {
                 val c = circleBounds.centerX()
                 circleBounds.left = c - circleBounds.height() / 2
