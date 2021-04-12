@@ -18,7 +18,7 @@
         <attr name="content" format="reference" />
         <attr name="icon" format="reference" />
         <attr name="iconAtRight" format="boolean" />
-        <attr name="loadingDrawable" format="reference" />
+        <attr name="loadingIcon" format="reference" />
         <attr name="loadingText" format="reference|string" />
         <attr name="buttonAppearance" format="reference" />
     </declare-styleable>
@@ -40,7 +40,7 @@
     <style name="ZButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->
         <item name="android:textAppearance">@style/EmptyTextAppearance</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="loadingDrawable">@drawable/button_loading_primary_anim</item>
+        <item name="loadingIcon">@drawable/button_loading_primary_anim</item>
         <item name="loadingText">"加载中..."</item>
     </style>
 
