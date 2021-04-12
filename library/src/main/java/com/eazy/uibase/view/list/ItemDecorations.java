@@ -13,11 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemDecorations {
 
-    public static  RecyclerView.ItemDecoration divider(int orientation, int size) {
+    public static  RecyclerView.ItemDecoration divider(int orientation, float size) {
         return new DividerDecoration(orientation, size);
     }
 
-    public static  RecyclerView.ItemDecoration divider(int orientation, int size, int color) {
+    public static  RecyclerView.ItemDecoration divider(int orientation, float size, float endianSize) {
+        return new DividerDecoration(orientation, size, endianSize);
+    }
+
+    public static  RecyclerView.ItemDecoration divider(int orientation, float size, int color) {
         return new DividerDecoration(orientation, size, color);
+    }
+
+    public static  RecyclerView.ItemDecoration divider(int orientation, float size, int color, float endianSize) {
+        return new DividerDecoration(orientation, size, color, endianSize);
     }
 }

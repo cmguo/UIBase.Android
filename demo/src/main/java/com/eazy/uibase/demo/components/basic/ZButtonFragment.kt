@@ -39,7 +39,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
 
         @Bindable
         @Title("加载")
-        @Description("切换到加载状态")
+        @Description("切换到加载状态，演示时也可以分别点击某个按钮，进入加载状态")
         var loading = false
 
         @Bindable
@@ -76,6 +76,17 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         @Description("按钮图标，资源ID类型，图标颜色随文字颜色变化")
         @Style(IconStyle::class)
         var icon = 0
+
+        @Bindable
+        @Title("加载文字")
+        @Description("改变加载状态显示的文字，按钮会自动适应文字宽度")
+        var loaddingText = "加载中..."
+
+        @Bindable
+        @Title("加载图标")
+        @Description("按钮加载图标，资源ID类型，图标颜色随文字颜色变化")
+        @Style(IconStyle::class)
+        var loaddingIcon = 0
 
         @Bindable
         @Title("图标在右")

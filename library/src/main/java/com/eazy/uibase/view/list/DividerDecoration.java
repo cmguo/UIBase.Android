@@ -20,17 +20,28 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
     private final int mOrientation;
     private int mSize;
+    private int mEndianSize; // also padding head and tail
+
     private boolean mSizeConverted = false;
 
-    public DividerDecoration(int orientation, int size) {
-        this(orientation, size, 0);
+    public DividerDecoration(int orientation, float size) {
+        this(orientation, size, 0, 0f);
     }
 
-    public DividerDecoration(int orientation, int size, int color) {
+    public DividerDecoration(int orientation, float size, float endianSize) {
+        this(orientation, size, 0, endianSize);
+    }
+
+    public DividerDecoration(int orientation, float size, int color) {
+        this(orientation, size, 0, 0);
+    }
+
+    public DividerDecoration(int orientation, float size, int color, float endianSize) {
         if (color != 0)
             mDivider = new ColorDrawable(color);
         mOrientation = orientation;
-        mSize = size;
+        mSize = (int) size;
+        mEndianSize = (int) endianSize;
     }
 
     @Override
@@ -47,12 +58,21 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
 
 
     public void drawVertical(Canvas c, RecyclerView parent) {
+        int childCount = parent.getChildCount();
+        if (childCount == 0)
+            return;
+
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
         final int recyclerViewTop = parent.getPaddingTop();
         final int recyclerViewBottom = parent.getHeight() - parent.getPaddingBottom();
-        final int childCount = parent.getChildCount();
 
+        if (mEndianSize > 0) {
+            final int top = recyclerViewTop;
+            final int bottom = Math.min(recyclerViewBottom, top + mEndianSize);
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+        }
         for (int i = 0; i < childCount - 1; i++) {
             final View child = parent.getChildAt(i);
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
@@ -61,20 +81,46 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
             mDivider.setBounds(left, top, right, bottom);
             mDivider.draw(c);
         }
+        if (mEndianSize > 0) {
+            final View child = parent.getChildAt(childCount - 1);
+            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+            final int top = Math.max(recyclerViewTop, child.getBottom() + params.bottomMargin);
+            final int bottom = Math.min(recyclerViewBottom, top + mEndianSize);
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+        }
     }
 
     public void drawHorizontal(Canvas c, RecyclerView parent) {
+        int childCount = parent.getChildCount();
+        if (childCount == 0)
+            return;
+
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
         final int recyclerViewLeft = parent.getPaddingLeft();
         final int recyclerViewRight = parent.getWidth() - parent.getPaddingRight();
-        final int childCount = parent.getChildCount();
+        if (mEndianSize > 0) {
+            final int left = recyclerViewLeft;
+            final int right = Math.min(recyclerViewRight, left + mEndianSize);
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+        }
         for (int i = 0; i < childCount - 1; i++) {
             final View child = parent.getChildAt(i);
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                     .getLayoutParams();
             final int left = Math.max(recyclerViewLeft, child.getRight() + params.rightMargin);
             final int right = Math.min(recyclerViewRight, left + mSize);
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+        }
+        if (mEndianSize > 0) {
+            final View child = parent.getChildAt(childCount - 1);
+            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
+                .getLayoutParams();
+            final int left = Math.max(recyclerViewLeft, child.getRight() + params.rightMargin);
+            final int right = Math.min(recyclerViewRight, left + mEndianSize);
             mDivider.setBounds(left, top, right, bottom);
             mDivider.draw(c);
         }
@@ -89,6 +135,23 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
         }
         int position = parent.getChildAdapterPosition(view);
         int count = Objects.requireNonNull(parent.getAdapter()).getItemCount();
+        if (mEndianSize > 0) {
+            if (position == 0) {
+                if (mOrientation == LinearLayoutManager.VERTICAL) {
+                    outRect.set(0, mEndianSize, 0, mSize);
+                } else {
+                    outRect.set(mEndianSize, 0, mSize, 0);
+                }
+                return;
+            } else if (position == count - 1) {
+                if (mOrientation == LinearLayoutManager.VERTICAL) {
+                    outRect.set(0, 0, 0, mEndianSize);
+                } else {
+                    outRect.set(0, 0, mEndianSize, 0);
+                }
+                return;
+            }
+        }
         if (position < count - 1) {
             if (mOrientation == LinearLayoutManager.VERTICAL) {
                 outRect.set(0, 0, 0, mSize);

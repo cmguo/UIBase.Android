@@ -20,10 +20,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/picker_view_item_padding_x"
+        android:paddingTop="@dimen/picker_view_item_padding_y"
+        android:paddingBottom="@dimen/picker_view_item_padding_y"
         app:itemBinding="@{@layout/activity_view_item}"
         app:layoutManagerFactory="@{LayoutManagers.linear(0, false)}"
-        app:itemDecoration="@{ItemDecorations.divider(0, 12)}"
+        app:itemDecoration="@{ItemDecorations.divider(0, @dimen/picker_view_item_padding, @dimen/picker_view_item_padding_x)}"
         app:itemClicked="@{listener}"
         app:data="@{list}"
         android:visibility="@{(list == null || list.size() == 0) ? View.GONE : View.VISIBLE}"/>

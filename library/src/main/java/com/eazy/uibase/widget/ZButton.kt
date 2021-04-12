@@ -133,6 +133,8 @@ open class ZButton @JvmOverloads constructor(
             if (field == value)
                 return
             field = value
+            if (_loadingIcon == null && loadingText == null)
+                return
             syncCompoundDrawable()
             // swap text
             val t = if (loading) loadingText else _text
