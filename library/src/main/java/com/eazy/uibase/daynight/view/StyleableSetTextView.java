@@ -31,7 +31,7 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
             @SuppressWarnings("unchecked")
             public void prepare(Context context, AttrValueSet<TextView> attrValueSet) {
                 AttrValue<TextView> textAppearance = (AttrValue<TextView>) attrValueSet.get(android.R.attr.textAppearance);
-                if (textAppearance == null || textAppearance.isThemed())
+                if (textAppearance == null)
                     return;
                 attrValueSet.remove(android.R.attr.textAppearance);
                 if (attrValueSet.get(android.R.attr.textColor) == null) {
