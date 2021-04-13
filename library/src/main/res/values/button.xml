@@ -17,7 +17,12 @@
         </attr>
         <attr name="content" format="reference" />
         <attr name="icon" format="reference" />
-        <attr name="iconAtRight" format="boolean" />
+        <attr name="iconPosition" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="bottom" value="3"/>
+        </attr>
         <attr name="loadingIcon" format="reference" />
         <attr name="loadingText" format="reference|string" />
         <attr name="buttonAppearance" format="reference" />
@@ -26,6 +31,7 @@
     <declare-styleable name="ZButton.Type">
         <attr name="textColor"/>
         <attr name="backgroundColor"/>
+        <attr name="iconPosition"/>
     </declare-styleable>
 
     <declare-styleable name="ZButton.Size">

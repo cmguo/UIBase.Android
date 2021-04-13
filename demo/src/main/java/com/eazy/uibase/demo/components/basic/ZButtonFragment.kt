@@ -89,9 +89,9 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         var loaddingIcon = 0
 
         @Bindable
-        @Title("图标在右")
-        @Description("设为true，则按钮图标在文字的右边，默认在左边")
-        var iconAtRight = false
+        @Title("图标位置")
+        @Description("按钮图标的位置，上下左右四种，默认在左边")
+        var iconPosition = ZButton.IconPosition.Left
 
         fun testButtonClick(view: View) {
             if (view is ZButton) {

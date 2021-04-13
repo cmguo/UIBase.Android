@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.content.res.TypedArray
 import android.graphics.PorterDuff
+import android.graphics.Rect
 import android.graphics.drawable.*
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -33,6 +34,13 @@ open class ZButton @JvmOverloads constructor(
         Middle(R.style.ZButton_Appearance_Middle),
         Small(R.style.ZButton_Appearance_Small),
         Thin(R.style.ZButton_Appearance_Thin)
+    }
+
+    enum class IconPosition {
+        Left,
+        Top,
+        Right,
+        Bottom
     }
 
     var buttonType: ButtonType = ButtonType.Primitive
@@ -83,7 +91,7 @@ open class ZButton @JvmOverloads constructor(
                 syncIcon()
         }
 
-    var iconAtRight = false
+    var iconPosition = IconPosition.Left
         set(value) {
             if (field == value)
                 return
@@ -146,7 +154,7 @@ open class ZButton @JvmOverloads constructor(
     private var _loadingIcon: Drawable? = null
     private var _text: CharSequence? = null
 
-    data class TypeStyles(val textColor: ColorStateList?, val backgroundColor: ColorStateList?)
+    data class TypeStyles(val textColor: ColorStateList?, val backgroundColor: ColorStateList?, val iconPosition: IconPosition)
     data class SizeStyles(val height: Int, val radius: Float, val padding: Int,
                           val textSize: Float, val iconSize: Int, val iconPadding: Int)
 
@@ -170,9 +178,11 @@ open class ZButton @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        //Log.d(TAG, "onMeasure: " + MeasureSpec.toString(widthMeasureSpec) + " " + MeasureSpec.toString(heightMeasureSpec))
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
         if (buttonAppearance != 0 || widthMode != MeasureSpec.EXACTLY) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+            //Log.d(TAG, "onMeasure: $measuredWidth $measuredHeight")
             return
         }
         val width = MeasureSpec.getSize(widthMeasureSpec)
@@ -184,6 +194,7 @@ open class ZButton @JvmOverloads constructor(
             setPadding(paddingLeft + d, paddingTop, paddingRight + d, paddingBottom)
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        //Log.d(TAG, "onMeasure: $measuredWidth $measuredHeight")
     }
 
     override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
@@ -195,12 +206,12 @@ open class ZButton @JvmOverloads constructor(
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        if (icon != 0 && !(_icon is VectorDrawable)) {
-            _icon = ContextCompat.getDrawable(context, icon);
+        if (icon != 0 && _icon !is VectorDrawable) {
+            _icon = ContextCompat.getDrawable(context, icon)
             syncIcon()
         }
-        if (loadingIcon != 0 && !(_loadingIcon is VectorDrawable)) {
-            _loadingIcon = ContextCompat.getDrawable(context, loadingIcon);
+        if (loadingIcon != 0 && _loadingIcon !is VectorDrawable) {
+            _loadingIcon = ContextCompat.getDrawable(context, loadingIcon)
             syncIcon(true)
         }
         syncType()
@@ -210,12 +221,15 @@ open class ZButton @JvmOverloads constructor(
 
     companion object {
 
+        private const val TAG = "ZButton"
+
         @SuppressLint("ResourceType")
         private fun typeStyles(context: Context, @StyleRes id: Int) : TypeStyles {
             val a = context.obtainStyledAttributes(id, R.styleable.ZButton_Type)
             val styles = TypeStyles(
                 a.getColorStateList(R.styleable.ZButton_Type_textColor),
-                a.getColorStateList(R.styleable.ZButton_Type_backgroundColor)
+                a.getColorStateList(R.styleable.ZButton_Type_backgroundColor),
+                IconPosition.values()[a.getInt(R.styleable.ZButton_Type_iconPosition, 0)]
             )
             a.recycle()
             return styles
@@ -255,7 +269,7 @@ open class ZButton @JvmOverloads constructor(
         icon = a.getResourceId(R.styleable.ZButton_icon, 0)
         loadingIcon = a.getResourceId(R.styleable.ZButton_loadingIcon, 0)
         loadingText = a.getText(R.styleable.ZButton_loadingText)
-        iconAtRight = a.getBoolean(R.styleable.ZButton_iconAtRight, iconAtRight)
+        iconPosition = IconPosition.values()[a.getInt(R.styleable.ZButton_iconPosition, iconPosition.ordinal)]
     }
 
     private fun setTextInner(text: CharSequence?, type: BufferType = BufferType.NORMAL) {
@@ -265,8 +279,10 @@ open class ZButton @JvmOverloads constructor(
     }
 
     private fun syncTypeSize(type: Boolean = true, size: Boolean = true) {
-        if (type)
+        if (type) {
             _typeStyles = typeStyles(context, if (buttonAppearance == 0) buttonType.resId else buttonAppearance)
+            iconPosition = _typeStyles.iconPosition
+        }
         if (size)
             _sizeStyles = sizeStyles(context, if (buttonAppearance == 0) buttonSize.resId else buttonAppearance)
         background = backgroundDrawable(_typeStyles, _sizeStyles)
@@ -301,8 +317,12 @@ open class ZButton @JvmOverloads constructor(
         if (content == 0)
             return
         when (resources.getResourceTypeName(content)) {
-            "drawable" -> { icon = content; text = null }
-            "string" -> { icon = 0; setText(content) }
+            "drawable" -> {
+                icon = content; text = null
+            }
+            "string" -> {
+                icon = 0; setText(content)
+            }
             "array" -> {
                 icon = 0
                 text = null
@@ -326,7 +346,7 @@ open class ZButton @JvmOverloads constructor(
         }
     }
 
-     fun syncIcon(loading: Boolean = false) {
+     private fun syncIcon(loading: Boolean = false) {
         val icon = if (loading) _loadingIcon else _icon
         if (icon != null) {
             if (icon is VectorDrawable) {
@@ -344,18 +364,21 @@ open class ZButton @JvmOverloads constructor(
     private var _lastIcon: Drawable? = null
 
     private fun syncCompoundDrawable() {
-        var o = _lastIcon
+        val o = _lastIcon
         val d = if (loading) _loadingIcon else _icon
         if (o == d)
             return
         // How to center icon and text in a android button with width set to “fill parent”
         // https://stackoverflow.com/questions/3634191/how-to-center-icon-and-text-in-a-android-button-with-width-set-to-fill-parent
-        val left = if (iconAtRight) null else d
-        val right = if (iconAtRight) d else null
-        if (buttonAppearance == 0) // TODO: extends iconAtRight to support more icon position mode
-            setCompoundDrawablesRelative(left, null, right, null)
-        else
-            setCompoundDrawablesRelative(null, left, null, right)
+        val left = if (iconPosition == IconPosition.Left) d else null
+        val top = if (iconPosition == IconPosition.Top) d else null
+        val right = if (iconPosition == IconPosition.Right) d else null
+        val bottom = if (iconPosition == IconPosition.Bottom) d else null
+        val compoundRect = Rect()
+        d?.copyBounds(compoundRect)
+        // setCompoundDrawablesRelative has measure problem on TextView
+        //  --Relative calc sizes of start/end, but measure use left/right sizes
+        setCompoundDrawables(left, top, right, bottom)
         if (d is Animatable)
             d.start()
         if (o is Animatable)

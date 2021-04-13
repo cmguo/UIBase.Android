@@ -27,7 +27,7 @@ class ZPanelFragment : ComponentFragment<PanelFragmentBinding?, ZPanelFragment.M
         @Title("顶部栏")
         @Description("顶部标题栏栏，可选，参见标题栏的 content 样式")
         @Style(ContentStyle::class, params = ["<title>"])
-        var titleBar = 0
+        var titleBar = R.style.title_bar_text
 
         @Bindable
         @Title("底部按钮")

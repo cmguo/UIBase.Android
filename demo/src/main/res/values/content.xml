@@ -20,7 +20,7 @@
         <item name="content">@array/button_icon_text</item>
         <item name="buttonType">text</item>
         <item name="buttonSize">thin</item>
-        <item name="iconAtRight">true</item>
+        <item name="iconPosition">right</item>
     </style>
 
     <style name="title_bar_icon">

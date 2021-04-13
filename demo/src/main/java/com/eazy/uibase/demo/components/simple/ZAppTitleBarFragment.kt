@@ -22,13 +22,13 @@ class ZAppTitleBarFragment : ComponentFragment<AppTitleBarFragmentBinding?, ZApp
         @Title("左侧按钮")
         @Description("左侧按钮的内容，参见按钮的 content 样式")
         @Style(ContentStyle::class, params = ["<button>"])
-        var leftButton = 0
+        var leftButton = R.drawable.icon_left
 
         @Bindable
         @Title("右侧按钮")
         @Description("右侧按钮的内容，参见按钮的 content 样式")
         @Style(ContentStyle::class, params = ["<button>"])
-        var rightButton = 0
+        var rightButton = R.drawable.icon_more
 
         @Bindable
         @Title("右侧按钮2")

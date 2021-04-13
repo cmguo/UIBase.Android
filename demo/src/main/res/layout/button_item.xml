@@ -54,7 +54,7 @@
                 xhb:buttonAppearance="@{styles.buttonAppearance}"
                 xhb:content="@{styles.conntent}"
                 xhb:icon="@{styles.icon}"
-                xhb:iconAtRight="@{styles.iconAtRight}"
+                xhb:iconPosition="@{styles.iconPosition}"
                 xhb:loading="@{styles.loading}"
                 android:enabled="@{!styles.disabled}"
                 android:onClick="@{(view) -> styles.testButtonClick(view)}"
