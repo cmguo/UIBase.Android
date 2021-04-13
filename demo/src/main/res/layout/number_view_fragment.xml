@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 app:minimum="@{styles.minimun}"
                 app:maximum="@{styles.maximun}"
+                app:step="@{styles.step}"
                 app:amount="@={styles.amount}"
                 />
 

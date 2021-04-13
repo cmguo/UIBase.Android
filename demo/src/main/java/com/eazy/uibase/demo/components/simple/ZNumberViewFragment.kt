@@ -24,6 +24,10 @@ class ZNumberViewFragment : ComponentFragment<NumberViewFragmentBinding?, ZNumbe
         var maximun = 0
 
         @Bindable
+        @Title("步进距离") @Description("每次点击增减的数量")
+        var step = 1
+
+        @Bindable
         @Title("数量") @Description("当前输入的数量")
         var amount = 1
     }

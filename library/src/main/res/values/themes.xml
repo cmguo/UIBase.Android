@@ -20,6 +20,7 @@
         <item name="panelStyle">@style/ZPanel</item>
         <item name="searchBoxStyle">@style/ZSearchBox</item>
         <item name="timePickerViewStyle">@style/ZTimePickerView</item>
+        <item name="numberViewStyle">@style/ZNumberView</item>
 
         <!-- for day night inspect -->
         <item name="viewInflaterClass">com.eazy.uibase.daynight.DayNightViewInflater</item>
