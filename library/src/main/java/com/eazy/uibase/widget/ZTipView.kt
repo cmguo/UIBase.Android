@@ -447,7 +447,10 @@ class ZTipView @JvmOverloads constructor(
         }
         val rootView = target.rootView
         val wBounds = Rect()
+        // This takes into account screen decorations above the window
         rootView.getWindowVisibleDisplayFrame(wBounds)
+        rootView.getLocationInWindow(loc)
+        wBounds.intersect(loc[0], loc[1], rootView.width, rootView.height)
         // for toast location
         if (location == Location.AutoToast) {
             if (toastCount <= 0) {
