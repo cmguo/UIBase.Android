@@ -17,7 +17,7 @@
         android:id="@+id/tipView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:frameColor="@{styles.frameColor}"
+        app:tipAppearance="@{styles.tipAppearance}"
         app:maxWidth="@{styles.maxWidth}"
         app:message="@{styles.message}"
         app:singleLine="@{styles.singleLine}"

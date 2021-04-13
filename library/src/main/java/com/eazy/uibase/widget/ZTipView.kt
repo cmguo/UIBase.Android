@@ -21,6 +21,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.annotation.StyleRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
@@ -49,22 +50,11 @@ class ZTipView @JvmOverloads constructor(
         fun tipViewDismissed(view: ZTipView, timeout: Boolean) {}
     }
 
-    var location: Location? = Location.TopRight
+    var location: Location = Location.TopRight
         set(value) {
-            if (value == null)
-                return
             field = value
-            if (value.ordinal < Location.AutoToast.ordinal) {
-                _frameColorId = R.color.tip_view_toast_frame_color
-                _textAppearance = R.style.tip_view_tool_text_appearance
-            } else if (value == Location.ManualLayout) {
-                frameRadius = 0f
-                _frameColorId = R.color.tip_view_snack_frame_color
-                _textAppearance = R.style.tip_view_snack_text_appearance
-            } else {
-                _frameColorId = R.color.tip_view_toast_frame_color
-                _textAppearance = R.style.tip_view_toast_text_appearance
-            }
+            if (tipAppearance == 0)
+                syncAppearance()
             requestLayout()
         }
 
@@ -94,28 +84,13 @@ class ZTipView @JvmOverloads constructor(
 
     var dismissDelay: Long = 0
 
-    var textAppearance = 0
-        set(value) {
-            field = value
-            TextViewCompat.setTextAppearance(_textView, value)
-        }
-
-    var frameRadius = 0f
-        set(value) {
-            field = value
-            _frameDrawable.borderRadius = value
-            invalidate()
-        }
-
-    var frameColor = 0
+    @StyleRes
+    var tipAppearance = 0
         set(value) {
             if (field == value)
                 return
             field = value
-            if (value == 0)
-                _frameColorId = _frameColorId
-            else
-                _frameColor = value
+            syncAppearance()
         }
 
     var singleLine: Boolean
@@ -158,27 +133,20 @@ class ZTipView @JvmOverloads constructor(
     private var _leftButton: ZButton
     private var _rightButton: ZButton
 
-    private var _frameColorId = 0
-        set(value) {
-            field = value
-            if (frameColor == 0) {
-                _frameColor = ContextCompat.getColor(context, value)
-            }
-        }
-
     private var _frameColor = 0
         set(value) {
             field = value
             _frameDrawable.fillColor = ColorStateList.valueOf(value)
-            _arrowDrawable.setTint(value)
+            _arrowDrawable.paint.color = value
             invalidate()
         }
 
-    private var _textAppearance = 0
+    private var _frameAlpha = 1f
         set(value) {
             field = value
-            if (textAppearance == 0)
-                TextViewCompat.setTextAppearance(_textView, value)
+            _frameDrawable.alpha = (value * 255).toInt()
+            _arrowDrawable.alpha = (value * 255).toInt()
+            invalidate()
         }
 
     private val _frameDrawable: RoundDrawable
@@ -208,9 +176,7 @@ class ZTipView @JvmOverloads constructor(
         if (a.hasValue(R.styleable.ZTipView_android_text))
             message = a.getText(R.styleable.ZTipView_android_text)
         dismissDelay = a.getInt(R.styleable.ZTipView_dismissDelay, dismissDelay.toInt()).toLong()
-        textAppearance = a.getResourceId(R.styleable.ZTipView_android_textAppearance, 0)
-        frameColor = a.getColor(R.styleable.ZTipView_frameColor, frameColor)
-        frameRadius = a.getDimension(R.styleable.ZTipView_frameRadius, frameRadius)
+        tipAppearance = a.getResourceId(R.styleable.ZTipView_tipAppearance, 0)
         arrowSize = a.getDimensionPixelSize(R.styleable.ZTipView_arrowSize, arrowSize)
         arrowOffset = a.getDimensionPixelSize(R.styleable.ZTipView_arrowOffset, arrowOffset)
         a.recycle()
@@ -326,8 +292,7 @@ class ZTipView @JvmOverloads constructor(
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
-        textAppearance = textAppearance
-        _frameColorId = _frameColorId
+        syncAppearance()
     }
 
     /* private */
@@ -384,6 +349,30 @@ class ZTipView @JvmOverloads constructor(
                 frame = OverlayFrame(content)
             return frame
         }
+    }
+
+    @SuppressLint("CustomViewStyleable")
+    private fun syncAppearance() {
+        var appearance = tipAppearance
+        if (appearance == 0) {
+            appearance = when (location.ordinal) {
+                in 0..Location.AutoToast.ordinal -> R.style.TipViewToolTipAppearance
+                Location.AutoToast.ordinal -> R.style.TipViewToastAppearance
+                Location.ManualLayout.ordinal -> R.style.TipViewSnackAppearance
+                else -> 0
+            }
+        }
+        val a = context.obtainStyledAttributes(appearance, R.styleable.ZTipView_Appearance)
+        _frameColor = a.getColor(R.styleable.ZTipView_Appearance_frameColor, 0)
+        _frameAlpha = a.getFloat(R.styleable.ZTipView_Appearance_frameAlpha, 1f)
+        _frameDrawable.borderRadius = a.getDimension(R.styleable.ZTipView_Appearance_frameRadius, 0f)
+        val textAppearance = a.getResourceId(R.styleable.ZTipView_Appearance_textAppearance, 0)
+        if (textAppearance > 0)
+            TextViewCompat.setTextAppearance(_textView, textAppearance)
+        val textColors = a.getColorStateList(R.styleable.ZTipView_Appearance_textColor)
+        if (textColors != null)
+            _textView.setTextColor(textColors)
+        a.recycle()
     }
 
     private fun syncButton(button: ZButton, content: Int) {
@@ -448,7 +437,7 @@ class ZTipView @JvmOverloads constructor(
 
     @SuppressLint("CheckResult")
     private fun calcLocation(target: View, size: Size): Point {
-        val location = this.location!!
+        val location = this.location
         val loc = intArrayOf(0, 0)
         if (location == Location.ManualLayout) {
             target.getLocationInWindow(loc)

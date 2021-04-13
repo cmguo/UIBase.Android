@@ -12,10 +12,7 @@ import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.core.style.ColorStyle
-import com.eazy.uibase.demo.core.style.ContentStyle
-import com.eazy.uibase.demo.core.style.DimemDpStyle
-import com.eazy.uibase.demo.core.style.IconStyle
+import com.eazy.uibase.demo.core.style.*
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.TipViewButtonItemBinding
 import com.eazy.uibase.demo.databinding.TipViewFragmentBinding
@@ -56,12 +53,6 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         @Description("自适应消息内容的宽度和高度")
         var message = "你点击了按钮"
 
-        @Bindable
-        @Title("背景颜色")
-        @Description("背景颜色，包括小三角的颜色，默认为0，根据 Location 确定默认颜色")
-        @Style(ColorStyle::class)
-        var frameColor = 0
-
         open fun buttonClick(view: View) {}
     }
 
@@ -78,6 +69,12 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         @Style(ContentStyle::class, params = ["<button>"])
         var rightButton = R.drawable.icon_close
 
+        @Bindable
+        @Title("视觉样式")
+        @Description("视觉样式集，StyleRes 类型；包括背景色，圆角尺寸，文字样式")
+        @Style(AppearanceStyle::class, params = ["TipViewToolTip"])
+        var tipAppearance = 0
+
         override fun buttonClick(view: View) {
             val binding = ToolTipBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
@@ -86,7 +83,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         }
     }
 
-    open class ToastStyles(fragment: ZTipViewFragment) : Styles(fragment) {
+    open class TipToastStyles(fragment: ZTipViewFragment) : Styles(fragment) {
 
         @Bindable
         @Title("提示图标")
@@ -98,10 +95,24 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         @Title("右侧按钮")
         @Description("右侧按钮的内容，参见按钮的 content 样式")
         @Style(ContentStyle::class, params = ["<button>"])
-        var rightButton = R.style.button_content_prim_style
+        var rightButton = 0
 
         init {
             maxWidth = -100
+        }
+
+    }
+
+    open class ToastStyles(fragment: ZTipViewFragment) : TipToastStyles(fragment) {
+
+        @Bindable
+        @Title("视觉样式")
+        @Description("视觉样式集，StyleRes 类型；包括背景色，圆角尺寸，文字样式")
+        @Style(AppearanceStyle::class, params = ["TipViewToast"])
+        var tipAppearance = 0
+
+        init {
+            rightButton = R.style.button_content_prim_style
         }
 
         override fun buttonClick(view: View) {
@@ -117,7 +128,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         }
     }
 
-    class SnackStyles(fragment: ZTipViewFragment) : ToastStyles(fragment) {
+    class SnackStyles(fragment: ZTipViewFragment) : TipToastStyles(fragment) {
 
         @Bindable
         @Title("左侧按钮")
@@ -125,9 +136,17 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         @Style(ContentStyle::class, params = ["<button>"])
         var leftButton = R.drawable.icon_close
 
+        @Bindable
+        @Title("视觉样式")
+        @Description("视觉样式集，StyleRes 类型；包括背景色，圆角尺寸，文字样式")
+        @Style(AppearanceStyle::class, params = ["TipViewSnack"])
+        var tipAppearance = 0
+
         init {
             rightButton = R.style.button_content_text_style
         }
+
+        private val snacks = arrayListOf<ZTipView>()
 
         override fun buttonClick(view: View) {
             val binding = SnackBarBinding.inflate(LayoutInflater.from(fragment.context))
@@ -139,6 +158,14 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
             val target = if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding.root
             binding.tipView.popAt(target, fragment)
         }
+
+        fun clearSnacks() {
+            for (s in snacks) {
+                s.dismiss()
+            }
+            snacks.clear()
+        }
+
     }
 
     class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.tip_view_button_item) {
@@ -173,6 +200,11 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
             R.id.component_z_snack_bars -> SnackStyles(this)
             else -> Styles(this)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (styles as? SnackStyles)?.clearSnacks()
     }
 
     companion object {

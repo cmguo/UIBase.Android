@@ -15,7 +15,7 @@ public class ContentStyle extends ResourceStyle {
         R.style.button_content_text_style,
     };
 
-    private static final String[] resources = new String[]{
+    private static final String[] resources = new String[] {
         "drawable/icon_left",
         "drawable/icon_exit",
         "drawable/img_share_weixin",
