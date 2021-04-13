@@ -245,7 +245,7 @@ class ZTipView @JvmOverloads constructor(
             context = context.baseContext
         }
         if (_location == Location.AutoToast) {
-            ++toastCount
+            ++_toastCount
         }
         val content = target.contentView
         if (content == null) {
@@ -280,7 +280,7 @@ class ZTipView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         if (_location == Location.AutoToast) {
-            --toastCount
+            --_toastCount
         }
     }
 
@@ -335,8 +335,9 @@ class ZTipView @JvmOverloads constructor(
 
         private const val TAG = "ZTipView"
 
-        private var toastCount = 0
-        private var toastY = 0
+        private var _toastCount = 0
+        private var _toastY = 0
+        private var _lastRoot = WeakReference<View>(null)
 
         @SuppressLint("ViewConstructor")
         class OverlayFrame(content: FrameLayout) : FrameLayout(content.context) {
@@ -437,6 +438,7 @@ class ZTipView @JvmOverloads constructor(
         return Size(measuredWidth, measuredHeight)
     }
 
+    @SuppressLint("CheckResult")
     private fun calcLocation(target: View, size: Size): Point {
         val location = this.location!!
         val loc = intArrayOf(0, 0)
@@ -453,12 +455,14 @@ class ZTipView @JvmOverloads constructor(
         wBounds.intersect(loc[0], loc[1], rootView.width, rootView.height)
         // for toast location
         if (location == Location.AutoToast) {
-            if (toastCount <= 0) {
-                toastY = wBounds.bottom
+            if (_toastCount <= 0 || _lastRoot.get() != rootView) {
+                if (_lastRoot.get() != rootView)
+                    _lastRoot = WeakReference(rootView)
+                _toastY = wBounds.bottom
             }
-            toastY -= size.height + 20
+            _toastY -= size.height + 20
             _location = location
-            return Point(wBounds.centerX() - size.width / 2, toastY)
+            return Point(wBounds.centerX() - size.width / 2, _toastY)
         }
         // for arrow locations
         val frame = Rect(0, 0, size.width, size.height)
