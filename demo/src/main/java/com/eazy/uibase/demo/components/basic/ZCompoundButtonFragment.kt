@@ -84,6 +84,9 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         @Description("改变文字，按钮会自动适应文字宽度")
         var text = "文字"
 
+        var allCheckBoxVisible = if (fragment.component.id() == R.id.component_z_check_boxes)
+            View.VISIBLE else View.GONE
+
         val checkBoxCheckedStateChanged = object : ZCheckBox.OnCheckedStateChangeListener {
             override fun onCheckedStateChanged(checkBox: ZCheckBox, state: ZCheckBox.CheckedState) {
                 fragment.model.updateAllCheckedState()

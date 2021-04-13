@@ -8,7 +8,7 @@
     <dimen name="app_title_bar_icon_padding">12dp</dimen>
     <dimen name="app_title_bar_text_padding">20dp</dimen>
     <!-- TODO: why can't use -->
-    <style name="app_title_bar_text_appearance">@style/TextAppearance.Z.Head3</style>
+    <style name="app_title_bar_text_appearance">@style/TextAppearance.Z.Head2</style>
 
     <array name="app_title_button">
         <item>@drawable/icon_minus</item>
@@ -35,6 +35,16 @@
         <item name="android:background">@color/bluegrey_00</item>
         <item name="leftButton">@drawable/icon_left</item>
         <item name="rightButton">@drawable/icon_more</item>
+    </style>
+
+    <style name="ZButton.TitleBar">
+        <item name="textColor">@color/bluegrey_800</item>
+        <item name="height">24dp</item>
+        <item name="borderRadius">0dp</item>
+        <item name="paddingX">0dp</item>
+        <item name="textSize">18sp</item>
+        <item name="iconSize">20dp</item>
+        <item name="iconPadding">5dp</item>
     </style>
 
 </resources>

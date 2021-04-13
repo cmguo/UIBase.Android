@@ -2,6 +2,8 @@ package com.eazy.uibase.demo.components.complex
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.R
@@ -17,7 +19,8 @@ import com.eazy.uibase.widget.ZPanel
 import com.eazy.uibase.widget.ZTimePickerView
 import java.util.*
 
-class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?, ZTimePickerViewFragment.Model?, ZTimePickerViewFragment.Styles?>() {
+class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?, ZTimePickerViewFragment.Model?, ZTimePickerViewFragment.Styles?>()
+    , ZPanel.PanelListener {
 
     class Model : ViewModel()
 
@@ -156,20 +159,21 @@ class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?
         return R.color.blue_100
     }
 
+    private var lp : ViewGroup.LayoutParams? = null
+
     var buttonClick = View.OnClickListener {
         val panel = ZPanel(requireContext())
         panel.titleBar = R.style.title_bar_text
-        panel.bottomButton = R.string.cancel
-        val picker = LayoutInflater.from(requireContext()).inflate(R.layout.time_picker_view, panel, false) as ZTimePickerView
-        picker.centerLabel = styles.centerLabel
-        picker.lunar = styles.lunar
-        picker.itemsVisibleCount = styles.itemsVisibleCount
-        picker.cyclic = styles.cyclic
-        picker.startTime = styles.startTime
-        picker.endTime = styles.endTime
-        picker.selectTime = styles.selectTime
-        panel.addView(picker)
+        binding.frame.removeView(binding.picker)
+        lp = binding.picker.layoutParams
+        panel.addView(binding.picker)
+        panel.listener = this
         panel.popUp(parentFragmentManager)
+    }
+
+    override fun panelDismissed(panel: ZPanel) {
+        panel.removeView(binding.picker)
+        binding.frame.addView(binding.picker, lp)
     }
 
 }

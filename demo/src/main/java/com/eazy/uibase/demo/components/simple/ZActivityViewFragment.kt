@@ -79,7 +79,7 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
 
     var buttonClick = View.OnClickListener {
         val panel = ZPanel(requireContext())
-        panel.titleBar = R.style.title_bar_text
+        panel.titleBar = R.style.title_bar_text_only
         panel.bottomButton = R.string.cancel
         panel.listener = this
         binding.frame.removeView(binding.activityViews.root)

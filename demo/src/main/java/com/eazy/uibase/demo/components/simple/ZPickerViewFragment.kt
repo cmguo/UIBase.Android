@@ -2,6 +2,7 @@ package com.eazy.uibase.demo.components.simple
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.R
@@ -14,7 +15,8 @@ import com.eazy.uibase.demo.databinding.PickerViewFragmentBinding
 import com.eazy.uibase.widget.ZPanel
 import com.eazy.uibase.widget.ZPickerView
 
-class ZPickerViewFragment : ComponentFragment<PickerViewFragmentBinding?, ZPickerViewFragment.Model?, ZPickerViewFragment.Styles?>() {
+class ZPickerViewFragment : ComponentFragment<PickerViewFragmentBinding?, ZPickerViewFragment.Model?, ZPickerViewFragment.Styles?>()
+    , ZPanel.PanelListener {
 
     class Model : ViewModel() {
 
@@ -46,15 +48,20 @@ class ZPickerViewFragment : ComponentFragment<PickerViewFragmentBinding?, ZPicke
         private const val TAG = "ZPickerViewFragment"
     }
 
+    private var lp : ViewGroup.LayoutParams? = null
+
     var buttonClick = View.OnClickListener {
         val panel = ZPanel(requireContext())
-        panel.titleBar = R.style.title_bar_text
-        panel.bottomButton = R.string.cancel
-        val picker = LayoutInflater.from(requireContext()).inflate(R.layout.picker_view, panel, false) as ZPickerView
-        picker.singleSelection = styles.singleSelection
-        picker.selections = model.selections
-        panel.addView(picker)
+        panel.titleBar = R.style.title_bar_icon
+        binding.frame.removeView(binding.picker)
+        lp = binding.picker.layoutParams
+        panel.addView(binding.picker)
+        panel.listener = this
         panel.popUp(parentFragmentManager)
     }
 
+    override fun panelDismissed(panel: ZPanel) {
+        panel.removeView(binding.picker)
+        binding.frame.addView(binding.picker, lp)
+    }
 }

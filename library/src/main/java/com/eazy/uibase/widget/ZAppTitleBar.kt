@@ -183,7 +183,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         rightButton2 = a.getResourceId(R.styleable.ZAppTitleBar_rightButton2, 0)
         icon = a.getResourceId(R.styleable.ZAppTitleBar_icon, 0)
         title = a.getText(R.styleable.ZAppTitleBar_title)
-        textAppearance = a.getResourceId(R.styleable.ZAppTitleBar_textAppearance, 0)
+        textAppearance = a.getResourceId(R.styleable.ZAppTitleBar_textAppearance, textAppearance)
     }
 
     private fun syncButton(button: ZButton, content: Int) {
