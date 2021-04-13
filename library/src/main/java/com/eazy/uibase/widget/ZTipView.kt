@@ -56,14 +56,14 @@ class ZTipView @JvmOverloads constructor(
             field = value
             if (value.ordinal < Location.AutoToast.ordinal) {
                 _frameColorId = R.color.tip_view_toast_frame_color
-                textAppearance = R.style.tip_view_tool_text_appearance
+                _textAppearance = R.style.tip_view_tool_text_appearance
             } else if (value == Location.ManualLayout) {
                 frameRadius = 0f
                 _frameColorId = R.color.tip_view_snack_frame_color
-                textAppearance = R.style.tip_view_snack_text_appearance
+                _textAppearance = R.style.tip_view_snack_text_appearance
             } else {
                 _frameColorId = R.color.tip_view_toast_frame_color
-                textAppearance = R.style.tip_view_toast_text_appearance
+                _textAppearance = R.style.tip_view_toast_text_appearance
             }
             requestLayout()
         }
@@ -96,6 +96,7 @@ class ZTipView @JvmOverloads constructor(
 
     var textAppearance = 0
         set(value) {
+            field = value
             TextViewCompat.setTextAppearance(_textView, value)
         }
 
@@ -171,6 +172,13 @@ class ZTipView @JvmOverloads constructor(
             _frameDrawable.fillColor = ColorStateList.valueOf(value)
             _arrowDrawable.setTint(value)
             invalidate()
+        }
+
+    private var _textAppearance = 0
+        set(value) {
+            field = value
+            if (textAppearance == 0)
+                TextViewCompat.setTextAppearance(_textView, value)
         }
 
     private val _frameDrawable: RoundDrawable

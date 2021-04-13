@@ -15,24 +15,24 @@ public class Styles extends Resources {
 
     private static final String TAG = "Styles";
 
-    public static Map<String, Integer> xhbButtonStyles(Context context) {
-        return getResources(context, R.style.class, Pattern.compile("^Z_Button_\\w+_\\w+"));
+    public static Map<String, Integer> xhbButtonStyles() {
+        return getResources(R.style.class, Pattern.compile("^Z_Button_\\w+_\\w+"));
     }
 
-    public static Map<String, Integer> buttonStyles(Context context) {
-        return getResources(context, R.style.class, Pattern.compile("Button"));
+    public static Map<String, Integer> buttonStyles() {
+        return getResources(R.style.class, Pattern.compile("Button"));
     }
 
-    public static Map<String, Integer> checkboxStyles(Context context) {
-        return getResources(context, R.style.class, Pattern.compile("CheckBox"));
+    public static Map<String, Integer> checkboxStyles() {
+        return getResources(R.style.class, Pattern.compile("CheckBox"));
     }
 
-    public static Map<String, Integer> radioStyles(Context context) {
-        return getResources(context, R.style.class, Pattern.compile("Radio"));
+    public static Map<String, Integer> radioStyles() {
+        return getResources(R.style.class, Pattern.compile("Radio"));
     }
 
-    public static Map<String, Integer> switchStyles(Context context) {
-        return getResources(context, R.style.class, Pattern.compile("Switch"));
+    public static Map<String, Integer> switchStyles() {
+        return getResources(R.style.class, Pattern.compile("Switch"));
     }
 
     @androidx.databinding.BindingAdapter("style")

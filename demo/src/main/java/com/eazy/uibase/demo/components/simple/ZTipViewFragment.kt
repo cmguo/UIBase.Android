@@ -12,6 +12,7 @@ import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
+import com.eazy.uibase.demo.core.style.ColorStyle
 import com.eazy.uibase.demo.core.style.ContentStyle
 import com.eazy.uibase.demo.core.style.DimemDpStyle
 import com.eazy.uibase.demo.core.style.IconStyle
@@ -54,6 +55,12 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         @Title("消息内容")
         @Description("自适应消息内容的宽度和高度")
         var message = "你点击了按钮"
+
+        @Bindable
+        @Title("背景颜色")
+        @Description("背景颜色，包括小三角的颜色，默认为0，根据 Location 确定默认颜色")
+        @Style(ColorStyle::class)
+        var frameColor = 0
 
         open fun buttonClick(view: View) {}
     }

@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/inputContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/search_box_input_height"
         android:layout_weight="1"
         android:paddingLeft="@dimen/search_box_input_border_radius"
         android:paddingRight="@dimen/search_box_input_border_radius"/>

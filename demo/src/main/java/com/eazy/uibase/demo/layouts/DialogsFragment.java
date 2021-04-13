@@ -31,7 +31,7 @@ public class DialogsFragment extends ComponentFragment<DialogsFragmentBinding, D
         private final Map<String, Integer> layouts;
 
         public Model(DialogsFragment fragment) {
-            layouts = Layouts.dialogLayouts(fragment.getContext());
+            layouts = Layouts.dialogLayouts();
         }
 
         public Map<String, Integer> getLayouts() {

@@ -24,13 +24,13 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
         public Model(StylesFragment fragment) {
             if (fragment.getComponent().id() == R.id.component_buttons)
-                styles = com.eazy.uibase.demo.core.Styles.buttonStyles(fragment.getContext());
+                styles = com.eazy.uibase.demo.core.Styles.buttonStyles();
             else if (fragment.getComponent().id() == R.id.component_check_boxes)
-                styles = com.eazy.uibase.demo.core.Styles.checkboxStyles(fragment.getContext());
+                styles = com.eazy.uibase.demo.core.Styles.checkboxStyles();
             else if (fragment.getComponent().id() == R.id.component_radio_buttons)
-                styles = com.eazy.uibase.demo.core.Styles.radioStyles(fragment.getContext());
+                styles = com.eazy.uibase.demo.core.Styles.radioStyles();
             else if (fragment.getComponent().id() == R.id.component_switches)
-                styles = com.eazy.uibase.demo.core.Styles.switchStyles(fragment.getContext());
+                styles = com.eazy.uibase.demo.core.Styles.switchStyles();
             else
                 styles = null;
         }

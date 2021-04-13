@@ -1,10 +1,12 @@
 package com.eazy.uibase.demo.view.main;
 
+import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.eazy.uibase.demo.R;
+import com.eazy.uibase.demo.core.style.ColorStyle;
 import com.eazy.uibase.demo.core.style.DimemDpStyle;
 import com.eazy.uibase.demo.databinding.StylesFragmentBinding;
 import com.eazy.uibase.demo.core.ComponentFragment;
@@ -123,9 +126,11 @@ public class StylesFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ColorStyle.init(requireContext());
         DimemDpStyle.init(requireContext());
         mViewModel = new ViewModelProvider(this).get(StylesViewModel.class);
         if (fragment != null)

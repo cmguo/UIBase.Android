@@ -14,7 +14,7 @@ public class Resources {
 
     private static final String TAG = "Resources";
 
-    public static Map<String, Integer> getResources(Context context, Class<?> clazz, Pattern pattern) {
+    public static Map<String, Integer> getResources(Class<?> clazz, Pattern pattern) {
         Map<String, Integer> ress = new TreeMap<>();
         try {
             for (Field f : clazz.getDeclaredFields()) {
@@ -30,7 +30,7 @@ public class Resources {
         return ress;
     }
 
-    public static int getResource(Context context, Class<?> clazz, String name) {
+    public static int getResource(Class<?> clazz, String name) {
         try {
             Field f = clazz.getDeclaredField(name);
             return (Integer) f.get(clazz);
