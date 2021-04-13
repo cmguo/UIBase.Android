@@ -3,15 +3,6 @@
 
     <attr name="actionSheetStyle" format="reference"/>
 
-    <dimen name="action_sheet_max_height">360dp</dimen>
-    <dimen name="action_sheet_padding_y">12dp</dimen>
-    <dimen name="action_sheet_item_padding_y">12dp</dimen>
-    <dimen name="action_sheet_icon_size">40dp</dimen>
-    <dimen name="action_sheet_icon_padding">24dp</dimen>
-    <dimen name="action_sheet_title_padding">12dp</dimen>
-    <!-- TODO: why can't use -->
-    <style name="action_sheet_text_appearance">@style/TextAppearance.Z.Body.Middle</style>
-
     <declare-styleable name="ZActionSheet">
         <attr name="titles"/>
         <attr name="title"/>
@@ -19,7 +10,26 @@
         <attr name="icon"/>
     </declare-styleable>
 
+    <dimen name="action_sheet_max_height">360dp</dimen>
+    <dimen name="action_sheet_padding_y">12dp</dimen>
+    <dimen name="action_sheet_icon_size">40dp</dimen>
+    <dimen name="action_sheet_icon_padding">24dp</dimen>
+    <dimen name="action_sheet_title_padding">12dp</dimen>
+    <!-- TODO: why can't use -->
+    <style name="action_sheet_text_appearance">@style/TextAppearance.Z.Body.Middle</style>
+
     <style name="ZActionSheet">
+    </style>
+
+    <style name="ZButton.Action">
+        <item name="textColor">@color/bluegrey900_disabled</item>
+        <item name="backgroundColor">@color/transparent_pressed_disabled</item>
+        <item name="height">48dp</item>
+        <item name="borderRadius">0dp</item>
+        <item name="paddingX">0dp</item>
+        <item name="textSize">16sp</item>
+        <item name="iconSize">18dp</item>
+        <item name="iconPadding">4dp</item>
     </style>
 
 </resources>

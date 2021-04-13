@@ -122,7 +122,7 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
 
         override fun bindView(view: View, item: Any?, position: Int) {
-            view.findViewById<TextView>(R.id.title).text = item.toString()
+            view.findViewById<TextView>(R.id.button).text = item.toString()
         }
 
     }
