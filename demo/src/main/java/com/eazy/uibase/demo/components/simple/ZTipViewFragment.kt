@@ -18,8 +18,9 @@ import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.TipViewButtonItemBinding
 import com.eazy.uibase.demo.databinding.TipViewFragmentBinding
-import com.eazy.uibase.demo.databinding.ToastTipViewBinding
-import com.eazy.uibase.demo.databinding.ToolTipViewBinding
+import com.eazy.uibase.demo.databinding.SnackBarBinding
+import com.eazy.uibase.demo.databinding.ToastBinding
+import com.eazy.uibase.demo.databinding.ToolTipBinding
 import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZTipView
 
@@ -68,60 +69,68 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         @Title("右侧按钮")
         @Description("右侧按钮的内容，参见按钮的 content 样式")
         @Style(ContentStyle::class, params = ["<button>"])
-        var rightButton = 0
+        var rightButton = R.drawable.icon_close
 
         override fun buttonClick(view: View) {
-            val binding = ToolTipViewBinding.inflate(LayoutInflater.from(fragment.context))
+            val binding = ToolTipBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
             binding.executePendingBindings()
             binding.tipView.popAt(view, fragment)
         }
     }
 
-    class ToastStyles(fragment: ZTipViewFragment) : Styles(fragment) {
-
-        @Bindable
-        @Title("左侧按钮")
-        @Description("左侧按钮的内容，参见按钮的 content 样式")
-        @Style(ContentStyle::class, params = ["<button>"])
-        var leftButton = 0
+    open class ToastStyles(fragment: ZTipViewFragment) : Styles(fragment) {
 
         @Bindable
         @Title("提示图标")
         @Description("附加在文字左侧的图标，资源ID类型，不能点击")
         @Style(IconStyle::class)
-        var icon = 0
+        var icon = R.drawable.icon_notice
 
         @Bindable
         @Title("右侧按钮")
         @Description("右侧按钮的内容，参见按钮的 content 样式")
         @Style(ContentStyle::class, params = ["<button>"])
-        var rightButton = 0
+        var rightButton = R.style.button_content_prim_style
 
         init {
             maxWidth = -100
         }
 
         override fun buttonClick(view: View) {
-            showTip(view, fragment.component.id() == R.id.component_z_toasts)
-        }
-
-        private fun showTip(view: View, toast: Boolean) {
-            val binding = ToastTipViewBinding.inflate(LayoutInflater.from(fragment.context))
+            val binding = ToastBinding.inflate(LayoutInflater.from(fragment.context))
             binding.styles = this
             binding.executePendingBindings()
             val index = (view.parent.parent as ViewGroup).indexOfChild(view.parent as View)
-            if (toast) {
-                binding.tipView.location = ZTipView.Location.AutoToast
-                if (index == 0)
-                    binding.tipView.popAt(view, fragment)
-                else
-                    binding.tipView.popUp(Toast.LENGTH_SHORT)
-            } else {
-                binding.tipView.location = ZTipView.Location.ManualLayout
-                val target = if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding.root
-                binding.tipView.popAt(target, fragment)
-            }
+            binding.tipView.location = ZTipView.Location.AutoToast
+            if (index == 0)
+                binding.tipView.popAt(view, fragment)
+            else
+                binding.tipView.popUp(Toast.LENGTH_SHORT)
+        }
+    }
+
+    class SnackStyles(fragment: ZTipViewFragment) : ToastStyles(fragment) {
+
+        @Bindable
+        @Title("左侧按钮")
+        @Description("左侧按钮的内容，参见按钮的 content 样式")
+        @Style(ContentStyle::class, params = ["<button>"])
+        var leftButton = R.drawable.icon_close
+
+        init {
+            rightButton = R.style.button_content_text_style
+        }
+
+        override fun buttonClick(view: View) {
+            val binding = SnackBarBinding.inflate(LayoutInflater.from(fragment.context))
+            binding.styles = this
+            binding.executePendingBindings()
+            val index = (view.parent.parent as ViewGroup).indexOfChild(view.parent as View)
+            binding.tipView.location = ZTipView.Location.ManualLayout
+            binding.tipView.dismissDelay = 0
+            val target = if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding.root
+            binding.tipView.popAt(target, fragment)
         }
     }
 
@@ -145,12 +154,18 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
     override fun tipViewButtonClicked(view: ZTipView, btnId: Int) {
         val tip = ZTipView(requireContext(), null)
         val name = resources.getResourceEntryName(btnId)
+        tip.location = ZTipView.Location.TopCenter
         tip.message = "点击了按钮${name}"
         tip.popAt(view)
     }
 
     override fun createStyle(): Styles {
-        return if (component.id() == R.id.component_z_tool_tips) ToolStyles(this) else ToastStyles(this)
+        return when (component.id()) {
+            R.id.component_z_tool_tips -> ToolStyles(this)
+            R.id.component_z_toasts -> ToastStyles(this)
+            R.id.component_z_snack_bars -> SnackStyles(this)
+            else -> Styles(this)
+        }
     }
 
     companion object {

@@ -93,15 +93,19 @@ public class ComponentStyle {
     public String get(ViewStyles styles) {
         Object value = getRaw(styles);
         String string = valueToString(value);
-        if (valueTitles_ == null)
+        if (valueTitles_ == null) {
             return string;
-        else
-            return valueTitles_.get(values_.indexOf(string));
+        } else {
+            int i = values_.indexOf(string);
+            return i < 0 ? string : valueTitles_.get(i);
+        }
     }
 
     public void set(ViewStyles styles, String string) {
         if (valueTitles_ != null) {
-            string = values_.get(valueTitles_.indexOf(string));
+            int i = valueTitles_.indexOf(string);
+            if (i >= 0)
+                string = values_.get(i);
         }
         Object value = valueFromString(string);
         setRaw(styles, value);

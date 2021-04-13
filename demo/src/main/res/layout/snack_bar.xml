@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.ToastStyles" />
+        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.SnackStyles" />
 
         <variable
             name="styles"
-            type="ToastStyles" />
+            type="SnackStyles" />
 
     </data>
 
