@@ -4,7 +4,7 @@
     <attr name="actionSheetStyle" format="reference"/>
 
     <declare-styleable name="ZActionSheet">
-        <attr name="titles"/>
+        <attr name="buttons" format="reference"/>
         <attr name="title"/>
         <attr name="subTitle"/>
         <attr name="icon"/>
@@ -22,7 +22,7 @@
     </style>
 
     <style name="ZButton.Action">
-        <item name="textColor">@color/bluegrey900_disabled</item>
+        <item name="textColor">@color/bluegrey900_selected_disabled</item>
         <item name="backgroundColor">@color/transparent_pressed_disabled</item>
         <item name="height">48dp</item>
         <item name="borderRadius">0dp</item>

@@ -43,7 +43,8 @@
                 app:icon="@{styles.icon}"
                 app:title="@{styles.title}"
                 app:subTitle="@{styles.subTitle}"
-                app:titles="@{model.titles}"
+                app:buttons="@{model.buttons}"
+                app:states="@{model.states}"
                 app:listener="@{fragment}"
                 />
 

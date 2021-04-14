@@ -25,8 +25,11 @@ class ZActionSheetFragment : ComponentFragment<ActionSheetFragmentBinding?, ZAct
 
     class Model : ViewModel() {
 
+        // selected first
+        var states = arrayListOf<Any?>(android.R.attr.state_selected)
+
         @Bindable
-        val titles: List<String> = listOf("删除内容", "列表标题")
+        val buttons: List<String> = listOf("删除内容", "列表标题")
     }
 
     class Styles : ViewStyles() {

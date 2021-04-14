@@ -325,15 +325,22 @@ open class ZButton @JvmOverloads constructor(
             "array" -> {
                 icon = 0
                 text = null
-                val typedArray = resources.obtainTypedArray(content)
-                for (i in 0 until typedArray.length()) {
-                    val id = typedArray.getResourceId(i, 0)
-                    when (resources.getResourceTypeName(id)) {
-                        "drawable" -> icon = id
-                        "string" -> setText(id)
+                val a = resources.obtainTypedArray(content)
+                val v = TypedValue()
+                for (i in 0 until a.length()) {
+                    if (a.getValue(i, v)) {
+                        if (v.resourceId != 0) {
+                            when (resources.getResourceTypeName(v.resourceId)) {
+                                "drawable" -> icon = v.resourceId
+                                "string" -> setText(v.resourceId)
+                            }
+                        } else if (v.string.isNotEmpty()) {
+                            text = v.string
+                        }
                     }
+
                 }
-                typedArray.recycle()
+                a.recycle()
             }
             "style" -> {
                 icon = 0

@@ -3,8 +3,10 @@ package com.eazy.uibase.widget
 import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -16,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.view.list.BaseItemBinding
 import com.eazy.uibase.view.list.DividerDecoration
-import com.eazy.uibase.view.list.RecyclerViewAdapter
 import kotlin.collections.ArrayList
 
 class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
@@ -62,11 +63,9 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
             }
         }
 
-    var titles: Iterable<Any> = ArrayList()
-        set(value) {
-            field = value
-            _adapter.replace(value)
-        }
+    var buttons: Iterable<Any?> = ArrayList()
+
+    var states: Iterable<Any?>? = null
 
     var listener: ActionSheetListener? = null
 
@@ -74,7 +73,7 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
     private val _textView: TextView
     private val _textView2: TextView
     private val _listView: RecyclerView
-    private val _adapter = RecyclerViewAdapter<Any>()
+    private val _adapter = ActionAdapter(this)
 
     companion object {
         private const val TAG = "ZActionSheet"
@@ -87,10 +86,6 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
         _textView2 = findViewById(R.id.textView2)
         _listView = findViewById(R.id.listView)
 
-        _adapter.setItemBinding(ItemBinding())
-        _adapter.setOnItemClickListener { i: Int, _: Any ->
-            listener?.onAction(this, i)
-        }
         _listView.adapter = _adapter
         _listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
         _listView.layoutManager = LinearLayoutManager(context)
@@ -99,11 +94,23 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
         title = a.getText(R.styleable.ZActionSheet_title)
         subTitle = a.getText(R.styleable.ZActionSheet_subTitle)
         icon = a.getResourceId(R.styleable.ZActionSheet_icon, 0)
-        val titlesId = a.getResourceId(R.styleable.ZActionSheet_titles, 0)
+        val buttonIds = a.getResourceId(R.styleable.ZActionSheet_buttons, 0)
         a.recycle()
 
-        if (titlesId > 0) {
-            titles = resources.getStringArray(titlesId).toList()
+        if (buttonIds > 0) {
+            val aa = resources.obtainTypedArray(buttonIds)
+            val v = TypedValue()
+            val ids = Array<Any?>(aa.length()) { null }
+            for (i in 0 until aa.length()) {
+                if (aa.getValue(i, v)) {
+                    if (v.resourceId != 0)
+                        ids[i] = v.resourceId
+                    else if (v.string.isNotEmpty())
+                        ids[i] = v.string
+                }
+            }
+            aa.recycle()
+            buttons = listOf(ids)
         }
     }
 
@@ -122,9 +129,62 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
 
         override fun bindView(view: View, item: Any?, position: Int) {
-            view.findViewById<TextView>(R.id.button).text = item.toString()
+            if (item == null)
+                return
+            if (item is String)
+                view.findViewById<TextView>(R.id.button).text = item.toString()
+            else
+                view.findViewById<ZButton>(R.id.button).content = item as Int
         }
 
     }
+
+
+    private class ActionHolder(private val view: View)
+        : RecyclerView.ViewHolder(view) {
+
+        private val button = view.findViewById<ZButton>(R.id.button)!!
+
+        fun bind(content: Any?, state: Any?) {
+            if (state != null) {
+                val states = if (state is Int) intArrayOf(state) else state as IntArray
+                if (states.contains(-android.R.attr.state_enabled)) {
+                    view.isEnabled = false
+                    button.isEnabled = false
+                }
+                if (states.contains(android.R.attr.state_selected)) {
+                    view.isSelected = true
+                    button.isSelected = true
+                }
+            }
+            if (content is String) {
+                button.text = content
+            } else if (content is Int) {
+                button.content = content
+            }
+        }
+    }
+
+    private class ActionAdapter(private val outer: ZActionSheet) : RecyclerView.Adapter<ActionHolder>(), OnClickListener {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.action_sheet_item, parent, false)
+            view.setOnClickListener(this)
+            return ActionHolder(view)
+        }
+
+        override fun getItemCount(): Int {
+            return outer.buttons.count()
+        }
+
+        override fun onBindViewHolder(holder: ActionHolder, position: Int) {
+            holder.bind(outer.buttons.elementAt(position), outer.states?.elementAtOrNull(position))
+        }
+
+        override fun onClick(view: View) {
+            outer.listener?.onAction(outer, outer._listView.getChildAdapterPosition(view))
+        }
+    }
+
 
 }

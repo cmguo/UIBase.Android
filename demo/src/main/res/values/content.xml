@@ -2,7 +2,7 @@
 
     <array name="button_icon_text">
         <item>@drawable/icon_exit</item>
-        <item>@string/action_settings</item>
+        <item>文字</item>
     </array>
 
     <style name="button_content_prim_style">
