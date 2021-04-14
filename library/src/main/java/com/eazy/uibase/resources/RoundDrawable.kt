@@ -22,6 +22,7 @@ open class RoundDrawable : Drawable {
     var height = 0
 
     private val paint = Paint()
+    private var alpha = 255
 
     constructor() {
         paint.isAntiAlias = true
@@ -55,6 +56,7 @@ open class RoundDrawable : Drawable {
         if (fillColor != null) {
             paint.style = Paint.Style.FILL
             paint.color = fillColor!!.getColorForState(state, 0)
+            paint.alpha = modulateAlpha(alpha, paint.alpha)
             bounds.inset(borderSize, borderSize)
             borderRadius -= borderSize
             if (borderRadius > 0)
@@ -67,6 +69,7 @@ open class RoundDrawable : Drawable {
         if (borderSize > 0 && borderColor != null) {
             paint.style = Paint.Style.STROKE
             paint.color = borderColor?.getColorForState(state, 0) ?: 0
+            paint.alpha = modulateAlpha(alpha, paint.alpha)
             paint.strokeWidth = borderSize
             bounds.inset(borderSize / 2f, borderSize / 2f)
             borderRadius -= borderSize /2f
@@ -78,8 +81,12 @@ open class RoundDrawable : Drawable {
         }
     }
 
+    override fun getAlpha(): Int {
+        return alpha
+    }
+
     override fun setAlpha(alpha: Int) {
-        paint.alpha = alpha
+        this.alpha = alpha
     }
 
     override fun setColorFilter(colorFilter: ColorFilter?) {
@@ -106,4 +113,8 @@ open class RoundDrawable : Drawable {
         return true
     }
 
+    private fun modulateAlpha(paintAlpha: Int, alpha: Int): Int {
+        val scale = alpha + (alpha ushr 7) // convert to 0..256
+        return paintAlpha * scale ushr 8
+    }
 }
