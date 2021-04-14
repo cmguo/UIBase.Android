@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content"
                 app:titles="@array/picker_titles"
                 app:icons="@array/icons"
+                app:states="@{model.states}"
                 app:singleSelection="@{styles.singleSelection}"
                 app:selection="@={model.selection}"
                 app:selections="@={model.selections}"

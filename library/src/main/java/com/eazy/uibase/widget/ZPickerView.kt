@@ -29,7 +29,9 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     var titles: Iterable<Any> = ArrayList()
 
-    var icons: Iterable<Any>? = null
+    var icons: Iterable<Any?>? = null
+
+    var states: Iterable<Any?>? = null
 
     var singleSelection = false
         set(value) {
@@ -129,14 +131,14 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
     }
 
-    private class PickerHolder(view: View)
+    private class PickerHolder(private val view: View)
         : RecyclerView.ViewHolder(view) {
 
         private val imageView = view.findViewById<ImageView>(R.id.image)!!
         private val textView = view.findViewById<TextView>(R.id.title)!!
         private val checkBox = view.findViewById<ZCheckBox>(R.id.checkbox)!!
 
-        fun bind(icon: Any?, title: Any, state: ZCheckBox.CheckedState) {
+        fun bind(icon: Any?, title: Any, state: Any?, checkedState: ZCheckBox.CheckedState) {
             textView.text = title.toString()
             if (icon == null) {
                 imageView.setImageDrawable(null)
@@ -149,8 +151,17 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 }
                 imageView.visibility = View.VISIBLE
             }
-            checkBox.visibility = if (state == ZCheckBox.CheckedState.HalfChecked) View.INVISIBLE else View.VISIBLE
-            checkBox.checkedState = state
+            if (state != null) {
+                val states = if (state is Int) intArrayOf(state) else state as IntArray
+                if (states.contains(-android.R.attr.state_enabled)) {
+                    view.isEnabled = false
+                    imageView.isEnabled = false
+                    textView.isEnabled = false
+                    checkBox.isEnabled = false
+                }
+            }
+            checkBox.visibility = if (checkedState == ZCheckBox.CheckedState.HalfChecked) View.INVISIBLE else View.VISIBLE
+            checkBox.checkedState = checkedState
         }
 
         fun checkBoxBounds() : Rect {
@@ -177,7 +188,8 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         override fun onBindViewHolder(holder: PickerHolder, position: Int) {
             val checkState = if (outer.singleSelection) ZCheckBox.CheckedState.HalfChecked else (
                 if (outer.selections.contains(position)) ZCheckBox.CheckedState.FullChecked else ZCheckBox.CheckedState.NotChecked)
-            holder.bind(outer.icons?.elementAtOrNull(position), outer.titles.elementAt(position), checkState)
+            holder.bind(outer.icons?.elementAtOrNull(position), outer.titles.elementAt(position),
+                outer.states?.elementAtOrNull(position), checkState)
         }
 
         override fun onClick(view: View) {

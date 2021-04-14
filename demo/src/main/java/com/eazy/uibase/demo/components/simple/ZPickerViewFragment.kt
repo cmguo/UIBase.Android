@@ -12,22 +12,24 @@ import com.eazy.uibase.demo.core.style.annotation.Description
 import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.PickerViewFragmentBinding
 import com.eazy.uibase.widget.ZPanel
-import com.eazy.uibase.widget.ZPickerView
 
 class ZPickerViewFragment : ComponentFragment<PickerViewFragmentBinding?, ZPickerViewFragment.Model?, ZPickerViewFragment.Styles?>()
     , ZPanel.PanelListener {
 
     class Model : ViewModel() {
 
+        // first two is disabled
+        var states = arrayListOf<Any?>(-android.R.attr.state_enabled, -android.R.attr.state_enabled)
+
         @Bindable
-        var selection: Int? = null
+        var selection: Int? = 0
             set(value) {
                 field = value
                 notifyPropertyChanged(BR.selection)
             }
 
         @Bindable
-        var selections: List<Int> = arrayListOf<Int>()
+        var selections: List<Int> = arrayListOf(0)
             set(value) {
                 field = value
                 notifyPropertyChanged(BR.selections)
