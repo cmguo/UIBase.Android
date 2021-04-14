@@ -155,6 +155,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
             val index = (view.parent.parent as ViewGroup).indexOfChild(view.parent as View)
             binding.tipView.location = ZTipView.Location.ManualLayout
             binding.tipView.dismissDelay = 0
+            snacks.add(binding.tipView)
             val target = if (index == 0) (view.rootView as ViewGroup).getChildAt(0) else fragment.binding.root
             binding.tipView.popAt(target, fragment)
         }
