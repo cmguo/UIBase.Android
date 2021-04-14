@@ -86,7 +86,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         @Title("加载图标")
         @Description("按钮加载图标，资源ID类型，图标颜色随文字颜色变化")
         @Style(IconStyle::class)
-        var loadingIcon = 0
+        var loadingIcon = R.drawable.button_loading_primary_anim
 
         @Bindable
         @Title("图标位置")

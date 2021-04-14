@@ -87,7 +87,15 @@ public class ComponentStyle {
     }
 
     public void init(ViewStyles styles) {
-
+        if (values_ != null) {
+            Object value = getRaw(styles);
+            String iv = valueToString(value);
+            if (!values_.contains(iv)) {
+                values_.add(0, iv);
+                if (valueTitles_ != null)
+                    valueTitles_.add(0, "<default>");
+            }
+        }
     }
 
     public String get(ViewStyles styles) {

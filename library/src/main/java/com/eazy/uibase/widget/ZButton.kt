@@ -117,16 +117,15 @@ open class ZButton @JvmOverloads constructor(
             else
                 null
             if (_inited)
-                syncIcon()
+                syncIcon(true)
         }
 
     var loadingIconDrawable: Drawable?
         get() = _loadingIcon
         set(value) {
             _loadingIcon = value
-            if (loading) {
+            if (_inited)
                 syncIcon(true)
-            }
         }
 
     var loadingText: CharSequence? = null

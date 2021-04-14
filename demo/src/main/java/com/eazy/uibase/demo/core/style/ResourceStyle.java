@@ -1,6 +1,7 @@
 package com.eazy.uibase.demo.core.style;
 
 import com.ustc.base.util.reflect.ClassWrapper;
+import com.eazy.uibase.demo.core.ViewStyles;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
