@@ -19,9 +19,9 @@ import java.util.Random;
 
 public class BadgeAnimator extends ValueAnimator {
     private BitmapFragment[][] mFragments;
-    private WeakReference<ZBadgeView> mWeakBadge;
+    private WeakReference<BadgeView> mWeakBadge;
 
-    public BadgeAnimator(Bitmap badgeBitmap, PointF center, ZBadgeView badge) {
+    public BadgeAnimator(Bitmap badgeBitmap, PointF center, BadgeView badge) {
         mWeakBadge = new WeakReference<>(badge);
         setFloatValues(0f, 1f);
         setDuration(500);
@@ -29,7 +29,7 @@ public class BadgeAnimator extends ValueAnimator {
         addUpdateListener(new AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                ZBadgeView badgeView = mWeakBadge.get();
+                BadgeView badgeView = mWeakBadge.get();
                 if (badgeView == null || !badgeView.isShown()) {
                     cancel();
                 } else {
@@ -40,7 +40,7 @@ public class BadgeAnimator extends ValueAnimator {
         addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                ZBadgeView badgeView = mWeakBadge.get();
+                BadgeView badgeView = mWeakBadge.get();
                 if (badgeView != null) {
                     badgeView.reset();
                 }

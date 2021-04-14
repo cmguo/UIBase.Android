@@ -14,7 +14,6 @@ import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.annotation.Description
 import com.eazy.uibase.demo.core.style.annotation.Title
-import com.eazy.uibase.demo.databinding.CheckBoxItemBinding
 import com.eazy.uibase.demo.databinding.CompoundButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.RadioButtonItemBinding
 import com.eazy.uibase.view.list.PaddingDecoration
@@ -87,11 +86,8 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         var allCheckBoxVisible = if (fragment.component.id() == R.id.component_z_check_boxes)
             View.VISIBLE else View.GONE
 
-        val checkBoxCheckedStateChanged = object : ZCheckBox.OnCheckedStateChangeListener {
-            override fun onCheckedStateChanged(checkBox: ZCheckBox, state: ZCheckBox.CheckedState) {
-                fragment.model.updateAllCheckedState()
-            }
-        }
+        val checkBoxCheckedStateChanged = ZCheckBox.OnCheckedStateChangeListener { _, _ ->
+            fragment.model.updateAllCheckedState() }
 
         // simulate radio group
         val radioCheckedChanged = CompoundButton.OnCheckedChangeListener { view: View, isChecked: Boolean ->

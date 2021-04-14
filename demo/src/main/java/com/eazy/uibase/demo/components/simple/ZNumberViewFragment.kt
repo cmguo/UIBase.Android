@@ -29,7 +29,7 @@ class ZNumberViewFragment : ComponentFragment<NumberViewFragmentBinding?, ZNumbe
 
         @Bindable
         @Title("数量") @Description("当前输入的数量")
-        var amount = 1
+        var number = 1
     }
 
     companion object {

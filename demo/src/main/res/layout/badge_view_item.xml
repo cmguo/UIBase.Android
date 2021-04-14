@@ -13,18 +13,18 @@
             type="Styles" />
     </data>
 
-    <com.eazy.uibase.widget.badgeview.ZBadgeView
+    <com.eazy.uibase.widget.ZBadgeView
         android:id="@+id/badgeview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         xhb:borderColor="@{@android:color/white}"
         xhb:borderWidth="@{styles.borderWidth}"
-        xhb:badgeGravity="@{styles.gravity.gravity()}"
+        xhb:gravity="@{styles.gravity.gravity()}"
         xhb:gravityOffset="@{styles.offset}"
         xhb:draggable="@{styles.draggabe}"
-        xhb:exactly="@{styles.exactly}"
-        xhb:badgeNumber="@{styles.number}"
-        xhb:badgeText="@{styles.text}"
+        xhb:maximum="@{styles.maximum}"
+        xhb:number="@{styles.number}"
+        xhb:text="@{styles.text}"
         xhb:dragState="@={styles.dragState}"
         />
 

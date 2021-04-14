@@ -19,39 +19,38 @@ import com.eazy.uibase.resources.RoundDrawable
 class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : LinearLayout(context, attrs, R.attr.numberViewStyle), View.OnClickListener, TextWatcher {
 
-    @FunctionalInterface
-    interface OnAmountChangeListener {
-        fun onAmountChanged(view: View, amount: Int)
+    fun interface OnNumberChangeListener {
+        fun onNumberChanged(view: View, number: Int)
     }
 
     var minimum = 0
         set(value) {
             if (field == value || value < 0 || value > maximum) return
             field = value
-            if (amount < value)
-                amount = value
+            if (number < value)
+                number = value
             else
-                _buttonDec.isEnabled = amount >= value + step
+                _buttonDec.isEnabled = number >= value + step
         }
 
     var maximum = 0
         set(value) {
             if (field == value || value < minimum) return
             field = value
-            if (value in 1 until amount)
-                amount = value
+            if (value in 1 until number)
+                number = value
             else
-                _buttonInc.isEnabled = (value == 0) || (amount + step <= value)
+                _buttonInc.isEnabled = (value == 0) || (number + step <= value)
         }
 
     var step = 1
         set(value) {
             field = value
-            _buttonDec.isEnabled = amount >= minimum + value
-            _buttonInc.isEnabled = (maximum == 0) || (amount + value <= maximum)
+            _buttonDec.isEnabled = number >= minimum + value
+            _buttonInc.isEnabled = (maximum == 0) || (number + value <= maximum)
         }
 
-    var amount = 0 //数量
+    var number = 0 //数量
         set(value) {
             if (field == value || (maximum in 1 until value) || value < minimum)
                 return
@@ -60,16 +59,16 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 _editText.setText(value.toString())
             _buttonDec.isEnabled = value >= minimum + step
             _buttonInc.isEnabled = (maximum == 0) || (value + step <= maximum)
-            mListener?.onAmountChanged(this, value)
+            mListener?.onNumberChanged(this, value)
         }
 
-    private var mListener: OnAmountChangeListener? = null
+    private var mListener: OnNumberChangeListener? = null
     private val _editText: EditText
     private val _buttonDec: Button
     private val _buttonInc: Button
     private var inCallbacks = false
 
-    fun setOnAmountChangeListener(listener: OnAmountChangeListener?) {
+    fun setOnNumberChangeListener(listener: OnNumberChangeListener?) {
         mListener = listener
     }
 
@@ -86,7 +85,7 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         minimum = a.getInt(R.styleable.ZNumberView_minimum, minimum)
         maximum = a.getInt(R.styleable.ZNumberView_maximum, maximum)
         step = a.getInt(R.styleable.ZNumberView_step, step)
-        amount = a.getInt(R.styleable.ZNumberView_amount, amount)
+        number = a.getInt(R.styleable.ZNumberView_number, number)
         a.recycle()
         syncButtonBackground()
     }
@@ -95,12 +94,12 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         val i = v.id
         _editText.clearFocus()
         if (i == R.id.buttonDec) {
-            if (amount >= minimum + step) {
-                amount -= step
+            if (number >= minimum + step) {
+                number -= step
             }
         } else if (i == R.id.buttonInc) {
-            if (maximum == 0 || amount + step <= maximum) {
-                amount += step
+            if (maximum == 0 || number + step <= maximum) {
+                number += step
             }
         }
     }
@@ -111,10 +110,10 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         if (s.toString().isEmpty()) return
         val value = Integer.valueOf(s.toString())
         inCallbacks = true
-        amount = value
+        number = value
         inCallbacks = false
-        if (amount != value) {
-            s.replace(0, s.length, amount.toString())
+        if (number != value) {
+            s.replace(0, s.length, number.toString())
         }
     }
 

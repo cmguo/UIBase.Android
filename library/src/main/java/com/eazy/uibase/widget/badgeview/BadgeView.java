@@ -16,7 +16,6 @@ import android.os.Parcelable;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.SizeF;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -39,7 +38,7 @@ import java.util.List;
  *         Email:qstumn@163.com
  */
 
-public class ZBadgeView extends View {
+public class BadgeView extends View {
 
     public enum DragState {
         START,
@@ -51,7 +50,7 @@ public class ZBadgeView extends View {
 
     @FunctionalInterface
     public interface OnDragStateChangedListener {
-        void onDragStateChanged(DragState dragState, ZBadgeView badge, View targetView);
+        void onDragStateChanged(DragState dragState, BadgeView badge, View targetView);
     }
 
     protected int mColorBackground;
@@ -67,7 +66,7 @@ public class ZBadgeView extends View {
     protected String mBadgeText;
     protected boolean mDraggable;
     protected boolean mDragging;
-    protected boolean mExact;
+    protected int mMaximumNumber;
     protected boolean mShowShadow;
     protected int mBadgeGravity;
     protected float mGravityOffsetX;
@@ -106,15 +105,15 @@ public class ZBadgeView extends View {
 
     protected ViewGroup mActivityRoot;
 
-    public ZBadgeView(Context context) {
+    public BadgeView(Context context) {
         this(context, null);
     }
 
-    public ZBadgeView(Context context, AttributeSet attrs) {
+    public BadgeView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ZBadgeView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BadgeView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -140,15 +139,15 @@ public class ZBadgeView extends View {
         mBadgeBackgroundBorderPaint = new Paint();
         mBadgeBackgroundBorderPaint.setAntiAlias(true);
         mBadgeBackgroundBorderPaint.setStyle(Paint.Style.STROKE);
-        mColorBackground = getColor(R.color.badge_view_background_color);
-        mColorBadgeText = getColor(R.color.badge_view_text_color);
-        mBadgeTextSize = getDimension(R.dimen.badge_view_text_size);
-        mBadgePadding = getDimension(R.dimen.badge_view_padding);
+//        mColorBackground = getColor(R.color.badge_view_background_color);
+//        mColorBadgeText = getColor(R.color.badge_view_text_color);
+//        mBadgeTextSize = getDimension(R.dimen.badge_view_text_size);
+//        mBadgePadding = getDimension(R.dimen.badge_view_padding);
         mBadgeNumber = 0;
-        mBadgeGravity = Gravity.END | Gravity.TOP;
-        mGravityOffsetX = getDimension(R.dimen.badge_view_gravity_offset_x);
-        mGravityOffsetY = getDimension(R.dimen.badge_view_gravity_offset_y);
-        mFinalDragDistance = getDimension(R.dimen.badge_view_final_drag_distance);
+//        mBadgeGravity = Gravity.END | Gravity.TOP;
+//        mGravityOffsetX = getDimension(R.dimen.badge_view_gravity_offset_x);
+//        mGravityOffsetY = getDimension(R.dimen.badge_view_gravity_offset_y);
+        //mFinalDragDistance = getDimension(R.dimen.badge_view_final_drag_distance);
         mShowShadow = true;
         mDrawableBackgroundClip = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -629,16 +628,16 @@ public class ZBadgeView extends View {
     /**
      * @param badgeNumber equal to zero badge will be hidden, less than zero show dot
      */
-    public ZBadgeView setBadgeNumber(int badgeNumber) {
+    public BadgeView setBadgeNumber(int badgeNumber) {
         mBadgeNumber = badgeNumber;
         if (mBadgeNumber < 0) {
             mBadgeText = "";
-        } else if (mBadgeNumber > 99) {
-            mBadgeText = mExact ? String.valueOf(mBadgeNumber) : "99+";
-        } else if (mBadgeNumber > 0 && mBadgeNumber <= 99) {
-            mBadgeText = String.valueOf(mBadgeNumber);
         } else if (mBadgeNumber == 0) {
             mBadgeText = null;
+        } else if (mMaximumNumber > 0 && mBadgeNumber > mMaximumNumber) {
+            mBadgeText = mMaximumNumber + "+";
+        } else {
+            mBadgeText = String.valueOf(mBadgeNumber);
         }
         measureText();
         invalidate();
@@ -649,7 +648,7 @@ public class ZBadgeView extends View {
         return mBadgeNumber;
     }
 
-    public ZBadgeView setBadgeText(String badgeText) {
+    public BadgeView setBadgeText(String badgeText) {
         mBadgeText = badgeText;
         mBadgeNumber = 1;
         measureText();
@@ -661,19 +660,19 @@ public class ZBadgeView extends View {
         return mBadgeText;
     }
 
-    public ZBadgeView setExactMode(boolean isExact) {
-        mExact = isExact;
-        if (mBadgeNumber > 99) {
+    public BadgeView setMaximumNumber(int number) {
+        mMaximumNumber = number;
+        if (mBadgeNumber > mMaximumNumber) {
             setBadgeNumber(mBadgeNumber);
         }
         return this;
     }
 
-    public boolean isExactMode() {
-        return mExact;
+    public int getMaximumNumber() {
+        return mMaximumNumber;
     }
 
-    public ZBadgeView setShowShadow(boolean showShadow) {
+    public BadgeView setShowShadow(boolean showShadow) {
         mShowShadow = showShadow;
         invalidate();
         return this;
@@ -683,7 +682,7 @@ public class ZBadgeView extends View {
         return mShowShadow;
     }
 
-    public ZBadgeView setBadgeBackgroundColor(int color) {
+    public BadgeView setBadgeBackgroundColor(int color) {
         mColorBackground = color;
         if (mColorBackground == Color.TRANSPARENT) {
             mBadgeTextPaint.setXfermode(null);
@@ -704,7 +703,7 @@ public class ZBadgeView extends View {
         invalidate();
     }
 
-    public ZBadgeView stroke(int color, float width, boolean isDpValue) {
+    public BadgeView stroke(int color, float width, boolean isDpValue) {
         mColorBackgroundBorder = color;
         mBackgroundBorderWidth = isDpValue ? dp2px(getContext(), width) : width;
         invalidate();
@@ -715,11 +714,11 @@ public class ZBadgeView extends View {
         return mColorBackground;
     }
 
-    public ZBadgeView setBadgeBackground(Drawable drawable) {
+    public BadgeView setBadgeBackground(Drawable drawable) {
         return setBadgeBackground(drawable, false);
     }
 
-    public ZBadgeView setBadgeBackground(Drawable drawable, boolean clip) {
+    public BadgeView setBadgeBackground(Drawable drawable, boolean clip) {
         mDrawableBackgroundClip = clip;
         mDrawableBackground = drawable;
         createClipLayer();
@@ -731,7 +730,7 @@ public class ZBadgeView extends View {
         return mDrawableBackground;
     }
 
-    public ZBadgeView setBadgeTextColor(int color) {
+    public BadgeView setBadgeTextColor(int color) {
         mColorBadgeText = color;
         invalidate();
         return this;
@@ -741,7 +740,7 @@ public class ZBadgeView extends View {
         return mColorBadgeText;
     }
 
-    public ZBadgeView setBadgeTextSize(float size, boolean isSpValue) {
+    public BadgeView setBadgeTextSize(float size, boolean isSpValue) {
         mBadgeTextSize = isSpValue ? dp2px(getContext(), size) : size;
         measureText();
         invalidate();
@@ -762,7 +761,7 @@ public class ZBadgeView extends View {
         return isSpValue ? px2dp(getContext(), mBadgeTextSize) : mBadgeTextSize;
     }
 
-    public ZBadgeView setBadgePadding(float padding, boolean isDpValue) {
+    public BadgeView setBadgePadding(float padding, boolean isDpValue) {
         mBadgePadding = isDpValue ? dp2px(getContext(), padding) : padding;
         createClipLayer();
         invalidate();
@@ -787,7 +786,7 @@ public class ZBadgeView extends View {
      *                Gravity.CENTER , Gravity.CENTER | Gravity.TOP , Gravity.CENTER | Gravity.BOTTOM ,
      *                Gravity.CENTER | Gravity.START , Gravity.CENTER | Gravity.END
      */
-    public ZBadgeView setBadgeGravity(int gravity) {
+    public BadgeView setBadgeGravity(int gravity) {
         if (gravity == (Gravity.START | Gravity.TOP) ||
                 gravity == (Gravity.END | Gravity.TOP) ||
                 gravity == (Gravity.START | Gravity.BOTTOM) ||
@@ -812,11 +811,11 @@ public class ZBadgeView extends View {
         return mBadgeGravity;
     }
 
-    public ZBadgeView setGravityOffset(float offset, boolean isDpValue) {
+    public BadgeView setGravityOffset(float offset, boolean isDpValue) {
         return setGravityOffset(offset, offset, isDpValue);
     }
 
-    public ZBadgeView setGravityOffset(float offsetX, float offsetY, boolean isDpValue) {
+    public BadgeView setGravityOffset(float offsetX, float offsetY, boolean isDpValue) {
         mGravityOffsetX = isDpValue ? dp2px(getContext(), offsetX) : offsetX;
         mGravityOffsetY = isDpValue ? dp2px(getContext(), offsetY) : offsetY;
         invalidate();
@@ -844,7 +843,7 @@ public class ZBadgeView extends View {
             mDragStateChangedListener.onDragStateChanged(state, this, mTargetView);
     }
 
-    public ZBadgeView setOnDragStateChangedListener(OnDragStateChangedListener l) {
+    public BadgeView setOnDragStateChangedListener(OnDragStateChangedListener l) {
         //mDraggable = l != null;
         mDragStateChangedListener = l;
         return this;
@@ -881,7 +880,7 @@ public class ZBadgeView extends View {
             View targetView = null, badgeView = null;
             for (int i = 0; i < getChildCount(); i++) {
                 View child = getChildAt(i);
-                if (!(child instanceof ZBadgeView)) {
+                if (!(child instanceof BadgeView)) {
                     targetView = child;
                 } else {
                     badgeView = child;

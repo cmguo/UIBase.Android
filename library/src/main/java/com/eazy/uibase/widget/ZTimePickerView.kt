@@ -17,8 +17,7 @@ import java.util.*
 class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : FrameLayout(context, attrs, R.attr.timePickerViewStyle), OnTimeSelectChangeListener {
 
-    @FunctionalInterface
-    interface OnSelectTimeChangeListener {
+    fun interface OnSelectTimeChangeListener {
         fun onSelectTimeChanged(picker: ZTimePickerView, time: Date)
     }
 

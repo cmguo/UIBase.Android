@@ -12,6 +12,7 @@
         <item name="textSize">12sp</item>
         <item name="iconSize">40dp</item>
         <item name="iconPadding">8dp</item>
+        <item name="iconPosition">top</item>
     </style>
 
 </resources>

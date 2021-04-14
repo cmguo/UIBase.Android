@@ -8,7 +8,7 @@
         <attr name="minimum" format="integer"/>
         <attr name="maximum" format="integer"/>
         <attr name="step" format="integer"/>
-        <attr name="amount" format="integer"/>
+        <attr name="number"/>
         <!-- 左右2边+-按钮的宽度 -->
         <attr name="buttonSize"/>
         <attr name="buttonBackgroundColor" format="color" />

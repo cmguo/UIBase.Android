@@ -23,8 +23,7 @@ import kotlin.collections.ArrayList
 class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : FrameLayout(context, attrs, R.attr.actionSheetStyle) {
 
-    @FunctionalInterface
-    interface ActionSheetListener {
+    fun interface ActionSheetListener {
         fun onAction(sheet: ZActionSheet, index: Int)
     }
 

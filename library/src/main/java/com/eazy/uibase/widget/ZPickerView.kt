@@ -22,8 +22,7 @@ import kotlin.collections.ArrayList
 class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : FrameLayout(context, attrs, R.attr.pickerViewStyle) {
 
-    @FunctionalInterface
-    interface OnSelectionChangeListener {
+    fun interface OnSelectionChangeListener {
         fun onSelectionChanged(picker: ZPickerView)
     }
 

@@ -35,7 +35,6 @@ class ZSearchBox @JvmOverloads constructor(
             _textView?.text = value
         }
 
-    @FunctionalInterface
     interface SearchBoxListener {
         fun searchBoxFocused(bar: ZSearchBox) {}
         fun searchBoxTextChanged(bar: ZSearchBox, text: String) {}

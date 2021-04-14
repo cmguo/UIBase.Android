@@ -21,6 +21,7 @@
         <item name="searchBoxStyle">@style/ZSearchBox</item>
         <item name="timePickerViewStyle">@style/ZTimePickerView</item>
         <item name="numberViewStyle">@style/ZNumberView</item>
+        <item name="badgeViewStyle">@style/ZBadgeView</item>
 
         <!-- for day night inspect -->
         <item name="viewInflaterClass">com.eazy.uibase.daynight.DayNightViewInflater</item>

@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="badge_view_background_color">#FFE84E40</color>
-    <color name="badge_view_text_color">#FFFFFFFF</color>
-    <dimen name="badge_view_text_size">11dp</dimen>
-    <dimen name="badge_view_padding">5dp</dimen>
-    <dimen name="badge_view_gravity_offset_x">1dp</dimen>
-    <dimen name="badge_view_gravity_offset_y">1dp</dimen>
-    <dimen name="badge_view_final_drag_distance">90dp</dimen>
-    <dimen name="badge_view_default_radius">7dp</dimen>
-    <dimen name="badge_view_bitmap_inflect">3dp</dimen>
+    <attr name="badgeViewStyle" format="reference"/>
+
+    <declare-styleable name="ZBadgeView">
+        <attr name="number" format="integer"/>
+        <attr name="maximum"/>
+        <attr name="text"/>
+        <attr name="textAppearance"/>
+        <attr name="android:gravity"/>
+        <attr name="offsetX"/>
+        <attr name="offsetY"/>
+        <attr name="fillColor"/>
+        <attr name="borderColor"/>
+        <attr name="borderWidth"/>
+        <attr name="padding" format="dimension"/>
+        <attr name="dragable" format="boolean"/>
+        <attr name="dragRadius" format="dimension"/>
+    </declare-styleable>
+
+    <!-- not styleable -->
+
     <dimen name="badge_view_shadow_offset_x">1dp</dimen>
     <dimen name="badge_view_shadow_offset_y">1.5dp</dimen>
     <dimen name="badge_view_shadow_radius">2dp</dimen>
+    <dimen name="badge_view_bitmap_inflect">3dp</dimen>
     <dimen name="badge_view_drag_start_radius">1.5dp</dimen>
+    <dimen name="badge_view_default_radius">7dp</dimen>
 
-    <!-- No need styleable because we never use BadgeView in layout -->
+
+    <color name="badge_view_fill_color">#FFE84E40</color>
+    <color name="badge_view_text_color">#FFFFFFFF</color>
+    <dimen name="badge_view_text_size">11sp</dimen>
+    <dimen name="badge_view_padding">5dp</dimen>
+    <dimen name="badge_view_drag_radius">90dp</dimen>
+
+    <style name="ZBadgeView.Text">
+        <item name="android:textColor">@color/badge_view_text_color</item>
+        <item name="android:textSize">@dimen/badge_view_text_size</item>
+    </style>
+
+    <style name="ZBadgeView">
+        <item name="android:gravity">top|right</item>
+        <item name="dragRadius">@dimen/badge_view_drag_radius</item>
+        <item name="fillColor">@color/badge_view_fill_color</item>
+        <item name="padding">@dimen/badge_view_padding</item>
+        <item name="textAppearance">@style/ZBadgeView.Text</item>
+    </style>
 
 </resources>

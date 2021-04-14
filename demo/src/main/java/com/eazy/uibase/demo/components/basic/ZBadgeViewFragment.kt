@@ -15,7 +15,7 @@ import com.eazy.uibase.demo.core.style.DimemDpStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.BadgeViewFragmentBinding
 import com.eazy.uibase.demo.databinding.BadgeViewItemBinding
-import com.eazy.uibase.widget.badgeview.ZBadgeView
+import com.eazy.uibase.widget.ZBadgeView
 
 class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
     ZBadgeViewFragment.Model?, ZBadgeViewFragment.Styles?>() {
@@ -63,9 +63,15 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
         var draggabe = false
 
         @Bindable
-        @Title("精确数值")
-        @Description("如果不精确展示数值，超过99，展示为99+")
-        var exactly = false
+        @Title("拖拽距离")
+        @Description("最大拖拽半径，当超过该范围时松开，可以将其删除，拖拽过程中会有事件回调")
+        @Style(DimemDpStyle::class)
+        var dragRadius = 90
+
+        @Bindable
+        @Title("最大数值")
+        @Description("如果数值超过最大数值，展示为XX+，XX为最大数值")
+        var maximum = 0
 
         @Bindable
         @Title("数字")
@@ -94,7 +100,7 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
     }
 
     private fun addBadge(inflater: LayoutInflater, target: View) {
-        val binding = BadgeViewItemBinding.inflate(inflater);
+        val binding = BadgeViewItemBinding.inflate(inflater)
         binding.styles = styles
         (binding.root as ZBadgeView).bindTarget(target)
     }
