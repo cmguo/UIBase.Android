@@ -91,9 +91,12 @@ public class ComponentStyle {
             Object value = getRaw(styles);
             String iv = valueToString(value);
             if (!values_.contains(iv)) {
+                values_ = new ArrayList<>(values_);
                 values_.add(0, iv);
-                if (valueTitles_ != null)
+                if (valueTitles_ != null) {
+                    valueTitles_ = new ArrayList<>(valueTitles_);
                     valueTitles_.add(0, "<default>");
+                }
             }
         }
     }
