@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.Bindable
-import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
@@ -16,8 +15,6 @@ import com.eazy.uibase.demo.databinding.ActivityViewFragmentBinding
 import com.eazy.uibase.view.list.RecyclerViewAdapter.OnItemClickListener
 import com.eazy.uibase.widget.ZPanel
 import com.eazy.uibase.widget.ZTipView
-import kotlinx.android.synthetic.main.activity_view_fragment.view.*
-import kotlinx.android.synthetic.main.number_view_fragment.view.*
 
 class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZActivityViewFragment.Model?, ZActivityViewFragment.Styles?>()
     , ZPanel.PanelListener, OnItemClickListener<Int> {

@@ -108,27 +108,30 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         if (clzB == ViewDataBinding.class) {
             return null;
         }
-        return ClassWrapper.wrap(getDataBindingType()).invoke("inflate",
+        return ClassWrapper.wrap(clzB).invoke("inflate",
                 ObjectWrapper.wrap(LayoutInflater.class, inflater));
     }
 
+    @SuppressWarnings("unchecked")
     protected Model createModel() {
         Class<Model> clzM = getModelType();
-        ClassWrapper<?> wrapper = ClassWrapper.wrap(clzM);
+        if ((Class<?>) clzM == Object.class) // kotlin empty Model
+            clzM = (Class<Model>) ViewModel.class;
+        ClassWrapper<Model> wrapper = ClassWrapper.wrap(clzM);
         if (wrapper.hasConstructor(getClass())) {
-            return ClassWrapper.wrap(clzM).newInstance(this);
+            return wrapper.newInstance(this);
         } else {
-            return ClassWrapper.wrap(clzM).newInstance();
+            return wrapper.newInstance();
         }
     }
 
     protected Styles createStyle() {
         Class<Styles> clzS = getStyleType();
-        ClassWrapper<?> wrapper = ClassWrapper.wrap(clzS);
+        ClassWrapper<Styles> wrapper = ClassWrapper.wrap(clzS);
         if (wrapper.hasConstructor(getClass())) {
-            return ClassWrapper.wrap(clzS).newInstance(this);
+            return wrapper.newInstance(this);
         } else {
-            return ClassWrapper.wrap(clzS).newInstance();
+            return wrapper.newInstance();
         }
     }
 

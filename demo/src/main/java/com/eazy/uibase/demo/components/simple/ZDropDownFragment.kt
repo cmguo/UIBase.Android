@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.Bindable
 import androidx.databinding.ViewDataBinding
-import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.GridLayoutManager
+import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel

@@ -1,7 +1,9 @@
 package com.eazy.uibase.demo.test;
 
 import android.graphics.Color;
+import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.Bindable;
 
 import com.eazy.uibase.demo.core.ComponentFragment;

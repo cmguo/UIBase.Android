@@ -16,8 +16,7 @@ import com.eazy.uibase.widget.ZAvatarView
 class ZAvatarViewFragment : ComponentFragment<AvatarViewFragmentBinding?,
     ZAvatarViewFragment.Model?, ZAvatarViewFragment.Styles?>() {
 
-    class Model : ViewModel() {
-    }
+    class Model : ViewModel()
 
     class Styles(private val fragment_: ZAvatarViewFragment) : ViewStyles() {
 

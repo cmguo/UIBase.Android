@@ -10,13 +10,12 @@ import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.databinding.CarouselFragmentBinding
 import com.eazy.uibase.demo.imageLoader.GlideImageLoader
 import kotlinx.android.synthetic.main.carousel_fragment.*
-import java.util.*
 
 class ZCarouselFragment : ComponentFragment<CarouselFragmentBinding?, ZCarouselFragment.Model?, ZCarouselFragment.Styles?>() {
 
-    class Model(fragment: ZCarouselFragment?) : ViewModel()
+    class Model : ViewModel()
 
-    class Styles(fragment: ZCarouselFragment?) : ViewStyles()
+    class Styles : ViewStyles()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

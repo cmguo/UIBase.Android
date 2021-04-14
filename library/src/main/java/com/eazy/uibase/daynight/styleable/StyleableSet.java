@@ -27,6 +27,7 @@ public class StyleableSet<E extends View> implements IStyleableSet<E> {
     static {
         for (IStyleableSet<?> styleableSet : ServiceLoader.load(IStyleableSet.class)) {
             Class<? extends View> cls = Generic.getParamType(styleableSet.getClass(), StyleableSet.class, 0);
+            Log.d(TAG, "collect styleableSet " + cls.getSimpleName());
             sStyleables.put(cls, styleableSet);
         }
     }

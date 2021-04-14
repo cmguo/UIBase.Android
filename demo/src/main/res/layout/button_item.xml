@@ -55,6 +55,8 @@
                 xhb:content="@{styles.conntent}"
                 xhb:icon="@{styles.icon}"
                 xhb:iconPosition="@{styles.iconPosition}"
+                xhb:loadingText="@{styles.loadingText}"
+                xhb:loadingIcon="@{styles.loadingIcon}"
                 xhb:loading="@{styles.loading}"
                 android:enabled="@{!styles.disabled}"
                 android:onClick="@{(view) -> styles.testButtonClick(view)}"
