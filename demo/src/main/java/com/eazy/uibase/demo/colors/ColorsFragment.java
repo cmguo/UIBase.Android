@@ -1,8 +1,10 @@
 package com.eazy.uibase.demo.colors;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.Bindable;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,7 +53,9 @@ public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, Col
     // this should be in view model, but fragment may simplify things
     public RecyclerViewAdapter.OnItemClickListener<Map.Entry<String, Integer>> colorClicked = (position, object) -> Log.d(TAG, "colorClicked" + object);
 
-    private void update() {
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
         getModel().updateColors(getContext());
         Objects.requireNonNull(getBinding().colorsList.getAdapter()).notifyItemRangeChanged(0, getModel().getColors().size());
     }
