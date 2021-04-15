@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.ToolStyles" />
+        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.ToolTipStyles" />
 
         <variable
             name="styles"
-            type="ToolStyles" />
+            type="ToolTipStyles" />
 
     </data>
 

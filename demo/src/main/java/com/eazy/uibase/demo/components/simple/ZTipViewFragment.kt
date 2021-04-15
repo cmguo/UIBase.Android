@@ -56,7 +56,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         open fun buttonClick(view: View) {}
     }
 
-    class ToolStyles(fragment: ZTipViewFragment) : Styles(fragment) {
+    class ToolTipStyles(fragment: ZTipViewFragment) : Styles(fragment) {
 
         @Bindable
         @Title("建议位置")
@@ -83,7 +83,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         }
     }
 
-    open class TipToastStyles(fragment: ZTipViewFragment) : Styles(fragment) {
+    open class SnackToastStyles(fragment: ZTipViewFragment) : Styles(fragment) {
 
         @Bindable
         @Title("提示图标")
@@ -103,7 +103,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
 
     }
 
-    open class ToastStyles(fragment: ZTipViewFragment) : TipToastStyles(fragment) {
+    open class ToastStyles(fragment: ZTipViewFragment) : SnackToastStyles(fragment) {
 
         @Bindable
         @Title("视觉样式")
@@ -128,7 +128,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         }
     }
 
-    class SnackStyles(fragment: ZTipViewFragment) : TipToastStyles(fragment) {
+    class SnackStyles(fragment: ZTipViewFragment) : SnackToastStyles(fragment) {
 
         @Bindable
         @Title("左侧按钮")
@@ -196,7 +196,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
 
     override fun createStyle(): Styles {
         return when (component.id()) {
-            R.id.component_z_tool_tips -> ToolStyles(this)
+            R.id.component_z_tool_tips -> ToolTipStyles(this)
             R.id.component_z_toasts -> ToastStyles(this)
             R.id.component_z_snack_bars -> SnackStyles(this)
             else -> Styles(this)
