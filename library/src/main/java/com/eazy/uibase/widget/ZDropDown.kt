@@ -2,6 +2,7 @@ package com.eazy.uibase.widget
 
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.Size
@@ -76,6 +77,8 @@ class ZDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                 window.dismiss()
             listener.dropDownFinished(this, it)
         }
+        // for sdk 21, window don't dismiss when click outside. setBackgroundDrawable can work
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window.showAsDropDown(target, 0, 0, Gravity.TOP or Gravity.START)
     }
 
