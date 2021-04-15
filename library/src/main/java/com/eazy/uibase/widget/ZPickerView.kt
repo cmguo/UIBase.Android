@@ -150,15 +150,12 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 }
                 imageView.visibility = View.VISIBLE
             }
-            if (state != null) {
-                val states = if (state is Int) intArrayOf(state) else state as IntArray
-                if (states.contains(-android.R.attr.state_enabled)) {
-                    view.isEnabled = false
-                    imageView.isEnabled = false
-                    textView.isEnabled = false
-                    checkBox.isEnabled = false
-                }
-            }
+            val states = if (state is Int) intArrayOf(state) else state as? IntArray
+            val enabled = !(states?.contains(-android.R.attr.state_enabled) ?: false)
+            view.isEnabled = enabled
+            imageView.isEnabled = enabled
+            textView.isEnabled = enabled
+            checkBox.isEnabled = enabled
             checkBox.visibility = if (checkedState == ZCheckBox.CheckedState.HalfChecked) View.INVISIBLE else View.VISIBLE
             checkBox.checkedState = checkedState
         }

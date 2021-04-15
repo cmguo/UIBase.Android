@@ -19,10 +19,12 @@ public class ColorStyle extends ComponentStyle {
     private static List<String> values;
     private static List<String> valueTitles;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void init(Context context) {
         final Map<String, Integer> colors = Colors.stdDynamicColors(context);
-        values = colors.values().stream().map(String::valueOf).collect(Collectors.toList());
+        values = new ArrayList<>();
+        for (int c : colors.values()) {
+            values.add(String.valueOf(c));
+        }
         valueTitles = new ArrayList<>(colors.keySet());
     }
 

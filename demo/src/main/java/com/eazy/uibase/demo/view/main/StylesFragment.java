@@ -1,30 +1,26 @@
 package com.eazy.uibase.demo.view.main;
 
-import androidx.annotation.RequiresApi;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.databinding.library.baseAdapters.BR;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewbinding.ViewBinding;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.databinding.library.baseAdapters.BR;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import com.eazy.uibase.demo.R;
+import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.style.ColorStyle;
 import com.eazy.uibase.demo.core.style.DimemDpStyle;
 import com.eazy.uibase.demo.databinding.StylesFragmentBinding;
-import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.view.list.BaseItemBinding;
 import com.eazy.uibase.view.list.DividerDecoration;
 import com.eazy.uibase.view.list.RecyclerViewAdapter;
@@ -52,7 +48,7 @@ public class StylesFragment extends Fragment {
                 return super.createBinding(parent, viewType);
             }
             ViewBinding binding = super.createBinding(parent, R.layout.style_item);
-            ViewGroup group = (ViewGroup) binding.getRoot().findViewById(R.id.value);
+            ViewGroup group = binding.getRoot().findViewById(R.id.value);
             ViewBinding valueBinding = super.createBinding(group, viewType);
             group.addView(valueBinding.getRoot());
             return binding;
@@ -62,7 +58,7 @@ public class StylesFragment extends Fragment {
         public void bindView(ViewBinding binding, StylesViewModel.StyleValue item, int position) {
             super.bindView(binding, item, position);
             if (binding instanceof com.eazy.uibase.demo.databinding.StyleItemBinding) {
-                ViewGroup group = (ViewGroup) binding.getRoot().findViewById(R.id.value);
+                ViewGroup group = binding.getRoot().findViewById(R.id.value);
                 ViewDataBinding valueBinding = DataBindingUtil.findBinding(group.getChildAt(0));
                 valueBinding.setVariable(BR.value, item);
             }
@@ -126,7 +122,6 @@ public class StylesFragment extends Fragment {
         return binding.getRoot();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

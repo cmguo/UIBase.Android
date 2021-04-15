@@ -145,17 +145,13 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
         private val button = view.findViewById<ZButton>(R.id.button)!!
 
         fun bind(content: Any?, state: Any?) {
-            if (state != null) {
-                val states = if (state is Int) intArrayOf(state) else state as IntArray
-                if (states.contains(-android.R.attr.state_enabled)) {
-                    view.isEnabled = false
-                    button.isEnabled = false
-                }
-                if (states.contains(android.R.attr.state_selected)) {
-                    view.isSelected = true
-                    button.isSelected = true
-                }
-            }
+            val states = if (state is Int) intArrayOf(state) else state as? IntArray
+            val enabled = !(states?.contains(-android.R.attr.state_enabled) ?: false)
+            val selected = states?.contains(android.R.attr.state_selected) ?: false
+            view.isEnabled = enabled
+            button.isEnabled = enabled
+            view.isSelected = selected
+            button.isSelected = selected
             if (content is String) {
                 button.text = content
             } else if (content is Int) {

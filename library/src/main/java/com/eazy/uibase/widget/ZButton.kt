@@ -258,10 +258,10 @@ open class ZButton @JvmOverloads constructor(
 
     private fun applyStyle(a: TypedArray) {
         val type = a.getInt(R.styleable.ZButton_buttonType, -1)
-        if (type >= 0 && type != buttonType.ordinal)
+        if (type >= 0)
             buttonType = ButtonType.values()[type]
         val size = a.getInt(R.styleable.ZButton_buttonSize, -1)
-        if (size >= 0 && size != buttonSize.ordinal)
+        if (size >= 0)
             buttonSize = ButtonSize.values()[size]
         content = a.getResourceId(R.styleable.ZButton_content, 0)
         buttonAppearance = a.getResourceId(R.styleable.ZButton_buttonAppearance, buttonAppearance)
