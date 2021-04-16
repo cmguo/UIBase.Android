@@ -11,11 +11,13 @@ import android.graphics.drawable.*
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.RoundDrawable
+import com.eazy.uibase.resources.Drawables
 
 open class ZButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -355,7 +357,7 @@ open class ZButton @JvmOverloads constructor(
      private fun syncIcon(loading: Boolean = false) {
         val icon = if (loading) _loadingIcon else _icon
         if (icon != null) {
-            if (icon is VectorDrawable) {
+            if (icon is VectorDrawable || Drawables.isPureColor(icon)) {
                 icon.setTintMode(PorterDuff.Mode.SRC_IN)
                 icon.setTintList(textColors)
             }
