@@ -7,6 +7,7 @@ import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
+import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundWrapDrawable
 
 class ZActionButton @JvmOverloads constructor(
@@ -18,7 +19,7 @@ class ZActionButton @JvmOverloads constructor(
             super.icon = value
             field = value
             val icon = iconDrawable
-            if (icon is VectorDrawable) {
+            if (icon != null && Drawables.isPureColor(icon)) {
                 icon.setTintList(ContextCompat.getColorStateList(context, R.color.bluegrey800_disabled))
                 icon.setBounds(Rect(0, 0, icon.intrinsicWidth, icon.intrinsicHeight))
                 val drawable = RoundWrapDrawable(icon)
