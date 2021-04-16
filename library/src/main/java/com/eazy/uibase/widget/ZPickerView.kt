@@ -74,6 +74,12 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
             _listView.setOnScrollChangeListener { _: View, _: Int, _: Int, _: Int, _: Int ->
                 layoutSelectImage()
             }
+        } else {
+            _listView.addOnScrollListener( object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    layoutSelectImage()
+                }
+            })
         }
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZPickerView, R.attr.pickerViewStyle, 0)
@@ -127,6 +133,8 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         if (holder != null) {
             val cb = holder.checkBoxBounds()
             _selectImage.layout(cb.left, cb.top, cb.right, cb.bottom)
+        } else {
+            _selectImage.layout(-1000,-1000, -1000, -1000)
         }
     }
 

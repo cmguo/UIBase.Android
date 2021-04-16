@@ -24,6 +24,7 @@
         android:orientation="vertical">
 
         <FrameLayout
+            android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -37,6 +38,7 @@
                 app:content="@{styles.content}"
                 app:bottomButton="@{styles.bottomButton}"
                 app:data="@{styles.data}"
+                app:listener="@{fragment}"
                 />
 
         </FrameLayout>
