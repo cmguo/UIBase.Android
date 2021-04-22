@@ -76,7 +76,7 @@ public class DimenStyle extends ComponentStyle {
             return v * density;
         }
         public float fromPx(float v)  {
-            return v * density;
+            return v / density;
         }
         public int toPx(int v) {
             return ceil(v * density);
