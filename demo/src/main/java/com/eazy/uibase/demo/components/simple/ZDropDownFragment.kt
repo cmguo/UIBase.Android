@@ -10,7 +10,7 @@ import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.core.style.DimemDpStyle
+import com.eazy.uibase.demo.core.style.DimenStyle
 import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.DropDownFragmentBinding
@@ -38,7 +38,7 @@ class ZDropDownFragment : ComponentFragment<DropDownFragmentBinding?, ZDropDownF
         @Bindable
         @Title("宽度")
         @Description("整体宽度，设置负数，则自动加上窗口宽度，设置为 0，自动计算宽度；通过 layout_width 或者 minimumWidth 设置")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var width = 200
 
         fun buttonClick(view: View) {

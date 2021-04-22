@@ -2,7 +2,7 @@ include ':banner'
 include ':badgelibrary'
 include ':libshape'
 include ':demo'
-include ':library'
+include ':uibase-library'
 include ':app'
 include ':magicindicator'
 include ':pickerview'
@@ -11,3 +11,4 @@ include ':wheelview'
 project(':magicindicator').projectDir = new File(settingsDir, './MagicIndicator/magicindicator')
 project(':pickerview').projectDir = new File(settingsDir, './Android-PickerView/pickerview')
 project(':wheelview').projectDir = new File(settingsDir, './Android-PickerView/wheelview')
+project(':uibase-library').projectDir = new File(settingsDir, './library')

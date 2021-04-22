@@ -132,9 +132,9 @@ class ZPanel @JvmOverloads constructor(
     /* private */
 
     private fun applyStyle(a: TypedArray) {
+        content = a.getResourceId(R.styleable.ZPanel_content, 0)
         titleBar = a.getResourceId(R.styleable.ZPanel_titleBar, 0)
         bottomButton = a.getResourceId(R.styleable.ZPanel_bottomButton, 0)
-        content = a.getResourceId(R.styleable.ZPanel_content, 0)
         borderRadius = a.getDimension(R.styleable.ZPanel_borderRadius, borderRadius)
     }
 

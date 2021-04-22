@@ -6,7 +6,7 @@ import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.ColorStyle
-import com.eazy.uibase.demo.core.style.DimemDpStyle
+import com.eazy.uibase.demo.core.style.DimenStyle
 import com.eazy.uibase.demo.core.style.annotation.Description
 import com.eazy.uibase.demo.core.style.annotation.Style
 import com.eazy.uibase.demo.core.style.annotation.Title
@@ -33,13 +33,13 @@ class ZAvatarViewFragment : ComponentFragment<AvatarViewFragmentBinding?,
         @Bindable
         @Title("剪切半径")
         @Description("圆角剪切时，剪切圆角半径，设为0，则为直角")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var roundRadius = 0f
 
         @Bindable
         @Title("边框宽度")
         @Description("设置头像边框宽度，设为0，则没有边框")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var borderWidth = 0.5f
 
         @Bindable

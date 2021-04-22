@@ -9,7 +9,7 @@ import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.core.style.DimemDpStyle
+import com.eazy.uibase.demo.core.style.DimenStyle
 import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.TextAreaFragmentBinding
@@ -27,12 +27,12 @@ class ZTextAreaFragment : ComponentFragment<TextAreaFragmentBinding?, ZTextAreaF
 
         @Bindable
         @Title("最小高度") @Description("没有文字时的高度")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var minimunHeight = 100f
 
         @Bindable
         @Title("最大高度") @Description("高度随文字变化，需要指定最大高度；包含字数指示（如果有的话）")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var maximunHeight = 300f
 
         @Bindable

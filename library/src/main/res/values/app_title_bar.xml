@@ -17,7 +17,8 @@
 
     <dimen name="app_title_bar_height">48dp</dimen>
     <dimen name="app_title_bar_padding">16dp</dimen>
-    <dimen name="app_title_bar_icon_padding">12dp</dimen>
+    <dimen name="app_title_bar_icon_padding">4dp</dimen>
+    <dimen name="app_title_bar_button_padding">12dp</dimen>
     <dimen name="app_title_bar_text_padding">20dp</dimen>
     <!-- TODO: why can't use -->
     <style name="app_title_bar_text_appearance">@style/TextAppearance.Z.Head2</style>

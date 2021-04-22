@@ -14,7 +14,7 @@ import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.core.style.DimemDpStyle
+import com.eazy.uibase.demo.core.style.DimenStyle
 import com.eazy.uibase.demo.core.style.annotation.Description
 import com.eazy.uibase.demo.core.style.annotation.Style
 import com.eazy.uibase.demo.core.style.annotation.Title
@@ -44,7 +44,7 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
                 val binding = LineIndicatorBinding.inflate(LayoutInflater.from(fragment.context))
                 binding.styles = styles
                 if (longLine)
-                    binding.lineIndicator.longLineHeight = DimemDpStyle.dp2px(1f)
+                    binding.lineIndicator.longLineHeight = DimenStyle.dpconv.toPx(1f)
                 return binding.lineIndicator
             }
             fun createRoundIndicator(fragment: ZTabBarFragment, styles: Styles): IPagerIndicator {
@@ -66,25 +66,25 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
         @Bindable
         @Title("线段宽度")
         @Description("线段指示器的宽度，仅在外部指定（Exactly）有意义")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var lineWidth = 24f
 
         @Bindable
         @Title("线段高度")
         @Description("线段指示器的高度")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var lineHeight = 4f
 
         @Bindable
         @Title("横向偏移")
         @Description("线段指示器的横行偏移，实际是padding，向内偏移")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var offsetX = 0f
 
         @Bindable
         @Title("纵向偏移")
         @Description("线段指示器的纵行偏移，从底部向上的偏移")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var offsetY = 0f
 
         val roundIndicator1 = createRoundIndicator(fragment, this)
@@ -92,19 +92,19 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
         @Bindable
         @Title("圆角尺寸")
         @Description("圆角指示器的圆角半径")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var borderRadius = 8f
 
         @Bindable
         @Title("横向填充")
         @Description("圆角指示器的横向填充大小，在外部指定（Exactly），用作实际宽度")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var paddingX = 7
 
         @Bindable
         @Title("纵向填充")
         @Description("圆角指示器的纵向填充大小，在外部指定（Exactly），用作实际高度")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var paddingY = -1
 
         val itemBinding1 = ItemBinding(fragment.requireContext(), this, 0)

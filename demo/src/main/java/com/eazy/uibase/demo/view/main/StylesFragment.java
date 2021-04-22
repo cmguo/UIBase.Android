@@ -19,7 +19,7 @@ import androidx.viewbinding.ViewBinding;
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.style.ColorStyle;
-import com.eazy.uibase.demo.core.style.DimemDpStyle;
+import com.eazy.uibase.demo.core.style.DimenStyle;
 import com.eazy.uibase.demo.databinding.StylesFragmentBinding;
 import com.eazy.uibase.view.list.BaseItemBinding;
 import com.eazy.uibase.view.list.DividerDecoration;
@@ -126,7 +126,7 @@ public class StylesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ColorStyle.init(requireContext());
-        DimemDpStyle.init(requireContext());
+        DimenStyle.init(requireContext());
         mViewModel = new ViewModelProvider(this).get(StylesViewModel.class);
         if (fragment != null)
             mViewModel.bindComponent(fragment);

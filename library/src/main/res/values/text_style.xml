@@ -40,7 +40,7 @@
 
     <style name="TextAppearance.Z.Secondary" parent="TextAppearance.Z">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/bluegrey_700</item>
+            <item name="android:textColor">@color/bluegrey_700</item>
     </style>
     <style name="TextAppearance.Z.Tip" parent="TextAppearance.Z">
         <item name="android:textSize">10sp</item>

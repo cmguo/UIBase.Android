@@ -40,7 +40,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
         @Bindable
         @Title("最大宽度")
         @Description("整体最大宽度，设置负数，则自动加上窗口宽度")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var maxWidth = 300
 
         @Bindable

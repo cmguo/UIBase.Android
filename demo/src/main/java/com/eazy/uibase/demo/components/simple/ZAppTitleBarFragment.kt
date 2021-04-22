@@ -39,7 +39,7 @@ class ZAppTitleBarFragment : ComponentFragment<AppTitleBarFragmentBinding?, ZApp
         @Bindable
         @Title("内容")
         @Description("中间或者整体内容，资源ID：布局（layout，中间内容）或者样式（style，整体内容）")
-        @Style(ContentStyle::class, params = ["@layout"])
+        @Style(ContentStyle::class, params = ["<title>"])
         var content = 0
 
         @Bindable

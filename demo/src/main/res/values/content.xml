@@ -26,7 +26,7 @@
     <style name="title_bar_icon">
         <item name="title">标题</item>
         <item name="leftButton">@drawable/icon_close</item>
-        <item name="rightButton">@drawable/icon_more</item>
+            <item name="rightButton">@drawable/icon_more</item>
     </style>
 
     <style name="title_bar_text">

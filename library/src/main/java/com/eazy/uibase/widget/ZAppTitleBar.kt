@@ -157,6 +157,7 @@ class ZAppTitleBar @JvmOverloads constructor(
                 l = c - r
             l += padding
         }
+        // TODO: consider icon
         val w = r - l - padding
         if (w < _textView.width)
             _textView.maxWidth = w
@@ -177,6 +178,7 @@ class ZAppTitleBar @JvmOverloads constructor(
     }
 
     private fun applyStyle(a: TypedArray) {
+        content = a.getResourceId(R.styleable.ZAppTitleBar_content, 0)
         leftButton = a.getResourceId(R.styleable.ZAppTitleBar_leftButton, 0)
         rightButton = a.getResourceId(R.styleable.ZAppTitleBar_rightButton, 0)
         rightButton2 = a.getResourceId(R.styleable.ZAppTitleBar_rightButton2, 0)

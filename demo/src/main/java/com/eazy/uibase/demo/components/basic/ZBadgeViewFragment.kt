@@ -11,7 +11,7 @@ import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.core.style.DimemDpStyle
+import com.eazy.uibase.demo.core.style.DimenStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.BadgeViewFragmentBinding
 import com.eazy.uibase.demo.databinding.BadgeViewItemBinding
@@ -43,7 +43,7 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
         @Bindable
         @Title("边框宽度")
         @Description("加上边框；如果徽标显示在复杂图形上或者带有强烈色彩的图标上，建议具有1px容器背景色（通常为白色）的描边。")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var borderWidth = 0.5f
 
         @Bindable
@@ -54,7 +54,7 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
         @Bindable
         @Title("位置偏移")
         @Description("相对于对齐点的偏移量，向中心偏移；如果某一边是中间对齐，则这边无法再调整")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var offset = SizeF(0f, 0f)
 
         @Bindable
@@ -65,7 +65,7 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
         @Bindable
         @Title("拖拽距离")
         @Description("最大拖拽半径，当超过该范围时松开，可以将其删除，拖拽过程中会有事件回调")
-        @Style(DimemDpStyle::class)
+        @Style(DimenStyle::class)
         var dragRadius = 90
 
         @Bindable
