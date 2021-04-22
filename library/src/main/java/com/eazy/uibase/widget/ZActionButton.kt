@@ -3,7 +3,6 @@ package com.eazy.uibase.widget
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Rect
-import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
@@ -20,7 +19,7 @@ class ZActionButton @JvmOverloads constructor(
             field = value
             val icon = iconDrawable
             if (icon != null && Drawables.isPureColor(icon)) {
-                icon.setTintList(ContextCompat.getColorStateList(context, R.color.bluegrey800_disabled))
+                icon.setTintList(ContextCompat.getColorStateList(context, R.color.bluegrey_800_disabled))
                 icon.setBounds(Rect(0, 0, icon.intrinsicWidth, icon.intrinsicHeight))
                 val drawable = RoundWrapDrawable(icon)
                 drawable.fillColor = ContextCompat.getColorStateList(context, R.color.bluegrey_100)

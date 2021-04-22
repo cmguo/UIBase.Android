@@ -83,7 +83,7 @@
         <attr name="textSizeSelected" format="dimension" />
     </declare-styleable>
 
-    <color name="tab_title_color">@color/bluegrey800_selected</color>
+    <color name="tab_title_color">@color/bluegrey_800_selected</color>
     <dimen name="tab_text_size_normal">16sp</dimen>
     <dimen name="tab_text_size_selected">18sp</dimen>
 

@@ -25,7 +25,7 @@
     <dimen name="number_view_button_radius">15dp</dimen>
     <dimen name="number_view_button_padding">3dp</dimen>
     <color name="number_view_button_background_color">@color/bluegrey_00</color>
-    <color name="number_view_button_foreground_color">@color/bluegrey900_disabled_bluegrey300</color>
+    <color name="number_view_button_foreground_color">@color/bluegrey_900_disabled2</color>
     <style name="number_view_text_appearance">@style/TextAppearance.Z.Body.Middle</style>
 
     <style name="ZNumberView">

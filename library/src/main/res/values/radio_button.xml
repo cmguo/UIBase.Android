@@ -19,10 +19,10 @@
     <!-- background drawable -->
 
     <style name="ZRadioButton.Background">
-        <item name="fillColor">@color/bluegrey00_disabled</item>
+        <item name="fillColor">@color/bluegrey_00_disabled</item>
         <item name="borderRadius">@dimen/radio_button_radius</item>
         <item name="borderSize">@dimen/radio_button_border_size</item>
-        <item name="borderColor">@color/bluegrey500_checked_disabled</item>
+        <item name="borderColor">@color/bluegrey_500_checked_disabled</item>
         <item name="android:width">@dimen/radio_button_icon_size</item>
         <item name="android:height">@dimen/radio_button_icon_size</item>
     </style>

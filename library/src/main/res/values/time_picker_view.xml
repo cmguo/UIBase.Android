@@ -9,7 +9,7 @@
     <dimen name="time_picker_view_icon_size">24dp</dimen>
     <dimen name="time_picker_view_icon_padding">8dp</dimen>
     <style name="time_picker_view_text_appearance" parent="TextAppearance.Z.Body.Large">
-        <item name="android:textColor">@color/bluegrey800_selected</item>
+        <item name="android:textColor">@color/bluegrey_800_selected</item>
     </style>
 
     <declare-styleable name="ZTimePickerView">

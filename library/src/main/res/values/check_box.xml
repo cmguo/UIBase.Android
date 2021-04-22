@@ -21,10 +21,10 @@
     <!-- background drawable -->
 
     <style name="ZCheckBox.Background">
-        <item name="fillColor">@color/bluegrey00_checked_disabled</item>
+        <item name="fillColor">@color/bluegrey_00_checked_disabled</item>
         <item name="borderRadius">@dimen/check_box_radius</item>
         <item name="borderSize">@dimen/check_box_border_size</item>
-        <item name="borderColor">@color/bluegrey500_checked_disabled</item>
+        <item name="borderColor">@color/bluegrey_500_checked_disabled</item>
         <item name="android:width">@dimen/check_box_icon_size</item>
         <item name="android:height">@dimen/check_box_icon_size</item>
     </style>
