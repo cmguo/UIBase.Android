@@ -14,7 +14,7 @@ class ZToastComponent : Component {
     }
 
     override fun group(): Int {
-        return R.string.group_simple
+        return R.string.group_indicator
     }
 
     override fun icon(): Int {

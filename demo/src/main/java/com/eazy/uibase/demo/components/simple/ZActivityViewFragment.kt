@@ -94,7 +94,7 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
        val tip = ZTipView(requireContext())
         tip.message="点击了按钮${position}"
         tip.location = ZTipView.Location.AutoToast
-        tip.popAt(requireView())
+        tip.popAt(binding.activityViews.root)
     }
 
 }

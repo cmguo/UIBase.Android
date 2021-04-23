@@ -25,8 +25,10 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     var minimum = 0
         set(value) {
-            if (field == value || value < 0 || value > maximum) return
+            if (field == value || value < 0) return
             field = value
+            if (maximum in 1 until value)
+                maximum = value
             if (number < value)
                 number = value
             else
@@ -35,7 +37,9 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     var maximum = 0
         set(value) {
-            if (field == value || value < minimum) return
+            if (field == value) return
+            if (value in 1 until minimum)
+                minimum = value
             field = value
             if (value in 1 until number)
                 number = value
@@ -82,8 +86,8 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         _editText.addTextChangedListener(this)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZNumberView, R.attr.numberViewStyle, 0)
-        minimum = a.getInt(R.styleable.ZNumberView_minimum, minimum)
         maximum = a.getInt(R.styleable.ZNumberView_maximum, maximum)
+        minimum = a.getInt(R.styleable.ZNumberView_minimum, minimum)
         step = a.getInt(R.styleable.ZNumberView_step, step)
         number = a.getInt(R.styleable.ZNumberView_number, number)
         a.recycle()

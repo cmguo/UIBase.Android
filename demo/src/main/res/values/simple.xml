@@ -1,14 +1,6 @@
 <resources>
 
-    <string name="group_simple">简单交互控件</string>
-
-    <id name="component_z_text_areas"/>
-    <string name="component_z_text_areas">文本域</string>
-    <string name="component_z_text_areas_desc">用于长文本输入，提供换行功能，支持多段落格式，通常搭配输入长度限制。</string>
-
-    <id name="component_z_text_inputs"/>
-    <string name="component_z_text_inputs">输入框</string>
-    <string name="component_z_text_inputs_desc">用于文字输入</string>
+    <string name="group_indicator">工具提示控件</string>
 
     <id name="component_z_tool_tips"/>
     <string name="component_z_tool_tips">气泡提示</string>
@@ -22,13 +14,8 @@
     <string name="component_z_toasts">简单提示</string>
     <string name="component_z_toasts_desc">包含一行与进行的操作直接相关的文案，它可以包含一个操作。</string>
 
-    <id name="component_z_number_views"/>
-    <string name="component_z_number_views">步进器</string>
-    <string name="component_z_number_views_desc">用于增加或减少数量的控件。</string>
 
-    <id name="component_z_search_boxes"/>
-    <string name="component_z_search_boxes">搜索框</string>
-    <string name="component_z_search_boxes_desc">当应用内包含大量的信息的时候，用户通过搜索快速地定位到特定的内容。</string>
+    <string name="group_menu_list">菜单选择控件</string>
 
     <id name="component_z_drop_downs"/>
     <string name="component_z_drop_downs">下拉菜单</string>
@@ -47,8 +34,27 @@
     <string name="component_z_action_sheets_desc">操作表单是响应于控件或动作出现的特定风格的面板，并呈现与当前上下文相关的一组两个或多个选项。使用操作菜单让人们启动任务，或者在执行潜在的破坏性操作之前请求确认。</string>
 
 
+    <string name="group_input">简单输入控件</string>
 
-    <string name="group_navigation">页面跳转控件</string>
+    <id name="component_z_text_areas"/>
+    <string name="component_z_text_areas">文本域</string>
+    <string name="component_z_text_areas_desc">用于长文本输入，提供换行功能，支持多段落格式，通常搭配输入长度限制。</string>
+
+    <id name="component_z_text_inputs"/>
+    <string name="component_z_text_inputs">输入框</string>
+    <string name="component_z_text_inputs_desc">用于文字输入</string>
+
+    <id name="component_z_number_views"/>
+    <string name="component_z_number_views">步进器</string>
+    <string name="component_z_number_views_desc">用于增加或减少数量的控件。</string>
+
+    <id name="component_z_search_boxes"/>
+    <string name="component_z_search_boxes">搜索框</string>
+    <string name="component_z_search_boxes_desc">当应用内包含大量的信息的时候，用户通过搜索快速地定位到特定的内容。</string>
+
+
+
+    <string name="group_navigation">导航跳转控件</string>
 
     <id name="component_z_app_title_bars"/>
     <string name="component_z_app_title_bars">导航栏</string>

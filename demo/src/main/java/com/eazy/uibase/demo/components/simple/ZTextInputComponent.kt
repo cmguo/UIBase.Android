@@ -14,7 +14,7 @@ class ZTextInputComponent : Component {
     }
 
     override fun group(): Int {
-        return R.string.group_simple
+        return R.string.group_input
     }
 
     override fun icon(): Int {
