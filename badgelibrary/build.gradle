@@ -12,3 +12,15 @@ android {
 dependencies {
     api 'com.nineoldandroids:library:2.4.0'
 }
+
+
+
+apply from: '../lib-config.gradle'
+
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.groupId = "com.xhb.uibase"
+        pom.artifactId = "badgeview"
+        pom.version = "1.0.0-SNAPSHOT"
+    }
+}

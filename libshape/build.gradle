@@ -25,3 +25,15 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
 }
+
+
+apply from: '../lib-config.gradle'
+
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.groupId = "com.xhb.uibase"
+        pom.artifactId = "libshape"
+        pom.version = "1.0.0-SNAPSHOT"
+    }
+}
+

@@ -48,12 +48,22 @@ dependencies {
     implementation 'com.google.android.material:material:1.3.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'com.google.auto.service:auto-service:1.0-rc6'
+    implementation 'com.google.auto.service:auto-service-annotations:1.0-rc6'
 
-    api project(path: ':libshape')
-    api project(path: ':badgelibrary')
-    api project(path: ':magicindicator')
-    api project(path: ':pickerview')
+    debugApi project(path: ':libshape')
+    debugApi project(path: ':badgelibrary')
+    debugApi project(path: ':magicindicator')
+    debugApi project(path: ':pickerview')
+
+    //releaseApi project(path: ':libshape')
+    //releaseApi project(path: ':badgelibrary')
+    //releaseApi project(path: ':magicindicator')
+    //releaseApi project(path: ':pickerview')
+
+    releaseApi 'com.xhb.uibase:libshape:1.0.0-20210425.050958-1'
+    releaseApi 'com.xhb.uibase:badgeview:1.0.0-20210425.051641-1'
+    releaseApi 'com.github.hackware1993:magic-indicator:1.6.0-20210425.050831-1'
+    releaseApi 'com.contrarywind:Android-PickerView:4.2.0-20210425.035556-1'
 
     kapt 'com.google.auto.service:auto-service:1.0-rc6'
 
@@ -65,4 +75,14 @@ dependencies {
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     mavenCentral()
+}
+
+apply from: '../lib-config.gradle'
+
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.groupId = "com.xhb.base"
+        pom.artifactId = "uibase-library"
+        pom.version = "1.0.0-SNAPSHOT"
+    }
 }

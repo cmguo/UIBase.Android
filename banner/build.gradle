@@ -48,3 +48,12 @@ artifacts {
 
 
 
+apply from: '../lib-config.gradle'
+
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.groupId = "com.xhb.uibase"
+        pom.artifactId = "banner"
+        pom.version = "1.0.0-SNAPSHOT"
+    }
+}

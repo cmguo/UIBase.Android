@@ -18,8 +18,6 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
         maven {
             url "http://nexus.xiaoheiban.cn/repository/maven-public/"
             credentials {
@@ -27,6 +25,8 @@ allprojects {
                 password = "xhb123"
             }
         }
+        google()
+        jcenter()
     }
 
 }
