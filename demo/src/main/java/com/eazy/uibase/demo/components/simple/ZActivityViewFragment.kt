@@ -45,12 +45,6 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
     }
 
     class Styles : ViewStyles() {
-
-        @Bindable
-        var content = 0
-            set(value) {
-                field = value
-            }
     }
 
     companion object {

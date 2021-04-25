@@ -42,12 +42,12 @@ class ZActionSheetFragment : ComponentFragment<ActionSheetFragmentBinding?, ZAct
 
         @Bindable
         @Title("标题")
-        @Description("标题文字，一般在中间显示；如果没有左侧按钮内容，则在左侧大标题样式展示")
+        @Description("标题文字，一般在中间显示")
         var title = "标题"
 
         @Bindable
         @Title("详细描述")
-        @Description("描述文字，一般在中间显示；如果没有左侧按钮内容，则在左侧大标题样式展示")
+        @Description("描述文字，显示在标题下面")
         var subTitle = "真的要撤回该作业吗？\n" +
             "所有已提交的学生作业也会被删除！"
 

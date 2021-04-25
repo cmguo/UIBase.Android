@@ -9,7 +9,7 @@ import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundWrapDrawable
 
-class ZActionButton @JvmOverloads constructor(
+class ZActivityButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : ZButton(context, attrs)
 {
@@ -20,7 +20,7 @@ class ZActionButton @JvmOverloads constructor(
             val icon = iconDrawable
             if (icon != null && Drawables.isPureColor(icon)) {
                 icon.setTintList(ContextCompat.getColorStateList(context, R.color.bluegrey_800_disabled))
-                icon.setBounds(Rect(0, 0, icon.intrinsicWidth, icon.intrinsicHeight))
+                icon.bounds = Rect(0, 0, icon.intrinsicWidth, icon.intrinsicHeight)
                 val drawable = RoundWrapDrawable(icon)
                 drawable.fillColor = ContextCompat.getColorStateList(context, R.color.bluegrey_100)
                 iconDrawable = drawable

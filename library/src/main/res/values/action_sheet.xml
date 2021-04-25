@@ -16,7 +16,8 @@
     <dimen name="action_sheet_icon_padding">24dp</dimen>
     <dimen name="action_sheet_title_padding">12dp</dimen>
     <!-- TODO: why can't use -->
-    <style name="action_sheet_text_appearance">@style/TextAppearance.Z.Body.Middle</style>
+    <style name="action_sheet_text_appearance">@style/TextAppearance.Z.Head3</style>
+    <style name="action_sheet_text_appearance2">@style/TextAppearance.Z.Body.Small</style>
 
     <style name="ZActionSheet">
     </style>

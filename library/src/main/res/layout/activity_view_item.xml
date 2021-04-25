@@ -9,8 +9,8 @@
             type="int" />
     </data>
 
-    <com.eazy.uibase.widget.ZActionButton
-        android:layout_width="56dp"
+    <com.eazy.uibase.widget.ZActivityButton
+        android:layout_width="@dimen/activity_view_item_width"
         android:layout_height="wrap_content"
         app:buttonAppearance="@style/ZButton.Activity"
         app:content="@{data}"/>
