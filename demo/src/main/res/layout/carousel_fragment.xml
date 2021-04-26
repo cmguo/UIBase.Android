@@ -3,13 +3,13 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZCarouselFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.dataview.ZCarouselFragment" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZCarouselFragment" />
+        <import type="com.eazy.uibase.demo.components.dataview.ZCarouselFragment.Styles" />
 
         <variable
             name="fragment"
-            type="ZCarouselFragment" />
+            type="com.eazy.uibase.demo.components.dataview.ZCarouselFragment" />
 
         <variable
             name="styles"

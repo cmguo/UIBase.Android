@@ -5,13 +5,13 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZDropDownFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.optional.ZDropDownFragment.Styles" />
 
         <variable
             name="styles"
             type="Styles" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZDropDownFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.optional.ZDropDownFragment.Model" />
 
         <variable
             name="model"

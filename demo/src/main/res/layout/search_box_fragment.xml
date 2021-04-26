@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZSearchBoxFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.input.ZSearchBoxFragment.Styles" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZSearchBoxFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.input.ZSearchBoxFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZSearchBoxFragment" />
+        <import type="com.eazy.uibase.demo.components.input.ZSearchBoxFragment" />
 
         <variable
             name="fragment"

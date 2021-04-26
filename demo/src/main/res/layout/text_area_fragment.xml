@@ -4,9 +4,9 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTextAreaFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.input.ZTextAreaFragment.Styles" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTextAreaFragment" />
+        <import type="com.eazy.uibase.demo.components.input.ZTextAreaFragment" />
 
         <variable
             name="fragment"

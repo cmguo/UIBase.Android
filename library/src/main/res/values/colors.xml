@@ -41,6 +41,9 @@
 
     <color name="transparent">#00000000</color>
 
+    <color name="static_blue_400">#77ACFF</color>
+    <color name="static_blue_600">#1970F2</color>
+    <color name="static_red_100">#FFEDED</color>
     <color name="static_bluegrey_05">#F7F8F9</color>  <!-- dark #F7F8F9, -->
     <color name="static_bluegrey_50">#F7F8F9</color>  <!-- dark #F7F8F9, -->
     <color name="static_bluegrey_100">#F2F3F4</color>  <!-- dark #F2F3F4, -->

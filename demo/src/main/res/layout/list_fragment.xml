@@ -4,13 +4,13 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZListFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.dataview.ZListFragment" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZListFragment" />
+        <import type="com.eazy.uibase.demo.components.dataview.ZListFragment.Styles" />
 
         <variable
             name="fragment"
-            type="ZListFragment" />
+            type="com.eazy.uibase.demo.components.dataview.ZListFragment" />
 
         <variable
             name="styles"

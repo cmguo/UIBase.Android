@@ -5,9 +5,9 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZNumberViewFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.input.ZNumberViewFragment.Styles" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZNumberViewFragment" />
+        <import type="com.eazy.uibase.demo.components.input.ZNumberViewFragment" />
 
         <variable
             name="fragment"

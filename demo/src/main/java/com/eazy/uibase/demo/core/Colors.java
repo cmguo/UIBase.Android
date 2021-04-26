@@ -21,6 +21,10 @@ public class Colors extends Resources {
         return getColors(context, R.color.class, Pattern.compile("^[a-z]{2,}_\\d+"));
     }
 
+    public static Map<String, Integer> stdDynamicColorIds() {
+        return getResources(R.color.class, Pattern.compile("^[a-z]{2,}_\\d+"));
+    }
+
     public static Map<String, Integer> nonStdColors(Context context) {
         Map<String, Integer> colors = getColors(context, R.color.class, null);
         Map<String, Integer> stdColors = Colors.stdColors(context);

@@ -46,6 +46,9 @@
     <style name="ZButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->
         <item name="android:textAppearance">@style/EmptyTextAppearance</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
+    <style name="ZButton.Loading" parent="ZButton">
         <item name="loadingIcon">@drawable/button_loading_primary_anim</item>
         <item name="loadingText">"加载中..."</item>
     </style>

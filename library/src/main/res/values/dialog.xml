@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Dialog.Z.Mask" parent="@android:style/Theme.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowTitleStyle">@null</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-        <item name="android:gravity">center</item>
+    <attr name="dialogStyle" />
+
+    <declare-styleable name="ZDialog">
+        <attr name="image" format="reference"/>
+        <attr name="closeIconColor" format="color"/>
+        <attr name="title"/>
+        <attr name="subTitle"/>
+        <attr name="content"/>
+        <attr name="confirmButton" format="reference"/>
+        <attr name="cancelButton" format="reference"/>
+        <attr name="moreButtons" format="reference"/>
+    </declare-styleable>
+
+    <dimen name="dialog_width">296dp</dimen>
+    <dimen name="dialog_border_radius">8dp</dimen>
+    <dimen name="dialog_padding_x">24dp</dimen>
+    <dimen name="dialog_close_padding">12dp</dimen>
+    <dimen name="dialog_image_padding">32dp</dimen>
+    <dimen name="dialog_title_padding">24dp</dimen> <!-- with image -->
+    <dimen name="dialog_sub_title_padding">0dp</dimen>
+    <dimen name="dialog_sub_title_padding2">8dp</dimen> <!-- with image -->
+    <dimen name="dialog_content_padding">16dp</dimen>
+    <dimen name="dialog_button_width">116dp</dimen>
+    <dimen name="dialog_button_padding">6dp</dimen>
+    <dimen name="dialog_button_padding_x">16dp</dimen>
+    <dimen name="dialog_button_padding2">24dp</dimen> <!-- with content -->
+    <dimen name="dialog_checkbox_padding">22dp</dimen>
+    <dimen name="dialog_bottom_padding">24dp</dimen>
+
+    <style name="ZDialog">
+        <item name="android:orientation">vertical</item>
+        <item name="android:minWidth">@dimen/dialog_width</item>
+        <item name="android:maxWidth">@dimen/dialog_width</item>
+        <item name="confirmButton">@string/confirm</item>
+        <item name="cancelButton">@string/cancel</item>
     </style>
 
-    <id name="dialog_container"></id>
+    <style name="ZButton.Dialog">
+        <item name="textColor">@color/bluegrey_900_selected_disabled</item>
+        <item name="backgroundColor">@color/transparent_pressed_disabled</item>
+        <item name="height">48dp</item>
+        <item name="borderRadius">0dp</item>
+        <item name="paddingX">0dp</item>
+        <item name="textSize">16sp</item>
+        <item name="iconSize">18dp</item>
+        <item name="iconPadding">4dp</item>
+    </style>
+
+    <style name="RoundDrawable.Dialog">
+        <item name="fillColor">@color/bluegrey_00</item>
+        <item name="borderRadius">@dimen/dialog_border_radius</item>
+    </style>
 
 </resources>

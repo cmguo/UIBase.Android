@@ -1,4 +1,8 @@
 <resources>
+
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
     <string name="app_name">Common Widget</string>
 
     <string name="count_down_text_view_default_pre_text">发送校验码</string>

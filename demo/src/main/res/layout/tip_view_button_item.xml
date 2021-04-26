@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTipViewFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.indicator.ZTipViewFragment.Styles" />
 
         <variable
             name="styles"

@@ -5,9 +5,9 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZPanelFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.navigation.ZPanelFragment.Styles" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZPanelFragment" />
+        <import type="com.eazy.uibase.demo.components.navigation.ZPanelFragment" />
 
         <variable
             name="fragment"

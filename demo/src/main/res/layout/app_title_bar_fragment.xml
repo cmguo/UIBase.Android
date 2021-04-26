@@ -5,13 +5,13 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZAppTitleBarFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.navigation.ZAppTitleBarFragment" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZAppTitleBarFragment" />
+        <import type="com.eazy.uibase.demo.components.navigation.ZAppTitleBarFragment.Styles" />
 
         <variable
             name="fragment"
-            type="ZAppTitleBarFragment" />
+            type="com.eazy.uibase.demo.components.navigation.ZAppTitleBarFragment" />
 
         <variable
             name="styles"

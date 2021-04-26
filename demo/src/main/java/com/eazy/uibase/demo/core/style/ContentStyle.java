@@ -19,6 +19,7 @@ public class ContentStyle extends ResourceStyle {
         "drawable/icon_left",
         "drawable/icon_exit",
         "drawable/img_share_weixin",
+        "image_dialog1:drawable/dialog1",
         "text_confirm:string/confirm",
         "text_cancel:string/cancel",
         "button_array:array/button_icon_text",

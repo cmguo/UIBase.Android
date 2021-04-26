@@ -4,15 +4,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTabBarFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.navigation.ZTabBarFragment" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTabBarFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.navigation.ZTabBarFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTabBarFragment" />
+        <import type="com.eazy.uibase.demo.components.navigation.ZTabBarFragment.Styles" />
 
         <variable
             name="fragment"
-            type="ZTabBarFragment" />
+            type="com.eazy.uibase.demo.components.navigation.ZTabBarFragment" />
 
         <variable
             name="model"

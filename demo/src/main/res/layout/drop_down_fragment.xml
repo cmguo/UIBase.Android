@@ -4,15 +4,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZDropDownFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.optional.ZDropDownFragment" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZDropDownFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.optional.ZDropDownFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZDropDownFragment" />
+        <import type="com.eazy.uibase.demo.components.optional.ZDropDownFragment.Styles" />
 
         <variable
             name="fragment"
-            type="ZDropDownFragment" />
+            type="com.eazy.uibase.demo.components.optional.ZDropDownFragment" />
 
         <variable
             name="model"

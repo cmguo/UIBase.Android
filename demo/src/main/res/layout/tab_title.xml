@@ -6,7 +6,7 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZTabBarFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.navigation.ZTabBarFragment.Styles" />
 
         <variable
             name="data"

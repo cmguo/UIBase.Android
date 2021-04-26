@@ -33,7 +33,7 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
     }
 
     public DividerDecoration(int orientation, float size, int color) {
-        this(orientation, size, 0, 0);
+        this(orientation, size, color, 0);
     }
 
     public DividerDecoration(int orientation, float size, int color, float endianSize) {

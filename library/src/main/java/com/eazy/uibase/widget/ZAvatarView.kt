@@ -50,11 +50,17 @@ class ZAvatarView @JvmOverloads constructor(
             invalidate()
         }
 
+    var roundRadii: FloatArray? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     var borderColor = 0
         set(value) {
             if (field != value) {
                 field = value
-                borderPaint.color = value
+                _borderPaint.color = value
                 invalidate()
             }
         }
@@ -63,29 +69,33 @@ class ZAvatarView @JvmOverloads constructor(
         set(value) {
             if (field != value) {
                 field = value
-                borderPaint.strokeWidth = value
+                _borderPaint.strokeWidth = value
                 computeRoundBounds()
                 invalidate()
             }
         }
 
-    private var xferPaint: Paint = Paint()
-    private var borderPaint: Paint = Paint()
-    private val circleBounds = RectF()
-    private val clipBounds = RectF()
+    private var _inited = false
 
-    private var dstImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-    private var srcImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
-    private var setXfermode: Method? = null
+    private var _xferPaint: Paint = Paint()
+    private var _borderPaint: Paint = Paint()
+    private val _circleBounds = RectF()
+    private var _roundPath: Path? = null
+    private val _clipBounds = RectF()
+
+    private var _dstImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+    private var _srcImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+    private var _setXfermode: Method? = null
 
     init {
-        xferPaint.isAntiAlias = true
-        xferPaint.color = Color.WHITE
-        xferPaint.style = Paint.Style.FILL
-        borderPaint.isAntiAlias = true
-        borderPaint.color = borderColor
-        borderPaint.strokeWidth = borderWidth
-        borderPaint.style = Paint.Style.STROKE
+        _xferPaint.isAntiAlias = true
+        _xferPaint.color = Color.WHITE
+        _xferPaint.style = Paint.Style.FILL
+        _borderPaint.isAntiAlias = true
+        _borderPaint.color = borderColor
+        _borderPaint.alpha = 255
+        _borderPaint.strokeWidth = borderWidth
+        _borderPaint.style = Paint.Style.STROKE
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZAvatarView, R.attr.avatarViewStyle, 0)
         val cr = a.getInt(R.styleable.ZAvatarView_clipRegion, -1)
@@ -95,29 +105,33 @@ class ZAvatarView @JvmOverloads constructor(
         borderWidth = a.getDimensionPixelSize(R.styleable.ZAvatarView_borderWidth, borderWidth.toInt()).toFloat()
         borderColor = a.getColor(R.styleable.ZAvatarView_borderColor, borderColor)
         a.recycle()
+
+        _inited = true
+        computeRoundBounds()
     }
 
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
         if (xfermodeClass != null) {
-            setXfermode = try { drawable?.javaClass?.getMethod("setXfermode", xfermodeClass) } catch (e: Throwable) { null }
-            setXfermode?.isAccessible = true
+            _setXfermode = try { drawable?.javaClass?.getMethod("setXfermode", xfermodeClass) } catch (e: Throwable) { null }
+            _setXfermode?.isAccessible = true
         }
+        computeRoundBounds()
     }
 
     override fun setFrame(l: Int, t: Int, r: Int, b: Int): Boolean {
         val result = super.setFrame(l, t, r, b)
         computeRoundBounds()
-        if (width != dstImage.width || height != dstImage.height
+        if (width != _dstImage.width || height != _dstImage.height
             && width > 0 && height > 0) {
-            dstImage.recycle()
-            dstImage = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-            dstImage.eraseColor(0)
-            if (setXfermode == null) {
-                srcImage.recycle()
-                srcImage = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-                srcImage.eraseColor(0)
+            _dstImage.recycle()
+            _dstImage = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            _dstImage.eraseColor(0)
+            if (_setXfermode == null) {
+                _srcImage.recycle()
+                _srcImage = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                _srcImage.eraseColor(0)
             }
         }
         return result
@@ -125,10 +139,10 @@ class ZAvatarView @JvmOverloads constructor(
 
     override fun invalidate() {
         super.invalidate()
-        if (dstImage != null)
-            dstImage.eraseColor(0)
-        if (srcImage != null)
-            srcImage.eraseColor(0)
+        if (_dstImage != null)
+            _dstImage.eraseColor(0)
+        if (_srcImage != null)
+            _srcImage.eraseColor(0)
     }
 
     @SuppressLint("DrawAllocation")
@@ -141,65 +155,76 @@ class ZAvatarView @JvmOverloads constructor(
             super.onDraw(canvas)
             return
         }
-        val dstCanvas = Canvas(dstImage)
-        dstCanvas.clipRect(clipBounds)
+        val dstCanvas = Canvas(_dstImage)
+        dstCanvas.clipRect(_clipBounds)
         // prepare mask
-        xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OVER)
-        if (clipType == ClipType.Circle || clipType == ClipType.Ellipse)
-            dstCanvas.drawOval(circleBounds, xferPaint)
-        else
-            dstCanvas.drawRoundRect(circleBounds, roundRadius, roundRadius, xferPaint)
+        _xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OVER)
+        if (clipType == ClipType.Circle || clipType == ClipType.Ellipse) {
+            dstCanvas.drawOval(_circleBounds, _xferPaint)
+        } else if (roundRadii != null) {
+            dstCanvas.drawPath(_roundPath!!, _xferPaint)
+        } else {
+            dstCanvas.drawRoundRect(_circleBounds, roundRadius, roundRadius, _xferPaint)
+        }
         // take photo of src
-        if (setXfermode != null) {
+        if (_setXfermode != null) {
             val callback = drawable.callback
             drawable.callback = null
-            setXfermode!!.invoke(drawable, PorterDuffXfermode(PorterDuff.Mode.SRC_IN))
+            _setXfermode!!.invoke(drawable, PorterDuffXfermode(PorterDuff.Mode.SRC_IN))
             super.onDraw(dstCanvas)
-            setXfermode!!.invoke(drawable, PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
+            _setXfermode!!.invoke(drawable, PorterDuffXfermode(PorterDuff.Mode.SRC_OVER))
             drawable.callback = callback
         } else {
-            val srcCanvas = Canvas(srcImage)
+            val srcCanvas = Canvas(_srcImage)
             super.onDraw(srcCanvas) // SRC_OVER
             // paint photo on mask
-            xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-            dstCanvas.drawBitmap(srcImage, 0f, 0f, xferPaint)
+            _xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+            dstCanvas.drawBitmap(_srcImage, 0f, 0f, _xferPaint)
         }
-        canvas.drawBitmap(dstImage, 0f, 0f, borderPaint)
+        canvas.drawBitmap(_dstImage, 0f, 0f, _borderPaint)
         // border
         if (borderWidth > 0) {
-            if (clipType == ClipType.Circle || clipType == ClipType.Ellipse)
-                canvas.drawOval(circleBounds, borderPaint)
-            else
-                canvas.drawRoundRect(circleBounds, roundRadius, roundRadius, borderPaint)
+            if (clipType == ClipType.Circle || clipType == ClipType.Ellipse) {
+                canvas.drawOval(_circleBounds, _borderPaint)
+            } else if (roundRadii != null) {
+                canvas.drawPath(_roundPath!!, _borderPaint)
+            } else {
+                canvas.drawRoundRect(_circleBounds, roundRadius, roundRadius, _borderPaint)
+            }
         }
     }
 
 
     private fun computeRoundBounds() {
-        if (clipType == ClipType.None)
+        if (clipType == ClipType.None || drawable == null || !_inited)
             return
         val viewBounds = RectF(0f, 0f, width.toFloat(), height.toFloat())
         val imageBounds = RectF(0f, 0f, drawable.intrinsicWidth.toFloat(), drawable.intrinsicHeight.toFloat())
         imageMatrix.mapRect(imageBounds)
         if (clipRegion == ClipRegion.WholeView) {
-            circleBounds.set(viewBounds)
+            _circleBounds.set(viewBounds)
         } else {
-            circleBounds.set(imageBounds)
+            _circleBounds.set(imageBounds)
         }
         if (clipType == ClipType.Circle || clipType == ClipType.RoundSquare) {
-            if (circleBounds.width() > circleBounds.height()) {
-                val c = circleBounds.centerX()
-                circleBounds.left = c - circleBounds.height() / 2
-                circleBounds.right = c + circleBounds.height() / 2
+            if (_circleBounds.width() > _circleBounds.height()) {
+                val c = _circleBounds.centerX()
+                _circleBounds.left = c - _circleBounds.height() / 2
+                _circleBounds.right = c + _circleBounds.height() / 2
             } else {
-                val c = circleBounds.centerY()
-                circleBounds.top = c - circleBounds.width() / 2
-                circleBounds.bottom = c + circleBounds.width() / 2
+                val c = _circleBounds.centerY()
+                _circleBounds.top = c - _circleBounds.width() / 2
+                _circleBounds.bottom = c + _circleBounds.width() / 2
             }
         }
         if (borderWidth > 0)
-            circleBounds.inset(borderWidth / 2f, borderWidth / 2f)
-        clipBounds.set(imageBounds)
+            _circleBounds.inset(borderWidth / 2f, borderWidth / 2f)
+        if (roundRadii != null) {
+            val path = Path()
+            path.addRoundRect(_circleBounds, roundRadii!!, Path.Direction.CW)
+            _roundPath = path
+        }
+        _clipBounds.set(imageBounds)
     }
 
     companion object {

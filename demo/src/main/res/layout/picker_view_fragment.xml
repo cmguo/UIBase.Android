@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZPickerViewFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.optional.ZPickerViewFragment" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZPickerViewFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.optional.ZPickerViewFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZPickerViewFragment" />
+        <import type="com.eazy.uibase.demo.components.optional.ZPickerViewFragment.Styles" />
 
         <variable
             name="fragment"
-            type="ZPickerViewFragment" />
+            type="com.eazy.uibase.demo.components.optional.ZPickerViewFragment" />
 
         <variable
             name="model"

@@ -1,9 +1,11 @@
 package com.eazy.uibase.demo.core.style;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 import com.eazy.uibase.demo.core.Colors;
 
@@ -17,13 +19,17 @@ import java.util.stream.Collectors;
 public class ColorStyle extends ComponentStyle {
 
     private static List<String> values;
+    private static List<String> valueIds;
     private static List<String> valueTitles;
 
     public static void init(Context context) {
-        final Map<String, Integer> colors = Colors.stdDynamicColors(context);
+        final Map<String, Integer> colors = Colors.stdDynamicColorIds();
         values = new ArrayList<>();
+        valueIds = new ArrayList<>();
         for (int c : colors.values()) {
-            values.add(String.valueOf(c));
+            int cl = ContextCompat.getColor(context, c);
+            values.add(String.valueOf(cl));
+            valueIds.add(String.valueOf(c));
         }
         valueTitles = new ArrayList<>(colors.keySet());
     }
@@ -41,6 +47,9 @@ public class ColorStyle extends ComponentStyle {
 //                String.valueOf(Color.GREEN),
 //                String.valueOf(Color.BLUE) };
 //        String[] valueTitles = {"black", "white", "red", "green", "blue"};
-        setValues(values, valueTitles);
+        if (styleParams().length == 0)
+            setValues(values, valueTitles);
+        else
+            setValues(valueIds, valueTitles);
     }
 }

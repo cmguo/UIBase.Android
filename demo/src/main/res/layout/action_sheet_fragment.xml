@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZActionSheetFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.optional.ZActionSheetFragment" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZActionSheetFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.optional.ZActionSheetFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZActionSheetFragment" />
+        <import type="com.eazy.uibase.demo.components.optional.ZActionSheetFragment.Styles" />
 
         <variable
             name="fragment"
-            type="ZActionSheetFragment" />
+            type="com.eazy.uibase.demo.components.optional.ZActionSheetFragment" />
 
         <variable
             name="model"

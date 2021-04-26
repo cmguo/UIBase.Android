@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
-import com.eazy.uibase.view.list.BaseItemBinding
 import com.eazy.uibase.view.list.DividerDecoration
 import kotlin.collections.ArrayList
 
@@ -121,24 +120,6 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     /* private */
 
-    class ItemBinding : BaseItemBinding<Any>() {
-
-        override fun getItemViewType(item: Any?): Int {
-            return R.layout.action_sheet_item
-        }
-
-        override fun bindView(view: View, item: Any?, position: Int) {
-            if (item == null)
-                return
-            if (item is String)
-                view.findViewById<TextView>(R.id.button).text = item.toString()
-            else
-                view.findViewById<ZButton>(R.id.button).content = item as Int
-        }
-
-    }
-
-
     private class ActionHolder(private val view: View)
         : RecyclerView.ViewHolder(view) {
 
@@ -163,7 +144,7 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
     private class ActionAdapter(private val outer: ZActionSheet) : RecyclerView.Adapter<ActionHolder>(), OnClickListener {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.action_sheet_item, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.action_item, parent, false)
             view.setOnClickListener(this)
             return ActionHolder(view)
         }

@@ -5,17 +5,17 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.complex.ZTimePickerViewFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.optional.ZTimePickerViewFragment" />
 
-        <import type="com.eazy.uibase.demo.components.complex.ZTimePickerViewFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.optional.ZTimePickerViewFragment.Styles" />
 
-        <import type="com.eazy.uibase.demo.components.complex.ZTimePickerViewFragment" />
+        <import type="com.eazy.uibase.demo.components.optional.ZTimePickerViewFragment.Model" />
 
         <import type="java.util.Date"/>
 
         <variable
             name="fragment"
-            type="ZTimePickerViewFragment" />
+            type="com.eazy.uibase.demo.components.optional.ZTimePickerViewFragment" />
 
         <variable
             name="model"

@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.simple.ZActivityViewFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.optional.ZActivityViewFragment" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZActivityViewFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.optional.ZActivityViewFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.components.simple.ZActivityViewFragment" />
+        <import type="com.eazy.uibase.demo.components.optional.ZActivityViewFragment.Styles" />
 
         <variable
             name="fragment"
-            type="ZActivityViewFragment" />
+            type="com.eazy.uibase.demo.components.optional.ZActivityViewFragment" />
 
         <variable
             name="model"
