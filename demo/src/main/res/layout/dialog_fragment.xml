@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -40,6 +40,8 @@
                 android:layout_width="@dimen/dialog_width"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
                 app:image="@{styles.image}"
                 app:closeIconColor="@{styles.closeIconColor}"
                 app:title="@{styles.title}"
@@ -52,7 +54,7 @@
                 app:listener="@{fragment}"
                 />
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <com.eazy.uibase.widget.ZButton
             android:layout_width="match_parent"

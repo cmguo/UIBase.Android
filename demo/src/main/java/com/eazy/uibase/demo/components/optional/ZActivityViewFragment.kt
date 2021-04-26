@@ -27,7 +27,7 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
             R.array.share_moment,
             R.array.share_qq,
             R.array.share_space,
-            R.array.share_more,
+            R.array.share_more
         )
 
         private val list2 = listOf(
@@ -37,7 +37,7 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
             R.array.op_recall,
             R.array.op_star,
             R.array.op_weblink,
-            R.array.op_refresh,
+            R.array.op_refresh
         )
 
         @Bindable

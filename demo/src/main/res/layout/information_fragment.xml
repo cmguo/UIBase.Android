@@ -32,7 +32,7 @@
                 android:paddingTop="10dp"
                 android:text="简介" />
 
-            <ScrollView
+            <com.eazy.uibase.view.MaxHeightScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxHeight="80dp"
@@ -42,10 +42,9 @@
                     android:id="@+id/text_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxHeight="80dp"
                     android:text="@{model.componentInfo.detail}" />
 
-            </ScrollView>
+            </com.eazy.uibase.view.MaxHeightScrollView>
 
             <TextView
                 android:id="@+id/text_author"

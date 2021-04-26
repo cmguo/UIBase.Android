@@ -8,6 +8,8 @@
             <enum name="none" value="0"/>
             <enum name="circle" value="1"/>
             <enum name="ellipse" value="2"/>
+            <enum name="roundSquare" value="3"/>
+            <enum name="roundRect" value="4"/>
         </attr>
         <attr name="clipRegion">
             <enum name="wholeView" value="0"/>
