@@ -41,7 +41,7 @@ class SingleSelectDialog : BaseDialogFragment() {
 
         private fun newInstance(
             title: String?, cancelable: Boolean,
-            data: ArrayList<ItemBean>, autoHeight: Boolean = false,
+            data: ArrayList<ItemBean>, autoHeight: Boolean = false
         ): SingleSelectDialog {
             val bundle = Bundle()
             bundle.putString(TITLE, title)

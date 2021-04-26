@@ -98,7 +98,7 @@ class InputDialog : DialogFragment() {
             inputType: Int,
             isPasswordTransformationMethod: Boolean,
             isShowPasswordSwitch: Boolean,
-            hideClose: Boolean,
+            hideClose: Boolean
         ): InputDialog {
             val bundle = Bundle()
             bundle.putInt(ICON_RES_ID, iconResId)
@@ -502,7 +502,7 @@ class InputDialog : DialogFragment() {
         fun withAction(
             actionBtnText: String,
             listener: InputActionListener,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(actionBtnText, listener, null, actionStyle)
         }
@@ -510,7 +510,7 @@ class InputDialog : DialogFragment() {
         fun withAction(
             @StringRes actionBtnTextResId: Int,
             listener: InputActionListener,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(context.resources.getString(actionBtnTextResId), listener, null, actionStyle)
         }
@@ -527,7 +527,7 @@ class InputDialog : DialogFragment() {
             actionBtnText: String,
             listener: InputActionListener,
             @StringRes componentKeyId: Int?,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             var componentKey: String? = null
             if (componentKeyId != null) {
@@ -544,7 +544,7 @@ class InputDialog : DialogFragment() {
             actionBtnTextResId: Int,
             listener: InputActionListener,
             @StringRes componentKeyId: Int?,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(context.resources.getString(actionBtnTextResId), listener, componentKeyId, actionStyle)
         }

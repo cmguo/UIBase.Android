@@ -59,7 +59,7 @@ class CommonDialog : DialogFragment() {
             contentStyle: ContentStyle?,
             actions: ArrayList<DialogAction>,
             cancelable: Boolean,
-            hideClose: Boolean,
+            hideClose: Boolean
         ): CommonDialog {
             val bundle = Bundle()
             bundle.putInt(ICON_RES_ID, iconResId)
@@ -325,7 +325,7 @@ class CommonDialog : DialogFragment() {
         fun withAction(
             actionBtnText: String,
             listener: CommonActionListener,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(actionBtnText, listener, null, actionStyle)
         }
@@ -333,7 +333,7 @@ class CommonDialog : DialogFragment() {
         fun withAction(
             @StringRes actionBtnTextResId: Int,
             listener: CommonActionListener,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(context.resources.getString(actionBtnTextResId), listener, null, actionStyle)
         }
@@ -341,7 +341,7 @@ class CommonDialog : DialogFragment() {
         fun withRepeatAction(
             @StringRes actionBtnTextResId: Int,
             listener: CommonActionListener? = null,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             return this.withRepeatAction(
                 context.resources.getString(actionBtnTextResId),
@@ -354,7 +354,7 @@ class CommonDialog : DialogFragment() {
         fun withRepeatAction(
             actionBtnText: String,
             listener: CommonActionListener? = null,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             return this.withRepeatAction(actionBtnText, listener, null, actionStyle)
         }
@@ -371,7 +371,7 @@ class CommonDialog : DialogFragment() {
             actionBtnText: String,
             listener: CommonActionListener,
             @StringRes componentKeyId: Int?,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             var componentKey: String? = null
             if (componentKeyId != null) {
@@ -387,7 +387,7 @@ class CommonDialog : DialogFragment() {
             actionBtnTextResId: Int,
             listener: CommonActionListener,
             @StringRes componentKeyId: Int?,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(context.resources.getString(actionBtnTextResId), listener, componentKeyId, actionStyle)
         }
@@ -396,7 +396,7 @@ class CommonDialog : DialogFragment() {
             actionBtnText: String,
             listener: CommonActionListener? = null,
             @StringRes componentKeyId: Int?,
-            actionStyle: ContentStyle? = null,
+            actionStyle: ContentStyle? = null
         ): Builder {
             var componentKey: String? = null
             if (componentKeyId != null) {

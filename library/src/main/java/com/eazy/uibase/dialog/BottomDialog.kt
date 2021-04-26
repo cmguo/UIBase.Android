@@ -43,7 +43,7 @@ class BottomDialog : DialogFragment() {
             title: String?,
             actions: ArrayList<DialogAction>,
             cancelable: Boolean,
-            showCancel: Boolean,
+            showCancel: Boolean
         ): BottomDialog {
             val bundle = Bundle()
             bundle.putString(TITLE, title)
@@ -196,7 +196,7 @@ class BottomDialog : DialogFragment() {
         fun withAction(
             actionBtnText: String,
             listener: BottomActionListener,
-            @Nullable actionStyle: ContentStyle? = null,
+            @Nullable actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(actionBtnText, listener, null, actionStyle)
         }
@@ -204,7 +204,7 @@ class BottomDialog : DialogFragment() {
         fun withAction(
             actionBtnTextResId: Int,
             listener: BottomActionListener,
-            @Nullable actionStyle: ContentStyle? = null,
+            @Nullable actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(context.resources.getString(actionBtnTextResId), listener, null, actionStyle)
         }
@@ -221,7 +221,7 @@ class BottomDialog : DialogFragment() {
             actionBtnText: String,
             listener: BottomActionListener,
             @StringRes componentKeyId: Int?,
-            @Nullable actionStyle: ContentStyle? = null,
+            @Nullable actionStyle: ContentStyle? = null
         ): Builder {
             var componentKey: String? = null
             if (componentKeyId != null) {
@@ -237,7 +237,7 @@ class BottomDialog : DialogFragment() {
             actionBtnTextResId: Int,
             listener: BottomActionListener,
             @StringRes componentKeyId: Int?,
-            @Nullable actionStyle: ContentStyle? = null,
+            @Nullable actionStyle: ContentStyle? = null
         ): Builder {
             return this.withAction(context.resources.getString(actionBtnTextResId), listener, componentKeyId, actionStyle)
         }

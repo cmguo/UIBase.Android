@@ -6,12 +6,12 @@ import android.view.View
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
-import com.eazy.uibase.demo.databinding.DialogFragmentBinding
+import com.eazy.uibase.demo.databinding.OldDialogFragmentBinding
 import com.eazy.uibase.dialog.*
 import com.eazy.uibase.dialog.bean.ItemBean
-import kotlinx.android.synthetic.main.dialog_fragment.*
+import kotlinx.android.synthetic.main.old_dialog_fragment.*
 
-class ZDialogFragment : ComponentFragment<DialogFragmentBinding?, ZDialogFragment.Model?, ZDialogFragment.Styles?>() {
+class ZDialogFragment : ComponentFragment<OldDialogFragmentBinding?, ZDialogFragment.Model?, ZDialogFragment.Styles?>() {
 
     class Model : ViewModel()
 
