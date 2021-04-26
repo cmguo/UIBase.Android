@@ -95,11 +95,11 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     var listener: TitleBarListener? = null
 
-    private var _imageView: ImageView
-    private var _textView: TextView
-    private var _leftButton: ZButton
-    private var _rightButton: ZButton
-    private var _rightButton2: ZButton
+    private val _imageView: ImageView
+    private val _textView: TextView
+    private val _leftButton: ZButton
+    private val _rightButton: ZButton
+    private val _rightButton2: ZButton
     private var _content: View? = null
 
     private var _inited = false

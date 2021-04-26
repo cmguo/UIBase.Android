@@ -183,6 +183,11 @@ class ZTipView @JvmOverloads constructor(
     }
 
     fun popAt(target: View, listener: TipViewListener? = null) {
+        val root = target.contentView
+        if (root == null) {
+            Log.w(TAG, "popAt: not found window!")
+            return
+        }
         this._target = target
         this._listener = listener
         if (listener != null) {
@@ -203,7 +208,7 @@ class ZTipView @JvmOverloads constructor(
             mWidth = target.width
         }
         val size = calcSize(mWidth)
-        val loc = calcLocation(target, size)
+        val loc = calcLocation(target, root, size)
         updateArrow()
         // pop
         val lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -221,17 +226,12 @@ class ZTipView @JvmOverloads constructor(
         if (_location == Location.AutoToast) {
             ++_toastCount
         }
-        val content = target.contentView
-        if (content == null) {
-            Log.w(TAG, "popAt: not found window!")
-            return
-        }
         if (dismissDelay > 0)
             postDelayed(DismissRunnable(this), dismissDelay)
         if (_location < Location.AutoToast) {
-            overlayFrame(content, true)?.attach(this)
+            overlayFrame(root, true)?.attach(this)
         }
-        content.addView(this, lp)
+        root.addView(this, lp)
         _textView.requestFocus()
     }
 
@@ -335,7 +335,7 @@ class ZTipView @JvmOverloads constructor(
             }
 
             @SuppressLint("ClickableViewAccessibility")
-            override fun onTouchEvent(event: MotionEvent?): Boolean {
+            override fun onTouchEvent(event: MotionEvent): Boolean {
                 val listCopy = ArrayList(list)
                 for (v in listCopy)
                     v.dismiss()
@@ -436,7 +436,7 @@ class ZTipView @JvmOverloads constructor(
     }
 
     @SuppressLint("CheckResult")
-    private fun calcLocation(target: View, size: Size): Point {
+    private fun calcLocation(target: View, rootView: ViewGroup, size: Size): Point {
         val location = this.location
         val loc = intArrayOf(0, 0)
         if (location == Location.ManualLayout) {
@@ -444,12 +444,12 @@ class ZTipView @JvmOverloads constructor(
             _location = location
             return Point(loc[0], loc[1])
         }
-        val rootView = target.rootView
         val wBounds = Rect()
         // This takes into account screen decorations above the window
         rootView.getWindowVisibleDisplayFrame(wBounds)
         rootView.getLocationInWindow(loc)
-        wBounds.intersect(loc[0], loc[1], rootView.width, rootView.height)
+        wBounds.offset(loc[0], loc[1])
+        wBounds.intersect(0, 0, rootView.width, rootView.height)
         // for toast location
         if (location == Location.AutoToast) {
             if (_toastCount <= 0 || _lastRoot.get() != rootView) {
@@ -463,7 +463,10 @@ class ZTipView @JvmOverloads constructor(
         }
         // for arrow locations
         val frame = Rect(0, 0, size.width, size.height)
-        target.getLocationInWindow(loc)
+        val loc2 = intArrayOf(0, 0)
+        target.getLocationInWindow(loc2)
+        loc[0] = loc2[0] - loc[0]
+        loc[1] = loc2[1] - loc[1]
         val tBounds = Rect(loc[0], loc[1], loc[0] + target.width, loc[1] + target.height)
         val checkX: (Int) -> Int = { x ->
             when (x) {

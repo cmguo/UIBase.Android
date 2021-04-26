@@ -68,7 +68,7 @@ class ZPanelFragment : ComponentFragment<PanelFragmentBinding?, ZPanelFragment.M
     override fun panelButtonClicked(panel: ZPanel, btnId: Int) {
         val tip = ZTipView(requireContext(), null)
         val name = resources.getResourceEntryName(btnId)
-        tip.message = "点击了按钮${name}"
+        tip.message = "点击了按钮: ${name}"
         tip.location = ZTipView.Location.AutoToast
         tip.popAt(panel)
     }

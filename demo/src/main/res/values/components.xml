@@ -38,7 +38,7 @@
     <string name="component_z_toasts_desc">包含一行与进行的操作直接相关的文案，它可以包含一个操作。</string>
 
     <id name="component_z_dialogs"/>
-    <id name="component_z_dialogs2"/>
+    <id name="component_z_old_dialogs"/>
     <string name="component_z_dialogs">对话框</string>
     <string name="component_z_dialogs_desc">1.需要用户做出简单的选择且选项较少时（如进行一些重要操作时的简单确认弹窗）\n
         2.前置或后置的提示性内容，又不希望跳转页面时（如在开始录音时弹窗提示用户注意事项）\n

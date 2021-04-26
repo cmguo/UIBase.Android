@@ -62,7 +62,7 @@ class ZDropDownFragment : ComponentFragment<DropDownFragmentBinding?, ZDropDownF
 
     override fun dropDownFinished(dropDown: ZDropDown, selection: Int?) {
         val tip = ZTipView(requireContext(), null)
-        tip.message = "选择了项目${selection}"
+        tip.message = "选择了项目: ${selection}"
         tip.location = ZTipView.Location.AutoToast
         tip.popAt(requireView())
     }

@@ -93,7 +93,7 @@ class ZActionSheetFragment : ComponentFragment<ActionSheetFragmentBinding?, ZAct
 
     override fun onAction(sheet: ZActionSheet, index: Int) {
        val tip = ZTipView(requireContext())
-        tip.message="点击了按钮${index}"
+        tip.message="点击了按钮: ${index}"
         tip.location = ZTipView.Location.AutoToast
         tip.popAt(sheet)
     }

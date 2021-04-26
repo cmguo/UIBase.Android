@@ -9,8 +9,9 @@ import com.eazy.uibase.demo.core.annotation.Author
 @AutoService(Component::class)
 @Author("jiangzhiguo")
 class ZDialogComponent : Component {
+
     override fun id(): Int {
-        return R.id.component_z_dialogs
+        return R.id.component_z_old_dialogs
     }
 
     override fun group(): Int {

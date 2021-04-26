@@ -91,6 +91,9 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         step = a.getInt(R.styleable.ZNumberView_step, step)
         number = a.getInt(R.styleable.ZNumberView_number, number)
         a.recycle()
+
+        isFocusable = true
+        isFocusableInTouchMode = true
         syncButtonBackground()
     }
 
