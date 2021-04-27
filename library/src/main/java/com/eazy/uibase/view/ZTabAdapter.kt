@@ -20,7 +20,7 @@ class ZTabAdapter<T>(titles: Iterator<T>, val itemBinding: ItemBinding<T>, priva
             this.titles.add(t)
     }
 
-    fun interface TitleSelectListener<T> {
+    interface TitleSelectListener<T> {
         fun titleSelected(index: Int, title: T)
     }
 

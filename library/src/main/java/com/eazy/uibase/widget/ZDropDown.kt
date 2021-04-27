@@ -23,7 +23,7 @@ import com.eazy.uibase.view.list.DividerDecoration
 class ZDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : LinearLayoutCompat(context, attrs, R.attr.dropDownStyle) {
 
-    fun interface DropDownListener {
+    interface DropDownListener {
         fun dropDownFinished(dropDown: ZDropDown, selection: Int?)
     }
 

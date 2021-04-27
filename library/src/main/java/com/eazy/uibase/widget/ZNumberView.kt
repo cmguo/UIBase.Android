@@ -19,7 +19,7 @@ import com.eazy.uibase.resources.RoundDrawable
 class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : LinearLayout(context, attrs, R.attr.numberViewStyle), View.OnClickListener, TextWatcher {
 
-    fun interface OnNumberChangeListener {
+    interface OnNumberChangeListener {
         fun onNumberChanged(view: View, number: Int)
     }
 

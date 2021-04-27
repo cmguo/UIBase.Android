@@ -54,7 +54,7 @@ class ZPanel @JvmOverloads constructor(
 
     val body get() = _content
 
-    fun interface PanelListener {
+    interface PanelListener {
         fun panelButtonClicked(panel: ZPanel, btnId: Int) {}
         fun panelDismissed(panel: ZPanel)
     }

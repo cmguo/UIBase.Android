@@ -21,7 +21,7 @@ class ZCheckBox @JvmOverloads constructor(
         FullChecked
     }
 
-    fun interface OnCheckedStateChangeListener {
+    interface OnCheckedStateChangeListener {
         fun onCheckedStateChanged(checkBox: ZCheckBox, state: CheckedState)
     }
 

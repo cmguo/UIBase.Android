@@ -89,7 +89,7 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     val extensionBody get() = _content
 
-    fun interface TitleBarListener {
+    interface TitleBarListener {
         fun titleBarButtonClicked(bar: ZAppTitleBar, btnId: Int)
     }
 

@@ -18,7 +18,7 @@ class ZBadgeView @JvmOverloads constructor(
         START, DRAGGING, DRAGGING_OUT_OF_RANGE, CANCELED, SUCCEED
     }
 
-    fun interface OnDragStateChangeListener {
+    interface OnDragStateChangeListener {
         fun onDragStateChanged(badge: ZBadgeView, dragState: DragState)
     }
 

@@ -86,8 +86,11 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         var allCheckBoxVisible = if (fragment.component.id() == R.id.component_z_check_boxes)
             View.VISIBLE else View.GONE
 
-        val checkBoxCheckedStateChanged = ZCheckBox.OnCheckedStateChangeListener { _, _ ->
-            fragment.model.updateAllCheckedState() }
+        val checkBoxCheckedStateChanged = object : ZCheckBox.OnCheckedStateChangeListener {
+            override fun onCheckedStateChanged(checkBox: ZCheckBox, state: ZCheckBox.CheckedState) {
+                fragment.model.updateAllCheckedState()
+            }
+        }
 
         // simulate radio group
         val radioCheckedChanged = CompoundButton.OnCheckedChangeListener { view: View, isChecked: Boolean ->
