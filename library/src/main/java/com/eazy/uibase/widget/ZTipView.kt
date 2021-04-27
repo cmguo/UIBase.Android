@@ -16,10 +16,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.Size
 import android.view.*
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -188,6 +185,10 @@ class ZTipView @JvmOverloads constructor(
             Log.w(TAG, "popAt: not found window!")
             return
         }
+        popAt(target, root, listener)
+    }
+
+    fun popAt(target: View, root: ViewGroup, listener: TipViewListener? = null) {
         this._target = target
         this._listener = listener
         if (listener != null) {
@@ -211,7 +212,7 @@ class ZTipView @JvmOverloads constructor(
         val loc = calcLocation(target, root, size)
         updateArrow()
         // pop
-        val lp = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val lp = MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         lp.leftMargin = loc.x
         lp.topMargin = loc.y
         if (_location == Location.ManualLayout) {
@@ -224,12 +225,12 @@ class ZTipView @JvmOverloads constructor(
             context = context.baseContext
         }
         if (_location == Location.AutoToast) {
-            ++_toastCount
+            ++toastCount
         }
         if (dismissDelay > 0)
             postDelayed(DismissRunnable(this), dismissDelay)
         if (_location < Location.AutoToast) {
-            overlayFrame(root, true)?.attach(this)
+            overlayFrame(contentView, true)?.attach(this)
         }
         root.addView(this, lp)
         _textView.requestFocus()
@@ -254,7 +255,7 @@ class ZTipView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         if (_location == Location.AutoToast) {
-            --_toastCount
+            --toastCount
         }
     }
 
@@ -308,9 +309,9 @@ class ZTipView @JvmOverloads constructor(
 
         private const val TAG = "ZTipView"
 
-        private var _toastCount = 0
-        private var _toastY = 0
-        private var _lastRoot = WeakReference<View>(null)
+        private var toastCount = 0
+        private var toastY = 0
+        private var lastRoot = WeakReference<View>(null)
 
         @SuppressLint("ViewConstructor")
         class OverlayFrame(content: FrameLayout) : FrameLayout(content.context) {
@@ -452,14 +453,14 @@ class ZTipView @JvmOverloads constructor(
         wBounds.intersect(0, 0, rootView.width, rootView.height)
         // for toast location
         if (location == Location.AutoToast) {
-            if (_toastCount <= 0 || _lastRoot.get() != rootView) {
-                if (_lastRoot.get() != rootView)
-                    _lastRoot = WeakReference(rootView)
-                _toastY = wBounds.bottom
+            if (toastCount <= 0 || lastRoot.get() != rootView) {
+                if (lastRoot.get() != rootView)
+                    lastRoot = WeakReference(rootView)
+                toastY = wBounds.bottom
             }
-            _toastY -= size.height + 20
+            toastY -= size.height + 20
             _location = location
-            return Point(wBounds.centerX() - size.width / 2, _toastY)
+            return Point(wBounds.centerX() - size.width / 2, toastY)
         }
         // for arrow locations
         val frame = Rect(0, 0, size.width, size.height)
