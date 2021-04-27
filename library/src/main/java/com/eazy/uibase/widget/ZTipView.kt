@@ -26,6 +26,7 @@ import com.eazy.uibase.R
 import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.view.contentView
 import java.lang.ref.WeakReference
+import kotlin.collections.ArrayList
 
 class ZTipView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -189,6 +190,10 @@ class ZTipView @JvmOverloads constructor(
     }
 
     fun popAt(target: View, root: ViewGroup, listener: TipViewListener? = null) {
+        if (root !is FrameLayout && root !is RelativeLayout) {
+            Log.w(TAG, "popAt: only support FrameLayout or RelativeLayout")
+            return
+        }
         this._target = target
         this._listener = listener
         if (listener != null) {
@@ -212,7 +217,10 @@ class ZTipView @JvmOverloads constructor(
         val loc = calcLocation(target, root, size)
         updateArrow()
         // pop
-        val lp = MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        // copy MarginLayoutParams not work on sdk 22
+        val lp: MarginLayoutParams = if (root is FrameLayout)
+            FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT) else
+                RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         lp.leftMargin = loc.x
         lp.topMargin = loc.y
         if (_location == Location.ManualLayout) {
@@ -448,9 +456,12 @@ class ZTipView @JvmOverloads constructor(
         val wBounds = Rect()
         // This takes into account screen decorations above the window
         rootView.getWindowVisibleDisplayFrame(wBounds)
+        Log.d(TAG, "calcLocation rootView getWindowVisibleDisplayFrame $wBounds")
         rootView.getLocationInWindow(loc)
+        Log.d(TAG, "calcLocation rootView getLocationInWindow " + loc.contentToString())
         wBounds.offset(loc[0], loc[1])
         wBounds.intersect(0, 0, rootView.width, rootView.height)
+        Log.d(TAG, "calcLocation wBounds $wBounds")
         // for toast location
         if (location == Location.AutoToast) {
             if (toastCount <= 0 || lastRoot.get() != rootView) {
@@ -466,9 +477,11 @@ class ZTipView @JvmOverloads constructor(
         val frame = Rect(0, 0, size.width, size.height)
         val loc2 = intArrayOf(0, 0)
         target.getLocationInWindow(loc2)
+        Log.d(TAG, "calcLocation target getLocationInWindow " + loc.contentToString())
         loc[0] = loc2[0] - loc[0]
         loc[1] = loc2[1] - loc[1]
         val tBounds = Rect(loc[0], loc[1], loc[0] + target.width, loc[1] + target.height)
+        Log.d(TAG, "calcLocation tBounds $tBounds")
         val checkX: (Int) -> Int = { x ->
             when (x) {
                 0 -> { // Left
