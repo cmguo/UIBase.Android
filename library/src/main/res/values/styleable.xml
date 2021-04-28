@@ -3,6 +3,9 @@
 
     <declare-styleable name="StyleableSetTextView">
         <attr name="android:textColor"/>
+        <attr name="android:textColorHint"/>
+        <attr name="android:textColorHighlight"/>
+        <attr name="android:textColorLink"/>
     </declare-styleable>
 
 </resources>

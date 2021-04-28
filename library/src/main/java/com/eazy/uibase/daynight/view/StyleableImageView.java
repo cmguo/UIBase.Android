@@ -15,5 +15,7 @@ public class StyleableImageView extends StyleableSet<ImageView> {
     public StyleableImageView() {
         addStyleable(android.R.attr.src, (view, value) ->
             view.setImageDrawable(ContextCompat.getDrawable(view.getContext(), value.resourceId)));
+        addStyleable(android.R.attr.tint, (view, value) ->
+            view.setImageTintList(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
     }
 }
