@@ -3,10 +3,8 @@ package com.eazy.uibase.daynight.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -26,6 +24,7 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
     private static final String TAG = "StyleableSetTextView";
 
     public StyleableSetTextView() {
+        // colors
         addStyleable(android.R.attr.textColor, (view, value) ->
             view.setTextColor(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
         addStyleable(android.R.attr.textColorHint, (view, value) ->
@@ -34,6 +33,7 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
             view.setHighlightColor(ContextCompat.getColor(view.getContext(), value.resourceId)));
         addStyleable(android.R.attr.textColorLink, (view, value) ->
             view.setLinkTextColor(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
+        // drawables
         addStyleable(android.R.attr.drawableLeft, (view, value) ->
             setCompoundDrawable(view, 0, value));
         addStyleable(android.R.attr.drawableTop, (view, value) ->
@@ -46,6 +46,7 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
             setCompoundDrawableRelative(view, 0, value));
         addStyleable(android.R.attr.drawableEnd, (view, value) ->
             setCompoundDrawableRelative(view, 2, value));
+        // textAppearance
         addStyleable(android.R.attr.textAppearance, new IStyleable<TextView>() {
             @Override
             @SuppressWarnings("unchecked")
@@ -55,9 +56,10 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
                     return;
                 attrValueSet.remove(android.R.attr.textAppearance);
                 if (attrValueSet.get(android.R.attr.textColor) == null
-                    || attrValueSet.get(android.R.attr.textColorHint) == null
-                    || attrValueSet.get(android.R.attr.textColorHighlight) == null
-                    || attrValueSet.get(android.R.attr.textColorLink) == null) {
+//                    || attrValueSet.get(android.R.attr.textColorHint) == null
+//                    || attrValueSet.get(android.R.attr.textColorHighlight) == null
+//                    || attrValueSet.get(android.R.attr.textColorLink) == null
+                ) {
                     TypedValue value2 = textAppearance.getValue();
                     TypedArray a = context.obtainStyledAttributes(value2.resourceId, R.styleable.StyleableSetTextView);
                     TypedValue value = new TypedValue();
@@ -67,24 +69,30 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
                             attrValueSet.put(android.R.attr.textColor, getStyleable(android.R.attr.textColor), value);
                         }
                     }
-                    if (attrValueSet.get(android.R.attr.textColorHint) == null && a.getValue(R.styleable.StyleableSetTextView_android_textColorHint, value)) {
-                        if (AttrValue.maybeThemed(value)) {
+                    /*
+                        performance save
+                    TypedValue valueHint = new TypedValue();
+                    if (attrValueSet.get(android.R.attr.textColorHint) == null && a.getValue(R.styleable.StyleableSetTextView_android_textColorHint, valueHint)) {
+                        if (AttrValue.maybeThemed(valueHint)) {
                             Log.d(TAG, "analyze textColorHint=" + context.getResources().getResourceName(value.resourceId));
-                            attrValueSet.put(android.R.attr.textColorHint, getStyleable(android.R.attr.textColorHint), value);
+                            attrValueSet.put(android.R.attr.textColorHint, getStyleable(android.R.attr.textColorHint), valueHint);
                         }
                     }
-                    if (attrValueSet.get(android.R.attr.textColorHighlight) == null && a.getValue(R.styleable.StyleableSetTextView_android_textColorHighlight, value)) {
-                        if (AttrValue.maybeThemed(value)) {
+                    TypedValue valueHighlight = new TypedValue();
+                    if (attrValueSet.get(android.R.attr.textColorHighlight) == null && a.getValue(R.styleable.StyleableSetTextView_android_textColorHighlight, valueHighlight)) {
+                        if (AttrValue.maybeThemed(valueHighlight)) {
                             Log.d(TAG, "analyze textColorHighlight=" + context.getResources().getResourceName(value.resourceId));
-                            attrValueSet.put(android.R.attr.textColorHighlight, getStyleable(android.R.attr.textColorHighlight), value);
+                            attrValueSet.put(android.R.attr.textColorHighlight, getStyleable(android.R.attr.textColorHighlight), valueHighlight);
                         }
                     }
-                    if (attrValueSet.get(android.R.attr.textColorLink) == null && a.getValue(R.styleable.StyleableSetTextView_android_textColorLink, value)) {
+                    TypedValue valueLink = new TypedValue();
+                    if (attrValueSet.get(android.R.attr.textColorLink) == null && a.getValue(R.styleable.StyleableSetTextView_android_textColorLink, valueLink)) {
                         if (AttrValue.maybeThemed(value)) {
                             Log.d(TAG, "analyze textColorLink=" + context.getResources().getResourceName(value.resourceId));
-                            attrValueSet.put(android.R.attr.textColorLink, getStyleable(android.R.attr.textColorLink), value);
+                            attrValueSet.put(android.R.attr.textColorLink, getStyleable(android.R.attr.textColorLink), valueLink);
                         }
                     }
+*/
                     a.recycle();
                 }
             }
