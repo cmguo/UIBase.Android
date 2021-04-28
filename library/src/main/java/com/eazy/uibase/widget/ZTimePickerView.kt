@@ -171,6 +171,7 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
         }
 
         _picker = TimePickerView(_options)
+        _picker.setKeyBackCancelable(false)
         _wheel = wheelTime.get(_picker) as WheelTime2
         _inited = true
         timeInterval = interval

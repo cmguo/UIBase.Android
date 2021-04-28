@@ -30,8 +30,8 @@ class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?
         var cyclic = false
 
         @Bindable
-        @Title("日历模式")
-        @Description("常用日历模式枚举，特殊模式设置 timeMode2")
+        @Title("时间模式")
+        @Description("常用时间模式枚举，特殊模式设置 timeMode2")
         var timeMode = ZTimePickerView.TimeMode.YearMonthDay
 
         @Bindable
