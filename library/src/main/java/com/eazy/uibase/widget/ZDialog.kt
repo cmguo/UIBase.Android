@@ -18,18 +18,16 @@ import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginTop
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.dialog.MaskDialog
 import com.eazy.uibase.resources.RoundDrawable
-import kotlinx.android.synthetic.main.dialog.view.*
 
 class ZDialog @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayoutCompat(context, attrs, if (defStyleAttr == 0) R.attr.dialogStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.dialogStyle
+) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     @DrawableRes
     var image: Int = 0
@@ -126,9 +124,10 @@ class ZDialog @JvmOverloads constructor(
 
     val body get() = _content
 
+    val checkedState get() = _checkBox.checkedState
+
     interface DialogListener {
         fun buttonClicked(dialog: ZDialog, btnId: Int) {}
-        fun checkBoxClicked(dialog: ZDialog) {}
         fun dialogDismissed(dialog: ZDialog)
     }
 
@@ -164,7 +163,7 @@ class ZDialog @JvmOverloads constructor(
         _listView.adapter = _adapter
         _listView.layoutManager = LinearLayoutManager(context)
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZDialog, R.attr.dialogStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZDialog, defStyleAttr, 0)
         applyStyle(a)
         a.recycle()
 
@@ -228,7 +227,7 @@ class ZDialog @JvmOverloads constructor(
     }
 
     companion object {
-        private const val TAG = "ZPanel"
+        private const val TAG = "ZDialog"
     }
 
     /* private */
@@ -313,7 +312,7 @@ class ZDialog @JvmOverloads constructor(
 
     /* private */
 
-    private class ButtonHolder(private val view: View)
+    private class ButtonHolder(view: View)
         : RecyclerView.ViewHolder(view) {
 
         private val button = view.findViewById<ZButton>(R.id.button)!!

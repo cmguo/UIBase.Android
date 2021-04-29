@@ -19,8 +19,9 @@ import com.eazy.uibase.R
 import com.eazy.uibase.view.list.DividerDecoration
 import kotlin.collections.ArrayList
 
-class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
-    : FrameLayout(context, attrs, R.attr.pickerViewStyle) {
+class ZPickerView @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.pickerViewStyle)
+    : FrameLayout(context, attrs, defStyleAttr) {
 
     interface OnSelectionChangeListener {
         fun onSelectionChanged(picker: ZPickerView)
@@ -39,7 +40,7 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
             _selectImage.visibility = if (value && selection != null) View.VISIBLE else View.INVISIBLE
         }
 
-    var selections: List<Int> = ArrayList<Int>()
+    var selections: List<Int> = ArrayList()
         set(value) {
             field = value
             _adapter.notifyDataSetChanged()
@@ -82,7 +83,7 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
             })
         }
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZPickerView, R.attr.pickerViewStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZPickerView, defStyleAttr, 0)
         singleSelection = a.getBoolean(R.styleable.ZPickerView_singleSelection, singleSelection)
         val titlesId = a.getResourceId(R.styleable.ZPickerView_titles, 0)
         val iconsId = a.getResourceId(R.styleable.ZPickerView_icons, 0)
@@ -112,15 +113,19 @@ class ZPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSe
     /* private */
 
     private fun select(index: Int, selected: Boolean) {
-        if (singleSelection) {
-            (selections as ArrayList<Int>).clear()
-            (selections as ArrayList<Int>).add(index)
-            _selectImage.visibility = View.VISIBLE
-            layoutSelectImage()
-        } else if (selected) {
-            (selections as ArrayList<Int>).add(selections.indexOfLast { it < index } + 1, index)
-        } else {
-            (selections as ArrayList<Int>).remove(index)
+        when {
+            singleSelection -> {
+                (selections as ArrayList<Int>).clear()
+                (selections as ArrayList<Int>).add(index)
+                _selectImage.visibility = View.VISIBLE
+                layoutSelectImage()
+            }
+            selected -> {
+                (selections as ArrayList<Int>).add(selections.indexOfLast { it < index } + 1, index)
+            }
+            else -> {
+                (selections as ArrayList<Int>).remove(index)
+            }
         }
         listener?.onSelectionChanged(this)
     }

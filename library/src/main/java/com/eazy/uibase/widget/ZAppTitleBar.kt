@@ -21,8 +21,8 @@ import com.eazy.uibase.R
 import com.eazy.uibase.resources.ViewDrawable
 
 class ZAppTitleBar @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, if (defStyleAttr == 0) R.attr.appTitleBarStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.appTitleBarStyle
+) : FrameLayout(context, attrs, defStyleAttr) {
 
     @RawRes
     var icon: Int = 0
@@ -112,7 +112,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         _rightButton = findViewById(R.id.rightButton)
         _rightButton2 = findViewById(R.id.rightButton2)
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZAppTitleBar, R.attr.appTitleBarStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZAppTitleBar, defStyleAttr, 0)
         applyStyle(a)
         a.recycle()
 

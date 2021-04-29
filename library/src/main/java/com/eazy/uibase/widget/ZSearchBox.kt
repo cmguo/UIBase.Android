@@ -17,8 +17,8 @@ import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.view.findViewByType
 
 class ZSearchBox @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayoutCompat(context, attrs, if (defStyleAttr == 0) R.attr.searchBoxStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.searchBoxStyle
+) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     @DrawableRes
     var rightButton: Int = 0
@@ -54,7 +54,7 @@ class ZSearchBox @JvmOverloads constructor(
 
         _inputContainer.background = RoundDrawable(context, R.style.ZSearchBox_InputBackground)
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZSearchBox, R.attr.searchBoxStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZSearchBox, defStyleAttr, 0)
         applyStyle(a)
         a.recycle()
     }

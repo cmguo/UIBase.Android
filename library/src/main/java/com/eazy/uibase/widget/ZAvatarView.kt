@@ -10,8 +10,8 @@ import com.eazy.uibase.R
 import java.lang.reflect.Method
 
 class ZAvatarView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, if (defStyleAttr == 0) R.attr.avatarViewStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.avatarViewStyle
+) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     enum class ClipType {
         None,
@@ -97,7 +97,7 @@ class ZAvatarView @JvmOverloads constructor(
         _borderPaint.strokeWidth = borderWidth
         _borderPaint.style = Paint.Style.STROKE
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZAvatarView, R.attr.avatarViewStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZAvatarView, defStyleAttr, 0)
         val cr = a.getInt(R.styleable.ZAvatarView_clipRegion, -1)
         if (cr >= 0) clipRegion = ClipRegion.values()[cr]
         val ct = a.getInt(R.styleable.ZAvatarView_clipType, -1)

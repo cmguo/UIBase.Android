@@ -10,7 +10,7 @@ import com.eazy.uibase.R
 import com.eazy.uibase.resources.RoundDrawable
 
 class ZRadioButton @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null
 ) : AppCompatRadioButton(context, attrs) {
 
     private var _textPadding : Int? = null

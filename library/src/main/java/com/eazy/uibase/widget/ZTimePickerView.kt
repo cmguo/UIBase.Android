@@ -14,8 +14,9 @@ import com.eazy.uibase.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
-    : FrameLayout(context, attrs, R.attr.timePickerViewStyle), OnTimeSelectChangeListener {
+class ZTimePickerView @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.timePickerViewStyle)
+    : FrameLayout(context, attrs, defStyleAttr), OnTimeSelectChangeListener {
 
     interface OnSelectTimeChangeListener {
         fun onSelectTimeChanged(picker: ZTimePickerView, time: Date)
@@ -142,7 +143,7 @@ class ZTimePickerView @JvmOverloads constructor(context: Context, attrs: Attribu
     init {
         initOptions(context)
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTimePickerView, R.attr.timePickerViewStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTimePickerView, defStyleAttr, 0)
         val type = a.getInt(R.styleable.ZTimePickerView_timeMode, 0)
         val interval = a.getInt(R.styleable.ZTimePickerView_timeInterval, 1)
         val titles = a.getString(R.styleable.ZTimePickerView_labels)

@@ -11,6 +11,7 @@ import android.graphics.drawable.*
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
+import androidx.annotation.AnyRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatButton
@@ -20,7 +21,7 @@ import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.resources.Drawables
 
 open class ZButton @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.buttonStyle
 ) : AppCompatButton(context, attrs)
 {
     enum class ButtonType(@StyleRes val resId: Int) {
@@ -63,6 +64,7 @@ open class ZButton @JvmOverloads constructor(
                 syncSize()
         }
 
+    @StyleRes
     var buttonAppearance: Int = 0
         set(value) {
             if (field == value)
@@ -72,6 +74,7 @@ open class ZButton @JvmOverloads constructor(
                 syncTypeSize()
         }
 
+    @AnyRes
     var content: Int = 0
         set(value) {
             if (field == value)
@@ -80,6 +83,7 @@ open class ZButton @JvmOverloads constructor(
             syncContent()
         }
 
+    @DrawableRes
     open var icon: Int = 0
         set(value) {
             if (field == value)
@@ -109,6 +113,7 @@ open class ZButton @JvmOverloads constructor(
             syncIcon()
         }
 
+    @DrawableRes
     var loadingIcon: Int = 0
         set(value) {
             if (field == value)
@@ -163,8 +168,7 @@ open class ZButton @JvmOverloads constructor(
     private lateinit var _sizeStyles: SizeStyles
 
     init {
-        val style = if (defStyleAttr == 0) R.attr.buttonStyle else defStyleAttr
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZButton, style, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZButton, defStyleAttr, 0)
         applyStyle(a)
         a.recycle()
         syncTypeSize()

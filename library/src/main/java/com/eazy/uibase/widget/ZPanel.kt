@@ -18,8 +18,8 @@ import com.eazy.uibase.R
 import com.eazy.uibase.dialog.MaskDialog
 
 class ZPanel @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayoutCompat(context, attrs, if (defStyleAttr == 0) R.attr.panelStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.panelStyle
+) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     var titleBar: Int = 0
         set(value) {
@@ -78,7 +78,7 @@ class ZPanel @JvmOverloads constructor(
             }
         }
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZPanel, R.attr.panelStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZPanel, defStyleAttr, 0)
         applyStyle(a)
         a.recycle()
 

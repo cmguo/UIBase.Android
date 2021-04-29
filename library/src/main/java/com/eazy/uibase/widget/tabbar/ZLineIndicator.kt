@@ -10,8 +10,8 @@ import com.eazy.uibase.R
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
 
 class ZLineIndicator @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinePagerIndicator(context, attrs, if (defStyleAttr == 0) R.attr.lineIndicatorStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.lineIndicatorStyle
+) : LinePagerIndicator(context, attrs, defStyleAttr) {
 
     enum class WidthMode
     {
@@ -58,8 +58,7 @@ class ZLineIndicator @JvmOverloads constructor(
     private val longLinePaint = Paint()
 
     init {
-        val style = if (defStyleAttr == 0) R.attr.lineIndicatorStyle else defStyleAttr
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZLineIndicator, style, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZLineIndicator, defStyleAttr, 0)
         mode = a.getInt(R.styleable.ZLineIndicator_widthMode, mode)
         lineWidth = a.getDimension(R.styleable.ZLineIndicator_lineWidth, lineWidth)
         lineHeight = a.getDimension(R.styleable.ZLineIndicator_lineHeight, lineHeight)

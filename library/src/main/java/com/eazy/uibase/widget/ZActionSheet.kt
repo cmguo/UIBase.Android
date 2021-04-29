@@ -19,8 +19,9 @@ import com.eazy.uibase.R
 import com.eazy.uibase.view.list.DividerDecoration
 import kotlin.collections.ArrayList
 
-class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
-    : FrameLayout(context, attrs, R.attr.actionSheetStyle) {
+class ZActionSheet @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.actionSheetStyle)
+    : FrameLayout(context, attrs, defStyleAttr) {
 
     interface ActionSheetListener {
         fun onAction(sheet: ZActionSheet, index: Int)
@@ -88,7 +89,7 @@ class ZActionSheet @JvmOverloads constructor(context: Context, attrs: AttributeS
         _listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
         _listView.layoutManager = LinearLayoutManager(context)
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZActionSheet, R.attr.actionSheetStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZActionSheet, defStyleAttr, 0)
         title = a.getText(R.styleable.ZActionSheet_title)
         subTitle = a.getText(R.styleable.ZActionSheet_subTitle)
         icon = a.getResourceId(R.styleable.ZActionSheet_icon, 0)

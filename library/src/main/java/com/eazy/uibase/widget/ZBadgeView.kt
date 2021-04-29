@@ -11,8 +11,8 @@ import com.eazy.uibase.R
 import com.eazy.uibase.widget.badgeview.BadgeView
 
 class ZBadgeView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : BadgeView(context, attrs) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.badgeViewStyle
+) : BadgeView(context, attrs, defStyleAttr) {
 
     enum class DragState {
         START, DRAGGING, DRAGGING_OUT_OF_RANGE, CANCELED, SUCCEED
@@ -88,8 +88,7 @@ class ZBadgeView @JvmOverloads constructor(
     }
 
     init {
-        val style = if (defStyleAttr == 0) R.attr.badgeViewStyle else defStyleAttr
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZBadgeView, style, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZBadgeView, defStyleAttr, 0)
         number = a.getInt(R.styleable.ZBadgeView_number, number)
         maximum = a.getInt(R.styleable.ZBadgeView_maximum, maximum)
         val text = a.getText(R.styleable.ZBadgeView_text)

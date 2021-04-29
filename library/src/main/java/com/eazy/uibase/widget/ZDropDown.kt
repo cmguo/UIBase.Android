@@ -20,8 +20,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.view.list.DividerDecoration
 
-class ZDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
-    : LinearLayoutCompat(context, attrs, R.attr.dropDownStyle) {
+class ZDropDown @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.dropDownStyle)
+    : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     interface DropDownListener {
         fun dropDownFinished(dropDown: ZDropDown, selection: Int?)
@@ -61,7 +62,7 @@ class ZDropDown @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
         backgroundPaint.style = Paint.Style.FILL
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZDropDown, R.attr.dropDownStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZDropDown, defStyleAttr, 0)
         shadowRadius = a.getDimensionPixelSize(R.styleable.ZDropDown_shadowRadius, 0).toFloat()
         borderRadius = a.getDimensionPixelSize(R.styleable.ZDropDown_borderRadius, 0).toFloat()
         backgroundPaint.color = a.getColor(R.styleable.ZDropDown_backgroundColor, Color.WHITE)

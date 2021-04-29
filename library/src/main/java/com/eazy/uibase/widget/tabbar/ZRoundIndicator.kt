@@ -10,8 +10,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Wr
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.model.PositionData
 
 class ZRoundIndicator @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : WrapPagerIndicator(context, attrs, if (defStyleAttr == 0) R.attr.roundIndicatorStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.roundIndicatorStyle
+) : WrapPagerIndicator(context, attrs, defStyleAttr) {
 
     enum class WidthMode
     {
@@ -61,8 +61,7 @@ class ZRoundIndicator @JvmOverloads constructor(
         // TODO: fix conflict with padding
         // setLayerType(LAYER_TYPE_SOFTWARE, null)
 
-        val style = if (defStyleAttr == 0) R.attr.roundIndicatorStyle else defStyleAttr
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZRoundIndicator, style, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZRoundIndicator, defStyleAttr, 0)
         mode = a.getInt(R.styleable.ZRoundIndicator_widthMode, mode)
         paddingX = a.getDimensionPixelSize(R.styleable.ZRoundIndicator_paddingX, paddingX)
         paddingY = a.getDimensionPixelSize(R.styleable.ZRoundIndicator_paddingY, paddingY)

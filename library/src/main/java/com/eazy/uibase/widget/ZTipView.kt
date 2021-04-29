@@ -29,8 +29,8 @@ import java.lang.ref.WeakReference
 import kotlin.collections.ArrayList
 
 class ZTipView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayoutCompat(context, attrs, if (defStyleAttr == 0) R.attr.tipViewStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.tipViewStyle
+) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     enum class Location {
         TopLeft,
@@ -166,7 +166,7 @@ class ZTipView @JvmOverloads constructor(
         _arrowDrawable = ShapeDrawable()
         _layerDrawable = LayerDrawable(arrayOf(_frameDrawable, _arrowDrawable))
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTipView, R.attr.tipViewStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTipView, defStyleAttr, 0)
         maxWidth = a.getDimensionPixelSize(R.styleable.ZTipView_maxWidth, maxWidth)
         leftButton = a.getResourceId(R.styleable.ZTipView_leftButton, 0)
         icon = a.getResourceId(R.styleable.ZTipView_icon, 0)

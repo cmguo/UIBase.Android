@@ -16,8 +16,9 @@ import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.RoundDrawable
 
-class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
-    : LinearLayout(context, attrs, R.attr.numberViewStyle), View.OnClickListener, TextWatcher {
+class ZNumberView @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.numberViewStyle)
+    : LinearLayout(context, attrs, defStyleAttr), View.OnClickListener, TextWatcher {
 
     interface OnNumberChangeListener {
         fun onNumberChanged(view: View, number: Int)
@@ -85,7 +86,7 @@ class ZNumberView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         _buttonInc.setOnClickListener(this)
         _editText.addTextChangedListener(this)
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZNumberView, R.attr.numberViewStyle, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZNumberView, defStyleAttr, 0)
         maximum = a.getInt(R.styleable.ZNumberView_maximum, maximum)
         minimum = a.getInt(R.styleable.ZNumberView_minimum, minimum)
         step = a.getInt(R.styleable.ZNumberView_step, step)

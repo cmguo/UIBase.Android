@@ -9,15 +9,14 @@ import com.eazy.uibase.R
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView
 
 class ZTabTitleView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ColorTransitionPagerTitleView(context, attrs, if (defStyleAttr == 0) R.attr.tabTitleStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.tabTitleStyle
+) : ColorTransitionPagerTitleView(context, attrs, defStyleAttr) {
 
     var textSizeNormal = 16f
     var textSizeSelected = 16f
 
     init {
-        val style = if (defStyleAttr == 0) R.attr.tabTitleStyle else defStyleAttr
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTabTitleView, style, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTabTitleView, defStyleAttr, 0)
         val color = a.getColorStateList(R.styleable.ZTabTitleView_android_textColor)
         setTextColor(color)
         textSizeNormal = a.getDimension(R.styleable.ZTabTitleView_textSizeNormal, textSizeNormal)

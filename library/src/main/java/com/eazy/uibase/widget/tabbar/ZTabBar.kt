@@ -14,8 +14,8 @@ import com.eazy.uibase.view.ZTabAdapter
 import net.lucode.hackware.magicindicator.MagicIndicator
 
 class ZTabBar @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : MagicIndicator(context, attrs, if (defStyleAttr == 0) R.attr.tabBarStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.tabBarStyle
+) : MagicIndicator(context, attrs, defStyleAttr) {
 
     var borderRadius = 0f
 
@@ -23,8 +23,7 @@ class ZTabBar @JvmOverloads constructor(
     private val bounds = RectF()
 
     init {
-        val style = if (defStyleAttr == 0) R.attr.tabBarStyle else defStyleAttr
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTabBar, style, 0)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTabBar, defStyleAttr, 0)
         val navigatorStyle = a.getResourceId(R.styleable.ZTabBar_navigatorStyle, 0);
         val titles = a.getResourceId(R.styleable.ZTabBar_titles, 0)
         a.recycle()

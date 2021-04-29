@@ -12,8 +12,8 @@ import com.eazy.uibase.R
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 
 class ZTabNavigator @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0
-) : CommonNavigator(context, attrs, if (defStyleAttr == 0) R.attr.tabNavigatorStyle else defStyleAttr) {
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.tabNavigatorStyle, defStyleRes: Int = 0
+) : CommonNavigator(context, attrs, defStyleAttr) {
 
     var borderRadius = 0f
         set(value) {
@@ -39,8 +39,7 @@ class ZTabNavigator @JvmOverloads constructor(
     private val bounds = RectF()
 
     init {
-        val style = if (defStyleAttr == 0) R.attr.tabNavigatorStyle else defStyleAttr
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTabNavigator, style, defStyleRes)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ZTabNavigator, defStyleAttr, defStyleRes)
         borderRadius = a.getDimension(R.styleable.ZTabNavigator_borderRadius, borderRadius)
         gravityCenter = a.getBoolean(R.styleable.ZTabNavigator_gravityCenter, gravityCenter)
         _backgroundColorId = a.getResourceId(R.styleable.ZTabNavigator_backgroundColor, 0)
