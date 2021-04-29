@@ -106,13 +106,13 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
     private void setCompoundDrawable(TextView view, int index, TypedValue value) {
         Drawable[] drawables = view.getCompoundDrawables();
         drawables[index] = ContextCompat.getDrawable(view.getContext(), value.resourceId);
-        view.setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawables[3]);
+        view.setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 
     private void setCompoundDrawableRelative(TextView view, int index, TypedValue value) {
         Drawable[] drawables = view.getCompoundDrawablesRelative();
         drawables[index] = ContextCompat.getDrawable(view.getContext(), value.resourceId);
-        view.setCompoundDrawablesRelative(drawables[0], drawables[1], drawables[2], drawables[3]);
+        view.setCompoundDrawablesRelativeWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 
 }

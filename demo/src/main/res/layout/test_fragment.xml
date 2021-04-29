@@ -21,15 +21,27 @@
         tools:context=".TestComponent">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.text}"
-            android:enabled="@{styles.boolStyle}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:text="@{model.text}"
+            android:drawableLeft="@drawable/icon_16px_read_black_light"
+            android:enabled="@{styles.boolStyle}"
             />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            android:src="@drawable/icon_16px_qrcode_small"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
