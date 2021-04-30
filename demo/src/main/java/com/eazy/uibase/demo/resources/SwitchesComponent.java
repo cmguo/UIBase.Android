@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.styles;
+package com.eazy.uibase.demo.resources;
 
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.demo.R;

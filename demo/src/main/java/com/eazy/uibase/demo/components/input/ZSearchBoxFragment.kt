@@ -2,7 +2,7 @@ package com.eazy.uibase.demo.components.input
 
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.BR
-import com.eazy.uibase.demo.core.Colors
+import com.eazy.uibase.demo.resources.Colors
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles

@@ -123,7 +123,7 @@ class ZAvatarView @JvmOverloads constructor(
     override fun setFrame(l: Int, t: Int, r: Int, b: Int): Boolean {
         val result = super.setFrame(l, t, r, b)
         computeRoundBounds()
-        if (width != _dstImage.width || height != _dstImage.height
+        if ((width != _dstImage.width || height != _dstImage.height)
             && width > 0 && height > 0) {
             _dstImage.recycle()
             _dstImage = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)

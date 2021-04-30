@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.colors;
+package com.eazy.uibase.demo.resources;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -9,7 +9,6 @@ import androidx.databinding.Bindable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eazy.uibase.demo.R;
-import com.eazy.uibase.demo.core.Colors;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;

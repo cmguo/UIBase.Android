@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.styles;
+package com.eazy.uibase.demo.resources;
 
 import androidx.databinding.Bindable;
 import androidx.databinding.ViewDataBinding;
@@ -24,13 +24,13 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
         public Model(StylesFragment fragment) {
             if (fragment.getComponent().id() == R.id.component_buttons)
-                styles = com.eazy.uibase.demo.core.Styles.buttonStyles();
+                styles = com.eazy.uibase.demo.resources.Styles.buttonStyles();
             else if (fragment.getComponent().id() == R.id.component_check_boxes)
-                styles = com.eazy.uibase.demo.core.Styles.checkboxStyles();
+                styles = com.eazy.uibase.demo.resources.Styles.checkboxStyles();
             else if (fragment.getComponent().id() == R.id.component_radio_buttons)
-                styles = com.eazy.uibase.demo.core.Styles.radioStyles();
+                styles = com.eazy.uibase.demo.resources.Styles.radioStyles();
             else if (fragment.getComponent().id() == R.id.component_switches)
-                styles = com.eazy.uibase.demo.core.Styles.switchStyles();
+                styles = com.eazy.uibase.demo.resources.Styles.switchStyles();
             else
                 styles = null;
         }

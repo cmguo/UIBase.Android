@@ -1,28 +1,27 @@
-package com.eazy.uibase.demo.styles;
+package com.eazy.uibase.demo.resources;
 
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.demo.R;
-import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.annotation.Author;
+import com.eazy.uibase.demo.core.Component;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class RatioButtonsComponent extends CheckBoxesComponent {
+public class ColorsComponent2 extends ColorsComponent {
 
     @Override
     public int id() {
-        return R.id.component_radio_buttons;
+        return R.id.component_colors2;
     }
 
     @Override
     public int title() {
-        return R.string.component_radio_buttons;
+        return R.string.component_colors2;
     }
 
     @Override
     public int description() {
-        return R.string.component_radio_buttons_desc;
+        return R.string.component_colors2_desc;
     }
 
 }
-

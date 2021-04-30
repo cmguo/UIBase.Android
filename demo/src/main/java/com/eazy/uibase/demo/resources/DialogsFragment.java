@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.layouts;
+package com.eazy.uibase.demo.resources;
 
 import android.app.Dialog;
 import android.graphics.drawable.StateListDrawable;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
-import com.eazy.uibase.demo.core.Layouts;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.databinding.DialogsFragmentBinding;

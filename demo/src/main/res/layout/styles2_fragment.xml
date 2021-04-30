@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.eazy.uibase.demo.styles.StylesFragment" />
-        <import type="com.eazy.uibase.demo.styles.StylesFragment.Styles" />
-        <import type="com.eazy.uibase.demo.styles.StylesFragment.Model" />
+        <import type="com.eazy.uibase.demo.resources.StylesFragment" />
+        <import type="com.eazy.uibase.demo.resources.StylesFragment.Model" />
+        <import type="com.eazy.uibase.demo.resources.StylesFragment.Styles" />
         <variable
             name="fragment"
-            type="StylesFragment" />
+            type="com.eazy.uibase.demo.resources.StylesFragment" />
         <variable
             name="model"
             type="Model" />

@@ -1,6 +1,4 @@
-package com.eazy.uibase.demo.core;
-
-import android.content.Context;
+package com.eazy.uibase.demo.resources;
 
 import com.eazy.uibase.demo.R;
 

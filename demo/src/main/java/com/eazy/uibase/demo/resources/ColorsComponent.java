@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.styles;
+package com.eazy.uibase.demo.resources;
 
 import com.google.auto.service.AutoService;
 import com.eazy.uibase.demo.R;
@@ -8,10 +8,11 @@ import com.eazy.uibase.demo.core.annotation.Author;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class CheckBoxesComponent implements Component{
+public class ColorsComponent implements Component
+{
     @Override
     public int id() {
-        return R.id.component_check_boxes;
+        return R.id.component_colors;
     }
 
     @Override
@@ -21,23 +22,22 @@ public class CheckBoxesComponent implements Component{
 
     @Override
     public int icon() {
-        return android.R.drawable.btn_plus;
+        return android.R.drawable.btn_star;
     }
 
     @Override
     public int title() {
-        return R.string.component_checkboxes;
+        return R.string.component_colors;
     }
 
     @Override
     public int description() {
-        return R.string.component_checkboxes_desc;
+        return R.string.component_colors_desc;
     }
 
     @Override
     public Class<? extends ComponentFragment> fragmentClass() {
-        return StylesFragment.class;
+        return ColorsFragment.class;
     }
-
 }
 

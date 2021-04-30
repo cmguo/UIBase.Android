@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.eazy.uibase.demo.colors.ColorsFragment.Model" />
-        <import type="com.eazy.uibase.demo.colors.ColorsFragment.Styles" />
-        <import type="com.eazy.uibase.demo.colors.ColorsFragment" />
+        <import type="com.eazy.uibase.demo.resources.ColorsFragment.Model" />
+        <import type="com.eazy.uibase.demo.resources.ColorsFragment.Styles" />
+        <import type="com.eazy.uibase.demo.resources.ColorsFragment" />
         <variable
             name="fragment"
             type="ColorsFragment" />

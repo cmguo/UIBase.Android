@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.eazy.uibase.demo.layouts.DialogsFragment.Model" />
-        <import type="com.eazy.uibase.demo.layouts.DialogsFragment.Styles" />
-        <import type="com.eazy.uibase.demo.layouts.DialogsFragment" />
+        <import type="com.eazy.uibase.demo.resources.DialogsFragment" />
+        <import type="com.eazy.uibase.demo.resources.DialogsFragment.Model" />
+        <import type="com.eazy.uibase.demo.resources.DialogsFragment.Styles" />
         <variable
             name="fragment"
-            type="DialogsFragment" />
+            type="com.eazy.uibase.demo.resources.DialogsFragment" />
         <variable
             name="model"
             type="Model" />
         <variable
             name="styles"
-            type="com.eazy.uibase.demo.layouts.DialogsFragment.Styles" />
+            type="Styles" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

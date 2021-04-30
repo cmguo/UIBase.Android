@@ -1,6 +1,5 @@
-package com.eazy.uibase.demo.core;
+package com.eazy.uibase.demo.resources;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;

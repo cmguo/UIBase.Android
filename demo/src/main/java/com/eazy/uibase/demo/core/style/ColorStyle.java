@@ -1,20 +1,16 @@
 package com.eazy.uibase.demo.core.style;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
-import com.eazy.uibase.demo.core.Colors;
+import com.eazy.uibase.demo.resources.Colors;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ColorStyle extends ComponentStyle {
 
