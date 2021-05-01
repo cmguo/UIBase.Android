@@ -17,7 +17,7 @@ public class StdDynamicColorsComponent implements Component
 
     @Override
     public int group() {
-        return R.string.group_styles;
+        return R.string.group_resource_styles;
     }
 
     @Override

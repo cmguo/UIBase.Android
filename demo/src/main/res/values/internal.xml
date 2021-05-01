@@ -4,7 +4,7 @@
     <string name="component_test">测试控件</string>
     <string name="component_test_desc">测试控件, MVVM 数据绑定</string>
 
-    <string name="group_styles">基础样式</string>
+    <string name="group_resource_styles">资源样式</string>
 
     <!-- colors -->
     <id name="component_std_dynamic_colors"></id>

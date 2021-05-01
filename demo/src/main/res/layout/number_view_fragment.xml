@@ -40,7 +40,31 @@
                 app:minimum="@{styles.minimun}"
                 app:maximum="@{styles.maximun}"
                 app:step="@{styles.step}"
+                app:wraps="@{styles.wraps}"
+                app:autoRepeat="@{styles.autoRepeat}"
+                app:continues="@{styles.continues}"
                 app:number="@={styles.number}"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+                android:text="当前数值"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+                android:text="@{String.valueOf(styles.number)}"
                 />
 
         </LinearLayout>

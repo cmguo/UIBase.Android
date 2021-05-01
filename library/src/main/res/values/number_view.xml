@@ -8,6 +8,9 @@
         <attr name="minimum" format="integer"/>
         <attr name="maximum" format="integer"/>
         <attr name="step" format="integer"/>
+        <attr name="wraps" format="boolean"/>
+        <attr name="autoRepeat" format="boolean"/>
+        <attr name="continues" format="boolean"/>
         <attr name="number"/>
         <!-- 左右2边+-按钮的宽度 -->
         <attr name="buttonSize"/>

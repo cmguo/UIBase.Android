@@ -1,5 +1,6 @@
 package com.eazy.uibase.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
@@ -8,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -15,10 +17,12 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.RoundDrawable
+import com.eazy.uibase.view.RepeatListener
 
+@SuppressLint("ClickableViewAccessibility")
 class ZNumberView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.numberViewStyle)
-    : LinearLayout(context, attrs, defStyleAttr), View.OnClickListener, TextWatcher {
+    : LinearLayout(context, attrs, defStyleAttr), View.OnClickListener, View.OnTouchListener, TextWatcher {
 
     interface OnNumberChangeListener {
         fun onNumberChanged(view: View, number: Int)
@@ -33,7 +37,7 @@ class ZNumberView @JvmOverloads constructor(
             if (number < value)
                 number = value
             else
-                _buttonDec.isEnabled = number >= value + step
+                syncEnable()
         }
 
     var maximum = 0
@@ -45,33 +49,55 @@ class ZNumberView @JvmOverloads constructor(
             if (value in 1 until number)
                 number = value
             else
-                _buttonInc.isEnabled = (value == 0) || (number + step <= value)
+                syncEnable()
         }
 
     var step = 1
         set(value) {
             field = value
-            _buttonDec.isEnabled = number >= minimum + value
-            _buttonInc.isEnabled = (maximum == 0) || (number + value <= maximum)
+            syncEnable()
         }
+
+    var wraps = false
+        set(value) {
+            field = value
+            syncEnable()
+        }
+
+    var autoRepeat = false
+        set(value) {
+            field = value
+            if (value) {
+                _buttonDec.setOnTouchListener(_repeatListener)
+                _buttonInc.setOnTouchListener(_repeatListener)
+            } else {
+                _buttonDec.setOnClickListener(this)
+                _buttonInc.setOnClickListener(this)
+            }
+        }
+
+    var continues = true
 
     var number = 0 //数量
         set(value) {
             if (field == value || (maximum in 1 until value) || value < minimum)
                 return
             field = value
-            if (!inCallbacks)
+            if (!_inCallbacks)
                 _editText.setText(value.toString())
-            _buttonDec.isEnabled = value >= minimum + step
-            _buttonInc.isEnabled = (maximum == 0) || (value + step <= maximum)
-            mListener?.onNumberChanged(this, value)
+            syncEnable()
+            if (continues || !_inInteraction)
+                mListener?.onNumberChanged(this, value)
         }
 
     private var mListener: OnNumberChangeListener? = null
+
     private val _editText: EditText
     private val _buttonDec: Button
     private val _buttonInc: Button
-    private var inCallbacks = false
+    private var _inCallbacks = false
+    private var _inInteraction = false
+    private val _repeatListener = RepeatListener(this)
 
     fun setOnNumberChangeListener(listener: OnNumberChangeListener?) {
         mListener = listener
@@ -82,14 +108,15 @@ class ZNumberView @JvmOverloads constructor(
         _editText = findViewById<View>(R.id.editText) as EditText
         _buttonDec = findViewById<View>(R.id.buttonDec) as Button
         _buttonInc = findViewById<View>(R.id.buttonInc) as Button
-        _buttonDec.setOnClickListener(this)
-        _buttonInc.setOnClickListener(this)
         _editText.addTextChangedListener(this)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZNumberView, defStyleAttr, 0)
         maximum = a.getInt(R.styleable.ZNumberView_maximum, maximum)
         minimum = a.getInt(R.styleable.ZNumberView_minimum, minimum)
         step = a.getInt(R.styleable.ZNumberView_step, step)
+        wraps = a.getBoolean(R.styleable.ZNumberView_wraps, wraps)
+        autoRepeat = a.getBoolean(R.styleable.ZNumberView_autoRepeat, autoRepeat)
+        continues = a.getBoolean(R.styleable.ZNumberView_continues, continues)
         number = a.getInt(R.styleable.ZNumberView_number, number)
         a.recycle()
 
@@ -104,12 +131,32 @@ class ZNumberView @JvmOverloads constructor(
         if (i == R.id.buttonDec) {
             if (number >= minimum + step) {
                 number -= step
+            } else if (wraps && maximum > 0) {
+                var n = number - step
+                while (n < minimum)
+                    n += maximum - minimum + 1
+                number = n
             }
         } else if (i == R.id.buttonInc) {
             if (maximum == 0 || number + step <= maximum) {
                 number += step
+            } else if (wraps && maximum > 0) {
+                var n = number + step
+                while (n > maximum)
+                    n -= maximum - minimum + 1
+                number = n
             }
         }
+    }
+
+    override fun onTouch(v: View, event: MotionEvent): Boolean {
+        val inInteraction = event.action != MotionEvent.ACTION_UP
+            && event.action != MotionEvent.ACTION_CANCEL
+        if (_inInteraction && !inInteraction) {
+            mListener?.onNumberChanged(this, number)
+        }
+        _inInteraction = inInteraction
+        return true
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -117,9 +164,9 @@ class ZNumberView @JvmOverloads constructor(
     override fun afterTextChanged(s: Editable) {
         if (s.toString().isEmpty()) return
         val value = Integer.valueOf(s.toString())
-        inCallbacks = true
+        _inCallbacks = true
         number = value
-        inCallbacks = false
+        _inCallbacks = false
         if (number != value) {
             s.replace(0, s.length, number.toString())
         }
@@ -132,6 +179,12 @@ class ZNumberView @JvmOverloads constructor(
 
     companion object {
         private const val TAG = "ZNumberView"
+    }
+
+    private fun syncEnable() {
+        val w = wraps && maximum > 0
+        _buttonDec.isEnabled = w || number >= minimum + step
+        _buttonInc.isEnabled = w || (maximum == 0) || (number + step <= maximum)
     }
 
     private fun syncButtonBackground() {

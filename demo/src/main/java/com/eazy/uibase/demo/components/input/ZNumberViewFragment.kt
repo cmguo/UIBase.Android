@@ -1,6 +1,7 @@
 package com.eazy.uibase.demo.components.input
 
 import androidx.databinding.Bindable
+import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
@@ -28,8 +29,24 @@ class ZNumberViewFragment : ComponentFragment<NumberViewFragmentBinding?, ZNumbe
         var step = 1
 
         @Bindable
+        @Title("循环步进") @Description("当数量超出时，是否循环到另一端")
+        var wraps = false
+
+        @Bindable
+        @Title("自动重复") @Description("当一直按着按钮时，自动重复改变数值")
+        var autoRepeat = false
+
+        @Bindable
+        @Title("持续通知") @Description("当一直按着按钮时，持续通知数值变化")
+        var continues = true
+
+        @Bindable
         @Title("数量") @Description("当前输入的数量")
         var number = 1
+            set(value) {
+                field = value
+                notifyPropertyChanged(BR.number)
+            }
     }
 
     companion object {
