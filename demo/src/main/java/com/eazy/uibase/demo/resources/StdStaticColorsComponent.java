@@ -7,21 +7,21 @@ import com.eazy.uibase.demo.core.Component;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class ColorsComponent2 extends ColorsComponent {
+public class StdStaticColorsComponent extends StdDynamicColorsComponent {
 
     @Override
     public int id() {
-        return R.id.component_colors2;
+        return R.id.component_std_static_colors;
     }
 
     @Override
     public int title() {
-        return R.string.component_colors2;
+        return R.string.component_std_static_colors;
     }
 
     @Override
     public int description() {
-        return R.string.component_colors2_desc;
+        return R.string.component_std_static_colors_desc;
     }
 
 }

@@ -7,11 +7,17 @@
     <string name="group_styles">基础样式</string>
 
     <!-- colors -->
-    <string name="component_colors">标准色</string>
-    <string name="component_colors_desc">标准色</string>
-    <id name="component_colors2"></id>
-    <string name="component_colors2">非标准色</string>
-    <string name="component_colors2_desc">非标准色</string>
+    <id name="component_std_dynamic_colors"></id>
+    <string name="component_std_dynamic_colors">标准色（动态）</string>
+    <string name="component_std_dynamic_colors_desc">动态标准色，在白天、夜间模式有不同都颜色值</string>
+
+    <id name="component_std_static_colors"></id>
+    <string name="component_std_static_colors">标准色（静态）</string>
+    <string name="component_std_static_colors_desc">静态标准色，没有夜间模式对应都颜色值</string>
+
+    <id name="component_state_list_colors"></id>
+    <string name="component_state_list_colors">有状态颜色</string>
+    <string name="component_state_list_colors_desc">有状态颜色，在不同状态下，展示不同颜色</string>
 
     <!-- buttons styles -->
     <id name="component_buttons"></id>

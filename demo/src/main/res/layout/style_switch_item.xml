@@ -20,27 +20,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/title"
+            style="@style/Demo.ResourceItemTitle"
+            android:text="@{data.key}"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/title"
-                style="@style/Demo.ResourceItemTitle"
-                android:text="@{data.key}"/>
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:style="@{data.value}"
-                android:enabled="@{!styles.disabled}"
-                android:text="@{styles.text}"/>
-
-        </LinearLayout>
+            android:layout_gravity="center"
+            app:style="@{data.value}"
+            android:enabled="@{!styles.disabled}"
+            android:text="@{styles.text}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

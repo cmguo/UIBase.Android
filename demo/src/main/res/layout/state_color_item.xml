@@ -6,14 +6,14 @@
 
     <data>
         <import type="java.util.Map.Entry" />
-        <import type="com.eazy.uibase.demo.resources.Resources.ResourceValue" />
+        <import type="com.eazy.uibase.demo.resources.Colors.StateColor" />
         <import type="com.eazy.uibase.demo.resources.Colors" />
         <variable
             name="data"
-            type="Entry&lt;String, ResourceValue&gt;" />
+            type="StateColor" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
@@ -23,10 +23,10 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingStart="5dp"
+            android:paddingStart="15dp"
             android:textSize="20dp"
             android:textFontWeight="2"
-            android:text="@{Colors.simpleName(data.key)}"/>
+            android:text="@{data.stateName}"/>
 
         <TextView
             android:id="@+id/color"
@@ -35,10 +35,10 @@
             android:layout_gravity="center_vertical"
             android:typeface="monospace"
             android:gravity="center"
-            android:background="@{data.value.value}"
-            android:textColor="@{Colors.invert(data.value.value)}"
-            android:text="@{Colors.text(data.value.value)}"/>
+            android:background="@{data.color}"
+            android:textColor="@{Colors.invert(data.color)}"
+            android:text="@{data.colorName}"/>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
 </layout>

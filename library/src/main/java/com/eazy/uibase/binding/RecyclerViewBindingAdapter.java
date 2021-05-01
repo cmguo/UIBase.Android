@@ -8,6 +8,7 @@ import com.eazy.uibase.view.list.ItemBindings;
 import com.eazy.uibase.view.list.LayoutManagerFactory;
 import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,8 @@ public class RecyclerViewBindingAdapter {
                 adapter.replace(((Map) data).entrySet());
             } else if (data instanceof Iterable) {
                 adapter.replace((Iterable) data);
+            } else if (data != null && data.getClass().isArray()) {
+                adapter.replace(Arrays.asList((Object[]) data));
             }
         }
     }

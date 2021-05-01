@@ -1,6 +1,5 @@
 package com.eazy.uibase.demo.resources;
 
-import android.content.Context;
 import android.content.res.Configuration;
 import android.util.Log;
 
@@ -17,7 +16,6 @@ import com.eazy.uibase.view.list.PaddingDecoration;
 import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, ColorsFragment.Model, ColorsFragment.Styles> {
 
@@ -25,28 +23,34 @@ public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, Col
 
     public static class Model extends ViewModel {
 
-        private final Map<String, Integer> colors;
+        private Map<String, Resources.ResourceValue> colors;
+        private Map<String, Colors.StateColor[]> stateColors;
 
         public Model(ColorsFragment fragment) {
-            if (fragment.getComponent().id() == R.id.component_colors)
-                colors = Colors.stdColors(fragment.getContext());
+            if (fragment.getComponent().id() == R.id.component_std_dynamic_colors)
+                colors = Colors.stdDynamicColors(fragment.getContext());
+            else if (fragment.getComponent().id() == R.id.component_std_static_colors)
+                colors = Colors.stdStaticColors(fragment.getContext());
             else
-                colors = Colors.nonStdColors(fragment.getContext());
+                stateColors = Colors.stateListColors(fragment.getContext());
         }
 
         @Bindable
-        public Map<String, Integer> getColors() {
-            return colors;
+        public Map<String, ?> getColors() {
+            return colors == null ? stateColors : colors;
         }
 
-        void updateColors(Context context) {
-            Colors.update(context, colors);
-        }
     }
 
     public static class Styles extends ViewStyles {
         public int itemBinding = R.layout.color_item;
         public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
+
+        public Styles(ColorsFragment fragment) {
+            if (fragment.getComponent().id() == R.id.component_state_list_colors) {
+                itemBinding = R.layout.state_list_color_item;
+            }
+        }
     }
 
     // this should be in view model, but fragment may simplify things
@@ -55,7 +59,6 @@ public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, Col
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        getModel().updateColors(getContext());
-        Objects.requireNonNull(getBinding().colorsList.getAdapter()).notifyItemRangeChanged(0, getModel().getColors().size());
+        Colors.updateResources(requireContext().getResources(), getModel().colors);
     }
 }

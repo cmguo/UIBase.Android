@@ -7,37 +7,36 @@
     <data>
         <import type="java.util.Map.Entry" />
         <import type="com.eazy.uibase.demo.resources.Resources.ResourceValue" />
+        <import type="com.eazy.uibase.demo.resources.Colors.StateColor" />
         <import type="com.eazy.uibase.demo.resources.Colors" />
         <variable
             name="data"
-            type="Entry&lt;String, ResourceValue&gt;" />
+            type="Entry&lt;String, StateColor[]&gt;" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="left"
             android:paddingStart="5dp"
-            android:textSize="20dp"
+            android:textSize="22dp"
             android:textFontWeight="2"
+            android:textStyle="bold"
             android:text="@{Colors.simpleName(data.key)}"/>
 
-        <TextView
-            android:id="@+id/color"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:typeface="monospace"
-            android:gravity="center"
-            android:background="@{data.value.value}"
-            android:textColor="@{Colors.invert(data.value.value)}"
-            android:text="@{Colors.text(data.value.value)}"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stateColors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:data="@{data.value}"
+            app:itemBinding="@{@layout/state_color_item}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

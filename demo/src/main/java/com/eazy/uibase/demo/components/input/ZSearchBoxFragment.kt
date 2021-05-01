@@ -19,7 +19,7 @@ class ZSearchBoxFragment : ComponentFragment<SearchBoxFragmentBinding?, ZSearchB
 
     class Model(fragment: ZSearchBoxFragment) : ViewModel() {
 
-        private val colors = Colors.stdColors(fragment.requireContext()).keys
+        private val colors = Colors.stdDynamicColors(fragment.requireContext()).keys
 
         fun filter(text: String) {
             result = colors.filter { it.contains(text) }

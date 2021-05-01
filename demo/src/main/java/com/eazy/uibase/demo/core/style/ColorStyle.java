@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.core.content.ContextCompat;
 
 import com.eazy.uibase.demo.resources.Colors;
+import com.eazy.uibase.demo.resources.Resources;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -19,15 +20,15 @@ public class ColorStyle extends ComponentStyle {
     private static List<String> valueTitles;
 
     public static void init(Context context) {
-        final Map<String, Integer> colors = Colors.stdDynamicColorIds();
+        final Map<String, Resources.ResourceValue> colors = Colors.stdDynamicColors(context);
         values = new ArrayList<>();
         valueIds = new ArrayList<>();
-        for (int c : colors.values()) {
-            int cl = ContextCompat.getColor(context, c);
-            values.add(String.valueOf(cl));
-            valueIds.add(String.valueOf(c));
+        valueTitles = new ArrayList<>();
+        for (Map.Entry<String, Resources.ResourceValue> e : colors.entrySet()) {
+            values.add(String.valueOf(e.getValue().getValue()));
+            valueIds.add(String.valueOf(e.getValue().getResId()));
+            valueTitles.add(Resources.simpleName(e.getKey()));
         }
-        valueTitles = new ArrayList<>(colors.keySet());
     }
 
     public ColorStyle(Field field) {

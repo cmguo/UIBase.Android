@@ -9,6 +9,8 @@ import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
+import com.eazy.uibase.demo.core.style.annotation.Description;
+import com.eazy.uibase.demo.core.style.annotation.Title;
 import com.eazy.uibase.demo.databinding.Styles2FragmentBinding;
 import com.eazy.uibase.view.list.PaddingDecoration;
 import com.eazy.uibase.view.list.UnitTypeItemBinding;
@@ -48,6 +50,8 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         public String text = "文字";
 
         @Bindable
+        @Title("禁用")
+        @Description("切换到禁用状态")
         public boolean disabled = false;
 
         private final StylesFragment fragment_;

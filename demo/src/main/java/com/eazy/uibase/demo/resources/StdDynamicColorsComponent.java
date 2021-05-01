@@ -8,11 +8,11 @@ import com.eazy.uibase.demo.core.annotation.Author;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class ColorsComponent implements Component
+public class StdDynamicColorsComponent implements Component
 {
     @Override
     public int id() {
-        return R.id.component_colors;
+        return R.id.component_std_dynamic_colors;
     }
 
     @Override
@@ -27,12 +27,12 @@ public class ColorsComponent implements Component
 
     @Override
     public int title() {
-        return R.string.component_colors;
+        return R.string.component_std_dynamic_colors;
     }
 
     @Override
     public int description() {
-        return R.string.component_colors_desc;
+        return R.string.component_std_dynamic_colors_desc;
     }
 
     @Override
