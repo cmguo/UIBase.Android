@@ -68,11 +68,15 @@ class ZNumberView @JvmOverloads constructor(
         set(value) {
             field = value
             if (value) {
+                _buttonDec.setOnClickListener(null)
+                _buttonInc.setOnClickListener(null)
                 _buttonDec.setOnTouchListener(_repeatListener)
                 _buttonInc.setOnTouchListener(_repeatListener)
             } else {
                 _buttonDec.setOnClickListener(this)
                 _buttonInc.setOnClickListener(this)
+                _buttonDec.setOnTouchListener(null)
+                _buttonInc.setOnTouchListener(null)
             }
         }
 
@@ -152,7 +156,7 @@ class ZNumberView @JvmOverloads constructor(
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         val inInteraction = event.action != MotionEvent.ACTION_UP
             && event.action != MotionEvent.ACTION_CANCEL
-        if (_inInteraction && !inInteraction) {
+        if (_inInteraction && !inInteraction && !continues) {
             mListener?.onNumberChanged(this, number)
         }
         _inInteraction = inInteraction

@@ -237,11 +237,10 @@ class ZTipView @JvmOverloads constructor(
         }
         if (dismissDelay > 0)
             postDelayed(DismissRunnable(this), dismissDelay)
+        root.addView(this, lp)
         if (_location < Location.AutoToast) {
             overlayFrame(contentView, true)?.attach(this)
         }
-        root.addView(this, lp)
-        _textView.requestFocus()
     }
 
     fun popUp(duration: Int = Toast.LENGTH_SHORT) {
