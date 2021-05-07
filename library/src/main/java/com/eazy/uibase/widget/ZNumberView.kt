@@ -197,7 +197,7 @@ class ZNumberView @JvmOverloads constructor(
         _buttonInc.background = createButtonDrawable(R.drawable.icon_plus)
     }
 
-    fun createButtonDrawable(foregroundId: Int): Drawable {
+    private fun createButtonDrawable(foregroundId: Int): Drawable {
         val buttonBackground = RoundDrawable(context, R.style.ZNumberView_ButtonBackground)
         val buttonForeground = ContextCompat.getDrawable(context, foregroundId)
         val buttonForegroundColor = ContextCompat.getColorStateList(context, R.color.number_view_button_foreground_color)

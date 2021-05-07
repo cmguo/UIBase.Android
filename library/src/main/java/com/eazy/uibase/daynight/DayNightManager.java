@@ -35,8 +35,12 @@ public class DayNightManager {
      * ths method should be called in Application onCreate method
      */
     public void init(Context context) {
+        init(context, false);
+    }
+
+    public void init(Context context, boolean defaultIsNight) {
         this.context = context.getApplicationContext();
-        boolean isNightModel = loadNightModel();
+        boolean isNightModel = loadNightModel(defaultIsNight);
         AppCompatDelegate.setDefaultNightMode(isNightModel ?
             AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
@@ -94,9 +98,9 @@ public class DayNightManager {
         inflaterList.remove(inflater);
     }
 
-    private boolean loadNightModel() {
+    private boolean loadNightModel(boolean defaultIsNight) {
         SharedPreferences sp = context.getSharedPreferences(KEY_CURRENT_MODEL, Context.MODE_PRIVATE);
-        return sp.getBoolean(KEY_CURRENT_MODEL, false);
+        return sp.getBoolean(KEY_CURRENT_MODEL, defaultIsNight);
     }
 
     private void saveNightModel(boolean isNight) {
