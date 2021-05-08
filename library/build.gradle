@@ -63,7 +63,7 @@ dependencies {
     releaseApi 'com.xhb.uibase:libshape:1.0.0-20210426.061031-2'
     releaseApi 'com.xhb.uibase:badgeview:1.0.0-20210425.051641-1'
     releaseApi 'com.github.hackware1993:magic-indicator:1.6.0-20210425.050831-1'
-    releaseApi 'com.contrarywind:Android-PickerView:4.2.0-20210428.115332-2'
+    releaseApi 'com.contrarywind:Android-PickerView:4.2.0-20210508.061916-4'
 
     kapt 'com.google.auto.service:auto-service:1.0-rc6'
 
