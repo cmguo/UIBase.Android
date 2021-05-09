@@ -27,12 +27,12 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
         // colors
         addStyleable(android.R.attr.textColor, (view, value) ->
             view.setTextColor(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
-        addStyleable(android.R.attr.textColorHint, (view, value) ->
-            view.setHintTextColor(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
-        addStyleable(android.R.attr.textColorHighlight, (view, value) ->
-            view.setHighlightColor(ContextCompat.getColor(view.getContext(), value.resourceId)));
-        addStyleable(android.R.attr.textColorLink, (view, value) ->
-            view.setLinkTextColor(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
+//        addStyleable(android.R.attr.textColorHint, (view, value) ->
+//            view.setHintTextColor(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
+//        addStyleable(android.R.attr.textColorHighlight, (view, value) ->
+//            view.setHighlightColor(ContextCompat.getColor(view.getContext(), value.resourceId)));
+//        addStyleable(android.R.attr.textColorLink, (view, value) ->
+//            view.setLinkTextColor(ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
         // drawables
         addStyleable(android.R.attr.drawableLeft, (view, value) ->
             setCompoundDrawable(view, 0, value));

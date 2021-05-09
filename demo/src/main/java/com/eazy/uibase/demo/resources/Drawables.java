@@ -5,6 +5,7 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
@@ -39,7 +40,7 @@ public class Drawables extends Resources {
 
     @BindingAdapter("drawable")
     public static void setDrawable(TextView view, int id) {
-        Drawable drawable = ContextCompat.getDrawable(view.getContext(), id);
+        Drawable drawable = AppCompatResources.getDrawable(view.getContext(), id);
         view.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
         if (drawable instanceof Animatable) {
             ((Animatable) drawable).start();

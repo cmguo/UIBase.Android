@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -117,7 +118,7 @@ class ZDropDown @JvmOverloads constructor(
                 imageView.visibility = View.GONE
             } else {
                 if (icon is Int) {
-                    imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, icon))
+                    imageView.setImageDrawable(AppCompatResources.getDrawable(imageView.context, icon))
                 } else {
                     imageView.setImageDrawable(icon as Drawable)
                 }

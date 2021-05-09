@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +36,7 @@ class ZActionSheet @JvmOverloads constructor(
             if (value == 0) {
                 _imageView.visibility = View.GONE
             } else {
-                _imageView.setImageDrawable(ContextCompat.getDrawable(context, value))
+                _imageView.setImageDrawable(AppCompatResources.getDrawable(context, value))
                 _imageView.visibility = View.VISIBLE
             }
         }

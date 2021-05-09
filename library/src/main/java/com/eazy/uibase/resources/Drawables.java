@@ -5,6 +5,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +20,7 @@ public class Drawables {
         if max size two group cover 95%, then consider to be pure
      */
     public static boolean isPureColor(Drawable drawable) {
-        if (drawable instanceof VectorDrawable)
+        if (drawable instanceof VectorDrawable || drawable instanceof VectorDrawableCompat)
             return true;
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;

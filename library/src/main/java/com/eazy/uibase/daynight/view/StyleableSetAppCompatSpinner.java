@@ -1,5 +1,6 @@
 package com.eazy.uibase.daynight.view;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.content.ContextCompat;
 
@@ -12,6 +13,6 @@ public class StyleableSetAppCompatSpinner extends StyleableSet<AppCompatSpinner>
 
     public StyleableSetAppCompatSpinner() {
         addStyleable(android.R.attr.popupBackground, (view, value) ->
-            view.setPopupBackgroundDrawable(ContextCompat.getDrawable(view.getContext(), value.resourceId)));
+            view.setPopupBackgroundDrawable(AppCompatResources.getDrawable(view.getContext(), value.resourceId)));
     }
 }

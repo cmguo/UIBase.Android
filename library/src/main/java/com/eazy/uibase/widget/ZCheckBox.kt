@@ -4,10 +4,9 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
-import android.os.Build
 import android.util.AttributeSet
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.RoundDrawable
 
@@ -88,13 +87,7 @@ class ZCheckBox @JvmOverloads constructor(
 
         private fun createButtonDrawable(context: Context) : Drawable {
             val background = RoundDrawable(context, R.style.ZCheckBox_Background)
-            val foreground = ContextCompat.getDrawable(context, R.drawable.check_box_foreground)
-            if (Build.VERSION.SDK_INT < 24) {
-                // Resource references will not work correctly in images generated for this vector icon for API < 24; check generated icon to make sure it looks acceptable
-                val layer = foreground as LayerDrawable
-                layer.getDrawable(0).setTintList(ContextCompat.getColorStateList(context, R.color.transparent_halfchecked_disabled))
-                layer.getDrawable(1).setTintList(ContextCompat.getColorStateList(context, R.color.transparent_checked_disabled2))
-            }
+            val foreground = AppCompatResources.getDrawable(context, R.drawable.check_box_foreground)
             return LayerDrawable(arrayOf(background, foreground))
         }
     }

@@ -19,6 +19,7 @@ import android.view.*
 import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
@@ -121,7 +122,7 @@ class ZTipView @JvmOverloads constructor(
             if (value == 0) {
                 _imageView.visibility = View.GONE
             } else {
-                _imageView.setImageDrawable(ContextCompat.getDrawable(context, value))
+                _imageView.setImageDrawable(AppCompatResources.getDrawable(context, value))
                 _imageView.visibility = View.VISIBLE
             }
         }

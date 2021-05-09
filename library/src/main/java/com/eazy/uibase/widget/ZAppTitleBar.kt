@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
@@ -256,7 +257,7 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     private fun getDrawable(value: Int): Drawable? {
         return when (context.resources.getResourceTypeName(value)) {
-            "drawable" -> ContextCompat.getDrawable(context, value)
+            "drawable" -> AppCompatResources.getDrawable(context, value)
             "layout" -> ViewDrawable(context, value)
             else -> null
         }
