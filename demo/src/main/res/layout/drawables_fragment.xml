@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.eazy.uibase.demo.resources.DrawablesFragment.Model" />
+        <import type="com.eazy.uibase.demo.resources.DrawablesFragment.Styles" />
+        <import type="com.eazy.uibase.demo.resources.DrawablesFragment" />
+        <import type="com.eazy.uibase.view.list.LayoutManagers" />
+        <variable
+            name="fragment"
+            type="DrawablesFragment" />
+        <variable
+            name="model"
+            type="Model" />
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/component_colors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TestComponent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/colorsList"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutManagerFactory="@{LayoutManagers.grid(6)}"
+            app:data="@{model.drawables}"
+            app:itemBinding="@{styles.itemBinding}"
+            app:itemDecoration="@{styles.itemDecoration}"
+            app:itemClicked="@{fragment.drawableClicked}">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

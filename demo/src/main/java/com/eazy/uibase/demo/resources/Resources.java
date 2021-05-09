@@ -90,7 +90,7 @@ public class Resources {
                     String name = resources.getResourceName(id);
                     ResourceValue v = new ResourceValue();
                     resources.getValue(id, v.value, true);
-                    if (dayNightOnly && !AttrValue.maybeThemed(v.value))
+                    if (dayNightOnly && !AttrValue.isThemed(v.value))
                         continue;
                     ress.put(name, v);
                 }
@@ -127,8 +127,4 @@ public class Resources {
         return name.substring(name.indexOf('/') + 1);
     }
 
-    @BindingAdapter("backgroundResource")
-    public static void setBackgroundResId(View view, ResourceValue value) {
-        view.setBackground(ContextCompat.getDrawable(view.getContext(), value.getResId()));
-    }
 }

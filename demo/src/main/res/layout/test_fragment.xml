@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{model.text}"
-            android:drawableLeft="@drawable/icon_16px_read_black_light"
+            android:drawableLeft="@drawable/img_16px_read_black_light"
             android:enabled="@{styles.boolStyle}"
             />
 
@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView"
-            android:src="@drawable/icon_16px_qrcode_small"/>
+            android:src="@drawable/img_16px_qrcode_small"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

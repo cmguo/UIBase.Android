@@ -35,12 +35,12 @@ public class AttrValue<E extends View> {
             || (v.type == TypedValue.TYPE_STRING && v.data != 0 && v.string.toString().startsWith("res/"));
     }
 
-    public boolean isFromTheme() {
-        return mValue.type == TypedValue.TYPE_ATTRIBUTE;
+    public static boolean isThemed(TypedValue v) {
+        return v.type == TypedValue.TYPE_ATTRIBUTE || v.changingConfigurations != 0;
     }
 
-    public boolean isThemed() {
-        return mValue.type == TypedValue.TYPE_ATTRIBUTE || mValue.changingConfigurations != 0;
+    public boolean isFromTheme() {
+        return mValue.type == TypedValue.TYPE_ATTRIBUTE;
     }
 
     public void apply(E view) {

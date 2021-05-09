@@ -19,6 +19,19 @@
     <string name="component_state_list_colors">有状态颜色</string>
     <string name="component_state_list_colors_desc">有状态颜色，在不同状态下，展示不同颜色</string>
 
+    <!-- drawables -->
+    <id name="component_dynamic_images"></id>
+    <string name="component_dynamic_images">图片（动态）</string>
+    <string name="component_dynamic_images_desc">动态图片，在白天、夜间模式有不同的内容</string>
+
+    <id name="component_images"></id>
+    <string name="component_images">图标（PNG）</string>
+    <string name="component_images_desc">所有 PNG 图标</string>
+
+    <id name="component_icons"></id>
+    <string name="component_icons">图标（SVG）</string>
+    <string name="component_icons_desc">所有 SVG 图标</string>
+
     <!-- buttons styles -->
     <id name="component_buttons"></id>
     <string name="component_buttons">按钮</string>

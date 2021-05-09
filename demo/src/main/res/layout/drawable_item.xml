@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="java.util.Map.Entry" />
+        <import type="com.eazy.uibase.demo.resources.Resources.ResourceValue" />
+        <import type="com.eazy.uibase.demo.resources.Drawables" />
+        <variable
+            name="data"
+            type="Entry&lt;String, ResourceValue&gt;" />
+    </data>
+
+    <TextView
+        android:id="@+id/drawable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+        app:drawable="@{data.value.resId}"
+        android:text="@{Drawables.simpleName(data.key)}"/>
+
+</layout>

@@ -51,7 +51,7 @@
     </string-array>
 
     <array name="icons">
-        <item>@drawable/ic_erase</item>
+        <item>@drawable/icon_erase</item>
         <item>@drawable/icon_plus</item>
         <item>@drawable/icon_minus</item>
         <item>@drawable/icon_more</item>
