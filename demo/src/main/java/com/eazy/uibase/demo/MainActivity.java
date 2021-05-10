@@ -1,4 +1,4 @@
-package com.eazy.uibase.app;
+package com.eazy.uibase.demo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.eazy.uibase.app.R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         switchComponent(new TestComponent());
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.components_container, componetsFragment)
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             ComponentFragment fragment = component.createFragment();
             getSupportFragmentManager().beginTransaction()
-                    .replace(com.eazy.uibase.app.R.id.component_container, component.createFragment())
+                    .replace(R.id.component_container, component.createFragment())
                     .commitNow();
             stylesFragment.bindComponent(fragment);
             showStyles();

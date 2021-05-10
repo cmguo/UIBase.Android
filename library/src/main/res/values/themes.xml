@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.AppCompat.Z" parent="Theme.AppCompat">
+    <style name="Theme.AppCompat.Z">
 
         <item name="android:textViewStyle">@style/AppCompatTextView</item>
 
@@ -25,7 +25,7 @@
         <item name="dialogStyle">@style/ZDialog</item>
    </style>
 
-    <style name="Theme.MaterialComponents.Z" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.MaterialComponents.DayNight.DarkActionBar.Z">
 
         <item name="android:textViewStyle">@style/AppCompatTextView</item>
 

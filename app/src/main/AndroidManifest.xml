@@ -10,18 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UIBase" >
-        <activity
-            android:name=".MainActivity2"
-            android:label="@string/app_name"
-            android:configChanges="uiMode"
-            android:theme="@style/Theme.UIBase.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
-        <activity android:name=".MainActivity" >
+        <activity android:name="com.eazy.uibase.demo.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!--category android:name="android.intent.category.LAUNCHER" /-->

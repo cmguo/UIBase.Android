@@ -21,7 +21,6 @@
         android:fitsSystemWindows="true"
         android:background="@color/bluegrey_00"
         app:itemTextAppearance="@style/TextAppearance.Z.Body.Small"
-        app:itemTextColor="@null"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 
