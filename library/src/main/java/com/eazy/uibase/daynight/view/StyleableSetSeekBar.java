@@ -10,9 +10,9 @@ import com.eazy.uibase.daynight.styleable.StyleableSet;
 import com.eazy.uibase.resources.Drawables;
 
 @AutoService(IStyleableSet.class)
-public class StyleableSeekBar extends StyleableSet<SeekBar> {
+public class StyleableSetSeekBar extends StyleableSet<SeekBar> {
 
-    public StyleableSeekBar() {
+    public StyleableSetSeekBar() {
         addStyleable(android.R.attr.thumb, (view, value) ->
             view.setThumb(Drawables.getDrawable(view.getContext(), value.resourceId)));
         addStyleable(android.R.attr.thumbTint, (view, value) ->

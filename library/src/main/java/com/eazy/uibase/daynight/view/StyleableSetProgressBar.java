@@ -10,9 +10,9 @@ import com.eazy.uibase.daynight.styleable.StyleableSet;
 import com.eazy.uibase.resources.Drawables;
 
 @AutoService(IStyleableSet.class)
-public class StyleableProgressBar extends StyleableSet<ProgressBar> {
+public class StyleableSetProgressBar extends StyleableSet<ProgressBar> {
 
-    public StyleableProgressBar() {
+    public StyleableSetProgressBar() {
         addStyleable(android.R.attr.progressDrawable, (view, value) ->
             view.setProgressDrawable(Drawables.getDrawable(view.getContext(), value.resourceId)));
         addStyleable(android.R.attr.progressTint, (view, value) ->

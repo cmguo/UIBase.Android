@@ -10,9 +10,9 @@ import com.eazy.uibase.daynight.styleable.StyleableSet;
 import com.eazy.uibase.resources.Drawables;
 
 @AutoService(IStyleableSet.class)
-public class StyleableImageView extends StyleableSet<ImageView> {
+public class StyleableSetImageView extends StyleableSet<ImageView> {
 
-    public StyleableImageView() {
+    public StyleableSetImageView() {
         addStyleable(android.R.attr.src, (view, value) ->
             view.setImageDrawable(Drawables.getDrawable(view.getContext(), value.resourceId)));
         addStyleable(android.R.attr.tint, (view, value) ->

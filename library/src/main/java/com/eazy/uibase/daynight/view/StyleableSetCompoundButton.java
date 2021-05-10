@@ -10,9 +10,9 @@ import com.eazy.uibase.daynight.styleable.StyleableSet;
 import com.eazy.uibase.resources.Drawables;
 
 @AutoService(IStyleableSet.class)
-public class StyleableCompoundButton extends StyleableSet<CompoundButton> {
+public class StyleableSetCompoundButton extends StyleableSet<CompoundButton> {
 
-    public StyleableCompoundButton() {
+    public StyleableSetCompoundButton() {
         addStyleable(android.R.attr.button, (view, value) ->
             view.setButtonDrawable(Drawables.getDrawable(view.getContext(), value.resourceId)));
         addStyleable(android.R.attr.buttonTint, (view, value) ->
