@@ -16,7 +16,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
 import androidx.annotation.StringRes
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
@@ -24,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.dialog.MaskDialog
+import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundDrawable
 
 class ZDialog @JvmOverloads constructor(
@@ -272,7 +272,7 @@ class ZDialog @JvmOverloads constructor(
             //lp.topMargin = context.resources.getDimensionPixelSize(R.dimen.dialog_title_padding)
             lp2.topMargin = context.resources.getDimensionPixelSize(R.dimen.dialog_sub_title_padding)
         } else {
-            _imageView.setImageDrawable(AppCompatResources.getDrawable(context, image))
+            _imageView.setImageDrawable(Drawables.getDrawable(context, image))
             _imageView.visibility = View.VISIBLE
             //lp.topMargin = context.resources.getDimensionPixelSize(R.dimen.dialog_title_padding2)
             lp2.topMargin = context.resources.getDimensionPixelSize(R.dimen.dialog_sub_title_padding2)

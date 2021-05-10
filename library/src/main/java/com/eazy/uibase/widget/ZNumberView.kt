@@ -14,9 +14,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
+import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.view.RepeatListener
 
@@ -200,7 +200,7 @@ class ZNumberView @JvmOverloads constructor(
 
     private fun createButtonDrawable(foregroundId: Int): Drawable {
         val buttonBackground = RoundDrawable(context, R.style.ZNumberView_ButtonBackground)
-        val buttonForeground = AppCompatResources.getDrawable(context, foregroundId)
+        val buttonForeground = Drawables.getDrawable(context, foregroundId)
         val buttonForegroundColor = ContextCompat.getColorStateList(context, R.color.number_view_button_foreground_color)
         buttonForeground!!.setTintList(buttonForegroundColor)
         val buttonDrawable = LayerDrawable(arrayOf(buttonBackground, buttonForeground))

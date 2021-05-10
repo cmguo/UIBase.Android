@@ -17,6 +17,7 @@ import com.eazy.uibase.daynight.styleable.AttrValueSet;
 import com.eazy.uibase.daynight.styleable.IStyleable;
 import com.eazy.uibase.daynight.styleable.IStyleableSet;
 import com.eazy.uibase.daynight.styleable.StyleableSet;
+import com.eazy.uibase.resources.Drawables;
 
 @AutoService(IStyleableSet.class)
 public class StyleableSetTextView extends StyleableSet<TextView> {
@@ -105,13 +106,13 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
 
     private void setCompoundDrawable(TextView view, int index, TypedValue value) {
         Drawable[] drawables = view.getCompoundDrawables();
-        drawables[index] = ContextCompat.getDrawable(view.getContext(), value.resourceId);
+        drawables[index] = Drawables.getDrawable(view.getContext(), value.resourceId);
         view.setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 
     private void setCompoundDrawableRelative(TextView view, int index, TypedValue value) {
         Drawable[] drawables = view.getCompoundDrawablesRelative();
-        drawables[index] = ContextCompat.getDrawable(view.getContext(), value.resourceId);
+        drawables[index] = Drawables.getDrawable(view.getContext(), value.resourceId);
         view.setCompoundDrawablesRelativeWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 

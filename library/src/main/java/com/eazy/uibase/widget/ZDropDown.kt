@@ -1,7 +1,10 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -13,12 +16,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
+import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.view.list.DividerDecoration
 
 class ZDropDown @JvmOverloads constructor(
@@ -118,7 +121,7 @@ class ZDropDown @JvmOverloads constructor(
                 imageView.visibility = View.GONE
             } else {
                 if (icon is Int) {
-                    imageView.setImageDrawable(AppCompatResources.getDrawable(imageView.context, icon))
+                    imageView.setImageDrawable(Drawables.getDrawable(imageView.context, icon))
                 } else {
                     imageView.setImageDrawable(icon as Drawable)
                 }

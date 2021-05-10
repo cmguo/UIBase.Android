@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import androidx.annotation.AnyRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.RoundDrawable
@@ -90,7 +89,7 @@ open class ZButton @JvmOverloads constructor(
                 return
             field = value
             _icon = if (value > 0)
-                AppCompatResources.getDrawable(context, value)!!
+                Drawables.getDrawable(context, value)!!
             else
                 null
             if (_inited)
@@ -120,7 +119,7 @@ open class ZButton @JvmOverloads constructor(
                 return
             field = value
             _loadingIcon = if (value > 0)
-                AppCompatResources.getDrawable(context, value)!!
+                Drawables.getDrawable(context, value)!!
             else
                 null
             if (_inited)
@@ -212,11 +211,11 @@ open class ZButton @JvmOverloads constructor(
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         if (icon != 0 && _icon !is VectorDrawable) {
-            _icon = AppCompatResources.getDrawable(context, icon)
+            _icon = Drawables.getDrawable(context, icon)
             syncIcon()
         }
         if (loadingIcon != 0 && _loadingIcon !is VectorDrawable) {
-            _loadingIcon = AppCompatResources.getDrawable(context, loadingIcon)
+            _loadingIcon = Drawables.getDrawable(context, loadingIcon)
             syncIcon(true)
         }
         syncType()

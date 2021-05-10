@@ -19,15 +19,13 @@ import android.view.*
 import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
+import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.view.contentView
 import java.lang.ref.WeakReference
-import kotlin.collections.ArrayList
 
 class ZTipView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.tipViewStyle
@@ -122,7 +120,7 @@ class ZTipView @JvmOverloads constructor(
             if (value == 0) {
                 _imageView.visibility = View.GONE
             } else {
-                _imageView.setImageDrawable(AppCompatResources.getDrawable(context, value))
+                _imageView.setImageDrawable(Drawables.getDrawable(context, value))
                 _imageView.visibility = View.VISIBLE
             }
         }

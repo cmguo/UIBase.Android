@@ -12,11 +12,11 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
+import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.view.list.DividerDecoration
 import kotlin.collections.ArrayList
 
@@ -158,7 +158,7 @@ class ZPickerView @JvmOverloads constructor(
                 imageView.visibility = View.GONE
             } else {
                 if (icon is Int) {
-                    imageView.setImageDrawable(AppCompatResources.getDrawable(imageView.context, icon))
+                    imageView.setImageDrawable(Drawables.getDrawable(imageView.context, icon))
                 } else {
                     imageView.setImageDrawable(icon as Drawable)
                 }

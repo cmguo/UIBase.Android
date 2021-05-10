@@ -5,13 +5,13 @@ import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatCheckBox
 import com.eazy.uibase.R
+import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundDrawable
 
 class ZCheckBox @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null
+    context: Context, attrs: AttributeSet? = null
 ) : AppCompatCheckBox(context, attrs) {
 
     enum class CheckedState {
@@ -87,7 +87,7 @@ class ZCheckBox @JvmOverloads constructor(
 
         private fun createButtonDrawable(context: Context) : Drawable {
             val background = RoundDrawable(context, R.style.ZCheckBox_Background)
-            val foreground = AppCompatResources.getDrawable(context, R.drawable.check_box_foreground)
+            val foreground = Drawables.getDrawable(context, R.drawable.check_box_foreground)
             return LayerDrawable(arrayOf(background, foreground))
         }
     }

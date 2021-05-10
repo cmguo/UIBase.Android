@@ -1,10 +1,17 @@
 package com.eazy.uibase.resources;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.ResourceManagerInternal;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import java.util.ArrayList;
@@ -14,6 +21,11 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Drawables {
+
+    @Nullable
+    public static Drawable getDrawable(@NonNull Context context, @DrawableRes int resId) {
+        return AppCompatResources.getDrawable(context, resId);
+    }
 
     /*
         Group pixels with color rgb range <= 16

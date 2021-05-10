@@ -1,12 +1,12 @@
 package com.eazy.uibase.daynight.view
 
 import android.util.TypedValue
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.auto.service.AutoService
 import com.eazy.uibase.R
 import com.eazy.uibase.daynight.styleable.IStyleableSet
 import com.eazy.uibase.daynight.styleable.StyleableSet
+import com.eazy.uibase.resources.Drawables
 
 @AutoService(IStyleableSet::class)
 class StyleableSetAppCompatTextView : StyleableSet<AppCompatTextView>() {
@@ -39,13 +39,13 @@ class StyleableSetAppCompatTextView : StyleableSet<AppCompatTextView>() {
 
     private fun setCompoundDrawable(view: AppCompatTextView, index: Int, value: TypedValue) {
         val drawables = view.compoundDrawables
-        drawables[index] = AppCompatResources.getDrawable(view.context, value.resourceId)
+        drawables[index] = Drawables.getDrawable(view.context, value.resourceId)
         view.setCompoundDrawablesWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], drawables[3])
     }
 
     private fun setCompoundDrawableRelative(view: AppCompatTextView, index: Int, value: TypedValue) {
         val drawables = view.compoundDrawablesRelative
-        drawables[index] = AppCompatResources.getDrawable(view.context, value.resourceId)
+        drawables[index] = Drawables.getDrawable(view.context, value.resourceId)
         view.setCompoundDrawablesRelativeWithIntrinsicBounds(drawables[0], drawables[1], drawables[2], drawables[3])
     }
 }
