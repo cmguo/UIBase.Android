@@ -22,7 +22,7 @@ public class StateListColorsComponent implements Component
 
     @Override
     public int icon() {
-        return android.R.drawable.btn_star;
+        return 0;
     }
 
     @Override

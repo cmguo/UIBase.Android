@@ -1,7 +1,9 @@
 package com.eazy.uibase.app;
 
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -31,13 +33,16 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.eazy.uibase.daynight.DayNightManager;
+import com.eazy.uibase.demo.resources.Resources;
 import com.eazy.uibase.demo.view.GridDrawable;
 import com.eazy.uibase.demo.view.main.InformationFragment;
 import com.eazy.uibase.demo.view.main.StylesFragment;
 import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.Components;
+import com.eazy.uibase.resources.Drawables;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -143,11 +148,21 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
     }
 
     private void buildNavMenu(Menu menu, Map<Integer, List<Component>> components) {
+        List<Resources.ResourceValue> icons = new ArrayList(com.eazy.uibase.demo.resources.Drawables.icons(this).values());
+        icons.addAll(com.eazy.uibase.demo.resources.Drawables.images(this).values());
         for (Map.Entry<Integer, List<Component>> g : components.entrySet()) {
             SubMenu sm = menu.addSubMenu(0, g.getKey(), 0, g.getKey());
             for (Component c : g.getValue()) {
                 Log.d(TAG, "buildNavMenu id=" + c.id() + ", title=" + c.title() + ", icon=" + c.icon());
-                sm.add(0, c.id(), 0, c.title()).setIcon(c.icon());
+                int icon = c.icon();
+                if (icon == 0 && !icons.isEmpty()) {
+                    icon = icons.remove(0).getResId();
+                }
+                Drawable drawable = null;
+                if (icon != 0) {
+                    drawable = Drawables.getDrawable(this, icon);
+                }
+                sm.add(0, c.id(), 0, c.title()).setIcon(drawable);
             }
         }
     }

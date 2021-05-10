@@ -18,7 +18,7 @@ class ZBadgeViewComponent : Component {
     }
 
     override fun icon(): Int {
-        return R.drawable.img_share_space
+        return 0
     }
 
     override fun title(): Int {

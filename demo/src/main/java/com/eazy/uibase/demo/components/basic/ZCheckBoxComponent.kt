@@ -18,7 +18,7 @@ class ZCheckBoxComponent : Component {
     }
 
     override fun icon(): Int {
-        return R.drawable.img_share_moment
+        return 0
     }
 
     override fun title(): Int {

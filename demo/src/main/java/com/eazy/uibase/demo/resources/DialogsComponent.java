@@ -22,7 +22,7 @@ public class DialogsComponent implements Component
 
     @Override
     public int icon() {
-        return android.R.drawable.btn_plus;
+        return 0;
     }
 
     @Override

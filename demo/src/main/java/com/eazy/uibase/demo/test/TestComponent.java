@@ -22,7 +22,7 @@ public class TestComponent implements Component
 
     @Override
     public int icon() {
-        return android.R.drawable.btn_radio;
+        return 0;
     }
 
     @Override

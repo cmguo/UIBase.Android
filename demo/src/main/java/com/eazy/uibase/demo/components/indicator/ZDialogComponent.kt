@@ -19,7 +19,7 @@ class ZDialogComponent : Component {
     }
 
     override fun icon(): Int {
-        return android.R.drawable.btn_plus
+        return 0
     }
 
     override fun title(): Int {

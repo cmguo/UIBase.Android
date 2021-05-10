@@ -18,7 +18,7 @@ class ZAvatarComponent : Component {
     }
 
     override fun icon(): Int {
-        return R.drawable.img_share_weixin
+        return 0
     }
 
     override fun title(): Int {

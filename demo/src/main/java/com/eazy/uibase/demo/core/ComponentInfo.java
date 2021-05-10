@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import com.eazy.uibase.demo.core.annotation.Author;
+import com.eazy.uibase.resources.Drawables;
 
 //保存子行信息的类
 public class ComponentInfo {
@@ -22,7 +23,7 @@ public class ComponentInfo {
 
     public ComponentInfo(Context context, Component component) {
         this.component = component;
-        icon = context.getDrawable(component.icon());
+        icon = component.icon() == 0 ? null : Drawables.getDrawable(context, component.icon());
         title = getText(context, component.title()).toString();
         Author annotation = component.getClass().getAnnotation(Author.class);
         author =  annotation == null ? "" : annotation.value();
