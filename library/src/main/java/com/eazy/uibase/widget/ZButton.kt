@@ -360,8 +360,8 @@ open class ZButton @JvmOverloads constructor(
      private fun syncIcon(loading: Boolean = false) {
         val icon = if (loading) _loadingIcon else _icon
         if (icon != null) {
+            icon.mutate()
             if (icon is VectorDrawable || Drawables.isPureColor(icon)) {
-                icon.setTintMode(PorterDuff.Mode.SRC_IN)
                 icon.setTintList(textColors)
             }
             val iconSize = _sizeStyles.iconSize
