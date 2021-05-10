@@ -3,6 +3,7 @@ package com.eazy.uibase.daynight;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -21,14 +22,9 @@ public class DayNightViewInflater extends DayNightBaseViewInflater {
     private static final String TAG = "DayNightViewInflater";
 
     public DayNightViewInflater() {
-        DayNightManager.getInstance().addActiveViewInflater(this);
     }
 
     private final Map<View, AttrValueSet<View>> mStyledViews = new WeakHashMap<>();
-
-    public Activity getActivity() {
-        return mActivity;
-    }
 
     public void updateViews() {
         Log.d(TAG, "updateViews");
@@ -47,19 +43,29 @@ public class DayNightViewInflater extends DayNightBaseViewInflater {
         }
     }
 
-    private Activity mActivity = null;
     private boolean mActivityHandlesUiModeChecked = false;
     private boolean mActivityHandlesUiMode = false;
 
     private boolean isActivityManifestHandlingUiMode(Context context) {
-        if (!mActivityHandlesUiModeChecked && context instanceof Activity) {
-            mActivity = (Activity) context;
+        if (!mActivityHandlesUiModeChecked) {
             final PackageManager pm = context.getPackageManager();
             if (pm == null) {
                 // If we don't have a PackageManager, return false. Don't set
                 // the checked flag though so we still check again later
                 return false;
             }
+            Activity activity = null;
+            while (context != null) {
+                if (context instanceof Activity) {
+                    activity = (Activity) context;
+                    break;
+                }
+                if (context instanceof ContextWrapper) {
+                    context = ((ContextWrapper) context).getBaseContext();
+                }
+            }
+            if (activity == null)
+                return false;
             try {
                 int flags = 0;
                 // On newer versions of the OS we need to pass direct boot
@@ -83,10 +89,12 @@ public class DayNightViewInflater extends DayNightBaseViewInflater {
                 Log.d(TAG, "Exception while getting ActivityInfo", e);
                 mActivityHandlesUiMode = false;
             }
+            if (mActivityHandlesUiMode) {
+                DayNightManager.getInstance().addActiveViewInflater(activity, this);
+            }
+            // Flip the checked flag so we don't check again
+            mActivityHandlesUiModeChecked = true;
         }
-        // Flip the checked flag so we don't check again
-        mActivityHandlesUiModeChecked = true;
-
         return mActivityHandlesUiMode;
     }
 

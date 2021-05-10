@@ -1,6 +1,7 @@
 package com.eazy.uibase.daynight;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -13,8 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.WeakHashMap;
 
 public class DayNightManager {
@@ -51,9 +51,9 @@ public class DayNightManager {
         int mode = isNight ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
         AppCompatDelegate.setDefaultNightMode(mode);
         saveNightModel(isNight);
-        for (DayNightViewInflater inflater : inflaterList) {
-            if (inflater.getActivity() instanceof  AppCompatActivity) {
-                AppCompatActivity activity = (AppCompatActivity) inflater.getActivity();
+        for (Map.Entry<Activity, DayNightViewInflater> inflater : inflaterList.entrySet()) {
+            if (inflater.getKey() instanceof  AppCompatActivity) {
+                AppCompatActivity activity = (AppCompatActivity) inflater.getKey();
                 if (activity.getDelegate().getLocalNightMode() != mode) {
                     // setLocalNightMode will cause onConfigurationChanged to be invoked
                     //  some customs views will response to onConfigurationChanged
@@ -79,7 +79,7 @@ public class DayNightManager {
                     activity.findViewById(android.R.id.content).dispatchConfigurationChanged(configuration);
                 }
             }
-            inflater.updateViews();
+            inflater.getValue().updateViews();
         }
     }
 
@@ -87,15 +87,12 @@ public class DayNightManager {
         return AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES;
     }
 
-    private final List<DayNightViewInflater> inflaterList = new ArrayList<>();
+    private final Map<Activity, DayNightViewInflater> inflaterList = new WeakHashMap<>();
 
 
-    void addActiveViewInflater(DayNightViewInflater inflater) {
-        inflaterList.add(inflater);
-    }
-
-    void removeActiveViewInflater(DayNightViewInflater inflater) {
-        inflaterList.remove(inflater);
+    void addActiveViewInflater(Activity activity, DayNightViewInflater inflater) {
+        inflaterList.put(activity, inflater);
+        // WeakHashMap auto remove
     }
 
     private boolean loadNightModel(boolean defaultIsNight) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Z" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.AppCompat.Z" parent="Theme.AppCompat">
 
         <item name="android:textViewStyle">@style/AppCompatTextView</item>
 
@@ -29,9 +29,28 @@
 
     </style>
 
-    <style name="Theme.Z.DayNight">
-        <!-- for day night inspect -->
-        <item name="viewInflaterClass">com.eazy.uibase.daynight.DayNightViewInflater</item>
+    <style name="Theme.MaterialComponents.Z" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+        <item name="android:textViewStyle">@style/AppCompatTextView</item>
+
+        <item name="buttonStyle">@style/ZButton</item>
+        <item name="checkboxStyle">@style/ZCheckBox</item>
+        <item name="radioButtonStyle">@style/ZRadioButton</item>
+        <item name="switchStyle">@style/ZSwitchButton</item>
+        <item name="tipViewStyle">@style/ZTipView</item>
+        <item name="dropDownStyle">@style/ZDropDown</item>
+        <item name="lineIndicatorStyle">@style/ZLineIndicator</item>
+        <item name="roundIndicatorStyle">@style/ZRoundIndicator</item>
+        <item name="tabTitleStyle">@style/ZTabTitleView</item>
+        <item name="tabNavigatorStyle">@style/ZTabNavigator</item>
+        <item name="tabBarStyle">@style/ZTabBar</item>
+        <item name="appTitleBarStyle">@style/ZAppTitleBar</item>
+        <item name="panelStyle">@style/ZPanel</item>
+        <item name="searchBoxStyle">@style/ZSearchBox</item>
+        <item name="timePickerViewStyle">@style/ZTimePickerView</item>
+        <item name="numberViewStyle">@style/ZNumberView</item>
+        <item name="badgeViewStyle">@style/ZBadgeView</item>
+        <item name="dialogStyle">@style/ZDialog</item>
     </style>
 
 </resources>

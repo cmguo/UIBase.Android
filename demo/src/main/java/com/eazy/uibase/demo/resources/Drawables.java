@@ -40,7 +40,7 @@ public class Drawables extends Resources {
 
     @BindingAdapter("drawable")
     public static void setDrawable(TextView view, int id) {
-        Drawable drawable = AppCompatResources.getDrawable(view.getContext(), id);
+        Drawable drawable = com.eazy.uibase.resources.Drawables.getDrawable(view.getContext(), id);
         view.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
         if (drawable instanceof Animatable) {
             ((Animatable) drawable).start();
