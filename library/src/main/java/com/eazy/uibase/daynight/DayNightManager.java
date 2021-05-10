@@ -48,37 +48,27 @@ public class DayNightManager {
     private WeakHashMap<Context, SparseArray<?>> AppCompatResources_sColorStateCaches = null;
 
     public void setDayNightModel(boolean isNight) {
+        if (Build.VERSION.SDK_INT < 23) {
+            if (AppCompatResources_sColorStateCaches == null) {
+                try {
+                    Field field = AppCompatResources.class.getDeclaredField("sColorStateCaches");
+                    field.setAccessible(true);
+                    AppCompatResources_sColorStateCaches = (WeakHashMap<Context, SparseArray<?>>) field.get(null);
+                } catch (Throwable e) {
+                    Log.w(TAG, e);
+                }
+            }
+            if (AppCompatResources_sColorStateCaches != null) {
+                AppCompatResources_sColorStateCaches.clear();
+            }
+        }
         int mode = isNight ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
         AppCompatDelegate.setDefaultNightMode(mode);
         saveNightModel(isNight);
         for (Map.Entry<Activity, DayNightViewInflater> inflater : inflaterList.entrySet()) {
-            if (inflater.getKey() instanceof  AppCompatActivity) {
-                AppCompatActivity activity = (AppCompatActivity) inflater.getKey();
-                if (activity.getDelegate().getLocalNightMode() != mode) {
-                    // setLocalNightMode will cause onConfigurationChanged to be invoked
-                    //  some customs views will response to onConfigurationChanged
-                    Configuration configuration = activity.getResources().getConfiguration();
-                    activity.getDelegate().setLocalNightMode(mode);
-                    if (Build.VERSION.SDK_INT < 23) {
-                        Configuration configuration1 = activity.getResources().getConfiguration();
-                        if (configuration == configuration1) {
-                            if (AppCompatResources_sColorStateCaches == null) {
-                                try {
-                                    Field field = AppCompatResources.class.getDeclaredField("sColorStateCaches");
-                                    field.setAccessible(true);
-                                    AppCompatResources_sColorStateCaches = (WeakHashMap<Context, SparseArray<?>>) field.get(null);
-                                } catch (Throwable e) {
-                                    Log.w(TAG, e);
-                                }
-                            }
-                            if (AppCompatResources_sColorStateCaches != null) {
-                                AppCompatResources_sColorStateCaches.clear();
-                            }
-                        }
-                    }
-                    activity.findViewById(android.R.id.content).dispatchConfigurationChanged(configuration);
-                }
-            }
+            Activity activity = inflater.getKey();
+            Configuration configuration = activity.getResources().getConfiguration();
+            activity.findViewById(android.R.id.content).dispatchConfigurationChanged(configuration);
             inflater.getValue().updateViews();
         }
     }
