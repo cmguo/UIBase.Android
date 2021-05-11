@@ -46,7 +46,7 @@
         4.非主动触发的引导性信息（如常规的运营弹窗等）。</string>
 
 
-    <string name="group_menu_list">菜单选择控件</string>
+    <string name="group_optional">菜单选择控件</string>
 
     <id name="component_z_drop_downs"/>
     <string name="component_z_drop_downs">下拉菜单</string>
@@ -69,7 +69,7 @@
     <string name="component_z_time_pickers_desc">一般由选择框触发，弹层的形式建立可滚动视图，并在视图中分段选取时间值。</string>
 
 
-    <string name="group_input">简单输入控件</string>
+    <string name="group_input">数值输入控件</string>
 
     <id name="component_z_text_areas"/>
     <string name="component_z_text_areas">文本域</string>

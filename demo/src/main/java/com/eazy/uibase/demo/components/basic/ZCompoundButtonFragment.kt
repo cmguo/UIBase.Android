@@ -37,6 +37,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
 
         var states: List<StateItem> = when (fragment.component.id()) {
             R.id.component_z_check_boxes -> ZCheckBox.CheckedState.values().asList().map {StateItem(it) }
+            R.id.component_z_radio_buttons -> arrayListOf(false, true, false, false).map { StateItem(it) }
             else -> arrayListOf(false, true).map { StateItem(it) }
         }
 

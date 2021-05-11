@@ -14,7 +14,7 @@ class ZPickerComponent : Component {
     }
 
     override fun group(): Int {
-        return R.string.group_menu_list
+        return R.string.group_optional
     }
 
     override fun icon(): Int {

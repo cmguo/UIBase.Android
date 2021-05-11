@@ -3,13 +3,13 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.components.indicator.ZDialogFragment" />
+        <import type="com.eazy.uibase.demo.components.other.ZDialogFragment" />
 
-        <import type="com.eazy.uibase.demo.components.indicator.ZDialogFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.other.ZDialogFragment.Styles" />
 
         <variable
             name="fragment"
-            type="com.eazy.uibase.demo.components.indicator.ZDialogFragment" />
+            type="com.eazy.uibase.demo.components.other.ZDialogFragment" />
 
         <variable
             name="styles"
