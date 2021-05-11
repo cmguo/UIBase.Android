@@ -1,4 +1,4 @@
-package com.eazy.uibase.demo.view.main
+package com.eazy.uibase.demo.components.other
 
 import android.graphics.Color
 import androidx.databinding.Bindable

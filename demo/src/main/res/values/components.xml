@@ -3,7 +3,7 @@
     <string name="group_basic">基础交互控件</string>
 
     <string name="component_z_buttons">按钮</string>
-    <string name="component_z_buttons_desc">按钮包含图标和文字，响应操作状态变化，特别具有加载状态；晓黑板按钮有5种颜色样式，3种尺寸样式。</string>
+    <string name="component_z_buttons_desc">按钮包含图标和文字，响应操作状态变化，特别具有加载状态；晓黑板按钮有5种颜色样式，4种尺寸样式。</string>
 
     <id name="component_z_check_boxes"/>
     <string name="component_z_check_boxes">复选框</string>
@@ -20,7 +20,7 @@
 
     <id name="component_z_avatars"/>
     <string name="component_z_avatars">头像</string>
-    <string name="component_z_avatars_desc">展示用户的头像。</string>
+    <string name="component_z_avatars_desc">展示用户的头像。也可以用在需要剪切图片的特殊场景（如对话框）。</string>
 
 
     <string name="group_indicator">工具提示控件</string>
@@ -54,7 +54,7 @@
 
     <id name="component_z_picker_views"/>
     <string name="component_z_picker_views">选择器</string>
-    <string name="component_z_picker_views_desc">临时浮层，用户出发选择操作时出现。从众多选项中选项中选择一个选项。</string>
+    <string name="component_z_picker_views_desc">临时浮层，用户触发选择操作时出现。从众多选项中选项中选择一个选项。</string>
 
     <id name="component_z_activity_views"/>
     <string name="component_z_activity_views">活动视图</string>

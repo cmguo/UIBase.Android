@@ -1,9 +1,7 @@
 package com.eazy.uibase.demo;
 
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -30,16 +28,13 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.eazy.uibase.daynight.DayNightManager;
-import com.eazy.uibase.demo.core.Component;
 import com.eazy.uibase.demo.core.ComponentFragment;
+import com.eazy.uibase.demo.core.ComponentInfo;
 import com.eazy.uibase.demo.core.Components;
-import com.eazy.uibase.demo.resources.Resources;
 import com.eazy.uibase.demo.view.GridDrawable;
 import com.eazy.uibase.demo.view.main.InformationFragment;
 import com.eazy.uibase.demo.view.main.StylesFragment;
-import com.eazy.uibase.resources.Drawables;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +46,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private Fragment informationFragment;
     private Fragment stylesFragment;
-    private GridDrawable gridDrawable = new GridDrawable();
+    private final GridDrawable gridDrawable = new GridDrawable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +58,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         fab.setOnClickListener(view -> getSupportFragmentManager().beginTransaction()
                 .show(stylesFragment)
                 .commitNow());
-        Map<Integer, List<Component>> components = Components.collectComponents();
+        Map<Integer, List<ComponentInfo>> components = Components.collectComponents(this);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         buildNavMenu(navigationView.getMenu(), components);
@@ -107,7 +102,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -144,51 +139,40 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
                 || super.onSupportNavigateUp();
     }
 
-    private void buildNavMenu(Menu menu, Map<Integer, List<Component>> components) {
-        List<Resources.ResourceValue> icons = new ArrayList(com.eazy.uibase.demo.resources.Drawables.icons(this).values());
-        icons.addAll(com.eazy.uibase.demo.resources.Drawables.images(this).values());
-        for (Map.Entry<Integer, List<Component>> g : components.entrySet()) {
+    private void buildNavMenu(Menu menu, Map<Integer, List<ComponentInfo>> components) {
+        for (Map.Entry<Integer, List<ComponentInfo>> g : components.entrySet()) {
             SubMenu sm = menu.addSubMenu(0, g.getKey(), 0, g.getKey());
-            for (Component c : g.getValue()) {
-                Log.d(TAG, "buildNavMenu id=" + c.id() + ", title=" + c.title() + ", icon=" + c.icon());
-                int icon = c.icon();
-                if (icon == 0 && !icons.isEmpty()) {
-                    icon = icons.remove(0).getResId();
-                }
-                Drawable drawable = null;
-                if (icon != 0) {
-                    drawable = Drawables.getDrawable(this, icon);
-                }
-                sm.add(0, c.id(), 0, c.title()).setIcon(drawable);
+            for (ComponentInfo c : g.getValue()) {
+                sm.add(0, c.id(), 0, c.title).setIcon(c.icon);
             }
         }
     }
 
-    private int[] getNavTopIds(Map<Integer, List<Component>> components) {
+    private int[] getNavTopIds(Map<Integer, List<ComponentInfo>> components) {
         int n = 1;
-        for (List<Component> g : components.values()) {
+        for (List<ComponentInfo> g : components.values()) {
             n += g.size();
         }
         int[] ids = new int[n];
         n = 0; ids[n++] = R.id.nav_home;
-        for (List<Component> g : components.values()) {
-            for (Component c : g) {
+        for (List<ComponentInfo> g : components.values()) {
+            for (ComponentInfo c : g) {
                 ids[n++] = c.id();
             }
         }
         return ids;
     }
 
-    private void buildNavGraph(NavController controller, Map<Integer, List<Component>> components) {
+    private void buildNavGraph(NavController controller, Map<Integer, List<ComponentInfo>> components) {
         NavGraph graph = controller.getGraph();
         FragmentNavigator navigator = controller.getNavigatorProvider().getNavigator("fragment");
-        for (List<Component> g : components.values()) {
-            for (Component c : g) {
+        for (List<ComponentInfo> g : components.values()) {
+            for (ComponentInfo c : g) {
                 FragmentNavigator.Destination destination = navigator.createDestination();
                 destination.setId(c.id());
-                destination.setLabel(getText(c.title()));
+                destination.setLabel(c.title);
                 destination.addArgument("componentId", new NavArgument.Builder().setDefaultValue(c.id()).build());
-                destination.setClassName(c.fragmentClass().getName());
+                destination.setClassName(c.getComponent().fragmentClass().getName());
                 graph.addDestination(destination);
             }
         }

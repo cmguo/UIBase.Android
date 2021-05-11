@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.eazy.uibase.demo.view.main.ContributionRequestFragment.Styles" />
+        <import type="com.eazy.uibase.demo.components.other.ContributionRequestFragment.Model" />
 
-        <import type="com.eazy.uibase.demo.view.main.ContributionRequestFragment.Model" />
+        <import type="com.eazy.uibase.demo.components.other.ContributionRequestFragment.Styles" />
 
-        <import type="com.eazy.uibase.demo.view.main.ContributionRequestFragment" />
+        <import type="com.eazy.uibase.demo.components.other.ContributionRequestFragment" />
 
         <variable
             name="fragment"
-            type="ContributionRequestFragment" />
+            type="com.eazy.uibase.demo.components.other.ContributionRequestFragment" />
 
         <variable
             name="model"

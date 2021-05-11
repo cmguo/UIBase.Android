@@ -18,8 +18,8 @@ public class ComponentsViewModel extends ViewModel {
     private static final String TAG = "ComponentsViewModel";
 
     // TODO: Implement the ViewModel
-    private Map<Integer, List<Component>> components_ =
-            Components.collectComponents();
+//    private Map<Integer, List<ComponentInfo>> components_ =
+//            Components.collectComponents();
 
 //    ListTree buildTree(Context context) {
 //        ListTree tree = new ListTree();

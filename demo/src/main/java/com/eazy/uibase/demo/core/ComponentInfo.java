@@ -3,69 +3,73 @@ package com.eazy.uibase.demo.core;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
+import com.eazy.uibase.demo.BR;
 import com.eazy.uibase.demo.core.annotation.Author;
+import com.eazy.uibase.demo.resources.Resources;
 import com.eazy.uibase.resources.Drawables;
 
-//保存子行信息的类
-public class ComponentInfo {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ComponentInfo extends BaseObservable {
+
+    private static List<Resources.ResourceValue> icons;
 
     private Component component;
-    //头像,用于设置给ImageView。
-    private Drawable icon;
+
+    // 图标
+    @Bindable
+    public Drawable icon;
     //标题
-    private String title;
+    @Bindable
+    public String title;
     //作者
-    private String author;
+    @Bindable
+    public String author;
+    //描述
+    @Bindable
+    public String detail;
+
     //星星数
     private int stars;
-    //描述
-    private String detail;
 
     public ComponentInfo(Context context, Component component) {
+        if (icons == null) {
+            icons = new ArrayList<>(com.eazy.uibase.demo.resources.Drawables.icons(context).values());
+        }
         this.component = component;
-        icon = component.icon() == 0 ? null : Drawables.getDrawable(context, component.icon());
+        int res = component.icon();
+        if (res == 0 && !icons.isEmpty())
+            res = icons.remove(0).getResId();
+        icon = res == 0 ? null : Drawables.getDrawable(context, res);
         title = getText(context, component.title()).toString();
         Author annotation = component.getClass().getAnnotation(Author.class);
         author =  annotation == null ? "" : annotation.value();
         detail = context.getText(component.description()).toString();
     }
 
-    public ComponentInfo(Drawable icon, String title, String author, String detail) {
-        this.icon = icon;
-        this.title = title;
-        this.author = author;
-        this.detail = detail;
-    }
-
     public Component getComponent() {
         return component;
     }
 
-    public Drawable getIcon() {
-        return icon;
+    public int id() {
+        return component.id();
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
+    @Bindable
     public int getStars() {
         return stars;
     }
 
-    public String getDetail() {
-        return detail;
-    }
-
     public void setStars(int stars) {
         this.stars = stars;
+        notifyPropertyChanged(BR.stars);
     }
 
-    public static CharSequence getText(Context context, int id) {
+    private static CharSequence getText(Context context, int id) {
         if (id == 0)
             return "";
         return context.getText(id);

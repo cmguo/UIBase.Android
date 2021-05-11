@@ -42,7 +42,7 @@ public abstract class ComponentFragment<DataBinding extends ViewDataBinding,
         super.onCreate(savedInstanceState);
         assert getArguments() != null;
         int componentId = getArguments().getInt("componentId", 0);
-        component_ = Components.getComponent(componentId);
+        component_ = Components.getComponent(componentId).getComponent();
     }
 
     @Nullable

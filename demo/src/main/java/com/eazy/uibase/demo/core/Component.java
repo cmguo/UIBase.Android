@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
 
-import com.eazy.uibase.demo.view.main.ContributionRequestFragment;
+import com.eazy.uibase.demo.components.other.ContributionRequestFragment;
 
 public interface Component {
     @IdRes
