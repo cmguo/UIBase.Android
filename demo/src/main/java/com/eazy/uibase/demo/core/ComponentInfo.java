@@ -18,7 +18,7 @@ public class ComponentInfo extends BaseObservable {
 
     private static List<Resources.ResourceValue> icons;
 
-    private Component component;
+    private final Component component;
 
     // 图标
     @Bindable

@@ -20,11 +20,7 @@ import com.eazy.uibase.demo.databinding.InformationFragmentBinding;
 public class InformationFragment extends Fragment {
 
     private InformationViewModel mViewModel;
-    private ComponentFragment fragment;
-
-    public static InformationFragment newInstance() {
-        return new InformationFragment();
-    }
+    private ComponentFragment<?,?,?> fragment;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -41,11 +37,11 @@ public class InformationFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(InformationViewModel.class);
         if (fragment != null)
             mViewModel.bindComponent(fragment);
-        DataBindingUtil.findBinding(getView()).setVariable(BR.model, mViewModel);
+        DataBindingUtil.findBinding(requireView()).setVariable(BR.model, mViewModel);
     }
 
 
-    public void bindComponent(ComponentFragment fragment) {
+    public void bindComponent(ComponentFragment<?,?,?> fragment) {
         if (mViewModel != null)
             mViewModel.bindComponent(fragment);
         else

@@ -1,28 +1,28 @@
 package com.eazy.uibase.resources
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.ColorFilter
-import android.graphics.PixelFormat
-import android.graphics.Rect
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewParent
+import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 
 class ViewDrawable(private val view: View) : Drawable() {
 
     constructor(context: Context, @LayoutRes id: Int)
-        : this(LayoutInflater.from(context).inflate(id, null)) {
+        : this(LayoutInflater.from(context).inflate(id, FrameLayout(context), false)) {
     }
 
     private val holder = ViewHolder(this, view)
 
     init {
-        view.measure(0, 0)
+        holder.measure(0, 0)
         view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+    }
+
+    fun getView() : View {
+        return holder.getChildAt(0)
     }
 
     override fun draw(canvas: Canvas) {
@@ -49,12 +49,12 @@ class ViewDrawable(private val view: View) : Drawable() {
         return view.measuredHeight
     }
 
-    class ViewHolder(private val drawable: ViewDrawable, private val view: View) : ViewGroup(view.context) {
+    class ViewHolder(private val drawable: ViewDrawable, private val view: View) : FrameLayout(view.context) {
 
         init {
             addView(view)
         }
-        
+
         override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         }
 
@@ -62,7 +62,7 @@ class ViewDrawable(private val view: View) : Drawable() {
             super.requestLayout()
             if (view == null)
                 return
-            view.measure(0, 0)
+            measure(0, 0)
             view.layout(0, 0, view.measuredWidth, view.measuredHeight)
             drawable.invalidateSelf()
         }

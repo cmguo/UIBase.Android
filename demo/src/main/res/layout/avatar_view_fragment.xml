@@ -7,11 +7,17 @@
 
         <import type="com.eazy.uibase.demo.components.basic.ZAvatarViewFragment.Styles" />
 
+        <import type="com.eazy.uibase.demo.components.basic.ZAvatarViewFragment.Model" />
+
         <import type="com.eazy.uibase.demo.components.basic.ZAvatarViewFragment" />
 
         <variable
             name="fragment"
             type="ZAvatarViewFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
 
         <variable
             name="styles"
@@ -28,18 +34,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <com.eazy.uibase.widget.ZAvatarView
                 android:id="@+id/avatarView"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
                 android:background="@color/brand_500"
                 android:src="@drawable/component"
+                app:clipType="@{styles.clipType}"
+                app:clipRegion="@{styles.clipRegion}"
+                app:roundRadius="@{styles.roundRadius}"
+                app:borderWidth="@{styles.borderWidth}"
+                app:borderColor="@{styles.borderColor}"
+                />
+
+            <com.eazy.uibase.widget.ZAvatarView
+                android:id="@+id/avatarTextView"
+                android:layout_marginLeft="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/green_500"
+                android:src="@{model.drawable}"
                 app:clipType="@{styles.clipType}"
                 app:clipRegion="@{styles.clipRegion}"
                 app:roundRadius="@{styles.roundRadius}"

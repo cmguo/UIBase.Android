@@ -114,7 +114,14 @@ class ZAvatarView @JvmOverloads constructor(
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
         if (xfermodeClass != null) {
-            _setXfermode = try { drawable?.javaClass?.getMethod("setXfermode", xfermodeClass) } catch (e: Throwable) { null }
+            _setXfermode = try {
+                drawable?.javaClass?.getDeclaredMethod("setXfermode", xfermodeClass)
+            } catch (e: Throwable) {
+                // HUAWEI SCL-TL00H SDK 22 -> ok
+                // HUAWEI BZT-W09 SDK 26 -> ok
+                // HUAWEI ALP-AL00 SDK 29 -> not such method
+                null
+            }
             _setXfermode?.isAccessible = true
         }
         computeRoundBounds()
@@ -228,8 +235,11 @@ class ZAvatarView @JvmOverloads constructor(
     }
 
     companion object {
+
+        private const val TAG = "ZAvatarView"
+
         val xfermodeClass: Class<*>? = try {
-            Class.forName("android.graphics.Xfermode");
+            Class.forName("android.graphics.Xfermode")
         } catch (e: Throwable) {
             null
         }

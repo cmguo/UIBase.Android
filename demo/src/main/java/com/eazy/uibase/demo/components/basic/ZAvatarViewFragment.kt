@@ -1,7 +1,14 @@
 package com.eazy.uibase.demo.components.basic
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.Bindable
+import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
@@ -11,14 +18,18 @@ import com.eazy.uibase.demo.core.style.annotation.Description
 import com.eazy.uibase.demo.core.style.annotation.Style
 import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.AvatarViewFragmentBinding
+import com.eazy.uibase.resources.Drawables
+import com.eazy.uibase.resources.ViewDrawable
 import com.eazy.uibase.widget.ZAvatarView
 
 class ZAvatarViewFragment : ComponentFragment<AvatarViewFragmentBinding?,
     ZAvatarViewFragment.Model?, ZAvatarViewFragment.Styles?>() {
 
-    class Model : ViewModel()
+    class Model(fragment: ZAvatarViewFragment) : ViewModel() {
+        val drawable = ViewDrawable(fragment.requireContext(), R.layout.avatar_text)
+    }
 
-    class Styles(private val fragment_: ZAvatarViewFragment) : ViewStyles() {
+    class Styles(private val fragment: ZAvatarViewFragment) : ViewStyles() {
 
         @Bindable
         @Title("剪切方式")
@@ -47,9 +58,19 @@ class ZAvatarViewFragment : ComponentFragment<AvatarViewFragmentBinding?,
         @Description("设置头像边框颜色")
         @Style(ColorStyle::class)
         var borderColor = Color.RED
+
+        @Bindable
+        @Title("头像文字")
+        @Description("设置文字头像的文字，结合使用 ViewDrawable 和 @layout/avatar_text")
+        var text = "头像"
+            set(value) {
+                field = value
+                (fragment.model.drawable.getView() as? TextView)?.text = value
+            }
     }
 
     companion object {
         private const val TAG = "ZAvatarViewFragment"
     }
+
 }

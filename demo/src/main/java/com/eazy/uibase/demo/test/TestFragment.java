@@ -1,9 +1,8 @@
 package com.eazy.uibase.demo.test;
 
 import android.graphics.Color;
-import android.view.LayoutInflater;
+import android.os.Build;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.Bindable;
 
 import com.eazy.uibase.demo.core.ComponentFragment;
@@ -16,7 +15,10 @@ import com.eazy.uibase.demo.databinding.TestFragmentBinding;
 public class TestFragment extends ComponentFragment<TestFragmentBinding, TestFragment.Model, TestFragment.Styles> {
 
     public static class Model extends ViewModel {
+
         public String text = "Hello world!";
+
+        public String version = "SDK:" + Build.VERSION.SDK_INT;
     }
 
     public enum EnumStyle {

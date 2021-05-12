@@ -2,12 +2,6 @@ package com.eazy.uibase.demo.core;
 
 import android.content.Context;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.annotation.StringRes;
-
-import com.eazy.uibase.demo.resources.Resources;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
