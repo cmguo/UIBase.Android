@@ -4,19 +4,19 @@
     <string name="component_test">测试控件</string>
     <string name="component_test_desc">测试控件, MVVM 数据绑定</string>
 
-    <string name="group_resource_styles">资源样式</string>
+    <string name="group_resources">内建资源</string>
 
     <!-- colors -->
     <id name="component_std_dynamic_colors"></id>
-    <string name="component_std_dynamic_colors">标准色（动态）</string>
+    <string name="component_std_dynamic_colors">颜色（动态）</string>
     <string name="component_std_dynamic_colors_desc">动态标准色，在白天、夜间模式有不同都颜色值</string>
 
     <id name="component_std_static_colors"></id>
-    <string name="component_std_static_colors">标准色（静态）</string>
+    <string name="component_std_static_colors">颜色（静态）</string>
     <string name="component_std_static_colors_desc">静态标准色，没有夜间模式对应都颜色值</string>
 
     <id name="component_state_list_colors"></id>
-    <string name="component_state_list_colors">有状态颜色</string>
+    <string name="component_state_list_colors">颜色（多态）</string>
     <string name="component_state_list_colors_desc">有状态颜色，在不同状态下，展示不同颜色</string>
 
     <!-- drawables -->
@@ -32,24 +32,31 @@
     <string name="component_icons">图标（SVG）</string>
     <string name="component_icons_desc">所有 SVG 图标</string>
 
+    <string name="group_styles">内建样式</string>
+
     <!-- buttons styles -->
     <id name="component_buttons"></id>
-    <string name="component_buttons">按钮</string>
-    <string name="component_buttons_desc">按钮</string>
+    <string name="component_buttons">按钮样式</string>
+    <string name="component_buttons_desc">按钮样式</string>
+
+    <!-- appearance styles -->
+    <id name="component_text_appearances"></id>
+    <string name="component_text_appearances">文字样式</string>
+    <string name="component_text_appearances_desc">文字样式</string>
 
     <!-- checkboxes styles -->
     <id name="component_check_boxes"></id>
-    <string name="component_checkboxes">复选框</string>
-    <string name="component_checkboxes_desc">复选框</string>
+    <string name="component_checkboxes">复选框样式</string>
+    <string name="component_checkboxes_desc">复选框样式</string>
     <id name="component_radio_buttons"></id>
-    <string name="component_radio_buttons">单选框</string>
-    <string name="component_radio_buttons_desc">单选框</string>
+    <string name="component_radio_buttons">单选框样式</string>
+    <string name="component_radio_buttons_desc">单选框样式</string>
     <id name="component_switches"></id>
-    <string name="component_switches">开关</string>
-    <string name="component_switches_desc">开关</string>
+    <string name="component_switches">开关样式</string>
+    <string name="component_switches_desc">开关样式</string>
 
     <!-- dialogs layouts -->
-    <string name="component_dialogs">对话框</string>
-    <string name="component_dialogs_desc">对话框</string>
-    
+    <string name="component_dialogs">对话框样式</string>
+    <string name="component_dialogs_desc">对话框样式</string>
+
 </resources>

@@ -17,7 +17,7 @@ public class IconsComponent implements Component
 
     @Override
     public int group() {
-        return R.string.group_resource_styles;
+        return R.string.group_resources;
     }
 
     @Override

@@ -34,6 +34,10 @@ public class Styles extends Resources {
         return getResources(R.style.class, Pattern.compile("Switch"));
     }
 
+    public static Map<String, Integer> textAppearances() {
+        return getResources(R.style.class, Pattern.compile("TextAppearance.Z"));
+    }
+
     @androidx.databinding.BindingAdapter("style")
     public static <T> void setStyle(TextView view, int style) {
         try {

@@ -1,5 +1,9 @@
 package com.eazy.uibase.demo.resources;
 
+import android.annotation.SuppressLint;
+import android.content.res.TypedArray;
+
+import androidx.annotation.StyleRes;
 import androidx.databinding.Bindable;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +37,8 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
                 styles = com.eazy.uibase.demo.resources.Styles.radioStyles();
             else if (fragment.getComponent().id() == R.id.component_switches)
                 styles = com.eazy.uibase.demo.resources.Styles.switchStyles();
+            else if (fragment.getComponent().id() == R.id.component_text_appearances)
+                styles = com.eazy.uibase.demo.resources.Styles.textAppearances();
             else
                 styles = null;
         }
@@ -48,6 +54,20 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
         @Bindable
         public String text = "文字";
+
+        public String textTitle(String title) {
+            return "文字样式： " + title;
+        }
+
+        @SuppressLint("DefaultLocale")
+        public String textDetail(@StyleRes int id) {
+            TypedArray a = fragment_.requireContext().obtainStyledAttributes(id, R.styleable.TextAppearance);
+            float size = a.getDimension(R.styleable.TextAppearance_android_textSize, 0);
+            int color = a.getResourceId(R.styleable.TextAppearance_android_textColor, 0);
+            a.recycle();
+            String colorStr = Resources.simpleName(fragment_.requireContext().getResources().getResourceName(color));
+            return String.format("size: %d, color: %s", (int)size, colorStr);
+        }
 
         @Bindable
         @Title("禁用")
@@ -65,6 +85,8 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
                 return R.layout.style_radio_button_item;
             else if (fragment_.getComponent().id() == R.id.component_switches)
                 return R.layout.style_switch_item;
+            else if (fragment_.getComponent().id() == R.id.component_text_appearances)
+                return R.layout.style_text_appearance_item;
             else
                 return 0;
         }

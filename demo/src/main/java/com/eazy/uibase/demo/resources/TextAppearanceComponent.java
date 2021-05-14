@@ -8,16 +8,16 @@ import com.eazy.uibase.demo.core.annotation.Author;
 
 @AutoService(Component.class)
 @Author("cmguo")
-public class ImagesComponent implements Component
+public class TextAppearanceComponent implements Component
 {
     @Override
     public int id() {
-        return R.id.component_images;
+        return R.id.component_text_appearances;
     }
 
     @Override
     public int group() {
-        return R.string.group_resources;
+        return R.string.group_styles;
     }
 
     @Override
@@ -27,17 +27,17 @@ public class ImagesComponent implements Component
 
     @Override
     public int title() {
-        return R.string.component_images;
+        return R.string.component_text_appearances;
     }
 
     @Override
     public int description() {
-        return R.string.component_images_desc;
+        return R.string.component_text_appearances_desc;
     }
 
     @Override
     public Class<? extends ComponentFragment> fragmentClass() {
-        return DrawablesFragment.class;
+        return StylesFragment.class;
     }
 }
 

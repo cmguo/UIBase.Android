@@ -65,7 +65,9 @@ class ZAvatarViewFragment : ComponentFragment<AvatarViewFragmentBinding?,
         var text = "头像"
             set(value) {
                 field = value
-                (fragment.model.drawable.getView() as? TextView)?.text = value
+                val view = fragment.model.drawable.getView() as? TextView
+                view?.text = value
+                ((view?.parent) as? ViewGroup)?.requestLayout()
             }
     }
 
