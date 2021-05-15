@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="carouselViewStyle" format="reference"/>
+
+    <declare-styleable name="ZCarouselView">
+
+        <attr name="slideDirection" format="enum">
+            <enum name="left_to_right" value="0"/>
+            <enum name="right_to_left" value="1"/>
+            <enum name="top_to_bottom" value="2"/>
+            <enum name="bottom_to_top" value="3"/>
+        </attr>
+        <attr name="slideInterval" format="integer"/>
+        <attr name="manualSlide" format="boolean"/>
+        <attr name="animationType" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="accordion" value="1"/>
+            <enum name="backgroundToForeground" value="2"/>
+            <enum name="foregroundToBackground" value="3"/>
+            <enum name="cubeIn" value="4"/>
+            <enum name="cubeOut" value="5"/>
+            <enum name="depthPage" value="6"/>
+            <enum name="flipHorizontal" value="7"/>
+            <enum name="flipVertical" value="8"/>
+            <enum name="rotateDown" value="9"/>
+            <enum name="rotateUp" value="10"/>
+            <enum name="scaleInOut" value="11"/>
+            <enum name="stack" value="12"/>
+            <enum name="tablet" value="13"/>
+            <enum name="zoomIn" value="14"/>
+            <enum name="zoomOut" value="15"/>
+            <enum name="zoomOutSlide" value="16"/>
+        </attr>
+        <attr name="indicatorType" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="circle" value="1"/>
+            <enum name="number" value="2"/>
+            <enum name="numberTitle" value="3"/>
+            <enum name="circleTitle" value="4"/>
+            <enum name="circleTitleInside" value="5"/>
+        </attr>
+        <attr name="indicatorGravity" format="flags">
+            <flag name="left" value="0x03" />
+            <!-- Push object to the right of its container, not changing its size. -->
+            <flag name="right" value="0x05" />
+            <!-- Place object in the horizontal center of its container, not changing its size. -->
+            <flag name="center_horizontal" value="0x01" />
+        </attr>
+    </declare-styleable>
+
+    <style name="ZCarouselView">
+    </style>
+
+</resources>

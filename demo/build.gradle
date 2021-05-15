@@ -58,7 +58,7 @@ dependencies {
 
     implementation project(':uibase-library')
     api fileTree(dir: 'libs', includes: ['*.aar'])
-    implementation project(path: ':banner')
+
     kapt 'com.google.auto.service:auto-service-annotations:1.0-rc6'
 
     testImplementation 'junit:junit:4.+'

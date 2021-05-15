@@ -1,9 +1,10 @@
-include ':banner'
 include ':badgelibrary'
 include ':libshape'
+
 include ':demo'
-include ':uibase-library'
 include ':app'
+
+include ':uibase-library'
 include ':magicindicator'
 include ':pickerview'
 include ':wheelview'

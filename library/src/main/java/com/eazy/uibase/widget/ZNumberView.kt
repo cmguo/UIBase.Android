@@ -26,7 +26,7 @@ class ZNumberView @JvmOverloads constructor(
     : LinearLayout(context, attrs, defStyleAttr), View.OnClickListener, View.OnTouchListener, TextWatcher {
 
     interface OnNumberChangeListener {
-        fun onNumberChanged(view: View, number: Int)
+        fun onNumberChanged(view: ZNumberView, number: Int)
     }
 
     var minimum = 0
@@ -92,10 +92,10 @@ class ZNumberView @JvmOverloads constructor(
                 _editText.setText(value.toString())
             syncEnable()
             if (continues || !_inInteraction)
-                mListener?.onNumberChanged(this, value)
+                _listener?.onNumberChanged(this, value)
         }
 
-    private var mListener: OnNumberChangeListener? = null
+    private var _listener: OnNumberChangeListener? = null
 
     private val _editText: EditText
     private val _buttonDec: Button
@@ -105,7 +105,7 @@ class ZNumberView @JvmOverloads constructor(
     private val _repeatListener = RepeatListener(this)
 
     fun setOnNumberChangeListener(listener: OnNumberChangeListener?) {
-        mListener = listener
+        _listener = listener
     }
 
     init {
@@ -158,7 +158,7 @@ class ZNumberView @JvmOverloads constructor(
         val inInteraction = event.action != MotionEvent.ACTION_UP
             && event.action != MotionEvent.ACTION_CANCEL
         if (_inInteraction && !inInteraction && !continues) {
-            mListener?.onNumberChanged(this, number)
+            _listener?.onNumberChanged(this, number)
         }
         _inInteraction = inInteraction
         return true

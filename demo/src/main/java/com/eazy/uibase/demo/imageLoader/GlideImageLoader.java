@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.eazy.banner.loader.ImageLoader;
+import com.eazy.uibase.widget.banner.loader.ImageLoader;
 
 
 public class GlideImageLoader extends ImageLoader {

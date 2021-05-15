@@ -26,7 +26,7 @@ public class ZNumberViewBindingAdapter {
         } else {
             view.setOnNumberChangeListener(new ZNumberView.OnNumberChangeListener() {
                 @Override
-                public void onNumberChanged(@NotNull View view, int number) {
+                public void onNumberChanged(@NotNull ZNumberView view, int number) {
                     if (listener != null) {
                         listener.onNumberChanged(view, number);
                     }

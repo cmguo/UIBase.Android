@@ -21,16 +21,12 @@ public class ComponentInfo extends BaseObservable {
     private final Component component;
 
     // 图标
-    @Bindable
     public Drawable icon;
     //标题
-    @Bindable
     public String title;
     //作者
-    @Bindable
     public String author;
     //描述
-    @Bindable
     public String detail;
 
     //星星数

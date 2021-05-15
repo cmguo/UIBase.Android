@@ -12,6 +12,7 @@ import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.BR
 import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.DimenStyle
+import com.eazy.uibase.demo.core.style.GravityStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.BadgeViewFragmentBinding
 import com.eazy.uibase.demo.databinding.BadgeViewItemBinding
@@ -24,22 +25,6 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
 
     class Styles : ViewStyles() {
 
-        @SuppressWarnings("unused")
-        enum class ViewGravity(private val gravity_: Int) {
-            LeftTop(Gravity.START or Gravity.TOP),
-            CenterTop(Gravity.CENTER or Gravity.TOP),
-            RigthTop(Gravity.END or Gravity.TOP),
-            LeftCenter(Gravity.START or Gravity.CENTER),
-            Center(Gravity.CENTER),
-            RigthCenter(Gravity.END or Gravity.CENTER),
-            LeftBottom(Gravity.START or Gravity.BOTTOM),
-            CenterBottom(Gravity.CENTER or Gravity.BOTTOM),
-            RigthBottom(Gravity.END or Gravity.BOTTOM);
-            fun gravity(): Int {
-                return gravity_
-            }
-        }
-
         @Bindable
         @Title("边框宽度")
         @Description("加上边框；如果徽标显示在复杂图形上或者带有强烈色彩的图标上，建议具有1px容器背景色（通常为白色）的描边。")
@@ -49,7 +34,8 @@ class ZBadgeViewFragment : ComponentFragment<BadgeViewFragmentBinding?,
         @Bindable
         @Title("对齐方式")
         @Description("对齐到哪个角落，9个点；可结合位置偏移来精确定位；默认右上角")
-        var gravity = ViewGravity.RigthTop
+        @Style(GravityStyle::class)
+        var gravity = Gravity.RIGHT or Gravity.TOP
 
         @Bindable
         @Title("位置偏移")

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.eazy.uibase.demo.components.dataview.ZCarouselViewFragment" />
+
+        <import type="com.eazy.uibase.demo.components.dataview.ZCarouselViewFragment.Model" />
+
+        <import type="com.eazy.uibase.demo.components.dataview.ZCarouselViewFragment.Styles" />
+
+        <variable
+            name="fragment"
+            type="com.eazy.uibase.demo.components.dataview.ZCarouselViewFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.eazy.uibase.widget.ZCarouselView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="150dp"
+            app:titles="@{model.titles}"
+            app:images="@{model.images}"
+            app:imageLoader="@{model.loader}"
+            app:slideDirection="@{styles.slideDirection}"
+            app:animationMode="@{styles.animationMode}"
+            app:slideInterval="@{styles.slideInterval}"
+            app:manualSlidable="@{styles.manualSlidable}"
+            app:indicatorType="@{styles.indicatorType}"
+            app:indicatorGravity="@{styles.indicatorGravity}"
+            app:slideIndex="@={styles.slideIndex}"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+                android:text="当前页"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+                android:text="@{String.valueOf(styles.slideIndex)}"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

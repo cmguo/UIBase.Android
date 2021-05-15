@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         xhb:borderColor="@{@android:color/white}"
         xhb:borderWidth="@{styles.borderWidth}"
-        xhb:gravity="@{styles.gravity.gravity()}"
+        xhb:gravity="@{styles.gravity}"
         xhb:gravityOffset="@{styles.offset}"
         xhb:draggable="@{styles.draggabe}"
         xhb:maximum="@{styles.maximum}"

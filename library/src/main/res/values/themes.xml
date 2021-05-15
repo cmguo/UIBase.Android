@@ -23,6 +23,7 @@
         <item name="numberViewStyle">@style/ZNumberView</item>
         <item name="badgeViewStyle">@style/ZBadgeView</item>
         <item name="dialogStyle">@style/ZDialog</item>
+        <item name="carouselViewStyle">@style/ZCarouselView</item>
    </style>
 
     <style name="Theme.MaterialComponents.DayNight.DarkActionBar.Z">
@@ -47,6 +48,7 @@
         <item name="numberViewStyle">@style/ZNumberView</item>
         <item name="badgeViewStyle">@style/ZBadgeView</item>
         <item name="dialogStyle">@style/ZDialog</item>
+        <item name="carouselViewStyle">@style/ZCarouselView</item>
     </style>
 
 </resources>
