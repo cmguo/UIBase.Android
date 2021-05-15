@@ -2,15 +2,12 @@ package com.eazy.uibase.daynight.styleable;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.AttrRes;
 
-import com.eazy.uibase.R;
 import com.eazy.uibase.utils.Generic;
 
 import java.util.HashMap;
@@ -27,7 +24,7 @@ public class StyleableSet<E extends View> implements IStyleableSet<E> {
     static {
         for (IStyleableSet<?> styleableSet : ServiceLoader.load(IStyleableSet.class)) {
             Class<? extends View> cls = Generic.getParamType(styleableSet.getClass(), StyleableSet.class, 0);
-            Log.d(TAG, "collect styleableSet " + cls.getSimpleName());
+            //Log.d(TAG, "collect styleableSet " + cls.getSimpleName());
             sStyleables.put(cls, styleableSet);
         }
     }
@@ -48,7 +45,7 @@ public class StyleableSet<E extends View> implements IStyleableSet<E> {
 
     @SuppressWarnings("unchecked")
     public static <E extends View> AttrValueSet<E> createAttrValueSet(E view, AttributeSet attrs) {
-        Log.d(TAG, "createAttrValueSet " + view);
+        //Log.d(TAG, "createAttrValueSet " + view);
 //        if (view.getId() == R.id.information_fragment) {
 //            Log.d(TAG, "createAttrValueSet " + view);
 //        }
@@ -79,7 +76,7 @@ public class StyleableSet<E extends View> implements IStyleableSet<E> {
             a.getValue(index, v);
             if (AttrValue.maybeThemed(v)) {
                 int attr = styleableAttrsArray[index];
-                Log.d(TAG, "analyze " + context.getResources().getResourceName(attr) + "=" + context.getResources().getResourceName(v.resourceId));
+                //Log.d(TAG, "analyze " + context.getResources().getResourceName(attr) + "=" + context.getResources().getResourceName(v.resourceId));
                 IStyleable<E> styleable = (IStyleable<E>) styleableAttrs.get(attr);
                 attrValueSet.put(attr, styleable, v);
                 v = new TypedValue();

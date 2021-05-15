@@ -1,6 +1,5 @@
 package com.eazy.uibase.daynight.styleable;
 
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -28,9 +27,9 @@ public class AttrValueSet<E extends View> {
     }
 
     public void apply(E view) {
-        Log.d(TAG, "apply " + view);
+        //Log.d(TAG, "apply " + view);
         for (Map.Entry<Integer, AttrValue<? super E>> entry : mAttrValues.entrySet()) {
-            Log.d(TAG, "apply " + view.getResources().getResourceName(entry.getKey()));
+            //Log.d(TAG, "apply " + view.getResources().getResourceName(entry.getKey()));
             entry.getValue().apply(view);
         }
     }

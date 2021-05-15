@@ -3,7 +3,6 @@ package com.eazy.uibase.daynight.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -56,6 +55,7 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
                 if (textAppearance == null)
                     return;
                 attrValueSet.remove(android.R.attr.textAppearance);
+                // TODO: fix when non themed textColor
                 if (attrValueSet.get(android.R.attr.textColor) == null
 //                    || attrValueSet.get(android.R.attr.textColorHint) == null
 //                    || attrValueSet.get(android.R.attr.textColorHighlight) == null
@@ -66,7 +66,7 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
                     TypedValue value = new TypedValue();
                     if (attrValueSet.get(android.R.attr.textColor) == null && a.getValue(R.styleable.StyleableSetTextView_android_textColor, value)) {
                         if (AttrValue.maybeThemed(value)) {
-                            Log.d(TAG, "analyze textColor=" + context.getResources().getResourceName(value.resourceId));
+                            //Log.d(TAG, "analyze textColor=" + context.getResources().getResourceName(value.resourceId));
                             attrValueSet.put(android.R.attr.textColor, getStyleable(android.R.attr.textColor), value);
                         }
                     }
