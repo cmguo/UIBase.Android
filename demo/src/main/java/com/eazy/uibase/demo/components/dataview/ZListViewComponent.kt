@@ -8,7 +8,7 @@ import com.eazy.uibase.demo.core.annotation.Author
 
 @AutoService(Component::class)
 @Author("jiangzhiguo")
-class ZListComponent : Component {
+class ZListViewComponent : Component {
     override fun id(): Int {
         return R.id.component_z_lists
     }
@@ -30,6 +30,6 @@ class ZListComponent : Component {
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>?> {
-        return ZListFragment::class.java
+        return ZListViewFragment::class.java
     }
 }

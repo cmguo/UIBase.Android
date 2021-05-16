@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.eazy.uibase.demo.components.dataview.ZListViewFragment" />
+
+        <import type="com.eazy.uibase.demo.components.dataview.ZListViewFragment.Model" />
+
+        <import type="com.eazy.uibase.demo.components.dataview.ZListViewFragment.Styles" />
+
+        <variable
+            name="fragment"
+            type="com.eazy.uibase.demo.components.dataview.ZListViewFragment" />
+
+        <variable
+            name="model"
+            type="Model" />
+
+        <variable
+            name="styles"
+            type="Styles" />
+    </data>
+
+    <com.eazy.uibase.widget.ZListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:data="@{styles.group ? model.colorGroups : model.colors}">
+
+    </com.eazy.uibase.widget.ZListView>
+
+</layout>
