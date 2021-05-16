@@ -5,44 +5,44 @@
         <item name="android:textColor">@color/bluegrey_900_disabled</item>
     </style>
 
-    <style name="TextAppearance.Z.Head" parent="TextAppearance.Z">
+    <style name="TextAppearance.Z.Head">
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="TextAppearance.Z.Head0" parent="TextAppearance.Z.Head">
+    <style name="TextAppearance.Z.Head0">
         <item name="android:textSize">24sp</item>
     </style>
-    <style name="TextAppearance.Z.Head1" parent="TextAppearance.Z.Head">
+    <style name="TextAppearance.Z.Head1">
         <item name="android:textSize">20sp</item>
     </style>
-    <style name="TextAppearance.Z.Head2" parent="TextAppearance.Z.Head">
+    <style name="TextAppearance.Z.Head2">
         <item name="android:textSize">18sp</item>
     </style>
-    <style name="TextAppearance.Z.Head3" parent="TextAppearance.Z.Head">
+    <style name="TextAppearance.Z.Head3">
         <item name="android:textSize">16sp</item>
     </style>
-    <style name="TextAppearance.Z.Head4" parent="TextAppearance.Z.Head">
+    <style name="TextAppearance.Z.Head4">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/bluegrey_800_disabled</item>
     </style>
 
-    <style name="TextAppearance.Z.Body" parent="TextAppearance.Z">
+    <style name="TextAppearance.Z.Body">
     </style>
-    <style name="TextAppearance.Z.Body.Large" parent="TextAppearance.Z.Body">
+    <style name="TextAppearance.Z.Body.Large">
         <item name="android:textSize">18sp</item>
     </style>
-    <style name="TextAppearance.Z.Body.Middle" parent="TextAppearance.Z.Body">
+    <style name="TextAppearance.Z.Body.Middle">
         <item name="android:textSize">16sp</item>
     </style>
-    <style name="TextAppearance.Z.Body.Small" parent="TextAppearance.Z.Body">
+    <style name="TextAppearance.Z.Body.Small">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/bluegrey_800_disabled</item>
     </style>
 
-    <style name="TextAppearance.Z.Secondary" parent="TextAppearance.Z">
+    <style name="TextAppearance.Z.Secondary">
         <item name="android:textSize">12sp</item>
-            <item name="android:textColor">@color/bluegrey_700</item>
+        <item name="android:textColor">@color/bluegrey_700</item>
     </style>
-    <style name="TextAppearance.Z.Tip" parent="TextAppearance.Z">
+    <style name="TextAppearance.Z.Tip">
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/bluegrey_700</item>
     </style>

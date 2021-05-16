@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="listViewStyle" format="reference"/>
+
+    <declare-styleable name="ZListView">
+        <attr name="headerAppearance" format="reference"/>
+        <attr name="itemAppearance" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ZListItemView">
+        <attr name="paddingX"/>
+        <attr name="paddingY"/>
+        <attr name="subTextPadding" format="dimension"/>
+        <attr name="textAppearance"/>
+        <attr name="subTextAppearance" format="reference"/>
+        <attr name="iconSize"/>
+        <attr name="iconSize2" format="dimension"/>
+        <attr name="iconPadding"/>
+        <attr name="iconPadding2" format="dimension"/>
+        <attr name="buttonAppearence" format="reference"/>
+    </declare-styleable>
+
+    <style name="ZListView">
+    </style>
+
+    <style name="ZButton.ListItem" parent="ZButton.Appearance.Middle">
+        <item name="textColor">@color/bluegrey_700_disabled</item>
+        <item name="backgroundColor">@color/transparent</item>
+        <item name="iconPosition">right</item>
+    </style>
+
+    <style name="TextAppearance.Z.Secondary.ListItem">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>
