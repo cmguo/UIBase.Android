@@ -5,7 +5,6 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.view.list.DividerDecoration
+import com.eazy.uibase.view.parentOfType
 
 @SuppressLint("CustomViewStyleable")
 class ZListView @JvmOverloads constructor(
@@ -22,18 +22,25 @@ class ZListView @JvmOverloads constructor(
     : RecyclerView(context, attrs, defStyleAttr) {
 
     interface OnItemValueChangeListener {
-        fun onItemValueChanged(List: ZListView, item: IntArray, value: Any?)
+        fun onItemValueChanged(listView: ZListView, item: IntArray, value: Any?)
     }
 
     var data: Iterable<ZListItemView.Data> = ArrayList()
+        set(value) {
+            field = value
+            syncData()
+        }
 
-    var headerStyle = ZListItemView.Style(true)
+    var headerStyle = ZListItemView.Appearance(context, true)
 
-    var itemStyle = ZListItemView.Style()
+    var itemStyle = ZListItemView.Appearance(context)
 
     var listener: OnItemValueChangeListener? = null
 
     private val _adapter = ListAdapter(this)
+
+    private var _count = 0
+    private var _groups = intArrayOf()
 
     companion object {
         private const val TAG = "ZListView"
@@ -50,15 +57,16 @@ class ZListView @JvmOverloads constructor(
         a.recycle()
 
         if (headerStyle > 0) {
-            val a1 = context.obtainStyledAttributes(headerStyle, R.styleable.ZListItemView)
-            this.headerStyle = ZListItemView.Style(true, a1)
-            a1.recycle()
+            this.headerStyle = ZListItemView.Appearance(context, true, headerStyle)
         }
         if (itemStyle > 0) {
-            val a1 = context.obtainStyledAttributes(itemStyle, R.styleable.ZListItemView)
-            this.itemStyle = ZListItemView.Style(false, a1)
-            a1.recycle()
+            this.itemStyle = ZListItemView.Appearance(context, false, itemStyle)
         }
+    }
+
+    fun findViewHolderForAdapterPosition(position: IntArray) : ViewHolder? {
+        val pos = _groups[position[0]] + position[1]
+        return super.findViewHolderForAdapterPosition(pos)
     }
 
     /* internal */
@@ -93,7 +101,7 @@ class ZListView @JvmOverloads constructor(
                 val radioButton = ZRadioButton(context)
                 radioButton.setOnCheckedChangeListener { buttonView, isChecked ->
                     listItemChanged(buttonView, isChecked)
-                    if (_radioButtons.contains(buttonView)) {
+                    if (isChecked && _radioButtons.contains(buttonView)) {
                         for (rb in _radioButtons) {
                             if (rb != buttonView)
                                 rb.isChecked = false
@@ -156,7 +164,7 @@ class ZListView @JvmOverloads constructor(
     }
 
     internal fun enqueueContentView(contentType: ZListItemView.ContentType, view: View) {
-        if (contentType == ZListItemView.ContentType.CheckBox) {
+        if (contentType == ZListItemView.ContentType.RadioButton) {
             _radioButtons.remove(view as ZRadioButton)
         }
         var cache = _contentViewCache[contentType]
@@ -170,9 +178,34 @@ class ZListView @JvmOverloads constructor(
 
     /* private */
 
+    private fun syncData() {
+        var count = 0
+        val groups = mutableListOf<Int>()
+        for (i in data) {
+            if (i is ZListItemView.GroupData) {
+                if (groups.isEmpty()) {
+                    groups.addAll(0 until count)
+                }
+                groups.add(count)
+                count += i.items.count()
+            } else if (!groups.isEmpty()) {
+                groups.add(count)
+            }
+            count++
+        }
+        if (groups.isEmpty())
+            groups.add(0)
+        _count = count
+        _groups = groups.toIntArray()
+        _adapter.notifyDataSetChanged()
+    }
+
     private fun listItemChanged(view: View, value: Any?) {
-        val position = getChildAdapterPosition(view.parent as View)
-        listener?.onItemValueChanged(this, intArrayOf(0, position), value)
+        val itemView = view.parentOfType(ZListItemView::class.java) ?: return
+        val position = getChildAdapterPosition(itemView)
+        if (position < 0) return
+        val group = _groups.indexOfLast { it <= position }
+        listener?.onItemValueChanged(this, intArrayOf(group, position - _groups[group]), value)
     }
 
     private class ListHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -180,12 +213,12 @@ class ZListView @JvmOverloads constructor(
     private class ListAdapter(private val outer: ZListView) : RecyclerView.Adapter<ListHolder>(), OnClickListener, ZCheckBox.OnCheckedStateChangeListener {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_view_item, parent, false) as ZListItemView
+            val view = ZListItemView(parent.context)
+            view.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             if (viewType == 0) {
-                view.style = outer.itemStyle
+                view.appearance = outer.itemStyle
             } else {
-                view.style = outer.headerStyle
+                view.appearance = outer.headerStyle
             }
             view.setOnClickListener(this)
             view.findViewById<ZCheckBox>(R.id.checkBox)!!.setOnCheckedStateChangeListener(this)
@@ -193,19 +226,41 @@ class ZListView @JvmOverloads constructor(
         }
 
         override fun getItemCount(): Int {
-            return outer.data.count()
+            return outer._count
+        }
+
+        fun getItem(position: Int) : ZListItemView.Data {
+            val group = outer._groups.indexOfLast { it <= position }
+            var data = outer.data.elementAt(group)
+            val subpos = position - outer._groups[group]
+            if (data is ZListItemView.GroupData && subpos > 0) {
+                data = data.items.elementAt(subpos - 1)
+            } else if (subpos > 0) {
+                data = outer.data.elementAt(subpos)
+            }
+            return data
         }
 
         override fun getItemViewType(position: Int): Int {
-            return 0
+            val data = getItem(position)
+            return if (data is ZListItemView.GroupData) 1 else 0
         }
 
         override fun onBindViewHolder(holder: ListHolder, position: Int) {
-            val data = outer.data.elementAt(position)
+            val data = getItem(position)
             (holder.itemView as ZListItemView).setData(data, outer)
         }
 
         override fun onClick(view: View) {
+            if (view is ZListItemView && view._contentType != null) {
+                when (view._contentType) {
+                    ZListItemView.ContentType.Button -> outer.listItemChanged(view, null)
+                    ZListItemView.ContentType.CheckBox -> (view._contentView as? ZCheckBox)?.toggle()
+                    ZListItemView.ContentType.RadioButton -> (view._contentView as? ZRadioButton)?.toggle()
+                    ZListItemView.ContentType.SwitchButton -> (view._contentView as? ZSwitchButton)?.toggle()
+                    else -> {}
+                }
+            }
         }
 
         override fun onCheckedStateChanged(checkBox: ZCheckBox, state: ZCheckBox.CheckedState) {

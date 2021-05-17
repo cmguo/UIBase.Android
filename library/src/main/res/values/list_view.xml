@@ -8,7 +8,7 @@
         <attr name="itemAppearance" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="ZListItemView">
+    <declare-styleable name="ZListItemAppearance">
         <attr name="paddingX"/>
         <attr name="paddingY"/>
         <attr name="subTextPadding" format="dimension"/>
@@ -20,6 +20,16 @@
         <attr name="iconPadding2" format="dimension"/>
         <attr name="buttonAppearence" format="reference"/>
     </declare-styleable>
+
+    <dimen name="list_item_view_padding_x">16dp</dimen>
+    <dimen name="list_item_view_padding_y">8dp</dimen>
+    <dimen name="list_item_view_sub_text_padding">8dp</dimen>
+    <dimen name="list_item_view_icon_size">18dp</dimen>
+    <dimen name="list_item_view_icon_padding">4dp</dimen>
+    <dimen name="list_item_view_icon_size2">40dp</dimen>
+    <dimen name="list_item_view_icon_padding2">8dp</dimen>
+
+    <dimen name="list_header_view_padding_x">0dp</dimen>
 
     <style name="ZListView">
     </style>

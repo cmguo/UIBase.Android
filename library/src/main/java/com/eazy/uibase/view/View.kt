@@ -22,6 +22,15 @@ fun <T: View> View.findViewByType(type: Class<T>) : T? {
     return null
 }
 
+fun <T: View> View.parentOfType(type: Class<T>) : T? {
+    if (type.isInstance(this))
+        return this as T
+    val parent = parent
+    if (parent is View)
+        return parent.parentOfType(type)
+    return null
+}
+
 val View.dataBinding get() = DataBindings.get(this)
 
 val View.contentView: FrameLayout? get() {
