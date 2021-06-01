@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--日期选择 日期TextView styleable-->
+    <declare-styleable name="DayTextView">
+        <attr name="selectedBg" format="color" />
+        <attr name="selectStartBg" format="color" />
+        <attr name="selectEndBg" format="color" />
+        <attr name="selectPeriodBg" format="color" />
+        <attr name="selectedNormalBg" format="color" />
+        <attr name="selectedBgDrawable" format="reference" />
+    </declare-styleable>
+
+    <style name="date_week_text_view">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#8A9BAD</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <color name="day_text_normal_black">#474751</color>
+    <color name="day_text_normal">#2A8AEE</color>
+    <color name="day_text_past_gray">#C1C7CD</color>
+    <color name="day_text_period_color">#D5EBFF</color>
+
+</resources>
