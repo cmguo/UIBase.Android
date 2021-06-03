@@ -42,6 +42,7 @@
         <item name="textSize">18sp</item>
         <item name="iconSize">20dp</item>
         <item name="iconPadding">5dp</item>
+        <item name="buttonType">primitive</item>
     </style>
 
 </resources>

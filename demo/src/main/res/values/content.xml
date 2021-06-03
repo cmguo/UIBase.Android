@@ -16,10 +16,13 @@
         <item>北京</item>
     </string-array>
 
+    <style name="ZButton.Appearance.Primitive.Large">
+        <item name="buttonSize">large</item>
+    </style>
+
     <style name="button_content_text_style">
         <item name="content">@array/button_icon_text</item>
-        <item name="buttonType">text</item>
-        <item name="buttonSize">thin</item>
+        <item name="buttonAppearance">@style/ZButton.Appearance.Primitive.Large</item>
         <item name="iconPosition">right</item>
     </style>
 

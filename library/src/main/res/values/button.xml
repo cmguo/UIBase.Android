@@ -29,6 +29,7 @@
     </declare-styleable>
 
     <declare-styleable name="ZButton.Type">
+        <attr name="buttonType"/>
         <attr name="textColor"/>
         <attr name="backgroundColor"/>
         <attr name="iconPosition"/>
@@ -41,6 +42,7 @@
         <attr name="textSize"/>
         <attr name="iconSize"/>
         <attr name="iconPadding"/>
+        <attr name="buttonSize"/>
     </declare-styleable>
 
     <style name="ZButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->

@@ -45,17 +45,19 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="1dp"
             android:background="@color/bluegrey_50"
             />
 
         <FrameLayout
             android:layout_width="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:layout_height="@dimen/panel_bottom_height">
 
             <com.eazy.uibase.widget.ZButton
                 android:id="@+id/bottomButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:buttonAppearance="@style/ZButton.Panel"/>

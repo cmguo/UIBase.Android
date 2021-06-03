@@ -5,9 +5,10 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.content.res.TypedArray
-import android.graphics.PorterDuff
 import android.graphics.Rect
-import android.graphics.drawable.*
+import android.graphics.drawable.Animatable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
@@ -16,8 +17,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatButton
 import com.eazy.uibase.R
-import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.resources.Drawables
+import com.eazy.uibase.resources.RoundDrawable
 
 open class ZButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.buttonStyle
@@ -230,10 +231,12 @@ open class ZButton @JvmOverloads constructor(
         @SuppressLint("ResourceType")
         private fun typeStyles(context: Context, @StyleRes id: Int) : TypeStyles {
             val a = context.obtainStyledAttributes(id, R.styleable.ZButton_Type)
+            val type = a.getInt(R.styleable.ZButton_Type_buttonType, -1)
+            val styles2 = if (type >= 0) typeStyles(context, ButtonType.values()[type].resId) else null
             val styles = TypeStyles(
-                a.getColorStateList(R.styleable.ZButton_Type_textColor),
-                a.getColorStateList(R.styleable.ZButton_Type_backgroundColor),
-                IconPosition.values()[a.getInt(R.styleable.ZButton_Type_iconPosition, 0)]
+                a.getColorStateList(R.styleable.ZButton_Type_textColor) ?: styles2?.textColor,
+                a.getColorStateList(R.styleable.ZButton_Type_backgroundColor) ?: styles2?.backgroundColor,
+                IconPosition.values()[a.getInt(R.styleable.ZButton_Type_iconPosition, styles2?.iconPosition?.ordinal ?: 0)]
             )
             a.recycle()
             return styles
@@ -241,13 +244,15 @@ open class ZButton @JvmOverloads constructor(
 
         private fun sizeStyles(context: Context, @StyleRes id: Int) : SizeStyles {
             val a = context.obtainStyledAttributes(id, R.styleable.ZButton_Size)
+            val size = a.getInt(R.styleable.ZButton_Size_buttonSize, -1)
+            val size2 = if (size >= 0) sizeStyles(context, ButtonSize.values()[size].resId) else null
             val styles = SizeStyles(
-                a.getDimensionPixelSize(R.styleable.ZButton_Size_height, 0),
-                a.getDimension(R.styleable.ZButton_Size_borderRadius, 0f),
-                a.getDimensionPixelSize(R.styleable.ZButton_Size_paddingX, 0),
-                a.getDimension(R.styleable.ZButton_Size_textSize, 0f),
-                a.getDimensionPixelSize(R.styleable.ZButton_Size_iconSize, 0),
-                a.getDimensionPixelSize(R.styleable.ZButton_Size_iconPadding, 0)
+                a.getDimensionPixelSize(R.styleable.ZButton_Size_height, size2?.height ?: 0),
+                a.getDimension(R.styleable.ZButton_Size_borderRadius, size2?.radius ?: 0f),
+                a.getDimensionPixelSize(R.styleable.ZButton_Size_paddingX, size2?.padding ?: 0),
+                a.getDimension(R.styleable.ZButton_Size_textSize, size2?.textSize ?: 0f),
+                a.getDimensionPixelSize(R.styleable.ZButton_Size_iconSize, size2?.iconSize ?: 0),
+                a.getDimensionPixelSize(R.styleable.ZButton_Size_iconPadding, size2?.iconPadding ?: 0)
             )
             a.recycle()
             return styles
