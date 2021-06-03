@@ -113,7 +113,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    static class DayViewHolder extends RecyclerView.ViewHolder {
+    public static class DayViewHolder extends RecyclerView.ViewHolder {
         DayTextView day;
 
         public DayViewHolder(View view) {
