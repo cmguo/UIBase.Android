@@ -117,7 +117,7 @@ public class DateHelper {
     public MonthBean getMonthBean(Calendar calendar) {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
-        return new MonthBean(year + "年" + month + "月", year);
+        return new MonthBean(month, year);
     }
 
     /**
@@ -190,7 +190,7 @@ public class DateHelper {
      * @param bean
      * @return
      */
-    public Calendar setCalendar(DayBean bean) {
+    public static Calendar setCalendar(DayBean bean) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, bean.getYear());
         calendar.set(Calendar.MONTH, bean.getMonth());
@@ -898,22 +898,6 @@ public class DateHelper {
     }
 
     /**
-     * 获取当前月周数
-     *
-     * @param year
-     * @param month
-     * @return
-     */
-    public static int getWeekCountOfMonth(int year, int month) {
-        Calendar c = Calendar.getInstance();
-        c.setFirstDayOfWeek(Calendar.SATURDAY); // 星期天为第一天
-        c.set(year, month - 1, 1);
-        int firstWeek = c.get(Calendar.DAY_OF_WEEK);
-        c.set(year, month - 1, getDaysOfMonth(year, month));
-        return c.get(Calendar.DAY_OF_WEEK) - firstWeek + 1;
-    }
-
-    /**
      * 周历中，通过diff定位周
      *
      * @param diff
@@ -921,7 +905,8 @@ public class DateHelper {
      */
     public static Calendar getCalendarWeekByDiff(int diff) {
         Calendar c = Calendar.getInstance();
-        c.setTime(new Date(System.currentTimeMillis() + (long)diff * 7 * 24 * 60 * 60 * 1000));
+        c.set(Calendar.DAY_OF_WEEK, 1);
+        c.add(Calendar.HOUR, diff * 7 * 24);
         return c;
     }
 

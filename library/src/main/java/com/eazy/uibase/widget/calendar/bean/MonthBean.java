@@ -2,17 +2,14 @@ package com.eazy.uibase.widget.calendar.bean;
 
 
 public class MonthBean extends DateBean {
-    private String month;
+    private int month;
 
-    public MonthBean() {
-    }
-
-    public MonthBean(String month, int year) {
+    public MonthBean(int month, int year) {
         this.month = month;
         super.setYear(year);
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 }

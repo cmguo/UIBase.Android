@@ -11,6 +11,12 @@
         <attr name="selectedBgDrawable" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="CalendarView">
+        <attr name="cvStartTime" format="string" />
+        <attr name="cvEndTime" format="string" />
+        <attr name="cvSelectedTime" format="string" />
+    </declare-styleable>
+
     <style name="date_week_text_view">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>

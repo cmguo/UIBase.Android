@@ -87,8 +87,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
         } else if (holder instanceof MonthViewHolder) {
             MonthBean item = (MonthBean) items.get(position);
-            if (item != null && item.getMonth() != null) {
-                ((MonthViewHolder) holder).month.setText(item.getMonth());
+            if (item != null) {
+                ((MonthViewHolder) holder).month.setText("" + item.getYear() + "年" + item.getMonth() + "月");
             }
         }
     }
@@ -114,7 +114,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public static class DayViewHolder extends RecyclerView.ViewHolder {
-        DayTextView day;
+        public DayTextView day;
 
         public DayViewHolder(View view) {
             super(view);
