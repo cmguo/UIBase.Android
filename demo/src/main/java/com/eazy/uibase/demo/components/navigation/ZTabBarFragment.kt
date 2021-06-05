@@ -128,8 +128,8 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
         }
     }
 
-    class ItemBinding(context: Context, private val styles: Styles, private val width: Int) : UnitTypeItemBinding<String?>(context, R.layout.tab_title) {
-        override fun bindView(binding: ViewDataBinding, item: String?, position: Int) {
+    class ItemBinding(context: Context, private val styles: Styles, private val width: Int) : UnitTypeItemBinding(context, R.layout.tab_title) {
+        override fun bindView(binding: ViewDataBinding, item: Any, position: Int) {
             super.bindView(binding, item, position)
             binding.setVariable(BR.styles, styles)
             if (width > 0) {

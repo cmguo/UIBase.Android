@@ -13,7 +13,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.eazy.uibase.BR;
 
-public abstract class BaseItemBinding<T> implements ItemBinding<T> {
+public abstract class BaseItemBinding implements ItemBinding {
 
     private LayoutInflater mInflater;
 
@@ -24,11 +24,11 @@ public abstract class BaseItemBinding<T> implements ItemBinding<T> {
         mInflater = LayoutInflater.from(context);
     }
 
-    static class ViewHolder implements ViewBinding {
+    public static class ViewHolder implements ViewBinding {
 
         private final View view;
 
-        ViewHolder(View view) {
+        public ViewHolder(View view) {
             this.view = view;
         }
 
@@ -54,7 +54,7 @@ public abstract class BaseItemBinding<T> implements ItemBinding<T> {
     }
 
     @Override
-    public void bindView(ViewBinding binding, T item, int position) {
+    public void bindView(ViewBinding binding, Object item, int position) {
         if (binding instanceof ViewDataBinding)
             bindView((ViewDataBinding) binding, item, position);
         else
@@ -66,11 +66,11 @@ public abstract class BaseItemBinding<T> implements ItemBinding<T> {
     }
 
     @CallSuper
-    protected void bindView(ViewDataBinding binding, T item, int position) {
+    protected void bindView(ViewDataBinding binding, Object item, int position) {
         binding.setVariable(BR.data, item);
     }
 
-    protected void bindView(View view, T item, int position) {
+    protected void bindView(View view, Object item, int position) {
     }
 
 }

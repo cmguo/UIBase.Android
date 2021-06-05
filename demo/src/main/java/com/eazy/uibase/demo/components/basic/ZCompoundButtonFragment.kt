@@ -106,8 +106,8 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         }
     }
 
-    class ItemBinding(private val styles: Styles, layoutId: Int) : UnitTypeItemBinding<StateItem>(layoutId) {
-        override fun bindView(binding: ViewDataBinding, item: StateItem, position: Int) {
+    class ItemBinding(private val styles: Styles, layoutId: Int) : UnitTypeItemBinding(layoutId) {
+        override fun bindView(binding: ViewDataBinding, item: Any, position: Int) {
             super.bindView(binding, item, position)
             binding.setVariable(BR.styles, styles)
         }

@@ -2,6 +2,9 @@ package com.eazy.uibase.view.list;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,29 +13,33 @@ import androidx.viewbinding.ViewBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAdapter.BindingViewHolder<T>>
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.BindingViewHolder>
     implements View.OnClickListener {
 
-    private List<T> mItems = new ArrayList<>();
+    private List<Object> mItems = new ArrayList<>();
 
-    private ItemBinding<T> mItemBinding;
+    private ItemBinding mItemBinding;
 
-    private OnItemClickListener<T> mOnItemClickListener;
+    private OnItemClickListener mOnItemClickListener;
+    private OnViewBindingCreateListener mOnViewBindingCreateListener;
 
-    public void setItemBinding(ItemBinding<T> binding) {
+    public void setItemBinding(ItemBinding binding) {
         mItemBinding = binding;
     }
 
     @NonNull
     @Override
-    public BindingViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BindingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ViewBinding binding = mItemBinding.createBinding(parent, viewType);
-        return new BindingViewHolder<>(this, binding);
+        if (mOnViewBindingCreateListener != null) {
+            mOnViewBindingCreateListener.onViewBindingCreated((RecyclerView) parent, binding);
+        }
+        return new BindingViewHolder(this, binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BindingViewHolder<T> holder, int position) {
-        T item = getItem(position);
+    public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
+        Object item = getItem(position);
         holder.bind(mItemBinding, item, position);
     }
 
@@ -41,7 +48,7 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         return mItems.size();
     }
 
-    public T getItem(int position) {
+    public Object getItem(int position) {
         return mItems.get(position);
     }
 
@@ -50,18 +57,18 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         return mItemBinding.getItemViewType(getItem(position));
     }
 
-    public List<T> getData() {
+    public List<?> getData() {
         return mItems;
     }
 
-    public void addAll(List<? extends T> items) {
+    public void addAll(List<?> items) {
         if (items == null || items.isEmpty()) return;
         int size = mItems.size();
         mItems.addAll(items);
         notifyItemRangeInserted(size, items.size());
     }
 
-    public void add(T item) {
+    public void add(Object item) {
         if (item == null) return;
         int size = mItems.size();
         mItems.add(item);
@@ -73,13 +80,13 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         notifyItemRemoved(position);
     }
 
-    public void remove(T item) {
+    public void remove(Object item) {
         int position = findPosition(item);
         if (position < 0) return;
         remove(position);
     }
 
-    public void replace(List<? extends T> items) {
+    public void replace(List<?> items) {
         mItems.clear();
         if (items != null && !items.isEmpty()) {
             mItems.addAll(items);
@@ -87,10 +94,10 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         notifyDataSetChanged();
     }
 
-    public void replace(Iterable<? extends T> items) {
+    public void replace(Iterable<?> items) {
         mItems.clear();
         if (items != null) {
-            for (T i : items)
+            for (Object i : items)
                 mItems.add(i);
         }
         notifyDataSetChanged();
@@ -101,15 +108,19 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener(OnItemClickListener<T> l) {
+    public void setOnItemClickListener(OnItemClickListener l) {
         this.mOnItemClickListener = l;
     }
 
-    public int findPosition(T item) {
+    public void setOnViewBindingCreateListener(OnViewBindingCreateListener l) {
+        this.mOnViewBindingCreateListener = l;
+    }
+
+    public int findPosition(Object item) {
         return mItems.indexOf(item);
     }
 
-    public void adopt(RecyclerViewAdapter<T> old) {
+    public void adopt(RecyclerViewAdapter old) {
         mItems = old.mItems;
         mItemBinding = old.mItemBinding;
         mOnItemClickListener = old.mOnItemClickListener;
@@ -117,12 +128,13 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
 
     @Override
     public void onClick(View v) {
-        int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+        RecyclerView recyclerView = (RecyclerView) v.getParent();
+        int position = recyclerView.getChildAdapterPosition(v);
         if (mOnItemClickListener != null && position >= 0)
-            mOnItemClickListener.onItemClick(position, getItem(position));
+            mOnItemClickListener.onItemClick(recyclerView, v, position, getItem(position));
     }
 
-    protected static class BindingViewHolder<T> extends RecyclerView.ViewHolder {
+    protected static class BindingViewHolder extends RecyclerView.ViewHolder {
 
         private final ViewBinding mBinding;
 
@@ -133,15 +145,20 @@ public class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAda
             mBinding = binding;
         }
 
-        public void bind(ItemBinding<T> binding, T item, int position) {
+        public void bind(ItemBinding binding, Object item, int position) {
             binding.bindView(mBinding, item, position);
             //mBinding.executePendingBindings();
         }
     }
 
     @FunctionalInterface
-    public interface OnItemClickListener<T> {
-        void onItemClick(int position, T object);
+    public interface OnItemClickListener {
+        void onItemClick(RecyclerView recyclerView, View view, int position, Object object);
+    }
+
+    @FunctionalInterface
+    public interface OnViewBindingCreateListener {
+        void onViewBindingCreated(RecyclerView recyclerView, ViewBinding view);
     }
 
 }

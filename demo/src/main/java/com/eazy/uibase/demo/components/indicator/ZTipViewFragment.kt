@@ -169,7 +169,7 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
 
     }
 
-    class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.tip_view_button_item) {
+    class ItemBinding(private val styles: Styles) : UnitTypeItemBinding(R.layout.tip_view_button_item) {
         override fun bindView(binding: ViewDataBinding, item: Any?, position: Int) {
             super.bindView(binding, item, position)
             binding.setVariable(BR.styles, styles)

@@ -54,7 +54,7 @@ public class ColorsFragment extends ComponentFragment<ColorsFragmentBinding, Col
     }
 
     // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener<Map.Entry<String, Integer>> colorClicked = (position, object) -> Log.d(TAG, "colorClicked" + object);
+    public RecyclerViewAdapter.OnItemClickListener colorClicked = (rv, v, position, object) -> Log.d(TAG, "colorClicked" + object);
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {

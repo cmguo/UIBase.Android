@@ -98,12 +98,13 @@ class ZListItemView @JvmOverloads constructor(
 
     init {
         LayoutInflater.from(context).inflate(R.layout.list_item_view, this)
+        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         _iconView = findViewById(R.id.icon)
         _titleView = findViewById(R.id.title)
         _subTitleView = findViewById(R.id.subTitle)
     }
 
-    fun setData(data: Data, listView: ZListView) {
+    fun setData(data: Data, listView: ZListWidgetCache) {
         val lpST = _subTitleView.layoutParams as LayoutParams
         lpST.topMargin = appearance.subTextPadding
         _subTitleView.layoutParams = lpST
@@ -136,13 +137,13 @@ class ZListItemView @JvmOverloads constructor(
         if (data.contentType != null) {
             if (_contentType != data.contentType) {
                 _contentType = data.contentType
-                _contentView = listView.dequeContentView(data.contentType!!)
+                _contentView = listView.dequeContentView(data.contentType!!, this)
                 val lp = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
                 lp.leftMargin = lpIcon.rightMargin
                 lp.gravity = Gravity.CENTER_VERTICAL
                 addView(_contentView, lp)
             }
-            listView.bindContent(_contentType!!, _contentView!!, data.content)
+            listView.bindContent(_contentType!!, _contentView!!, appearance, data.content)
         }
         if (data.badge != null) {
             val badge = ZBadgeView(context)

@@ -53,7 +53,7 @@ class ZDropDownFragment : ComponentFragment<DropDownFragmentBinding?, ZDropDownF
         }
     }
 
-    class ItemBinding(private val styles: Styles) : UnitTypeItemBinding<Any>(R.layout.drop_down_button_item) {
+    class ItemBinding(private val styles: Styles) : UnitTypeItemBinding(R.layout.drop_down_button_item) {
         override fun bindView(binding: ViewDataBinding, item: Any?, position: Int) {
             super.bindView(binding, item, position)
             binding.setVariable(BR.styles, styles)

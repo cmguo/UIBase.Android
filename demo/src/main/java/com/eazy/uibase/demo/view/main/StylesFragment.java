@@ -27,15 +27,16 @@ import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
 public class StylesFragment extends Fragment {
 
-    public static class StyleItemBinding extends BaseItemBinding<StylesViewModel.StyleValue> {
+    public static class StyleItemBinding extends BaseItemBinding {
 
         public StyleItemBinding() {
         }
 
         @Override
-        public int getItemViewType(StylesViewModel.StyleValue item) {
-            Class<?> type = item.style.getValueType();
-            if (item.style.getValues() != null)
+        public int getItemViewType(Object item) {
+            StylesViewModel.StyleValue styleValue = (StylesViewModel.StyleValue) item;
+            Class<?> type = styleValue.style.getValueType();
+            if (styleValue.style.getValues() != null)
                 return R.layout.style_value_list;
             if (type == Boolean.TYPE)
                 return R.layout.style_value_bool;
@@ -55,7 +56,7 @@ public class StylesFragment extends Fragment {
         }
 
         @Override
-        public void bindView(ViewBinding binding, StylesViewModel.StyleValue item, int position) {
+        public void bindView(ViewBinding binding, Object item, int position) {
             super.bindView(binding, item, position);
             if (binding instanceof com.eazy.uibase.demo.databinding.StyleItemBinding) {
                 ViewGroup group = binding.getRoot().findViewById(R.id.value);
@@ -65,7 +66,7 @@ public class StylesFragment extends Fragment {
         }
     }
 
-    public static class StylesAdapter extends RecyclerViewAdapter<StylesViewModel.StyleValue> {
+    public static class StylesAdapter extends RecyclerViewAdapter {
 
         private int expandStyle = 0;
 
@@ -90,7 +91,7 @@ public class StylesFragment extends Fragment {
         }
 
         @Override
-        public StylesViewModel.StyleValue getItem(int position) {
+        public Object getItem(int position) {
             if (expandStyle > 0 && position >= expandStyle)
                 --position;
             return super.getItem(position);
@@ -111,7 +112,7 @@ public class StylesFragment extends Fragment {
     public StylesAdapter adapter = new StylesAdapter();
     public StyleItemBinding itemBinding = new StyleItemBinding();
     public RecyclerView.ItemDecoration itemDecoration = new DividerDecoration(LinearLayout.VERTICAL, 1);
-    public RecyclerViewAdapter.OnItemClickListener<StylesViewModel.StyleValue> itemClicked = (position, object) -> adapter.toggle(position);
+    public RecyclerViewAdapter.OnItemClickListener itemClicked = (rv, v, position, object) -> adapter.toggle(position);
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

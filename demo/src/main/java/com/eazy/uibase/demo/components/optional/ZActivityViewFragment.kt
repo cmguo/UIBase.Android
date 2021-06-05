@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.Bindable
+import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
@@ -17,7 +18,7 @@ import com.eazy.uibase.widget.ZPanel
 import com.eazy.uibase.widget.ZTipView
 
 class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZActivityViewFragment.Model?, ZActivityViewFragment.Styles?>()
-    , ZPanel.PanelListener, OnItemClickListener<Int> {
+    , ZPanel.PanelListener, OnItemClickListener {
 
     class Model : ViewModel() {
 
@@ -84,7 +85,7 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
         binding.frame.addView(binding.activityViews.root, lp)
     }
 
-    override fun onItemClick(position: Int, `object`: Int?) {
+    override fun onItemClick(rv: RecyclerView, view: View, position: Int, `object`: Any) {
        val tip = ZTipView(requireContext())
         tip.message="点击了按钮: ${position}"
         tip.location = ZTipView.Location.AutoToast

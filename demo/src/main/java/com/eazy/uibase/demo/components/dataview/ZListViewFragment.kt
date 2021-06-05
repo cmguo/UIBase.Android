@@ -9,7 +9,6 @@ import com.eazy.uibase.demo.core.ViewStyles
 import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.ListViewFragmentBinding
 import com.eazy.uibase.demo.resources.Colors
-import com.eazy.uibase.demo.resources.Drawables
 import com.eazy.uibase.demo.resources.Resources
 import com.eazy.uibase.widget.ZListItemView
 import com.eazy.uibase.widget.ZListView

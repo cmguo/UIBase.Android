@@ -4,11 +4,11 @@ import android.view.ViewGroup;
 
 import androidx.viewbinding.ViewBinding;
 
-public interface ItemBinding<T> {
+public interface ItemBinding {
 
-    int getItemViewType(T item);
+    int getItemViewType(Object item);
 
     ViewBinding createBinding(ViewGroup parent, int viewType);
 
-    void bindView(ViewBinding binding, T item, int position);
+    void bindView(ViewBinding binding, Object item, int position);
 }

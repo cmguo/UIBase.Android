@@ -41,7 +41,7 @@ public class DrawablesFragment extends ComponentFragment<DrawablesFragmentBindin
     }
 
     // this should be in view model, but fragment may simplify things
-    public RecyclerViewAdapter.OnItemClickListener<Map.Entry<String, Integer>> drawableClicked = (position, object) -> Log.d(TAG, "drawableClicked" + object);
+    public RecyclerViewAdapter.OnItemClickListener drawableClicked = (rv, v, position, object) -> Log.d(TAG, "drawableClicked" + object);
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {

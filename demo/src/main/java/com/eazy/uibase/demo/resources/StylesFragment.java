@@ -97,7 +97,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         }
     }
 
-    public static class ItemBinding extends UnitTypeItemBinding<Map.Entry<String, Integer>> {
+    public static class ItemBinding extends UnitTypeItemBinding {
         private final Styles styles;
 
         public ItemBinding(Styles styles) {
@@ -106,7 +106,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         }
 
         @Override
-        public void bindView(ViewDataBinding binding, Map.Entry<String, Integer> item, int position) {
+        public void bindView(ViewDataBinding binding, Object item, int position) {
             super.bindView(binding, item, position);
             binding.setVariable(BR.styles, styles);
         }

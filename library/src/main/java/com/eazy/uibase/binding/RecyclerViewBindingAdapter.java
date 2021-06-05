@@ -18,10 +18,10 @@ import java.util.Map;
 public class RecyclerViewBindingAdapter {
 
     @BindingAdapter("adapter")
-    public static <T> void setRecyclerViewAdapter(RecyclerView recyclerView, RecyclerViewAdapter<T> adapter) {
-        RecyclerView.Adapter old = recyclerView.getAdapter();
+    public static  void setRecyclerViewAdapter(RecyclerView recyclerView, RecyclerViewAdapter adapter) {
+        RecyclerView.Adapter<?> old = recyclerView.getAdapter();
         if (old instanceof RecyclerViewAdapter) {
-            adapter.adopt(((RecyclerViewAdapter<T>) old));
+            adapter.adopt(((RecyclerViewAdapter) old));
         }
         recyclerView.setAdapter(adapter);
     }
@@ -31,11 +31,11 @@ public class RecyclerViewBindingAdapter {
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
             if (data instanceof List) {
-                adapter.replace((List) data);
+                adapter.replace((List<?>) data);
             } else if (data instanceof Map) {
-                adapter.replace(((Map) data).entrySet());
+                adapter.replace(((Map<?, ?>) data).entrySet());
             } else if (data instanceof Iterable) {
-                adapter.replace((Iterable) data);
+                adapter.replace((Iterable<?>) data);
             } else if (data != null && data.getClass().isArray()) {
                 adapter.replace(Arrays.asList((Object[]) data));
             }
@@ -43,17 +43,17 @@ public class RecyclerViewBindingAdapter {
     }
 
     @BindingAdapter("itemBinding")
-    public static <T> void setRecyclerViewItemBinding(RecyclerView recyclerView, T binding) {
-        RecyclerViewAdapter<T> adapter = getAdapter(recyclerView);
+    public static <B> void setRecyclerViewItemBinding(RecyclerView recyclerView, B binding) {
+        RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
             adapter.setItemBinding(ItemBindings.get(recyclerView.getContext(), binding));
         }
     }
 
     @BindingAdapter("itemClicked")
-    public static <T> void setRecyclerViewOnItemClickListener(RecyclerView recyclerView,
-                                                              RecyclerViewAdapter.OnItemClickListener<T> listener) {
-        RecyclerViewAdapter<T> adapter = getAdapter(recyclerView);
+    public static  void setRecyclerViewOnItemClickListener(RecyclerView recyclerView,
+                                                              RecyclerViewAdapter.OnItemClickListener listener) {
+        RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
             adapter.setOnItemClickListener(listener);
         }
@@ -77,16 +77,16 @@ public class RecyclerViewBindingAdapter {
         view.setHasFixedSize(hasFixedSize);
     }
 
-    private static <T> RecyclerViewAdapter<T> getAdapter(RecyclerView recyclerView) {
-        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+    private static  RecyclerViewAdapter getAdapter(RecyclerView recyclerView) {
+        RecyclerView.Adapter<?> adapter = recyclerView.getAdapter();
         if (adapter == null) {
-            adapter = new RecyclerViewAdapter<T>();
+            adapter = new RecyclerViewAdapter();
             recyclerView.setAdapter(adapter);
         }
         if (recyclerView.getLayoutManager() == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         }
-        return adapter instanceof RecyclerViewAdapter ? (RecyclerViewAdapter<T>) adapter : null;
+        return adapter instanceof RecyclerViewAdapter ? (RecyclerViewAdapter) adapter : null;
     }
 
 }
