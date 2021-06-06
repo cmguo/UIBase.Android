@@ -533,18 +533,22 @@ public class BadgeView extends View {
         float rectWidth = mBadgeTextRect.height() > mBadgeTextRect.width() ?
                 mBadgeTextRect.height() : mBadgeTextRect.width();
         switch (mBadgeGravity) {
+            case Gravity.LEFT | Gravity.TOP:
             case Gravity.START | Gravity.TOP:
                 mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f;
                 mBadgeCenter.y = mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f;
                 break;
+            case Gravity.LEFT | Gravity.BOTTOM:
             case Gravity.START | Gravity.BOTTOM:
                 mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f;
                 mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f);
                 break;
+            case Gravity.RIGHT | Gravity.TOP:
             case Gravity.END | Gravity.TOP:
                 mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f);
                 mBadgeCenter.y = mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f;
                 break;
+            case Gravity.RIGHT | Gravity.BOTTOM:
             case Gravity.END | Gravity.BOTTOM:
                 mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f);
                 mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f);
@@ -561,10 +565,12 @@ public class BadgeView extends View {
                 mBadgeCenter.x = mWidth / 2f;
                 mBadgeCenter.y = mHeight - (mGravityOffsetY + mBadgePadding + mBadgeTextRect.height() / 2f);
                 break;
+            case Gravity.CENTER | Gravity.LEFT:
             case Gravity.CENTER | Gravity.START:
                 mBadgeCenter.x = mGravityOffsetX + mBadgePadding + rectWidth / 2f;
                 mBadgeCenter.y = mHeight / 2f;
                 break;
+            case Gravity.CENTER | Gravity.RIGHT:
             case Gravity.CENTER | Gravity.END:
                 mBadgeCenter.x = mWidth - (mGravityOffsetX + mBadgePadding + rectWidth / 2f);
                 mBadgeCenter.y = mHeight / 2f;
@@ -787,14 +793,20 @@ public class BadgeView extends View {
      *                Gravity.CENTER | Gravity.START , Gravity.CENTER | Gravity.END
      */
     public BadgeView setBadgeGravity(int gravity) {
-        if (gravity == (Gravity.START | Gravity.TOP) ||
+        if (gravity == (Gravity.LEFT | Gravity.TOP) ||
+                gravity == (Gravity.START | Gravity.TOP) ||
+                gravity == (Gravity.RIGHT | Gravity.TOP) ||
                 gravity == (Gravity.END | Gravity.TOP) ||
+                gravity == (Gravity.LEFT | Gravity.BOTTOM) ||
                 gravity == (Gravity.START | Gravity.BOTTOM) ||
+                gravity == (Gravity.RIGHT | Gravity.BOTTOM) ||
                 gravity == (Gravity.END | Gravity.BOTTOM) ||
                 gravity == (Gravity.CENTER) ||
                 gravity == (Gravity.CENTER | Gravity.TOP) ||
                 gravity == (Gravity.CENTER | Gravity.BOTTOM) ||
+                gravity == (Gravity.CENTER | Gravity.LEFT) ||
                 gravity == (Gravity.CENTER | Gravity.START) ||
+                gravity == (Gravity.CENTER | Gravity.RIGHT) ||
                 gravity == (Gravity.CENTER | Gravity.END)) {
             mBadgeGravity = gravity;
             invalidate();
