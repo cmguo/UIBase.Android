@@ -121,15 +121,14 @@ class ZListWidgetCache {
 
     companion object {
 
-        internal fun onItemClicked(listView: RecyclerView, view: View) {
-            if (view is ZListItemView && view._contentType != null) {
+        internal fun onItemClicked(listView: ZListView, view: View) {
+            if (view is ZListItemView) {
                 when (view._contentType) {
-                    ZListItemView.ContentType.Button -> (listView as ZListWidgetCache).listItemChanged(view, null)
+                    ZListItemView.ContentType.Button -> listView.listItemChanged(view, null)
                     ZListItemView.ContentType.CheckBox -> (view._contentView as? ZCheckBox)?.toggle()
                     ZListItemView.ContentType.RadioButton -> (view._contentView as? ZRadioButton)?.toggle()
                     ZListItemView.ContentType.SwitchButton -> (view._contentView as? ZSwitchButton)?.toggle()
-                    else -> {
-                    }
+                    else -> listView.listItemChanged(view, null)
                 }
             }
         }

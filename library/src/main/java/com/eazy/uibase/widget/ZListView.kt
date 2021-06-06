@@ -60,7 +60,7 @@ class ZListView @JvmOverloads constructor(
         super.setAdapter(adapter)
         if (adapter is RecyclerViewAdapter) {
             adapter.setOnItemClickListener { listView: RecyclerView, view: View, _: Int, _: Any ->
-                ZListWidgetCache.onItemClicked(listView, view)
+                ZListWidgetCache.onItemClicked(listView as ZListView, view)
             }
             adapter.setOnViewBindingCreateListener { _: RecyclerView, binding: ViewBinding ->
                 binding.root.findViewById<ZCheckBox>(R.id.checkBox)?.setOnCheckedStateChangeListener(object: ZCheckBox.OnCheckedStateChangeListener {
