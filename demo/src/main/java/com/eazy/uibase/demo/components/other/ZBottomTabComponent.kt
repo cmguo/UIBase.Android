@@ -29,6 +29,6 @@ class ZBottomTabComponent : Component {
     }
 
     override fun fragmentClass(): Class<out ComponentFragment<*, *, *>> {
-        return ZTabBarFragment::class.java
+        return ContributionRequestFragment::class.java
     }
 }
