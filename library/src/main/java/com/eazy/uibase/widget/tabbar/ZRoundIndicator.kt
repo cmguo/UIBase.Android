@@ -32,7 +32,7 @@ class ZRoundIndicator @JvmOverloads constructor(
         get() = verticalPadding + shadowRadius.toInt()
         set(value) { verticalPadding = value - shadowRadius.toInt() }
 
-    var borderRadius: Float
+    var cornerRadius: Float
         get() = roundRadius
         set(value) { roundRadius = value }
 
@@ -65,7 +65,7 @@ class ZRoundIndicator @JvmOverloads constructor(
         mode = a.getInt(R.styleable.ZRoundIndicator_widthMode, mode)
         paddingX = a.getDimensionPixelSize(R.styleable.ZRoundIndicator_paddingX, paddingX)
         paddingY = a.getDimensionPixelSize(R.styleable.ZRoundIndicator_paddingY, paddingY)
-        roundRadius = a.getDimension(R.styleable.ZRoundIndicator_borderRadius, roundRadius)
+        roundRadius = a.getDimension(R.styleable.ZRoundIndicator_cornerRadius, roundRadius)
         shadowRadius = a.getDimension(R.styleable.ZRoundIndicator_shadowRadius, shadowRadius)
         color = a.getColor(R.styleable.ZRoundIndicator_color, color)
         splitterWidth = context.resources.getDimension(R.dimen.round_indicator_splitter_width)

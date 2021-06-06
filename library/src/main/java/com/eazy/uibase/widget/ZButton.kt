@@ -161,7 +161,7 @@ open class ZButton @JvmOverloads constructor(
     private var _text: CharSequence? = null
 
     data class TypeStyles(val textColor: ColorStateList?, val backgroundColor: ColorStateList?, val iconPosition: IconPosition)
-    data class SizeStyles(val height: Int, val radius: Float, val padding: Int,
+    data class SizeStyles(val height: Int, val cornerRadius: Float, val padding: Int,
                           val textSize: Float, val iconSize: Int, val iconPadding: Int)
 
     private lateinit var _typeStyles: TypeStyles
@@ -248,7 +248,7 @@ open class ZButton @JvmOverloads constructor(
             val size2 = if (size >= 0) sizeStyles(context, ButtonSize.values()[size].resId) else null
             val styles = SizeStyles(
                 a.getDimensionPixelSize(R.styleable.ZButton_Size_height, size2?.height ?: 0),
-                a.getDimension(R.styleable.ZButton_Size_borderRadius, size2?.radius ?: 0f),
+                a.getDimension(R.styleable.ZButton_Size_cornerRadius, size2?.cornerRadius ?: 0f),
                 a.getDimensionPixelSize(R.styleable.ZButton_Size_paddingX, size2?.padding ?: 0),
                 a.getDimension(R.styleable.ZButton_Size_textSize, size2?.textSize ?: 0f),
                 a.getDimensionPixelSize(R.styleable.ZButton_Size_iconSize, size2?.iconSize ?: 0),
@@ -262,7 +262,7 @@ open class ZButton @JvmOverloads constructor(
             // it's stateful, so can't shard
             if (types.backgroundColor == null)
                 return null
-            return RoundDrawable(types.backgroundColor, sizes.radius)
+            return RoundDrawable(types.backgroundColor, sizes.cornerRadius)
         }
     }
 

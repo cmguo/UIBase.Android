@@ -17,7 +17,7 @@ class ZTabBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.tabBarStyle
 ) : MagicIndicator(context, attrs, defStyleAttr) {
 
-    var borderRadius = 0f
+    var cornerRadius = 0f
 
     private val backgroundPaint = Paint()
     private val bounds = RectF()
@@ -44,7 +44,7 @@ class ZTabBar @JvmOverloads constructor(
 
     override fun draw(canvas: Canvas) {
         bounds.set(0f, 0f, width.toFloat(), height.toFloat())
-        canvas.drawRoundRect(bounds, borderRadius, borderRadius, backgroundPaint)
+        canvas.drawRoundRect(bounds, cornerRadius, cornerRadius, backgroundPaint)
         super.draw(canvas)
     }
 

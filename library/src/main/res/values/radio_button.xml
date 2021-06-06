@@ -20,7 +20,7 @@
 
     <style name="ZRadioButton.Background">
         <item name="fillColor">@color/bluegrey_00_disabled</item>
-        <item name="borderRadius">@dimen/radio_button_radius</item>
+        <item name="cornerRadius">@dimen/radio_button_radius</item>
         <item name="borderSize">@dimen/radio_button_border_size</item>
         <item name="borderColor">@color/bluegrey_500_checked_disabled</item>
         <item name="android:width">@dimen/radio_button_icon_size</item>
@@ -31,7 +31,7 @@
 
     <style name="ZRadioButton.Foreground">
         <item name="fillColor">@color/transparent_checked_disabled</item>
-        <item name="borderRadius">@dimen/radio_button_radius</item>
+        <item name="cornerRadius">@dimen/radio_button_radius</item>
         <item name="borderSize">@dimen/radio_button_border_size2</item>
         <item name="android:width">@dimen/check_box_icon_size</item>
         <item name="android:height">@dimen/check_box_icon_size</item>

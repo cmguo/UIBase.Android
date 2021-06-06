@@ -17,14 +17,14 @@
 
     <style name="ZSwitchButton.Track">
         <item name="fillColor">@color/bluegrey_300_checked</item>
-        <item name="borderRadius">@dimen/switch_button_radius</item>
+        <item name="cornerRadius">@dimen/switch_button_radius</item>
     </style>
 
     <!-- thumb drawable -->
 
     <style name="ZSwitchButton.Thumb">
         <item name="fillColor">@color/bluegrey_00</item>
-        <item name="borderRadius">@dimen/switch_button_thumb_radius</item>
+        <item name="cornerRadius">@dimen/switch_button_thumb_radius</item>
         <item name="borderSize">@dimen/switch_button_thumb_padding</item>
         <item name="android:width">@dimen/switch_button_thumb_size</item>
         <item name="android:height">@dimen/switch_button_thumb_size</item>

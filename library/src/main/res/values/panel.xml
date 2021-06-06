@@ -7,7 +7,7 @@
         <attr name="titleBar" format="reference"/>
         <attr name="content"/>
         <attr name="bottomButton" format="reference"/>
-        <attr name="borderRadius"/>
+        <attr name="cornerRadius"/>
     </declare-styleable>
 
     <dimen name="panel_bottom_height">48dp</dimen>
@@ -18,7 +18,7 @@
         <item name="android:orientation">vertical</item>
         <item name="android:minHeight">200dp</item>
         <item name="android:maxHeight">600dp</item>
-        <item name="borderRadius">@dimen/panel_border_radius</item>
+        <item name="cornerRadius">@dimen/panel_border_radius</item>
     </style>
 
     <style name="ZButton.Panel" parent="ZButton.TitleBar">

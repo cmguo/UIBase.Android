@@ -14,7 +14,7 @@
         <attr name="lineWidth" format="dimension" />
         <attr name="lineHeight" format="dimension" />
         <attr name="longLineHeight" format="dimension" />
-        <attr name="borderRadius"/>
+        <attr name="cornerRadius"/>
         <attr name="offsetX" format="dimension"/>
         <attr name="offsetY" format="dimension"/>
         <attr name="color"/>
@@ -34,7 +34,7 @@
         <item name="widthMode">exactly</item>
         <item name="lineWidth">@dimen/line_indicator_line_width</item>
         <item name="lineHeight">@dimen/line_indicator_line_height</item>
-        <item name="borderRadius">@dimen/line_indicator_border_radius</item>
+        <item name="cornerRadius">@dimen/line_indicator_border_radius</item>
         <item name="offsetX">@dimen/line_indicator_offset_x</item>
         <item name="offsetY">@dimen/line_indicator_offset_y</item>
         <item name="color">@color/line_indicator_color</item>
@@ -46,7 +46,7 @@
     <attr name="roundIndicatorStyle" format="reference"/>
 
     <declare-styleable name="ZRoundIndicator">
-        <attr name="borderRadius"/>
+        <attr name="cornerRadius"/>
         <attr name="shadowRadius"/>
         <attr name="widthMode" />
         <attr name="paddingX" format="dimension"/>
@@ -64,7 +64,7 @@
     <color name="round_indicator_splitter_color">@color/bluegrey_300</color>
 
     <style name="ZRoundIndicator">
-        <item name="borderRadius">@dimen/round_indicator_border_radius</item>
+        <item name="cornerRadius">@dimen/round_indicator_border_radius</item>
         <item name="shadowRadius">@dimen/round_indicator_shadow_radius</item>
         <item name="splitterHeight">@dimen/round_indicator_splitter_height</item>
         <item name="color">@color/round_indicator_color</item>
@@ -100,7 +100,7 @@
 
     <declare-styleable name="ZTabNavigator">
         <attr name="backgroundColor"/>
-        <attr name="borderRadius"/>
+        <attr name="cornerRadius"/>
         <attr name="gravityCenter" format="boolean"/>
     </declare-styleable>
 
@@ -119,7 +119,7 @@
 
     <style name="ZTabNavigator.Round" parent="ZTabNavigator">
         <item name="backgroundColor">@color/tab_nav_round_background_color</item>
-        <item name="borderRadius">@dimen/tab_nav_border_radius</item>
+        <item name="cornerRadius">@dimen/tab_nav_border_radius</item>
     </style>
 
     <style name="ZTabNavigator.Frame" parent="ZTabNavigator">

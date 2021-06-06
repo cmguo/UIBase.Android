@@ -43,7 +43,7 @@ class ZDropDown @JvmOverloads constructor(
             setPadding(padding, padding, padding, padding)
         }
 
-    var borderRadius = 0f
+    var cornerRadius = 0f
 
     private val listView: RecyclerView
     private val adapter = DropDownAdapter(this)
@@ -68,7 +68,7 @@ class ZDropDown @JvmOverloads constructor(
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZDropDown, defStyleAttr, 0)
         shadowRadius = a.getDimensionPixelSize(R.styleable.ZDropDown_shadowRadius, 0).toFloat()
-        borderRadius = a.getDimensionPixelSize(R.styleable.ZDropDown_borderRadius, 0).toFloat()
+        cornerRadius = a.getDimensionPixelSize(R.styleable.ZDropDown_cornerRadius, 0).toFloat()
         backgroundPaint.color = a.getColor(R.styleable.ZDropDown_backgroundColor, Color.WHITE)
         a.recycle()
     }
@@ -92,7 +92,7 @@ class ZDropDown @JvmOverloads constructor(
         bounds.set(0f, 0f, width.toFloat(), height.toFloat())
         bounds.inset(shadowRadius, shadowRadius)
         backgroundPaint.setShadowLayer(shadowRadius, 0f, 0f, Color.GRAY)
-        canvas?.drawRoundRect(bounds, borderRadius, borderRadius, backgroundPaint)
+        canvas?.drawRoundRect(bounds, cornerRadius, cornerRadius, backgroundPaint)
     }
 
     override fun onDetachedFromWindow() {

@@ -93,7 +93,7 @@ class ZTabBarFragment : ComponentFragment<TabBarFragmentBinding?, ZTabBarFragmen
         @Title("圆角尺寸")
         @Description("圆角指示器的圆角半径")
         @Style(DimenStyle::class)
-        var borderRadius = 8f
+        var cornerRadius = 8f
 
         @Bindable
         @Title("横向填充")

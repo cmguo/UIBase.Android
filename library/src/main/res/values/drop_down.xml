@@ -4,14 +4,14 @@
     <attr name="dropDownStyle" format="reference"/>
 
     <declare-styleable name="ZDropDown">
-        <attr name="backgroundColor" />
-        <attr name="borderRadius" format="dimension" />
+        <attr name="backgroundColor"/>
+        <attr name="cornerRadius"/>
         <attr name="shadowRadius" format="dimension" />
     </declare-styleable>
 
     <color name="drop_down_background_color">@color/bluegrey_00</color>
     <dimen name="drop_down_shadow_radius">6dp</dimen>
-    <dimen name="drop_down_border_radius">8dp</dimen>
+    <dimen name="drop_down_corner_radius">8dp</dimen>
     <dimen name="drop_down_max_height">400dp</dimen>
     <dimen name="drop_down_item_padding_x">16dp</dimen>
     <dimen name="drop_down_item_padding_y">12dp</dimen>
@@ -24,7 +24,7 @@
         <item name="android:orientation">vertical</item>
         <item name="backgroundColor">@color/drop_down_background_color</item>
         <item name="shadowRadius">@dimen/drop_down_shadow_radius</item>
-        <item name="borderRadius">@dimen/drop_down_border_radius</item>
+        <item name="cornerRadius">@dimen/drop_down_corner_radius</item>
     </style>
 
 </resources>

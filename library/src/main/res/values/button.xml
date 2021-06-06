@@ -37,7 +37,7 @@
 
     <declare-styleable name="ZButton.Size">
         <attr name="height"/>
-        <attr name="borderRadius"/>
+        <attr name="cornerRadius"/>
         <attr name="paddingX"/>
         <attr name="textSize"/>
         <attr name="iconSize"/>
@@ -91,7 +91,7 @@
 
     <style name="ZButton.Appearance.Large" parent="ZButton.Appearance">
         <item name="height">44dp</item>
-        <item name="borderRadius">24dp</item>
+        <item name="cornerRadius">24dp</item>
         <item name="paddingX">24dp</item>
         <item name="textSize">18sp</item>
         <item name="iconSize">20dp</item>
@@ -100,7 +100,7 @@
 
     <style name="ZButton.Appearance.Middle" parent="ZButton.Appearance">
         <item name="height">36dp</item>
-        <item name="borderRadius">18dp</item>
+        <item name="cornerRadius">18dp</item>
         <item name="paddingX">16dp</item>
         <item name="textSize">16sp</item>
         <item name="iconSize">18dp</item>
@@ -109,7 +109,7 @@
 
     <style name="ZButton.Appearance.Small" parent="ZButton.Appearance">
         <item name="height">24dp</item>
-        <item name="borderRadius">12dp</item>
+        <item name="cornerRadius">12dp</item>
         <item name="paddingX">12dp</item>
         <item name="textSize">14sp</item>
         <item name="iconSize">16dp</item>
@@ -118,7 +118,7 @@
 
     <style name="ZButton.Appearance.Thin" parent="ZButton.Appearance">
         <item name="height">24dp</item>
-        <item name="borderRadius">0dp</item>
+        <item name="cornerRadius">0dp</item>
         <item name="paddingX">0dp</item>
         <item name="textSize">14sp</item>
         <item name="iconSize">16dp</item>

@@ -15,11 +15,11 @@ class ZTabNavigator @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.tabNavigatorStyle, defStyleRes: Int = 0
 ) : CommonNavigator(context, attrs, defStyleAttr) {
 
-    var borderRadius = 0f
+    var cornerRadius = 0f
         set(value) {
             field = value
             if (titleContainer != null && value > 0) {
-                val i = borderRadius.toInt()
+                val i = cornerRadius.toInt()
                 val lp = titleContainer.layoutParams as FrameLayout.LayoutParams
                 lp.marginStart = i
                 lp.marginEnd = i
@@ -40,7 +40,7 @@ class ZTabNavigator @JvmOverloads constructor(
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZTabNavigator, defStyleAttr, defStyleRes)
-        borderRadius = a.getDimension(R.styleable.ZTabNavigator_borderRadius, borderRadius)
+        cornerRadius = a.getDimension(R.styleable.ZTabNavigator_cornerRadius, cornerRadius)
         gravityCenter = a.getBoolean(R.styleable.ZTabNavigator_gravityCenter, gravityCenter)
         _backgroundColorId = a.getResourceId(R.styleable.ZTabNavigator_backgroundColor, 0)
         backgroundPaint.color = a.getColor(R.styleable.ZTabNavigator_backgroundColor, -1)
@@ -52,12 +52,12 @@ class ZTabNavigator @JvmOverloads constructor(
     override fun init() {
         super.init()
         // sync margin
-        borderRadius = borderRadius
+        cornerRadius = cornerRadius
     }
 
     override fun draw(canvas: Canvas) {
         bounds.set(0f, 0f, width.toFloat(), height.toFloat())
-        canvas.drawRoundRect(bounds, borderRadius, borderRadius, backgroundPaint)
+        canvas.drawRoundRect(bounds, cornerRadius, cornerRadius, backgroundPaint)
         super.draw(canvas)
     }
 

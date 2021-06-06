@@ -12,7 +12,7 @@
         <item name="textColor">@color/bluegrey_700</item>
         <item name="backgroundColor">@color/transparent_pressed_disabled</item>
         <item name="height">66dp</item>
-        <item name="borderRadius">0dp</item>
+        <item name="cornerRadius">0dp</item>
         <item name="paddingX">0dp</item>
         <item name="textSize">12sp</item>
         <item name="iconSize">40dp</item>

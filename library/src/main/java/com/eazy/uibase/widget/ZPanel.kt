@@ -46,7 +46,7 @@ class ZPanel @JvmOverloads constructor(
             syncContent()
         }
 
-    var borderRadius = 0f
+    var cornerRadius = 0f
         set(value) {
             field = value
             syncBackground()
@@ -135,7 +135,7 @@ class ZPanel @JvmOverloads constructor(
         content = a.getResourceId(R.styleable.ZPanel_content, 0)
         titleBar = a.getResourceId(R.styleable.ZPanel_titleBar, 0)
         bottomButton = a.getResourceId(R.styleable.ZPanel_bottomButton, 0)
-        borderRadius = a.getDimension(R.styleable.ZPanel_borderRadius, borderRadius)
+        cornerRadius = a.getDimension(R.styleable.ZPanel_cornerRadius, cornerRadius)
     }
 
     private fun syncTitleBar() {
@@ -184,7 +184,7 @@ class ZPanel @JvmOverloads constructor(
         val drawable = GradientDrawable()
         drawable.shape = GradientDrawable.RECTANGLE
         drawable.color = ContextCompat.getColorStateList(context, R.color.bluegrey_00)
-        drawable.cornerRadii = floatArrayOf(borderRadius, borderRadius, borderRadius, borderRadius, 0f, 0f, 0f, 0f)
+        drawable.cornerRadii = floatArrayOf(cornerRadius, cornerRadius, cornerRadius, cornerRadius, 0f, 0f, 0f, 0f)
         background = drawable
     }
 

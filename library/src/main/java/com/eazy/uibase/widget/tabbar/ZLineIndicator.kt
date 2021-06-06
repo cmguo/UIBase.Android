@@ -24,7 +24,7 @@ class ZLineIndicator @JvmOverloads constructor(
         get() = WidthMode.values()[mode]
         set(value) {  mode = value.ordinal }
 
-    var borderRadius: Float
+    var cornerRadius: Float
         get() = roundRadius
         set(value) { roundRadius = value }
 
@@ -65,7 +65,7 @@ class ZLineIndicator @JvmOverloads constructor(
         longLineHeight = a.getDimension(R.styleable.ZLineIndicator_longLineHeight, longLineHeight)
         offsetX = a.getDimension(R.styleable.ZLineIndicator_offsetX, offsetX)
         offsetY = a.getDimension(R.styleable.ZLineIndicator_offsetY, offsetY)
-        roundRadius = a.getDimension(R.styleable.ZLineIndicator_borderRadius, roundRadius)
+        cornerRadius = a.getDimension(R.styleable.ZLineIndicator_cornerRadius, roundRadius)
         color = a.getColor(R.styleable.ZLineIndicator_color, color)
         longLineColor = a.getColor(R.styleable.ZLineIndicator_longLineColor, longLineColor)
         a.recycle()

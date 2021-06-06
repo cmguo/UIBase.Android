@@ -6,7 +6,7 @@
     <style name="ZButton.Bottom">
         <item name="textColor">@color/bluegrey_700</item>
         <item name="height">50dp</item>
-        <item name="borderRadius">0dp</item>
+        <item name="cornerRadius">0dp</item>
         <item name="paddingX">0dp</item>
         <item name="textSize">10sp</item>
         <item name="iconSize">24dp</item>
