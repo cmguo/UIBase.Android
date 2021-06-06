@@ -171,8 +171,8 @@ class ZDialog @JvmOverloads constructor(
         _inited = true
 
         syncBackground()
-        val radius = (background as RoundDrawable).borderRadius
-        _imageView.roundRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
+        val radius = (background as RoundDrawable).cornerRadius
+        _imageView.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
     }
 
     fun popUp(fragmentManager: FragmentManager) {

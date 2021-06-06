@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layoutManagerFactory="@{LayoutManagers.grid(6)}"
+            app:layoutManager="@{LayoutManagers.grid(6)}"
             app:data="@{model.drawables}"
             app:itemBinding="@{styles.itemBinding}"
             app:itemDecoration="@{styles.itemDecoration}"

@@ -45,7 +45,7 @@ class ZAvatarViewFragment : ComponentFragment<AvatarViewFragmentBinding?,
         @Title("剪切半径")
         @Description("圆角剪切时，剪切圆角半径，设为0，则为直角")
         @Style(DimenStyle::class)
-        var roundRadius = 0f
+        var cornerRadius = 0f
 
         @Bindable
         @Title("边框宽度")

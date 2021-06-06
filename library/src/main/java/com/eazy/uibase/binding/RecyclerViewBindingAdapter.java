@@ -5,7 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eazy.uibase.view.list.ItemBindings;
-import com.eazy.uibase.view.list.LayoutManagerFactory;
+import com.eazy.uibase.view.list.ItemDecorations;
+import com.eazy.uibase.view.list.LayoutManagers;
 import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
 import java.util.Arrays;
@@ -59,17 +60,28 @@ public class RecyclerViewBindingAdapter {
         }
     }
 
-    @BindingAdapter(value = {"layoutManager", "layoutManagerFactory"}, requireAll = false)
-    public static void setRecyclerViewLayoutManager(RecyclerView view, RecyclerView.LayoutManager manager, LayoutManagerFactory factory) {
+    @BindingAdapter("layoutManager")
+    public static void setRecyclerViewLayoutManager(RecyclerView view, RecyclerView.LayoutManager manager) {
         if (manager != null)
             view.setLayoutManager(manager);
-        else if (factory != null)
-            view.setLayoutManager(factory.create(view));
+    }
+
+    @BindingAdapter("layoutManager")
+    public static void setRecyclerViewLayoutManager(RecyclerView view, LayoutManagers.Builder factory) {
+        if (factory != null)
+            view.setLayoutManager(factory.build(view));
     }
 
     @BindingAdapter("itemDecoration")
     public static void setRecyclerViewItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decoration) {
         view.addItemDecoration(decoration);
+    }
+
+    @BindingAdapter("itemDecoration")
+    public static void setRecyclerViewItemDecoration(RecyclerView view, ItemDecorations.Builder builder) {
+        while (view.getItemDecorationCount() > 0)
+            view.removeItemDecorationAt(0);
+        view.addItemDecoration(builder.build(view));
     }
 
     @BindingAdapter("hasFixedSize")

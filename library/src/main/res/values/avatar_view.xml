@@ -15,9 +15,9 @@
             <enum name="wholeView" value="0"/>
             <enum name="drawable" value="1"/>
         </attr>
-        <attr name="roundRadius" format="dimension"/>
-        <attr name="borderColor" format="color" />
-        <attr name="borderWidth" />
+        <attr name="cornerRadius"/>
+        <attr name="borderColor"/>
+        <attr name="borderWidth"/>
     </declare-styleable>
 
     <style name="ZAvatarView">

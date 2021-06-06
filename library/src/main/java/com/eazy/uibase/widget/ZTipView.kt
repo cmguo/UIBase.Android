@@ -372,7 +372,7 @@ class ZTipView @JvmOverloads constructor(
         val a = context.obtainStyledAttributes(appearance, R.styleable.ZTipView_Appearance)
         _frameColor = a.getColor(R.styleable.ZTipView_Appearance_frameColor, 0)
         _frameAlpha = a.getFloat(R.styleable.ZTipView_Appearance_frameAlpha, 1f)
-        _frameDrawable.borderRadius = a.getDimension(R.styleable.ZTipView_Appearance_frameRadius, 0f)
+        _frameDrawable.cornerRadius = a.getDimension(R.styleable.ZTipView_Appearance_frameRadius, 0f)
         val textAppearance = a.getResourceId(R.styleable.ZTipView_Appearance_textAppearance, 0)
         if (textAppearance > 0)
             TextViewCompat.setTextAppearance(_textView, textAppearance)

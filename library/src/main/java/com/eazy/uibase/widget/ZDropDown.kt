@@ -58,7 +58,7 @@ class ZDropDown @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.drop_down, this)
         listView = findViewById(R.id.listView)
         listView.adapter = adapter
-        listView.addItemDecoration(DividerDecoration(VERTICAL, 1f, ContextCompat.getColor(context, R.color.bluegrey_100)))
+        listView.addItemDecoration(DividerDecoration(context, VERTICAL, 1f, ContextCompat.getColor(context, R.color.bluegrey_100)))
         listView.layoutManager = LinearLayoutManager(context)
 
         setWillNotDraw(false)

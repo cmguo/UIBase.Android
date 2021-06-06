@@ -86,7 +86,7 @@ class ZActionSheet @JvmOverloads constructor(
         _listView = findViewById(R.id.listView)
 
         _listView.adapter = _adapter
-        _listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.addItemDecoration(DividerDecoration(context, LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
         _listView.layoutManager = LinearLayoutManager(context)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZActionSheet, defStyleAttr, 0)
@@ -116,7 +116,7 @@ class ZActionSheet @JvmOverloads constructor(
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
         _listView.removeItemDecorationAt(0)
-        _listView.addItemDecoration(DividerDecoration(LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.addItemDecoration(DividerDecoration(context, LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
     }
 
     /* private */

@@ -3,9 +3,13 @@
 
     <declare-styleable name="RoundDrawable">
         <attr name="fillColor" format="color"/>
-        <attr name="borderColor"/>
+        <attr name="borderColor" format="color"/>
         <attr name="borderSize" format="dimension"/>
-        <attr name="borderRadius"/>
+        <attr name="cornerRadius"/>
+        <attr name="android:topLeftRadius"/>
+        <attr name="android:topRightRadius"/>
+        <attr name="android:bottomRightRadius"/>
+        <attr name="android:bottomLeftRadius"/>
         <attr name="android:width"/>
         <attr name="android:height"/>
     </declare-styleable>

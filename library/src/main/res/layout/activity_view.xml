@@ -23,7 +23,7 @@
         android:paddingTop="@dimen/activity_view_item_padding_y"
         android:paddingBottom="@dimen/activity_view_item_padding_y"
         app:itemBinding="@{@layout/activity_view_item}"
-        app:layoutManagerFactory="@{LayoutManagers.linear(0, false)}"
+        app:layoutManager="@{LayoutManagers.linear(0, false)}"
         app:itemDecoration="@{ItemDecorations.divider(0, @dimen/activity_view_item_padding, @dimen/activity_view_item_padding_x)}"
         app:itemClicked="@{listener}"
         app:data="@{list}"

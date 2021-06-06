@@ -23,6 +23,7 @@ import com.eazy.uibase.demo.core.style.DimenStyle;
 import com.eazy.uibase.demo.databinding.StylesFragmentBinding;
 import com.eazy.uibase.view.list.BaseItemBinding;
 import com.eazy.uibase.view.list.DividerDecoration;
+import com.eazy.uibase.view.list.ItemDecorations;
 import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
 public class StylesFragment extends Fragment {
@@ -111,7 +112,7 @@ public class StylesFragment extends Fragment {
 
     public StylesAdapter adapter = new StylesAdapter();
     public StyleItemBinding itemBinding = new StyleItemBinding();
-    public RecyclerView.ItemDecoration itemDecoration = new DividerDecoration(LinearLayout.VERTICAL, 1);
+    public ItemDecorations.Builder itemDecoration = ItemDecorations.divider(LinearLayout.VERTICAL, 1);
     public RecyclerViewAdapter.OnItemClickListener itemClicked = (rv, v, position, object) -> adapter.toggle(position);
 
     @Override

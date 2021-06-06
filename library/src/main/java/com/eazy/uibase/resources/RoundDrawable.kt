@@ -15,7 +15,11 @@ open class RoundDrawable : Drawable {
 
     var borderSize = 0f
 
-    var borderRadius = 0f
+    var cornerRadius = 0f
+
+    var cornerRadii: FloatArray? = null
+
+    var padding: RectF? = null
 
     var width = 0
 
@@ -33,19 +37,32 @@ open class RoundDrawable : Drawable {
         fillColor = a.getColorStateList(R.styleable.RoundDrawable_fillColor)
         borderColor = a.getColorStateList(R.styleable.RoundDrawable_borderColor)
         borderSize = a.getDimension(R.styleable.RoundDrawable_borderSize, borderSize)
-        borderRadius = a.getDimension(R.styleable.RoundDrawable_borderRadius, borderRadius)
+        cornerRadius = a.getDimension(R.styleable.RoundDrawable_cornerRadius, borderSize)
+        val topLeftRadius = a.getDimension(
+            R.styleable.RoundDrawable_android_topLeftRadius, cornerRadius)
+        val topRightRadius = a.getDimension(
+            R.styleable.RoundDrawable_android_topRightRadius, cornerRadius)
+        val bottomLeftRadius = a.getDimension(
+            R.styleable.RoundDrawable_android_bottomLeftRadius, cornerRadius)
+        val bottomRightRadius = a.getDimension(
+            R.styleable.RoundDrawable_android_bottomRightRadius, cornerRadius)
+        if (topLeftRadius != cornerRadius || topRightRadius != cornerRadius
+            ||bottomLeftRadius != cornerRadius || bottomRightRadius != cornerRadius) {
+            cornerRadii = floatArrayOf(topLeftRadius, topLeftRadius, topRightRadius, topRightRadius,
+            bottomRightRadius, bottomRightRadius, bottomLeftRadius, bottomLeftRadius)
+        }
         width = a.getDimensionPixelSize(R.styleable.RoundDrawable_android_width, width)
         height = a.getDimensionPixelSize(R.styleable.RoundDrawable_android_height, height)
         a.recycle()
     }
 
-    constructor(fillColor: ColorStateList, borderRadius: Float) : this() {
+    constructor(fillColor: ColorStateList, cornerRadius: Float) : this() {
         this.fillColor = fillColor
-        this.borderRadius = borderRadius
+        this.cornerRadius = cornerRadius
     }
 
-    constructor(fillColor: ColorStateList, borderRadius: Float, borderColor: ColorStateList, borderSize: Float)
-        : this(fillColor, borderRadius)
+    constructor(fillColor: ColorStateList, cornerRadius: Float, borderColor: ColorStateList, borderSize: Float)
+        : this(fillColor, cornerRadius)
     {
         this.borderColor = borderColor
         this.borderSize = borderSize
@@ -53,17 +70,24 @@ open class RoundDrawable : Drawable {
 
     override fun draw(canvas: Canvas) {
         val bounds = RectF(this.bounds)
+        val padding = this.padding
+        if (padding != null) {
+            bounds.left += padding.left
+            bounds.right -= padding.right
+            bounds.top += padding.top
+            bounds.bottom -= padding.bottom
+        }
         if (fillColor != null) {
             paint.style = Paint.Style.FILL
             paint.color = fillColor!!.getColorForState(state, 0)
             paint.alpha = modulateAlpha(alpha, paint.alpha)
             bounds.inset(borderSize, borderSize)
-            borderRadius -= borderSize
-            if (borderRadius > 0)
-                canvas.drawRoundRect(bounds, borderRadius, borderRadius, paint)
+            cornerRadius -= borderSize
+            if (cornerRadius > 0)
+                canvas.drawRoundRect(bounds, cornerRadius, cornerRadius, paint)
             else
                 canvas.drawRect(bounds, paint)
-            borderRadius += borderSize
+            cornerRadius += borderSize
             bounds.inset(-borderSize, -borderSize)
         }
         if (borderSize > 0 && borderColor != null) {
@@ -72,12 +96,17 @@ open class RoundDrawable : Drawable {
             paint.alpha = modulateAlpha(alpha, paint.alpha)
             paint.strokeWidth = borderSize
             bounds.inset(borderSize / 2f, borderSize / 2f)
-            borderRadius -= borderSize /2f
-            if (borderRadius > 0)
-                canvas.drawRoundRect(bounds, borderRadius, borderRadius, paint)
-            else
-                canvas.drawRect(bounds, paint)
-            borderRadius += borderSize /2f
+            cornerRadius -= borderSize /2f
+            when {
+                cornerRadii != null -> {
+                    val path = Path()
+                    path.addRoundRect(bounds, cornerRadii!!, Path.Direction.CW)
+                    canvas.drawPath(path, paint)
+                }
+                cornerRadius > 0 -> canvas.drawRoundRect(bounds, cornerRadius, cornerRadius, paint)
+                else -> canvas.drawRect(bounds, paint)
+            }
+            cornerRadius += borderSize /2f
         }
     }
 
@@ -97,11 +126,13 @@ open class RoundDrawable : Drawable {
     }
 
     override fun getIntrinsicWidth(): Int {
-        return width
+        val padding = this.padding ?: return width
+        return width + (padding.left + padding.right).toInt()
     }
 
     override fun getIntrinsicHeight(): Int {
-        return height
+        val padding = this.padding ?: return height
+        return height + (padding.top + padding.bottom).toInt()
     }
 
     override fun isStateful(): Boolean {

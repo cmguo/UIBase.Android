@@ -44,13 +44,13 @@ class ZAvatarView @JvmOverloads constructor(
             }
         }
 
-    var roundRadius = 0f
+    var cornerRadius = 0f
         set(value) {
             field = value
             invalidate()
         }
 
-    var roundRadii: FloatArray? = null
+    var cornerRadii: FloatArray? = null
         set(value) {
             field = value
             invalidate()
@@ -168,10 +168,10 @@ class ZAvatarView @JvmOverloads constructor(
         _xferPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OVER)
         if (clipType == ClipType.Circle || clipType == ClipType.Ellipse) {
             dstCanvas.drawOval(_circleBounds, _xferPaint)
-        } else if (roundRadii != null) {
+        } else if (cornerRadii != null) {
             dstCanvas.drawPath(_roundPath!!, _xferPaint)
         } else {
-            dstCanvas.drawRoundRect(_circleBounds, roundRadius, roundRadius, _xferPaint)
+            dstCanvas.drawRoundRect(_circleBounds, cornerRadius, cornerRadius, _xferPaint)
         }
         // take photo of src
         if (_setXfermode != null) {
@@ -193,10 +193,10 @@ class ZAvatarView @JvmOverloads constructor(
         if (borderWidth > 0) {
             if (clipType == ClipType.Circle || clipType == ClipType.Ellipse) {
                 canvas.drawOval(_circleBounds, _borderPaint)
-            } else if (roundRadii != null) {
+            } else if (cornerRadii != null) {
                 canvas.drawPath(_roundPath!!, _borderPaint)
             } else {
-                canvas.drawRoundRect(_circleBounds, roundRadius, roundRadius, _borderPaint)
+                canvas.drawRoundRect(_circleBounds, cornerRadius, cornerRadius, _borderPaint)
             }
         }
     }
@@ -226,9 +226,9 @@ class ZAvatarView @JvmOverloads constructor(
         }
         if (borderWidth > 0)
             _circleBounds.inset(borderWidth / 2f, borderWidth / 2f)
-        if (roundRadii != null) {
+        if (cornerRadii != null) {
             val path = Path()
-            path.addRoundRect(_circleBounds, roundRadii!!, Path.Direction.CW)
+            path.addRoundRect(_circleBounds, cornerRadii!!, Path.Direction.CW)
             _roundPath = path
         }
         _clipBounds.set(imageBounds)
