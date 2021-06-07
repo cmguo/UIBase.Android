@@ -40,6 +40,7 @@ public class CalendarView extends FrameLayout {
     private long endTime;
     private long selectedTime;
     private IDaySelectedCallback selectedCallback;
+    private ViewPager viewPager;
 
     public CalendarView(Context context) {
         this(context, null);
@@ -52,13 +53,13 @@ public class CalendarView extends FrameLayout {
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
-        String selectedString = ta.getString(R.styleable.CalendarView_cvSelectedTime);
+        String selectedString = ta.getString(R.styleable.CalendarView_selectedTime);
         if (!TextUtils.isEmpty(selectedString))
             selectedTime = Long.parseLong(selectedString);
-        String startTimeString = ta.getString(R.styleable.CalendarView_cvStartTime);
+        String startTimeString = ta.getString(R.styleable.CalendarView_startTime);
         if (!TextUtils.isEmpty(startTimeString))
             startTime = Long.parseLong(startTimeString);
-        String endTimeString = ta.getString(R.styleable.CalendarView_cvEndTime);
+        String endTimeString = ta.getString(R.styleable.CalendarView_endTime);
         if (!TextUtils.isEmpty(endTimeString))
             endTime = Long.parseLong(endTimeString);
 
@@ -81,11 +82,29 @@ public class CalendarView extends FrameLayout {
         viewPager.setPageTransformer(true, new DepthPageTransformer());
         viewPager.setPadding(0, UIUtil.dip2px(context, 30), 0, 0);
         addView(viewPager, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        refreshViewPager();
+    }
 
-
-        CalendarAdapter adapter = new CalendarAdapter(context);
+    private void refreshViewPager() {
+        CalendarAdapter adapter = new CalendarAdapter(getContext());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(adapter.currentPages);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+        refreshViewPager();
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
+        refreshViewPager();
+    }
+
+    public void setSelectedTime(long selectedTime) {
+        this.selectedTime = selectedTime;
+        refreshViewPager();
     }
 
     public void setSelectedCallback(IDaySelectedCallback callback) {
