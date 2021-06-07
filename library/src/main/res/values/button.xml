@@ -101,7 +101,7 @@
 
     <style name="ZButton.Appearance.Large" parent="ZButton.Appearance">
         <item name="height">44dp</item>
-        <item name="cornerRadius">24dp</item>
+        <item name="cornerRadius">22dp</item>
         <item name="paddingX">24dp</item>
         <item name="textSize">18sp</item>
         <item name="iconSize">20dp</item>
