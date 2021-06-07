@@ -40,7 +40,7 @@ public class CalendarView extends FrameLayout {
     private long endTime;
     private long selectedTime;
     private IDaySelectedCallback selectedCallback;
-    private ViewPager viewPager;
+    private ViewPager viewPager = null;
 
     public CalendarView(Context context) {
         this(context, null);
@@ -78,7 +78,7 @@ public class CalendarView extends FrameLayout {
         addView(weekSymbolLayout, new LayoutParams(LayoutParams.MATCH_PARENT, UIUtil.dip2px(context, 34)));
 
         // week content view
-        ViewPager viewPager = new ViewPager(context);
+        viewPager = new ViewPager(context);
         viewPager.setPageTransformer(true, new DepthPageTransformer());
         viewPager.setPadding(0, UIUtil.dip2px(context, 30), 0, 0);
         addView(viewPager, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -86,6 +86,8 @@ public class CalendarView extends FrameLayout {
     }
 
     private void refreshViewPager() {
+        if (viewPager == null)
+            return;
         CalendarAdapter adapter = new CalendarAdapter(getContext());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(adapter.currentPages);
