@@ -79,7 +79,6 @@ public class CalendarView extends FrameLayout {
 
         // week content view
         viewPager = new ViewPager(context);
-        viewPager.setPageTransformer(true, new DepthPageTransformer());
         viewPager.setPadding(0, UIUtil.dip2px(context, 30), 0, 0);
         addView(viewPager, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         refreshViewPager();
@@ -140,7 +139,7 @@ public class CalendarView extends FrameLayout {
                 calendar.setTimeInMillis(System.currentTimeMillis());
                 calendar.set(Calendar.DAY_OF_WEEK, 1);
                 long currentWeekTime = calendar.getTimeInMillis();
-                currentPages = (int) ((currentWeekTime - startTime) / ONE_WEEK);
+                currentPages = (int) ((currentWeekTime - startTime) / ONE_WEEK) + 1;
             }
 
         }
@@ -196,8 +195,6 @@ public class CalendarView extends FrameLayout {
             dayList = dataStrategy.getCalendarData(calendar);
             calendar.setTimeInMillis(selectedTime);
             selectedDay = new DayBean(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), DayBean.STATE_FUTURE);
-            calendar.setTimeInMillis(startTime);
-            calendar.setTimeInMillis(endTime);
             resetDayState();
         }
 
@@ -214,10 +211,8 @@ public class CalendarView extends FrameLayout {
         public void onBindViewHolder(@NonNull DayViewHolder holder, int position) {
             Resources resources = context.getResources();
             DayBean dayBean = dayList.get(position);
-            holder.day.setText(String.valueOf(dayBean.isSpace() ? "" : dayBean.getDay()));
             if (dayBean.getState() == DayBean.STATE_TODAY) {
                 holder.day.setTextColor(resources.getColor(R.color.bluegrey_900));
-                holder.day.setText("今");
             } else if (dayBean.getState() == DayBean.STATE_FUTURE) {
                 holder.day.setTextColor(resources.getColor(R.color.bluegrey_900));
             } else {
@@ -229,8 +224,14 @@ public class CalendarView extends FrameLayout {
                 holder.day.setState(DayTextView.State.Selected);
             }
 
+            if (dayBean.isToady()) {
+                holder.day.setText("今");
+            } else {
+                holder.day.setText(String.valueOf(dayBean.isSpace() ? "" : dayBean.getDay()));
+            }
+
             holder.itemView.setOnClickListener(v -> {
-                if (!dayBean.isSpace() && dayBean.withByDayRange(startTime, endTime)) {
+                if (!dayBean.isSpace()) {
                     if (dayBean != selectedDay) {
                         selectedDay = dayBean;
                     }
@@ -251,12 +252,15 @@ public class CalendarView extends FrameLayout {
 
         public void resetDayState() {
             for (DayBean bean : dayList) {
-                if (bean == selectedDay) {
+                if (bean.isSameDay(selectedDay)) {
                     bean.setState(DayBean.STATE_SELECTED);
                 } else if (bean.isToady())
                     bean.setState(DayBean.STATE_TODAY);
                 else if (bean.withByDayRange(startTime, endTime))
                     bean.setState(DayBean.STATE_FUTURE);
+                else {
+                    bean.setState(DayBean.STATE_NORMAL);
+                }
             }
         }
 
