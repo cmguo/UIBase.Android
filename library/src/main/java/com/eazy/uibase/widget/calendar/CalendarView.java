@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CalendarView extends FrameLayout {
-    private static final String[] WeekSymbolString = {"周", "一", "二", "三", "四", "五", "六"};
+    private static final String[] WeekSymbolString = {"日", "一", "二", "三", "四", "五", "六"};
     private static final long ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
 
     private long startTime;
