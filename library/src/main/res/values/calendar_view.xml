@@ -28,7 +28,6 @@
     <declare-styleable name="CalendarView">
         <attr name="startTime" />
         <attr name="endTime" />
-        <attr name="selectedTime" format="string" />
     </declare-styleable>
 
 </resources>

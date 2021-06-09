@@ -38,9 +38,9 @@ public class CalendarView extends FrameLayout {
 
     private long startTime;
     private long endTime;
-    private long selectedTime;
+    private DayBean selectedDay;
     private IDaySelectedCallback selectedCallback;
-    private ViewPager viewPager = null;
+    private ViewPager viewPager;
 
     public CalendarView(Context context) {
         this(context, null);
@@ -53,9 +53,6 @@ public class CalendarView extends FrameLayout {
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
-        String selectedString = ta.getString(R.styleable.CalendarView_selectedTime);
-        if (!TextUtils.isEmpty(selectedString))
-            selectedTime = Long.parseLong(selectedString);
         String startTimeString = ta.getString(R.styleable.CalendarView_startTime);
         if (!TextUtils.isEmpty(startTimeString))
             startTime = Long.parseLong(startTimeString);
@@ -104,7 +101,9 @@ public class CalendarView extends FrameLayout {
     }
 
     public void setSelectedTime(long selectedTime) {
-        this.selectedTime = selectedTime;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(selectedTime);
+        selectedDay = new DayBean(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), DayBean.STATE_NORMAL);
         refreshViewPager();
     }
 
@@ -179,6 +178,11 @@ public class CalendarView extends FrameLayout {
         public boolean isViewFromObject(@NotNull View view, @NotNull Object object) {
             return view == object;
         }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
     }
 
     public interface IDaySelectedCallback {
@@ -188,13 +192,10 @@ public class CalendarView extends FrameLayout {
     class GridAdapter extends RecyclerView.Adapter<DayViewHolder> {
         private final ArrayList<DayBean> dayList;
         private final Context context;
-        private DayBean selectedDay;
 
         public GridAdapter(Context context, Calendar calendar, ICalendarDataStrategy dataStrategy) {
             this.context = context;
             dayList = dataStrategy.getCalendarData(calendar);
-            calendar.setTimeInMillis(selectedTime);
-            selectedDay = new DayBean(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), DayBean.STATE_FUTURE);
             resetDayState();
         }
 
@@ -212,7 +213,7 @@ public class CalendarView extends FrameLayout {
             Resources resources = context.getResources();
             DayBean dayBean = dayList.get(position);
             if (dayBean.getState() == DayBean.STATE_TODAY) {
-                holder.day.setTextColor(resources.getColor(R.color.bluegrey_900));
+                holder.day.setTextColor(resources.getColor(R.color.blue_600));
             } else if (dayBean.getState() == DayBean.STATE_FUTURE) {
                 holder.day.setTextColor(resources.getColor(R.color.bluegrey_900));
             } else {
@@ -226,13 +227,14 @@ public class CalendarView extends FrameLayout {
 
             if (dayBean.isToady()) {
                 holder.day.setText("今");
+
             } else {
                 holder.day.setText(String.valueOf(dayBean.isSpace() ? "" : dayBean.getDay()));
             }
 
             holder.itemView.setOnClickListener(v -> {
                 if (!dayBean.isSpace()) {
-                    if (dayBean != selectedDay) {
+                    if (selectedDay == null || !dayBean.isSameDay(selectedDay)) {
                         selectedDay = dayBean;
                     }
                     if (CalendarView.this.selectedCallback != null) {
@@ -240,6 +242,7 @@ public class CalendarView extends FrameLayout {
                     }
                     resetDayState();
                     notifyDataSetChanged();
+                    viewPager.getAdapter().notifyDataSetChanged();
 
                 }
             });
@@ -252,7 +255,7 @@ public class CalendarView extends FrameLayout {
 
         public void resetDayState() {
             for (DayBean bean : dayList) {
-                if (bean.isSameDay(selectedDay)) {
+                if (selectedDay != null && bean.isSameDay(selectedDay)) {
                     bean.setState(DayBean.STATE_SELECTED);
                 } else if (bean.isToady())
                     bean.setState(DayBean.STATE_TODAY);
