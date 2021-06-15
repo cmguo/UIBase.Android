@@ -38,6 +38,7 @@ public class CalendarView extends FrameLayout {
 
     private long startTime;
     private long endTime;
+    private long selectedTime = System.currentTimeMillis();
     private DayBean selectedDay;
     private IDaySelectedCallback selectedCallback;
     private ViewPager viewPager;
@@ -101,6 +102,7 @@ public class CalendarView extends FrameLayout {
     }
 
     public void setSelectedTime(long selectedTime) {
+        this.selectedTime = selectedTime;
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(selectedTime);
         selectedDay = new DayBean(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), DayBean.STATE_NORMAL);
@@ -125,7 +127,7 @@ public class CalendarView extends FrameLayout {
                 int startMonth = calendar.get(Calendar.DAY_OF_MONTH);
                 calendar.setTimeInMillis(endTime);
                 pages = calendar.get(Calendar.MONTH) - startMonth + 1;
-                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.setTimeInMillis(selectedTime);
                 currentPages = calendar.get(Calendar.MONTH) - startMonth;
             } else {
                 calendar.setTimeInMillis(startTime);
@@ -135,7 +137,7 @@ public class CalendarView extends FrameLayout {
                 calendar.set(Calendar.DAY_OF_WEEK, 1);
                 long endWeekTime = calendar.getTimeInMillis();
                 pages = (int) ((endWeekTime - startWeekTime) / ONE_WEEK) + 1;
-                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.setTimeInMillis(selectedTime);
                 calendar.set(Calendar.DAY_OF_WEEK, 1);
                 long currentWeekTime = calendar.getTimeInMillis();
                 currentPages = (int) ((currentWeekTime - startTime) / ONE_WEEK) + 1;
