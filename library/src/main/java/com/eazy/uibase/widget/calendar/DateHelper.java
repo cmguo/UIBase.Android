@@ -903,8 +903,9 @@ public class DateHelper {
      * @param diff
      * @return
      */
-    public static Calendar getCalendarWeekByDiff(int diff) {
+    public static Calendar getCalendarWeekByDiff(long baseTime,int diff) {
         Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(baseTime);
         c.set(Calendar.DAY_OF_WEEK, 1);
         c.add(Calendar.HOUR, diff * 7 * 24);
         return c;

@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CalendarView extends FrameLayout {
     private static final String[] WeekSymbolString = {"日", "一", "二", "三", "四", "五", "六"};
@@ -140,7 +141,7 @@ public class CalendarView extends FrameLayout {
                 calendar.setTimeInMillis(selectedTime);
                 calendar.set(Calendar.DAY_OF_WEEK, 1);
                 long currentWeekTime = calendar.getTimeInMillis();
-                currentPages = (int) ((currentWeekTime - startTime) / ONE_WEEK) + 1;
+                currentPages = (int) ((currentWeekTime + ONE_WEEK - 1 - startTime) / ONE_WEEK);
             }
 
         }
@@ -163,7 +164,7 @@ public class CalendarView extends FrameLayout {
                 calendar.add(Calendar.MONTH, position - currentPages);
                 recyclerView.setAdapter(new GridAdapter(context, calendar, new MonthCalendarDataStrategy()));
             } else {
-                calendar = DateHelper.getCalendarWeekByDiff(position - currentPages);
+                calendar = DateHelper.getCalendarWeekByDiff(startTime, position - 0);
                 recyclerView.setAdapter(new GridAdapter(context, calendar, new WeekCalendarDataStrategy()));
             }
 
