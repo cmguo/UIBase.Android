@@ -29,7 +29,9 @@ open class ZButton @JvmOverloads constructor(
         Secondary(R.style.ZButton_Appearance_Secondary),
         Tertiary(R.style.ZButton_Appearance_Tertiary),
         Danger(R.style.ZButton_Appearance_Danger),
-        Text(R.style.ZButton_Appearance_Text)
+        Text(R.style.ZButton_Appearance_Text),
+        TextTransparent(R.style.ZButton_Appearance_Text_Transparent),
+        TextTransparentLight(R.style.ZButton_Appearance_Text_Transparent_Light)
     }
 
     enum class ButtonSize(@StyleRes val resId: Int) {
@@ -366,9 +368,9 @@ open class ZButton @JvmOverloads constructor(
         val icon = if (loading) _loadingIcon else _icon
         if (icon != null) {
             icon.mutate()
-            if (icon is VectorDrawable || Drawables.isPureColor(icon)) {
-                icon.setTintList(textColors)
-            }
+//            if (icon is VectorDrawable || Drawables.isPureColor(icon)) {
+//                icon.setTintList(textColors)
+//            }
             val iconSize = _sizeStyles.iconSize
             icon.setBounds(0, 0, iconSize, iconSize)
         }

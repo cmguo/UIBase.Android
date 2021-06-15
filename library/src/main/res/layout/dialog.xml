@@ -7,6 +7,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content">
 
         <View
@@ -35,22 +36,22 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dialog_padding_x"
-        android:paddingRight="@dimen/dialog_padding_x"
-        android:paddingBottom="@dimen/dialog_bottom_padding"
+        android:paddingStart="@dimen/dialog_padding_x"
+        android:paddingEnd="@dimen/dialog_padding_x"
+        android:paddingBottom="18dp"
+        android:paddingTop="@dimen/dialog_padding_x"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dialog_title_padding"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.Z.Head2"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:visibility="gone"
-            />
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/textView2"
@@ -58,9 +59,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.Z.Body.Middle"
-            android:ellipsize="marquee"
-            android:visibility="gone"
-            />
+            android:textColor="@color/bluegrey_800"
+            android:ellipsize="end"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"

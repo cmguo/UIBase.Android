@@ -45,4 +45,9 @@
         <item name="buttonType">primitive</item>
     </style>
 
+    <style name="ZButton.TitleBar.Blue">
+        <item name="textColor">@color/blue_600</item>
+        <item name="backgroundColor">@color/transparent</item>
+    </style>
+
 </resources>

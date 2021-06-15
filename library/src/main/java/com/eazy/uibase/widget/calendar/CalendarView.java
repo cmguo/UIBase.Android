@@ -4,13 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Objects;
 
 public class CalendarView extends FrameLayout {
     private static final String[] WeekSymbolString = {"日", "一", "二", "三", "四", "五", "六"};
@@ -42,7 +46,7 @@ public class CalendarView extends FrameLayout {
     private long selectedTime = System.currentTimeMillis();
     private DayBean selectedDay;
     private IDaySelectedCallback selectedCallback;
-    private ViewPager viewPager;
+    private final BounceBackViewPager viewPager;
 
     public CalendarView(Context context) {
         this(context, null);
@@ -54,7 +58,7 @@ public class CalendarView extends FrameLayout {
 
     public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
+        @SuppressLint("Recycle") TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
         String startTimeString = ta.getString(R.styleable.CalendarView_startTime);
         if (!TextUtils.isEmpty(startTimeString))
             startTime = Long.parseLong(startTimeString);
@@ -77,10 +81,9 @@ public class CalendarView extends FrameLayout {
         addView(weekSymbolLayout, new LayoutParams(LayoutParams.MATCH_PARENT, UIUtil.dip2px(context, 34)));
 
         // week content view
-        viewPager = new ViewPager(context);
+        viewPager = new BounceBackViewPager(context);
         viewPager.setPadding(0, UIUtil.dip2px(context, 30), 0, 0);
         addView(viewPager, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        refreshViewPager();
     }
 
     private void refreshViewPager() {
@@ -116,7 +119,7 @@ public class CalendarView extends FrameLayout {
 
     class CalendarAdapter extends PagerAdapter {
         private final Context context;
-        private int pages;
+        private final int pages;
         int currentPages;
         boolean isMonthPage = false;
 
@@ -164,7 +167,7 @@ public class CalendarView extends FrameLayout {
                 calendar.add(Calendar.MONTH, position - currentPages);
                 recyclerView.setAdapter(new GridAdapter(context, calendar, new MonthCalendarDataStrategy()));
             } else {
-                calendar = DateHelper.getCalendarWeekByDiff(startTime, position - 0);
+                calendar = DateHelper.getCalendarWeekByDiff(startTime, position);
                 recyclerView.setAdapter(new GridAdapter(context, calendar, new WeekCalendarDataStrategy()));
             }
 
@@ -183,7 +186,7 @@ public class CalendarView extends FrameLayout {
         }
 
         @Override
-        public int getItemPosition(Object object) {
+        public int getItemPosition(@NotNull Object object) {
             return POSITION_NONE;
         }
     }
@@ -219,8 +222,10 @@ public class CalendarView extends FrameLayout {
                 holder.day.setTextColor(resources.getColor(R.color.blue_600));
             } else if (dayBean.getState() == DayBean.STATE_FUTURE) {
                 holder.day.setTextColor(resources.getColor(R.color.bluegrey_900));
+            } else if (dayBean.getState() == DayBean.STATE_SELECTED) {
+                holder.day.setTextColor(resources.getColor(R.color.static_white_100));
             } else {
-                holder.day.setTextColor(resources.getColor(R.color.bluegrey_300));
+                holder.day.setTextColor(resources.getColor(R.color.bluegrey_500));
             }
 
             holder.day.setState(DayTextView.State.Normal);
@@ -230,7 +235,6 @@ public class CalendarView extends FrameLayout {
 
             if (dayBean.isToady()) {
                 holder.day.setText("今");
-
             } else {
                 holder.day.setText(String.valueOf(dayBean.isSpace() ? "" : dayBean.getDay()));
             }
@@ -245,7 +249,7 @@ public class CalendarView extends FrameLayout {
                     }
                     resetDayState();
                     notifyDataSetChanged();
-                    viewPager.getAdapter().notifyDataSetChanged();
+                    Objects.requireNonNull(viewPager.getAdapter()).notifyDataSetChanged();
 
                 }
             });
@@ -310,30 +314,123 @@ public class CalendarView extends FrameLayout {
     }
 
 
-    static class DepthPageTransformer implements ViewPager.PageTransformer {
-        private static final float MIN_SCALE = 0.75f;
+    public static class BounceBackViewPager extends ViewPager {
+
+        private int currentPosition = 0;
+        private final Rect mRect = new Rect();
+        private boolean handleDefault = true;
+        private float preX = 0f;
+        private static final float RATIO = 0.5f;
+        private static final float SCROLL_WIDTH = 10f;
+
+        public BounceBackViewPager(Context context) {
+            super(context);
+        }
+
+        public BounceBackViewPager(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
 
         @Override
-        public void transformPage(View view, float position) {
-            int pageWidth = view.getWidth();
-            if (position < -1) {
-                view.setAlpha(0);
-            } else if (position <= 0) {
-                view.setAlpha(1);
-                view.setTranslationX(0);
-                view.setScaleX(1);
-                view.setScaleY(1);
+        public boolean dispatchKeyEvent(KeyEvent event) {
+            return super.dispatchKeyEvent(event);
+        }
 
-            } else if (position <= 1) {
-                view.setAlpha(1 - position);
-                view.setTranslationX(pageWidth * -position);
-                float scaleFactor = MIN_SCALE
-                    + (1 - MIN_SCALE) * (1 - Math.abs(position));
-                view.setScaleX(scaleFactor);
-                view.setScaleY(scaleFactor);
-            } else {
-                view.setAlpha(0);
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent ev) {
+            if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+                preX = ev.getX();//记录起点
+                currentPosition = getCurrentItem();
+            }
+            return super.onInterceptTouchEvent(ev);
+        }
+
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+            return super.dispatchTouchEvent(ev);
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouchEvent(MotionEvent ev) {
+            switch (ev.getAction()) {
+                case MotionEvent.ACTION_UP:
+                    onTouchActionUp();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if (Objects.requireNonNull(getAdapter()).getCount() == 1) {
+                        float nowX = ev.getX();
+                        float offset = nowX - preX;
+                        preX = nowX;
+
+                        if (offset > SCROLL_WIDTH) {
+                            whetherConditionIsRight(offset);
+                        } else if (offset < -SCROLL_WIDTH) {
+                            whetherConditionIsRight(offset);
+                        } else if (!handleDefault) {
+                            if (getLeft() + (int) (offset * RATIO) != mRect.left) {
+                                layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
+                            }
+                        }
+                    } else if ((currentPosition == 0 || currentPosition == getAdapter().getCount() - 1)) {
+                        float nowX = ev.getX();
+                        float offset = nowX - preX;
+                        preX = nowX;
+
+                        if (currentPosition == 0) {
+                            if (offset > SCROLL_WIDTH) {
+                                whetherConditionIsRight(offset);
+                            } else if (!handleDefault) {
+                                if (getLeft() + (int) (offset * RATIO) >= mRect.left) {
+                                    layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
+                                }
+                            }
+                        } else {
+                            if (offset < -SCROLL_WIDTH) {
+                                whetherConditionIsRight(offset);
+                            } else if (!handleDefault) {
+                                if (getRight() + (int) (offset * RATIO) <= mRect.right) {
+                                    layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
+                                }
+                            }
+                        }
+                    } else {
+                        handleDefault = true;
+                    }
+
+                    if (!handleDefault) {
+                        return true;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            return super.onTouchEvent(ev);
+        }
+
+        private void whetherConditionIsRight(float offset) {
+            if (mRect.isEmpty()) {
+                mRect.set(getLeft(), getTop(), getRight(), getBottom());
+            }
+            handleDefault = false;
+            layout(getLeft() + (int) (offset * RATIO), getTop(), getRight() + (int) (offset * RATIO), getBottom());
+        }
+
+        private void onTouchActionUp() {
+            if (!mRect.isEmpty()) {
+                recoveryPosition();
             }
         }
+
+        private void recoveryPosition() {
+            TranslateAnimation ta = new TranslateAnimation(getLeft(), mRect.left, 0, 0);
+            ta.setDuration(300);
+            startAnimation(ta);
+            layout(mRect.left, mRect.top, mRect.right, mRect.bottom);
+            mRect.setEmpty();
+            handleDefault = true;
+        }
+
     }
 }
