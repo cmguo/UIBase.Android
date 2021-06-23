@@ -22,7 +22,7 @@
     <style name="ZActionSheet">
     </style>
 
-    <style name="ZButton.Action">
+    <style name="ZButton.Appearance.Action">
         <item name="textColor">@color/bluegrey_900_selected_disabled</item>
         <item name="backgroundColor">@color/transparent_pressed_disabled</item>
         <item name="height">48dp</item>

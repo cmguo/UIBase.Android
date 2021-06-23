@@ -57,32 +57,35 @@
 
     <!-- Button Appearance Styles -->
 
-    <style name="ZButton.Appearance">
+    <attr name="buttonAppearanceStub" format="boolean"/>
+
+    <style name="ZButton.Appearance" parent="">
+        <item name="buttonAppearanceStub">true</item>
     </style>
 
     <!-- Type Styles -->
 
-    <style name="ZButton.Appearance.Primitive" parent="ZButton.Appearance">
-        <item name="textColor">@color/static_bluegrey_900_disabled</item>
-        <item name="backgroundColor">@color/static_brand_500_pressed_disabled</item>
+    <style name="ZButton.Appearance.Primitive">
+        <item name="textColor">@color/bluegrey_900_disabled</item>
+        <item name="backgroundColor">@color/brand_500_pressed_disabled</item>
     </style>
 
-    <style name="ZButton.Appearance.Secondary" parent="ZButton.Appearance">
+    <style name="ZButton.Appearance.Secondary">
         <item name="textColor">@color/blue_600_disabled</item>
         <item name="backgroundColor">@color/blue_100_pressed_disabled</item>
     </style>
 
-    <style name="ZButton.Appearance.Tertiary" parent="ZButton.Appearance">
+    <style name="ZButton.Appearance.Tertiary">
         <item name="textColor">@color/bluegrey_800_disabled</item>
         <item name="backgroundColor">@color/bluegrey_100_pressed_disabled</item>
     </style>
 
-    <style name="ZButton.Appearance.Danger" parent="ZButton.Appearance">
+    <style name="ZButton.Appearance.Danger">
         <item name="textColor">@color/red_600_disabled</item>
         <item name="backgroundColor">@color/red_100_pressed_disabled</item>
     </style>
 
-    <style name="ZButton.Appearance.Text" parent="ZButton.Appearance">
+    <style name="ZButton.Appearance.Text">
         <item name="textColor">@color/blue_600_disabled</item>
         <item name="backgroundColor">@color/transparent_pressed_disabled</item>
     </style>
@@ -99,7 +102,7 @@
 
     <!-- Size Styles -->
 
-    <style name="ZButton.Appearance.Large" parent="ZButton.Appearance">
+    <style name="ZButton.Appearance.Large">
         <item name="height">44dp</item>
         <item name="cornerRadius">22dp</item>
         <item name="paddingX">24dp</item>
@@ -108,7 +111,7 @@
         <item name="iconPadding">5dp</item>
     </style>
 
-    <style name="ZButton.Appearance.Middle" parent="ZButton.Appearance">
+    <style name="ZButton.Appearance.Middle">
         <item name="height">36dp</item>
         <item name="cornerRadius">18dp</item>
         <item name="paddingX">16dp</item>
@@ -117,7 +120,7 @@
         <item name="iconPadding">4dp</item>
     </style>
 
-    <style name="ZButton.Appearance.Small" parent="ZButton.Appearance">
+    <style name="ZButton.Appearance.Small">
         <item name="height">24dp</item>
         <item name="cornerRadius">12dp</item>
         <item name="paddingX">12dp</item>
@@ -126,13 +129,95 @@
         <item name="iconPadding">3dp</item>
     </style>
 
-    <style name="ZButton.Appearance.Thin" parent="ZButton.Appearance">
+    <style name="ZButton.Appearance.Thin">
         <item name="height">24dp</item>
         <item name="cornerRadius">0dp</item>
         <item name="paddingX">0dp</item>
         <item name="textSize">14sp</item>
         <item name="iconSize">16dp</item>
         <item name="iconPadding">3dp</item>
+    </style>
+
+    <!-- combine appearances -->
+
+    <style name="ZButton.Appearance.Primitive.Large">
+        <item name="buttonSize">large</item>
+    </style>
+
+    <style name="ZButton.Appearance.Primitive.Middle">
+        <item name="buttonSize">middle</item>
+    </style>
+
+    <style name="ZButton.Appearance.Primitive.Small">
+        <item name="buttonSize">small</item>
+    </style>
+
+    <style name="ZButton.Appearance.Primitive.Thin">
+        <item name="buttonSize">thin</item>
+    </style>
+
+    <style name="ZButton.Appearance.Secondary.Large">
+        <item name="buttonSize">large</item>
+    </style>
+
+    <style name="ZButton.Appearance.Secondary.Middle">
+        <item name="buttonSize">middle</item>
+    </style>
+
+    <style name="ZButton.Appearance.Secondary.Small">
+        <item name="buttonSize">small</item>
+    </style>
+
+    <style name="ZButton.Appearance.Secondary.Thin">
+        <item name="buttonSize">thin</item>
+    </style>
+
+    <style name="ZButton.Appearance.Tertiary.Large">
+        <item name="buttonSize">large</item>
+    </style>
+
+    <style name="ZButton.Appearance.Tertiary.Middle">
+        <item name="buttonSize">middle</item>
+    </style>
+
+    <style name="ZButton.Appearance.Tertiary.Small">
+        <item name="buttonSize">small</item>
+    </style>
+
+    <style name="ZButton.Appearance.Tertiary.Thin">
+        <item name="buttonSize">thin</item>
+    </style>
+
+    <style name="ZButton.Appearance.Danger.Large">
+        <item name="buttonSize">large</item>
+    </style>
+
+    <style name="ZButton.Appearance.Danger.Middle">
+        <item name="buttonSize">middle</item>
+    </style>
+
+    <style name="ZButton.Appearance.Danger.Small">
+        <item name="buttonSize">small</item>
+    </style>
+
+    <style name="ZButton.Appearance.Danger.Thin">
+        <item name="buttonSize">thin</item>
+    </style>
+
+    <style name="ZButton.Appearance.Text.Large">
+        <item name="buttonSize">large</item>
+    </style>
+
+    <style name="ZButton.Appearance.Text.Middle">
+        <item name="buttonSize">middle</item>
+    </style>
+
+    <style name="ZButton.Appearance.Text.Small">
+        <item name="buttonSize">small</item>
+    </style>
+
+    <style name="ZButton.Appearance.Text.Thin">
+        <item name="buttonSize">thin</item>
     </style>
 
 </resources>

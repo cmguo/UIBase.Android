@@ -73,7 +73,7 @@ open class ZButton @JvmOverloads constructor(
                 return
             field = value
             if (_inited)
-                syncTypeSize()
+                syncAppearance()
         }
 
     @AnyRes
@@ -173,7 +173,7 @@ open class ZButton @JvmOverloads constructor(
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZButton, defStyleAttr, 0)
         applyStyle(a)
         a.recycle()
-        syncTypeSize()
+        syncAppearance()
         syncIcon()
         _inited = true
     }
@@ -289,7 +289,7 @@ open class ZButton @JvmOverloads constructor(
             syncIconPadding()
     }
 
-    private fun syncTypeSize(type: Boolean = true, size: Boolean = true) {
+    private fun syncAppearance(type: Boolean = true, size: Boolean = true) {
         if (type) {
             _typeStyles = typeStyles(context, if (buttonAppearance == 0) buttonType.resId else buttonAppearance)
             iconPosition = _typeStyles.iconPosition
@@ -317,11 +317,11 @@ open class ZButton @JvmOverloads constructor(
     }
 
     private fun syncType() {
-        syncTypeSize(size = false)
+        syncAppearance(size = false)
     }
 
     private fun syncSize() {
-        syncTypeSize(type = false)
+        syncAppearance(type = false)
     }
 
     private fun syncContent() {
@@ -350,16 +350,21 @@ open class ZButton @JvmOverloads constructor(
                             text = v.string
                         }
                     }
-
                 }
                 a.recycle()
             }
             "style" -> {
-                icon = 0
-                text = null
-                val typedArray = context.obtainStyledAttributes(content, R.styleable.ZButton)
-                applyStyle(typedArray)
-                typedArray.recycle()
+                var stub = context.obtainStyledAttributes(content, intArrayOf(R.attr.buttonAppearanceStub))
+                if (stub.getBoolean(0, false)) {
+                    buttonAppearance = content
+                } else {
+                    icon = 0
+                    text = null
+                    val typedArray = context.obtainStyledAttributes(content, R.styleable.ZButton)
+                    applyStyle(typedArray)
+                    typedArray.recycle()
+                }
+                stub.recycle()
             }
         }
     }

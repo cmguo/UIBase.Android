@@ -21,8 +21,6 @@
         <item name="cornerRadius">@dimen/panel_border_radius</item>
     </style>
 
-    <style name="ZButton.Panel" parent="ZButton.TitleBar">
-
-    </style>
+    <style name="ZButton.Appearance.Panel" parent="ZButton.Appearance.TitleBar"/>
 
 </resources>

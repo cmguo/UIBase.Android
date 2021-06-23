@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|start"
-        app:buttonAppearance="@style/ZButton.TitleBar.Blue"/>
+        app:buttonAppearance="@style/ZButton.Appearance.TitleBar"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -50,14 +50,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/app_title_bar_button_padding"
-            app:buttonAppearance="@style/ZButton.TitleBar.Blue"
+            app:buttonAppearance="@style/ZButton.Appearance.TitleBar"
             android:visibility="gone"/>
 
         <com.eazy.uibase.widget.ZButton
             android:id="@+id/rightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:buttonAppearance="@style/ZButton.TitleBar.Blue"
+            app:buttonAppearance="@style/ZButton.Appearance.TitleBar"
             android:visibility="gone"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

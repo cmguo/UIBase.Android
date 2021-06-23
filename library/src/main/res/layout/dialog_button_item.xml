@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/button"
-    app:buttonAppearance="@style/ZButton.Dialog">
+    app:buttonAppearance="@style/ZButton.Appearance.Dialog">
 
 </com.eazy.uibase.widget.ZButton>
