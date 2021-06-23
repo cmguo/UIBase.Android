@@ -56,59 +56,61 @@
         <item name="dismissDelay">3000</item>
     </style>
 
+    <style name="ZTipView.Appearance" parent=""/>
+
     <!-- TipViewToastAppearance -->
 
-    <style name="TipViewToastAppearance">
+    <style name="ZTipView.Appearance.Toast">
         <item name="textAppearance">@style/TextAppearance.Z.Body.Small</item>
         <item name="textColor">@color/bluegrey_00</item>
         <item name="frameColor">@color/tip_view_toast_frame_color</item>
         <item name="frameRadius">@dimen/tip_view_frame_radius</item>
     </style>
 
-    <style name="TipViewToastAppearance.Opaque" parent="TipViewToastAppearance">
+    <style name="ZTipView.Appearance.Toast.Opaque">
         <item name="frameAlpha">0.5</item>
     </style>
 
     <!-- TipViewToolTipAppearance -->
 
-    <style name="TipViewToolTipAppearance" parent="TipViewToastAppearance">
+    <style name="ZTipView.Appearance.ToolTip">
         <item name="textAppearance">@style/TextAppearance.Z.Body.Middle</item>
     </style>
 
-    <style name="TipViewToolTipAppearance.Opaque" parent="TipViewToolTipAppearance">
+    <style name="ZTipView.Appearance.ToolTip.Opaque">
         <item name="frameAlpha">0.5</item>
     </style>
 
-    <style name="TipViewToolTipAppearance.Special" parent="TipViewToolTipAppearance">
+    <style name="ZTipView.Appearance.ToolTip.Special">
         <item name="frameColor">@color/blue_600</item>
     </style>
 
-    <style name="TipViewToolTipAppearance.Success" parent="TipViewToolTipAppearance">
+    <style name="ZTipView.Appearance.ToolTip.Success">
         <item name="frameColor">@color/green_600</item>
     </style>
 
-    <style name="TipViewToolTipAppearance.Warning" parent="TipViewToolTipAppearance">
+    <style name="ZTipView.Appearance.ToolTip.Warning">
         <item name="frameColor">@color/orange_600</item>
     </style>
 
-    <style name="TipViewToolTipAppearance.Error" parent="TipViewToolTipAppearance">
+    <style name="ZTipView.Appearance.ToolTip.Error">
         <item name="frameColor">@color/red_600</item>
     </style>
 
     <!-- TipViewSnackAppearance -->
 
-    <style name="TipViewSnackAppearance" parent="TipViewToastAppearance">
+    <style name="ZTipView.Appearance.Snack" parent="ZTipView.Appearance.Toast">
         <item name="frameColor">@color/tip_view_snack_frame_color</item>
         <item name="textColor">@color/bluegrey_800</item>
         <item name="frameRadius">0dp</item>
     </style>
 
-    <style name="TipViewSnackAppearance.Info" parent="TipViewSnackAppearance">
+    <style name="ZTipView.Appearance.Snack.Info">
         <item name="frameColor">@color/blue_100</item>
         <item name="textColor">@color/blue_600</item>
     </style>
 
-    <style name="TipViewSnackAppearance.Error" parent="TipViewSnackAppearance">
+    <style name="ZTipView.Appearance.Snack.Error">
         <item name="frameColor">@color/red_100</item>
         <item name="textColor">@color/red_600</item>
     </style>
