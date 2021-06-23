@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="switchButtonStyle" format="reference"/>
+
     <dimen name="switch_button_width">48dp</dimen> <!-- TODO: 40dp -->
     <dimen name="switch_button_height">24dp</dimen>
     <dimen name="switch_button_radius">12dp</dimen>

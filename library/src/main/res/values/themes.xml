@@ -6,9 +6,9 @@
         <item name="android:textViewStyle">@style/AppCompatTextView</item>
 
         <item name="buttonStyle">@style/ZButton</item>
-        <item name="checkboxStyle">@style/ZCheckBox</item>
+        <item name="checkBoxStyle">@style/ZCheckBox</item>
         <item name="radioButtonStyle">@style/ZRadioButton</item>
-        <item name="switchStyle">@style/ZSwitchButton</item>
+        <item name="switchButtonStyle">@style/ZSwitchButton</item>
         <item name="tipViewStyle">@style/ZTipView</item>
         <item name="dropDownStyle">@style/ZDropDown</item>
         <item name="lineIndicatorStyle">@style/ZLineIndicator</item>
@@ -31,9 +31,9 @@
         <item name="android:textViewStyle">@style/AppCompatTextView</item>
 
         <item name="buttonStyle">@style/ZButton</item>
-        <item name="checkboxStyle">@style/ZCheckBox</item>
+        <item name="checkBoxStyle">@style/ZCheckBox</item>
         <item name="radioButtonStyle">@style/ZRadioButton</item>
-        <item name="switchStyle">@style/ZSwitchButton</item>
+        <item name="switchButtonStyle">@style/ZSwitchButton</item>
         <item name="tipViewStyle">@style/ZTipView</item>
         <item name="dropDownStyle">@style/ZDropDown</item>
         <item name="lineIndicatorStyle">@style/ZLineIndicator</item>
