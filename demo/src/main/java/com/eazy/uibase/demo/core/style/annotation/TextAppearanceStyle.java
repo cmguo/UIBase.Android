@@ -23,9 +23,10 @@ public class TextAppearanceStyle extends ComponentStyle {
             String.valueOf(R.style.TextAppearance_MaterialComponents_Headline3),
             String.valueOf(R.style.TextAppearance_MaterialComponents_Headline4),
             String.valueOf(R.style.TextAppearance_MaterialComponents_Headline5),
-            String.valueOf(R.style.TextAppearance_MaterialComponents_Headline6)
+            String.valueOf(R.style.TextAppearance_MaterialComponents_Headline6),
+            String.valueOf(R.style.TextAppearance_Z_Head2_Demo)
         };
-        String[] valueTitles = {"<null>", "head1", "head2", "head3", "head4", "head5", "head6", };
+        String[] valueTitles = {"<null>", "head1", "head2", "head3", "head4", "head5", "head6", "demo" };
         setValues(Arrays.asList(values), Arrays.asList(valueTitles));
     }
 }

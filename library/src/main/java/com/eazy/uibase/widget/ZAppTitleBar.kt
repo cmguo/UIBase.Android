@@ -4,21 +4,23 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
+import com.eazy.uibase.resources.GradientColorList
 import com.eazy.uibase.resources.ViewDrawable
+import com.eazy.uibase.resources.toGradient
 
 class ZAppTitleBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.appTitleBarStyle
@@ -48,8 +50,10 @@ class ZAppTitleBar @JvmOverloads constructor(
             if (field == value)
                 return
             field = value
-            if (value > 0)
+            if (value > 0) {
                 TextViewCompat.setTextAppearance(_textView, value)
+                _textView.setTextColor(_textView.textColors.toGradient(_textView))
+            }
             else if (_inited)
                 updateLayout()
         }
@@ -106,6 +110,8 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     init {
         LayoutInflater.from(context).inflate(R.layout.app_title_bar, this)
+        GradientColorList.prepare(this)
+
         _leftButton = findViewById(R.id.leftButton)
         _imageView = findViewById(R.id.imageView)
         _textView = findViewById(R.id.textView)
@@ -116,8 +122,25 @@ class ZAppTitleBar @JvmOverloads constructor(
         applyStyle(a)
         a.recycle()
 
+        background = background.toGradient(this)
+
         _inited = true
         updateLayout()
+    }
+
+    fun gradientWith(view: ScrollView, length1: Int, length2: Int, horizontal: Boolean = false) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            view.setOnScrollChangeListener { _, scrollX, scrollY, _, _ ->
+                val position = if (horizontal) scrollX else scrollY
+                val progress = when {
+                    position < 0 -> -1f
+                    position < length1 -> -position.toFloat() / length1
+                    position < (length1 + length2) -> (position - length1).toFloat() / length2
+                    else -> 1f
+                }
+                GradientColorList.setProgress(this, progress)
+            }
+        }
     }
 
     override fun addView(child: View) {
@@ -169,6 +192,8 @@ class ZAppTitleBar @JvmOverloads constructor(
         if (_imageView.drawable is ViewDrawable) {
             _imageView.drawable.invalidateSelf()
         }
+        background = background.toGradient(this)
+        _textView.setTextColor(_textView.textColors.toGradient(_textView))
     }
 
     /* private */
@@ -207,7 +232,7 @@ class ZAppTitleBar @JvmOverloads constructor(
     private fun updateLayout() {
         val titleView = _textView.parent as LinearLayoutCompat
         val lp = titleView.layoutParams as LayoutParams
-        var ta: Int
+        val ta: Int
         val tg: Int
         if (leftButton == 0 && (rightButton != 0 || rightButton2 != 0)) {
             lp.gravity = Gravity.START or Gravity.CENTER_VERTICAL
@@ -218,11 +243,10 @@ class ZAppTitleBar @JvmOverloads constructor(
             tg = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
             ta = R.style.TextAppearance_Z_Head2
         }
-        if (textAppearance > 0)
-            ta = textAppearance
         titleView.layoutParams = lp
         titleView.gravity = tg
-        TextViewCompat.setTextAppearance(_textView, ta)
+        if (textAppearance == 0)
+            TextViewCompat.setTextAppearance(_textView, ta)
     }
 
     private fun syncContent() {

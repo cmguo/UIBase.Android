@@ -1,5 +1,7 @@
 package com.eazy.uibase.demo.components.navigation
 
+import android.os.Bundle
+import android.view.View
 import androidx.databinding.Bindable
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
@@ -72,6 +74,11 @@ class ZAppTitleBarFragment : ComponentFragment<AppTitleBarFragmentBinding?, ZApp
 
     override fun backgroundColor(): Int {
         return R.color.blue_100
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.titleBar.gradientWith(binding.scrollView, 0, 400)
     }
 
     override fun titleBarButtonClicked(bar: ZAppTitleBar, btnId: Int) {

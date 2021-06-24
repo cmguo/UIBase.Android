@@ -39,4 +39,6 @@
     <color name="purple_500">#8C79F2</color>  <!-- default #8C79F2, -->
     <color name="purple_600">#988BDC</color>  <!-- default #6A54E0, -->
 
+    <color name="trans_write">#00000000</color>
+
 </resources>

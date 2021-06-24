@@ -20,6 +20,10 @@
         <item name="buttonSize">large</item>
     </style>
 
+    <style name="ZButton.Appearance.AppTitleBar.Gradient">
+        <item name="textColor">@color/bluegrey_00_gradient</item>
+    </style>
+
     <style name="button_content_text_style">
         <item name="content">@array/button_icon_text</item>
         <item name="buttonAppearance">@style/ZButton.Appearance.Primitive.Large</item>

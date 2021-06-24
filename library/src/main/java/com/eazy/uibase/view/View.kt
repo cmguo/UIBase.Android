@@ -27,6 +27,16 @@ fun <T: View> View.parentOfType(type: Class<T>) : T? {
     return null
 }
 
+fun <T> View.getTagInTree(tag: Int) : T? {
+    val t = getTag(tag)
+    if (t != null)
+        return t as T
+    val parent = parent
+    if (parent is View)
+        return parent.getTagInTree(tag)
+    return null
+}
+
 val View.dataBinding get() = DataBindings.get(this)
 
 val View.contentView: FrameLayout? get() {

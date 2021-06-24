@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="GradientColorList">
+        <attr name="state_gradient_start" format="boolean" />
+        <attr name="state_gradient_end" format="boolean" />
+    </declare-styleable>
+
+    <id name="gradient_progress"/>
+
+</resources>

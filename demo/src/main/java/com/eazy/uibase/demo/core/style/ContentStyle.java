@@ -24,6 +24,7 @@ public class ContentStyle extends ResourceStyle {
         "text_cancel:string/cancel",
         "button_array:array/button_icon_text",
         "button_prim:style/button_content_prim_style",
+        "button_gradient:style/ZButton_Appearance_AppTitleBar_Gradient",
         "button_text:style/button_content_text_style",
         "title_icon:style/title_bar_icon",
         "title_text:style/title_bar_text",

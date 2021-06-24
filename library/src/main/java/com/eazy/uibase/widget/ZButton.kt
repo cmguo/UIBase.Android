@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatButton
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundDrawable
+import com.eazy.uibase.resources.toGradient
 
 open class ZButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.buttonStyle
@@ -298,7 +299,7 @@ open class ZButton @JvmOverloads constructor(
             _sizeStyles = sizeStyles(context, if (buttonAppearance == 0) buttonSize.resId else buttonAppearance)
         background = backgroundDrawable(_typeStyles, _sizeStyles)
         if (type) {
-            setTextColor(_typeStyles.textColor)
+            setTextColor(_typeStyles.textColor?.toGradient(this, _icon))
             if (_icon is VectorDrawable)
                 _icon?.setTintList(textColors)
         }
@@ -373,9 +374,9 @@ open class ZButton @JvmOverloads constructor(
         val icon = if (loading) _loadingIcon else _icon
         if (icon != null) {
             icon.mutate()
-//            if (icon is VectorDrawable || Drawables.isPureColor(icon)) {
-//                icon.setTintList(textColors)
-//            }
+            if (icon is VectorDrawable) {
+                icon.setTintList(textColors)
+            }
             val iconSize = _sizeStyles.iconSize
             icon.setBounds(0, 0, iconSize, iconSize)
         }

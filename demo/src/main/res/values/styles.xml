@@ -13,4 +13,8 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="TextAppearance.Z.Head2.Demo">
+        <item name="android:textColor">@color/transparent_gradient</item>
+    </style>
+
 </resources>

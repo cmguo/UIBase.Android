@@ -68,8 +68,8 @@ public class DayNightManager {
         for (Map.Entry<Activity, DayNightViewInflater> inflater : inflaterList.entrySet()) {
             Activity activity = inflater.getKey();
             Configuration configuration = activity.getResources().getConfiguration();
-            activity.findViewById(android.R.id.content).dispatchConfigurationChanged(configuration);
             inflater.getValue().updateViews();
+            activity.findViewById(android.R.id.content).dispatchConfigurationChanged(configuration);
         }
     }
 
