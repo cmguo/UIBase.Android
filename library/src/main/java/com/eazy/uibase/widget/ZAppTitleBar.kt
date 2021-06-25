@@ -6,7 +6,6 @@ import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -128,7 +127,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         updateLayout()
     }
 
-    fun gradientWith(view: ScrollView, length1: Int, length2: Int, horizontal: Boolean = false) {
+    fun gradientWith(view: View, length1: Int, length2: Int, horizontal: Boolean = false) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.setOnScrollChangeListener { _, scrollX, scrollY, _, _ ->
                 val position = if (horizontal) scrollX else scrollY
