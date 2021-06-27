@@ -9,7 +9,7 @@ import com.eazy.uibase.resources.RoundDrawable
 
 class ZSwitchButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : SwitchCompat(context, attrs) {
+) : SwitchCompat(context, attrs, R.attr.switchButtonStyle) {
 
     init {
         trackDrawable = RoundDrawable(context, R.style.ZSwitchButton_Track)

@@ -12,7 +12,7 @@ import com.eazy.uibase.resources.RoundDrawable
 
 class ZCheckBox @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : AppCompatCheckBox(context, attrs) {
+) : AppCompatCheckBox(context, attrs, R.attr.checkBoxStyle) {
 
     enum class CheckedState {
         NotChecked,
