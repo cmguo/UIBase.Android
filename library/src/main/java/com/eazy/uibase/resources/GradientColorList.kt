@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.ColorStateListDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.VectorDrawable
 import android.os.Build
 import android.view.View
 import androidx.annotation.RequiresApi
@@ -12,45 +13,7 @@ import com.eazy.uibase.R
 import com.eazy.uibase.view.getTagInTree
 import java.lang.reflect.Method
 
-class GradientProgress {
-
-    var progress: Float = 0.0f
-        set(value) {
-            field = value
-            for (d in drawables) {
-                d.state = intArrayOf()
-            }
-            for (v in views) {
-                v.refreshDrawableState()
-                v.invalidate()
-            }
-        }
-
-    private val views = arrayListOf<View>()
-    private val drawables = arrayListOf<Drawable>()
-
-    fun add(view: View) {
-        if (!views.contains(view))
-            views.add(view)
-    }
-
-    fun remove(view: View) {
-        views.remove(view)
-    }
-
-    fun add(drawable: Drawable) {
-        if (!drawables.contains(drawable))
-            drawables.add(drawable)
-    }
-
-    fun remove(drawable: Drawable) {
-        drawables.remove(drawable)
-    }
-
-
-}
-
-class GradientColorList(private val colorList: ColorStateList, private val progress: GradientProgress)
+class GradientColorList(private val colorList: ColorStateList, val progress: GradientProgress)
     : ColorStateList(arrayOf(), intArrayOf()) {
 
     override fun getDefaultColor(): Int {
@@ -89,14 +52,25 @@ class GradientColorList(private val colorList: ColorStateList, private val progr
 
         var evaluator = ArgbEvaluator()
 
-        private val _hasState : Method? = ColorStateList::class.java.getMethod("hasState", Integer.TYPE)
+        private var _hasStateChecked = false
+        private var _hasState : Method? = null
 
         fun hasGradient(colorList: ColorStateList) : Boolean {
-            if (_hasState == null)
-                return false
+            if (!_hasStateChecked) {
+                _hasStateChecked = true
+                try {
+                    _hasState = ColorStateList::class.java.getMethod("hasState", Integer.TYPE)
+                } catch (_: Throwable) {}
+            }
+            val hasState = _hasState
+            if (hasState == null) {
+                val color = colorList.defaultColor
+                return colorList.getColorForState(intArrayOf(R.attr.state_gradient_start), color) != color
+                    || colorList.getColorForState(intArrayOf(R.attr.state_gradient_end), color) != color
+            }
             return try {
-                (_hasState.invoke(colorList, R.attr.state_gradient_start) as? Boolean ?: false)
-                    || (_hasState.invoke(colorList, R.attr.state_gradient_end) as? Boolean ?: false)
+                (hasState.invoke(colorList, R.attr.state_gradient_start) as? Boolean ?: false)
+                    || (hasState.invoke(colorList, R.attr.state_gradient_end) as? Boolean ?: false)
             } catch (_: Throwable) {
                 false
             }
@@ -109,29 +83,97 @@ class GradientColorList(private val colorList: ColorStateList, private val progr
         fun setProgress(view: View, process: Float) {
             (view.getTag(R.id.gradient_progress) as GradientProgress).progress = process
         }
+
+        fun progress(vararg colorLists: ColorStateList?) : GradientProgress? {
+            for (colorList in colorLists) {
+                if (colorList is GradientColorList) {
+                    return colorList.progress
+                }
+            }
+            return null
+        }
+
     }
 }
 
-fun ColorStateList.toGradient(view: View, drawable: Drawable? = null) : ColorStateList {
+fun ColorStateList.toGradient(view: View, drawable: Boolean = false) : ColorStateList {
     if (GradientColorList.hasGradient(this)) {
         val progress : GradientProgress = view.getTagInTree(R.id.gradient_progress) ?: return this
-        progress.add(view)
-        if (drawable != null)
-            progress.add(drawable)
+        if (!drawable)
+            progress.add(view)
         return GradientColorList(this, progress)
     }
     return this
 }
 
 fun Drawable.toGradient(view: View) : Drawable {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && this is ColorStateListDrawable) {
-        val drawable = mutate() as ColorStateListDrawable
-        drawable.colorStateList = colorStateList.toGradient(view, this)
-        return drawable
-    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && this is GradientDrawable) {
-        val drawable = mutate() as GradientDrawable
-        drawable.color = color?.toGradient(view, this)
-        return drawable
+    if (this is RoundDrawable) {
+        fillColor = fillColor?.toGradient(view, true)
+        borderColor = borderColor?.toGradient(view, true)
+        GradientColorList.progress(fillColor, borderColor)?.add(this, Drawable::invalidateSelf)
+        return this
     }
-    return this
+    val drawable = mutate()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && drawable is ColorStateListDrawable) {
+        drawable.colorStateList = drawable.colorStateList.toGradient(view)
+        /*
+            ColorStateListDrawable.setColorStateList
+                Drawable.onStateChange
+         */
+        GradientColorList.progress(drawable.colorStateList)?.add(this) {
+            val drawable2 = (it as ColorStateListDrawable)
+            drawable2.colorStateList = drawable2.colorStateList
+        }
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && drawable is GradientDrawable) {
+        drawable.color = drawable.color?.toGradient(view)
+        /*
+            GradientDrawable.setColor
+                Drawable.onStateChange
+         */
+        GradientColorList.progress(drawable.color)?.add(this) {
+            val drawable2 = (it as GradientDrawable)
+            drawable2.color = drawable2.color
+        }
+    }
+    return drawable
+}
+
+class GradientProgress {
+
+    var progress: Float = 0.0f
+        set(value) {
+            field = value
+            for (d in drawables) {
+                d.value(d.key)
+            }
+            /*
+                View.refreshDrawableState
+                    View.drawableStateChanged
+                        View.getDrawableState
+                        Drawable.setState
+                        View.invalidate (if changed)
+             */
+            for (v in views) {
+                v.refreshDrawableState()
+                v.invalidate()
+            }
+        }
+
+    private val views = arrayListOf<View>()
+    private val drawables = mutableMapOf<Drawable, (Drawable) -> Unit>()
+
+    fun add(view: View) {
+        if (!views.contains(view))
+            views.add(view)
+    }
+    fun remove(view: View) {
+        views.remove(view)
+    }
+    fun add(drawable: Drawable, refresh: (Drawable) -> Unit) {
+        drawables[drawable] = refresh
+    }
+    fun remove(drawable: Drawable) {
+        drawables.remove(drawable)
+    }
+
 }
