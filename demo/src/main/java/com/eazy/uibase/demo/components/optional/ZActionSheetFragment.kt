@@ -29,7 +29,7 @@ class ZActionSheetFragment : ComponentFragment<ActionSheetFragmentBinding?, ZAct
         var states = arrayListOf<Any?>(android.R.attr.state_selected)
 
         @Bindable
-        val buttons: List<String> = listOf("删除内容", "列表标题")
+        val buttons: List<Any> = listOf(R.array.action_sheet_button1, R.array.action_sheet_button2)
     }
 
     class Styles : ViewStyles() {

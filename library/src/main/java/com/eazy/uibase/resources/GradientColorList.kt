@@ -5,7 +5,6 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.ColorStateListDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.VectorDrawable
 import android.os.Build
 import android.view.View
 import androidx.annotation.RequiresApi

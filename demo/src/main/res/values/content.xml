@@ -16,6 +16,16 @@
         <item>北京</item>
     </string-array>
 
+    <array name="action_sheet_button1">
+        <item>@drawable/icon_alert</item>
+        <item>"删除内容"</item>
+    </array>
+
+    <array name="action_sheet_button2">
+        <item>@drawable/icon_add_book</item>
+        <item>"列表标题"</item>
+    </array>
+
     <style name="ZButton.Appearance.Primitive.Large">
         <item name="buttonSize">large</item>
     </style>
