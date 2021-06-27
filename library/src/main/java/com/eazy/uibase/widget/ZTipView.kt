@@ -363,7 +363,7 @@ class ZTipView @JvmOverloads constructor(
         var appearance = tipAppearance
         if (appearance == 0) {
             appearance = when (location.ordinal) {
-                in 0..Location.AutoToast.ordinal -> R.style.ZTipView_Appearance_ToolTip
+                in 0 until Location.AutoToast.ordinal -> R.style.ZTipView_Appearance_ToolTip
                 Location.AutoToast.ordinal -> R.style.ZTipView_Appearance_Toast
                 Location.ManualLayout.ordinal -> R.style.ZTipView_Appearance_Snack
                 else -> 0

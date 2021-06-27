@@ -73,7 +73,7 @@
 
     <!-- TipViewToolTipAppearance -->
 
-    <style name="ZTipView.Appearance.ToolTip">
+    <style name="ZTipView.Appearance.ToolTip" parent="ZTipView.Appearance.Toast">
         <item name="textAppearance">@style/TextAppearance.Z.Body.Middle</item>
     </style>
 
