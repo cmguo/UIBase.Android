@@ -10,7 +10,7 @@
     </data>
 
     <com.eazy.uibase.widget.ZActivityButton
-        android:layout_width="@dimen/activity_view_item_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:buttonAppearance="@style/ZButton.Appearance.Activity"
         app:content="@{data}"/>

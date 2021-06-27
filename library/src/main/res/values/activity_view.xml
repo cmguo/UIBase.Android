@@ -8,16 +8,15 @@
 
     <!-- Button Style -->
 
-    <style name="ZButton.Appearance.Activity">
+    <style name="ZButton.Appearance.Activity" parent="ZButton.Appearance.Text.Large">
         <item name="textColor">@color/bluegrey_700</item>
-        <item name="backgroundColor">@color/transparent_pressed_disabled</item>
+        <item name="iconPosition">top</item>
         <item name="height">66dp</item>
         <item name="cornerRadius">0dp</item>
-        <item name="paddingX">0dp</item>
+        <item name="paddingX">8dp</item>
         <item name="textSize">12sp</item>
         <item name="iconSize">40dp</item>
         <item name="iconPadding">8dp</item>
-        <item name="iconPosition">top</item>
     </style>
 
 </resources>
