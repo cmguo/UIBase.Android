@@ -49,7 +49,6 @@
             android:id="@+id/rightButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/app_title_bar_button_padding"
             app:buttonAppearance="@style/ZButton.Appearance.AppTitleBar"
             android:visibility="gone"/>
 

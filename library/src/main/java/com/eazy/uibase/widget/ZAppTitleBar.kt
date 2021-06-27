@@ -142,6 +142,11 @@ class ZAppTitleBar @JvmOverloads constructor(
         }
     }
 
+    fun setGradientProgress(progress: Float) {
+        val p = if (progress < -1f) -1f else if (progress > 1f) 1f else progress;
+        GradientColorList.setProgress(this, p)
+    }
+
     override fun addView(child: View) {
         addView(child, child.layoutParams)
     }
