@@ -32,45 +32,57 @@ public class Drawables {
         if max size two group cover 95%, then consider to be pure
      */
     public static boolean isPureColor(Drawable drawable) {
-        if (drawable instanceof VectorDrawable || drawable instanceof VectorDrawableCompat)
-            return true;
+        if (drawable instanceof VectorDrawable)
+            return vectorIsPureColor((VectorDrawable) drawable);
+        if (drawable instanceof VectorDrawableCompat)
+            return vectorIsPureColor((VectorDrawableCompat) drawable);
         if (drawable instanceof BitmapDrawable) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            Bitmap bitmap = bitmapDrawable.getBitmap();
-            int[] pixels = new int[bitmap.getWidth() * bitmap.getHeight()];
-            bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getHeight(), bitmap.getWidth());
-            Map<Integer, Integer> colors = new TreeMap<>();
-            for (int p : pixels) {
-                Integer c = colors.get(p);
-                if (c == null)
-                    c = 1;
-                else
-                    c = c + 1;
-                colors.put(p, c);
-            }
-            if (colors.size() <= 2)
-                return true;
-            List<Group> groups = new ArrayList<>();
-            for (Map.Entry<Integer, Integer> e : colors.entrySet()) {
-                boolean added = false;
-                for (Group g : groups) {
-                    if (g.add(e.getKey(), e.getValue())) {
-                        added = true;
-                        break;
-                    }
-                }
-                if (!added) {
-                    groups.add(new Group(e.getKey(), e.getValue()));
-                }
-            }
-            if (groups.size() <= 2)
-                return true;
-            Group max = Collections.max(groups, (l, r) -> l.cnt - r.cnt );
-            groups.remove(max);
-            Group max2 = Collections.max(groups, (l, r) -> l.cnt - r.cnt );
-            return (max.cnt + max2.cnt) * 100 > pixels.length * 95;
+            return bitmapIsPureColor(((BitmapDrawable) drawable).getBitmap());
         }
         return false;
+    }
+
+    private static boolean vectorIsPureColor(VectorDrawable drawable) {
+        return true;
+    }
+
+    private static boolean vectorIsPureColor(VectorDrawableCompat drawable) {
+        return true;
+    }
+
+    private static boolean bitmapIsPureColor(Bitmap bitmap) {
+        int[] pixels = new int[bitmap.getWidth() * bitmap.getHeight()];
+        bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getHeight(), bitmap.getWidth());
+        Map<Integer, Integer> colors = new TreeMap<>();
+        for (int p : pixels) {
+            Integer c = colors.get(p);
+            if (c == null)
+                c = 1;
+            else
+                c = c + 1;
+            colors.put(p, c);
+        }
+        if (colors.size() <= 2)
+            return true;
+        List<Group> groups = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> e : colors.entrySet()) {
+            boolean added = false;
+            for (Group g : groups) {
+                if (g.add(e.getKey(), e.getValue())) {
+                    added = true;
+                    break;
+                }
+            }
+            if (!added) {
+                groups.add(new Group(e.getKey(), e.getValue()));
+            }
+        }
+        if (groups.size() <= 2)
+            return true;
+        Group max = Collections.max(groups, (l, r) -> l.cnt - r.cnt );
+        groups.remove(max);
+        Group max2 = Collections.max(groups, (l, r) -> l.cnt - r.cnt );
+        return (max.cnt + max2.cnt) * 100 > pixels.length * 95;
     }
 
     static class Group {

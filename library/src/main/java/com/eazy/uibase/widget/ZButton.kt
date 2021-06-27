@@ -18,6 +18,7 @@ import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatButton
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
+import com.eazy.uibase.resources.GradientColorList
 import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.resources.toGradient
 
@@ -93,7 +94,7 @@ open class ZButton @JvmOverloads constructor(
                 return
             field = value
             _icon = if (value > 0)
-                Drawables.getDrawable(context, value)!!
+                Drawables.getDrawable(context, value)
             else
                 null
             if (_inited)
@@ -297,11 +298,15 @@ open class ZButton @JvmOverloads constructor(
         }
         if (size)
             _sizeStyles = sizeStyles(context, if (buttonAppearance == 0) buttonSize.resId else buttonAppearance)
-        background = backgroundDrawable(_typeStyles, _sizeStyles)
+        background = backgroundDrawable(_typeStyles, _sizeStyles)?.toGradient(this)
         if (type) {
-            setTextColor(_typeStyles.textColor?.toGradient(this, _icon))
-            if (_icon is VectorDrawable)
+            setTextColor(_typeStyles.textColor?.toGradient(this))
+            if (Drawables.isPureColor(_icon)) {
                 _icon?.setTintList(textColors)
+                GradientColorList.progress(textColors)?.add(_icon!!) {
+                    it.state = intArrayOf();
+                }
+            }
         }
         if (size) {
             height = _sizeStyles.height
@@ -355,7 +360,7 @@ open class ZButton @JvmOverloads constructor(
                 a.recycle()
             }
             "style" -> {
-                var stub = context.obtainStyledAttributes(content, intArrayOf(R.attr.buttonAppearanceStub))
+                val stub = context.obtainStyledAttributes(content, intArrayOf(R.attr.buttonAppearanceStub))
                 if (stub.getBoolean(0, false)) {
                     buttonAppearance = content
                 } else {
@@ -374,8 +379,11 @@ open class ZButton @JvmOverloads constructor(
         val icon = if (loading) _loadingIcon else _icon
         if (icon != null) {
             icon.mutate()
-            if (icon is VectorDrawable) {
+            if (Drawables.isPureColor(icon)) {
                 icon.setTintList(textColors)
+                GradientColorList.progress(textColors)?.add(icon) {
+                    it.state = intArrayOf();
+                }
             }
             val iconSize = _sizeStyles.iconSize
             icon.setBounds(0, 0, iconSize, iconSize)
