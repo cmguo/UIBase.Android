@@ -6,6 +6,7 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
+
     signingConfigs {
         XHB {
             keyAlias properties.getProperty('ALIAS')
@@ -14,12 +15,13 @@ android {
             storePassword properties.getProperty('KEYSTORE_PASSWORD')
         }
     }
-    compileSdkVersion 30
+
+    compileSdkVersion build_versions.compileSdkVersion
 
     defaultConfig {
         applicationId "com.xhb.uibase.app"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion build_versions.minSdkVersion
+        targetSdkVersion build_versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
