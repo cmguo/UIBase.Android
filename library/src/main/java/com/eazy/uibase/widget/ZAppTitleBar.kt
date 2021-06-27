@@ -121,7 +121,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         applyStyle(a)
         a.recycle()
 
-        background = background.toGradient(this)
+        background = background?.toGradient(this)
 
         _inited = true
         updateLayout()
@@ -196,7 +196,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         if (_imageView.drawable is ViewDrawable) {
             _imageView.drawable.invalidateSelf()
         }
-        background = background.toGradient(this)
+        background = background?.toGradient(this)
         _textView.setTextColor(_textView.textColors.toGradient(_textView))
     }
 

@@ -51,9 +51,9 @@
 
         <FrameLayout
             android:layout_width="match_parent"
+            android:layout_height="@dimen/panel_bottom_height"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_height="@dimen/panel_bottom_height">
+            android:paddingEnd="16dp">
 
             <com.eazy.uibase.widget.ZButton
                 android:id="@+id/bottomButton"
