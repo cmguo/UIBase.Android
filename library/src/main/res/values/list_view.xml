@@ -35,7 +35,7 @@
     </style>
 
     <style name="ZButton.Appearance.ListItem" parent="ZButton.Appearance.Middle">
-        <item name="textColor">@color/bluegrey_700_disabled</item>
+        <item name="android:textColor">@color/bluegrey_700_disabled</item>
         <item name="backgroundColor">@color/transparent</item>
         <item name="iconPosition">right</item>
     </style>

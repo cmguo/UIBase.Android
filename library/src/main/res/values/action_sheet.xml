@@ -23,7 +23,7 @@
     </style>
 
     <style name="ZButton.Appearance.Action" parent="ZButton.Appearance.Text.Middle">
-        <item name="textColor">@color/bluegrey_900_selected_disabled</item>
+        <item name="android:textColor">@color/bluegrey_900_selected_disabled</item>
         <item name="height">48dp</item>
         <item name="cornerRadius">0dp</item>
     </style>
