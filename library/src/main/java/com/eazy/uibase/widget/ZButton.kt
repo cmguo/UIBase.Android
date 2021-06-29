@@ -115,13 +115,14 @@ open class ZButton @JvmOverloads constructor(
                 syncIcon()
         }
 
-    var iconPosition = IconPosition.Left
+    var iconPosition : IconPosition
+        get() = _appearance.iconPosition
         set(value) {
-            if (field == value)
+            if (_appearance.iconPosition == value)
                 return
-            field = value
+            _appearance.iconPosition = value
             if (_inited && !loading)
-                syncCompoundDrawable()
+                syncCompoundDrawable(true)
         }
 
     var iconDrawable: Drawable?
@@ -328,7 +329,6 @@ open class ZButton @JvmOverloads constructor(
     private fun syncAppearance(type: Boolean = true, size: Boolean = true) {
         background = backgroundDrawable(_appearance)?.toGradient(this)
         if (type) {
-            iconPosition = _appearance.iconPosition
             super.setTextColor(_appearance.textColor?.toGradient(this))
             if (Drawables.isPureColor(_icon)) {
                 _icon?.setTintList(textColors)
@@ -336,6 +336,8 @@ open class ZButton @JvmOverloads constructor(
                     it.state = intArrayOf()
                 }
             }
+            if (_inited)
+                syncCompoundDrawable(true)
         }
         if (size) {
             height = _appearance.height
@@ -345,8 +347,6 @@ open class ZButton @JvmOverloads constructor(
             val iconSize = _appearance.iconSize
             _icon?.setBounds(0, 0, iconSize, iconSize)
             _loadingIcon?.setBounds(0, 0, iconSize, iconSize)
-            if (_inited)
-                syncCompoundDrawable()
             syncIconPadding()
         }
     }
@@ -424,10 +424,10 @@ open class ZButton @JvmOverloads constructor(
 
     private var _lastIcon: Drawable? = null
 
-    private fun syncCompoundDrawable() {
+    private fun syncCompoundDrawable(position: Boolean = false) {
         val o = _lastIcon
         val d = if (loading) _loadingIcon else _icon
-        if (o == d)
+        if (o == d && !position)
             return
         // How to center icon and text in a android button with width set to “fill parent”
         // https://stackoverflow.com/questions/3634191/how-to-center-icon-and-text-in-a-android-button-with-width-set-to-fill-parent
@@ -435,15 +435,13 @@ open class ZButton @JvmOverloads constructor(
         val top = if (iconPosition == IconPosition.Top) d else null
         val right = if (iconPosition == IconPosition.Right) d else null
         val bottom = if (iconPosition == IconPosition.Bottom) d else null
-        val compoundRect = Rect()
-        d?.copyBounds(compoundRect)
         // setCompoundDrawablesRelative has measure problem on TextView
         //  --Relative calc sizes of start/end, but measure use left/right sizes
         setCompoundDrawables(left, top, right, bottom)
-        if (d is Animatable)
-            d.start()
         if (o is Animatable)
             o.stop()
+        if (d is Animatable)
+            d.start()
         _lastIcon = d
     }
 

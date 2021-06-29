@@ -32,7 +32,7 @@ class ZListItemView @JvmOverloads constructor(
         var iconSize2: Int = R.dimen.list_item_view_icon_size2
         var iconPadding2: Int = R.dimen.list_item_view_icon_padding2
 
-        var buttonAppearence = R.style.ZButton_ListItem
+        var buttonAppearence = R.style.ZButton_Appearance_ListItem
 
         init {
             if (context != null) {
