@@ -39,8 +39,8 @@
 
     <declare-styleable name="ZButton.Appearance">
         <attr name="buttonType"/>
+        <attr name="buttonSize"/>
         <attr name="iconPosition"/>
-        <attr name="iconSize"/>
         <attr name="android:textColor"/>
         <attr name="backgroundColor"/>
         <attr name="height"/>
@@ -48,7 +48,7 @@
         <attr name="paddingX"/>
         <attr name="android:textSize"/>
         <attr name="iconPadding"/>
-        <attr name="buttonSize"/>
+        <attr name="iconSize"/>
     </declare-styleable>
 
     <style name="ZButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->

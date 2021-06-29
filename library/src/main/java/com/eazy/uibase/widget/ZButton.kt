@@ -5,13 +5,14 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.content.res.TypedArray
-import android.graphics.Rect
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.AnyRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
@@ -272,15 +273,29 @@ open class ZButton @JvmOverloads constructor(
             val backgroundColor = appearance.backgroundColor ?: return null
             return RoundDrawable(backgroundColor, appearance.cornerRadius)
         }
+
+        private val sAppearanceValues = mapOf(
+            R.styleable.ZButton_buttonType to R.styleable.ZButton_Appearance_buttonType,
+            R.styleable.ZButton_buttonSize to R.styleable.ZButton_Appearance_buttonSize,
+            R.styleable.ZButton_iconPosition to R.styleable.ZButton_Appearance_iconPosition,
+            R.styleable.ZButton_backgroundColor to R.styleable.ZButton_Appearance_backgroundColor,
+            R.styleable.ZButton_android_textColor to R.styleable.ZButton_Appearance_android_textColor,
+            R.styleable.ZButton_android_textSize to R.styleable.ZButton_Appearance_android_textSize,
+            R.styleable.ZButton_paddingX to R.styleable.ZButton_Appearance_paddingX,
+            R.styleable.ZButton_height to R.styleable.ZButton_Appearance_height,
+            R.styleable.ZButton_cornerRadius to R.styleable.ZButton_Appearance_cornerRadius,
+            R.styleable.ZButton_iconSize to R.styleable.ZButton_Appearance_iconSize,
+            R.styleable.ZButton_iconPadding to R.styleable.ZButton_Appearance_iconPadding
+        )
     }
 
     private fun readStyle(a: TypedArray) {
         buttonAppearance = a.getResourceId(R.styleable.ZButton_buttonAppearance, 0)
-        if (buttonAppearance != 0) {
-            readAppearance(buttonAppearance)
+        if (buttonAppearance != 0 && !_inited) {
+            readAppearance(buttonAppearance, false, true)
         }
         content = a.getResourceId(R.styleable.ZButton_content, 0)
-        readAppearance(a)
+        readAppearance(a, true, !_inited && buttonAppearance == 0)
         icon = a.getResourceId(R.styleable.ZButton_icon, 0)
         loadingIcon = a.getResourceId(R.styleable.ZButton_loadingIcon, 0)
         loadingText = a.getText(R.styleable.ZButton_loadingText)
@@ -288,36 +303,74 @@ open class ZButton @JvmOverloads constructor(
     }
 
     @SuppressLint("CustomViewStyleable")
-    private fun readAppearance(@StyleRes id: Int) {
+    private fun readAppearance(@StyleRes id: Int, styleArray: Boolean = false, dftSizeType: Boolean = false) {
         val aa = context.obtainStyledAttributes(id, R.styleable.ZButton_Appearance)
-        readAppearance(aa)
+        readAppearance(aa, styleArray, dftSizeType)
         aa.recycle()
     }
 
     @SuppressLint("CustomViewStyleable")
-    private fun readAppearance(a: TypedArray) {
-        val type = a.getInt(R.styleable.ZButton_Appearance_buttonType, if (_inited) -1 else buttonType.ordinal)
-        val size = a.getInt(R.styleable.ZButton_Appearance_buttonSize, if (_inited) -1 else buttonSize.ordinal)
-        val inited = _inited
-        _inited = true
-        if (type >= 0) {
+    private fun readAppearance(a: TypedArray, styleArray: Boolean = false, dftSizeType: Boolean = false) {
+        var type = buttonType.ordinal
+        var size = buttonSize.ordinal
+        val n: Int = a.indexCount
+        for (i in 0 until n) {
+            val attr: Int = a.getIndex(i)
+            var index = attr
+            if (styleArray) {
+                index = sAppearanceValues[attr] ?: -1
+                if (index == -1) {
+                    continue
+                }
+            }
+            when (index) {
+                R.styleable.ZButton_Appearance_buttonType -> type = a.getInt(attr, type)
+                R.styleable.ZButton_Appearance_buttonSize -> size = a.getInt(attr, size)
+            }
+        }
+        if (type != buttonType.ordinal || dftSizeType) {
             buttonType = ButtonType.values()[type]
             readAppearance(buttonType.resId)
         }
-        if (size >= 0) {
+        if (size != buttonSize.ordinal || dftSizeType) {
             buttonSize = ButtonSize.values()[size]
             readAppearance(buttonSize.resId)
         }
-        _inited = inited
-        _appearance.textColor = a.getColorStateList(R.styleable.ZButton_Appearance_android_textColor) ?: _appearance.textColor
-        _appearance.backgroundColor = a.getColorStateList(R.styleable.ZButton_Appearance_backgroundColor) ?: _appearance.backgroundColor
-        _appearance.iconPosition = IconPosition.values()[a.getInt(R.styleable.ZButton_Appearance_iconPosition, _appearance.iconPosition.ordinal)]
-        _appearance.height = a.getDimensionPixelSize(R.styleable.ZButton_Appearance_height, _appearance.height)
-        _appearance.cornerRadius = a.getDimension(R.styleable.ZButton_Appearance_cornerRadius, _appearance.cornerRadius)
-        _appearance.padding = a.getDimensionPixelSize(R.styleable.ZButton_Appearance_paddingX, _appearance.padding)
-        _appearance.textSize = a.getDimension(R.styleable.ZButton_Appearance_android_textSize, _appearance.textSize)
-        _appearance.iconSize = a.getDimensionPixelSize(R.styleable.ZButton_Appearance_iconSize, _appearance.iconSize)
-        _appearance.iconPadding = a.getDimensionPixelSize(R.styleable.ZButton_Appearance_iconPadding, _appearance.iconPadding)
+        for (i in 0 until n) {
+            val attr: Int = a.getIndex(i)
+            var index = attr
+            if (styleArray) {
+                index = sAppearanceValues[attr] ?: -1
+                if (index == -1) {
+                    continue
+                }
+            }
+            try {
+                when (index) {
+                    R.styleable.ZButton_Appearance_android_textColor ->
+                        _appearance.textColor = a.getColorStateList(attr) ?: _appearance.textColor
+                    R.styleable.ZButton_Appearance_backgroundColor ->
+                        _appearance.backgroundColor = a.getColorStateList(attr)
+                            ?: _appearance.backgroundColor
+                    R.styleable.ZButton_Appearance_iconPosition ->
+                        _appearance.iconPosition = IconPosition.values()[a.getInt(attr, _appearance.iconPosition.ordinal)]
+                    R.styleable.ZButton_Appearance_height ->
+                        _appearance.height = a.getDimensionPixelSize(attr, _appearance.height)
+                    R.styleable.ZButton_Appearance_cornerRadius ->
+                        _appearance.cornerRadius = a.getDimension(attr, _appearance.cornerRadius)
+                    R.styleable.ZButton_Appearance_paddingX ->
+                        _appearance.padding = a.getDimensionPixelSize(attr, _appearance.padding)
+                    R.styleable.ZButton_Appearance_android_textSize ->
+                        _appearance.textSize = a.getDimension(attr, _appearance.textSize)
+                    R.styleable.ZButton_Appearance_iconSize ->
+                        _appearance.iconSize = a.getDimensionPixelSize(attr, _appearance.iconSize)
+                    R.styleable.ZButton_Appearance_iconPadding ->
+                        _appearance.iconPadding = a.getDimensionPixelSize(attr, _appearance.iconPadding)
+                }
+            } catch (e : Throwable) {
+                Log.w(TAG, e)
+            }
+        }
     }
 
     private fun setTextInner(text: CharSequence?, type: BufferType = BufferType.NORMAL) {
