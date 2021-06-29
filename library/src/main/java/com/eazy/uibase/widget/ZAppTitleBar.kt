@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
+import androidx.annotation.StyleRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
@@ -80,6 +81,33 @@ class ZAppTitleBar @JvmOverloads constructor(
             if (field == value) return
             field = value
             syncButton(_rightButton2, value)
+        }
+
+    @StyleRes
+    var leftButtonAppearance: Int = 0
+        set (value) {
+            if (field == value)
+                return
+            field = value
+            _leftButton.buttonAppearance = value
+        }
+
+    @StyleRes
+    var rightButtonAppearance: Int = 0
+        set (value) {
+            if (field == value)
+                return
+            field = value
+            _rightButton.buttonAppearance = value
+        }
+
+    @StyleRes
+    var rightButton2Appearance: Int = 0
+        set (value) {
+            if (field == value)
+                return
+            field = value
+            _rightButton2.buttonAppearance = value
         }
 
     var content: Int = 0
@@ -208,6 +236,9 @@ class ZAppTitleBar @JvmOverloads constructor(
 
     private fun readStyle(a: TypedArray) {
         content = a.getResourceId(R.styleable.ZAppTitleBar_content, 0)
+        leftButtonAppearance = a.getResourceId(R.styleable.ZAppTitleBar_leftButtonAppearance, 0)
+        rightButtonAppearance = a.getResourceId(R.styleable.ZAppTitleBar_rightButtonAppearance, 0)
+        rightButton2Appearance = a.getResourceId(R.styleable.ZAppTitleBar_rightButton2Appearance, 0)
         leftButton = a.getResourceId(R.styleable.ZAppTitleBar_leftButton, 0)
         rightButton = a.getResourceId(R.styleable.ZAppTitleBar_rightButton, 0)
         rightButton2 = a.getResourceId(R.styleable.ZAppTitleBar_rightButton2, 0)

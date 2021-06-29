@@ -5,8 +5,11 @@
 
     <declare-styleable name="ZAppTitleBar">
         <attr name="leftButton" format="reference"/>
+        <attr name="leftButtonAppearance" format="reference"/>
         <attr name="rightButton" format="reference"/>
+        <attr name="rightButtonAppearance" format="reference"/>
         <attr name="rightButton2" format="reference"/>
+        <attr name="rightButton2Appearance" format="reference"/>
         <attr name="icon"/>
         <attr name="title" format="string"/>
         <!-- not use android:textAppearance, since we not assign style value by default style,
