@@ -128,8 +128,8 @@ class ZDialog @JvmOverloads constructor(
     val checkedState get() = _checkBox.checkedState
 
     interface DialogListener {
-        fun buttonClicked(dialog: ZDialog, btnId: Int) {}
-        fun dialogDismissed(dialog: ZDialog)
+        fun buttonClicked(dialog: ZDialog, btnId: Int)
+        fun dialogDismissed(dialog: ZDialog) {}
     }
 
     var listener: DialogListener? = null
@@ -175,12 +175,20 @@ class ZDialog @JvmOverloads constructor(
         _imageView.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
     }
 
-    fun popUp(fragmentManager: FragmentManager) {
+    fun popUp(fragmentManager: FragmentManager, buttonClicked: ((dialog: ZDialog, btnId: Int) -> Unit)? = null) {
         val lp = FrameLayout.LayoutParams(0, 0)
         lp.width = minimumWidth
         lp.height = ViewGroup.LayoutParams.WRAP_CONTENT
         lp.gravity = Gravity.CENTER
         layoutParams = lp
+        if (buttonClicked != null) {
+            listener = object : DialogListener {
+                override fun buttonClicked(dialog: ZDialog, btnId: Int) {
+                    buttonClicked(dialog, btnId)
+                    dialog.dismiss()
+                }
+            }
+        }
         MaskDialog(this).show(fragmentManager, "")
     }
 
