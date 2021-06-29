@@ -79,7 +79,7 @@ class ZPanel @JvmOverloads constructor(
         }
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZPanel, defStyleAttr, 0)
-        applyStyle(a)
+        readStyle(a)
         a.recycle()
 
         _inited = true
@@ -131,7 +131,7 @@ class ZPanel @JvmOverloads constructor(
 
     /* private */
 
-    private fun applyStyle(a: TypedArray) {
+    private fun readStyle(a: TypedArray) {
         content = a.getResourceId(R.styleable.ZPanel_content, 0)
         titleBar = a.getResourceId(R.styleable.ZPanel_titleBar, 0)
         bottomButton = a.getResourceId(R.styleable.ZPanel_bottomButton, 0)
@@ -175,7 +175,7 @@ class ZPanel @JvmOverloads constructor(
             addView(view)
         } else if (type == "style") {
             val typedArray = context.obtainStyledAttributes(content, R.styleable.ZPanel)
-            applyStyle(typedArray)
+            readStyle(typedArray)
             typedArray.recycle()
         }
     }

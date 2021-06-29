@@ -55,7 +55,7 @@ class ZSearchBox @JvmOverloads constructor(
         _inputContainer.background = RoundDrawable(context, R.style.ZSearchBox_InputBackground)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZSearchBox, defStyleAttr, 0)
-        applyStyle(a)
+        readStyle(a)
         a.recycle()
     }
 
@@ -93,7 +93,7 @@ class ZSearchBox @JvmOverloads constructor(
         private const val TAG = "ZSearchBox"
     }
 
-    private fun applyStyle(a: TypedArray) {
+    private fun readStyle(a: TypedArray) {
         rightButton = a.getResourceId(R.styleable.ZSearchBox_rightButton, 0)
     }
 

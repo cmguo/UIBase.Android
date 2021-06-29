@@ -118,7 +118,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         _rightButton2 = findViewById(R.id.rightButton2)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZAppTitleBar, defStyleAttr, 0)
-        applyStyle(a)
+        readStyle(a)
         a.recycle()
 
         background = background?.toGradient(this)
@@ -206,7 +206,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         private const val TAG = "ZAppTitleBar"
     }
 
-    private fun applyStyle(a: TypedArray) {
+    private fun readStyle(a: TypedArray) {
         content = a.getResourceId(R.styleable.ZAppTitleBar_content, 0)
         leftButton = a.getResourceId(R.styleable.ZAppTitleBar_leftButton, 0)
         rightButton = a.getResourceId(R.styleable.ZAppTitleBar_rightButton, 0)
@@ -276,7 +276,7 @@ class ZAppTitleBar @JvmOverloads constructor(
                 rightButton2 = 0
                 title = null
                 val typedArray = context.obtainStyledAttributes(content, R.styleable.ZAppTitleBar)
-                applyStyle(typedArray)
+                readStyle(typedArray)
                 typedArray.recycle()
             }
         }

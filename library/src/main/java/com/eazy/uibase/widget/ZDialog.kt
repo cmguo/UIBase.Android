@@ -165,7 +165,7 @@ class ZDialog @JvmOverloads constructor(
         _listView.layoutManager = LinearLayoutManager(context)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZDialog, defStyleAttr, 0)
-        applyStyle(a)
+        readStyle(a)
         a.recycle()
 
         _inited = true
@@ -241,7 +241,7 @@ class ZDialog @JvmOverloads constructor(
 
     /* private */
 
-    private fun applyStyle(a: TypedArray) {
+    private fun readStyle(a: TypedArray) {
         content = a.getResourceId(R.styleable.ZDialog_content, 0)
         title = a.getText(R.styleable.ZDialog_title)
         subTitle = a.getText(R.styleable.ZDialog_subTitle)
@@ -314,7 +314,7 @@ class ZDialog @JvmOverloads constructor(
             addView(view)
         } else if (type == "style") {
             val typedArray = context.obtainStyledAttributes(content, R.styleable.ZDialog)
-            applyStyle(typedArray)
+            readStyle(typedArray)
             typedArray.recycle()
         }
     }
