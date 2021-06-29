@@ -78,7 +78,5 @@
     <color name="static_black_20">#33000000</color>  <!-- dark #000000 20%, 20% -->
     <color name="static_black_10">#19000000</color>  <!-- dark #000000 10%, 10% -->
     <color name="static_black_05">#0C000000</color>  <!-- dark #000000 5%, 5% -->
-    <color name="static_brand_500">#FFD630</color>
-    <color name="static_brand_600">#F2C121</color>
 
 </resources>

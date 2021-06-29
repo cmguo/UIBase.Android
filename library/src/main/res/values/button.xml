@@ -66,7 +66,7 @@
     <!-- Type Styles -->
 
     <style name="ZButton.Appearance.Primitive">
-        <item name="textColor">@color/bluegrey_900_disabled</item>
+        <item name="textColor">@color/static_bluegrey_900_disabled</item>
         <item name="backgroundColor">@color/brand_500_pressed_disabled</item>
     </style>
 
