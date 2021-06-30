@@ -36,9 +36,8 @@ public class Drawables {
             return vectorIsPureColor((VectorDrawable) drawable);
         if (drawable instanceof VectorDrawableCompat)
             return vectorIsPureColor((VectorDrawableCompat) drawable);
-        if (drawable instanceof BitmapDrawable) {
-            return bitmapIsPureColor(((BitmapDrawable) drawable).getBitmap());
-        }
+//        if (drawable instanceof BitmapDrawable)
+//            return bitmapIsPureColor(((BitmapDrawable) drawable).getBitmap());
         return false;
     }
 

@@ -21,12 +21,12 @@
             <enum name="right" value="2"/>
             <enum name="bottom" value="3"/>
         </attr>
-        <attr name="android:textColor"/>
         <attr name="backgroundColor"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
         <attr name="height"/>
         <attr name="cornerRadius"/>
         <attr name="paddingX"/>
-        <attr name="android:textSize"/>
         <attr name="iconPadding"/>
         <attr name="iconSize"/>
 
@@ -38,17 +38,17 @@
     </declare-styleable>
 
     <declare-styleable name="ZButton.Appearance">
-        <attr name="buttonType"/>
-        <attr name="buttonSize"/>
-        <attr name="iconPosition"/>
-        <attr name="android:textColor"/>
         <attr name="backgroundColor"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="iconPosition"/>
         <attr name="height"/>
         <attr name="cornerRadius"/>
         <attr name="paddingX"/>
-        <attr name="android:textSize"/>
         <attr name="iconPadding"/>
         <attr name="iconSize"/>
+        <attr name="buttonType"/>
+        <attr name="buttonSize"/>
     </declare-styleable>
 
     <style name="ZButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->
