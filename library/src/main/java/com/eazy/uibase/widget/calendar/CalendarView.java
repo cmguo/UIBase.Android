@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -320,6 +319,7 @@ public class CalendarView extends FrameLayout {
         private final Rect mRect = new Rect();
         private boolean handleDefault = true;
         private float preX = 0f;
+        private float startX = 0f;
         private static final float RATIO = 0.5f;
         private static final float SCROLL_WIDTH = 10f;
 
@@ -337,25 +337,25 @@ public class CalendarView extends FrameLayout {
 
             if (ev.getAction() == MotionEvent.ACTION_DOWN) {
                 preX = ev.getRawX();
+                startX = ev.getRawX();
                 currentPosition = getCurrentItem();
+                mRect.setEmpty();
             }
-            switch (ev.getAction()) {
-                case MotionEvent.ACTION_MOVE:
-                    int endX = (int) ev.getRawX();
-                    if (Math.abs(endX - preX) > SCROLL_WIDTH) {
-                        if (endX > preX) {
-                            if (getCurrentItem() == 0) {
-                                getParent().requestDisallowInterceptTouchEvent(true);
-                            }
-                        } else {
-                            if (getCurrentItem() == getAdapter().getCount() - 1) {
-                                getParent().requestDisallowInterceptTouchEvent(true);
-                            }
+            if (ev.getAction() == MotionEvent.ACTION_MOVE) {
+                int endX = (int) ev.getRawX();
+                if (Math.abs(endX - startX) > SCROLL_WIDTH) {
+                    if (endX > startX) {
+                        if (getCurrentItem() == 0) {
+                            getParent().requestDisallowInterceptTouchEvent(true);
                         }
                     } else {
-                        getParent().requestDisallowInterceptTouchEvent(false);
+                        if (getCurrentItem() == Objects.requireNonNull(getAdapter()).getCount() - 1) {
+                            getParent().requestDisallowInterceptTouchEvent(true);
+                        }
                     }
-                    break;
+                } else {
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                }
             }
             return super.dispatchTouchEvent(ev);
         }
@@ -372,9 +372,11 @@ public class CalendarView extends FrameLayout {
                     if (Objects.requireNonNull(getAdapter()).getCount() == 1) {
                         float nowX = ev.getRawX();
                         float offset = nowX - preX;
-                        if (offset > SCROLL_WIDTH) {
+                        float diff = nowX - startX;
+                        preX = nowX;
+                        if (diff > SCROLL_WIDTH) {
                             whetherConditionIsRight(offset);
-                        } else if (offset < -SCROLL_WIDTH) {
+                        } else if (diff < -SCROLL_WIDTH) {
                             whetherConditionIsRight(offset);
                         } else if (!handleDefault) {
                             if (getLeft() + (int) (offset * RATIO) != mRect.left) {
@@ -384,10 +386,10 @@ public class CalendarView extends FrameLayout {
                     } else if ((currentPosition == 0 || currentPosition == getAdapter().getCount() - 1)) {
                         float nowX = ev.getRawX();
                         float offset = nowX - preX;
+                        float diff = nowX - startX;
                         preX = nowX;
-
                         if (currentPosition == 0) {
-                            if (offset > SCROLL_WIDTH) {
+                            if (diff > SCROLL_WIDTH) {
                                 whetherConditionIsRight(offset);
                             } else if (!handleDefault) {
                                 if (getLeft() + (int) (offset * RATIO) >= mRect.left) {
@@ -395,7 +397,7 @@ public class CalendarView extends FrameLayout {
                                 }
                             }
                         } else {
-                            if (offset < -SCROLL_WIDTH) {
+                            if (diff < -SCROLL_WIDTH) {
                                 whetherConditionIsRight(offset);
                             } else if (!handleDefault) {
                                 if (getRight() + (int) (offset * RATIO) <= mRect.right) {
@@ -410,12 +412,12 @@ public class CalendarView extends FrameLayout {
                     if (!handleDefault) {
                         return true;
                     }
-                    return true;
                 default:
                     break;
             }
             return super.onTouchEvent(ev);
         }
+
 
         private void whetherConditionIsRight(float offset) {
             if (mRect.isEmpty()) {
