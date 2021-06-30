@@ -353,17 +353,17 @@ open class ZButton @JvmOverloads constructor(
             }
         }
         // Always apply ButtonType & ButtonSize, because it's parts of ButtonAppearance
-        if (type >= 0) {
-            val bt = ButtonType.values()[type]
-            if (styleArray && !_inited)
-                buttonType = bt
-            changed = changed or readAppearance(bt.resId)
-        }
         if (size >= 0) {
             val bs = ButtonSize.values()[size]
             if (styleArray && !_inited)
                 buttonSize = bs
             changed = changed or readAppearance(bs.resId)
+        }
+        if (type >= 0) {
+            val bt = ButtonType.values()[type]
+            if (styleArray && !_inited)
+                buttonType = bt
+            changed = changed or readAppearance(bt.resId)
         }
         for (i in 0 until n) {
             val attr: Int = a.getIndex(i)

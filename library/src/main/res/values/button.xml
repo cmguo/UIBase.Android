@@ -94,6 +94,7 @@
     <style name="ZButton.Appearance.Text">
         <item name="android:textColor">@color/blue_600_disabled</item>
         <item name="backgroundColor">@color/transparent_pressed_disabled</item>
+        <item name="padding">0dp</item>
     </style>
 
     <style name="ZButton.Appearance.Text.Transparent" parent="ZButton.Appearance">
