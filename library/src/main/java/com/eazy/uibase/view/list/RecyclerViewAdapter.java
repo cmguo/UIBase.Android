@@ -2,9 +2,6 @@ package com.eazy.uibase.view.list;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +16,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<Object> mItems = new ArrayList<>();
 
     private ItemBinding mItemBinding;
+    private Object mEmptyItem;
+    private ItemBinding mEmptyItemBinding;
 
     private OnItemClickListener mOnItemClickListener;
     private OnViewBindingCreateListener mOnViewBindingCreateListener;
@@ -27,9 +26,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         mItemBinding = binding;
     }
 
+    public void setEmptyItem(Object item, ItemBinding binding) {
+        mEmptyItem = item;
+        mEmptyItemBinding = binding;
+    }
+
     @NonNull
     @Override
     public BindingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (isEmptyItem(0)) {
+            ViewBinding binding = (mEmptyItemBinding == null ? mItemBinding : mEmptyItemBinding).createBinding(parent, viewType);
+            return new BindingViewHolder(this, binding);
+        }
         ViewBinding binding = mItemBinding.createBinding(parent, viewType);
         if (mOnViewBindingCreateListener != null) {
             mOnViewBindingCreateListener.onViewBindingCreated((RecyclerView) parent, binding);
@@ -40,20 +48,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
         Object item = getItem(position);
+        if (isEmptyItem(position)) {
+            holder.bind(mEmptyItemBinding == null ? mItemBinding : mEmptyItemBinding, item, position);
+            return;
+        }
         holder.bind(mItemBinding, item, position);
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        int size = getRealItemCount();
+        if (isEmptyItem(0))
+            size = 1;
+        return size;
     }
 
     public Object getItem(int position) {
-        return mItems.get(position);
+        if (isEmptyItem(position))
+            return mEmptyItem;
+        return getRealItem(position);
     }
 
     @Override
     public int getItemViewType(int position) {
+        if (isEmptyItem(position))
+            return (mEmptyItemBinding == null ? mItemBinding : mEmptyItemBinding).getItemViewType(mEmptyItem);
         return mItemBinding.getItemViewType(getItem(position));
     }
 
@@ -130,7 +149,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onClick(View v) {
         RecyclerView recyclerView = (RecyclerView) v.getParent();
         int position = recyclerView.getChildAdapterPosition(v);
-        if (mOnItemClickListener != null && position >= 0)
+        if (mOnItemClickListener != null && position >= 0 && !mItems.isEmpty())
             mOnItemClickListener.onItemClick(recyclerView, v, position, getItem(position));
     }
 
@@ -159,6 +178,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @FunctionalInterface
     public interface OnViewBindingCreateListener {
         void onViewBindingCreated(RecyclerView recyclerView, ViewBinding view);
+    }
+
+    protected int getRealItemCount() {
+        return mItems.size();
+    }
+
+    protected Object getRealItem(int position) {
+        return mItems.get(position);
+    }
+
+    protected boolean isEmptyItem(int position) {
+        return position == 0 && mItems.isEmpty() && (mEmptyItem != null || mEmptyItemBinding != null);
     }
 
 }

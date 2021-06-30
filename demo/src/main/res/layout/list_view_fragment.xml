@@ -26,7 +26,8 @@
     <com.eazy.uibase.widget.ZListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:data="@{styles.group ? model.colorGroups : model.colors}"
+        app:data="@{styles.empty ? model.empty : styles.group ? model.colorGroups : model.colors}"
+        app:emptyItemBinding="@{styles.emptyItemBinding}"
         app:listener="@{fragment.listener}">
 
     </com.eazy.uibase.widget.ZListView>

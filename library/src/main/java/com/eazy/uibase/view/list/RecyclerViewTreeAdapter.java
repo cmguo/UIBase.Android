@@ -11,12 +11,12 @@ import java.util.Iterator;
 public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
 
     @Override
-    public int getItemCount() {
+    protected int getRealItemCount() {
         return getItemsCount(this) - 1;
     }
 
     @Override
-    public Object getItem(int position) {
+    protected Object getRealItem(int position) {
         return getItem(this, position + 1);
     }
 

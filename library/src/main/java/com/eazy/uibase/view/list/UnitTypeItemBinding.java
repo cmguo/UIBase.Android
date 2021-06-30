@@ -21,8 +21,4 @@ public class UnitTypeItemBinding extends BaseItemBinding {
         return mItemLayout;
     }
 
-    @Override
-    protected void bindView(View view, Object item, int position) {
-        super.bindView(view, item, position);
-    }
 }

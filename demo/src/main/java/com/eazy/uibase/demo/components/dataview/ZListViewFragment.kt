@@ -1,7 +1,12 @@
 package com.eazy.uibase.demo.components.dataview
 
 import android.graphics.drawable.ColorDrawable
+import android.media.Image
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.Bindable
+import com.eazy.uibase.databinding.ItemBinding
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
@@ -10,6 +15,7 @@ import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.ListViewFragmentBinding
 import com.eazy.uibase.demo.resources.Colors
 import com.eazy.uibase.demo.resources.Resources
+import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZListItemView
 import com.eazy.uibase.widget.ZListView
 import com.eazy.uibase.widget.ZTipView
@@ -17,6 +23,8 @@ import com.eazy.uibase.widget.ZTipView
 class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewFragment.Model?, ZListViewFragment.Styles?>() {
 
     class Model(fragment: ZListViewFragment) : ViewModel() {
+
+        val empty = arrayListOf<Any>()
         val colors: List<ZListItemView.Data>
         val colorGroups: List<ZListItemView.Data>
 
@@ -30,8 +38,29 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
     class Styles : ViewStyles() {
 
         @Bindable
+        @Title("空列表")
+        var empty = false
+
+        @Bindable
         @Title("分组")
         var group = false
+
+        val emptyItemBinding = object : UnitTypeItemBinding(R.layout.list_empty_view) {
+            override fun bindView(view: View, item: Any?, position: Int) {
+                val image = view.findViewById<ImageView>(R.id.image)
+                image.setImageResource(R.drawable.icon_weblink)
+                image.visibility = View.VISIBLE
+                val title = view.findViewById<TextView>(R.id.title)
+                title.text = "标题"
+                title.visibility = View.VISIBLE
+                val subTitle = view.findViewById<TextView>(R.id.subTitle)
+                subTitle.text = "详细内容详细内容详细内容详细内容详细内容详细内容"
+                subTitle.visibility = View.VISIBLE
+                val button = view.findViewById<TextView>(R.id.button)
+                button.text = "重试"
+                button.visibility = View.VISIBLE
+            }
+        }
     }
 
     val listener = object : ZListView.OnItemValueChangeListener {
