@@ -7,12 +7,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="wrap_content">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dialog_image_padding"/>
 
         <com.eazy.uibase.widget.ZAvatarView
             android:id="@+id/imageView"
