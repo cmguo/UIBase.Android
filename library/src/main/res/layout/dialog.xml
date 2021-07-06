@@ -18,13 +18,15 @@
 
         <ImageView
             android:id="@+id/closeIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_gravity="top|right"
             android:layout_marginTop="@dimen/dialog_close_padding"
             android:layout_marginRight="@dimen/dialog_close_padding"
             android:src="@drawable/icon_close"
-            android:visibility="gone"/>
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
     </FrameLayout>
 
