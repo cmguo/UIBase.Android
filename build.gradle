@@ -29,6 +29,11 @@ allprojects {
         google()
         jcenter()
     }
+
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'minutes'
+    }
+
 }
 
 task clean(type: Delete) {
