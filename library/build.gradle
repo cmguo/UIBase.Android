@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+apply from: '../build-version.gradle'
+
 android {
 
     compileSdkVersion build_versions.compileSdkVersion
@@ -22,8 +24,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField 'String', 'BUILD_VERSION', build_version
+        }
         release {
             minifyEnabled false
+            buildConfigField 'String', 'BUILD_VERSION', build_version
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'consumer-rules.pro'
         }
     }
@@ -63,10 +69,10 @@ dependencies {
     //releaseApi project(path: ':magicindicator')
     //releaseApi project(path: ':pickerview')
 
-    releaseApi 'com.xhb.uibase:libshape:1.0.0-20210426.061031-2'
-    releaseApi 'com.xhb.uibase:badgeview:1.0.0-20210425.051641-1'
-    releaseApi 'com.github.hackware1993:magic-indicator:1.6.0-20210425.050831-1'
-    releaseApi 'com.contrarywind:Android-PickerView:4.2.0-20210508.104110-5'
+    releaseApi 'com.xhb.uibase:libshape:1.0.0-SNAPSHOT'
+    releaseApi 'com.xhb.uibase:badgeview:1.0.0-SNAPSHOT'
+    releaseApi 'com.github.hackware1993:magic-indicator:1.6.0-SNAPSHOT'
+    releaseApi 'com.contrarywind:Android-PickerView:4.2.0-SNAPSHOT'
 
     kapt 'com.google.auto.service:auto-service:1.0-rc6'
 

@@ -1,0 +1,21 @@
+
+ext.getGitVersion = {
+    def gitRevision = "git -C ${project.getProjectDir()} log -1 --format=%h"
+    println(gitRevision)
+    gitRevision = gitRevision.execute().text.trim()
+    println(gitRevision)
+    return String.format("\"%s\"",gitRevision)
+}
+
+ext.build_version = ext.getGitVersion()
+
+android {
+    buildTypes {
+        debug {
+            buildConfigField 'String', 'BUILD_VERSION', build_version
+        }
+        release {
+            buildConfigField 'String', 'BUILD_VERSION', build_version
+        }
+    }
+}

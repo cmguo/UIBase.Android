@@ -57,12 +57,12 @@ class ZPanelFragment : ComponentFragment<PanelFragmentBinding?, ZPanelFragment.M
     }
 
     var buttonClick = View.OnClickListener {
-        val panel = ZPanel(requireContext())
-        panel.titleBar = styles.titleBar
-        panel.bottomButton = styles.bottomButton
-        panel.content = styles.content
-        panel.listener = this
-        panel.popUp(parentFragmentManager)
+        ZPanel(requireContext()).apply {
+            titleBar = styles.titleBar
+            bottomButton = styles.bottomButton
+            content = styles.content
+            listener = this@ZPanelFragment
+        }.popUp(parentFragmentManager)
     }
 
     override fun panelButtonClicked(panel: ZPanel, btnId: Int) {

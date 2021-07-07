@@ -5,6 +5,7 @@ import android.os.Build;
 
 import androidx.databinding.Bindable;
 
+import com.eazy.uibase.BuildConfig;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.core.ViewModel;
 import com.eazy.uibase.demo.core.ViewStyles;
@@ -18,7 +19,12 @@ public class TestFragment extends ComponentFragment<TestFragmentBinding, TestFra
 
         public String text = "Hello world!";
 
-        public String version = "SDK:" + Build.VERSION.SDK_INT;
+        public String osVersion = "SDK:" + Build.VERSION.SDK_INT;
+        public String buildVersion = "UIBase Build:" + BuildConfig.BUILD_VERSION
+            + "\nMagicIndicator Build: " + net.lucode.hackware.magicindicator.BuildConfig.BUILD_VERSION
+            + "\nWheelView Build: " + com.contrarywind.view.BuildConfig.BUILD_VERSION
+            + "\nPickerView Build: " + com.bigkoo.pickerview.BuildConfig.BUILD_VERSION
+            ;
     }
 
     public enum EnumStyle {
