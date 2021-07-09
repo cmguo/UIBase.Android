@@ -91,7 +91,7 @@ class ZTipView @JvmOverloads constructor(
         }
 
     var singleLine: Boolean
-        get() = _textView.isSingleLine
+        get() = _textView.isSingleLine()
         set(value) {
             _textView.isSingleLine = value
         }
