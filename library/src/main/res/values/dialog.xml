@@ -18,8 +18,7 @@
     <dimen name="dialog_border_radius">8dp</dimen>
     <dimen name="dialog_padding_x">24dp</dimen>
     <dimen name="dialog_close_padding">12dp</dimen>
-    <dimen name="dialog_image_padding">32dp</dimen>
-    <dimen name="dialog_title_padding">24dp</dimen> <!-- with image -->
+    <dimen name="dialog_top_padding">24dp</dimen>
     <dimen name="dialog_sub_title_padding">0dp</dimen>
     <dimen name="dialog_sub_title_padding2">8dp</dimen> <!-- with image -->
     <dimen name="dialog_content_padding">16dp</dimen>
@@ -28,7 +27,7 @@
     <dimen name="dialog_button_padding_x">16dp</dimen>
     <dimen name="dialog_button_padding2">24dp</dimen> <!-- with content -->
     <dimen name="dialog_checkbox_padding">22dp</dimen>
-    <dimen name="dialog_bottom_padding">24dp</dimen>
+    <dimen name="dialog_bottom_padding">18dp</dimen>
 
     <style name="ZDialog">
         <item name="android:orientation">vertical</item>

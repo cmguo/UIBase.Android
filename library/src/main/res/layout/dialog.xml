@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/dialog_padding_x"
         android:paddingEnd="@dimen/dialog_padding_x"
-        android:paddingBottom="18dp"
-        android:paddingTop="@dimen/dialog_padding_x"
+        android:paddingTop="@dimen/dialog_top_padding"
+        android:paddingBottom="@dimen/dialog_bottom_padding"
         android:orientation="vertical">
 
         <TextView
