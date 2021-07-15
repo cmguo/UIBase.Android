@@ -45,7 +45,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.Z.Head2"
-            android:textStyle="bold"
             android:maxLines="2"
             android:ellipsize="end"
             android:visibility="gone" />
