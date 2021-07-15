@@ -10,18 +10,23 @@
     </style>
     <style name="TextAppearance.Z.Title.24">
         <item name="android:textSize">24sp</item>
+        <item name="lineHeight">36sp</item>
     </style>
     <style name="TextAppearance.Z.Title.20">
         <item name="android:textSize">20sp</item>
+        <item name="lineHeight">32sp</item>
     </style>
     <style name="TextAppearance.Z.Title.18">
         <item name="android:textSize">18sp</item>
+        <item name="lineHeight">28sp</item>
     </style>
     <style name="TextAppearance.Z.Title.16">
         <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
     </style>
     <style name="TextAppearance.Z.Title.14">
         <item name="android:textSize">14sp</item>
+        <item name="lineHeight">20sp</item>
         <item name="android:textColor">@color/bluegrey_800_disabled</item>
     </style>
 
@@ -35,28 +40,33 @@
     </style>
     <style name="TextAppearance.Z.Body.18">
         <item name="android:textSize">18sp</item>
+        <item name="lineHeight">28sp</item>
     </style>
     <style name="TextAppearance.Z.Body.16">
         <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
     </style>
     <style name="TextAppearance.Z.Body.14">
         <item name="android:textSize">14sp</item>
+        <item name="lineHeight">20sp</item>
         <item name="android:textColor">@color/bluegrey_800_disabled</item>
     </style>
     <style name="TextAppearance.Z.Body.12">
         <item name="android:textSize">12sp</item>
+        <item name="lineHeight">20sp</item>
         <item name="android:textColor">@color/bluegrey_700</item>
     </style>
     <style name="TextAppearance.Z.Body.10">
         <item name="android:textSize">10sp</item>
+        <item name="lineHeight">20sp</item>
         <item name="android:textColor">@color/bluegrey_700</item>
     </style>
 
     <style name="TextAppearance.Z.Body.Large" parent="TextAppearance.Z.Body.18"/>
     <style name="TextAppearance.Z.Body.Middle" parent="TextAppearance.Z.Body.16"/>
     <style name="TextAppearance.Z.Body.Small" parent="TextAppearance.Z.Body.14"/>
-    <style name="TextAppearance.Z.Secondary" parent="TextAppearance.Z.Body.12"/>
-    <style name="TextAppearance.Z.Tip" parent="TextAppearance.Z.Body.10"/>
+    <style name="TextAppearance.Z.Body.Secondary" parent="TextAppearance.Z.Body.12"/>
+    <style name="TextAppearance.Z.Body.Tip" parent="TextAppearance.Z.Body.10"/>
 
     <style name="EmptyTextAppearance">
         <!-- for TextView sub class not controlled by textAppearance, for example ZButton -->

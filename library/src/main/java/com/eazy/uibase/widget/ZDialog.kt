@@ -272,17 +272,13 @@ class ZDialog @JvmOverloads constructor(
     }
 
     private fun syncImage() {
-        val lp2 = _textView2.layoutParams as LayoutParams
         if (image == 0) {
             _imageView.setImageDrawable(null)
             _imageView.visibility = View.GONE
-            lp2.topMargin = context.resources.getDimensionPixelSize(R.dimen.dialog_sub_title_padding)
         } else {
             _imageView.setImageDrawable(Drawables.getDrawable(context, image))
             _imageView.visibility = View.VISIBLE
-            lp2.topMargin = context.resources.getDimensionPixelSize(R.dimen.dialog_sub_title_padding2)
         }
-        _textView2.layoutParams = lp2
     }
 
     private fun syncButton(button: ZButton, content: Int) {

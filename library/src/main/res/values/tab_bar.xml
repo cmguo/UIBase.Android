@@ -12,7 +12,7 @@
             <enum name="exactly" value="2"/>
         </attr>
         <attr name="lineWidth" format="dimension" />
-        <attr name="lineHeight" format="dimension" />
+        <attr name="lineHeight" />
         <attr name="longLineHeight" format="dimension" />
         <attr name="cornerRadius"/>
         <attr name="offsetX" format="dimension"/>

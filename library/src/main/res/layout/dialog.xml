@@ -57,7 +57,7 @@
             android:textAppearance="@style/TextAppearance.Z.Body.Middle"
             android:textColor="@color/bluegrey_800"
             android:ellipsize="end"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/dialog_sub_title_padding"
             android:visibility="gone" />
 
         <LinearLayout

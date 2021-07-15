@@ -25,8 +25,8 @@ class ZListItemView @JvmOverloads constructor(
         var paddingY: Int = R.dimen.list_item_view_padding_y
         var subTextPadding: Int = R.dimen.list_item_view_sub_text_padding
         var textAppearance = R.style.TextAppearance_Z_Body_Middle
-        var subTextAppearance = if (header)  R.style.TextAppearance_Z_Secondary_ListItem else
-            R.style.TextAppearance_Z_Secondary
+        var subTextAppearance = if (header)  R.style.TextAppearance_Z_Body_Secondary_ListItem else
+            R.style.TextAppearance_Z_Body_Secondary
         var iconSize: Int = R.dimen.list_item_view_icon_size
         var iconPadding: Int = R.dimen.list_item_view_icon_padding
         var iconSize2: Int = R.dimen.list_item_view_icon_size2

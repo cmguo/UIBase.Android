@@ -19,8 +19,7 @@
     <dimen name="dialog_padding_x">24dp</dimen>
     <dimen name="dialog_close_padding">12dp</dimen>
     <dimen name="dialog_top_padding">24dp</dimen>
-    <dimen name="dialog_sub_title_padding">0dp</dimen>
-    <dimen name="dialog_sub_title_padding2">8dp</dimen> <!-- with image -->
+    <dimen name="dialog_sub_title_padding">8dp</dimen>
     <dimen name="dialog_content_padding">16dp</dimen>
     <dimen name="dialog_button_width">116dp</dimen>
     <dimen name="dialog_button_padding">14dp</dimen>

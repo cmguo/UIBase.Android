@@ -40,7 +40,7 @@
         <item name="iconPosition">right</item>
     </style>
 
-    <style name="TextAppearance.Z.Secondary.ListItem">
+    <style name="TextAppearance.Z.Body.Secondary.ListItem">
         <item name="android:textSize">14sp</item>
     </style>
 
