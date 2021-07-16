@@ -2,10 +2,12 @@ package com.eazy.uibase.demo.resources;
 
 import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 
 import androidx.annotation.StyleRes;
 import androidx.databinding.Bindable;
 import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eazy.uibase.demo.BR;
@@ -16,7 +18,7 @@ import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.core.style.annotation.Description;
 import com.eazy.uibase.demo.core.style.annotation.Title;
 import com.eazy.uibase.demo.databinding.Styles2FragmentBinding;
-import com.eazy.uibase.view.list.PaddingDecoration;
+import com.eazy.uibase.view.list.DividerDecoration;
 import com.eazy.uibase.view.list.UnitTypeItemBinding;
 
 import java.util.Map;
@@ -49,8 +51,8 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
     }
 
     public static class Styles extends ViewStyles {
-        public ItemBinding itemBinding;
-        public RecyclerView.ItemDecoration itemDecoration = new PaddingDecoration();
+        public final ItemBinding itemBinding;
+        public final RecyclerView.ItemDecoration itemDecoration;
 
         @Bindable
         public String text = "文字";
@@ -67,6 +69,10 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
             a.recycle();
             String colorStr = Resources.simpleName(fragment_.requireContext().getResources().getResourceName(color));
             return String.format("size: %d, color: %s", (int)size, colorStr);
+        }
+
+        public String textAll(Map.Entry<String, Integer> data) {
+            return textTitle(data.getKey()) + "\n" + textDetail(data.getValue());
         }
 
         @Bindable
@@ -94,6 +100,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         public Styles(StylesFragment fragment) {
             this.fragment_ = fragment;
             itemBinding = new ItemBinding(this);
+            itemDecoration = new DividerDecoration(fragment.requireContext(), LinearLayoutManager.VERTICAL, 1, Color.BLUE);
         }
     }
 

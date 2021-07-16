@@ -25,6 +25,7 @@ import com.eazy.uibase.R
 import com.eazy.uibase.dialog.MaskDialog
 import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundDrawable
+import com.eazy.uibase.view.textAppearance
 
 class ZDialog @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.dialogStyle
@@ -153,7 +154,9 @@ class ZDialog @JvmOverloads constructor(
         _imageView = findViewById(R.id.imageView)
         _closeIcon = findViewById(R.id.closeIcon)
         _textView = findViewById(R.id.textView)
+        _textView.textAppearance = R.style.TextAppearance_Z_Head2
         _textView2 = findViewById(R.id.textView2)
+        _textView2.textAppearance = R.style.TextAppearance_Z_Body_Middle
         _confirmButton = findViewById(R.id.confirmButton)
         _cancelButton = findViewById(R.id.cancelButton)
         _listView = findViewById(R.id.listView)

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="ZTextAppearance">
+        <attr name="lineHeight"/>
+        <attr name="lineSpacing" format="dimension" />
+    </declare-styleable>
+
     <style name="TextAppearance.Z" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/bluegrey_900_disabled</item>
     </style>

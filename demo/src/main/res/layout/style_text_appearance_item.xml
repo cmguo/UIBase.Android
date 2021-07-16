@@ -24,14 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/title"
-            android:textAppearance="@{data.value}"
-            android:text="@{styles.textTitle(data.key)}"/>
-
-        <TextView
-            android:id="@+id/radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{styles.textDetail(data.value)}"/>
+            app:textAppearance="@{data.value}"
+            android:text="@{styles.textAll(data)}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
