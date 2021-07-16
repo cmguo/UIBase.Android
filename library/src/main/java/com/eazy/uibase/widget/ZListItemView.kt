@@ -12,8 +12,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StyleRes
-import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
+import com.eazy.uibase.view.textAppearance
 
 @SuppressLint("ClickableViewAccessibility")
 class ZListItemView @JvmOverloads constructor(
@@ -86,8 +86,8 @@ class ZListItemView @JvmOverloads constructor(
     var appearance: Appearance = DefaultStyle
         set(value) {
             field = value
-            TextViewCompat.setTextAppearance(_titleView, appearance.textAppearance)
-            TextViewCompat.setTextAppearance(_subTitleView, appearance.subTextAppearance)
+            _titleView.textAppearance = appearance.textAppearance
+            _subTitleView.textAppearance = appearance.subTextAppearance
         }
 
     private val _iconView: ImageView

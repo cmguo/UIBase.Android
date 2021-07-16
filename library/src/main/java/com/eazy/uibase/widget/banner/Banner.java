@@ -17,11 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.core.widget.TextViewCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.eazy.uibase.R;
+import com.eazy.uibase.view.TextViewKt;
 import com.eazy.uibase.widget.banner.loader.ImageLoaderInterface;
 import com.eazy.uibase.widget.banner.view.BannerViewPager;
 
@@ -268,7 +268,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             titleView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, titleHeight));
         }
         if (titleTextAppearance > 0) {
-            TextViewCompat.setTextAppearance(bannerTitle, titleTextAppearance);
+            TextViewKt.setTextAppearance(bannerTitle, titleTextAppearance);
         }
         if (titles != null && titles.size() > 0) {
             bannerTitle.setText(titles.get(0));

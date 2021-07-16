@@ -20,11 +20,11 @@ import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.RoundDrawable
 import com.eazy.uibase.view.contentView
+import com.eazy.uibase.view.textAppearance
 import java.lang.ref.WeakReference
 
 class ZTipView @JvmOverloads constructor(
@@ -375,7 +375,7 @@ class ZTipView @JvmOverloads constructor(
         _frameDrawable.cornerRadius = a.getDimension(R.styleable.ZTipView_Appearance_frameRadius, 0f)
         val textAppearance = a.getResourceId(R.styleable.ZTipView_Appearance_textAppearance, 0)
         if (textAppearance > 0)
-            TextViewCompat.setTextAppearance(_textView, textAppearance)
+            _textView.textAppearance = textAppearance
         val textColors = a.getColorStateList(R.styleable.ZTipView_Appearance_textColor)
         if (textColors != null)
             _textView.setTextColor(textColors)

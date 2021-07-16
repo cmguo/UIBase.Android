@@ -15,12 +15,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.widget.TextViewCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.GradientColorList
 import com.eazy.uibase.resources.ViewDrawable
 import com.eazy.uibase.resources.toGradient
+import com.eazy.uibase.view.textAppearance
 
 class ZAppTitleBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.appTitleBarStyle
@@ -51,7 +51,7 @@ class ZAppTitleBar @JvmOverloads constructor(
                 return
             field = value
             if (value > 0) {
-                TextViewCompat.setTextAppearance(_textView, value)
+                _textView.textAppearance = value
                 _textView.setTextColor(_textView.textColors.toGradient(_textView))
             }
             else if (_inited)
@@ -171,7 +171,7 @@ class ZAppTitleBar @JvmOverloads constructor(
     }
 
     fun setGradientProgress(progress: Float) {
-        val p = if (progress < -1f) -1f else if (progress > 1f) 1f else progress;
+        val p = if (progress < -1f) -1f else if (progress > 1f) 1f else progress
         GradientColorList.setProgress(this, p)
     }
 
@@ -281,7 +281,7 @@ class ZAppTitleBar @JvmOverloads constructor(
         titleView.layoutParams = lp
         titleView.gravity = tg
         if (textAppearance == 0)
-            TextViewCompat.setTextAppearance(_textView, ta)
+            _textView.textAppearance = ta
     }
 
     private fun syncContent() {
