@@ -4,6 +4,7 @@
     <declare-styleable name="ZTextAppearance">
         <attr name="lineHeight"/>
         <attr name="lineSpacing" format="dimension" />
+        <attr name="android:gravity"/>
     </declare-styleable>
 
     <style name="TextAppearance.Z" parent="TextAppearance.AppCompat">

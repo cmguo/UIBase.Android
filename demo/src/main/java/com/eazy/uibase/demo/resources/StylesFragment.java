@@ -80,6 +80,16 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         @Description("切换到禁用状态")
         public boolean disabled = false;
 
+        @Bindable
+        @Title("文字背景")
+        @Description("文字背景，适用文字样式")
+        public boolean textBackgroud = false;
+
+        @Bindable
+        @Title("文字居中")
+        @Description("文字居中，适用文字样式")
+        public boolean textAlignmentCenter = false;
+
         private final StylesFragment fragment_;
 
         public int itemBindingId() {

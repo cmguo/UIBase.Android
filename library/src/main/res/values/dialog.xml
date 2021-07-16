@@ -36,6 +36,10 @@
         <item name="cancelButton">@string/cancel</item>
     </style>
 
+    <style name="TextAppearance.Z.Dialog.SubTitle" parent="TextAppearance.Z.Body.Middle">
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
     <style name="ZButton.Appearance.Dialog">
         <item name="android:textColor">@color/bluegrey_900_selected_disabled</item>
         <item name="backgroundColor">@color/transparent_pressed_disabled</item>

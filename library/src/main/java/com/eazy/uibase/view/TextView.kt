@@ -11,6 +11,7 @@ var TextView.textAppearance: Int
         val a = context.obtainStyledAttributes(value, R.styleable.ZTextAppearance)
         val lineHeight = a.getDimensionPixelSize(R.styleable.ZTextAppearance_lineHeight, -1)
         val lineSpacing = a.getDimensionPixelSize(R.styleable.ZTextAppearance_lineSpacing, -1)
+        val gravity = a.getInteger(R.styleable.ZTextAppearance_android_gravity, -1)
         if (lineHeight > 0 || lineSpacing > 0) {
             val fontHeight: Int = getPaint().getFontMetricsInt(null)
             if (lineHeight < 0) {
@@ -20,5 +21,8 @@ var TextView.textAppearance: Int
                 setPadding(paddingLeft, padding, paddingRight, padding)
                 setLineSpacing((lineHeight + lineSpacing - fontHeight).toFloat(), 1f)
             }
+        }
+        if (gravity >= 0) {
+            setGravity(gravity)
         }
     }

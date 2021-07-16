@@ -6,6 +6,7 @@
 
     <data>
         <import type="java.util.Map.Entry" />
+        <import type="android.view.Gravity" />
         <import type="com.eazy.uibase.demo.resources.StylesFragment.Styles" />
         <variable
             name="data"
@@ -21,10 +22,11 @@
         android:orientation="vertical" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/title"
             app:textAppearance="@{data.value}"
+            android:gravity="@{styles.textAlignmentCenter ? Gravity.CENTER_HORIZONTAL : Gravity.TOP | Gravity.START}"
             android:text="@{styles.textAll(data)}"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

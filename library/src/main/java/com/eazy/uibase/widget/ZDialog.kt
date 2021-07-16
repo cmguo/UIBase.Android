@@ -156,7 +156,7 @@ class ZDialog @JvmOverloads constructor(
         _textView = findViewById(R.id.textView)
         _textView.textAppearance = R.style.TextAppearance_Z_Head2
         _textView2 = findViewById(R.id.textView2)
-        _textView2.textAppearance = R.style.TextAppearance_Z_Body_Middle
+        _textView2.textAppearance = R.style.TextAppearance_Z_Dialog_SubTitle
         _confirmButton = findViewById(R.id.confirmButton)
         _cancelButton = findViewById(R.id.cancelButton)
         _listView = findViewById(R.id.listView)
