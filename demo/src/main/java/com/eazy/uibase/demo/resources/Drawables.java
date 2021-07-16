@@ -5,7 +5,6 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
@@ -38,9 +37,15 @@ public class Drawables extends Resources {
         return getResource(R.drawable.class, "name");
     }
 
-    @BindingAdapter("drawable")
-    public static void setDrawable(TextView view, int id) {
-        Drawable drawable = com.eazy.uibase.resources.Drawables.getDrawable(view.getContext(), id);
+    @BindingAdapter(value = {"drawable", "drawableTint"}, requireAll = false)
+    public static void setDrawable(TextView view, int drawableId, int tintId) {
+        if (drawableId == 0)
+            return;
+        Drawable drawable = com.eazy.uibase.resources.Drawables.getDrawable(view.getContext(), drawableId);
+        if (drawable != null && tintId != 0) {
+            drawable = drawable.mutate();
+            drawable.setTintList(ContextCompat.getColorStateList(view.getContext(), tintId));
+        }
         view.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
         if (drawable instanceof Animatable) {
             ((Animatable) drawable).start();

@@ -11,6 +11,11 @@
         <variable
             name="data"
             type="Entry&lt;String, ResourceValue&gt;" />
+
+        <import type="com.eazy.uibase.demo.resources.DrawablesFragment.Styles" />
+        <variable
+            name="styles"
+            type="Styles" />
     </data>
 
     <TextView
@@ -19,6 +24,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.Z.Body.Middle"
+        app:drawableTint="@{styles.drawableTint ? com.eazy.uibase.demo.R.color.bluegrey_900 : 0}"
         app:drawable="@{data.value.resId}"
         android:text="@{Drawables.simpleName(data.key)}"/>
 

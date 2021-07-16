@@ -39,6 +39,8 @@
             app:layout_constraintTop_toBottomOf="@id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:textAlignment="center"
+            app:textAppearance="@{com.eazy.uibase.demo.R.style.TextAppearance_Z_Head0}"
             android:text="@{model.osVersion}"
             />
 
@@ -49,18 +51,32 @@
             app:layout_constraintTop_toBottomOf="@id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:textAppearance="@{com.eazy.uibase.demo.R.style.TextAppearance_Z_Head1}"
             android:text="@{model.buildVersion}"
             />
 
-        <ImageView
-            android:id="@+id/imageView"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/textView2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/img_16px_qrcode_small"/>
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/img_16px_qrcode_small" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                app:tint="@color/bluegrey_900"
+                app:srcCompat="@drawable/icon_add_book" />
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
