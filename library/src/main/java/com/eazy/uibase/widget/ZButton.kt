@@ -15,6 +15,7 @@ import androidx.annotation.AnyRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
 import com.eazy.uibase.resources.GradientColorList
@@ -181,13 +182,13 @@ open class ZButton @JvmOverloads constructor(
 
     data class Appearance(
         @StyleRes
-        var styleId: Int,
+        var styleId: Int, var textColorId : Int,var backgroundColorId : Int,
         var textColor: ColorStateList?, var backgroundColor: ColorStateList?,
         var iconPosition: IconPosition,
         var height: Int, var cornerRadius: Float, var padding: Int,
         var textSize: Float, var iconSize: Int, var iconPadding: Int)
 
-    private val _appearance = Appearance(0,
+    private val _appearance = Appearance(0, 0, 0,
         null, null, IconPosition.Left,
         0, 0f, 0, 0f, 0, 0)
 
@@ -263,7 +264,7 @@ open class ZButton @JvmOverloads constructor(
             _loadingIcon = Drawables.getDrawable(context, loadingIcon)
             syncIcon(true)
         }
-        syncAppearance(makeChange())
+        syncAppearance(updateColor())
     }
 
     /* private */
@@ -375,10 +376,14 @@ open class ZButton @JvmOverloads constructor(
                 }
             }
             when (index) {
-                R.styleable.ZButton_Appearance_android_textColor ->
+                R.styleable.ZButton_Appearance_android_textColor -> {
+                    _appearance.textColorId = a.getResourceId(attr, 0)
                     _appearance.textColor = a.getColorStateList(attr)
-                R.styleable.ZButton_Appearance_backgroundColor ->
+                }
+                R.styleable.ZButton_Appearance_backgroundColor -> {
+                    _appearance.backgroundColorId = a.getResourceId(attr, 0)
                     _appearance.backgroundColor = a.getColorStateList(attr)
+                }
                 R.styleable.ZButton_Appearance_iconPosition -> {
                     val p = a.getInt(attr, _appearance.iconPosition.ordinal)
                     if (p != _appearance.iconPosition.ordinal) {
@@ -441,6 +446,14 @@ open class ZButton @JvmOverloads constructor(
             }
         } // for
         return changed
+    }
+
+    private fun updateColor() : Int {
+        if (_appearance.textColorId != 0)
+            _appearance.textColor = ContextCompat.getColorStateList(context, _appearance.textColorId)
+        if (_appearance.backgroundColorId != 0)
+            _appearance.backgroundColor = ContextCompat.getColorStateList(context, _appearance.backgroundColorId)
+        return makeChange(R.styleable.ZButton_Appearance_android_textColor, R.styleable.ZButton_Appearance_backgroundColor)
     }
 
     private fun setTextInner(text: CharSequence?, type: BufferType = BufferType.NORMAL) {
