@@ -6,15 +6,13 @@
 
     <data>
 
-        <import type="com.eazy.uibase.widget.ZButton.ButtonType" />
-
         <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment.Styles" />
 
         <import type="com.eazy.uibase.demo.components.basic.ZButtonFragment" />
 
         <variable
             name="data"
-            type="ButtonType" />
+            type="Object" />
 
         <variable
             name="styles"
@@ -27,42 +25,57 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:paddingStart="5dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
             android:textAppearance="@style/TextAppearance.Z.Head2"
-            android:paddingStart="5dp"
             android:singleLine="true"
             android:text="@{data.toString()}"/>
 
-        <FrameLayout
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/subTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            >
+            android:layout_marginTop="5dp"
+            android:textAppearance="@style/TextAppearance.Z.Body.14"
+            android:text="@{styles.detail(data)}"/>
 
-            <com.eazy.uibase.widget.ZButton
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                xhb:buttonType="@{data}"
-                xhb:buttonSize="@{styles.buttonSize}"
-                xhb:buttonAppearance="@{styles.buttonAppearance}"
-                xhb:content="@{styles.conntent}"
-                xhb:icon="@{styles.icon}"
-                xhb:iconPosition="@{styles.iconPosition}"
-                xhb:loadingText="@{styles.loadingText}"
-                xhb:loadingIcon="@{styles.loadingIcon}"
-                xhb:loading="@{styles.loading}"
-                android:enabled="@{!styles.disabled}"
-                android:onClick="@{(view) -> styles.testButtonClick(view)}"
-                android:text="@{styles.text}"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </FrameLayout>
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        >
+
+        <com.eazy.uibase.widget.ZButton
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            xhb:buttonType="@{styles.buttonType}"
+            xhb:buttonSize="@{styles.buttonSize}"
+            xhb:buttonAppearance="@{styles.buttonAppearance}"
+            xhb:content="@{styles.conntent}"
+            xhb:icon="@{styles.icon}"
+            xhb:iconPosition="@{styles.iconPosition}"
+            xhb:loadingText="@{styles.loadingText}"
+            xhb:loadingIcon="@{styles.loadingIcon}"
+            xhb:loading="@{styles.loading}"
+            android:enabled="@{!styles.disabled}"
+            android:onClick="@{(view) -> styles.testButtonClick(view)}"
+            android:text="@{styles.text}"/>
+
+    </FrameLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

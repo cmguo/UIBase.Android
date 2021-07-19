@@ -4,6 +4,8 @@
     <declare-styleable name="ZTextAppearance">
         <attr name="lineHeight"/>
         <attr name="lineSpacing" format="dimension" />
+        <attr name="android:textSize"/>
+        <attr name="android:textColor"/>
         <attr name="android:gravity"/>
     </declare-styleable>
 

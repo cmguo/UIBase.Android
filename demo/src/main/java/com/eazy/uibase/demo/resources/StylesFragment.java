@@ -63,12 +63,13 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
         @SuppressLint("DefaultLocale")
         public String textDetail(@StyleRes int id) {
-            TypedArray a = fragment_.requireContext().obtainStyledAttributes(id, R.styleable.TextAppearance);
-            float size = a.getDimension(R.styleable.TextAppearance_android_textSize, 0);
-            int color = a.getResourceId(R.styleable.TextAppearance_android_textColor, 0);
+            TypedArray a = fragment_.requireContext().obtainStyledAttributes(id, R.styleable.ZTextAppearance);
+            float size = a.getDimension(R.styleable.ZTextAppearance_android_textSize, 0);
+            float lineHeight = a.getDimension(R.styleable.ZTextAppearance_lineHeight, 0);
+            int color = a.getResourceId(R.styleable.ZTextAppearance_android_textColor, 0);
             a.recycle();
             String colorStr = Resources.simpleName(fragment_.requireContext().getResources().getResourceName(color));
-            return String.format("size: %d, color: %s", (int)size, colorStr);
+            return String.format("size: %d, lineHeight: %d, color: %s", (int)size, (int)lineHeight, colorStr);
         }
 
         public String textAll(Map.Entry<String, Integer> data) {

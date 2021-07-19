@@ -1,5 +1,6 @@
 package com.eazy.uibase.demo.components.basic
 
+import android.content.res.TypedArray
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.Bindable
@@ -16,6 +17,7 @@ import com.eazy.uibase.demo.core.style.IconStyle
 import com.eazy.uibase.demo.core.style.annotation.*
 import com.eazy.uibase.demo.databinding.ButtonFragmentBinding
 import com.eazy.uibase.demo.databinding.ButtonItemBinding
+import com.eazy.uibase.demo.resources.Resources
 import com.eazy.uibase.view.list.PaddingDecoration
 import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZButton
@@ -24,7 +26,8 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
     ZButtonFragment.Model?, ZButtonFragment.Styles?>() {
 
     class Model : ViewModel() {
-        val types = ZButton.ButtonType.values().asList()
+        val types : List<Any> = ZButton.ButtonType.values().asList()
+        val sizes : List<Any> = ZButton.ButtonSize.values().asList()
     }
 
     class Styles(private val fragment_: ZButtonFragment) : ViewStyles() {
@@ -44,6 +47,16 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
 
         @Bindable
         @Title("尺寸模式")
+        @Description("切换到尺寸演示模式")
+        var sizeMode = false
+
+        @Bindable
+        @Title("颜色模式")
+        @Description("有下列颜色模式：主要（Primitive）、二级（Secondary）、三级（Tertiary）、危险（Danger）、文字（Text），默认：Primitive")
+        var buttonType = ZButton.ButtonType.Text
+
+        @Bindable
+        @Title("尺寸模式")
         @Description("有下列尺寸模式：大（Large）、中（Middle）、小（Small），默认：Large")
         var buttonSize = ZButton.ButtonSize.Large
 
@@ -58,7 +71,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         @Description("有下列宽度模式：适应内容（WrapContent）、适应布局（MatchParent），默认：WrapContent")
         @ValueTitles("WrapContent", "MatchParent")
         @Values("-2", "-1")
-        var widthMode = ViewGroup.LayoutParams.MATCH_PARENT
+        var widthMode = ViewGroup.LayoutParams.WRAP_CONTENT
 
         @Bindable
         @Title("内容")
@@ -75,7 +88,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         @Title("图标")
         @Description("按钮图标，资源ID类型，图标颜色随文字颜色变化")
         @Style(IconStyle::class)
-        var icon = 0
+        var icon = R.drawable.icon_exit
 
         @Bindable
         @Title("加载文字")
@@ -109,13 +122,48 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
             }
             super.notifyPropertyChanged(fieldId)
         }
+
+        fun detail(data: Any) : String {
+            if (data is ZButton.ButtonType) {
+                val a: TypedArray = fragment_.requireContext()
+                    .obtainStyledAttributes(data.resId, R.styleable.ZButton_Appearance)
+                val textColor = a.getResourceId(R.styleable.ZButton_Appearance_android_textColor, 0)
+                val backgroundColor = a.getResourceId(R.styleable.ZButton_Appearance_backgroundColor, 0)
+                a.recycle()
+                val textColorStr =
+                    Resources.simpleName(fragment_.requireContext().resources.getResourceName(textColor))
+                val backgroundColorStr =
+                    Resources.simpleName(fragment_.requireContext().resources.getResourceName(backgroundColor))
+                return String.format("textColor: %s\nbackgroundColor: %s",
+                    textColorStr, backgroundColorStr)
+            } else if (data is ZButton.ButtonSize) {
+                val a: TypedArray = fragment_.requireContext()
+                    .obtainStyledAttributes(data.resId, R.styleable.ZButton_Appearance)
+                val height = a.getDimension(R.styleable.ZButton_Appearance_height, 0f).toInt()
+                val radius = a.getDimension(R.styleable.ZButton_Appearance_cornerRadius, 0f).toInt()
+                val textSize = a.getDimension(R.styleable.ZButton_Appearance_android_textSize, 0f).toInt()
+                val iconSize = a.getDimension(R.styleable.ZButton_Appearance_iconSize, 0f).toInt()
+                return String.format("height: %d, radius: %d\ntextSize: %d, iconSize: %d",
+                    height, radius, textSize, iconSize)
+            } else {
+                return ""
+            }
+        }
     }
 
     class ItemBinding(private val styles: Styles) : UnitTypeItemBinding(R.layout.button_item) {
         override fun bindView(binding: ViewDataBinding, item: Any, position: Int) {
             super.bindView(binding, item, position)
             binding.setVariable(BR.styles, styles)
+            binding.executePendingBindings()
             val button = (binding as ButtonItemBinding).button
+            if (!styles.sizeMode) {
+                button.buttonType = item as ZButton.ButtonType
+                button.buttonSize = ZButton.ButtonSize.Large
+            } else {
+                button.buttonType = ZButton.ButtonType.Primitive
+                button.buttonSize = item as ZButton.ButtonSize
+            }
             val lp = button.layoutParams
             lp.width = styles.widthMode
             button.layoutParams = lp

@@ -33,7 +33,7 @@
             android:id="@+id/button_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:data="@{model.types}"
+            app:data="@{styles.sizeMode ? model.sizes : model.types}"
             app:itemDecoration="@{styles.itemDecoration}"
             app:itemBinding="@{styles.itemBinding}">
 
