@@ -1,0 +1,10 @@
+<resources>
+
+    <color name="transparent">#00000000</color>
+    <color name="trans_write">#00FFFFFF</color>
+
+    <color name="static_blue_400">#77ACFF</color>
+    <color name="static_blue_600">#1970F2</color>
+    <color name="static_red_100">#FFEDED</color>
+
+</resources>
