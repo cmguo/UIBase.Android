@@ -34,7 +34,7 @@ uploadArchives {
     repositories.mavenDeployer {
         pom.groupId = "com.xhb.uibase"
         pom.artifactId = "libshape"
-        pom.version = "1.0.0-SNAPSHOT"
+        pom.version = build_branch.startsWith("release/") ? "1.0.0" : "1.0.0-SNAPSHOT"
     }
 }
 

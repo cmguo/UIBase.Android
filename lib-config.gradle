@@ -43,7 +43,9 @@ tasks.withType(JavaCompile) {
 apply plugin: 'maven'
 uploadArchives {
     repositories.mavenDeployer {
-        final String url = "http://nexus.xiaoheiban.cn/repository/component-snapshots"
+        final String url = pom.version.endsWith("SNAPSHOT")
+                ? "http://nexus.xiaoheiban.cn/repository/component-snapshots"
+                : "http://nexus.xiaoheiban.cn/repository/component"
         repository(url: url) {
             authentication(userName: USERNAME, password: PASSWORD)
         }

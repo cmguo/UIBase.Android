@@ -7,7 +7,16 @@ ext.getGitVersion = {
     return String.format("\"%s\"",gitRevision)
 }
 
+ext.getGitBranch = {
+    def gitBranch = "git -C ${project.getProjectDir()} branch --show-current"
+    println(gitBranch)
+    gitBranch = gitBranch.execute().text.trim()
+    println(gitBranch)
+    return gitBranch
+}
+
 ext.build_version = ext.getGitVersion()
+ext.build_branch = ext.getGitBranch()
 
 android {
     buildTypes {
