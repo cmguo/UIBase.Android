@@ -9,20 +9,11 @@ apply from: '../build-version.gradle'
 
 android {
 
-    if (DEPEND_SOURCE.toBoolean()) {
-        compileSdkVersion 30
-    } else {
-        compileSdkVersion build_versions.compileSdkVersion
-    }
-
+    compileSdkVersion build_versions.compileSdkVersion
 
     defaultConfig {
         minSdkVersion build_versions.minSdkVersion
-        if (DEPEND_SOURCE.toBoolean()) {
-            targetSdkVersion 30
-        } else {
-            targetSdkVersion build_versions.targetSdkVersion
-        }
+        targetSdkVersion build_versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -68,22 +59,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
     implementation 'com.google.auto.service:auto-service-annotations:1.0-rc6'
 
-    if (DEPEND_SOURCE.toBoolean()) {
-        api 'com.xhb.uibase:libshape:1.0.0-20210426.061031-2'
-        api 'com.xhb.uibase:badgeview:1.0.0-20210425.051641-1'
-        api 'com.github.hackware1993:magic-indicator:1.6.0-20210425.050831-1'
-        api 'com.contrarywind:Android-PickerView:4.2.0-20210508.104110-5'
-    } else {
-        debugApi project(path: ':libshape')
-        debugApi project(path: ':badgelibrary')
-        debugApi project(path: ':magicindicator')
-        debugApi project(path: ':pickerview')
-
-        releaseApi 'com.xhb.uibase:libshape:1.0.0'
-        releaseApi 'com.xhb.uibase:badgeview:1.0.0'
-        releaseApi 'com.github.hackware1993:magic-indicator:1.6.0'
-        releaseApi 'com.contrarywind:Android-PickerView:4.2.0'
-    }
+    implementation 'com.xhb.uibase:libshape:1.0.0'
+    implementation 'com.xhb.uibase:badgeview:1.0.0'
+    implementation 'com.github.hackware1993:magic-indicator:1.6.0'
+    implementation 'com.contrarywind:Android-PickerView:4.2.0'
 
     kapt 'com.google.auto.service:auto-service:1.0-rc6'
 
