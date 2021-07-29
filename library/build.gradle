@@ -59,10 +59,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
     implementation 'com.google.auto.service:auto-service-annotations:1.0-rc6'
 
-    implementation 'com.xhb.uibase:libshape:1.0.0'
+    api 'com.xhb.uibase:libshape:1.0.0'
     implementation 'com.xhb.uibase:badgeview:1.0.0'
-    implementation 'com.github.hackware1993:magic-indicator:1.6.0'
-    implementation 'com.contrarywind:Android-PickerView:4.2.0'
+    api 'com.github.hackware1993:magic-indicator:1.6.0'
+    api 'com.contrarywind:Android-PickerView:4.2.0'
 
     kapt 'com.google.auto.service:auto-service:1.0-rc6'
 
