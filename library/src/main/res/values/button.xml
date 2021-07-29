@@ -51,8 +51,13 @@
         <attr name="buttonSize"/>
     </declare-styleable>
 
+
+    <style name="ButtonTextAppearance">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
     <style name="ZButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->
-        <item name="android:textAppearance">@style/EmptyTextAppearance</item>
+        <item name="android:textAppearance">@style/ButtonTextAppearance</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
