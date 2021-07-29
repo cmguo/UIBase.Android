@@ -500,6 +500,8 @@ open class ZButton @JvmOverloads constructor(
             val iconSize = _appearance.iconSize
             _icon?.setBounds(0, 0, iconSize, iconSize)
             _loadingIcon?.setBounds(0, 0, iconSize, iconSize)
+            // fix size change, icon not at center
+            syncCompoundDrawable(true)
         }
         if (hasChanged(changed,
                 R.styleable.ZButton_Appearance_iconPadding)) {
