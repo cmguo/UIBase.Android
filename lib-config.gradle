@@ -19,13 +19,13 @@ if (isAndroid()) { // Android libraries
 } else { // Java libraries
     println "Java case"
 
-    task sourcesJar(type: Jar, dependsOn: classes) {
+    task sourcesJar(overwrite: true, type: Jar, dependsOn: classes) {
         classifier = 'sources'
         from sourceSets.main.allSource
     }
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(overwrite: true, type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
@@ -43,9 +43,9 @@ tasks.withType(JavaCompile) {
 apply plugin: 'maven'
 uploadArchives {
     repositories.mavenDeployer {
-        final String url = pom.version.endsWith("SNAPSHOT")
-                ? "http://nexus.xiaoheiban.cn/repository/component-snapshots"
-                : "http://nexus.xiaoheiban.cn/repository/component"
+        final String url = build_branch.startsWith("release/")
+                ? "http://nexus.xiaoheiban.cn/repository/component"
+                : "http://nexus.xiaoheiban.cn/repository/component-snapshots"
         repository(url: url) {
             authentication(userName: USERNAME, password: PASSWORD)
         }
