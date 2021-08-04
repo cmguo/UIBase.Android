@@ -25,7 +25,8 @@ class ZTimePickerView @JvmOverloads constructor(
     enum class TimeMode(val mode : Int) {
         YearMonthDay(0b110100000),
         YearMonthWithDayWithWeek(0b1110010000),
-        MonthWithDayWithWeekHourMinute(0b1010010110);
+        MonthWithDayWithWeekHourMinute(0b1010010110),
+        HourMinute(0b0000000110);
     }
 
     var timeMode: TimeMode = TimeMode.YearMonthDay
@@ -145,6 +146,7 @@ class ZTimePickerView @JvmOverloads constructor(
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZTimePickerView, defStyleAttr, 0)
         val type = a.getInt(R.styleable.ZTimePickerView_timeMode, 0)
+        val mode2 = a.getInt(R.styleable.ZTimePickerView_timeMode2, 0)
         val interval = a.getInt(R.styleable.ZTimePickerView_timeInterval, 1)
         val titles = a.getString(R.styleable.ZTimePickerView_labels)
         cyclic = a.getBoolean(R.styleable.ZTimePickerView_cyclic, cyclic)
@@ -175,6 +177,7 @@ class ZTimePickerView @JvmOverloads constructor(
         _picker.setKeyBackCancelable(false)
         _wheel = wheelTime.get(_picker) as WheelTime2
         _inited = true
+        timeMode2 = mode2;
         timeInterval = interval
         timeMode = TimeMode.values()[type]
         _picker.show(this, false)

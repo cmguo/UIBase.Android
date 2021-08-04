@@ -17,7 +17,9 @@
             <enum name="yearMonthDay" value="0"/>
             <enum name="yearMonthWithDayWithWeek" value="1"/>
             <enum name="monthWithDayWithWeekHourMinute" value="2"/>
+            <enum name="hourMinute" value="3"/>
         </attr>
+        <attr name="timeMode2" format="integer"/>
         <attr name="timeInterval" format="integer"/>
         <attr name="labels" format="string"/>
         <attr name="itemsVisibleCount" format="integer"/>
