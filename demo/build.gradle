@@ -70,7 +70,6 @@ dependencies {
 
 
 project.ext.LIB_ARTIFACT_ID = "uibase-demo"
-apply from: '../lib-config.gradle'
 
 repositories {
     mavenCentral()
