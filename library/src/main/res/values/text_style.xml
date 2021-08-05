@@ -45,6 +45,7 @@
     <style name="TextAppearance.Z.Head4" parent="TextAppearance.Z.Title.14"/>
 
     <style name="TextAppearance.Z.Body">
+        <item name="android:textColor">@color/bluegrey_800_disabled</item>
     </style>
     <style name="TextAppearance.Z.Body.18">
         <item name="android:textSize">18sp</item>

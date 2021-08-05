@@ -16,6 +16,7 @@
             android:layout_width="@dimen/action_sheet_icon_size"
             android:layout_height="@dimen/action_sheet_icon_size"
             android:layout_marginTop="@dimen/action_sheet_icon_padding"
+            android:layout_marginBottom="@dimen/action_sheet_icon_padding"
             android:layout_gravity="center_horizontal"
             android:visibility="gone"/>
 
@@ -23,7 +24,6 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/action_sheet_title_padding"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.Z.Head3"
             android:singleLine="true"
@@ -44,7 +44,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/action_sheet_title_padding"
+            android:layout_marginTop="@dimen/action_sheet_padding_y"
             android:background="@color/bluegrey_100"
             />
 
