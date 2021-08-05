@@ -111,7 +111,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         public Styles(StylesFragment fragment) {
             this.fragment_ = fragment;
             itemBinding = new ItemBinding(this);
-            itemDecoration = new DividerDecoration(fragment.requireContext(), LinearLayoutManager.VERTICAL, 1, Color.BLUE);
+            itemDecoration = new DividerDecoration(fragment.requireContext(), 1, Color.BLUE);
         }
     }
 

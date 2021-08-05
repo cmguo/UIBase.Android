@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import androidx.annotation.StyleRes;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.eazy.uibase.resources.RoundDrawable;
 
@@ -60,14 +59,14 @@ public class BackgroundDecoration extends BaseDecoration {
     }
 
     @Override
-    protected void drawChildDecoration(@NotNull Canvas c, Rect outRect, Rect childRect, Rect parentRect) {
-        mBackground.setBounds(outRect);
-        mBackground.draw(c);
+    protected void getItemOffsets(Rect outRect, int type) {
+        outRect.set(mOutRect);
     }
 
     @Override
-    public void getItemOffsets(@NotNull Rect outRect, @NotNull View view, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
-        outRect.set(mOutRect);
+    protected void drawChildDecoration(@NotNull Canvas c, @NotNull View child, int type) {
+        mBackground.setBounds(outRect);
+        mBackground.draw(c);
     }
 
     private static int ceil(float f) {

@@ -70,7 +70,7 @@ class ZPickerView @JvmOverloads constructor(
         _selectImage = findViewById(R.id.selectImage)
 
         _listView.adapter = _adapter
-        _listView.addItemDecoration(DividerDecoration(context, LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.blue_100)))
         _listView.layoutManager = LinearLayoutManager(context)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             _listView.setOnScrollChangeListener { _: View, _: Int, _: Int, _: Int, _: Int ->
@@ -108,7 +108,7 @@ class ZPickerView @JvmOverloads constructor(
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
         _listView.removeItemDecorationAt(0)
-        _listView.addItemDecoration(DividerDecoration(context, LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.blue_100)))
     }
 
     /* private */

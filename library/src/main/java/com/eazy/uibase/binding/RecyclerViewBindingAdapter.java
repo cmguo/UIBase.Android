@@ -84,14 +84,14 @@ public class RecyclerViewBindingAdapter {
 
     @BindingAdapter("itemDecoration")
     public static void setItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decoration) {
+        while (view.getItemDecorationCount() > 0)
+            view.removeItemDecorationAt(0);
         view.addItemDecoration(decoration);
     }
 
     @BindingAdapter("itemDecoration")
     public static void setItemDecoration(RecyclerView view, ItemDecorations.Builder builder) {
-        while (view.getItemDecorationCount() > 0)
-            view.removeItemDecorationAt(0);
-        view.addItemDecoration(builder.build(view));
+        setItemDecoration(view, builder.build(view));
     }
 
     @BindingAdapter("hasFixedSize")

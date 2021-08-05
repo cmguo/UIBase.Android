@@ -112,7 +112,7 @@ public class StylesFragment extends Fragment {
 
     public StylesAdapter adapter = new StylesAdapter();
     public StyleItemBinding itemBinding = new StyleItemBinding();
-    public ItemDecorations.Builder itemDecoration = ItemDecorations.divider(LinearLayout.VERTICAL, 1);
+    public ItemDecorations.Builder itemDecoration = ItemDecorations.divider(1);
     public RecyclerViewAdapter.OnItemClickListener itemClicked = (rv, v, position, object) -> adapter.toggle(position);
 
     @Override

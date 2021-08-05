@@ -1,5 +1,6 @@
 package com.eazy.uibase.demo.components.dataview
 
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.Image
 import android.view.View
@@ -15,6 +16,7 @@ import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.ListViewFragmentBinding
 import com.eazy.uibase.demo.resources.Colors
 import com.eazy.uibase.demo.resources.Resources
+import com.eazy.uibase.view.list.ItemDecorations
 import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZListItemView
 import com.eazy.uibase.widget.ZListView
@@ -61,6 +63,8 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
                 button.visibility = View.VISIBLE
             }
         }
+
+        val itemDecoration = ItemDecorations.background(20f, Color.GRAY)
     }
 
     val listener = object : ZListView.OnItemValueChangeListener {

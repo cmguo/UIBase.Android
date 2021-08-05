@@ -41,7 +41,7 @@ class ZListView @JvmOverloads constructor(
     init {
         this.adapter = _adapter
         _adapter.setItemBinding(ZListItemBinding(context))
-        this.addItemDecoration(DividerDecoration(context, LinearLayout.VERTICAL, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        this.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.blue_100)))
         this.layoutManager = LinearLayoutManager(context)
     }
 
