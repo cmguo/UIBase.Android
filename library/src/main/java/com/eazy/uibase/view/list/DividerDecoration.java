@@ -1,5 +1,6 @@
 package com.eazy.uibase.view.list;
 
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -11,20 +12,32 @@ import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class DividerDecoration extends BaseDecoration {
 
     private Drawable mDivider;
     private final int mSize;
+    private final int mEndianSize; // also padding head and tail
 
     public DividerDecoration(Context context, float size) {
-        this(context, size, 0);
+        this(context, size, 0, 0f);
+    }
+
+    public DividerDecoration(Context context, float size, float endianSize) {
+        this(context, size, 0, endianSize);
     }
 
     public DividerDecoration(Context context, float size, int color) {
+        this(context, size, color, 0);
+    }
+
+    public DividerDecoration(Context context, float size, int color, float endianSize) {
         if (color != 0)
             mDivider = new ColorDrawable(color);
         float density = context.getResources().getDisplayMetrics().density;
         mSize = ceil(size * density);
+        mEndianSize = ceil(endianSize * density);
     }
 
     @Override
@@ -40,6 +53,17 @@ public class DividerDecoration extends BaseDecoration {
             outRect.set(0, 0, 0, mSize);
         } else {
             outRect.set(0, 0, mSize, 0);
+        }
+    }
+
+    @Override
+    protected void getTreeOffsets(Rect treeRect, int[] position, int level) {
+        if (level == -1) {
+            if (orientation == LinearLayoutManager.VERTICAL) {
+                outRect.set(0, mEndianSize, 0, mEndianSize);
+            } else {
+                outRect.set(mEndianSize, 0, mEndianSize, 0);
+            }
         }
     }
 

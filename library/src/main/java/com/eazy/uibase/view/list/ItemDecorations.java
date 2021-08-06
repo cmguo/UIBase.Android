@@ -1,7 +1,16 @@
 package com.eazy.uibase.view.list;
 
+
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+
 import androidx.annotation.StyleRes;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 public class ItemDecorations {
 
@@ -14,8 +23,16 @@ public class ItemDecorations {
         return (view) -> new DividerDecoration(view.getContext(), size);
     }
 
+    public static Builder divider(float size, float endianSize) {
+        return (view) -> new DividerDecoration(view.getContext(), size, endianSize);
+    }
+
     public static Builder divider(float size, int color) {
         return (view) -> new DividerDecoration(view.getContext(), size, color);
+    }
+
+    public static Builder divider(float size, int color, float endianSize) {
+        return (view) -> new DividerDecoration(view.getContext(), size, color, endianSize);
     }
 
     public static Builder background(float radius, int color) {

@@ -3,11 +3,15 @@ package com.eazy.uibase.view.list;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import androidx.annotation.StyleRes;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.eazy.uibase.resources.RoundDrawable;
 
@@ -67,6 +71,20 @@ public class BackgroundDecoration extends BaseDecoration {
     protected void drawChildDecoration(@NotNull Canvas c, @NotNull View child, int type) {
         mBackground.setBounds(outRect);
         mBackground.draw(c);
+    }
+
+    final Paint paint = new Paint();
+    final int[] colors = new int[] {Color.RED, Color.GREEN, Color.BLUE};
+
+    @Override
+    protected void drawTreeDecoration(@NotNull Canvas c, int[] position, int level) {
+        paint.setColor(colors[level]);
+        c.drawRoundRect(new RectF(outRect), 20, 20, paint);
+    }
+
+    @Override
+    protected void getTreeOffsets(Rect treeRect, int[] position, int level) {
+        treeRect.set(0, 20, 0, 20);
     }
 
     private static int ceil(float f) {
