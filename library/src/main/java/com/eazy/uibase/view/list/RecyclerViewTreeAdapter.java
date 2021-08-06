@@ -1,14 +1,21 @@
 package com.eazy.uibase.view.list;
 
+import android.util.Log;
+
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /*
   Tree without root
  */
 
 public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
+
+    public final static int[] RootPosition = new int[0];
 
     @Override
     protected int getRealItemCount() {
@@ -20,18 +27,43 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         return getItem(this, position + 1);
     }
 
+    public Object getRealItem(int[] position) {
+        return getRealItem(position, position.length);
+    }
+
+    // maxLevel: tell position real length
+    public Object getRealItem(int[] position, int maxLevel) {
+        return getRealItem(this, position, 0, maxLevel);
+    }
+
     public int[] getTreePosition(int n) {
         return getTreePosition(this, n + 1, 0);
     }
 
     public int getItemPosition(@NotNull int[] position) {
-        return getItemPosition(this, position, 0) - 1;
+        return getItemPosition(position, position.length);
     }
 
+    // maxLevel: tell position real length
+    public int getItemPosition(@NotNull int[] position, int maxLevel) {
+        return getItemPosition(this, position, 0, maxLevel) - 1;
+    }
+
+    public int[] getNextPosition(@NotNull int[] position) {
+        return getNextPosition(position, position.length);
+    }
+
+    // maxLevel: tell position real length
+    public int[] getNextPosition(@NotNull int[] position, int maxLevel) {
+        return getNextPosition(this, position, 0, maxLevel);
+    }
+
+    // Should implement this to build tree structure
     protected Iterable<?> getChildren(Object t) {
         return null;
     }
 
+    // Get number of items in sub tree, include sub root
     protected int getItemsCount(Object t) {
         Iterable<?> children = getChildren2(t);
         if (children == null)
@@ -44,10 +76,12 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         return n;
     }
 
+    // Used direct by other methods, consider adapter self as root
     private Iterable<?> getChildren2(Object t) {
         return t == this ? getData() : getChildren(t);
     }
 
+    // Get n-th item in sub tree, index 0 is sub root
     public Object getItem(Object t, int n) {
         if (n == 0) {
             return t;
@@ -68,6 +102,8 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "th item from" + t.toString());
     }
 
+    // Get n-th item position in sub tree
+    //  l: sub tree level, result[j] == 0 if j < l, and is filled by outer stack
     private int[] getTreePosition(Object t, int n, int l) {
         if (n == 0) {
             return new int[l];
@@ -92,8 +128,11 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "th item from" + t.toString());
     }
 
-    private int getItemPosition(Object t, int[] n, int l) {
-        if (l >= n.length) {
+    // Get linear index in sub tree with tree position <n>
+    //  l: sub tree level
+    //  m: tell real length of <n>
+    private int getItemPosition(Object t, int[] n, int l, int m) {
+        if (l >= m) {
             return 0;
         }
         Iterable<?> children = getChildren2(t);
@@ -106,9 +145,152 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
             n2 += getItemsCount(iterator.next());
             --p;
         }
-        if (p == 0 && iterator.hasNext()) {
-            return n2 + getItemPosition(iterator.next(), n, l + 1);
+        if (iterator.hasNext()) {
+            return n2 + getItemPosition(iterator.next(), n, l + 1, m);
         }
         throw new IndexOutOfBoundsException("Failed to get " + n[l] + "th child from" + t.toString());
     }
+
+    // Get item in sub tree with tree position <n>
+    //  l: sub tree level
+    //  m: tell real length of <n>
+    private Object getRealItem(Object t, int[] n, int l, int m) {
+        if (l >= m) {
+            return t;
+        }
+        Iterable<?> children = getChildren2(t);
+        if (children == null)
+            throw new IndexOutOfBoundsException("Failed to get " + n[l] + "th child from" + t.toString());
+        Iterator<?> iterator = children.iterator();
+        int p = n[l];
+        while (p > 0 && iterator.hasNext()) {
+            --p;
+            iterator.next();
+        }
+        if (iterator.hasNext()) {
+            return getRealItem(iterator.next(), n, l + 1, m);
+        }
+        throw new IndexOutOfBoundsException("Failed to get " + n[l] + "th child from" + t.toString());
+    }
+
+    // Get next item in sub tree with tree position <n>
+    //  l: sub tree level
+    //  m: tell real length of <n>
+    //  return null if at end, upper stack will handle null and try in sibling sub tree
+    private int[] getNextPosition(Object t, int[] n, int l, int m) {
+        Iterable<?> children = getChildren2(t);
+        if (children == null)
+            return null;
+        Iterator<?> iterator = children.iterator();
+        if (l >= m) {
+            if (iterator.hasNext())
+                return Arrays.copyOf(n, l + 1);
+            else
+                return null;
+        }
+        int p = n[l];
+        while (p > 0 && iterator.hasNext()) {
+            --p;
+            iterator.next();
+        }
+        if (!iterator.hasNext())
+            return null;
+        int[] position = getNextPosition(iterator.next(), n, l + 1, m);
+        if (position == null && iterator.hasNext()) {
+            position = Arrays.copyOf(n, l + 1);
+            ++position[l];
+        }
+        return position;
+    }
+
+    @FunctionalInterface
+    protected interface TreeVisitor {
+        void visitTree(int[] firstPos, int firstLevel, int[] lastPos, int level);
+    }
+
+    protected void visitTrees(TreeVisitor visitor, int[] firstPos, int[] lastPos) {
+        visitTrees(visitor, firstPos, firstPos.length, lastPos, 0);
+    }
+
+    protected void visitTrees(TreeVisitor visitor, int[] firstPos, int[] lastPos, int level) {
+        visitTrees(visitor, firstPos, firstPos.length, lastPos, level);
+    }
+
+    protected void visitTrees(TreeVisitor visitor, int[] firstPos, int firstLevel, int[] lastPos) {
+        visitTrees(visitor, firstPos, firstLevel, lastPos, 0);
+    }
+
+    protected void visitTrees(TreeVisitor visitor, int[] firstPos, int firstLevel, int[] lastPos, int level) {
+        visitor.visitTree(firstPos, firstLevel, lastPos, level);
+        if (firstLevel == level && lastPos.length == level)
+            return;
+        if (firstPos.length < level + 1) {
+            firstPos = Arrays.copyOf(firstPos, level + 1);
+        }
+        if (firstLevel < level + 1)
+            firstLevel = level + 1;
+        while (firstPos[level] < lastPos[level]) {
+            ++firstPos[level];
+            int position = getItemPosition(firstPos, level + 1);
+            int[] subEnd = getTreePosition(position - 1);
+            --firstPos[level];
+            visitTrees(visitor, firstPos, firstLevel, subEnd, level + 1);
+            for (int i = level + 1; i < firstPos.length; ++i)
+                firstPos[i] = 0;
+            ++firstPos[level];
+            firstLevel = level + 1;
+        }
+        visitTrees(visitor, firstPos, firstLevel, lastPos, level + 1);
+    }
+
+    public static void test() {
+        class Item {
+            List<Item> children;
+        }
+
+        List<Item> items = new ArrayList<>();
+        items.add(new Item());  // 0
+        items.get(0).children = new ArrayList<>();
+        items.get(0).children.add(new Item());  // 00
+        items.get(0).children.get(0).children = new ArrayList<>();
+        items.get(0).children.get(0).children.add(new Item());  // 000
+        items.get(0).children.get(0).children.add(new Item());  // 001
+        items.get(0).children.add(new Item());  // 01
+        items.get(0).children.get(1).children = new ArrayList<>();
+        items.get(0).children.get(1).children.add(new Item());  // 010
+        items.get(0).children.get(1).children.add(new Item());  // 011
+        items.get(0).children.get(1).children.add(new Item());  // 012
+        items.add(new Item());  // 1
+        items.get(1).children = new ArrayList<>();
+        items.get(1).children.add(new Item()); // 10
+        items.get(1).children.get(0).children = new ArrayList<>();
+        items.get(1).children.get(0).children.add(new Item());  // 100
+        items.get(1).children.get(0).children.get(0).children = new ArrayList<>();
+        items.get(1).children.get(0).children.get(0).children.add(new Item());  // 1000
+        items.get(1).children.get(0).children.get(0).children.add(new Item());  // 1001
+        items.get(1).children.get(0).children.add(new Item());  // 101
+        items.get(1).children.get(0).children.add(new Item());  // 102
+        items.get(1).children.add(new Item()); // 11
+        items.get(1).children.get(1).children = new ArrayList<>();
+        items.get(1).children.get(1).children.add(new Item());  // 110
+        items.get(1).children.get(1).children.add(new Item());  // 111
+
+        RecyclerViewTreeAdapter adapter = new RecyclerViewTreeAdapter() {
+            @Override
+            protected Iterable<?> getChildren(Object t) {
+                return ((Item) t).children;
+            }
+        };
+        adapter.replace(items);
+//        int[] p = RootPosition;
+//        while ((p = adapter.getNextPosition(p)) != null) {
+//            Log.d("RecyclerViewTreeAdapter", "getNextPosition " + Arrays.toString(p));
+//        }
+
+        adapter.visitTrees( (firstPos, firstLevel, lastPos, level) -> {
+            Log.d("RecyclerViewTreeAdapter", "visitTrees level " + level + ": "
+                + Arrays.toString(Arrays.copyOf(firstPos, firstLevel)) + " ~ " + Arrays.toString(lastPos));
+        }, new int[] {0}, new int[] {1}, 0);
+    }
+
 }
