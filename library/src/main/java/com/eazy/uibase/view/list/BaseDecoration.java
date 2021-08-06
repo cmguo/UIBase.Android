@@ -48,7 +48,7 @@ public class BaseDecoration extends RecyclerView.ItemDecoration {
             getTreesOffsets(outRect, treeAdapter, treePosition, treePosition.length, 0);
         } else {
             getTreeOffsets(treeRect, RecyclerViewTreeAdapter.RootPosition, 0);
-            addTreeOffsets(outRect, treeRect, position == 0, position + 1 == count);
+            addTreeOffsets(outRect, treeRect, position > 0, position + 1 < count);
         }
     }
 
@@ -59,7 +59,7 @@ public class BaseDecoration extends RecyclerView.ItemDecoration {
         if (children != null) {
             getTreeOffsets(treeRect, treePosition, treeLevel);
             upperMiddle = children.iterator().hasNext();
-            addTreeOffsets(outRect, treeRect, true, !upperMiddle);
+            addTreeOffsets(outRect, treeRect, false, upperMiddle);
         }
         int[] nextPosition = treeAdapter.getNextPosition(treePosition, treeLevel);
         if (nextPosition == null)
@@ -68,7 +68,7 @@ public class BaseDecoration extends RecyclerView.ItemDecoration {
             getTreeOffsets(treeRect, treePosition, i);
             lowerMiddle |= i > 0;
             upperMiddle |= i < nextPosition.length;
-            addTreeOffsets(outRect, treeRect, !lowerMiddle, !upperMiddle);
+            addTreeOffsets(outRect, treeRect, lowerMiddle, upperMiddle);
         }
     }
 
@@ -82,9 +82,9 @@ public class BaseDecoration extends RecyclerView.ItemDecoration {
         }
         if (next) {
             if (orientation == LinearLayoutManager.HORIZONTAL) {
-                treeRect.left = 0;
+                treeRect.right = 0;
             } else {
-                treeRect.top = 0;
+                treeRect.bottom = 0;
             }
         }
         outRect.left += treeRect.left;

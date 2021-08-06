@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
-import com.eazy.uibase.view.list.DividerDecoration
+import com.eazy.uibase.view.list.ItemDecorations
 import kotlin.collections.ArrayList
 
 class ZPickerView @JvmOverloads constructor(
@@ -70,7 +70,8 @@ class ZPickerView @JvmOverloads constructor(
         _selectImage = findViewById(R.id.selectImage)
 
         _listView.adapter = _adapter
-        _listView.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.addItemDecoration(ItemDecorations.divider(1f,
+            ContextCompat.getColor(context, R.color.blue_100)).build(_listView))
         _listView.layoutManager = LinearLayoutManager(context)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             _listView.setOnScrollChangeListener { _: View, _: Int, _: Int, _: Int, _: Int ->
@@ -108,7 +109,8 @@ class ZPickerView @JvmOverloads constructor(
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
         _listView.removeItemDecorationAt(0)
-        _listView.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.addItemDecoration(ItemDecorations.divider(1f,
+            ContextCompat.getColor(context, R.color.blue_100)).build(_listView))
     }
 
     /* private */

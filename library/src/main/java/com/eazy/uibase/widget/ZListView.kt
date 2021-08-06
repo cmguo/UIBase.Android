@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.eazy.uibase.R
-import com.eazy.uibase.view.list.DividerDecoration
+import com.eazy.uibase.view.list.ItemDecorations
 import com.eazy.uibase.view.list.RecyclerViewAdapter
 import com.eazy.uibase.view.list.RecyclerViewTreeAdapter
 import com.eazy.uibase.view.parentOfType
@@ -41,7 +41,8 @@ class ZListView @JvmOverloads constructor(
     init {
         this.adapter = _adapter
         _adapter.setItemBinding(ZListItemBinding(context))
-        this.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        this.addItemDecoration(ItemDecorations.divider(1f,
+            ContextCompat.getColor(context, R.color.blue_100)).build(this))
         this.layoutManager = LinearLayoutManager(context)
     }
 

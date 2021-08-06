@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
-import com.eazy.uibase.view.list.DividerDecoration
+import com.eazy.uibase.view.list.ItemDecorations
 
 class ZDropDown @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.dropDownStyle)
@@ -58,7 +58,8 @@ class ZDropDown @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.drop_down, this)
         listView = findViewById(R.id.listView)
         listView.adapter = adapter
-        listView.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.bluegrey_100)))
+        listView.addItemDecoration(ItemDecorations.divider(1f,
+            ContextCompat.getColor(context, R.color.bluegrey_100)).build(listView))
         listView.layoutManager = LinearLayoutManager(context)
 
         setWillNotDraw(false)

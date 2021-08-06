@@ -7,8 +7,6 @@ import android.graphics.Color;
 import androidx.annotation.StyleRes;
 import androidx.databinding.Bindable;
 import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.eazy.uibase.demo.BR;
 import com.eazy.uibase.demo.R;
@@ -18,7 +16,7 @@ import com.eazy.uibase.demo.core.ViewStyles;
 import com.eazy.uibase.demo.core.style.annotation.Description;
 import com.eazy.uibase.demo.core.style.annotation.Title;
 import com.eazy.uibase.demo.databinding.Styles2FragmentBinding;
-import com.eazy.uibase.view.list.DividerDecoration;
+import com.eazy.uibase.view.list.ItemDecorations;
 import com.eazy.uibase.view.list.UnitTypeItemBinding;
 
 import java.util.Map;
@@ -52,7 +50,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
 
     public static class Styles extends ViewStyles {
         public final ItemBinding itemBinding;
-        public final RecyclerView.ItemDecoration itemDecoration;
+        public final ItemDecorations.Builder itemDecoration;
 
         @Bindable
         public String text = "文字";
@@ -111,7 +109,7 @@ public class StylesFragment extends ComponentFragment<Styles2FragmentBinding, St
         public Styles(StylesFragment fragment) {
             this.fragment_ = fragment;
             itemBinding = new ItemBinding(this);
-            itemDecoration = new DividerDecoration(fragment.requireContext(), 1, Color.BLUE);
+            itemDecoration = ItemDecorations.divider(1f, Color.BLUE);
         }
     }
 

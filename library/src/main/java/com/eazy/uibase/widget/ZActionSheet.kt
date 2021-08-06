@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
-import com.eazy.uibase.view.list.DividerDecoration
+import com.eazy.uibase.view.list.ItemDecorations
 
 class ZActionSheet @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.actionSheetStyle)
@@ -86,7 +86,8 @@ class ZActionSheet @JvmOverloads constructor(
         _listView = findViewById(R.id.listView)
 
         _listView.adapter = _adapter
-        _listView.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.addItemDecoration(ItemDecorations.divider(1f,
+            ContextCompat.getColor(context, R.color.blue_100)).build(_listView))
         _listView.layoutManager = LinearLayoutManager(context)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZActionSheet, defStyleAttr, 0)
@@ -116,7 +117,8 @@ class ZActionSheet @JvmOverloads constructor(
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
         _listView.removeItemDecorationAt(0)
-        _listView.addItemDecoration(DividerDecoration(context, 1f, ContextCompat.getColor(context, R.color.blue_100)))
+        _listView.addItemDecoration(ItemDecorations.divider(1f,
+            ContextCompat.getColor(context, R.color.blue_100)).build(_listView))
     }
 
     /* private */

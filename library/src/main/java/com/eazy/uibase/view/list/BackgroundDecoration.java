@@ -22,11 +22,11 @@ public class BackgroundDecoration extends BaseDecoration {
     private Drawable mBackground;
     private Rect mOutRect = new Rect();
 
-    public BackgroundDecoration(Context context, float radius, int color) {
-        this(context, radius, color, false);
+    public BackgroundDecoration(float radius, int color) {
+        this(radius, color, false);
     }
 
-    public BackgroundDecoration(Context context, float radius, int color, boolean outer) {
+    public BackgroundDecoration(float radius, int color, boolean outer) {
         mBackground = new RoundDrawable(ColorStateList.valueOf(color), radius);
         if (outer) {
             int r = (int) radius;
