@@ -2,18 +2,20 @@ package com.eazy.uibase.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.View
-import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.eazy.uibase.R
+import com.eazy.uibase.view.list.DividerDecoration
 import com.eazy.uibase.view.list.ItemDecorations
 import com.eazy.uibase.view.list.RecyclerViewAdapter
 import com.eazy.uibase.view.list.RecyclerViewTreeAdapter
 import com.eazy.uibase.view.parentOfType
+import java.lang.ref.WeakReference
 
 @SuppressLint("CustomViewStyleable")
 class ZListView @JvmOverloads constructor(
@@ -33,6 +35,7 @@ class ZListView @JvmOverloads constructor(
     var listener: OnItemValueChangeListener? = null
 
     private val _adapter = ListAdapter()
+    private val _decoration: WeakReference<DividerDecoration>
 
     companion object {
         private const val TAG = "ZListView"
@@ -41,8 +44,10 @@ class ZListView @JvmOverloads constructor(
     init {
         this.adapter = _adapter
         _adapter.setItemBinding(ZListItemBinding(context))
-        this.addItemDecoration(ItemDecorations.divider(1f,
-            ContextCompat.getColor(context, R.color.blue_100)).build(this))
+        val decoration = ItemDecorations.divider(1f,
+            ContextCompat.getColor(context, R.color.blue_100)).build(this)
+        _decoration = WeakReference(decoration as DividerDecoration)
+        this.addItemDecoration(decoration)
         this.layoutManager = LinearLayoutManager(context)
     }
 
@@ -71,6 +76,15 @@ class ZListView @JvmOverloads constructor(
                 })
             }
             adapter.setItemBinding(ZListItemBinding(context))
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        val decoration = _decoration.get()
+        if (decoration != null) {
+            decoration.updateColor(ContextCompat.getColor(context, R.color.blue_100))
+            invalidate()
         }
     }
 

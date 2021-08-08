@@ -35,6 +35,10 @@ public class DividerDecoration extends BaseDecoration {
         mEndianSize = ceil(endianSize);
     }
 
+    public void updateColor(int color) {
+        mDivider = new ColorDrawable(color);
+    }
+
     @Override
     public void onDraw(@NotNull Canvas c, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
         if (mDivider == null)

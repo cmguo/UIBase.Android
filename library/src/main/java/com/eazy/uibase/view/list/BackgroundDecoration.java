@@ -58,6 +58,11 @@ public class BackgroundDecoration extends BaseDecoration {
         }
     }
 
+    public void updateColor(int color) {
+        if (mBackground instanceof RoundDrawable)
+            ((RoundDrawable) mBackground).setFillColor(ColorStateList.valueOf(color));
+    }
+
     @Override
     protected void getItemOffsets(Rect outRect, int type) {
         outRect.set(mOutRect);

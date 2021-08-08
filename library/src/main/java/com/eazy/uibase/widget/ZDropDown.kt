@@ -1,6 +1,7 @@
 package com.eazy.uibase.widget
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -22,7 +23,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.R
 import com.eazy.uibase.resources.Drawables
+import com.eazy.uibase.view.list.DividerDecoration
 import com.eazy.uibase.view.list.ItemDecorations
+import java.lang.ref.WeakReference
 
 class ZDropDown @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.dropDownStyle)
@@ -45,10 +48,11 @@ class ZDropDown @JvmOverloads constructor(
 
     var cornerRadius = 0f
 
-    private val listView: RecyclerView
-    private val adapter = DropDownAdapter(this)
-    private val bounds = RectF()
-    private val backgroundPaint = Paint()
+    private val _listView: RecyclerView
+    private val _decoration: WeakReference<DividerDecoration>
+    private val _adapter = DropDownAdapter(this)
+    private val _bounds = RectF()
+    private val _backgroundPaint = Paint()
 
     companion object {
         private const val TAG = "ZDropDown"
@@ -56,21 +60,22 @@ class ZDropDown @JvmOverloads constructor(
 
     init {
         LayoutInflater.from(context).inflate(R.layout.drop_down, this)
-        listView = findViewById(R.id.listView)
-        listView.adapter = adapter
-        listView.addItemDecoration(ItemDecorations.divider(1f,
-            ContextCompat.getColor(context, R.color.bluegrey_100)).build(listView))
-        listView.layoutManager = LinearLayoutManager(context)
+        _listView = findViewById(R.id.listView)
+        _listView.adapter = _adapter
+        val decoration = ItemDecorations.divider(1f, ContextCompat.getColor(context, R.color.bluegrey_100)).build(_listView)
+        _decoration = WeakReference(decoration as DividerDecoration)
+        _listView.addItemDecoration(decoration)
+        _listView.layoutManager = LinearLayoutManager(context)
 
         setWillNotDraw(false)
         setLayerType(LAYER_TYPE_SOFTWARE, null)
 
-        backgroundPaint.style = Paint.Style.FILL
+        _backgroundPaint.style = Paint.Style.FILL
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZDropDown, defStyleAttr, 0)
         shadowRadius = a.getDimensionPixelSize(R.styleable.ZDropDown_shadowRadius, 0).toFloat()
         cornerRadius = a.getDimensionPixelSize(R.styleable.ZDropDown_cornerRadius, 0).toFloat()
-        backgroundPaint.color = a.getColor(R.styleable.ZDropDown_backgroundColor, Color.WHITE)
+        _backgroundPaint.color = a.getColor(R.styleable.ZDropDown_backgroundColor, Color.WHITE)
         a.recycle()
     }
 
@@ -78,7 +83,7 @@ class ZDropDown @JvmOverloads constructor(
         val size = calcSize()
         // pop
         val window = PopupWindow(this, size.width, size.height, true)
-        adapter.listener = {
+        _adapter.listener = {
             if (it != null)
                 window.dismiss()
             listener.dropDownFinished(this, it)
@@ -90,16 +95,25 @@ class ZDropDown @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        bounds.set(0f, 0f, width.toFloat(), height.toFloat())
-        bounds.inset(shadowRadius, shadowRadius)
-        backgroundPaint.setShadowLayer(shadowRadius, 0f, 0f, Color.GRAY)
-        canvas?.drawRoundRect(bounds, cornerRadius, cornerRadius, backgroundPaint)
+        _bounds.set(0f, 0f, width.toFloat(), height.toFloat())
+        _bounds.inset(shadowRadius, shadowRadius)
+        _backgroundPaint.setShadowLayer(shadowRadius, 0f, 0f, Color.GRAY)
+        canvas?.drawRoundRect(_bounds, cornerRadius, cornerRadius, _backgroundPaint)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        adapter.listener?.invoke(null)
-        adapter.listener = null
+        _adapter.listener?.invoke(null)
+        _adapter.listener = null
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        val decoration = _decoration.get()
+        if (decoration != null) {
+            decoration.updateColor(ContextCompat.getColor(context, R.color.bluegrey_100))
+            invalidate()
+        }
     }
 
     private fun calcSize() : Size {
