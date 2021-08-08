@@ -88,7 +88,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         }
         Iterable<?> children = getChildren2(t);
         if (children == null)
-            throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "th item from" + t.toString());
+            throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "-th item from" + t.toString());
         Iterator<?> iterator = children.iterator();
         int n2 = 1;
         while (iterator.hasNext()) {
@@ -99,7 +99,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
             }
             n2 += n3;
         }
-        throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "th item from" + t.toString());
+        throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "-th item from" + t.toString());
     }
 
     // Get n-th item position in sub tree
@@ -110,7 +110,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         }
         Iterable<?> children = getChildren2(t);
         if (children == null)
-            throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "th item from" + t.toString());
+            throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "-th item from" + t.toString());
         Iterator<?> iterator = children.iterator();
         int p = 0;
         int n2 = 1;
@@ -125,7 +125,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
             n2 += n3;
             ++p;
         }
-        throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "th item from" + t.toString());
+        throw new IndexOutOfBoundsException("Failed to get " + (n + 1) + "-th item from" + t.toString());
     }
 
     // Get linear index in sub tree with tree position <n>
@@ -137,7 +137,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         }
         Iterable<?> children = getChildren2(t);
         if (children == null)
-            throw new IndexOutOfBoundsException("Failed to get " + n[l] + "th child from" + t.toString());
+            throw new IndexOutOfBoundsException("Failed to get " + n[l] + "-th child from" + t.toString());
         Iterator<?> iterator = children.iterator();
         int p = n[l];
         int n2 = 1;
@@ -148,7 +148,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         if (iterator.hasNext()) {
             return n2 + getItemPosition(iterator.next(), n, l + 1, m);
         }
-        throw new IndexOutOfBoundsException("Failed to get " + n[l] + "th child from" + t.toString());
+        throw new IndexOutOfBoundsException("Failed to get " + n[l] + "-th child from" + t.toString());
     }
 
     // Get item in sub tree with tree position <n>
@@ -160,7 +160,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         }
         Iterable<?> children = getChildren2(t);
         if (children == null)
-            throw new IndexOutOfBoundsException("Failed to get " + n[l] + "th child from" + t.toString());
+            throw new IndexOutOfBoundsException("Failed to get " + n[l] + "-th child from" + t.toString());
         Iterator<?> iterator = children.iterator();
         int p = n[l];
         while (p > 0 && iterator.hasNext()) {
@@ -170,7 +170,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         if (iterator.hasNext()) {
             return getRealItem(iterator.next(), n, l + 1, m);
         }
-        throw new IndexOutOfBoundsException("Failed to get " + n[l] + "th child from" + t.toString());
+        throw new IndexOutOfBoundsException("Failed to get " + n[l] + "-th child from" + t.toString());
     }
 
     // Get next item in sub tree with tree position <n>
@@ -209,19 +209,20 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
     }
 
     protected void visitTrees(TreeVisitor visitor, int[] firstPos, int[] lastPos) {
-        visitTrees(visitor, firstPos, firstPos.length, lastPos, 0);
-    }
-
-    protected void visitTrees(TreeVisitor visitor, int[] firstPos, int[] lastPos, int level) {
-        visitTrees(visitor, firstPos, firstPos.length, lastPos, level);
+        visitTrees(visitor, this, firstPos, firstPos.length, lastPos, 0);
     }
 
     protected void visitTrees(TreeVisitor visitor, int[] firstPos, int firstLevel, int[] lastPos) {
-        visitTrees(visitor, firstPos, firstLevel, lastPos, 0);
+        visitTrees(visitor, this, firstPos, firstLevel, lastPos, 0);
     }
 
-    protected void visitTrees(TreeVisitor visitor, int[] firstPos, int firstLevel, int[] lastPos, int level) {
+    // Item t is at <firstPos with length firstLevel>
+    private void visitTrees(TreeVisitor visitor, Object t, int[] firstPos, int firstLevel, int[] lastPos, int level) {
+        Iterable<?> children = getChildren2(t);
+        if (children == null)
+            return;
         visitor.visitTree(firstPos, firstLevel, lastPos, level);
+        Iterator<?> iterator = children.iterator();
         if (firstLevel == level && lastPos.length == level)
             return;
         if (firstPos.length < level + 1) {
@@ -229,18 +230,44 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
         }
         if (firstLevel < level + 1)
             firstLevel = level + 1;
+        int p = firstPos[level];
+        while (p > 0 && iterator.hasNext()) {
+            --p;
+            iterator.next();
+        }
         while (firstPos[level] < lastPos[level]) {
-            ++firstPos[level];
-            int position = getItemPosition(firstPos, level + 1);
-            int[] subEnd = getTreePosition(position - 1);
-            --firstPos[level];
-            visitTrees(visitor, firstPos, firstLevel, subEnd, level + 1);
+            if (!iterator.hasNext())
+                throw new IndexOutOfBoundsException("Failed to get " + firstPos[level] + "-th child from" + t.toString());
+            Object c = iterator.next();
+            int[] subEnd = tailPosition(c, firstPos, level + 1);
+            visitTrees(visitor, c, firstPos, firstLevel, subEnd, level + 1);
             for (int i = level + 1; i < firstPos.length; ++i)
                 firstPos[i] = 0;
             ++firstPos[level];
             firstLevel = level + 1;
         }
-        visitTrees(visitor, firstPos, firstLevel, lastPos, level + 1);
+        if (!iterator.hasNext())
+            throw new IndexOutOfBoundsException("Failed to get " + firstPos[level] + "-th child from" + t.toString());
+        visitTrees(visitor, iterator.next(), firstPos, firstLevel, lastPos, level + 1);
+    }
+
+    // Item t is at <position with length level>
+    private int[] tailPosition(Object t, int[] position, int level) {
+        Iterable<?> children = getChildren2(t);
+        if (children == null)
+            return Arrays.copyOf(position, level);
+        Iterator<?> iterator = children.iterator();
+        int n = -1;
+        Object c = null;
+        while (iterator.hasNext()) {
+            ++n;
+            c = iterator.next();
+        }
+        if (c == null)
+            return Arrays.copyOf(position, level);
+        int[] tail = tailPosition(c, position, level + 1);
+        tail[level] = n;
+        return tail;
     }
 
     public static void test() {
@@ -287,10 +314,11 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
 //            Log.d("RecyclerViewTreeAdapter", "getNextPosition " + Arrays.toString(p));
 //        }
 
-        adapter.visitTrees( (firstPos, firstLevel, lastPos, level) -> {
+        adapter.visitTrees( (firstPos, firstLevel, lastPos, level) ->
             Log.d("RecyclerViewTreeAdapter", "visitTrees level " + level + ": "
-                + Arrays.toString(Arrays.copyOf(firstPos, firstLevel)) + " ~ " + Arrays.toString(lastPos));
-        }, new int[] {0}, new int[] {1}, 0);
+                + Arrays.toString(Arrays.copyOf(firstPos, firstLevel)) + " ~ "
+                + Arrays.toString(lastPos))
+            , new int[] {0}, new int[] {1});
     }
 
 }

@@ -86,12 +86,13 @@ public class RecyclerViewBindingAdapter {
     public static void setItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decoration) {
         while (view.getItemDecorationCount() > 0)
             view.removeItemDecorationAt(0);
-        view.addItemDecoration(decoration);
+        if (decoration != null)
+            view.addItemDecoration(decoration);
     }
 
     @BindingAdapter("itemDecoration")
     public static void setItemDecoration(RecyclerView view, ItemDecorations.Builder builder) {
-        setItemDecoration(view, builder.build(view));
+        setItemDecoration(view, builder == null ? null : builder.build(view));
     }
 
     @BindingAdapter("hasFixedSize")

@@ -1,26 +1,30 @@
 package com.eazy.uibase.demo.components.dataview
 
-import android.graphics.Color
+import android.graphics.*
 import android.graphics.drawable.ColorDrawable
-import android.media.Image
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.Bindable
-import com.eazy.uibase.databinding.ItemBinding
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
 import com.eazy.uibase.demo.core.ViewStyles
+import com.eazy.uibase.demo.core.style.ComponentStyle
+import com.eazy.uibase.demo.core.style.annotation.Style
 import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.ListViewFragmentBinding
 import com.eazy.uibase.demo.resources.Colors
 import com.eazy.uibase.demo.resources.Resources
+import com.eazy.uibase.view.list.BackgroundDecoration
 import com.eazy.uibase.view.list.ItemDecorations
 import com.eazy.uibase.view.list.UnitTypeItemBinding
 import com.eazy.uibase.widget.ZListItemView
 import com.eazy.uibase.widget.ZListView
 import com.eazy.uibase.widget.ZTipView
+import java.lang.reflect.Field
+import java.lang.reflect.Method
 
 class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewFragment.Model?, ZListViewFragment.Styles?>() {
 
@@ -47,6 +51,11 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
         @Title("分组")
         var group = false
 
+        @Bindable
+        @Title("装饰器")
+        @Style(DecorationStyle::class)
+        var itemDecoration : ItemDecorations.Builder? = null
+
         val emptyItemBinding = object : UnitTypeItemBinding(R.layout.list_empty_view) {
             override fun bindView(view: View, item: Any?, position: Int) {
                 val image = view.findViewById<ImageView>(R.id.image)
@@ -63,8 +72,46 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
                 button.visibility = View.VISIBLE
             }
         }
+    }
 
-        val itemDecoration = ItemDecorations.background(20f, Color.GRAY)
+    class DecorationStyle(field: Field, getter: Method? = null, setter: Method? = null)
+        : ComponentStyle(field, getter, setter) {
+        init {
+            val values = arrayListOf("divider", "background", "tree")
+            val titles = arrayListOf("分割线", "圆角背景", "树形装饰器")
+            setValues(values, titles)
+        }
+        override fun valueToString(value: Any?): String {
+            for (e in decorations.entries) {
+                if (e.value === value)
+                    return e.key
+            }
+            return ""
+        }
+        override fun valueFromString(value: String?): Any? {
+            return decorations.get(value)
+        }
+        companion object {
+            val decorations = mapOf<String, ItemDecorations.Builder>(
+                "divider" to ItemDecorations.divider(1f, Color.RED),
+                "background" to ItemDecorations.background(20f, Color.GRAY, true),
+                "tree" to ItemDecorations.Builder {
+                    object : BackgroundDecoration(40f, Color.GRAY, true) {
+                        val paint = Paint()
+                        val colors = intArrayOf(Color.RED, Color.GREEN, Color.BLUE)
+                        override fun drawTreeDecoration(c: Canvas, position: IntArray?, level: Int) {
+                            paint.color = colors[level]
+                            val rect = RectF(outRect)
+                            rect.inset(10f, 20f)
+                            c.drawRoundRect(rect, 20f, 20f, paint)
+                        }
+                        override fun getTreeOffsets(treeRect: Rect, position: IntArray?, level: Int) {
+                            treeRect[20, 40, 20] = 40
+                        }
+                    }
+                }
+            )
+        }
     }
 
     val listener = object : ZListView.OnItemValueChangeListener {
@@ -80,13 +127,20 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val decoration = binding.listView.getItemDecorationAt(0)
+        styles.itemDecoration = ItemDecorations.Builder {
+            decoration
+        }
+    }
+
     companion object {
         private const val TAG = "ZListFragment"
     }
 }
 
 class ResourceColorGroup(private val name: String, colors: List<ResourceColorItem>) : ZListItemView.GroupData {
-    private val colors = colors.filter { it.title.startsWith(name) }
+    private val colors = colors.filter { it.title.startsWith(name + "_") }
     override val items: Iterable<ZListItemView.Data>
         get() = colors
     override val title: String
