@@ -96,7 +96,7 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
                 "divider" to ItemDecorations.divider(1f, Color.RED),
                 "background" to ItemDecorations.background(20f, Color.GRAY, true),
                 "tree" to ItemDecorations.Builder {
-                    object : BackgroundDecoration(40f, Color.GRAY, true) {
+                    object : BackgroundDecoration(10f, Color.GRAY, true) {
                         val paint = Paint()
                         val colors = intArrayOf(Color.RED, Color.GREEN, Color.BLUE)
                         override fun drawTreeDecoration(c: Canvas, position: IntArray?, level: Int) {

@@ -52,7 +52,7 @@ public class BaseDecoration extends RecyclerView.ItemDecoration {
 
         if (treeAdapter != null) {
             int[] treePosition = treeAdapter.getTreePosition(position);
-            getTreesOffsets(outRect, treeAdapter, treePosition, treePosition.length, 0);
+            getTreesOffsets(outRect, treeAdapter, treePosition, treePosition.length);
         } else {
             getTreeOffsets(treeRect, RecyclerViewTreeAdapter.RootPosition, 0);
             addTreeOffsets(outRect, treeRect, position > 0, position + 1 < count);
@@ -61,7 +61,7 @@ public class BaseDecoration extends RecyclerView.ItemDecoration {
         Log.d("BaseDecoration", "getItemOffsets: " + position + " -> " + outRect.toString());
     }
 
-    private void getTreesOffsets(@NonNull Rect outRect, RecyclerViewTreeAdapter treeAdapter, int[] treePosition, int treeLevel, int minLevel) {
+    private void getTreesOffsets(@NonNull Rect outRect, RecyclerViewTreeAdapter treeAdapter, int[] treePosition, int treeLevel) {
         boolean lowerMiddle = false;
         boolean upperMiddle = false;
         Iterable<?> children = treeAdapter.getChildren(treeAdapter.getRealItem(treePosition, treeLevel));
@@ -73,16 +73,29 @@ public class BaseDecoration extends RecyclerView.ItemDecoration {
         int[] nextPosition = treeAdapter.getNextPosition(treePosition, treeLevel);
         if (nextPosition == null)
             nextPosition = RecyclerViewTreeAdapter.RootPosition;
-        for (int i = treeLevel - 1; i >= minLevel; --i) {
+        for (int i = treeLevel - 1; i >= 0; --i) {
             getTreeOffsets(treeRect, treePosition, i);
             lowerMiddle |= i > 0 || treePosition[i] > 0;
             upperMiddle |= i < nextPosition.length;
             addTreeOffsets(outRect, treeRect, lowerMiddle, upperMiddle);
         }
+    }
+
+    // call from onDraw, take item as boundary
+    private void getTreesOffsets(@NonNull Rect outRect, RecyclerViewTreeAdapter treeAdapter, int[] treePosition, int treeLevel, int minLevel) {
+        Iterable<?> children = treeAdapter.getChildren(treeAdapter.getRealItem(treePosition, treeLevel));
+        if (children != null) {
+            getTreeOffsets(treeRect, treePosition, treeLevel);
+            addTreeOffsets(outRect, treeRect, false, false);
+        }
+        for (int i = treeLevel - 1; i >= minLevel; --i) {
+            getTreeOffsets(treeRect, treePosition, i);
+            addTreeOffsets(outRect, treeRect, false, false);
+        }
         Log.d("BaseDecoration", "getTreesOffsets: "
-            + Arrays.toString(Arrays.copyOf(treePosition, treeLevel))
-            + ": " + minLevel
-            + " -> " + outRect.toString());
+                + Arrays.toString(Arrays.copyOf(treePosition, treeLevel))
+                + ": " + minLevel
+                + " -> " + outRect.toString());
     }
 
     private void addTreeOffsets(Rect outRect, Rect treeRect, boolean prev, boolean next) {
@@ -144,24 +157,24 @@ public class BaseDecoration extends RecyclerView.ItemDecoration {
         if (treeAdapter != null) {
             int[] firstPos = treeAdapter.getTreePosition(first);
             int[] lastPos = treeAdapter.getTreePosition(last);
-            RecyclerViewTreeAdapter finalTreeAdapter = treeAdapter;
+            RecyclerViewTreeAdapter treeAdapter2 = treeAdapter;
             RecyclerViewTreeAdapter.TreeVisitor visitor = (firstPos2, firstLevel2, lastPos2, level) -> {
                 Log.d("BaseDecoration", "visitTrees level " + level + ": "
                     + Arrays.toString(Arrays.copyOf(firstPos2, firstLevel2)) + " ~ " + Arrays.toString(lastPos2));
-                int first2 = finalTreeAdapter.getItemPosition(firstPos2, firstLevel2);
-                int last2 = finalTreeAdapter.getItemPosition(lastPos2);
+                int first2 = treeAdapter2.getItemPosition(firstPos2, firstLevel2);
+                int last2 = treeAdapter2.getItemPosition(lastPos2);
                 getChildRect(linearLayoutManager.findViewByPosition(first2));
                 int type = adapter.getItemViewType(first2);
                 outRect.setEmpty();
                 getItemOffsets(outRect, type);
-                getTreesOffsets(outRect, finalTreeAdapter, firstPos2, firstLevel2, level);
+                getTreesOffsets(outRect, treeAdapter2, firstPos2, firstLevel2, level);
                 outRect2.set(childRect.left - outRect.left, childRect.top - outRect.top,
                     childRect.right + outRect.right, childRect.bottom + outRect.bottom);
                 getChildRect(linearLayoutManager.findViewByPosition(last2));
                 int type2 = adapter.getItemViewType(last2);
                 outRect.setEmpty();
                 getItemOffsets(outRect, type2);
-                getTreesOffsets(outRect, finalTreeAdapter, lastPos2, lastPos2.length, level);
+                getTreesOffsets(outRect, treeAdapter2, lastPos2, lastPos2.length, level);
                 outRect.set(childRect.left - outRect.left, childRect.top - outRect.top,
                     childRect.right + outRect.right, childRect.bottom + outRect.bottom);
                 outRect.set(Math.min(outRect2.left, outRect.left), Math.min(outRect2.top, outRect.top),
