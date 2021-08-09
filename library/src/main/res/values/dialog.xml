@@ -4,6 +4,7 @@
     <attr name="dialogStyle" />
 
     <declare-styleable name="ZDialog">
+        <attr name="background"/>
         <attr name="image" format="reference"/>
         <attr name="closeIconColor" format="color"/>
         <attr name="title"/>
@@ -32,6 +33,7 @@
         <item name="android:orientation">vertical</item>
         <item name="android:minWidth">@dimen/dialog_width</item>
         <item name="android:maxWidth">@dimen/dialog_width</item>
+        <item name="background">@style/RoundDrawable.Dialog</item>
         <item name="confirmButton">@string/confirm</item>
         <item name="cancelButton">@string/cancel</item>
     </style>

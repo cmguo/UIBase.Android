@@ -58,6 +58,11 @@ public class BackgroundDecoration extends BaseDecoration {
         }
     }
 
+    public void updateColors(Context context) {
+        if (mBackground instanceof RoundDrawable)
+            ((RoundDrawable) mBackground).updateColors(context);
+    }
+
     public void updateColor(int color) {
         if (mBackground instanceof RoundDrawable)
             ((RoundDrawable) mBackground).setFillColor(ColorStateList.valueOf(color));

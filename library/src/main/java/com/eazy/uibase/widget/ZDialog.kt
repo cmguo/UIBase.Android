@@ -3,6 +3,7 @@ package com.eazy.uibase.widget
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.TypedArray
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -173,7 +174,6 @@ class ZDialog @JvmOverloads constructor(
 
         _inited = true
 
-        syncBackground()
         val radius = (background as RoundDrawable).cornerRadius
         _imageView.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
     }
@@ -235,7 +235,9 @@ class ZDialog @JvmOverloads constructor(
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
-        syncBackground()
+        val background = this.background
+        if (background is RoundDrawable)
+            background.updateColors(context)
     }
 
     companion object {
@@ -251,8 +253,15 @@ class ZDialog @JvmOverloads constructor(
         image = a.getResourceId(R.styleable.ZDialog_image, 0)
         confirmButton = a.getResourceId(R.styleable.ZDialog_confirmButton, 0)
         cancelButton = a.getResourceId(R.styleable.ZDialog_cancelButton, 0)
+        try {
+            val drawable = a.getDrawable(R.styleable.ZDialog_background)
+            background = drawable
+        } catch (ignored: Throwable) {
+            val styleRes = a.getResourceId(R.styleable.ZDialog_background, 0)
+            if (styleRes > 0)
+                background = RoundDrawable(context, styleRes)
+        }
         val buttonIds = a.getResourceId(R.styleable.ZDialog_moreButtons, 0)
-
         if (buttonIds > 0) {
             val aa = resources.obtainTypedArray(buttonIds)
             val v = TypedValue()
@@ -268,10 +277,6 @@ class ZDialog @JvmOverloads constructor(
             aa.recycle()
             moreButtons = listOf(ids)
         }
-    }
-
-    private fun syncBackground() {
-        background = RoundDrawable(context, R.style.RoundDrawable_Dialog)
     }
 
     private fun syncImage() {

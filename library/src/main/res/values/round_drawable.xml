@@ -6,6 +6,11 @@
         <attr name="borderColor" format="color"/>
         <attr name="borderSize" format="dimension"/>
         <attr name="cornerRadius"/>
+        <attr name="android:padding"/>
+        <attr name="android:paddingLeft"/>
+        <attr name="android:paddingTop"/>
+        <attr name="android:paddingRight"/>
+        <attr name="android:paddingBottom"/>
         <attr name="android:topLeftRadius"/>
         <attr name="android:topRightRadius"/>
         <attr name="android:bottomRightRadius"/>

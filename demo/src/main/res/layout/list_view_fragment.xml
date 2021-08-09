@@ -24,6 +24,7 @@
     </data>
 
     <com.eazy.uibase.widget.ZListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:data="@{styles.empty ? model.empty : styles.group ? model.colorGroups : model.colors}"

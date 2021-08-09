@@ -25,6 +25,7 @@ open class RoundDrawable : Drawable {
 
     var height = 0
 
+    private var style = 0
     private val paint = Paint()
     private var alpha = 255
 
@@ -33,11 +34,22 @@ open class RoundDrawable : Drawable {
     }
 
     constructor(context: Context, @StyleRes style: Int) : this() {
+        this.style = style
         val a = context.obtainStyledAttributes(style, R.styleable.RoundDrawable)
         fillColor = a.getColorStateList(R.styleable.RoundDrawable_fillColor)
         borderColor = a.getColorStateList(R.styleable.RoundDrawable_borderColor)
         borderSize = a.getDimension(R.styleable.RoundDrawable_borderSize, borderSize)
         cornerRadius = a.getDimension(R.styleable.RoundDrawable_cornerRadius, borderSize)
+        val padding = a.getDimension(
+            R.styleable.RoundDrawable_android_padding, 0f)
+        val paddingLeft = a.getDimension(
+            R.styleable.RoundDrawable_android_paddingLeft, padding)
+        val paddingTop = a.getDimension(
+            R.styleable.RoundDrawable_android_paddingTop, padding)
+        val paddingRight = a.getDimension(
+            R.styleable.RoundDrawable_android_paddingRight, padding)
+        val paddingBottom = a.getDimension(
+            R.styleable.RoundDrawable_android_paddingBottom, padding)
         val topLeftRadius = a.getDimension(
             R.styleable.RoundDrawable_android_topLeftRadius, cornerRadius)
         val topRightRadius = a.getDimension(
@@ -46,6 +58,9 @@ open class RoundDrawable : Drawable {
             R.styleable.RoundDrawable_android_bottomLeftRadius, cornerRadius)
         val bottomRightRadius = a.getDimension(
             R.styleable.RoundDrawable_android_bottomRightRadius, cornerRadius)
+        if (paddingLeft > 0 || paddingTop > 0 || paddingRight > 0 || paddingBottom > 0) {
+            this.padding = RectF(paddingLeft, paddingTop, paddingRight, paddingBottom)
+        }
         if (topLeftRadius != cornerRadius || topRightRadius != cornerRadius
             ||bottomLeftRadius != cornerRadius || bottomRightRadius != cornerRadius) {
             cornerRadii = floatArrayOf(topLeftRadius, topLeftRadius, topRightRadius, topRightRadius,
@@ -66,6 +81,15 @@ open class RoundDrawable : Drawable {
     {
         this.borderColor = borderColor
         this.borderSize = borderSize
+    }
+
+    fun updateColors(context: Context) {
+        if (style > 0) {
+            val a = context.obtainStyledAttributes(style, R.styleable.RoundDrawable)
+            fillColor = a.getColorStateList(R.styleable.RoundDrawable_fillColor)
+            borderColor = a.getColorStateList(R.styleable.RoundDrawable_borderColor)
+            a.recycle()
+        }
     }
 
     override fun draw(canvas: Canvas) {
