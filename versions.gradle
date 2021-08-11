@@ -1,3 +1,5 @@
+apply from: 'git-version.gradle'
+
 def build_versions = [:]
 build_versions.minSdkVersion = 21
 build_versions.compileSdkVersion = 30
@@ -9,6 +11,18 @@ ext.build_versions = build_versions
 def versions = [:]
 versions.kotlin = "1.3.61"
 versions.appcompat = "1.0.2"
+
+if (build_branch.startsWith("release/")) {
+    versions.libshape = "1.0.0"
+    versions.badgeview = "1.0.0"
+    versions.magic_indicator = "1.6.0"
+    versions.pickerview = "4.2.0"
+} else {
+    versions.libshape = "1.0.0-SNAPSHOT"
+    versions.badgeview = "1.0.0-SNAPSHOT"
+    versions.magic_indicator = "1.6.0-SNAPSHOT"
+    versions.pickerview = "4.2.0-SNAPSHOT"
+}
 
 ext.versions = versions
 
