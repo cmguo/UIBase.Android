@@ -1,0 +1,25 @@
+stages:
+  - build
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+build-job-android:
+  stage: build
+  except:
+    - tags
+    - /^publish/.*/
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - cp ../../../local.properties .
+  script:
+    - ./gradlew --build-cache uploadArchives
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
+      - local.properties
+  tags:
+    - android
