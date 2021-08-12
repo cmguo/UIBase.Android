@@ -13,7 +13,7 @@ build-job-android:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - cp ../../../local.properties .
   script:
-    - ./gradlew --build-cache uploadArchives
+    - ./gradlew --build-cache :uibase-library:uploadArchives
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
