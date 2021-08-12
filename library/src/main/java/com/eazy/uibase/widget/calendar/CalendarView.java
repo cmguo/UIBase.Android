@@ -143,7 +143,7 @@ public class CalendarView extends FrameLayout {
                 calendar.setTimeInMillis(selectedTime);
                 calendar.set(Calendar.DAY_OF_WEEK, 1);
                 long currentWeekTime = calendar.getTimeInMillis();
-                currentPages = (int) ((currentWeekTime + ONE_WEEK - 1 - startTime) / ONE_WEEK);
+                currentPages = (int) ((currentWeekTime + ONE_WEEK - 24*60*60*1000 - startTime) / ONE_WEEK);// 一天时间差校验
             }
 
         }
