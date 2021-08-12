@@ -16,7 +16,7 @@ build-job-android:
     - ./gradlew --build-cache :uibase-library:uploadArchives
   cache:
     key: "$CI_COMMIT_REF_NAME"
-    policy: push
+    policy: pull-push
     paths:
       - build
       - .gradle

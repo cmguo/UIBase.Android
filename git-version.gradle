@@ -4,7 +4,7 @@ ext.getGitVersion = {
     println(gitRevision)
     gitRevision = gitRevision.execute().text.trim()
     println(gitRevision)
-    return String.format("\"%s\"",gitRevision)
+    return gitRevision
 }
 
 ext.getGitBranch = {
@@ -15,5 +15,16 @@ ext.getGitBranch = {
     return gitBranch
 }
 
+ext.build_branch = System.getenv("CI_COMMIT_REF_NAME")
+
+if (ext.build_branch == null) {
+
+    ext.build_branch = ext.getGitBranch()
+
+} else {
+
+    println("CI_COMMIT_REF_NAME: " + ext.build_branch)
+
+}
+
 ext.build_version = ext.getGitVersion()
-ext.build_branch = ext.getGitBranch()

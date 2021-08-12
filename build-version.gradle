@@ -1,10 +1,12 @@
 android {
     buildTypes {
         debug {
-            buildConfigField 'String', 'BUILD_VERSION', build_version
+            buildConfigField 'String', 'BUILD_BRANCH', "\"" + build_branch + "\""
+            buildConfigField 'String', 'BUILD_VERSION', "\"" + build_version + "\""
         }
         release {
-            buildConfigField 'String', 'BUILD_VERSION', build_version
+            buildConfigField 'String', 'BUILD_BRANCH', "\"" + build_branch + "\""
+            buildConfigField 'String', 'BUILD_VERSION', "\"" + build_version + "\""
         }
     }
 }
