@@ -3,8 +3,8 @@ package com.eazy.uibase.widget
 import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
 import com.bigkoo.pickerview.configure.PickerOptions
 import com.bigkoo.pickerview.listener.CustomListener
 import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener
@@ -173,7 +173,10 @@ class ZTimePickerView @JvmOverloads constructor(
             this.endTime = df.parse(endDate)!!
         }
 
-        _picker = TimePickerView(_options)
+        _picker = object : TimePickerView(_options) {
+            override fun dismiss() {
+            }
+        }
         _picker.setKeyBackCancelable(false)
         _wheel = wheelTime.get(_picker) as WheelTime2
         _inited = true
@@ -232,19 +235,22 @@ class ZTimePickerView @JvmOverloads constructor(
     private fun updateTextAppearance() {
         if (textAppearance == 0)
             return
-        val a = context.obtainStyledAttributes(textAppearance, R.styleable.TextAppearance)
-        val color = a.getColorStateList(R.styleable.TextAppearance_android_textColor)
-        val size = a.getDimension(R.styleable.TextAppearance_android_textSize, 0f)
-        if (color != null) {
-            _options.textColorOut = color.defaultColor
-            _options.textColorCenter = color.getColorForState(intArrayOf(android.R.attr.state_selected), color.defaultColor)
+        val a = context.obtainStyledAttributes(textAppearance, R.styleable.ZTextAppearance)
+        val textColor = a.getColorStateList(R.styleable.ZTextAppearance_android_textColor)
+        val textSize = a.getDimension(R.styleable.ZTextAppearance_android_textSize, 0f)
+        val lineHeight = a.getDimension(R.styleable.ZTextAppearance_lineHeight, 0f)
+        if (textColor != null) {
+            _options.textColorOut = textColor.defaultColor
+            _options.textColorCenter = textColor.getColorForState(intArrayOf(android.R.attr.state_selected), textColor.defaultColor)
             if (_inited) {
                 _wheel.setTextColorOut(_options.textColorOut)
                 _wheel.setTextColorCenter(_options.textColorCenter)
             }
         }
-         if (size > 0)
-            _options.textSizeContent = (size / context.resources.displayMetrics.density).toInt()
+         if (textSize > 0)
+            _options.textSizeContent = (textSize / context.resources.displayMetrics.density).toInt()
+        if (lineHeight > 0)
+            _options.lineSpacingMultiplier = lineHeight / textSize
     }
 
 }

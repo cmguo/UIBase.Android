@@ -106,8 +106,8 @@ class ZTimePickerViewFragment : ComponentFragment<TimePickerViewFragmentBinding?
 
         @Bindable
         @Title("显示数目")
-        @Description("最大可见数目，建议3，7，9")
-        var itemsVisibleCount = 9
+        @Description("最大可见数目，建议3，5，7，9")
+        var itemsVisibleCount = 5
 
         @Bindable
         @Title("选中时间")

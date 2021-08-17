@@ -2,7 +2,7 @@
 <resources>
 
     <declare-styleable name="ZTextAppearance">
-        <attr name="lineHeight"/>
+        <attr name="lineHeight"/> <!-- 行高，一般比 textSize 大，在文字上下两侧留空白 -->
         <attr name="lineSpacing" format="dimension" />
         <attr name="android:textSize"/>
         <attr name="android:textColor"/>
