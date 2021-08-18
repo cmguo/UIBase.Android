@@ -45,7 +45,9 @@ public class StyleableSetTextView extends StyleableSet<TextView> {
         addStyleable(android.R.attr.drawableStart, (view, value) ->
             setCompoundDrawableRelative(view, 0, value));
         addStyleable(android.R.attr.drawableEnd, (view, value) ->
-            setCompoundDrawableRelative(view, 2, value));
+                setCompoundDrawableRelative(view, 2, value));
+        addStyleable(android.R.attr.drawableTint, (view, value) ->
+                TextViewCompat.setCompoundDrawableTintList(view, ContextCompat.getColorStateList(view.getContext(), value.resourceId)));
         // textAppearance
         addStyleable(android.R.attr.textAppearance, new IStyleable<TextView>() {
             @Override

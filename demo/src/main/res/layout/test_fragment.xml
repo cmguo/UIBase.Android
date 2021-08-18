@@ -28,6 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@{model.text}"
+            android:drawableTint="@color/red_100"
             app:drawableLeftCompat="@drawable/img_16px_read_black_light"
             android:enabled="@{styles.boolStyle}"
             />

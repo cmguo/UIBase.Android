@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.google.auto.service.AutoService;
+import com.eazy.uibase.R;
 import com.eazy.uibase.daynight.styleable.IStyleableSet;
 import com.eazy.uibase.daynight.styleable.StyleableSet;
 import com.eazy.uibase.resources.Drawables;
@@ -21,17 +22,17 @@ public class StyleableSetAppCompatTextView extends StyleableSet<AppCompatTextVie
 
     public StyleableSetAppCompatTextView() {
         // drawables
-        addStyleable(android.R.attr.drawableLeft, (view, value) ->
+        addStyleable(R.attr.drawableLeftCompat, (view, value) ->
             setCompoundDrawable(view, 0, value));
-        addStyleable(android.R.attr.drawableTop, (view, value) ->
+        addStyleable(R.attr.drawableTopCompat, (view, value) ->
             setCompoundDrawable(view, 1, value));
-        addStyleable(android.R.attr.drawableRight, (view, value) ->
+        addStyleable(R.attr.drawableRightCompat, (view, value) ->
             setCompoundDrawable(view, 2, value));
-        addStyleable(android.R.attr.drawableBottom, (view, value) ->
+        addStyleable(R.attr.drawableBottomCompat, (view, value) ->
             setCompoundDrawable(view, 3, value));
-        addStyleable(android.R.attr.drawableStart, (view, value) ->
+        addStyleable(R.attr.drawableStartCompat, (view, value) ->
             setCompoundDrawableRelative(view, 0, value));
-        addStyleable(android.R.attr.drawableEnd, (view, value) ->
+        addStyleable(R.attr.drawableEndCompat, (view, value) ->
             setCompoundDrawableRelative(view, 2, value));
     }
 
