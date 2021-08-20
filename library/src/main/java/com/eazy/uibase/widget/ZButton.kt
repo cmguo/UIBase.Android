@@ -32,15 +32,12 @@ open class ZButton @JvmOverloads constructor(
         Tertiary(R.style.ZButton_Appearance_Tertiary),
         Danger(R.style.ZButton_Appearance_Danger),
         Text(R.style.ZButton_Appearance_Text),
-        TextTransparent(R.style.ZButton_Appearance_Text_Transparent),
-        TextTransparentLight(R.style.ZButton_Appearance_Text_Transparent_Light)
     }
 
     enum class ButtonSize(@StyleRes val resId: Int) {
         Large(R.style.ZButton_Appearance_Large),
         Middle(R.style.ZButton_Appearance_Middle),
         Small(R.style.ZButton_Appearance_Small),
-        Thin(R.style.ZButton_Appearance_Thin)
     }
 
     enum class IconPosition {
@@ -488,7 +485,7 @@ open class ZButton @JvmOverloads constructor(
         }
         if (hasChanged(changed,
                 R.styleable.ZButton_Appearance_height)) {
-            height = _appearance.height
+            minHeight = _appearance.height
         }
         if (hasChanged(changed,
                 R.styleable.ZButton_Appearance_paddingX)) {

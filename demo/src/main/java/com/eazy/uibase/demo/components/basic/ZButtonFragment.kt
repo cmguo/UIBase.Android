@@ -53,7 +53,7 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
         @Bindable
         @Title("颜色模式")
         @Description("有下列颜色模式：主要（Primitive）、二级（Secondary）、三级（Tertiary）、危险（Danger）、文字（Text），默认：Primitive")
-        var buttonType = ZButton.ButtonType.Text
+        var buttonType = ZButton.ButtonType.Primitive
 
         @Bindable
         @Title("尺寸模式")

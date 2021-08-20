@@ -59,6 +59,7 @@
     <style name="ZButton"><!-- parent="Widget.AppCompat.Button" TODO: erase shadow -->
         <item name="android:textAppearance">@style/ButtonTextAppearance</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="ZButton.Loading" parent="ZButton">
@@ -99,17 +100,9 @@
     <style name="ZButton.Appearance.Text">
         <item name="android:textColor">@color/blue_600_disabled</item>
         <item name="backgroundColor">@color/transparent_pressed_disabled</item>
-        <item name="padding">0dp</item>
-    </style>
-
-    <style name="ZButton.Appearance.Text.Transparent" parent="ZButton.Appearance">
-        <item name="android:textColor">@color/bluegrey_900</item>
-        <item name="backgroundColor">@color/transparent_pressed_disabled</item>
-    </style>
-
-    <style name="ZButton.Appearance.Text.Transparent.Light" parent="ZButton.Appearance">
-        <item name="android:textColor">@color/bluegrey_500</item>
-        <item name="backgroundColor">@color/transparent_pressed_disabled</item>
+        <item name="paddingX">0dp</item>
+        <item name="height">0dp</item>
+        <item name="cornerRadius">0dp</item>
     </style>
 
     <!-- Size Styles -->
@@ -136,15 +129,6 @@
         <item name="height">24dp</item>
         <item name="cornerRadius">12dp</item>
         <item name="paddingX">12dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="iconSize">16dp</item>
-        <item name="iconPadding">3dp</item>
-    </style>
-
-    <style name="ZButton.Appearance.Thin">
-        <item name="height">24dp</item>
-        <item name="cornerRadius">0dp</item>
-        <item name="paddingX">0dp</item>
         <item name="android:textSize">14sp</item>
         <item name="iconSize">16dp</item>
         <item name="iconPadding">3dp</item>
