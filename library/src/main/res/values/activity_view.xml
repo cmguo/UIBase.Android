@@ -8,10 +8,10 @@
 
     <!-- Button Style -->
 
-    <style name="ZButton.Appearance.Activity" parent="ZButton.Appearance.Text.Large">
+    <style name="ZButton.Appearance.Activity" parent="ZButton.Appearance.TextLink.Large">
         <item name="android:textColor">@color/bluegrey_700</item>
         <item name="iconPosition">top</item>
-        <item name="height">66dp</item>
+        <item name="android:minHeight">66dp</item>
         <item name="cornerRadius">0dp</item>
         <item name="paddingX">8dp</item>
         <item name="android:textSize">12sp</item>

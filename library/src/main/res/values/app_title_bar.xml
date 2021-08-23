@@ -35,9 +35,8 @@
         <item name="rightButton">@drawable/icon_more</item>
     </style>
 
-    <style name="ZButton.Appearance.AppTitleBar" parent="ZButton.Appearance.Text.Large">
+    <style name="ZButton.Appearance.AppTitleBar" parent="ZButton.Appearance.TextLink.Large">
         <item name="android:textColor">@color/bluegrey_800</item>
-        <item name="cornerRadius">0dp</item>
         <item name="paddingX">6dp</item>
     </style>
 

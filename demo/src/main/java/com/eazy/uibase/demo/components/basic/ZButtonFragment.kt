@@ -139,11 +139,11 @@ class ZButtonFragment : ComponentFragment<ButtonFragmentBinding?,
             } else if (data is ZButton.ButtonSize) {
                 val a: TypedArray = fragment_.requireContext()
                     .obtainStyledAttributes(data.resId, R.styleable.ZButton_Appearance)
-                val height = a.getDimension(R.styleable.ZButton_Appearance_height, 0f).toInt()
+                val height = a.getDimension(R.styleable.ZButton_Appearance_android_minHeight, 0f).toInt()
                 val radius = a.getDimension(R.styleable.ZButton_Appearance_cornerRadius, 0f).toInt()
                 val textSize = a.getDimension(R.styleable.ZButton_Appearance_android_textSize, 0f).toInt()
                 val iconSize = a.getDimension(R.styleable.ZButton_Appearance_iconSize, 0f).toInt()
-                return String.format("height: %d, radius: %d\ntextSize: %d, iconSize: %d",
+                return String.format("minHeight: %d, radius: %d\ntextSize: %d, iconSize: %d",
                     height, radius, textSize, iconSize)
             } else {
                 return ""

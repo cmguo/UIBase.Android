@@ -24,11 +24,14 @@
         <attr name="backgroundColor"/>
         <attr name="android:textColor"/>
         <attr name="android:textSize"/>
-        <attr name="height"/>
+        <attr name="lineHeight"/>
+        <attr name="android:minHeight"/>
         <attr name="cornerRadius"/>
-        <attr name="paddingX"/>
+        <attr name="paddingX" format="dimension"/>
+        <attr name="paddingY" format="dimension"/>
         <attr name="iconPadding"/>
         <attr name="iconSize"/>
+        <attr name="iconColor"/>
 
         <attr name="content" format="reference" />
         <attr name="icon" format="reference" />
@@ -41,12 +44,15 @@
         <attr name="backgroundColor"/>
         <attr name="android:textColor"/>
         <attr name="android:textSize"/>
+        <attr name="lineHeight"/>
         <attr name="iconPosition"/>
-        <attr name="height"/>
+        <attr name="android:minHeight"/>
         <attr name="cornerRadius"/>
         <attr name="paddingX"/>
+        <attr name="paddingY"/>
         <attr name="iconPadding"/>
         <attr name="iconSize"/>
+        <attr name="iconColor" format="color"/>
         <attr name="buttonType"/>
         <attr name="buttonSize"/>
     </declare-styleable>
@@ -97,41 +103,54 @@
         <item name="backgroundColor">@color/red_100_pressed_disabled</item>
     </style>
 
-    <style name="ZButton.Appearance.Text">
+    <style name="ZButton.Appearance.TextLink">
         <item name="android:textColor">@color/blue_600_disabled</item>
         <item name="backgroundColor">@color/transparent_pressed_disabled</item>
         <item name="paddingX">0dp</item>
-        <item name="height">0dp</item>
-        <item name="cornerRadius">0dp</item>
+        <item name="paddingY">0dp</item>
+        <item name="android:minHeight">0dp</item>
     </style>
 
     <!-- Size Styles -->
 
     <style name="ZButton.Appearance.Large">
-        <item name="height">44dp</item>
+        <item name="android:minHeight">44dp</item>
         <item name="cornerRadius">22dp</item>
         <item name="paddingX">32dp</item>
         <item name="android:textSize">18sp</item>
+        <item name="lineHeight">28sp</item>
         <item name="iconSize">20dp</item>
         <item name="iconPadding">5dp</item>
     </style>
 
     <style name="ZButton.Appearance.Middle">
-        <item name="height">36dp</item>
+        <item name="android:minHeight">36dp</item>
         <item name="cornerRadius">18dp</item>
         <item name="paddingX">24dp</item>
         <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
         <item name="iconSize">18dp</item>
         <item name="iconPadding">4dp</item>
     </style>
 
     <style name="ZButton.Appearance.Small">
-        <item name="height">24dp</item>
+        <item name="android:minHeight">24dp</item>
         <item name="cornerRadius">12dp</item>
         <item name="paddingX">12dp</item>
         <item name="android:textSize">14sp</item>
+        <item name="lineHeight">20sp</item>
         <item name="iconSize">16dp</item>
         <item name="iconPadding">3dp</item>
+    </style>
+
+    <style name="ZButton.Appearance.Thin">
+        <item name="android:minHeight">20dp</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="paddingX">12dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">18sp</item>
+        <item name="iconSize">14dp</item>
+        <item name="iconPadding">2dp</item>
     </style>
 
     <!-- combine appearances -->
@@ -200,19 +219,19 @@
         <item name="buttonSize">thin</item>
     </style>
 
-    <style name="ZButton.Appearance.Text.Large">
+    <style name="ZButton.Appearance.TextLink.Large">
         <item name="buttonSize">large</item>
     </style>
 
-    <style name="ZButton.Appearance.Text.Middle">
+    <style name="ZButton.Appearance.TextLink.Middle">
         <item name="buttonSize">middle</item>
     </style>
 
-    <style name="ZButton.Appearance.Text.Small">
+    <style name="ZButton.Appearance.TextLink.Small">
         <item name="buttonSize">small</item>
     </style>
 
-    <style name="ZButton.Appearance.Text.Thin">
+    <style name="ZButton.Appearance.TextLink.Thin">
         <item name="buttonSize">thin</item>
     </style>
 

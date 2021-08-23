@@ -48,9 +48,9 @@
     <declare-styleable name="ZRoundIndicator">
         <attr name="cornerRadius"/>
         <attr name="shadowRadius"/>
-        <attr name="widthMode" />
-        <attr name="paddingX" format="dimension"/>
-        <attr name="paddingY" format="dimension"/>
+        <attr name="widthMode"/>
+        <attr name="paddingX"/>
+        <attr name="paddingY"/>
         <attr name="color"/>
         <attr name="splitterHeight" format="dimension"/>
         <attr name="splitterColor" format="color"/>
