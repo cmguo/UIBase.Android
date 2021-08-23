@@ -12,14 +12,14 @@ class ZSwitchButton @JvmOverloads constructor(
 ) : SwitchCompat(context, attrs, R.attr.switchButtonStyle) {
 
     init {
-        trackDrawable = RoundDrawable(context, R.style.ZSwitchButton_Track)
-        thumbDrawable = RoundDrawable(context, R.style.ZSwitchButton_Thumb)
+        trackDrawable = RoundDrawable(context, R.style.RoundDrawable_ZSwitchButton_Track)
+        thumbDrawable = RoundDrawable(context, R.style.RoundDrawable_ZSwitchButton_Thumb)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
-        trackDrawable = RoundDrawable(context, R.style.ZSwitchButton_Track)
-        thumbDrawable = RoundDrawable(context, R.style.ZSwitchButton_Thumb)
+        trackDrawable = RoundDrawable(context, R.style.RoundDrawable_ZSwitchButton_Track)
+        thumbDrawable = RoundDrawable(context, R.style.RoundDrawable_ZSwitchButton_Thumb)
     }
 
     companion object {

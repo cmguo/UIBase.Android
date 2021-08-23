@@ -22,7 +22,7 @@
 
     <!-- background drawable -->
 
-    <style name="ZCheckBox.Background">
+    <style name="RoundDrawable.ZCheckBox_Background">
         <item name="fillColor">@color/bluegrey_00_checked_disabled</item>
         <item name="cornerRadius">@dimen/check_box_radius</item>
         <item name="borderSize">@dimen/check_box_border_size</item>

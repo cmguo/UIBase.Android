@@ -18,7 +18,7 @@
 
     <!-- background drawable -->
 
-    <style name="ZRadioButton.Background">
+    <style name="RoundDrawable_ZRadioButton_Background">
         <item name="fillColor">@color/bluegrey_00_disabled</item>
         <item name="cornerRadius">@dimen/radio_button_radius</item>
         <item name="borderSize">@dimen/radio_button_border_size</item>
@@ -29,7 +29,7 @@
 
     <!-- foreground drawable -->
 
-    <style name="ZRadioButton.Foreground">
+    <style name="RoundDrawable.ZRadioButton_Foreground">
         <item name="fillColor">@color/transparent_checked_disabled</item>
         <item name="cornerRadius">@dimen/radio_button_radius</item>
         <item name="borderSize">@dimen/radio_button_border_size2</item>

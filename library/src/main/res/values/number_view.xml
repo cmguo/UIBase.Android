@@ -42,14 +42,14 @@
 
     <!-- background drawable -->
 
-    <style name="ZNumberView.Background">
+    <style name="RoundDrawable.ZNumberView_Background">
         <item name="fillColor">@color/number_view_background_color</item>
         <item name="cornerRadius">@dimen/number_view_radius</item>
     </style>
 
     <!-- button background drawable -->
 
-    <style name="ZNumberView.ButtonBackground">
+    <style name="RoundDrawable.ZNumberView_ButtonBackground">
         <item name="fillColor">@color/number_view_button_background_color</item>
         <item name="cornerRadius">@dimen/number_view_button_radius</item>
     </style>

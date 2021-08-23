@@ -41,8 +41,8 @@ class ZRadioButton @JvmOverloads constructor(
         private const val TAG = "ZRadioButton"
 
         private fun createButtonDrawable(context: Context): Drawable {
-            val background = RoundDrawable(context, R.style.ZRadioButton_Background)
-            val foreground = RoundDrawable(context, R.style.ZRadioButton_Foreground)
+            val background = RoundDrawable(context, R.style.RoundDrawable_ZRadioButton_Background)
+            val foreground = RoundDrawable(context, R.style.RoundDrawable_ZRadioButton_Foreground)
             return LayerDrawable(arrayOf(background, foreground))
         }
 

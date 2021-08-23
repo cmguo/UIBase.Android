@@ -86,7 +86,7 @@ class ZCheckBox @JvmOverloads constructor(
         private const val TAG = "ZCheckBox"
 
         private fun createButtonDrawable(context: Context) : Drawable {
-            val background = RoundDrawable(context, R.style.ZCheckBox_Background)
+            val background = RoundDrawable(context, R.style.RoundDrawable_ZCheckBox_Background)
             val foreground = Drawables.getDrawable(context, R.drawable.check_box_foreground)
             return LayerDrawable(arrayOf(background, foreground))
         }

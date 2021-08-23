@@ -52,7 +52,7 @@ class ZSearchBox @JvmOverloads constructor(
         _inputContainer = findViewById(R.id.inputContainer)
         _rightButton = findViewById(R.id.rightButton)
 
-        _inputContainer.background = RoundDrawable(context, R.style.ZSearchBox_InputBackground)
+        _inputContainer.background = RoundDrawable(context, R.style.RoundDrawable_ZSearchBox_InputBackground)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.ZSearchBox, defStyleAttr, 0)
         readStyle(a)
@@ -84,7 +84,7 @@ class ZSearchBox @JvmOverloads constructor(
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
-        _inputContainer.background = RoundDrawable(context, R.style.ZSearchBox_InputBackground)
+        _inputContainer.background = RoundDrawable(context, R.style.RoundDrawable_ZSearchBox_InputBackground)
     }
 
     /* private */

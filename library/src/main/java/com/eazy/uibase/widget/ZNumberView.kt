@@ -193,13 +193,13 @@ class ZNumberView @JvmOverloads constructor(
     }
 
     private fun syncButtonBackground() {
-        background = RoundDrawable(context, R.style.ZNumberView_Background)
+        background = RoundDrawable(context, R.style.RoundDrawable_ZNumberView_Background)
         _buttonDec.background = createButtonDrawable(R.drawable.icon_minus)
         _buttonInc.background = createButtonDrawable(R.drawable.icon_plus)
     }
 
     private fun createButtonDrawable(foregroundId: Int): Drawable {
-        val buttonBackground = RoundDrawable(context, R.style.ZNumberView_ButtonBackground)
+        val buttonBackground = RoundDrawable(context, R.style.RoundDrawable_ZNumberView_ButtonBackground)
         val buttonForeground = Drawables.getDrawable(context, foregroundId)!!
         val buttonForegroundColor = ContextCompat.getColorStateList(context, R.color.number_view_button_foreground_color)
         buttonForeground.mutate().setTintList(buttonForegroundColor)

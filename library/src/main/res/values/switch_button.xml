@@ -17,14 +17,14 @@
 
     <!-- track drawable -->
 
-    <style name="ZSwitchButton.Track">
+    <style name="RoundDrawable.ZSwitchButton_Track">
         <item name="fillColor">@color/bluegrey_300_checked</item>
         <item name="cornerRadius">@dimen/switch_button_radius</item>
     </style>
 
     <!-- thumb drawable -->
 
-    <style name="ZSwitchButton.Thumb">
+    <style name="RoundDrawable.ZSwitchButton_Thumb">
         <item name="fillColor">@color/bluegrey_00</item>
         <item name="cornerRadius">@dimen/switch_button_thumb_radius</item>
         <item name="borderSize">@dimen/switch_button_thumb_padding</item>
