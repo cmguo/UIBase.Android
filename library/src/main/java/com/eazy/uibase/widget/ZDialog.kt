@@ -173,9 +173,9 @@ class ZDialog @JvmOverloads constructor(
         a.recycle()
 
         _inited = true
-
-        val radius = (background as RoundDrawable).cornerRadius
-        _imageView.cornerRadii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
+        (background as? RoundDrawable)?.cornerRadius?.let {
+            _imageView.cornerRadii = floatArrayOf(it, it, it, it, 0f, 0f, 0f, 0f)
+        }
     }
 
     fun popUp(fragmentManager: FragmentManager, buttonClicked: ((dialog: ZDialog, btnId: Int) -> Unit)? = null) {
@@ -255,7 +255,7 @@ class ZDialog @JvmOverloads constructor(
         cancelButton = a.getResourceId(R.styleable.ZDialog_cancelButton, 0)
         try {
             val drawable = a.getDrawable(R.styleable.ZDialog_background)
-            background = drawable
+            background = drawable as Drawable
         } catch (ignored: Throwable) {
             val styleRes = a.getResourceId(R.styleable.ZDialog_background, 0)
             if (styleRes > 0)
