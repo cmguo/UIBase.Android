@@ -79,6 +79,6 @@ uploadArchives {
     repositories.mavenDeployer {
         pom.groupId = "com.xhb.base"
         pom.artifactId = "uibase-library"
-        pom.version = build_branch.startsWith("release/") ? "1.1.0" : "1.1.0-SNAPSHOT"
+        pom.version = build_branch.startsWith("release/") ? "1.2.0" : "1.2.0-SNAPSHOT"
     }
 }
