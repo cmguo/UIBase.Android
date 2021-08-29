@@ -78,7 +78,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
 
     // Used direct by other methods, consider adapter self as root
     private Iterable<?> getChildren2(Object t) {
-        return t == this ? getData() : getChildren(t);
+        return t == this ? getItems() : getChildren(t);
     }
 
     // Get n-th item in sub tree, index 0 is sub root

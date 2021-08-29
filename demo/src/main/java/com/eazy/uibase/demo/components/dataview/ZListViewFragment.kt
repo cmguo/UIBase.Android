@@ -3,10 +3,13 @@ package com.eazy.uibase.demo.components.dataview
 import android.graphics.*
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.Bindable
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.eazy.uibase.demo.R
 import com.eazy.uibase.demo.core.ComponentFragment
 import com.eazy.uibase.demo.core.ViewModel
@@ -17,9 +20,8 @@ import com.eazy.uibase.demo.core.style.annotation.Title
 import com.eazy.uibase.demo.databinding.ListViewFragmentBinding
 import com.eazy.uibase.demo.resources.Colors
 import com.eazy.uibase.demo.resources.Resources
-import com.eazy.uibase.view.list.BackgroundDecoration
-import com.eazy.uibase.view.list.ItemDecorations
-import com.eazy.uibase.view.list.UnitTypeItemBinding
+import com.eazy.uibase.view.list.*
+import com.eazy.uibase.view.parentOfType
 import com.eazy.uibase.widget.ZListItemView
 import com.eazy.uibase.widget.ZListView
 import com.eazy.uibase.widget.ZTipView
@@ -132,6 +134,56 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
         styles.itemDecoration = ItemDecorations.Builder {
             decoration
         }
+        ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            override fun isLongPressDragEnabled(): Boolean {
+                return !styles.group
+            }
+            override fun isItemViewSwipeEnabled(): Boolean {
+                return !styles.group
+            }
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
+                val dragFlags =
+                    ItemTouchHelper.UP or ItemTouchHelper.DOWN
+                val swipeFlags =
+                    ItemTouchHelper.RIGHT
+                return makeMovementFlags(dragFlags, swipeFlags)
+            }
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val adapter = recyclerView.adapter as RecyclerViewAdapter
+                val f = recyclerView.getChildAdapterPosition(viewHolder.itemView)
+                val t = recyclerView.getChildAdapterPosition(target.itemView)
+                if (f < 0 || t < 0)
+                    return false
+                Log.d(TAG, "move $f to $t")
+                adapter.items.move(f, t, 1)
+                return true
+            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val recyclerView = viewHolder.itemView.parentOfType(RecyclerView::class.java)
+                val f = recyclerView?.getChildAdapterPosition(viewHolder.itemView) ?: -1
+                if (f < 0)
+                    return
+                Log.d(TAG, "swipe $f")
+                val adapter = recyclerView?.adapter as? RecyclerViewAdapter
+                adapter?.items?.removeAt(f)
+            }
+            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                viewHolder?.itemView?.setBackgroundColor(Color.GRAY)
+            }
+            override fun clearView(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ) {
+                viewHolder.itemView.background = null
+            }
+        }).attachToRecyclerView(binding.listView)
     }
 
     companion object {

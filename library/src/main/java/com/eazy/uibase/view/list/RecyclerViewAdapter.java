@@ -4,16 +4,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableList;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.BindingViewHolder>
     implements View.OnClickListener {
 
-    private List<Object> mItems = new ArrayList<>();
+    private RecyclerList<Object> mItems = new RecyclerList<>();
 
     private ItemBinding mItemBinding;
     private Object mEmptyItem;
@@ -21,6 +21,43 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private OnItemClickListener mOnItemClickListener;
     private OnViewBindingCreateListener mOnViewBindingCreateListener;
+
+    public RecyclerViewAdapter() {
+        mItems.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<Object>>() {
+            @Override
+            public void onChanged(ObservableList<Object> sender) {
+                notifyDataSetChanged();
+            }
+            @Override
+            public void onItemRangeChanged(ObservableList<Object> sender, int positionStart, int itemCount) {
+                notifyItemRangeChanged(positionStart, itemCount);
+            }
+            @Override
+            public void onItemRangeInserted(ObservableList<Object> sender, int positionStart, int itemCount) {
+                notifyItemRangeInserted(positionStart, itemCount);
+            }
+            @Override
+            public void onItemRangeMoved(ObservableList<Object> sender, int fromPosition, int toPosition, int itemCount) {
+                // see RecyclerList move
+                if (fromPosition < toPosition) {
+                    toPosition += itemCount - 1;
+                    for (int i = 0; i < itemCount; ++i) {
+                        notifyItemMoved(fromPosition, toPosition);
+                    }
+                } else {
+                    for (int i = 0; i < itemCount; ++i) {
+                        notifyItemMoved(fromPosition, toPosition);
+                        ++fromPosition;
+                        ++toPosition;
+                    }
+                }
+            }
+            @Override
+            public void onItemRangeRemoved(ObservableList<Object> sender, int positionStart, int itemCount) {
+                notifyItemRangeRemoved(positionStart, itemCount);
+            }
+        });
+    }
 
     public void setItemBinding(ItemBinding binding) {
         mItemBinding = binding;
@@ -76,33 +113,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mItemBinding.getItemViewType(getItem(position));
     }
 
-    public List<?> getData() {
+    public RecyclerList<?> getItems() {
         return mItems;
-    }
-
-    public void addAll(List<?> items) {
-        if (items == null || items.isEmpty()) return;
-        int size = mItems.size();
-        mItems.addAll(items);
-        notifyItemRangeInserted(size, items.size());
-    }
-
-    public void add(Object item) {
-        if (item == null) return;
-        int size = mItems.size();
-        mItems.add(item);
-        notifyItemInserted(size);
-    }
-
-    public void remove(int position) {
-        mItems.remove(position);
-        notifyItemRemoved(position);
-    }
-
-    public void remove(Object item) {
-        int position = findPosition(item);
-        if (position < 0) return;
-        remove(position);
     }
 
     public void replace(List<?> items) {
