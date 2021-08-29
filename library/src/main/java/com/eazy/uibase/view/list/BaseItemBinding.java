@@ -13,15 +13,41 @@ import androidx.viewbinding.ViewBinding;
 
 import com.eazy.uibase.BR;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class BaseItemBinding implements ItemBinding {
 
     private LayoutInflater mInflater;
+    private int mBrData;
+    private int mBrViewModel;
+    private Map<Object, Object> itemViewModels = new HashMap<>();
 
     public BaseItemBinding() {
+        this(null, BR.data, BR.viewModel);
+    }
+
+    public BaseItemBinding(int brData) {
+        this(null, brData, BR.viewModel);
+    }
+
+    public BaseItemBinding(int brData, int brViewModel) {
+        this(null, brData, brViewModel);
     }
 
     public BaseItemBinding(Context context) {
-        mInflater = LayoutInflater.from(context);
+        this(context, BR.data, BR.viewModel);
+    }
+
+    public BaseItemBinding(Context context, int brData) {
+        this(context, brData, BR.viewModel);
+    }
+
+    public BaseItemBinding(Context context, int brData, int brViewModel) {
+        if (context != null)
+            mInflater = LayoutInflater.from(context);
+        mBrData = brData;
+        mBrViewModel = brViewModel;
     }
 
     public static class ViewHolder implements ViewBinding {
@@ -53,6 +79,10 @@ public abstract class BaseItemBinding implements ItemBinding {
         return new ViewHolder(view);
     }
 
+    public Object createViewModel(Object item) {
+        return null;
+    }
+
     @Override
     public void bindView(ViewBinding binding, Object item, int position) {
         if (binding instanceof ViewDataBinding)
@@ -67,7 +97,19 @@ public abstract class BaseItemBinding implements ItemBinding {
 
     @CallSuper
     protected void bindView(ViewDataBinding binding, Object item, int position) {
-        binding.setVariable(BR.data, item);
+        if (mBrData != 0)
+            binding.setVariable(mBrData, item);
+        if (mBrViewModel != 0) {
+            Object vm = itemViewModels.get(item);
+            if (vm == null) {
+                vm = createViewModel(item);
+                if (vm == null)
+                    vm = this; // no view model
+                itemViewModels.put(item, vm);
+            }
+            if (vm != this)
+                binding.setVariable(mBrViewModel, vm);
+        }
     }
 
     protected void bindView(View view, Object item, int position) {

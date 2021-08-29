@@ -8,6 +8,9 @@
         <variable
             name="data"
             type="String" />
+        <variable
+            name="viewModel"
+            type="Object" />
     </data>
 
     <TextView
