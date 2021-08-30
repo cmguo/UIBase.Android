@@ -28,7 +28,7 @@ val treeList = object : RecyclerTreeList<T>() {
 val item: T
 treeList.add(item)
 treeList.remove(0) // 删除第一的子树
-treeList.get(1).move(1, 0) // 移动第二个子树的子节点，第二个子节点移动到所在树的最前面
+treeList.getSubTree(1).move(1, 0) // 移动第二个子树的子节点，第二个子节点移动到所在树的最前面
 ```
 
 # 单一视图类型 UnitItemBinding
