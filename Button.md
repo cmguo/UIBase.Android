@@ -28,9 +28,11 @@
 
 # 标准样式
 * 标准按钮类型
-![buttonType.png](buttonType.png)
+
+ ![buttonType.png](buttonType.png)
 * 标准按钮尺寸
-![buttonSize.png](buttonSize.png)
+
+ ![buttonSize.png](buttonSize.png)
 
 # 自定义按钮样式集合
 通过 app:buttonAppearance 中引用自定义按钮样式集合，部分组合控件也可以使用这些样式集合；当然，也可以在布局定义中指定这些样式（如：cornerRadius）
