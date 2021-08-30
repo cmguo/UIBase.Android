@@ -6,4 +6,31 @@
 - 圆角图标：RoundDrawable 通过 style 描述
 - 视图图标：ViewDrawable（通过视图布局 layout 描述图标）
 
+# 使用矢量图标
+* 兼容性：在 SDK 21 ～ 24，使用 Vector，需要做下列工作：
+  - 每个library需要分别配置开关：vectorDrawables.useSupportLibrary = true
+  - 通过代码加载，AppCompatResources.getDrawable
+  - 在 layout 中使用 AppCompatImageView，否则用下面的方法兼容
+  - 使用 app:srcCompat、app:drawableLeftCompat 等间接使用 AppCompatResources
+
 # 使用圆角图标
+* 自定义圆角图标（通过 style），可以减少 drawables 文件，并可以利用 style 继承特性批量定义
+``` xml
+<style name="RoundDrawable.ZNumberView_Background">
+    <item name="fillColor">@color/number_view_background_color</item>
+    <item name="cornerRadius">@dimen/number_view_radius</item>
+</style>
+```
+* 引用圆角图标
+``` xml
+<style name="ZDialog">
+    <item name="background">@style/RoundDrawable.Dialog</item>
+</style>
+```
+``` kotlin
+background = RoundDrawable(context, R.style.RoundDrawable_ZNumberView_Background)
+```
+
+# 夜间模式
+- 矢量图标中使用动态颜色，不需要处理夜间模式
+- 位图图标在 drawbles-night-xxx 目录存在夜间模式图标
