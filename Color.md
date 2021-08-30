@@ -7,14 +7,47 @@
 - 有状态颜色：通过 select xml 定义（如 color/blue600_disabled.xml）
   - 扩展了half_checked 状态
   - 有状态颜色可以使用“动态颜色“，实现夜间模式
+- 渐变色
+  - 扩展了 state_gradient_start， state_gradient_end 状态
+  - 部分控件支持渐变色
 
-# 定义有状态颜色
+# 自定义动态颜色
+values/colors.xml
+``` xml
+<color name="mycolor1">#FFFFFF</color>
+```
+values-night/colors.xml
+``` xml
+<color name="mycolor1">#191E26</color>
+```
+
+# 自定义有状态颜色
+color/bluegrey_00_disabled.xml
 ``` xml
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="@color/bluegrey_100" android:state_enabled="false" />
     <item android:color="@color/bluegrey_00" />
 </selector>
 ```
+
+# 自定义渐变色
+color/bluegrey_00_disabled.xml
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:eazy="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/bluegrey_900" eazy:state_gradient_end="true" />
+    <item android:color="@color/bluegrey_00" />
+</selector>
+```
+处理渐变色
+``` kotlin
+// 父布局已经通过 GradientColorList.prepare(this) 注册了渐变场景
+// 子 View 支持渐变色
+background = backgroundDrawable?.toGradient(this)
+textView.setTextColor(textColor?.toGradient(this))
+```
+
 
 # 使用颜色资源
 * 在 xml 中使用
