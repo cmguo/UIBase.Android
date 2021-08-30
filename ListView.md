@@ -51,7 +51,7 @@
 </layout>
 ```
 
-```
+``` kotlin
 // 动态绑定，数据绑定到 data 变量，交互逻辑绑定到 viewModel 变量
 val itemBinding = object : UnitItemBinding(R.layout.item) {
     @Override
@@ -61,9 +61,10 @@ val itemBinding = object : UnitItemBinding(R.layout.item) {
 }
 // 自定义动态绑定 Id
 itemBinding.setBindVariable(BR.item, BR.vm)
+// 通过 app:itemBinding="@{itemBinding}" 绑定到列表
 ```
 * 多样视图类型 BaseItemBinding
-```
+``` kotlin
 val itemBinding = object : BaseItemBinding() {
     @Override
     public int getItemViewType(Object item) {
@@ -82,7 +83,7 @@ val itemBinding = object : BaseItemBinding() {
 }
 ```
 * 退化为 ViewHolder（与 ViewHolder 不同在与，整个列表只对应一个实例）
-```
+``` kotlin
 // item2.xml 不是 layout 动态绑定
 val itemBinding = object : UnitItemBinding(R.layout.item2) {
     @Override
@@ -129,7 +130,8 @@ public class MyDecoration extends BaseDecoration {
 ``` kotlin
 val data : List<T>
 val treeList = object : RecyclerTreeList<T>(data) {
-    fun getChildren(T item) : Iterator<T> {
+    // 只要实现这个就可用了
+    override fun getChildren(T item) : Iterator<T> {
         return item.children.iterator()
     }
 }
