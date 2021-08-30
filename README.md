@@ -22,9 +22,9 @@
   * [徽章（BadgeView）](BadgeView.md)
 * 数值输入控件
   * [步进器（NumberView）](NumberView.md)
-  * [文本域
-  * [输入框
-  * [搜索框
+  * [文本域](TextArea.md)
+  * [输入框](TextInput.md)
+  * [搜索框](SearchBar.md)
 * 工具提示控件
   * [提示视图（TipView）](TipView.md)
   * [对话框（Dialog）](Dialog.md)
