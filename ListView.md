@@ -125,7 +125,7 @@ public class MyDecoration extends BaseDecoration {
 ```
 
 # 树形数据展示
-* 树形数据绑定
+* 树形数据绑定 RecyclerTreeList
 ``` kotlin
 val data : List<T>
 val treeList = object : RecyclerTreeList<T>(data) {
