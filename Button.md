@@ -27,7 +27,8 @@
 ```
 
 # 自定义按钮样式集合
-自定义按钮样式集合通过 app:buttonAppearance 中引用，也可以在布局定义中指定这些样式（如：cornerRadius）
+通过 app:buttonAppearance 中引用自定义按钮样式集合，部分组合控件也可以使用这些样式集合
+当然，也可以在布局定义中指定这些样式（如：cornerRadius）
 ``` xml
 <style name="ZButton.Appearance.Action" parent="ZButton.Appearance.TextLink.Middle">
     <item name="android:textColor">@color/bluegrey_900_selected_disabled</item>
@@ -43,6 +44,7 @@
 ```
 
 # 组合定义按钮内容
+通过 app:content 中引用组合按钮内容，部分组合控件也可以使用这些样式集合
 ``` xml
 <array name="button_icon_text">
     <item>@drawable/icon_exit</item>
