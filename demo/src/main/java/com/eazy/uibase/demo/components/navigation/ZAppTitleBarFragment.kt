@@ -82,10 +82,7 @@ class ZAppTitleBarFragment : ComponentFragment<AppTitleBarFragmentBinding?, ZApp
     }
 
     override fun titleBarButtonClicked(bar: ZAppTitleBar, btnId: Int) {
-        val tip = ZTipView(requireContext(), null)
         val name = resources.getResourceEntryName(btnId)
-        tip.message = "点击了按钮: ${name}"
-        tip.location = ZTipView.Location.AutoToast
-        tip.popAt(requireView())
+        ZTipView.toast(requireView(), "点击了按钮: ${name}")
     }
 }

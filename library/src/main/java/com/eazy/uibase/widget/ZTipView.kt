@@ -18,6 +18,7 @@ import android.util.Size
 import android.view.*
 import android.widget.*
 import androidx.annotation.DrawableRes
+import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.eazy.uibase.R
@@ -319,8 +320,38 @@ class ZTipView @JvmOverloads constructor(
         private var toastY = 0
         private var lastRoot = WeakReference<View>(null)
 
+        fun toast(target: View, message: String, listener: TipViewListener? = null) {
+            tip(target, message, Location.AutoToast, listener);
+        }
+
+        fun toast(target: View, message: String, @LayoutRes layout: Int, listener: TipViewListener? = null) {
+            tip(target, message, Location.AutoToast, layout, listener);
+        }
+
+        fun snack(target: View, message: String, listener: TipViewListener? = null) {
+            tip(target, message, Location.ManualLayout, listener);
+        }
+
+        fun snack(target: View, message: String, @LayoutRes layout: Int, listener: TipViewListener? = null) {
+            tip(target, message, Location.ManualLayout, layout, listener);
+        }
+
+        fun tip(target: View, message: String, location: Location, listener: TipViewListener? = null) {
+            val tipView = ZTipView(target.context)
+            tipView.message = message
+            tipView.location = location
+            tipView.popAt(target, listener);
+        }
+
+        fun tip(target: View, message: String, location: Location, @LayoutRes layout: Int, listener: TipViewListener? = null) {
+            val tipView = LayoutInflater.from(target.context).inflate(layout, null) as ZTipView
+            tipView.message = message
+            tipView.location = location
+            tipView.popAt(target, listener);
+        }
+
         @SuppressLint("ViewConstructor")
-        class OverlayFrame(content: FrameLayout) : FrameLayout(content.context) {
+        private class OverlayFrame(content: FrameLayout) : FrameLayout(content.context) {
 
             val list = mutableListOf<ZTipView>()
 
@@ -350,7 +381,7 @@ class ZTipView @JvmOverloads constructor(
             }
         }
 
-        fun overlayFrame(content: FrameLayout?, create: Boolean = false): OverlayFrame? {
+        private fun overlayFrame(content: FrameLayout?, create: Boolean = false): OverlayFrame? {
             var frame = content?.findViewById<OverlayFrame>(R.id.tip_view_overly_frame)
             if (frame == null && create && content != null)
                 frame = OverlayFrame(content)

@@ -108,11 +108,8 @@ class ZDialogFragment : ComponentFragment<DialogFragmentBinding?, ZDialogFragmen
     }
 
     override fun buttonClicked(dialog: ZDialog, btnId: Int) {
-        val tip = ZTipView(requireContext())
         val name = if (btnId < 256) "index_$btnId" else resources.getResourceEntryName(btnId)
-        tip.message = "点击了按钮: ${name}"
-        tip.location = ZTipView.Location.AutoToast
-        tip.popAt(dialog)
+        ZTipView.toast(dialog, "点击了按钮: ${name}")
     }
 
 }

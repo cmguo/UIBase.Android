@@ -86,10 +86,7 @@ class ZActivityViewFragment : ComponentFragment<ActivityViewFragmentBinding?, ZA
     }
 
     override fun onItemClick(rv: RecyclerView, view: View, position: Int, `object`: Any) {
-       val tip = ZTipView(requireContext())
-        tip.message="点击了按钮: ${position}"
-        tip.location = ZTipView.Location.AutoToast
-        tip.popAt(binding.activityViews.root)
+        ZTipView.toast(binding.activityViews.root, "点击了按钮: ${position}")
     }
 
 }

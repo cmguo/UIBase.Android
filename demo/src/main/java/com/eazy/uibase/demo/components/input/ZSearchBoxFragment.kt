@@ -48,11 +48,8 @@ class ZSearchBoxFragment : ComponentFragment<SearchBoxFragmentBinding?, ZSearchB
     }
 
     override fun searchBoxButtonClicked(bar: ZSearchBox, btnId: Int) {
-        val tip = ZTipView(requireContext(), null)
         val name = resources.getResourceEntryName(btnId)
-        tip.message = "点击了按钮${name}"
-        tip.location = ZTipView.Location.AutoToast
-        tip.popAt(bar)
+        ZTipView.toast(bar, "点击了按钮${name}")
     }
 
     override fun searchBoxFocused(bar: ZSearchBox) {

@@ -187,11 +187,8 @@ class ZTipViewFragment : ComponentFragment<TipViewFragmentBinding?, ZTipViewFrag
     }
 
     override fun tipViewButtonClicked(view: ZTipView, btnId: Int) {
-        val tip = ZTipView(requireContext(), null)
         val name = resources.getResourceEntryName(btnId)
-        tip.location = ZTipView.Location.TopCenter
-        tip.message = "点击了按钮${name}"
-        tip.popAt(view)
+        ZTipView.tip(view, "点击了按钮${name}", ZTipView.Location.TopCenter)
     }
 
     override fun createStyle(): Styles {

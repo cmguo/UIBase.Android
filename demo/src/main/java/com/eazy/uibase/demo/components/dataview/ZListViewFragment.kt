@@ -120,11 +120,8 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
         override fun onItemValueChanged(listView: ZListView, item: IntArray, value: Any?) {
             val holder = listView.findViewHolderForAdapterPosition(item)
             if (holder != null) {
-                val tip = ZTipView(requireContext())
                 val pos = item.contentToString()
-                tip.message = "项目 $pos 的值变为 $value"
-                tip.location = ZTipView.Location.TopCenter
-                tip.popAt(holder.itemView)
+                ZTipView.tip(holder.itemView, "项目 $pos 的值变为 $value", ZTipView.Location.TopCenter)
             }
         }
     }

@@ -58,7 +58,7 @@ class ZCompoundButtonFragment : ComponentFragment<CompoundButtonFragmentBinding?
         fun updateAllCheckedState() {
             allCheckedState = when (states.filter { s -> s.state == ZCheckBox.CheckedState.FullChecked }.size) {
                 0 -> ZCheckBox.CheckedState.NotChecked
-                3 -> ZCheckBox.CheckedState.FullChecked
+                states.size -> ZCheckBox.CheckedState.FullChecked
                 else -> ZCheckBox.CheckedState.HalfChecked
             }
         }
