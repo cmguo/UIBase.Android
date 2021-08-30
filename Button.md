@@ -26,7 +26,8 @@
     android:text="按钮"/>
 ```
 
-# 自定义按钮样式集合，然后在 app:buttonAppearance 中引用，也可以在布局定义中指定这些样式（如：cornerRadius）
+# 自定义按钮样式集合
+自定义按钮样式集合通过 app:buttonAppearance 中引用，也可以在布局定义中指定这些样式（如：cornerRadius）
 ``` xml
 <style name="ZButton.Appearance.Action" parent="ZButton.Appearance.TextLink.Middle">
     <item name="android:textColor">@color/bluegrey_900_selected_disabled</item>
