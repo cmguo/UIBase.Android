@@ -9,9 +9,40 @@
 # 使用矢量图标
 * 兼容性：在 SDK 21 ～ 24，使用 Vector，需要做下列工作：
   - 每个library需要分别配置开关：vectorDrawables.useSupportLibrary = true
+``` gradle
+android {
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+}
+```
   - 通过代码加载，AppCompatResources.getDrawable
-  - 在 layout 中使用 AppCompatImageView，否则用下面的方法兼容
+``` java
+public class Drawables {
+    @Nullable
+    public static Drawable getDrawable(@NonNull Context context, @DrawableRes int resId) {
+        return AppCompatResources.getDrawable(context, resId);
+    }
+}
+```
+  - 在 layout 中使用 AppCompatImageView，否则用下面第2种方法兼容
+``` xml
+<AppCompatImageView
+    android:id="@+id/image"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_gravity="center_horizontal"
+    android:src="@drawable/icon_weblink" />
+```
   - 使用 app:srcCompat、app:drawableLeftCompat 等间接使用 AppCompatResources
+``` xml
+<ImageView
+    android:id="@+id/image"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_gravity="center_horizontal"
+    app:srcCompat="@drawable/icon_weblink" />
+```
 
 # 使用圆角图标
 * 自定义圆角图标（通过 style），可以减少 drawables 文件，并可以利用 style 继承特性批量定义
