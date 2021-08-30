@@ -5,7 +5,7 @@
 - 数据视图绑定机制 ItemBinding；单一视图类型：UnitItemBinding，多样视图类型 BaseItemBinding
 - 通用列表适配器：支持托管点击回调、空视图、数据更新
 - 各种列表装饰器：填充，分割线，支持快速扩展，支持树形数据
-- 简单的 RecylcerView 封装： ZListView
+- 简单列表：ZListView，封装 RecylcerView，提供标准化视图
 
 
 # 普通列表使用
@@ -23,7 +23,8 @@
         />
 ```
 
-# 单一视图类型 UnitItemBinding
+# 视图数据绑定
+* 单一视图类型 UnitItemBinding
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout
@@ -61,9 +62,7 @@ val itemBinding = object : UnitItemBinding(R.layout.item) {
 // 自定义动态绑定 Id
 itemBinding.setBindVariable(BR.item, BR.vm)
 ```
-
-# 多样视图类型 BaseItemBinding
-
+* 多样视图类型 BaseItemBinding
 ```
 val itemBinding = object : BaseItemBinding() {
     @Override
@@ -82,7 +81,7 @@ val itemBinding = object : BaseItemBinding() {
     }
 }
 ```
-* 退化为 ViewHolder
+* 退化为 ViewHolder（与 ViewHolder 不同在与，整个列表只对应一个实例）
 ```
 // item2.xml 不是 layout 动态绑定
 val itemBinding = object : UnitItemBinding(R.layout.item2) {
@@ -125,7 +124,8 @@ public class MyDecoration extends BaseDecoration {
 }
 ```
 
-# 数据编辑 RecyclerList
+# 数据编辑
+* 普通列表数据 RecyclerList
 ``` kotlin
 // RecylerViewAdpater 默认就是通过 RecyclerList 实现数据管理
 val recyclerList = (recylerView.adpater as RecylerViewAdpater).getItems()
@@ -135,13 +135,14 @@ recyclerList.add(Item())
 recyclerList.move(1, 0) // 移动 Item 1 到位置 0
 ```
 
-# 树形数据编辑 RecyclerTreeList
+* 树形数据 RecyclerTreeList
 ``` kotlin
 val treeList = object : RecyclerTreeList<T>() {
     fun getChildren(T item) : Iterator<T> {
         return item.children.iterator()
     }
 }
+(recylerView.adpater as RecylerViewAdpater).setItems(treeList)
 // ...
 // 操作数据，列表会自动更新
 val item: T
