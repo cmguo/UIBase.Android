@@ -123,6 +123,42 @@ public class MyDecoration extends BaseDecoration {
 }
 ```
 
+# 简单列表 ZListView
+* 标准列表项目视觉
+![listView.png](listView.png)
+* 列表数据定义
+``` kotlin
+class ResourceColorItem(private val key: String, private val value: Resources.ResourceValue) : ZListItemView.Data {
+    override val title: String
+        get() = key
+    override val subTitle: String?
+        get() = if (key.contains("600")) null else Colors.text(value.value)
+    override val icon: Any
+        get() = ColorDrawable(value.value)
+    override val contentType: ZListItemView.ContentType?
+        get() = when (key) {
+            "blue_100" -> ZListItemView.ContentType.Button
+            "bluegrey_100", "bluegrey_300"-> ZListItemView.ContentType.CheckBox
+            "bluegrey_800", "bluegrey_900" -> ZListItemView.ContentType.RadioButton
+            "brand_600" -> ZListItemView.ContentType.TextField
+            "red_600" -> ZListItemView.ContentType.SwitchButton
+            else -> null
+        }
+    override val content: Any?
+        get() = when (key) {
+            "blue_100" -> R.array.button_icon_text
+            "bluegrey_800" -> true
+            "brand_600" -> "请输入"
+            else -> null
+        }
+    override val badge: Any?
+        get() = null
+
+}
+// 使用数据
+listView.data = colors.map { ResourceColorItem(Colors.simpleName(it.key), it.value) }
+```
+
 # 树形数据展示
 * 树形数据绑定 RecyclerTreeList
 ``` kotlin
