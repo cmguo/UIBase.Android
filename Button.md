@@ -26,9 +26,14 @@
     android:text="按钮"/>
 ```
 
+# 标准样式
+* 标准按钮类型
+[](buttonType.png)
+* 标准按钮尺寸
+[](buttonSize.png)
+
 # 自定义按钮样式集合
-通过 app:buttonAppearance 中引用自定义按钮样式集合，部分组合控件也可以使用这些样式集合
-当然，也可以在布局定义中指定这些样式（如：cornerRadius）
+通过 app:buttonAppearance 中引用自定义按钮样式集合，部分组合控件也可以使用这些样式集合；当然，也可以在布局定义中指定这些样式（如：cornerRadius）
 ``` xml
 <style name="ZButton.Appearance.Action" parent="ZButton.Appearance.TextLink.Middle">
     <item name="android:textColor">@color/bluegrey_900_selected_disabled</item>
