@@ -310,8 +310,8 @@ open class ZButton @JvmOverloads constructor(
         if (ZButtonAppearance.hasChanged(changed,
                 R.styleable.ZButton_Appearance_android_textColor,
                 R.styleable.ZButton_Appearance_iconColor)) {
-            val color = _appearance.iconColor ?: textColors
-            if (Drawables.isPureColor(_icon)) {
+            val color = _appearance.iconColor?.toGradient(this) ?: textColors
+            if ((_appearance.iconColor != null) or Drawables.isPureColor(_icon)) {
                 _icon?.setTintList(color)
                 GradientColorList.progress(color)?.add(_icon!!) {
                     it.state = intArrayOf()

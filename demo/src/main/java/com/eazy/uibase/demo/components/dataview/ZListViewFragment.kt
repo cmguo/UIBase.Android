@@ -219,6 +219,10 @@ class ResourceColorItem(private val key: String, private val value: Resources.Re
     override val contentType: ZListItemView.ContentType?
         get() = when (key) {
             "blue_100" -> ZListItemView.ContentType.Button
+            "blue_200" -> ZListItemView.ContentType.CheckBox
+            "blue_500" -> ZListItemView.ContentType.RadioButton
+            "blue_600" -> ZListItemView.ContentType.SwitchButton
+            "bluegrey_00" -> ZListItemView.ContentType.TextField
             "bluegrey_100", "bluegrey_300"-> ZListItemView.ContentType.CheckBox
             "bluegrey_800", "bluegrey_900" -> ZListItemView.ContentType.RadioButton
             "brand_600" -> ZListItemView.ContentType.TextField
@@ -229,6 +233,7 @@ class ResourceColorItem(private val key: String, private val value: Resources.Re
         get() = when (key) {
             "blue_100" -> R.array.button_icon_text
             "bluegrey_800" -> true
+            "bluegrey_00" -> "请输入"
             "brand_600" -> "请输入"
             else -> null
         }
