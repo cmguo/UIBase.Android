@@ -29,7 +29,8 @@
 # 按钮样式增强
 | 样式 | 使用说明 | 是否展示样式 | 备注 |
 | ------ | ------ | ------ | ------ |
-| android:textColor | 支持夜间模式 | 是 | 同时应用于图标颜色 |
+| backgroundColor | 背景色，支持夜间模式 | 是 | 同时应用于图标颜色 |
+| android:textColor | 文字颜色，支持夜间模式 | 是 | 同时应用于图标颜色 |
 | android:textSize | 文字尺寸 | 是 ||
 | iconPosition | 图标位置，4个方向 | 是 | |
 | android:minHeight | 指定按钮高度 | 是 | 优先级低于 android:layoutHeight="10dp" |
