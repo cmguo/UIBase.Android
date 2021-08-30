@@ -26,7 +26,29 @@
     android:text="按钮"/>
 ```
 
-# 标准样式
+# 按钮样式增强
+| 样式 | 使用说明 | 是否展示样式 | 备注 |
+| ------ | ------ | ------ | ------ |
+| android:textColor | 支持夜间模式 | 是 | 同时应用于图标颜色 |
+| android:textSize | 文字尺寸 | 是 ||
+| iconPosition | 图标位置，4个方向 | 是 | |
+| android:minHeight | 指定按钮高度 | 是 | 优先级低于 android:layoutHeight="10dp" |
+| cornerRadius | 背景圆角尺寸 | 是 ||
+| paddingX | 相当于同时指定 android:paddingLeft,android:paddingRight | 是 | |
+| paddingY | 与 minHeight 配合使用，用于高度不固定情形 | 是 | |
+| iconPadding | 文字、图标之间的距离 | 是 | |
+| iconSize | 图标尺寸，宽高相等 | 是 | |
+| iconColor | 图标颜色 | 是 | 如果指定，则不跟随文字颜色 |
+| buttonType | 组合定义按钮标准类型 | 是 | |
+| buttonSize | 组合定义按钮标准尺寸 | 是 | |
+| content | 按钮组合内容 | 否 | 可以是 string，drawable，style，array 资源 |
+| icon | 按钮图标资源 | 否 | |
+| loadingIcon | 按钮图标资源，加载状态显示 | 否 | |
+| loadingText | 按钮文字资源，加载状态显示 | 否 | |
+| buttonAppearance | 按钮样式集合，类型与 TextApperance | 否 | 部分覆盖 buttonType，buttonSize |
+
+
+# 标准按钮样式
 * 标准按钮类型
 
  ![buttonType.png](buttonType.png)
