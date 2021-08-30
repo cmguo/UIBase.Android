@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         app:data="@{model.colors}" // 任意类型的列表数据
         app:layoutManager="@{LayoutManagers.linear(0, false)}" // 上下线性布局
-        app:itemBinding="@{@layout/view_item}" // Item 的布局
+        app:itemBinding="@{@layout/view_item}" // Item 的布局，也可以绑定 ItemBinding 类型的对象
         app:emptyItemBinding="@{layout/list_empty_view}" // 列表数据为空时，显示的布局视图
         app:itemDecoration="@{ItemDecorations.divider(1)}" // 分割线装饰，底部 1dp
         app:itemClicked="@{fragment.itemClicked}" // Item 点击处理
@@ -24,7 +24,7 @@
 ```
 
 # 视图数据绑定
-* 单一视图类型 UnitItemBinding
+* 参考视图布局
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout
@@ -41,16 +41,14 @@
     </data>
     <TextView
         android:id="@+id/title"
-        android:paddingStart="5dp"
-        android:textSize="20dp"
-        android:textFontWeight="2"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@{data}"/>
-
+        android:text="@{data}"
+        android:onClick=@{v -> viewModel.onClick()}
+        />
 </layout>
 ```
-
+* 单一视图类型 UnitItemBinding
 ``` kotlin
 // 动态绑定，数据绑定到 data 变量，交互逻辑绑定到 viewModel 变量
 val itemBinding = object : UnitItemBinding(R.layout.item) {
