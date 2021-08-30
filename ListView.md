@@ -170,7 +170,8 @@ recyclerList.move(1, 0) // 移动 Item 1 到位置 0
 * 树形数据 RecyclerTreeList
 ``` kotlin
 val treeList = object : RecyclerTreeList<T>() {
-    fun getChildren(T item) : Iterator<T> {
+    // 只要实现这个就可用了
+    override fun getChildren(T item) : Iterator<T> {
         return item.children.iterator()
     }
 }
