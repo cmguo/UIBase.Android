@@ -124,6 +124,38 @@ public class MyDecoration extends BaseDecoration {
 }
 ```
 
+# 树形数据展示
+* 树形数据绑定
+``` kotlin
+val data : List<T>
+val treeList = object : RecyclerTreeList<T>(data) {
+    fun getChildren(T item) : Iterator<T> {
+        return item.children.iterator()
+    }
+}
+// 也可以在 xml 通过 app:data="@{treeList}" 绑定
+(recylerView.adpater as RecylerViewAdpater).setItems(treeList)
+```
+* 树形列表装饰器
+``` kotlin
+val decoration = ItemDecorations.Builder {
+    object : BackgroundDecoration(10f, Color.GRAY, true) {
+        val paint = Paint()
+        val colors = intArrayOf(Color.RED, Color.GREEN, Color.BLUE)
+        override fun drawTreeDecoration(c: Canvas, position: IntArray?, level: Int) {
+            // 不同层级，画不同的背景颜色
+            paint.color = colors[level]
+            val rect = RectF(outRect)
+            rect.inset(10f, 20f)
+            c.drawRoundRect(rect, 20f, 20f, paint)
+        }
+        override fun getTreeOffsets(treeRect: Rect, position: IntArray?, level: Int) {
+            treeRect[20, 40, 20] = 40 // 设置树视图填充尺寸
+        }
+    }
+}
+```
+
 # 数据编辑
 * 普通列表数据 RecyclerList
 ``` kotlin
