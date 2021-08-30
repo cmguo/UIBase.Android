@@ -126,7 +126,7 @@ public class MyDecoration extends BaseDecoration {
 # 简单列表 ZListView
 * 标准列表项目视觉
 
-![listView.png](listView.png)
+![listView.png](images/listView.png)
 * 列表数据定义
 ``` kotlin
 class ResourceColorItem(private val key: String, private val value: Resources.ResourceValue) : ZListItemView.Data {
