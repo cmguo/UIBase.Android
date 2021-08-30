@@ -23,12 +23,18 @@
 ```
 * 引用圆角图标
 ``` xml
+<!-- 注意：仅部分基础控件支持 RoundDrawable -->
 <style name="ZDialog">
     <item name="background">@style/RoundDrawable.Dialog</item>
 </style>
 ```
 ``` kotlin
 background = RoundDrawable(context, R.style.RoundDrawable_ZNumberView_Background)
+```
+
+# 使用视图图标
+``` kotlin
+val drawable = ViewDrawable(fragment.requireContext(), R.layout.avatar_text)
 ```
 
 # 夜间模式
