@@ -24,5 +24,5 @@
 # 不规则圆角
 ``` kotlin
 // 仅左上、右上有圆角效果
-imageView.cornerRadii = floatArrayOf(8, 8, 8, 8, 0f, 0f, 0f, 0f)
+imageView.cornerRadii = floatArrayOf(8f, 8f, 8f, 8f, 0f, 0f, 0f, 0f)
 ```
