@@ -4,9 +4,9 @@
 - 标准色：分为动态颜色和静态颜色
   - 动态颜色：具有夜间模式
   - 静态颜色（static_*）：没有夜间模式，在不同模式下，保持不变
-- 有状态颜色：通过 select xml 定义（如 color/blue600_disabled.xml）
+- 多态颜色：通过 select xml 定义（如 color/blue600_disabled.xml）
   - 扩展了half_checked 状态
-  - 有状态颜色可以使用“动态颜色“，实现夜间模式
+  - 多态颜色可以使用“动态颜色“，实现夜间模式
 - 渐变色
   - 扩展了 state_gradient_start， state_gradient_end 状态
   - 部分控件支持渐变色
@@ -21,7 +21,7 @@ values-night/colors.xml
 <color name="mycolor1">#191E26</color>
 ```
 
-# 自定义有状态颜色
+# 自定义多态颜色
 color/bluegrey_00_disabled.xml
 ``` xml
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
