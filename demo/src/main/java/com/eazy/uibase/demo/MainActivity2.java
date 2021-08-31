@@ -15,6 +15,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavArgument;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -33,6 +34,7 @@ import com.eazy.uibase.demo.core.ComponentInfo;
 import com.eazy.uibase.demo.core.Components;
 import com.eazy.uibase.demo.view.GridDrawable;
 import com.eazy.uibase.demo.view.main.InformationFragment;
+import com.eazy.uibase.demo.view.main.ReadmeFragment;
 import com.eazy.uibase.demo.view.main.StylesFragment;
 
 import java.util.List;
@@ -46,6 +48,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private Fragment informationFragment;
     private Fragment stylesFragment;
+    private Fragment readmeFragment = new ReadmeFragment();
     private final GridDrawable gridDrawable = new GridDrawable();
 
     @Override
@@ -55,9 +58,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> getSupportFragmentManager().beginTransaction()
-                .show(stylesFragment)
-                .commitNow());
+        fab.setOnClickListener(view -> showStyles());
         Map<Integer, List<ComponentInfo>> components = Components.collectComponents(this);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -128,6 +129,8 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
             item.setChecked(!item.isChecked());
             DayNightManager.getInstance().setDayNightModel(item.isChecked());
             return true;
+        } else if (item.getItemId() == R.id.action_readme) {
+            showReadme();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -206,6 +209,34 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
             ((InformationFragment) informationFragment).bindComponent(null);
             ((StylesFragment) stylesFragment).bindComponent(null);
         }
+        if (readmeFragment.isAdded()) {
+            getSupportFragmentManager().beginTransaction().remove(readmeFragment).commitNow();
+        }
+    }
+
+    private void showStyles() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (readmeFragment.isAdded()) {
+            transaction.remove(readmeFragment);
+        } else {
+            transaction.show(stylesFragment);
+        }
+        transaction.commitNow();
+    }
+
+    private void showReadme() {
+        Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
+        List<Fragment> fragments = ((NavHostFragment) componentFragment).getChildFragmentManager().getFragments();
+        String name = fragments.get(fragments.size() - 1).getClass().getSimpleName();
+        name = name.replace("Z", "");
+        name = name.replace("Fragment", "");
+        Bundle args = new Bundle();
+        args.putString("file", "docs/" + name + ".md");
+        readmeFragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_main, readmeFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

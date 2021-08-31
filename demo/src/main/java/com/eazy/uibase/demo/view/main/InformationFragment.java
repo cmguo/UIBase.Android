@@ -14,8 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.eazy.uibase.demo.R;
 import com.eazy.uibase.demo.core.ComponentFragment;
 import com.eazy.uibase.demo.databinding.InformationFragmentBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 public class InformationFragment extends Fragment {
 
@@ -32,14 +35,13 @@ public class InformationFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(InformationViewModel.class);
         if (fragment != null)
             mViewModel.bindComponent(fragment);
-        DataBindingUtil.findBinding(requireView()).setVariable(BR.model, mViewModel);
+        DataBindingUtil.findBinding(view).setVariable(BR.model, mViewModel);
     }
-
 
     public void bindComponent(ComponentFragment<?,?,?> fragment) {
         if (mViewModel != null)

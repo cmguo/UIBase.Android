@@ -18,4 +18,9 @@
         android:title="@string/action_skin_dark"
         android:checkable="true"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_readme"
+        android:orderInCategory="100"
+        android:title="@string/action_readme"
+        app:showAsAction="never" />
 </menu>
