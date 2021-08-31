@@ -33,8 +33,9 @@ titleBar.listener = object : TitleBarListener() {
 
 # 内部元素颜色渐变
 * 定义使用渐变色
+
+参考 [颜色](docs/Colors.md) 定义渐变色
 ``` xml
-<!-- 参考[颜色](docs/Colors.md)定义渐变色 -->
 <!-- 自定义按钮样式，使用渐变色 -->
 <style name="ZButton.Appearance.AppTitleBar.Gradient">
     <item name="android:textColor">@color/bluegrey_00_gradient</item>
