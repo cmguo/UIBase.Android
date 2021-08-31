@@ -56,3 +56,27 @@ titleBar.setGradientProgress(progress)
 // 或者自动跟踪内容视图的滚动
 titleBar.gradientWith(view, 0, length)
 ```
+
+
+# 扩展中间内容
+* 在 layout 中指定扩展内容
+``` xml
+<com.eazy.uibase.widget.ZAppTitleBar
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="wrap_content">
+    
+    <RecylerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        />
+    
+</com.eazy.uibase.widget.ZAppTitleBar>
+
+```
+* 在代码中增加扩展内容
+``` kotlin
+titleBar.content = R.layout.body_view
+// 或者
+titleBar.addView(view)
+```
