@@ -53,4 +53,6 @@ titleBar.rightButtonAppearance = R.style.ZButton_Appearance_AppTitleBar_Gradient
 titleBar.textAppearance = R.style.TextAppearance_Z_Head2_Gradient
 // 直接设置进度
 titleBar.setGradientProgress(progress)
+// 或者自动跟踪内容视图的滚动
+titleBar.gradientWith(view, 0, length)
 ```
