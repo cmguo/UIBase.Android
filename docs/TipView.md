@@ -3,7 +3,7 @@
 
 提示视图控件有下列特性
 - 组合图标、文字、按钮多个元素
-- 样式集管理（ZTipView.Appearance），默认样式集
+- 样式集管理（ZTipView.Appearance），标准样式集，自定义样式集
 - 小三角指示器（气泡提示）
 - 自动弹出位置（小三角指向的位置，简单提示堆叠）
 - 自动消失：定时消失，外部点击消失
@@ -35,4 +35,41 @@ tipView.popAt(view, object : TipViewListener {
 ``` xml
 tipView.location = ZTipView.Location.AutoToast
 tipView.popAt(view)
+// 快速使用
+ZTipView.toast(view, "简单提示")
+```
+
+# 作为气泡提示使用
+``` xml
+tipView.location = ZTipView.Location.TopCenter
+tipView.popAt(view)
+// 快速使用，需要明确指定小箭头位置
+ZTipView.tip(view, "气泡提示", ZTipView.Location.TopCenter)
+```
+
+# 作为横幅提示使用
+``` xml
+tipView.location = ZTipView.Location.ManualLayout
+tipView.popAt(view)
+// 快速使用
+ZTipView.snack(view, "横幅提示")
+```
+
+# 标准样式集
+标准样式集
+
+# 自定义样式集
+``` xml
+<style name="ZTipView.Appearance.XXX">
+    <item name="textAppearance">@style/TextAppearance.Z.Body.Small</item>
+    <item name="frameColor">@color/red_100</item>
+    <item name="textColor">@color/red_600</item>
+    <item name="frameColor">@color/black</item>
+    <item name="frameRadius">10dp</item></style>
+```
+
+# 作为系统 Toast 内容弹出
+``` kotlin
+// 不支持回调，按钮不能点击
+tipView.popUp(Toast.LENGTH_SHORT)
 ```
