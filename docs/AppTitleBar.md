@@ -31,7 +31,7 @@ titleBar.listener = object : TitleBarListener() {
 }
 ```
 
-# 响应正文内容滚动，改变内部元素的颜色
+# 内部元素颜色渐变
 * 定义使用渐变色
 ``` xml
 <!-- 参考[颜色](docs/Colors.md)定义渐变色 -->
