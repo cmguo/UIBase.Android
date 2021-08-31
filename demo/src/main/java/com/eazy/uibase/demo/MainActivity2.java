@@ -199,7 +199,7 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
     @Override
     public void onBackStackChanged() {
         Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
-        List<Fragment> fragments = ((NavHostFragment) componentFragment).getChildFragmentManager().getFragments();
+        List<Fragment> fragments = componentFragment.getChildFragmentManager().getFragments();
         if (!fragments.isEmpty())
             componentFragment = fragments.get(fragments.size() - 1);
         if (componentFragment instanceof ComponentFragment) {
@@ -226,12 +226,21 @@ public class MainActivity2 extends AppCompatActivity implements NavController.On
 
     private void showReadme() {
         Fragment componentFragment = getSupportFragmentManager().findFragmentById(R.id.component_fragment);
-        List<Fragment> fragments = ((NavHostFragment) componentFragment).getChildFragmentManager().getFragments();
-        String name = fragments.get(fragments.size() - 1).getClass().getSimpleName();
+        List<Fragment> fragments = componentFragment.getChildFragmentManager().getFragments();
+        if (!fragments.isEmpty())
+            componentFragment = fragments.get(fragments.size() - 1);
+        if (!(componentFragment instanceof ComponentFragment)) {
+            return;
+        }
+        String name = ((ComponentFragment) componentFragment).getComponent().getClass().getSimpleName();
         name = name.replace("Z", "");
-        name = name.replace("Fragment", "");
+        name = name.replace("Component", "");
+        String name2 = componentFragment.getClass().getSimpleName();
+        name2 = name2.replace("Z", "");
+        name2 = name2.replace("Fragment", "");
         Bundle args = new Bundle();
         args.putString("file", "docs/" + name + ".md");
+        args.putString("file2", "docs/" + name2 + ".md");
         readmeFragment.setArguments(args);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_main, readmeFragment)

@@ -98,7 +98,12 @@ public class ReadmeFragment extends Fragment {
 
     private String getReadmeContent() throws IOException {
         StringBuilder sb = new StringBuilder();
-        InputStream is = requireContext().getAssets().open(getArguments().getString("file"));
+        InputStream is;
+        try {
+            is = requireContext().getAssets().open(getArguments().getString("file"));
+        } catch (IOException e) {
+            is = requireContext().getAssets().open(getArguments().getString("file2"));
+        }
         BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8 ));
         String str;
         while ((str = br.readLine()) != null) {

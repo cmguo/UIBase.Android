@@ -38,3 +38,6 @@
   **[] $VALUES;
   public *;
 }
+
+-keep class **.*Component
+-keep class **.*Fragment
