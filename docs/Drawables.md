@@ -7,8 +7,9 @@
 - 视图图标：ViewDrawable（通过视图布局 layout 描述图标）
 
 # 使用矢量图标
-* 兼容性：在 SDK 21 ～ 24，使用 Vector，需要做下列工作：
-  - 每个library需要分别配置开关：vectorDrawables.useSupportLibrary = true
+
+兼容性：在 SDK 21 ～ 24，使用 Vector，需要做下列工作：
+- 每个library需要分别配置开关：vectorDrawables.useSupportLibrary = true
 ``` gradle
 android {
     defaultConfig {
@@ -16,7 +17,7 @@ android {
     }
 }
 ```
-  - 通过代码加载，AppCompatResources.getDrawable
+- 通过代码加载，AppCompatResources.getDrawable
 ``` java
 public class Drawables {
     @Nullable
@@ -25,7 +26,7 @@ public class Drawables {
     }
 }
 ```
-  - 在 layout 中使用 AppCompatImageView，否则用下面第2种方法兼容
+- 在 layout 中使用 AppCompatImageView，否则用下面第2种方法兼容
 ``` xml
 <AppCompatImageView
     android:id="@+id/image"
@@ -34,7 +35,7 @@ public class Drawables {
     android:layout_gravity="center_horizontal"
     android:src="@drawable/icon_weblink" />
 ```
-  - 使用 app:srcCompat、app:drawableLeftCompat 等间接使用 AppCompatResources
+- 使用 app:srcCompat、app:drawableLeftCompat 等间接使用 AppCompatResources
 ``` xml
 <ImageView
     android:id="@+id/image"
