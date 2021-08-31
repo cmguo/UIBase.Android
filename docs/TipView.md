@@ -68,7 +68,7 @@ ZTipView.snack(view, "横幅提示")
     <item name="frameRadius">10dp</item></style>
 ```
 
-# 作为系统 Toast 内容弹出
+# 作为系统 Toast 的内容弹出
 ``` kotlin
 // 不支持回调，按钮不能点击
 tipView.popUp(Toast.LENGTH_SHORT)
