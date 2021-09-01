@@ -100,7 +100,7 @@ class ZListView @JvmOverloads constructor(
     /* private */
 
     private fun syncData() {
-        _adapter.replace(data)
+        _adapter.setItems(data)
     }
 
     class ListAdapter : RecyclerViewTreeAdapter() {

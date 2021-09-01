@@ -12,6 +12,16 @@ public class RecyclerList<T> extends ArrayList<T> implements ObservableList<T> {
 
     private transient ListChangeRegistry mListeners = new ListChangeRegistry();
 
+    public RecyclerList() {}
+
+    public RecyclerList(int initialCapacity) {
+        super(initialCapacity);
+    }
+
+    public RecyclerList(Collection<? extends T> c) {
+        super(c);
+    }
+
     @Override
     public void addOnListChangedCallback(ObservableList.OnListChangedCallback listener) {
         if (mListeners == null) {
@@ -95,12 +105,15 @@ public class RecyclerList<T> extends ArrayList<T> implements ObservableList<T> {
         return val;
     }
 
+    public void move(int fromPosition, int toPosition) {
+        move(fromPosition, toPosition, 1);
+    }
+
     public void move(int fromPosition, int toPosition, int itemCount) {
         if (fromPosition < toPosition) {
-            int f = fromPosition;
-            int t = toPosition += itemCount - 1;
+            int t = toPosition + itemCount - 1;
             for (int i = 0; i < itemCount; ++i) {
-                super.add(t, super.remove(f));
+                super.add(t, super.remove(fromPosition));
             }
         } else {
             int f = fromPosition;

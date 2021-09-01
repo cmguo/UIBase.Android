@@ -5,7 +5,10 @@ import android.content.Context;
 import androidx.databinding.BindingAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.eazy.uibase.view.ZTabAdapter;
 import com.eazy.uibase.view.list.ItemBindings;
+import com.eazy.uibase.view.list.Items;
+import com.eazy.uibase.view.list.PagerIndicators;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -13,15 +16,10 @@ import net.lucode.hackware.magicindicator.abs.IPagerNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 
-import com.eazy.uibase.view.list.Items;
-import com.eazy.uibase.view.list.PagerIndicators;
-import com.eazy.uibase.view.ZTabAdapter;
-
-import java.util.List;
-
 public class MagicIndicatorBindingAdapter {
 
     @BindingAdapter(value = {"titles", "itemBinding", "indicator", "navigator", "itemClicked", "viewPager"}, requireAll = false)
+    @SuppressWarnings("rawtypes, unchecked")
     public static <T> void setMagicIndicatorTitles(MagicIndicator magicIndicator, Object titles, Object itemBinding,
                                                    Object indicator, Object navigator,
                                                    ZTabAdapter.TitleSelectListener listener, Object viewPagerOrId) {
@@ -32,7 +30,7 @@ public class MagicIndicatorBindingAdapter {
             if (listener != null) {
                 ((ZTabAdapter) adapter).setListener(listener);
             } else if (viewPagerOrId != null) {
-                ViewPager viewPager = null;
+                ViewPager viewPager;
                 if (viewPagerOrId instanceof ViewPager)
                     viewPager = (ViewPager) viewPagerOrId;
                 else

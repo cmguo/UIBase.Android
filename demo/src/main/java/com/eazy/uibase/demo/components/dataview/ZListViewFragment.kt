@@ -34,11 +34,13 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
 
         val empty = arrayListOf<Any>()
         val colors: List<ZListItemView.Data>
+        val mutableColors: RecyclerList<ZListItemView.Data>
         val colorGroups: List<ZListItemView.Data>
 
         init {
             val colors = Colors.stdDynamicColors(fragment.requireContext()).map { ResourceColorItem(Colors.simpleName(it.key), it.value) }
-            this.colors = colors
+            this.mutableColors = RecyclerList(colors)
+            this.colors = this.mutableColors
             colorGroups = listOf("bluegrey", "blue", "red", "brand", "cyan", "green", "purple", "redorange").map { ResourceColorGroup(it, colors) }
         }
     }
@@ -91,7 +93,7 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
             return ""
         }
         override fun valueFromString(value: String?): Any? {
-            return decorations.get(value)
+            return decorations[value]
         }
         companion object {
             val decorations = mapOf<String, ItemDecorations.Builder>(
@@ -153,13 +155,12 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                val adapter = recyclerView.adapter as RecyclerViewAdapter
-                val f = recyclerView.getChildAdapterPosition(viewHolder.itemView)
-                val t = recyclerView.getChildAdapterPosition(target.itemView)
+                val f = viewHolder.adapterPosition
+                val t = target.adapterPosition
                 if (f < 0 || t < 0)
                     return false
                 Log.d(TAG, "move $f to $t")
-                adapter.items.move(f, t, 1)
+                model.mutableColors.move(f, t)
                 return true
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -169,7 +170,7 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
                     return
                 Log.d(TAG, "swipe $f")
                 val adapter = recyclerView?.adapter as? RecyclerViewAdapter
-                adapter?.items?.removeAt(f)
+                model.mutableColors.removeAt(f)
             }
             override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
                 viewHolder?.itemView?.setBackgroundColor(Color.GRAY)
@@ -184,7 +185,7 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
     }
 
     companion object {
-        private const val TAG = "ZListFragment"
+        private const val TAG = "ZListViewFragment"
     }
 }
 

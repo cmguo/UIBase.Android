@@ -11,17 +11,19 @@ import java.util.Map;
 
 public class Items {
 
-    public static Iterator<?> get(Context context, Object data) {
+    public static Iterable<?> get(Context context, Object data) {
         if (data == null)
             return null;
         if (data instanceof List) {
-            return ((List<?>) data).iterator();
+            return ((List<?>) data);
         } else if (data instanceof Map) {
-            return ((Map) data).entrySet().iterator();
+            return ((Map<?, ?>) data).entrySet();
         } else if (data instanceof Iterable) {
-            return ((Iterable) data).iterator();
+            return (Iterable<?>) data;
+        } else if (data.getClass().isArray()) {
+            return Arrays.asList((Object[]) data);
         } else if (data instanceof Integer) {
-            return Arrays.asList(context.getResources().getStringArray((Integer) data)).iterator();
+            return Arrays.asList(context.getResources().getStringArray((Integer) data));
         } else {
             return null;
         }

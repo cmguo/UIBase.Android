@@ -3,17 +3,14 @@ package com.eazy.uibase.binding;
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewbinding.ViewBinding;
 
-import com.eazy.uibase.view.list.ItemBinding;
 import com.eazy.uibase.view.list.ItemBindings;
 import com.eazy.uibase.view.list.ItemDecorations;
+import com.eazy.uibase.view.list.Items;
 import com.eazy.uibase.view.list.LayoutManagers;
 import com.eazy.uibase.view.list.RecyclerViewAdapter;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * RecyclerView 的 databinding adapter
@@ -33,15 +30,7 @@ public class RecyclerViewBindingAdapter {
     public static <LT> void setData(RecyclerView recyclerView, LT data) {
         RecyclerViewAdapter adapter = getAdapter(recyclerView);
         if (adapter != null) {
-            if (data instanceof List) {
-                adapter.replace((List<?>) data);
-            } else if (data instanceof Map) {
-                adapter.replace(((Map<?, ?>) data).entrySet());
-            } else if (data instanceof Iterable) {
-                adapter.replace((Iterable<?>) data);
-            } else if (data != null && data.getClass().isArray()) {
-                adapter.replace(Arrays.asList((Object[]) data));
-            }
+            adapter.setItems(Items.get(recyclerView.getContext(), data));
         }
     }
 

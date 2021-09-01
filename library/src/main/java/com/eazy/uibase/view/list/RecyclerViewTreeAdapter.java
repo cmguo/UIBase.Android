@@ -308,7 +308,7 @@ public class RecyclerViewTreeAdapter extends RecyclerViewAdapter {
                 return ((Item) t).children;
             }
         };
-        adapter.replace(items);
+        adapter.setItems(items);
 //        int[] p = RootPosition;
 //        while ((p = adapter.getNextPosition(p)) != null) {
 //            Log.d("RecyclerViewTreeAdapter", "getNextPosition " + Arrays.toString(p));

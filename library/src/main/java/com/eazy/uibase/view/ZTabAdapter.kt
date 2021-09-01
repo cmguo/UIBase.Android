@@ -10,7 +10,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNav
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
 
-class ZTabAdapter<T>(titles: Iterator<T>, val itemBinding: ItemBinding, private val indicator: IPagerIndicator)
+class ZTabAdapter<T>(titles: Iterable<T>, val itemBinding: ItemBinding, private val indicator: IPagerIndicator)
     : CommonNavigatorAdapter(), View.OnClickListener {
 
     var titles = mutableListOf<T>()
