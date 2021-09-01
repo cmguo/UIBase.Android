@@ -87,6 +87,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @SuppressWarnings("rawtypes, unchecked")
     public void setItems(List<?> items) {
+        // DataBinding will notifyPropertyChanged
+        if (items == mItems && items instanceof ObservableList)
+            return;
         if (mItems instanceof ObservableList)
             ((ObservableList) mItems).removeOnListChangedCallback(listChangedCallback);
         mItems = (List<Object>) items;

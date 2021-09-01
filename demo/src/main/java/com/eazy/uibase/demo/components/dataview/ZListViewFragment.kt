@@ -33,14 +33,12 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
     class Model(fragment: ZListViewFragment) : ViewModel() {
 
         val empty = arrayListOf<Any>()
-        val colors: List<ZListItemView.Data>
-        val mutableColors: RecyclerList<ZListItemView.Data>
+        val colors: MutableList<ZListItemView.Data>
         val colorGroups: List<ZListItemView.Data>
 
         init {
             val colors = Colors.stdDynamicColors(fragment.requireContext()).map { ResourceColorItem(Colors.simpleName(it.key), it.value) }
-            this.mutableColors = RecyclerList(colors)
-            this.colors = this.mutableColors
+            this.colors = RecyclerList(colors)
             colorGroups = listOf("bluegrey", "blue", "red", "brand", "cyan", "green", "purple", "redorange").map { ResourceColorGroup(it, colors) }
         }
     }
@@ -160,7 +158,7 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
                 if (f < 0 || t < 0)
                     return false
                 Log.d(TAG, "move $f to $t")
-                model.mutableColors.move(f, t)
+                (model.colors as RecyclerList).move(f, t)
                 return true
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -169,8 +167,7 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
                 if (f < 0)
                     return
                 Log.d(TAG, "swipe $f")
-                val adapter = recyclerView?.adapter as? RecyclerViewAdapter
-                model.mutableColors.removeAt(f)
+                model.colors.removeAt(f)
             }
             override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
                 viewHolder?.itemView?.setBackgroundColor(Color.GRAY)
