@@ -96,16 +96,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public void setItems(Iterable<?> items) {
-        if (items instanceof List) {
-            setItems((List<?>) items);
-            return;
-        }
-        List<Object> list = new ArrayList<>();
-        if (items != null) {
-            for (Object i : items)
-                list.add(i);
-        }
-        setItems(list);
+        setItems(Items.toList(items));
     }
 
     public void replace(Iterator<?> items) {

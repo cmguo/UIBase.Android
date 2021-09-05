@@ -4,8 +4,6 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +25,17 @@ public class Items {
         } else {
             return null;
         }
+    }
+
+    public static <T> List<T> toList(Iterable<T> collection) {
+        if (collection == null)
+            return new ArrayList<>();
+        if (collection instanceof List)
+            return (List<T>) collection;
+        List<T> list = new ArrayList<>();
+        for (T t : collection)
+            list.add(t);
+        return list;
     }
 
 }
