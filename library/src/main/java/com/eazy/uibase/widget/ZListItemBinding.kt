@@ -17,7 +17,7 @@ open class ZListItemBinding(context: Context) : BaseItemBinding() {
 
     protected var itemStyle = ZListItemView.Appearance(context)
 
-    override fun getItemViewType(item: Any): Int {
+    override fun getItemViewType(item: Any?): Int {
         return 0
     }
 

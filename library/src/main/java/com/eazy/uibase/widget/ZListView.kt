@@ -10,10 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.eazy.uibase.R
-import com.eazy.uibase.view.list.DividerDecoration
-import com.eazy.uibase.view.list.ItemDecorations
-import com.eazy.uibase.view.list.RecyclerViewAdapter
-import com.eazy.uibase.view.list.RecyclerViewTreeAdapter
+import com.eazy.uibase.view.list.*
 import com.eazy.uibase.view.parentOfType
 import java.lang.ref.WeakReference
 
@@ -53,7 +50,8 @@ class ZListView @JvmOverloads constructor(
 
     fun findViewHolderForAdapterPosition(position: IntArray) : ViewHolder? {
         val adapter = this.adapter
-        val pos = if (adapter is RecyclerViewTreeAdapter) adapter.getItemPosition(position) else {
+        val data = if (adapter is RecyclerViewAdapter) adapter.items else null
+        val pos = if (data is RecyclerTree) data.getItemPosition(position) - 1 else {
             if (position.size != 1) {
                 error("Assertion failed")
             }
@@ -93,7 +91,8 @@ class ZListView @JvmOverloads constructor(
         val position = getChildAdapterPosition(itemView)
         if (position < 0) return
         val adapter = this.adapter
-        val position2 = if (adapter is RecyclerViewTreeAdapter) adapter.getTreePosition(position) else intArrayOf(position)
+        val data = if (adapter is RecyclerViewAdapter) adapter.items else null
+        val position2 = if (data is RecyclerTree) data.getTreePosition(position + 1) else intArrayOf(position)
         listener?.onItemValueChanged(this, position2, value)
     }
 
@@ -103,11 +102,15 @@ class ZListView @JvmOverloads constructor(
         _adapter.setItems(data)
     }
 
-    class ListAdapter : RecyclerViewTreeAdapter() {
-
-        override fun getChildren(t: Any?): Iterable<*>? {
-            return if (t is ZListItemView.GroupData) t.items else null
+    private class ListAdapter : RecyclerViewAdapter() {
+        override fun setItems(items: Iterable<*>?) {
+            val items2 = object : RecyclerTreeList<Any>(items) {
+                override fun getChildren(t: Any?): Iterable<Any>? {
+                    return if (t is ZListItemView.GroupData) t.items else null
+                }
+            }
+            super.setItems(items2)
         }
-
     }
+
 }

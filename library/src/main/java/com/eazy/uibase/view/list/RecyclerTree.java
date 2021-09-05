@@ -240,7 +240,6 @@ public class RecyclerTree<T> extends AbstractList<T> {
                     children.add(t, children.remove(fromPosition));
                 subTrees.add(t, subTrees.remove(fromPosition));
             }
-            toPosition += itemCount;
         } else {
             int f = fromPosition;
             int t = toPosition;
@@ -251,11 +250,16 @@ public class RecyclerTree<T> extends AbstractList<T> {
                 ++f;
                 ++t;
             }
-            fromPosition = toPosition;
-            toPosition = f;
         }
         changedCallback.lock = false;
-        int position3 = itemPosition(toPosition + itemCount);
+        int position3 = itemPosition(toPosition);
+//        int position4 = itemPosition(toPosition + itemCount);
+        if (fromPosition > toPosition) {
+            int t = toPosition;
+            toPosition = fromPosition;
+            fromPosition = t;
+        }
+        toPosition += itemCount;
         int position = Math.min(position1, position3);
         for (int i = fromPosition; i < toPosition; ++i) {
             RecyclerTree<T> subTree = subTrees.get(i);
