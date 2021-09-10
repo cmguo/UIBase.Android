@@ -37,6 +37,20 @@ public abstract class RecyclerTreeList<T> extends RecyclerTree<T> implements Obs
         return super.get(position + 1);
     }
 
+    @Override
+    public T remove(int index) {
+        return super.remove(index + 1);
+    }
+
+    @Override
+    public T set(int index, T element) {
+        return super.set(index + 1, element);
+    }
+
+    public boolean move(int fromPosition, int toPosition) {
+        return super.moveItem(fromPosition + 1, toPosition + 1);
+    }
+
     @NonNull
     @Override
     public Iterator<T> iterator() {

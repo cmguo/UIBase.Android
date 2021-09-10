@@ -103,7 +103,11 @@ class ZListView @JvmOverloads constructor(
     }
 
     private class ListAdapter : RecyclerViewAdapter() {
-        override fun setItems(items: Iterable<*>?) {
+        private var list : List<*>? = null
+        override fun setItems(items: List<*>?) {
+            if (items == list)
+                return;
+            list = items;
             val items2 = object : RecyclerTreeList<Any>(items) {
                 override fun getChildren(t: Any?): Iterable<Any>? {
                     return if (t is ZListItemView.GroupData) t.items else null

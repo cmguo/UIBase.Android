@@ -58,6 +58,11 @@ public class RecyclerTree<T> extends AbstractList<T> {
         return getItem(index);
     }
 
+    @Override
+    public T remove(int index) {
+        return removeItem(index);
+    }
+
     @NonNull
     @Override
     public Iterator<T> iterator() {
@@ -81,7 +86,7 @@ public class RecyclerTree<T> extends AbstractList<T> {
             }
         }
         Iterable<T> children = getChildren(object);
-        int position = leafItemPosition(index);
+        int position = leafChildPosition(index);
         int count = 1;
         if (children != null) {
             RecyclerTree<T> subTree = new RecyclerTree<>(this, children);
@@ -91,7 +96,7 @@ public class RecyclerTree<T> extends AbstractList<T> {
         } else {
             subTrees.add(index, null);
         }
-        updateSubTreesPosition(index + 1, count);
+        updateChildrenPosition(index + 1, count);
         parentTree.notifyInserted(this, position, count);
     }
 
@@ -110,7 +115,7 @@ public class RecyclerTree<T> extends AbstractList<T> {
                 changedCallback.lock = false;
             }
         }
-        int position = leafItemPosition(index);
+        int position = leafChildPosition(index);
         int count = 0;
         subTrees.ensureCapacity(children.size());
         for (int i = index; subTrees.size() < children.size(); ++i) {
@@ -125,7 +130,7 @@ public class RecyclerTree<T> extends AbstractList<T> {
                 count += 1;
             }
         }
-        updateSubTreesPosition(index + collection.size(), count);
+        updateChildrenPosition(index + collection.size(), count);
         parentTree.notifyInserted(this, position, count);
         return true;
     }
@@ -147,7 +152,7 @@ public class RecyclerTree<T> extends AbstractList<T> {
         }
         if (oldSize != 0) {
             itemCount = 1;
-            parentTree.notifyRemoved(this, firstPosition, itemCount - 1);
+            parentTree.notifyRemoved(this, 0, itemCount - 1);
         }
     }
 
@@ -163,12 +168,12 @@ public class RecyclerTree<T> extends AbstractList<T> {
         }
         RecyclerTree<T> subTree = subTrees.remove(index);
         if (subTree == null) {
-            int position = leafItemPosition(index);
-            updateSubTreesPosition(index, -1);
+            int position = leafChildPosition(index);
+            updateChildrenPosition(index, -1);
             parentTree.notifyRemoved(this, position, 1);
         } else {
             subTree.detach();
-            updateSubTreesPosition(index, -subTree.itemCount);
+            updateChildrenPosition(index, -subTree.itemCount);
             parentTree.notifyRemoved(this, subTree.firstPosition, subTree.itemCount);
         }
         return val;
@@ -200,13 +205,13 @@ public class RecyclerTree<T> extends AbstractList<T> {
         Iterable<T> children = getChildren(object);
         RecyclerTree<T> subTree2 = children == null ? null : new RecyclerTree<>(this, children);
         if (subTree1 == null) {
-            int position = leafItemPosition(index);
+            int position = leafChildPosition(index);
             if (subTree2 == null) {
                 parentTree.notifyChanged(this, position, 1);
             } else {
                 subTree2.firstPosition = position;
                 subTrees.set(index, subTree2);
-                updateSubTreesPosition(index + 1, subTree2.itemCount - 1);
+                updateChildrenPosition(index + 1, subTree2.itemCount - 1);
                 parentTree.notifyChanged(this, position, 1);
                 parentTree.notifyInserted(this, position + 1, subTree2.itemCount - 1);
             }
@@ -214,12 +219,12 @@ public class RecyclerTree<T> extends AbstractList<T> {
             subTree1.detach();
             subTrees.set(index, subTree2);
             if (subTree2 == null) {
-                updateSubTreesPosition(index + 1, 1 - subTree1.itemCount);
+                updateChildrenPosition(index + 1, 1 - subTree1.itemCount);
                 parentTree.notifyChanged(this, subTree1.firstPosition, 1);
                 parentTree.notifyRemoved(this, subTree1.firstPosition + 1, subTree1.itemCount - 1);
             } else {
                 subTree2.firstPosition = subTree1.firstPosition;
-                updateSubTreesPosition(index + 1, subTree2.itemCount - subTree1.itemCount);
+                updateChildrenPosition(index + 1, subTree2.itemCount - subTree1.itemCount);
                 parentTree.notifyChanged(this, subTree1.firstPosition, 1);
                 parentTree.notifyRemoved(this, subTree1.firstPosition + 1, subTree1.itemCount - 1);
                 parentTree.notifyInserted(this, subTree2.firstPosition + 1, subTree2.itemCount - 1);
@@ -229,8 +234,8 @@ public class RecyclerTree<T> extends AbstractList<T> {
     }
 
     public void moveChildren(int fromPosition, int toPosition, int itemCount) {
-        int position1 = itemPosition(fromPosition);
-        int position2 = itemPosition(fromPosition + itemCount);
+        int position1 = childPosition(fromPosition);
+        int position2 = childPosition(fromPosition + itemCount);
         boolean lock = changedCallback.lock;
         changedCallback.lock = true;
         if (fromPosition < toPosition) {
@@ -252,7 +257,7 @@ public class RecyclerTree<T> extends AbstractList<T> {
             }
         }
         changedCallback.lock = false;
-        int position3 = itemPosition(toPosition);
+        int position3 = childPosition(toPosition);
 //        int position4 = itemPosition(toPosition + itemCount);
         if (fromPosition > toPosition) {
             int t = toPosition;
@@ -282,15 +287,15 @@ public class RecyclerTree<T> extends AbstractList<T> {
                 changedCallback.lock = false;
             }
         }
-        int position1 = itemPosition(fromIndex);
-        int position2 = itemPosition(toIndex);
+        int position1 = childPosition(fromIndex);
+        int position2 = childPosition(toIndex);
         for (int i = fromIndex; i < toIndex; ++i) {
             RecyclerTree<T> subTree = subTrees.get(i);
             if (subTree != null)
                 subTree.detach();
         }
         subTrees.subList(fromIndex, toIndex).clear();
-        updateSubTreesPosition(toIndex, position1 - position2);
+        updateChildrenPosition(toIndex, position1 - position2);
         parentTree.notifyRemoved(this, position1, position2 - position1);
     }
 
@@ -353,6 +358,42 @@ public class RecyclerTree<T> extends AbstractList<T> {
         return getNextPosition(positions, 0, maxLevel);
     }
 
+    public T removeItem(int position) {
+        if (position == 0) {
+            throw new IndexOutOfBoundsException("State error " + toString());
+        }
+        if (position >= itemCount)
+            throw new IndexOutOfBoundsException("Failed to get " + position + "-th item from" + toString());
+        --position;
+        for (int i = 0; i < subTrees.size(); ++i) {
+            if (position == 0)
+                return removeChild(i);
+            RecyclerTree<T> subTree = subTrees.get(i);
+            if (subTree == null) {
+                --position;
+            } else if (position < subTree.itemCount) {
+                return subTree.removeItem(position);
+            } else {
+                position -= subTree.itemCount;
+            }
+        }
+        throw new IndexOutOfBoundsException("State error " + toString());
+    }
+
+    public boolean moveItem(int fromPosition, int toPosition) {
+        RecyclerTree<T> from = childAtPosition(fromPosition);
+        RecyclerTree<T> to = childAtPosition(toPosition);
+        if (from == this)
+            return false;
+        if (from == null && to == null) {
+            return false;
+        }
+        if (from == to) {
+            return from.moveItem(fromPosition - from.firstPosition, toPosition - from.firstPosition);
+        }
+        return false;
+    }
+
     /* Protected methods */
 
     // Should implement this to build tree structure
@@ -375,20 +416,24 @@ public class RecyclerTree<T> extends AbstractList<T> {
 
     protected void notifyInserted(RecyclerTree<T> subTree, int position, int count) {
         itemCount += count;
-        parentTree.notifyInserted(this, firstPosition + position, count);
+        int index = subTrees.indexOf(subTree);
+        updateChildrenPosition(index + 1, count);
+        parentTree.notifyInserted(this, subTree.firstPosition + position, count);
     }
 
     protected void notifyChanged(RecyclerTree<T> subTree, int position, int count) {
-        parentTree.notifyChanged(this, firstPosition + position, count);
+        parentTree.notifyChanged(this, subTree.firstPosition + position, count);
     }
 
     protected void notifyMoved(RecyclerTree<T> subTree, int position, int position2, int count) {
-        parentTree.notifyMoved(this, firstPosition + position, firstPosition + position2, count);
+        parentTree.notifyMoved(this, subTree.firstPosition + position, subTree.firstPosition + position2, count);
     }
 
     protected void notifyRemoved(RecyclerTree<T> subTree, int position, int count) {
         itemCount -= count;
-        parentTree.notifyRemoved(this, firstPosition + position, count);
+        int index = subTrees.indexOf(subTree);
+        updateChildrenPosition(index + 1, -count);
+        parentTree.notifyRemoved(this, subTree.firstPosition + position, count);
     }
 
     /* Private methods */
@@ -523,7 +568,7 @@ public class RecyclerTree<T> extends AbstractList<T> {
             if (level < maxLevel) {
                 throw new IndexOutOfBoundsException("Failed to get " + index + "-th sub tree from" + toString());
             }
-            return leafItemPosition(index);
+            return leafChildPosition(index);
         } else {
             return subTree.firstPosition + subTree.getItemPosition(positions, level, maxLevel);
         }
@@ -606,14 +651,14 @@ public class RecyclerTree<T> extends AbstractList<T> {
         return tail;
     }
 
-    private int itemPosition(int index) {
+    private int childPosition(int index) {
         if (index == subTrees.size())
             return itemCount;
         RecyclerTree<T> subTree = subTrees.get(index);
-        return subTree == null ? leafItemPosition(index) : subTree.firstPosition;
+        return subTree == null ? leafChildPosition(index) : subTree.firstPosition;
     }
 
-    private int leafItemPosition(int index) {
+    private int leafChildPosition(int index) {
         for (int i = index - 1; i >= 0; --i) {
             RecyclerTree<T> subTree = subTrees.get(i);
             if (subTree != null) {
@@ -623,7 +668,7 @@ public class RecyclerTree<T> extends AbstractList<T> {
         return index + 1;
     }
 
-    private void updateSubTreesPosition(int index, int diff) {
+    private void updateChildrenPosition(int index, int diff) {
         for (int i = index; i < subTrees.size(); ++i) {
             RecyclerTree<T> subTree = subTrees.get(i);
             if (subTree != null)
@@ -632,6 +677,34 @@ public class RecyclerTree<T> extends AbstractList<T> {
         itemCount += diff;
     }
 
+    private RecyclerTree<T> childAtPosition(int position) {
+        if (position == 0)
+            return this;
+        --position;
+        for (int i = 0; i < subTrees.size(); ++i) {
+            RecyclerTree<T> subTree = subTrees.get(i);
+            if (position == 0)
+                return subTree;
+            if (position < subTree.itemCount)
+                return subTree;
+            position -= subTree.itemCount;
+        }
+        return null;
+    }
+
+    private void checkChildPosition() {
+        int position = 1;
+        for (int i = 0; i < subTrees.size(); ++i) {
+            RecyclerTree<T> subTree = subTrees.get(i);
+            if (subTree == null) {
+                ++position;
+            } else if (position == subTree.firstPosition) {
+                position += subTree.itemCount;
+            } else {
+                throw new IndexOutOfBoundsException("State error " + toString());
+            }
+        }
+    }
 
     public static void test() {
         class Item {

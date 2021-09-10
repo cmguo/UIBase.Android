@@ -133,10 +133,10 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
         }
         ItemTouchHelper(object : ItemTouchHelper.Callback() {
             override fun isLongPressDragEnabled(): Boolean {
-                return !styles.group
+                return true
             }
             override fun isItemViewSwipeEnabled(): Boolean {
-                return !styles.group
+                return true
             }
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
@@ -158,16 +158,22 @@ class ZListViewFragment : ComponentFragment<ListViewFragmentBinding?, ZListViewF
                 if (f < 0 || t < 0)
                     return false
                 Log.d(TAG, "move $f to $t")
+                if (styles.group)
+                    return ((viewHolder.itemView.parentOfType(RecyclerView::class.java)!!.adapter
+                            as RecyclerViewAdapter).items as RecyclerTreeList).move(f, t)
                 (model.colors as RecyclerList).move(f, t)
                 return true
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val recyclerView = viewHolder.itemView.parentOfType(RecyclerView::class.java)
-                val f = recyclerView?.getChildAdapterPosition(viewHolder.itemView) ?: -1
+                val f = viewHolder.adapterPosition
                 if (f < 0)
                     return
                 Log.d(TAG, "swipe $f")
-                model.colors.removeAt(f)
+                if (styles.group)
+                    ((viewHolder.itemView.parentOfType(RecyclerView::class.java)!!.adapter
+                            as RecyclerViewAdapter).items as RecyclerTreeList).removeAt(f)
+                else
+                    model.colors.removeAt(f)
             }
             override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
                 viewHolder?.itemView?.setBackgroundColor(Color.GRAY)
