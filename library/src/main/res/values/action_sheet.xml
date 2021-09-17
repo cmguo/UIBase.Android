@@ -23,7 +23,6 @@
 
     <style name="ZButton.Appearance.Action" parent="ZButton.Appearance.TextLink.Middle">
         <item name="android:textColor">@color/bluegrey_900_selected_disabled</item>
-        <item name="android:minHeight">48dp</item>
     </style>
 
 </resources>

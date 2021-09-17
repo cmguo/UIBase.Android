@@ -338,7 +338,7 @@ class ZDialog @JvmOverloads constructor(
     private class ButtonAdapter(private val outer: ZDialog) : RecyclerView.Adapter<ButtonHolder>(), OnClickListener {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ButtonHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.action_item, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.dialog_button_item, parent, false)
             view.setOnClickListener(this)
             return ButtonHolder(view)
         }

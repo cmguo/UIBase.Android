@@ -23,9 +23,8 @@
     <dimen name="dialog_sub_title_padding">8dp</dimen>
     <dimen name="dialog_content_padding">16dp</dimen>
     <dimen name="dialog_button_width">116dp</dimen>
-    <dimen name="dialog_button_padding">14dp</dimen>
+    <dimen name="dialog_button_padding">24dp</dimen>
     <dimen name="dialog_button_padding_x">16dp</dimen>
-    <dimen name="dialog_button_padding2">24dp</dimen> <!-- with content -->
     <dimen name="dialog_checkbox_padding">22dp</dimen>
     <dimen name="dialog_bottom_padding">18dp</dimen>
 
