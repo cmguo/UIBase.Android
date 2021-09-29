@@ -9,7 +9,6 @@ public class IconStyle extends ResourceStyle {
 
     public static int[] icons = {
         R.drawable.icon_erase,
-        R.drawable.icon_navi,
         R.drawable.img_share_weixin,
         R.drawable.icon_minus,
         R.drawable.icon_add_book,
@@ -21,7 +20,7 @@ public class IconStyle extends ResourceStyle {
     };
 
     private static String[] resources = new String[] {
-        "drawable/icon_erase", "icon_navi", "img_share_weixin",
+        "drawable/icon_erase", "img_share_weixin",
         "icon_plus", "icon_minus", "icon_add_book", "icon_more", "icon_left", "icon_exit", "icon_search"};
 
     public IconStyle(Field field) {
