@@ -1,44 +1,22 @@
 # UI 基础库（Android）
 
-* [目录文件结构](docs/Files.md)
-* 基础资源管理
-  * [颜色（color）](docs/Colors.md)
-  * [图标（drawable）](docs/Drawables.md)
-  * [样式（style）](docs/Styles.md)
-* 样式集和主题
-  * [主题/样式](docs/Style.md)
-  * [展示样式](docs/Appearance.md)
-  * [内容样式](docs/Content.md)
-* 夜间模式方案
-  * [模式管理](docs/DayNight.md)
-  * [动态模式切换](docs/DynamicDayNight.md)
-  * [静态模式](docs/StaticDayNight.md)
-* 基础交互控件
-  * [按钮（Button）](docs/Button.md)
-  * [复选框（CheckBox）](docs/CheckBox.md)
-  * [单选框（RadioButton）](docs/RadioButton.md)
-  * [开关（SwitchButton）](docs/SwitchButton.md)
-  * [头像（AvatarView）](docs/AvatarView.md)
-  * [徽章（BadgeView）](docs/BadgeView.md)
-* 数值输入控件
-  * [步进器（NumberView）](docs/NumberView.md)
-  * [文本域](docs/TextArea.md)
-  * [输入框](docs/TextInput.md)
-  * [搜索框](docs/SearchBar.md)
-* 工具提示控件
-  * [提示视图（TipView）](docs/TipView.md)
-  * [对话框（Dialog）](docs/Dialog.md)
-* 数据展示控件
-  * [列表（ListView）](docs/ListView.md)
-  * [走马灯（CarouselView）](docs/CarouselView.md)
-* 菜单选择控件
-  * [操作表单（ActionSheet）](docs/ActionSheet.md)
-  * [活动视图（ActivityView）](docs/ActivityView.md)
-  * [下列菜单（DropDown）](docs/DropDown.md)
-  * [选择器（PickerView）](docs/PickerView.md)
-  * [时间选择器（TimePickerView）](docs/TimePickerView.md)
-* 导航跳转控件
-  * [标题栏（导航栏，AppTitleBar）](docs/AppTitleBar.md)
-  * [浮层面板（Panel）](docs/Panel.md)
-  * [选项卡（TabBar）](docs/TabBar.md)
+![image](images/Navigation.jpg) ![image](images/StylesEdit.jpg)
 
+## 特性
+- 本着简单实用为目标，每个控件都能够满足基本的需求，可进一步定制
+- 有统一的设计思路，也不搞另类，与 Android API 高度融合
+- 支持 Android Daynight 模式，并简单加强，对业务没有侵入性
+- Kotlin 语言实现，支持 MVVM 动态绑定
+- 简单灵活的演示框架，交互式演示，动态修改样式，所见即所得
+
+## 使用说明（Document）
+(在线使用说明文档)[docs/Library.md]
+在演示 Demo 中也可以查看文档
+
+## 演示框架
+演示框架功能特性
+- 抽屉式控件列表，随时选择并切换演示控件
+- 上下文属性配置交互，随时随地改变控件的样式
+- 夜间模式一键切换
+- 可开关的网格背景，视觉设计的最爱
+- 随时查看关联的使用说明文档
